@@ -3,7 +3,7 @@
     "name": "Slayer's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/slayer_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/slayer_head.png"
     }
   },
   "criteria": {

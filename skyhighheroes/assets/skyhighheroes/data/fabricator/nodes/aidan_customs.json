@@ -3,7 +3,7 @@
     "name": "Aidan's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/aidan_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/aidan_head.png"
     }
   },
   "criteria": {

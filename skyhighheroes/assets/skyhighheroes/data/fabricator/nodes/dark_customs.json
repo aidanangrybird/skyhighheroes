@@ -3,7 +3,7 @@
     "name": "Dark's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/dark_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/dark_head.png"
     }
   },
   "criteria": {

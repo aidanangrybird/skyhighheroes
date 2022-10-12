@@ -3,7 +3,7 @@
     "name": "Tobi's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/tobi_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/tobi_head.png"
     }
   },
   "criteria": {

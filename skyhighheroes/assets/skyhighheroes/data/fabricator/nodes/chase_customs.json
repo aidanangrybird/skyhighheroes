@@ -3,7 +3,7 @@
     "name": "Chase's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/chase_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/chase_head.png"
     }
   },
   "criteria": {

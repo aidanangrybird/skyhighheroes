@@ -3,7 +3,7 @@
     "name": "Sym's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/sym_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/sym_head.png"
     }
   },
   "criteria": {

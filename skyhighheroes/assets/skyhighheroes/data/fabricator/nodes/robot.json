@@ -8,7 +8,7 @@
     }
   },
   "requirements": [
-      "skyhighheroes:anime"
+      "skyhighheroes:base"
   ],
   "price": {
     "TUTRIDIUM": 2048,

@@ -3,7 +3,7 @@
     "name": "Fire's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/fire_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/fire_head.png"
     }
   },
   "criteria": {

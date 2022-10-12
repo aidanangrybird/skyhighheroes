@@ -3,7 +3,7 @@
     "name": "Boom's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/boom_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/boom_head.png"
     }
   },
   "criteria": {

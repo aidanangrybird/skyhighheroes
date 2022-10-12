@@ -3,7 +3,7 @@
     "name": "Tysen's Custom Suits",
 	"hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/items/heroes/tysen_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/tysen_head.png"
     }
   },
   "criteria": {
