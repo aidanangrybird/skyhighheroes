@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:minecraft_stelar",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:minecraft_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

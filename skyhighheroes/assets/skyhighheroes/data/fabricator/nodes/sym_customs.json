@@ -1,0 +1,23 @@
+{
+  "display": {
+    "name": "Sym's Custom Suits",
+	"hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/items/heroes/sym_head.png"
+    }
+  },
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as symbiotespidey"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '340d3667-9ee9-49eb-b98b-e12c7534b577'"
+      }
+    }
+  }
+}

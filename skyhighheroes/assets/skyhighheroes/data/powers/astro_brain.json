@@ -1,0 +1,14 @@
+{
+  "name": "Intellect",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:arrow_catching": {
+    },
+	"fiskheroes:shield_throwing": {
+      "cooldownTime": 0,
+      "soundEvents": {
+        "THROW": "fiskheroes:shield_throw"
+      }
+	}
+  }
+}

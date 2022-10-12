@@ -1,0 +1,62 @@
+{data} = curve {data}
+
+{head_rotX} @ {data} -> 1.8{head_rotX}
+{head_rotY} @ {data} -> -0{head_rotY}
+{head_rotZ} @ {data} -> 0.1{head_rotZ}
+
+{body_posZ} += 10{data}
+{rightLeg_posZ} += 10{data}
+{leftLeg_posZ} += 10{data}
+{rightArm_posZ} += 6{data}
+{leftArm_posZ} += 9{data}
+{head_posZ} += 10{data}
+{leftArm_posX} += 2{data}
+{leftArm_posY} -= 1{data}
+
+{a1} = {data}(cos(0.6662{limbSwing}) + 1) / 2
+{a2} = {data}(cos(0.6662{limbSwing} + pi) + 1) / 2
+{a3} = {data}(-cos(0.6662{limbSwing}) + 1) / 2
+{a4} = {data}(-cos(0.6662{limbSwing} + pi) + 1) / 2
+{body_rotY} -= 0.1{data} + 0.2{a1};
+{body_rotX} -= 1.25{data} - 0.2{a1};
+{body_rotZ} -= 0.1{data} - 0.2{a1};
+
+{leftArm_rotX} *= {data} - 1
+{leftArm_rotY} *= {data} - 1
+{leftArm_rotZ} *= {data} - 1
+{rightArm_rotX} *= {data} - 1
+{rightArm_rotY} *= {data} - 1
+{rightArm_rotZ} *= {data} - 1
+
+{leftArm_rotX} -= -0.2{data} - 1.5{a2}
+{leftArm_rotY} += 0.2{data} - 0.5{a2}
+{leftArm_rotZ} -= 0.2{a1}
+{leftArm_posY} += {data} - {a3}
+{leftArm_posZ} += {data} - {a4}
+
+{rightArm_rotX} += -0.2{data} - 3.0{a1}
+{rightArm_rotY} += -0.2{data} + 1.0{a1}
+{rightArm_rotZ} -= 0.1{a1}
+{rightArm_posY} -= {data} - 2.0{a3}
+{rightArm_posZ} += {data} - 2.0{a3}
+{rightArm_posX} -= {data} + 2.0{a3}
+
+{leftLeg_rotY} += 0.9{a3}
+{leftLeg_rotZ} += 0.2{a3}
+{rightLeg_rotY} -= 0.3{a3}
+{rightLeg_rotZ} -= 0.8{a3}
+{leftLeg_rotX} -= 0.8{a4}
+{rightLeg_rotX} -= 0.8{a4}
+
+{leftLeg_posX} -= -2.25{a4}
+{leftLeg_posY} -= 6{a4}
+{leftLeg_posZ} -= 9.75{a4}
+{rightLeg_posX} -= -2.75{a4}
+{rightLeg_posY} -= 6.25{a4}
+{rightLeg_posZ} -= 11.25{a4}
+
+out "firstPerson" (true)
+out "rotate" (56{data}, 0, 1, 0)
+out "rotate" (20{data}, 1, 0, 0)
+out "rotate" (-30{data}, 0, 0, 1)
+out "translate" (0.06{data}, -0.15{data}, -0.5{data})

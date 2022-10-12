@@ -1,0 +1,166 @@
+{
+
+    "parent" : "skyhighheroes:base_tenma",
+    
+  "resources": {
+      
+    "lights" : "skyhighheroes:astro/boom/boom_tenma_lights",
+      
+    "lights_flying" : "skyhighheroes:astro/boom/boom_tenma_lights_flying",
+	  
+	"lights_normal" : "skyhighheroes:astro/boom/boom_tenma_lights_normal",
+	  
+	"lights_normal_flying" : "skyhighheroes:astro/boom/boom_tenma_lights_normal_flying",
+
+    "base": "skyhighheroes:astro/boom/boom_tenma_base",
+      
+    "base_flying": "skyhighheroes:astro/boom/boom_tenma_base_flying",
+
+	"long" : "skyhighheroes:astro/boom/boom_tenma_long",
+
+	"long_flying" : "skyhighheroes:astro/boom/boom_tenma_long_flying",
+      
+    "short" : "skyhighheroes:astro/boom/boom_tenma_short",
+
+	"short_flying" : "skyhighheroes:astro/boom/boom_tenma_short_flying",
+      
+    "normal" : "skyhighheroes:astro/boom/boom_tenma_normal",
+
+	"normal_flying" : "skyhighheroes:astro/boom/boom_tenma_normal_flying",
+	  
+	"cannon_lights_inner" : "skyhighheroes:astro/boom/boom_tenma_cannon_lights_inner"
+	 
+ 	 },
+  
+    "custom" : {
+    "fiskheroes:booster|left1": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer1",
+      "anchor": "leftLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:jetpacking_timer"
+    },
+    "fiskheroes:booster|right1": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer1",
+      "anchor": "rightLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:jetpacking_timer"  
+    },
+    "fiskheroes:booster|left2": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer1",
+      "anchor": "leftLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:glide_flying_timer"
+    },
+    "fiskheroes:booster|right2": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer1",
+      "anchor": "rightLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:glide_flying_timer"  
+    },
+	"fiskheroes:booster|left3": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer2",
+      "anchor": "leftLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:jetpacking_timer"
+    },
+    "fiskheroes:booster|right3": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer2",
+      "anchor": "rightLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:jetpacking_timer"  
+    },
+    "fiskheroes:booster|left4": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer2",
+      "anchor": "leftLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:glide_flying_timer"
+    },
+    "fiskheroes:booster|right4": {
+      "applicable": ["BOOTS"],
+      "icon": "skyhighheroes:purple_fire_layer2",
+      "anchor": "rightLeg",
+      "offset": [0.0, 12.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "scale": [1.75, 3.0],
+      "opacity": 1.0,
+	  "conditionals": ["vars:GLIDING"],
+      "mirror": false,
+      "data": "fiskheroes:glide_flying_timer"  
+    },
+    "fiskheroes:energy_bolt": {
+      "color": "0xAA00FF"
+    },
+	"fiskheroes:energy_projection": {
+      "color": "0xAA00FF",
+      "anchor": "rightArm",
+      "beams": [
+        {
+          "firstPerson": [-4.5, 3.75, -8.0],
+          "offset": [-0.5, 9.0, 0.0],
+          "size": [2, 2]
+        }
+      ],
+	  "mirror": true,
+      "renderer": "fiskheroes:energy_projection",
+      "particleType": "fiskheroes:impact_energy_projection"
+    },
+	"fiskheroes:trail" : {
+	    "type" : "skyhighheroes:boom_tenma_speed",
+	    "conditionals" : ["vars:SPEEDING"]
+	},
+	"fiskheroes:forcefield": {
+      "color": "0xAA00FF",
+      "rotation": [0.0, 0.0, 0.0],
+      "translation": [0.0, 10.0, 0.0],
+      "scale": [2.0, 2.0, 2.0],
+      "shape": [36, 36],
+      "data": "entity.getData('fiskheroes:shield_blocking_timer') * 0.1"
+    }
+    },
+  
+    "vars": {
+   		"DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '9af1da24-6827-4c48-848d-df07952ff161'"
+  }
+}

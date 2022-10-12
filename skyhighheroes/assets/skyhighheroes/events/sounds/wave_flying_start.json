@@ -1,0 +1,11 @@
+{
+  "sound": "skyhighheroes:wave.flying.start",
+  "override": null,
+  "condition": "entity.getData('fiskheroes:glide_flying_timer') > 0 || entity.getData('fiskheroes:jetpacking_timer') == 1",
+  "volume": 1.0,
+  "pitch": 1.0,
+  "loop": false,
+  "delay": 0,
+  "fadeIn": 0,
+  "fadeOut": 0
+}

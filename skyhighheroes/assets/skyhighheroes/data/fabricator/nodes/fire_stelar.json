@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:fire_stelar",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:fire_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

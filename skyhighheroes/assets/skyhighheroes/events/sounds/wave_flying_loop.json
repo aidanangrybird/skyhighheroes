@@ -1,0 +1,7 @@
+{
+  "sound": "skyhighheroes:wave.flying.loop",
+  "override": "skyhighheroes:funcs/flying",
+  "loop": true,
+  "fadeIn": 10,
+  "fadeOut": 10
+}

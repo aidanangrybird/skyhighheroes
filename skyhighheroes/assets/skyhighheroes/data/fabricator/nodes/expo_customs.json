@@ -1,0 +1,23 @@
+{
+  "display": {
+    "name": "Expo's Custom Suits",
+	"hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/items/heroes/expo_head.png"
+    }
+  },
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as matureExpo"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '37992cf8-6eb2-42b5-b748-c10f3f80d6e7'"
+      }
+    }
+  }
+}

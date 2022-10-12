@@ -1,0 +1,11 @@
+{
+  "sound": "skyhighheroes:wave.shooting",
+  "override": null,
+  "condition": true,
+  "volume": 1.0,
+  "pitch": 1.0,
+  "loop": false,
+  "delay": 0,
+  "fadeIn": 0,
+  "fadeOut": 10
+}

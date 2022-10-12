@@ -1,0 +1,14 @@
+{data} = curve {data}
+{rightArm_rotX} @ {data} -> {head_rotX} - pi / 2
+{rightArm_rotY} @ {data} -> {head_rotY}
+{rightArm_rotZ} @ {data} -> {head_rotZ}
+
+{leftArm_rotX} @ {data} -> 0.9({head_rotX} - pi / 2)
+{leftArm_rotY} @ {data} -> {head_rotY}
+{leftArm_rotZ} @ {data} -> {head_rotZ}
+
+out "firstPerson" (true)
+out "translate" (-0.35{data}, 0, 0.15{data})
+out "rotate" (-27{data}, 0, 1, 0)
+out "rotate" (-20{data}, 1, 0, 0)
+out "rotate" (-30{data}, 0, 0, 1)

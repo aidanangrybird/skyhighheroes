@@ -1,0 +1,21 @@
+{
+  "name": "Force Field",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:shield": {
+      "shield": {
+        "health": 500.0,
+        "regeneration": 50.0,
+        "recoveryDelay": 0
+      },
+      "coverage": {
+        "yawRadius": 360.0,
+        "pitchRadius": 360.0,
+        "yawOffset": 0.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+	  "isToggle": false
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "100,000 Horsepower Engine",
+  "value": 1,
+  "modifiers": {
+	"fiskheroes:leaping": {
+      "leapAmount": [2.0, 2.0]
+    },
+	"fiskheroes:super_speed": {
+      "canUseTreadmill": false
+    }
+  }
+}

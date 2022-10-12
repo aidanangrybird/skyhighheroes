@@ -1,0 +1,23 @@
+{
+  "display": {
+    "name": "Dark's Custom Suits",
+	"hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/items/heroes/dark_head.png"
+    }
+  },
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as DarknessDxD"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'ad0fedda-b04a-47b3-bd2b-fa94b3f2fa34'"
+      }
+    }
+  }
+}

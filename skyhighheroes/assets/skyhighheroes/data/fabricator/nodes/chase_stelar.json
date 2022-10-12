@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:chase_stelar",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:chase_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

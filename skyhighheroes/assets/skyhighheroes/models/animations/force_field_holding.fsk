@@ -1,0 +1,13 @@
+{data} = curve {data}
+{rightArm_rotX} -= 75'{data} + {rightArm_rotX}
+{rightArm_rotY} -= -90'{data} + {rightArm_rotY}
+{rightArm_rotZ} += 60'{data} - {rightArm_rotZ}
+
+{leftArm_rotX} -= 75'{data} + {leftArm_rotX}
+{leftArm_rotY} -= 90'{data} + {leftArm_rotY}
+{leftArm_rotZ} += -60'{data} - {leftArm_rotZ}
+
+out "firstPerson" (true)
+out "translate" (0.6{data}, 0.2{data}, 0)
+out "rotate" (70{data}, 0, 1, 0)
+out "rotate" (80{data}, 0, 0, 1)

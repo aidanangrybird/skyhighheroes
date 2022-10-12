@@ -1,0 +1,6 @@
+{
+  "sound": "fiskheroes:ambient.flight",
+  "override": "skyhighheroes:funcs/gliding",
+  "loop": true,
+  "delay": 10
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Battle Card Predation",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:shield": {
+      "shield": {
+        "health": 1000.0,
+        "regeneration": 100.0,
+        "recoveryDelay": 0
+      },
+      "coverage": {
+        "yawRadius": 360.0,
+        "pitchRadius": 360.0,
+        "yawOffset": 0.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+	  "isToggle": true
+    },
+    "fiskheroes:blade": {
+		"isToggle": true
+    }
+  }
+}

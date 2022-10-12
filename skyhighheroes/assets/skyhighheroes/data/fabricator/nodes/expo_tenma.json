@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:expo_tenma",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:expo_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Mega Buster",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:energy_blast": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "ELECTRICITY": 1.0,
+          "ENERGY": 1.0
+        }
+      },
+      "isExplosive": false,
+      "cooldown": 1.0,
+      "soundEvents": {
+        "SHOOT": "skyhighheroes:wave_shooting"
+      }
+    }
+  }
+}

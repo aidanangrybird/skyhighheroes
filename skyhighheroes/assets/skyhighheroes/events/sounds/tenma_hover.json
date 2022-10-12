@@ -1,0 +1,8 @@
+{
+  "parent": "fiskheroes:sound_base",
+  "sound": "fiskheroes:suit.ironman.hover.loop",
+  "condition": "entity.getData('fiskheroes:gliding')",
+  "volume": 0.2,
+  "loop": true,
+  "fadeOut": 10
+}

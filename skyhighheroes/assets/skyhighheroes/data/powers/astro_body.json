@@ -1,0 +1,30 @@
+{
+  "name": "Robotic Body",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:potion_immunity": {
+      "potionEffects": ["minecraft:nausea", "minecraft:poison", "minecraft:wither", "minecraft:weakness", "minecraft:slowness", "minecraft:blindness", "minecraft:hunger", "minecraft:instant_damage", "minecraft:mining_fatigue", "minecraft:haste", "minecraft:fire_resistance", "minecraft:health_boost", "minecraft:instant_health", "minecraft:jump_boost", "minecraft:regeneration", "minecraft:resistance", "minecraft:saturation", "minecraft:speed", "minecraft:strength", "minecraft:water_breathing"]
+    },
+    "fiskheroes:regeneration": {
+      "factor": 5
+    },
+    "fiskheroes:healing_factor": {
+        "delay": 20
+    },
+    "fiskheroes:water_breathing": {
+    },
+    "fiskheroes:fire_immunity": {
+    },
+    "fiskheroes:damage_immunity|cactus": {
+      "damageType": "CACTUS"
+    },
+    "fiskheroes:damage_immunity|thorns": {
+      "damageType": "THORNS"
+    },
+    "fiskheroes:damage_immunity|bullet": {
+      "damageType": "BULLET"
+    },
+    "fiskheroes:projectile_immunity": {
+    }
+  }
+}

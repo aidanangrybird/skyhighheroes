@@ -1,0 +1,11 @@
+{
+  "parent" : "skyhighheroes:guyver",
+  "resources": {
+
+    "base": "skyhighheroes:guyver_3_base",
+	 
+	"suit" : "skyhighheroes:guyver_3_suit.tx.json"
+	  
+ 	 }
+
+}

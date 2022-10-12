@@ -1,0 +1,18 @@
+{
+  "display": {
+    "name": {
+      "translate": "EM Wave Beings"
+    },
+    "icon": {
+      "texture": "skyhighheroes:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+      "skyhighheroes:anime"
+  ],
+  "price": {
+    "TUTRIDIUM": 2048,
+    "IRID_GOLD": 2048,
+    "XP_LEVELS": 2048
+  }
+}

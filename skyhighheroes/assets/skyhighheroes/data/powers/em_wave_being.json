@@ -1,0 +1,89 @@
+{
+  "name": "EM Wave Being",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:potion_immunity": {
+      "potionEffects": ["minecraft:nausea", "minecraft:poison", "minecraft:wither", "minecraft:weakness", "minecraft:slowness", "minecraft:blindness", "minecraft:hunger", "minecraft:instant_damage", "minecraft:mining_fatigue", "minecraft:haste", "minecraft:fire_resistance", "minecraft:health_boost", "minecraft:instant_health", "minecraft:jump_boost", "minecraft:regeneration", "minecraft:resistance", "minecraft:saturation", "minecraft:speed", "minecraft:strength", "minecraft:water_breathing"]
+	},
+    "fiskheroes:gliding": {
+      "boostSpeed": 0.3,
+      "isPowered": true,
+      "isControlled": true,
+      "soundEvents": {
+        "BOOST": ["skyhighheroes:wave_flying_start", "skyhighheroes:wave_flying_loop"]
+      }
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": "skyhighheroes:wave_teleport"
+      }
+    },
+    "fiskheroes:intangibility": {
+      "isAbsolute": true
+    },
+    "fiskheroes:regeneration": {
+      "factor": 5
+    },
+    "fiskheroes:healing_factor": {
+        "delay": 40
+    },
+    "fiskheroes:water_breathing": {
+    },
+    "fiskheroes:invisibility": {
+        "isToggle": true
+    },
+    "fiskheroes:fire_immunity": {
+    },
+    "fiskheroes:damage_immunity|explosion": {
+      "damageType": "EXPLOSION"
+    },
+    "fiskheroes:damage_immunity|fire": {
+      "damageType": "FIRE"
+    },
+    "fiskheroes:damage_immunity|magic": {
+      "damageType": "MAGIC"
+    },
+    "fiskheroes:damage_immunity|cactus": {
+      "damageType": "CACTUS"
+    },
+    "fiskheroes:damage_immunity|cold": {
+      "damageType": "COLD"
+    },
+    "fiskheroes:damage_immunity|energy": {
+      "damageType": "ENERGY"
+    },
+    "fiskheroes:damage_immunity|electricity": {
+      "damageType": "ELECTRICITY"
+    },
+    "fiskheroes:damage_immunity|sound": {
+      "damageType": "SOUND"
+    },
+    "fiskheroes:damage_immunity|thorns": {
+      "damageType": "THORNS"
+    },
+    "fiskheroes:damage_immunity|shuriken": {
+      "damageType": "SHURIKEN"
+    },
+    "fiskheroes:damage_immunity|sharp": {
+      "damageType": "SHARP"
+    },
+    "fiskheroes:damage_immunity|bullet": {
+      "damageType": "BULLET"
+    },
+    "fiskheroes:damage_immunity|blunt": {
+      "damageType": "BLUNT"
+    },
+    "fiskheroes:projectile_immunity": {
+    },
+	"fiskheroes:arrow_catching": {
+    },
+	"fiskheroes:shield_throwing": {
+      "cooldownTime": 0,
+      "soundEvents": {
+        "THROW": "fiskheroes:shield_throw"
+      }
+	}
+  }
+}

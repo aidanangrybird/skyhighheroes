@@ -1,0 +1,15 @@
+{
+  "name": "Jet-powered Flight",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:gliding": {
+      "boostSpeed": 0.2,
+      "isPowered": true,
+      "isControlled": true,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flying_start"],
+        "BOOST": ["skyhighheroes:gliding", "skyhighheroes:tenma_flying", "skyhighheroes:tenma_hover"]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "fiskheroes:sound_base",
+  "sound": "fiskheroes:suit.ironman.boost.loop",
+  "condition": "entity.getData('fiskheroes:glide_flying_timer') > 0 && entity.getData('fiskheroes:jetpacking_timer') > 0",
+  "loop": true,
+  "volume": 0.75,
+  "fadeIn": 5,
+  "fadeOut": 10
+}

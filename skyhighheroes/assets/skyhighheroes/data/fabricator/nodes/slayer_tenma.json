@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:slayer_tenma",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:slayer_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

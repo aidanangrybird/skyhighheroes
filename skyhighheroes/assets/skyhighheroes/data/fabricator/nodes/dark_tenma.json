@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:dark_tenma",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:dark_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

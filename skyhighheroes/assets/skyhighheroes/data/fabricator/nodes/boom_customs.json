@@ -1,0 +1,23 @@
+{
+  "display": {
+    "name": "Boom's Custom Suits",
+	"hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/items/heroes/boom_head.png"
+    }
+  },
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as 0fficialB00M"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '9af1da24-6827-4c48-848d-df07952ff161'"
+      }
+    }
+  }
+}

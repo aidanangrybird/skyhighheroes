@@ -1,0 +1,8 @@
+{
+  "parent": "fiskheroes:sound_base",
+  "sound": "fiskheroes:suit.ironman.boost.start",
+  "condition": true,
+  "volume": 0.5,
+  "pitch": "1.2 - Math.random() * 0.4",
+  "fadeOut": 5
+}

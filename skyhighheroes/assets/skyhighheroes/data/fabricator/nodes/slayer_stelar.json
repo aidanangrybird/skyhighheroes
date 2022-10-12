@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:slayer_stelar",
+  "display": {
+  	"hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:slayer_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

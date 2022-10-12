@@ -1,0 +1,19 @@
+{
+  "name": "Laser Cannon Arm",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:energy_blast": {
+      "damageProfile": {
+        "damage": 10.0,
+        "types": {
+          "ENERGY": 1.0
+        }
+      },
+      "isExplosive": false,
+      "cooldownTime": 10.0,
+      "soundEvents": {
+        "SHOOT": "fiskheroes:energy_blast"
+      }
+    }
+  }
+}
