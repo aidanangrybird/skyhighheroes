@@ -7,20 +7,20 @@
     "base": "skyhighheroes:geo/subaru/geo_stelar_subaru",
     
     "lights" : "skyhighheroes:geo/subaru/geo_stelar_subaru_lights",
-	 
-	"suit" : "skyhighheroes:geo/subaru/geo_stelar_subaru_suit.tx.json",
-	  
-	"suit_lights" : "skyhighheroes:geo/subaru/geo_stelar_subaru_suit_lights.tx.json",
-	  
-	"cannon_bottom" : "skyhighheroes:geo/subaru/geo_stelar_subaru_bottom_cannon",
-	  
-	"cannon_left" : "skyhighheroes:geo/subaru/geo_stelar_subaru_left_cannon",
-	
-	"cannon_right" : "skyhighheroes:geo/subaru/geo_stelar_subaru_right_cannon",
-	  
-	"cannon_top" : "skyhighheroes:geo/subaru/geo_stelar_subaru_top_cannon",
-	
-	"cannon_front" : "skyhighheroes:geo/subaru/geo_stelar_subaru_front_cannon",
+     
+    "suit" : "skyhighheroes:geo/subaru/geo_stelar_subaru_suit.tx.json",
+      
+    "suit_lights" : "skyhighheroes:geo/subaru/geo_stelar_subaru_suit_lights.tx.json",
+      
+    "cannon_bottom" : "skyhighheroes:geo/subaru/geo_stelar_subaru_bottom_cannon",
+      
+    "cannon_left" : "skyhighheroes:geo/subaru/geo_stelar_subaru_left_cannon",
+    
+    "cannon_right" : "skyhighheroes:geo/subaru/geo_stelar_subaru_right_cannon",
+      
+    "cannon_top" : "skyhighheroes:geo/subaru/geo_stelar_subaru_top_cannon",
+    
+    "cannon_front" : "skyhighheroes:geo/subaru/geo_stelar_subaru_front_cannon",
     
     "cannon_left_lights" : "skyhighheroes:geo/subaru/omega_xis_subaru_left_eyes",
       
@@ -34,7 +34,7 @@
     "fiskheroes:energy_bolt": {
       "color": "0x39D6BD"
     },
-	"fiskheroes:beam|headStart": {
+    "fiskheroes:beam|headStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x39D6BD",
       "anchor": "head",
@@ -74,7 +74,7 @@
       "length": "Math.min(Math.max(((81/13) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (26/26)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|armsStart": {
+    "fiskheroes:beam|armsStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x39D6BD",
       "anchor": "rightArm",
@@ -154,7 +154,7 @@
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (50/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|omegaXis": {
+    "fiskheroes:beam|omegaXis": {
       "applicable": ["CHESTPLATE"],
       "color": "0x39D6BD",
       "anchor": "rightArm",
@@ -164,12 +164,12 @@
         {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -1000000.0, 0.0],
+            "firstPerson": [-1.0, -1000000.0, 0.0],
             "offset": [-1.0, -10.5, 0.0],
             "size": [6.0, 6.0]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
             "firstPerson": [-1.0, -10.5, 0.0],
@@ -177,50 +177,50 @@
             "size": [9.0, 9.0]
           }
         },
-		{
+        {
           "direction": [0.5, 4.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-6.0, -10.3, -3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 4.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-6.0, -10.3, 3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 7.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-5.0, -10.4, -3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 7.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-5.0, -10.4, 3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [1.5, 0.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [1.5, -2.25, -2.5],
             "size": [0.5, 0.5]
           }
         },
-		{
+        {
           "direction": [1.5, 0.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [1.5, -2.25, 2.5],
             "size": [0.5, 0.5]
           }
@@ -231,10 +231,10 @@
       "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:trail" : {
-		"type" : "skyhighheroes:geo_stelar_subaru_flight",
-		"conditionals" : ["vars:GLIDING"]
-	},
+    "fiskheroes:trail" : {
+        "type" : "skyhighheroes:geo_stelar_subaru_flight",
+        "conditionals" : ["vars:GLIDING"]
+    },
     "fiskheroes:forcefield": {
       "color": "0x39D6BD",
       "rotation": [0.0, 0.0, 0.0],

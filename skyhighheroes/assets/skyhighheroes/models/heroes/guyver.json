@@ -3,52 +3,52 @@
   "resources": {
 
     "base": "skyhighheroes:guyver_base",
-	 
-	"suit" : "skyhighheroes:guyver_suit.tx.json",
+     
+    "suit" : "skyhighheroes:guyver_suit.tx.json",
 
-	"growths" : "skyhighheroes:guyver_growths",
-	  
-	"blade_lights" : "skyhighheroes:guyver_blade"
-	  
- 	 },
+    "growths" : "skyhighheroes:guyver_growths",
+      
+    "blade_lights" : "skyhighheroes:guyver_blade"
+      
+      },
   
     "texture": {
-		
-		"vars:DISPLAY" : {
-			"false" : {
-				"vars:OPEN" : {
-					"true" : "growths"
-				},
-				"vars:ANIM": {
-					"true": "suit"
-				}
-			}
-		},
+        
+        "vars:DISPLAY" : {
+            "false" : {
+                "vars:OPEN" : {
+                    "true" : "growths"
+                },
+                "vars:ANIM": {
+                    "true": "suit"
+                }
+            }
+        },
 
     "default": "base"
-	},
-		
-  	"showModel": {
+    },
+        
+      "showModel": {
 
-  	  "head": ["CHESTPLATE"],
+        "head": ["CHESTPLATE"],
 
- 	   "headwear": ["CHESTPLATE"],
+        "headwear": ["CHESTPLATE"],
 
- 	   "body": ["CHESTPLATE"],
+        "body": ["CHESTPLATE"],
 
- 	   "rightArm": ["CHESTPLATE"],
+        "rightArm": ["CHESTPLATE"],
 
- 	   "leftArm": ["CHESTPLATE"],
+        "leftArm": ["CHESTPLATE"],
 
- 	   "rightLeg": ["CHESTPLATE"],
+        "rightLeg": ["CHESTPLATE"],
 
-	    "leftLeg": ["CHESTPLATE"]
-	  },
-  "fixHatLayer" : ["CHESTPLATE"],	
-	
+        "leftLeg": ["CHESTPLATE"]
+      },
+  "fixHatLayer" : ["CHESTPLATE"],    
+    
   "custom": {
 
-		
+        
     "fiskheroes:shield|blade": {
 
       "applicable": ["CHESTPLATE"],
@@ -69,31 +69,31 @@
 
     },
 
-	
+    
 
-		"fiskheroes:heat_vision": {
-			"color" : "0xFFFFFF",
-			"useHands" : false,
-			"beams" : [
-				{
-					"offset" : [-2.0, -2.0],
-					"size" : [2.0, 2.0]
-				},
-				{
-					"offset" : [2.0, -2.0],
-					"size" : [2.0, 2.0]
-				}
-			]
-		}
-		
+        "fiskheroes:heat_vision": {
+            "color" : "0xFFFFFF",
+            "useHands" : false,
+            "beams" : [
+                {
+                    "offset" : [-2.0, -2.0],
+                    "size" : [2.0, 2.0]
+                },
+                {
+                    "offset" : [2.0, -2.0],
+                    "size" : [2.0, 2.0]
+                }
+            ]
+        }
+        
   },
   
     "vars": {
-    	"ANIM": "entity.getData('fiskheroes:transform_timer') < 1",
-    	"OPEN": "entity.getData('fiskheroes:transform_timer') == 0",
-   		"DISPLAY": "entity.isDisplayStand()"
+        "ANIM": "entity.getData('fiskheroes:transform_timer') < 1",
+        "OPEN": "entity.getData('fiskheroes:transform_timer') == 0",
+           "DISPLAY": "entity.isDisplayStand()"
   },
-	
+    
   "itemIcons": {
     "CHESTPLATE": "guyver_1"
   }

@@ -3,72 +3,72 @@
   "resources": {
 
     "devil": "skyhighheroes:lucifer_base",
-	  
-	"devil_lights" : "skyhighheroes:lucifer_base_lights",
-	  
-	"suit" : "skyhighheroes:lucifer_suit.tx.json",
-	  
-	"blade" : "skyhighheroes:lucifer_blade",
-	  
-	"blade_lights" : "skyhighheroes:lucifer_blade_lights",
-	  
-	"wings" : "skyhighheroes:lucifer_wings",
-	  
-	"tux" : "skyhighheroes:lucifer_tux"
-	  
- 	 },
+      
+    "devil_lights" : "skyhighheroes:lucifer_base_lights",
+      
+    "suit" : "skyhighheroes:lucifer_suit.tx.json",
+      
+    "blade" : "skyhighheroes:lucifer_blade",
+      
+    "blade_lights" : "skyhighheroes:lucifer_blade_lights",
+      
+    "wings" : "skyhighheroes:lucifer_wings",
+      
+    "tux" : "skyhighheroes:lucifer_tux"
+      
+      },
   
     "texture": {
-		
-		"vars:DISPLAY" : {
-			"false" : {
-				"vars:OPEN" : {
-					"true" : "tux"
-					},
-				"vars:ANIM": {
-					"true": "suit"
-				}
-			},
-			"true" : "devil"
-		},		
-		
-		"default": "devil"
-		},
-    		
-  	"showModel": {
+        
+        "vars:DISPLAY" : {
+            "false" : {
+                "vars:OPEN" : {
+                    "true" : "tux"
+                    },
+                "vars:ANIM": {
+                    "true": "suit"
+                }
+            },
+            "true" : "devil"
+        },        
+        
+        "default": "devil"
+        },
+            
+      "showModel": {
 
-  	  "head": ["HELMET"],
+        "head": ["HELMET"],
 
- 	   "headwear": ["HELMET"],
+        "headwear": ["HELMET"],
 
- 	   "body": ["CHESTPLATE", "LEGGINGS"],
+        "body": ["CHESTPLATE", "LEGGINGS"],
 
- 	   "rightArm": ["CHESTPLATE"],
+        "rightArm": ["CHESTPLATE"],
 
- 	   "leftArm": ["CHESTPLATE"],
+        "leftArm": ["CHESTPLATE"],
 
- 	   "rightLeg": ["LEGGINGS", "BOOTS"],
+        "rightLeg": ["LEGGINGS", "BOOTS"],
 
-	    "leftLeg": ["LEGGINGS", "BOOTS"]
-		
-	  },
-	"fixHatLayer": ["HELMET"],
-	
-	"lights" : {
-		
-		"vars:DISPLAY" : {
-			"true" : "devil_lights"
-		},
-		
-		"vars:TRANSFORMED" : {
-			"false": "null"
-		},
-		"default" : "devil_lights"
-		},
-		
-	
+        "leftLeg": ["LEGGINGS", "BOOTS"]
+        
+      },
+    "fixHatLayer": ["HELMET"],
+    
+    "lights" : {
+        
+        "vars:DISPLAY" : {
+            "true" : "devil_lights"
+        },
+        
+        "vars:TRANSFORMED" : {
+            "false": "null"
+        },
+        "default" : "devil_lights"
+        },
+        
+    
   "custom": {
-		
+        
     "fiskheroes:shield|blade": {
 
       "applicable": ["CHESTPLATE"],
@@ -88,20 +88,20 @@
       "data": "fiskheroes:blade_timer"
 
     },
-	
+    
     "fiskheroes:arm_animation": {
 
       "dataSwordPose": "fiskheroes:blade_timer"
 
     },
-	  
-	"fiskheroes:wings": {
+      
+    "fiskheroes:wings": {
       "applicable": ["CHESTPLATE"],
       "texture": "wings",
       "dataWings": "fiskheroes:wing_animation_timer",
       "dataShield": "fiskheroes:shield_blocking_timer"
     },
-	
+    
     "fiskheroes:heat_vision": {
       "color": "0xFF0000",
       "beams": [
@@ -115,18 +115,18 @@
         }
       ]
     }
-		
+        
   },
   
     "vars": {
-    	"ANIM": "entity.getData('fiskheroes:transform_timer') < 1",
-    	"OPEN": "entity.getData('fiskheroes:transform_timer') == 0",
-   		"DISPLAY": "entity.isDisplayStand()",
-		"TRANSFORMED" : "entity.getData('fiskheroes:transformed')",
-		"GLIDING" : "entity.getData('fiskheroes:glide_flying_timer') == 1",
-		"SHIELD_BLOCKING" : "entity.getData('fiskheroes:shield_blocking')"
+        "ANIM": "entity.getData('fiskheroes:transform_timer') < 1",
+        "OPEN": "entity.getData('fiskheroes:transform_timer') == 0",
+           "DISPLAY": "entity.isDisplayStand()",
+        "TRANSFORMED" : "entity.getData('fiskheroes:transformed')",
+        "GLIDING" : "entity.getData('fiskheroes:glide_flying_timer') == 1",
+        "SHIELD_BLOCKING" : "entity.getData('fiskheroes:shield_blocking')"
   },
-	
+    
   "itemIcons": {
     "HELMET": "lucifer_0",
     "CHESTPLATE": "lucifer_1",

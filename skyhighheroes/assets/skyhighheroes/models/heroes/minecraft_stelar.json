@@ -7,9 +7,9 @@
     "base": "skyhighheroes:minecraft/minecraft_stelar",
       
     "lights" : "skyhighheroes:minecraft/minecraft_stelar_lights",
-	 
+     
     "suit" : "skyhighheroes:minecraft/minecraft_stelar_suit.tx.json",
-	  
+      
     "suit_lights" : "skyhighheroes:minecraft/minecraft_stelar_suit_lights.tx.json",
 
     "visualizer_up" : "skyhighheroes:minecraft/minecraft_stelar_up_transer",
@@ -31,15 +31,15 @@
     "visualizer_up_lights" : "skyhighheroes:minecraft/minecraft_stelar_up_lights",
       
     "visualizer_down_lights": "skyhighheroes:minecraft/minecraft_stelar_down_lights",
-	  
+      
     "cannon_bottom" : "skyhighheroes:minecraft/minecraft_stelar_bottom_cannon",
-	  
+      
     "cannon_left" : "skyhighheroes:minecraft/minecraft_stelar_left_cannon",
-	
+    
     "cannon_right" : "skyhighheroes:minecraft/minecraft_stelar_right_cannon",
-	  
+      
     "cannon_top" : "skyhighheroes:minecraft/minecraft_stelar_top_cannon",
-	
+    
     "cannon_front" : "skyhighheroes:minecraft/minecraft_stelar_front_cannon",
     
     "cannon_left_lights" : "skyhighheroes:omega_xis_left_eyes",
@@ -59,11 +59,11 @@
     "transer_lights" : "skyhighheroes:stelar_transer_lights",
       
     "blade" : "skyhighheroes:minecraft/minecraft_stelar_blade"
-	
+    
     },
-	
+    
   "custom": {
-	
+    
     "fiskheroes:energy_bolt": {
       "color": "0x0000D1"
     },
@@ -107,7 +107,7 @@
       "length": "Math.min(Math.max(((81/13) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (26/26)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|armsStart": {
+    "fiskheroes:beam|armsStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x0000D1",
       "anchor": "rightArm",
@@ -187,7 +187,7 @@
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (50/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|omegaXis": {
+    "fiskheroes:beam|omegaXis": {
       "applicable": ["CHESTPLATE"],
       "color": "0x0000D1",
       "anchor": "rightArm",
@@ -197,12 +197,12 @@
         {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -1000000.0, 0.0],
+            "firstPerson": [-1.0, -1000000.0, 0.0],
             "offset": [-1.0, -10.5, 0.0],
             "size": [6.0, 6.0]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
             "firstPerson": [-1.0, -10.5, 0.0],
@@ -210,50 +210,50 @@
             "size": [9.0, 9.0]
           }
         },
-		{
+        {
           "direction": [0.5, 4.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-6.0, -10.3, -3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 4.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-6.0, -10.3, 3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 7.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-5.0, -10.4, -3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 7.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-5.0, -10.4, 3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [1.5, 0.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [1.5, -2.25, -2.5],
             "size": [0.5, 0.5]
           }
         },
-		{
+        {
           "direction": [1.5, 0.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [1.5, -2.25, 2.5],
             "size": [0.5, 0.5]
           }
@@ -264,10 +264,10 @@
       "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:trail" : {
-	    "type" : "skyhighheroes:minecraft_stelar_flight",
-	    "conditionals" : ["vars:GLIDING"]
-	},
+    "fiskheroes:trail" : {
+        "type" : "skyhighheroes:minecraft_stelar_flight",
+        "conditionals" : ["vars:GLIDING"]
+    },
     "fiskheroes:forcefield": {
       "color": "0x0000D1",
       "rotation": [0.0, 0.0, 0.0],
@@ -279,9 +279,9 @@
   },
   
     "vars": {
-		"DISPLAY": "entity.isDisplayStand() || entity.getUUID() != 'f849622f-b7cc-4ff5-8ce1-484f75c1ffa3'"
-	},
-	
+        "DISPLAY": "entity.isDisplayStand() || entity.getUUID() != 'f849622f-b7cc-4ff5-8ce1-484f75c1ffa3'"
+    },
+    
   "itemIcons": {
     "CHESTPLATE": "leo_transer"
   }

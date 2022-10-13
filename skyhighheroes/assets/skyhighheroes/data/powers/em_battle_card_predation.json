@@ -15,10 +15,10 @@
         "pitchOffset": 0.0
       },
       "knockback": 0.0,
-	  "isToggle": true
+        "isToggle": true
     },
     "fiskheroes:blade": {
-		"isToggle": true
+        "isToggle": true
     }
   }
 }

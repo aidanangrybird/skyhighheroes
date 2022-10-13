@@ -7,12 +7,12 @@
     "base": "skyhighheroes:fire/fire_stelar",
       
     "lights" : "skyhighheroes:fire/fire_stelar_lights",
-	 
-	"suit" : "skyhighheroes:fire/fire_stelar_suit.tx.json",
-	  
-	"suit_lights" : "skyhighheroes:fire/fire_stelar_suit_lights.tx.json",
+     
+    "suit" : "skyhighheroes:fire/fire_stelar_suit.tx.json",
+      
+    "suit_lights" : "skyhighheroes:fire/fire_stelar_suit_lights.tx.json",
 
-	"visualizer_up" : "skyhighheroes:fire/fire_stelar_up_transer",
+    "visualizer_up" : "skyhighheroes:fire/fire_stelar_up_transer",
       
     "visualizer_down": "skyhighheroes:fire/fire_stelar_down_transer",
       
@@ -31,16 +31,16 @@
     "visualizer_up_lights" : "skyhighheroes:fire/fire_stelar_up_lights",
       
     "visualizer_down_lights": "skyhighheroes:fire/fire_stelar_down_lights",
-	  
-	"cannon_bottom" : "skyhighheroes:fire/fire_stelar_bottom_cannon",
-	  
-	"cannon_left" : "skyhighheroes:fire/fire_stelar_left_cannon",
-	
-	"cannon_right" : "skyhighheroes:fire/fire_stelar_right_cannon",
-	  
-	"cannon_top" : "skyhighheroes:fire/fire_stelar_top_cannon",
-	
-	"cannon_front" : "skyhighheroes:fire/fire_stelar_front_cannon",
+      
+    "cannon_bottom" : "skyhighheroes:fire/fire_stelar_bottom_cannon",
+      
+    "cannon_left" : "skyhighheroes:fire/fire_stelar_left_cannon",
+    
+    "cannon_right" : "skyhighheroes:fire/fire_stelar_right_cannon",
+      
+    "cannon_top" : "skyhighheroes:fire/fire_stelar_top_cannon",
+    
+    "cannon_front" : "skyhighheroes:fire/fire_stelar_front_cannon",
     
     "cannon_left_lights" : "skyhighheroes:omega_xis_left_eyes",
       
@@ -59,15 +59,15 @@
     "transer_lights" : "skyhighheroes:stelar_transer_lights",
       
     "blade" : "skyhighheroes:fire/fire_stelar_blade"
-	
- 	 },
-	
+    
+      },
+    
   "custom": {
 
     "fiskheroes:energy_bolt": {
       "color": "0xFF0000"
     },
-	"fiskheroes:beam|headRightStart": {
+    "fiskheroes:beam|headRightStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x0000FF",
       "anchor": "head",
@@ -81,7 +81,7 @@
             "size": [4.6875, 4.6875]
           }
         },
-		{
+        {
           "direction": [0.0, -9.0, 0.0],
           "beam": {
             "offset": [2.0, 0.5, 2.0],
@@ -94,7 +94,7 @@
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|headLeftStart": {
+    "fiskheroes:beam|headLeftStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0xFF0000",
       "anchor": "head",
@@ -108,7 +108,7 @@
             "size": [4.6875, 4.6875]
           }
         },
-		{
+        {
           "direction": [0.0, -9.0, 0.0],
           "beam": {
             "offset": [-2.0, 0.5, 2.0],
@@ -141,7 +141,7 @@
       "length": "Math.min(Math.max(((81/13) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (26/26)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|bodyLeftStart": {
+    "fiskheroes:beam|bodyLeftStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x0000FF",
       "anchor": "body",
@@ -161,7 +161,7 @@
       "length": "Math.min(Math.max(((81/13) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (26/26)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|armsStart": {
+    "fiskheroes:beam|armsStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0xFF0000",
       "anchor": "rightArm",
@@ -241,7 +241,7 @@
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (50/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|leftLegStart": {
+    "fiskheroes:beam|leftLegStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x0000FF",
       "anchor": "leftLeg",
@@ -261,7 +261,7 @@
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (50/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|omegaXisLeft": {
+    "fiskheroes:beam|omegaXisLeft": {
       "applicable": ["CHESTPLATE"],
       "color": "0x0000FF",
       "anchor": "rightArm",
@@ -271,55 +271,55 @@
         {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -1000000.0, 0.0],
+            "firstPerson": [-1.0, -1000000.0, 0.0],
             "offset": [-3.0, -10.5, -2.0],
             "size": [3.0, 3.0]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -1000000.0, 0.0],
+            "firstPerson": [-1.0, -1000000.0, 0.0],
             "offset": [1.0, -10.5, -2.0],
             "size": [3.0, 3.0]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-3.6875, -10.5, -2.6875],
+            "firstPerson": [-3.6875, -10.5, -2.6875],
             "offset": [0.0, -1000000.0, 0.0],
             "size": [3.875, 3.875]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [1.6875, -10.5, -2.6875],
+            "firstPerson": [1.6875, -10.5, -2.6875],
             "offset": [0.0, -1000000.0, 0.0],
             "size": [3.875, 3.875]
           }
         },
-		{
+        {
           "direction": [0.5, 4.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-6.0, -10.3, -3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 7.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-5.0, -10.4, -3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [1.5, 0.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [1.5, -2.25, -2.5],
             "size": [0.5, 0.5]
           }
@@ -330,7 +330,7 @@
       "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('fiskheroes:teleport_timer') > 0.0 ? 1.0 : 0.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-	"fiskheroes:beam|omegaXisRight": {
+    "fiskheroes:beam|omegaXisRight": {
       "applicable": ["CHESTPLATE"],
       "color": "0xFF0000",
       "anchor": "rightArm",
@@ -340,55 +340,55 @@
         {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -1000000.0, 0.0],
+            "firstPerson": [-1.0, -1000000.0, 0.0],
             "offset": [-3.0, -10.5, 2.0],
             "size": [3.0, 3.0]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -1000000.0, 0.0],
+            "firstPerson": [-1.0, -1000000.0, 0.0],
             "offset": [1.0, -10.5, 2.0],
             "size": [3.0, 3.0]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [-3.6875, -10.5, 2.6875],
+            "firstPerson": [-3.6875, -10.5, 2.6875],
             "offset": [0.0, -1000000.0, 0.0],
             "size": [3.875, 3.875]
           }
         },
-		{
+        {
           "direction": [0.0, 9.0, 0.0],
           "beam": {
-			"firstPerson": [1.6875, -10.5, 2.6875],
+            "firstPerson": [1.6875, -10.5, 2.6875],
             "offset": [0.0, -1000000.0, 0.0],
             "size": [3.875, 3.875]
           }
         },
-		{
+        {
           "direction": [0.5, 4.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-6.0, -10.3, 3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [0.5, 7.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [-5.0, -10.4, 3.0],
             "size": [1.0, 1.0]
           }
         },
-		{
+        {
           "direction": [1.5, 0.0, 0.0],
           "beam": {
-			"firstPerson": [-1.0, -12.5, 0.0],
+            "firstPerson": [-1.0, -12.5, 0.0],
             "offset": [1.5, -2.25, 2.5],
             "size": [0.5, 0.5]
           }
@@ -399,10 +399,10 @@
       "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('fiskheroes:teleport_timer') > 0.0 ? 1.0 : 0.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-		"fiskheroes:trail" : {
-			"type" : "skyhighheroes:fire_stelar_flight",
-			"conditionals" : ["vars:GLIDING"]
-		},
+        "fiskheroes:trail" : {
+            "type" : "skyhighheroes:fire_stelar_flight",
+            "conditionals" : ["vars:GLIDING"]
+        },
     "fiskheroes:forcefield": {
       "color": "0xFF0000",
       "rotation": [0.0, 0.0, 0.0],
@@ -411,13 +411,13 @@
       "shape": [36, 36],
       "data": "entity.getData('fiskheroes:shield_blocking_timer') * 0.1"
     }
-		
+        
   },
   
     "vars": {
-   		"DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '87fa6187-4fa6-4dc6-8742-19a2b67c4cc0'"
+           "DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '87fa6187-4fa6-4dc6-8742-19a2b67c4cc0'"
   },
-	
+    
   "itemIcons": {
     "CHESTPLATE": "pegasus_transer"
   }

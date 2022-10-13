@@ -1,7 +1,7 @@
 {
   "suit": "skyhighheroes:aidan_stelar",
   "display": {
-  	"hideUntilAvailable": true
+    "hideUntilAvailable": true
   },
   "requirements": [
     "skyhighheroes:aidan_customs"

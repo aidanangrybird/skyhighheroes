@@ -1,7 +1,7 @@
 {
   "display": {
     "name": "Chase's Custom Suits",
-	"hideUntilAvailable": true,
+    "hideUntilAvailable": true,
     "icon": {
       "texture":  "skyhighheroes:textures/gui/nodes/chase_head.png"
     }

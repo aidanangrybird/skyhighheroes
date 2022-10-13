@@ -4,7 +4,7 @@
   "modifiers": {
     "fiskheroes:arrow_catching": {
     },
-	"fiskheroes:shield_throwing": {
+    "fiskheroes:shield_throwing": {
       "cooldownTime": 0,
       "soundEvents": {
         "THROW": "fiskheroes:shield_throw"

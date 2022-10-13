@@ -4,7 +4,7 @@
   "modifiers": {
     "fiskheroes:potion_immunity": {
       "potionEffects": ["minecraft:nausea", "minecraft:poison", "minecraft:wither", "minecraft:weakness", "minecraft:slowness", "minecraft:blindness", "minecraft:hunger", "minecraft:instant_damage", "minecraft:mining_fatigue", "minecraft:haste", "minecraft:fire_resistance", "minecraft:health_boost", "minecraft:instant_health", "minecraft:jump_boost", "minecraft:regeneration", "minecraft:resistance", "minecraft:saturation", "minecraft:speed", "minecraft:strength", "minecraft:water_breathing"]
-	},
+    },
     "fiskheroes:gliding": {
       "boostSpeed": 0.3,
       "isPowered": true,
@@ -77,9 +77,9 @@
     },
     "fiskheroes:projectile_immunity": {
     },
-	"fiskheroes:arrow_catching": {
+    "fiskheroes:arrow_catching": {
     },
-	"fiskheroes:shield_throwing": {
+    "fiskheroes:shield_throwing": {
       "cooldownTime": 0,
       "soundEvents": {
         "THROW": "fiskheroes:shield_throw"

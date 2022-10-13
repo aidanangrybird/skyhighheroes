@@ -7,30 +7,30 @@
     "lights" : "skyhighheroes:astro/slayer/slayer_tenma_lights",
       
     "lights_flying" : "skyhighheroes:astro/slayer/slayer_tenma_lights_flying",
-	  
-	"lights_normal" : "skyhighheroes:astro/slayer/slayer_tenma_lights_normal",
-	  
-	"lights_normal_flying" : "skyhighheroes:astro/slayer/slayer_tenma_lights_normal_flying",
+      
+    "lights_normal" : "skyhighheroes:astro/slayer/slayer_tenma_lights_normal",
+      
+    "lights_normal_flying" : "skyhighheroes:astro/slayer/slayer_tenma_lights_normal_flying",
 
     "base": "skyhighheroes:astro/slayer/slayer_tenma_base",
       
     "base_flying": "skyhighheroes:astro/slayer/slayer_tenma_base_flying",
 
-	"long" : "skyhighheroes:astro/slayer/slayer_tenma_long",
+    "long" : "skyhighheroes:astro/slayer/slayer_tenma_long",
 
-	"long_flying" : "skyhighheroes:astro/slayer/slayer_tenma_long_flying",
+    "long_flying" : "skyhighheroes:astro/slayer/slayer_tenma_long_flying",
       
     "short" : "skyhighheroes:astro/slayer/slayer_tenma_short",
 
-	"short_flying" : "skyhighheroes:astro/slayer/slayer_tenma_short_flying",
+    "short_flying" : "skyhighheroes:astro/slayer/slayer_tenma_short_flying",
       
     "normal" : "skyhighheroes:astro/slayer/slayer_tenma_normal",
 
-	"normal_flying" : "skyhighheroes:astro/slayer/slayer_tenma_normal_flying",
-	  
-	"cannon_lights_inner" : "skyhighheroes:astro/slayer/slayer_tenma_cannon_lights_inner"
-	 
- 	 },
+    "normal_flying" : "skyhighheroes:astro/slayer/slayer_tenma_normal_flying",
+      
+    "cannon_lights_inner" : "skyhighheroes:astro/slayer/slayer_tenma_cannon_lights_inner"
+     
+      },
   
     "custom" : {
     "fiskheroes:booster|left1": {
@@ -41,7 +41,7 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:jetpacking_timer"
     },
@@ -53,7 +53,7 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:jetpacking_timer"  
     },
@@ -65,7 +65,7 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:glide_flying_timer"
     },
@@ -77,11 +77,11 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:glide_flying_timer"  
     },
-	"fiskheroes:booster|left3": {
+    "fiskheroes:booster|left3": {
       "applicable": ["BOOTS"],
       "icon": "skyhighheroes:gold_fire_layer2",
       "anchor": "leftLeg",
@@ -89,7 +89,7 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:jetpacking_timer"
     },
@@ -101,7 +101,7 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:jetpacking_timer"  
     },
@@ -113,7 +113,7 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:glide_flying_timer"
     },
@@ -125,14 +125,14 @@
       "rotation": [0.0, 0.0, 0.0],
       "scale": [1.75, 3.0],
       "opacity": 1.0,
-	  "conditionals": ["vars:GLIDING"],
+      "conditionals": ["vars:GLIDING"],
       "mirror": false,
       "data": "fiskheroes:glide_flying_timer"  
     },
     "fiskheroes:energy_bolt": {
       "color": "0xFFC400"
     },
-	"fiskheroes:energy_projection": {
+    "fiskheroes:energy_projection": {
       "color": "0xFFC400",
       "anchor": "rightArm",
       "beams": [
@@ -142,15 +142,15 @@
           "size": [2, 2]
         }
       ],
-	  "mirror": true,
+      "mirror": true,
       "renderer": "fiskheroes:energy_projection",
       "particleType": "fiskheroes:impact_energy_projection"
     },
-	"fiskheroes:trail" : {
-	    "type" : "skyhighheroes:slayer_tenma_speed",
-	    "conditionals" : ["vars:SPEEDING"]
-	},
-	"fiskheroes:forcefield": {
+    "fiskheroes:trail" : {
+        "type" : "skyhighheroes:slayer_tenma_speed",
+        "conditionals" : ["vars:SPEEDING"]
+    },
+    "fiskheroes:forcefield": {
       "color": "0xFFC400",
       "rotation": [0.0, 0.0, 0.0],
       "translation": [0.0, 10.0, 0.0],
@@ -161,6 +161,6 @@
     },
   
     "vars": {
-   		"DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '85f45fed-d7f1-4966-bfad-915c3dba0153'"
+           "DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '85f45fed-d7f1-4966-bfad-915c3dba0153'"
   }
 }

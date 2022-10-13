@@ -3,39 +3,39 @@
   "resources": {
 
     "base": "skyhighheroes:deathstroke_base"
-	  
- 	 },
+      
+      },
   
     "texture": {
 
-    	"default": "base"
-		
-	},
-		
-  	"showModel": {
+        "default": "base"
+        
+    },
+        
+      "showModel": {
 
-  	  "head": ["HELMET"],
+        "head": ["HELMET"],
 
- 	   "headwear": ["HELMET"],
+        "headwear": ["HELMET"],
 
- 	   "body": ["CHESTPLATE", "LEGGINGS"],
+        "body": ["CHESTPLATE", "LEGGINGS"],
 
- 	   "rightArm": ["CHESTPLATE"],
+        "rightArm": ["CHESTPLATE"],
 
- 	   "leftArm": ["CHESTPLATE"],
+        "leftArm": ["CHESTPLATE"],
 
- 	   "rightLeg": ["LEGGINGS", "BOOTS"],
+        "rightLeg": ["LEGGINGS", "BOOTS"],
 
-	    "leftLeg": ["LEGGINGS", "BOOTS"]
-		
-	  },
-  "fixHatLayer": ["HELMET"],		
-	
+        "leftLeg": ["LEGGINGS", "BOOTS"]
+        
+      },
+  "fixHatLayer": ["HELMET"],        
+    
   "itemIcons": {
-	"HELMET": "%s_0",
+    "HELMET": "%s_0",
     "CHESTPLATE": "%s_1",
-	"LEGGINGS": "%s_2",
-	"BOOTS": "%s_3"
+    "LEGGINGS": "%s_2",
+    "BOOTS": "%s_3"
   }
 
 }

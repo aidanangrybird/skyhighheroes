@@ -1,7 +1,7 @@
 {
   "suit": "skyhighheroes:aidan_tenma",
   "display": {
-  	"hideUntilAvailable": true
+    "hideUntilAvailable": true
   },
   "requirements": [
     "skyhighheroes:aidan_customs"

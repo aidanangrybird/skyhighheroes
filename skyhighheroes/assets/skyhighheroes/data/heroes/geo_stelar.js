@@ -263,19 +263,19 @@ function isKeyBindEnabled(entity, keyBind) {
 
     case "func_ELECTROMAGNETIC":
 
-	return entity.isAlive() && !entity.getData("fiskheroes:glide_flying_timer") > 0 && !entity.getData("fiskheroes:jetpacking_timer") > 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
+        return entity.isAlive() && !entity.getData("fiskheroes:glide_flying_timer") > 0 && !entity.getData("fiskheroes:jetpacking_timer") > 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
 
     case "WAVE_CHANGE":
 
-	return entity.isAlive() && !entity.getData("fiskheroes:glide_flying_timer") > 0 && !entity.getData("fiskheroes:jetpacking_timer") > 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
+        return entity.isAlive() && !entity.getData("fiskheroes:glide_flying_timer") > 0 && !entity.getData("fiskheroes:jetpacking_timer") > 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
 
     case "func_VISUALIZER_TOGGLE":
 
-	return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
 
     case "func_CYCLE_CLOTHES":
 
-	return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
 
     case "INTANGIBILITY":
 

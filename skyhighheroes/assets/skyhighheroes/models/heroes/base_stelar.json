@@ -1,29 +1,29 @@
 {
     "texture": {
-	    "vars:DISPLAY" : {
-			"false" : {
+        "vars:DISPLAY" : {
+            "false" : {
                 "vars:ANIM1_BASE": {
-				    "true" : "transertx"
-				},
+                    "true" : "transertx"
+                },
                 "vars:ANIM1_SHORT": {
-				    "true" : "shorttx"
-				},
+                    "true" : "shorttx"
+                },
                 "vars:ANIM1_SWIMSUIT": {
-				    "true" : "swimsuittx"
-				},
+                    "true" : "swimsuittx"
+                },
                 "vars:ANIM1_NORMAL": {
-				    "true" : "normaltx"
-				},
+                    "true" : "normaltx"
+                },
                 "vars:ANIM2": {
-				    "true" : "suit"
-				}
+                    "true" : "suit"
+                }
             },
-			"true" : "transer"
-		},
-		
-		"vars:TRANSFORMED" : {
-			"true" : "base"
-		},
+            "true" : "transer"
+        },
+        
+        "vars:TRANSFORMED" : {
+            "true" : "base"
+        },
         "vars:NORMAL" : {
             "true" : {
                 "vars:VISUALIZER":{
@@ -57,32 +57,32 @@
             }
         },
 
-    	"default": "null"
-	},
-		
-  	"showModel": {
+        "default": "null"
+    },
+        
+      "showModel": {
 
-  	  "head": ["CHESTPLATE"],
+        "head": ["CHESTPLATE"],
 
- 	   "headwear": ["CHESTPLATE"],
+        "headwear": ["CHESTPLATE"],
 
- 	   "body": ["CHESTPLATE"],
+        "body": ["CHESTPLATE"],
 
- 	   "rightArm": ["CHESTPLATE"],
+        "rightArm": ["CHESTPLATE"],
 
- 	   "leftArm": ["CHESTPLATE"],
+        "leftArm": ["CHESTPLATE"],
 
- 	   "rightLeg": ["CHESTPLATE"],
+        "rightLeg": ["CHESTPLATE"],
 
-	    "leftLeg": ["CHESTPLATE"]
+        "leftLeg": ["CHESTPLATE"]
 
-	  },
-	
-	"fixHatLayer": ["CHESTPLATE"],
-		
-	"lights" : {
-		"vars:DISPLAY" : {
-			"false" : {
+      },
+    
+    "fixHatLayer": ["CHESTPLATE"],
+        
+    "lights" : {
+        "vars:DISPLAY" : {
+            "false" : {
                 "vars:OPEN" : {
                     "true":{
                         "vars:VISUALIZER":{
@@ -92,26 +92,26 @@
                     }
                 },
                 "vars:ANIM": {
-				    "true" : "suit_lights"
-				}
+                    "true" : "suit_lights"
+                }
             },
-		    "true" : "transer_lights"
-		},
+            "true" : "transer_lights"
+        },
 
-		"vars:TRANSFORMED" : {
-			"true" : "lights"
-		},
+        "vars:TRANSFORMED" : {
+            "true" : "lights"
+        },
 
-    	"default": "null"
-	},
-	
+        "default": "null"
+    },
+    
   "custom": {
       
     "fiskheroes:animation": {
       "animation": "skyhighheroes:stelar_flight",
       "data": "fiskheroes:glide_flying_timer"
     },
-	  
+      
     "fiskheroes:ears": {
       "applicable": ["CHESTPLATE"],
       "angle": 7.5,
@@ -145,8 +145,8 @@
       "data": "0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
-	
-	"fiskheroes:shield|cannon1": {
+    
+    "fiskheroes:shield|cannon1": {
 
       "applicable": ["CHESTPLATE"],
 
@@ -185,7 +185,7 @@
       "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
-	
+    
     "fiskheroes:shield|cannon3": {
 
       "applicable": ["CHESTPLATE"],
@@ -205,7 +205,7 @@
       "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
-	
+    
     "fiskheroes:shield|cannon4": {
 
       "applicable": ["CHESTPLATE"],
@@ -225,7 +225,7 @@
       "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
-	
+    
     "fiskheroes:shield|cannon5": {
 
       "applicable": ["CHESTPLATE"],
@@ -248,18 +248,18 @@
   },
   
   "vars": {
-  	"ANIM": "entity.getData('skyhighheroes:dyn/wave_changing_timer') < 1 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0",
-		"ANIM1": "(entity.getData('skyhighheroes:dyn/wave_changing_timer') < 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0)",
+      "ANIM": "entity.getData('skyhighheroes:dyn/wave_changing_timer') < 1 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0",
+        "ANIM1": "(entity.getData('skyhighheroes:dyn/wave_changing_timer') < 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0)",
         "ANIM1_BASE": "entity.getData('skyhighheroes:dyn/stelar_clothes') == 0 && (entity.getData('skyhighheroes:dyn/wave_changing_timer') < 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0)",
         "ANIM1_SHORT": "entity.getData('skyhighheroes:dyn/stelar_clothes') == 1 && (entity.getData('skyhighheroes:dyn/wave_changing_timer') < 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0)",
         "ANIM1_SWIMSUIT": "entity.getData('skyhighheroes:dyn/stelar_clothes') == 2 && (entity.getData('skyhighheroes:dyn/wave_changing_timer') < 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0)",
         "ANIM1_NORMAL": "entity.getData('skyhighheroes:dyn/stelar_clothes') == 3 && (entity.getData('skyhighheroes:dyn/wave_changing_timer') < 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0)",
         "ANIM2": "entity.getData('skyhighheroes:dyn/wave_changing_timer') < 1 && entity.getData('skyhighheroes:dyn/wave_changing_timer') >= 0.5",
-    	"OPEN": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 0",
-	    "ANIM_FULL": "entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0",
-	"TRANSFORMED": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1",
+        "OPEN": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 0",
+        "ANIM_FULL": "entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0",
+    "TRANSFORMED": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1",
         "VISUALIZER": "entity.getData('skyhighheroes:dyn/visualizer') == 1",
-	"GLIDING" : "entity.getData('fiskheroes:glide_flying_timer') == 1 && entity.getData('fiskheroes:jetpacking_timer') == 1",
+    "GLIDING" : "entity.getData('fiskheroes:glide_flying_timer') == 1 && entity.getData('fiskheroes:jetpacking_timer') == 1",
         "BASE" : "entity.getData('skyhighheroes:dyn/stelar_clothes') == 0",
         "SHORT" : "entity.getData('skyhighheroes:dyn/stelar_clothes') == 1",
         "SWIMSUIT" : "entity.getData('skyhighheroes:dyn/stelar_clothes') == 2",

@@ -1,14 +1,14 @@
 {
     "resources" : {
-	    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
+        "cannon" : "skyhighheroes:astro/base_tenma_cannon",
         
         "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
     },
     
     "texture": {
-	    "vars:DISPLAY" : {
-			"true" : "base"
-		},
+        "vars:DISPLAY" : {
+            "true" : "base"
+        },
         "vars:NORMAL" : {
             "true" : {
                 "vars:GLIDING":{
@@ -41,10 +41,10 @@
                 }
             }
         },
-    	"default": "base"
-	},
-		
-  	"showModel": {
+        "default": "base"
+    },
+        
+      "showModel": {
     "head": ["HELMET"],
     "headwear": ["HELMET"],
     "body": ["CHESTPLATE"],
@@ -53,30 +53,30 @@
     "rightLeg": ["LEGGINGS", "BOOTS"],
     "leftLeg": ["LEGGINGS", "BOOTS"]
   },
-	
-	"fixHatLayer": ["HELMET"],
-		
-	"lights" : {
-		"vars:NORMAL" : {
-			"true" : {
-				"vars:GLIDING" : {
-					"true" : "lights_normal_flying",
-					"false" : "lights_normal"
-				}
-			}
-		},
+    
+    "fixHatLayer": ["HELMET"],
+        
+    "lights" : {
+        "vars:NORMAL" : {
+            "true" : {
+                "vars:GLIDING" : {
+                    "true" : "lights_normal_flying",
+                    "false" : "lights_normal"
+                }
+            }
+        },
         "vars:GLIDING" : {
           "true": "lights_flying"  
         },
-		"vars:DISPLAY" : {
-		    "true" : "lights"
-		},
+        "vars:DISPLAY" : {
+            "true" : "lights"
+        },
 
-    	"default": "lights"
-	},
-	
+        "default": "lights"
+    },
+    
   "custom": {
-	  
+      
     "fiskheroes:shield|cannon1": {
 
       "applicable": ["CHESTPLATE"],
@@ -116,7 +116,7 @@
       "data": "entity.getInterpolatedData('fiskheroes:aiming_timer')"
 
     },
-	
+    
     "fiskheroes:shield|cannon3": {
 
       "applicable": ["CHESTPLATE"],
@@ -136,7 +136,7 @@
       "data": "entity.getInterpolatedData('fiskheroes:aiming_timer')"
 
     },
-	
+    
     "fiskheroes:shield|cannon4": {
 
       "applicable": ["CHESTPLATE"],
@@ -156,7 +156,7 @@
       "data": "entity.getInterpolatedData('fiskheroes:aiming_timer')"
 
     },
-	
+    
     "fiskheroes:shield|cannon5": {
 
       "applicable": ["CHESTPLATE"],
@@ -199,8 +199,8 @@
   },
   "vars": {
         "GLIDING" : "entity.getData('fiskheroes:gliding')",
-		"SPEEDING": "entity.getData('fiskheroes:speeding')",
-		"BASE" : "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0",
+        "SPEEDING": "entity.getData('fiskheroes:speeding')",
+        "BASE" : "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0",
         "LONG" : "entity.getData('skyhighheroes:dyn/tenma_clothes') == 1",
         "SHORT" : "entity.getData('skyhighheroes:dyn/tenma_clothes') == 2",
         "NORMAL" : "entity.getData('skyhighheroes:dyn/tenma_clothes') == 3"
