@@ -56,7 +56,7 @@
       
     "transer" : "skyhighheroes:stelar_transer_leo",
       
-    "transer_lights" : "skyhighheroes:stelar_transer_lights",
+    "transer_lights" : "skyhighheroes:chase/chase_stelar_transer_lights",
       
     "blade" : "skyhighheroes:chase/chase_stelar_blade"
     
