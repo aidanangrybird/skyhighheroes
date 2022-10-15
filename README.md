@@ -1,0 +1,1 @@
+This is a repository for the Sky High Heroes heropack. You can go ahead and learn from what I have made, just don't steal anything as I have worked hard on this. 
