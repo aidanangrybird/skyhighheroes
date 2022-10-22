@@ -244,6 +244,25 @@
 
       "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
+    },
+    "fiskheroes:shield|hair": {
+
+      "applicable": ["CHESTPLATE"],
+
+      "texture": ["hair", "null"],
+
+      "offset": [3.0, 12.0, 0.0],
+
+      "rotation": [0.0, 0.0, -90.0],
+
+      "curve": [0.0, 0.0],
+
+      "mirror": false,
+
+      "large": true,
+
+      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6))"
+
     }
   },
   

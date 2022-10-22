@@ -3,6 +3,7 @@ function init(hero) {
     hero.setTier(10);
     hero.setChestplate("Transer");
     hero.setAliases("geo_stelar");
+    hero.hide();
     hero.setVersion("Mega Man Star Force");
     
     hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");

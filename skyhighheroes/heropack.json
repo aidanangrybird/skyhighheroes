@@ -31,59 +31,55 @@
     }
   },
   "alts" : {
-  	"skyhighheroes:geo_stelar" : {
-		"subaru" : "\u00A74Subaru Style\u00A7r"
-	},
-	"skyhighheroes:guyver" : {
-		"1" : "Guyver I",
-		"2" : "Guyver II",
-		"3" : "Guyver III"
-	},
+    "skyhighheroes:geo_stelar" : {
+      "subaru" : "\u00A74Subaru Style\u00A7r"
+    },
+    "skyhighheroes:guyver" : {
+      "1" : "Guyver I",
+      "2" : "Guyver II",
+      "3" : "Guyver III"
+    },
     "skyhighheroes:aidan_stelar" : {
-		"gundam" : "\u00A76RX-0 Unicorn Gundam Style\u00A7r"
-	},
-	"skyhighheroes:boom_stelar" : {
-		"martian_manhunter_comics" : "\u00A75Martian Manhunter (Comics) Style\u00A7r"
-	},
+      "gundam" : "\u00A76RX-0 Unicorn Gundam Style\u00A7r"
+    },
+    "skyhighheroes:boom_stelar" : {
+      "martian_manhunter_comics" : "\u00A75Martian Manhunter (Comics) Style\u00A7r"
+    },
     "skyhighheroes:chase_stelar" : {
-		"iron_man" : "\u00A72Iron Man Mark 50 Style\u00A7r"
-	},
+      "iron_man" : "\u00A72Iron Man Mark 50 Style\u00A7r"
+    },
     "skyhighheroes:comic_stelar" : {
-		"flash" : "\u00A71The Flash Style\u00A7r"
-	},
+      "flash" : "\u00A71The Flash Style\u00A7r"
+    },
     "skyhighheroes:dark_stelar" : {
-		"batman" : "\u00A78Batman Who Laughs Style\u00A7r"
-	},
-	"skyhighheroes:expo_stelar" : {
-		"mysterio" : "\u00A72Mysterio Style\u00A7r"
-	},
+      "batman" : "\u00A78Batman Who Laughs Style\u00A7r"
+    },
+    "skyhighheroes:expo_stelar" : {
+      "mysterio" : "\u00A72Mysterio Style\u00A7r"
+    },
     "skyhighheroes:fire_stelar" : {
-		"firestorm" : "\u00A74Fire\u00A71storm \u00A74Jax \u00A71Style\u00A7r"
-	},
-	"skyhighheroes:minecraft_stelar" : {
-		"deadpool" : "\u00A71Deadpool Style\u00A7r"
-	},
-	"skyhighheroes:slayer_stelar" : {
-		"black_panther" : "\u00A7eBlack Panther Style\u00A7r"
-	},
-	"skyhighheroes:storm_stelar" : {
-		"iron_man" : "\u00A74Iron Man Mark 85 Style\u00A7r"
-	},
+      "firestorm" : "\u00A74Fire\u00A71storm \u00A74Jax \u00A71Style\u00A7r"
+    },
+    "skyhighheroes:minecraft_stelar" : {
+      "deadpool" : "\u00A71Deadpool Style\u00A7r"
+    },
+    "skyhighheroes:slayer_stelar" : {
+      "black_panther" : "\u00A7eBlack Panther Style\u00A7r"
+    },
+    "skyhighheroes:storm_stelar" : {
+      "iron_man" : "\u00A74Iron Man Mark 85 Style\u00A7r"
+    },
     "skyhighheroes:sym_stelar" : {
-		"blue_beetle" : "\u00A73Blue Beetle Style\u00A7r"
-	},
+      "blue_beetle" : "\u00A73Blue Beetle Style\u00A7r"
+    },
+    "skyhighheroes:trell_stelar" : {
+      "black_lightning" : "\u00A73Black \u00A73Lightning \u00A73Style\u00A7r"
+    },
     "skyhighheroes:tobi_stelar" : {
-		"reverse_flash" : "\u00A77Reverse Flash (Earth X) Style\u00A7r"
-	},
-	"skyhighheroes:tysen_stelar" : {
-		"martian_manhunter" : "\u00A75Martian Manhunter Style\u00A7r"
-	},
-	"wave:starforce" : {
-		"angeal" : "Black Lightning Style (Xuwt)"
-	},
-  	"wave:geo_stelar" : {
-		"angeal" : "Black Lightning Style (Xuwt)"
-	}
+      "reverse_flash" : "\u00A77Reverse \u00A77Flash \u00A77(Earth \u00A77X) \u00A77Style\u00A7r"
+    },
+    "skyhighheroes:tysen_stelar" : {
+      "martian_manhunter" : "\u00A75Martian \u00A75Manhunter \u00A75Style\u00A7r"
+    }
   }
-
 }
