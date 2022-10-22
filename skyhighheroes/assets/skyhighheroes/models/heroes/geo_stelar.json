@@ -385,7 +385,7 @@
       ],
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
-      "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
+      "length": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
       "conditionals": ["vars:ANIM_FULL"]
     },
         "fiskheroes:trail" : {
@@ -456,7 +456,7 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
 
@@ -476,7 +476,7 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
     
@@ -496,7 +496,7 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
     
@@ -516,7 +516,7 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
     
@@ -536,7 +536,7 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     }
         

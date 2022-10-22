@@ -431,7 +431,7 @@
       ],
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
-      "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('fiskheroes:teleport_timer') > 0.0 ? 1.0 : 0.0)",
+      "length": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
       "conditionals": ["vars:ANIM_FULL"]
     },
     "fiskheroes:beam|omegaXisRight": {
@@ -500,7 +500,7 @@
       ],
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
-      "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('fiskheroes:teleport_timer') > 0.0 ? 1.0 : 0.0)",
+      "length": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
       "conditionals": ["vars:ANIM_FULL"]
     },
         "fiskheroes:trail" : {
