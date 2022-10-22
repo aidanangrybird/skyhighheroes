@@ -58,7 +58,9 @@
       
     "transer_lights" : "skyhighheroes:minecraft/minecraft_stelar_transer_lights",
       
-    "blade" : "skyhighheroes:minecraft/minecraft_stelar_blade"
+    "blade" : "skyhighheroes:minecraft/minecraft_stelar_blade",
+    
+    "hair" : "skyhighheroes:minecraft/minecraft_stelar_hair"
     
     },
     
@@ -85,6 +87,33 @@
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0)",
+      "conditionals": ["vars:ANIM_FULL"]
+    },
+    "fiskheroes:beam|hairStart": {
+      "applicable": ["CHESTPLATE"],
+      "color": "0x0000D1",
+      "anchor": "head",
+      "offset": [0.0, 0.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "componentBeams": [
+        {
+          "direction": [0.0, -7.5, 0.0],
+          "beam": {
+            "offset": [0.0, -8.0, 2.3125],
+            "size": [4.0, 4.0]
+          }
+        },
+        {
+          "direction": [0.0, -5.0, 0.0],
+          "beam": {
+            "offset": [0.0, -5.5, 5.3125],
+            "size": [2.0, 2.0]
+          }
+        }
+      ],
+      "mirror": false,
+      "renderer": "skyhighheroes:wave_glow",
+      "length": "Math.min(Math.max((((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
     "fiskheroes:beam|bodyStart": {
@@ -125,6 +154,26 @@
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
       "length": "1",
+      "conditionals": ["vars:TRANSFORMED"]
+    },
+    "fiskheroes:beam|blade": {
+      "applicable": ["CHESTPLATE"],
+      "color": "0x0000D1",
+      "anchor": "rightArm",
+      "offset": [0.0, -1.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "componentBeams": [
+        {
+          "direction": [0.0, 15.0, 0.0],
+          "beam": {
+            "offset": [-1.0, 5.5, 0.0],
+            "size": [8.0, 10.0]
+          }
+        }
+      ],
+      "mirror": false,
+      "renderer": "skyhighheroes:wave_glow",
+      "length": "entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0",
       "conditionals": ["vars:TRANSFORMED"]
     },
     "fiskheroes:beam|armRightStart": {

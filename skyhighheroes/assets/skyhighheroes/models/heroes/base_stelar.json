@@ -242,18 +242,20 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
 
     },
     "fiskheroes:shield|hair": {
 
       "applicable": ["CHESTPLATE"],
+      
+      "anchor" : "head",
 
       "texture": ["hair", "null"],
 
-      "offset": [3.0, 12.0, 0.0],
+      "offset": [0.0, -11.0625, 2.0625],
 
-      "rotation": [0.0, 0.0, -90.0],
+      "rotation": [0.0, 180.0, 0.0],
 
       "curve": [0.0, 0.0],
 
@@ -261,7 +263,7 @@
 
       "large": true,
 
-      "data": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6))"
+      "data": "Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') < 0.5 ? (((-81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) + (50/32)) : (((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0) - entity.isDisplayStand()"
 
     }
   },

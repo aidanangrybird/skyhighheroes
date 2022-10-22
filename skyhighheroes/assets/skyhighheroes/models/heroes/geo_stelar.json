@@ -231,6 +231,26 @@
       "length": "1",
       "conditionals": ["vars:TRANSFORMED"]
     },
+    "fiskheroes:beam|blade": {
+      "applicable": ["CHESTPLATE"],
+      "color": "0x00FF00",
+      "anchor": "rightArm",
+      "offset": [0.0, -1.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "componentBeams": [
+        {
+          "direction": [0.0, 15.0, 0.0],
+          "beam": {
+            "offset": [-1.0, 5.5, 0.0],
+            "size": [8.0, 10.0]
+          }
+        }
+      ],
+      "mirror": false,
+      "renderer": "skyhighheroes:wave_glow",
+      "length": "entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0",
+      "conditionals": ["vars:TRANSFORMED"]
+    },
     "fiskheroes:beam|armRightStart": {
       "applicable": ["CHESTPLATE"],
       "color": "0x00FF00",

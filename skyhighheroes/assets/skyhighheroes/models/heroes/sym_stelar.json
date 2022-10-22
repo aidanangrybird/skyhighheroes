@@ -1,7 +1,7 @@
 {
-    
-    "parent" : "skyhighheroes:base_stelar",
 
+    "parent" : "skyhighheroes:base_stelar",
+    
   "resources": {
 
     "base": "skyhighheroes:sym/sym_stelar",
@@ -45,7 +45,7 @@
     "cannon_left_lights" : "skyhighheroes:omega_xis_left_eyes",
       
     "cannon_right_lights" : "skyhighheroes:omega_xis_right_eyes",
-    
+      
     "transertx" : "skyhighheroes:sym/sym_stelar_transer.tx.json",
       
     "shorttx" : "skyhighheroes:sym/sym_stelar_short.tx.json",
@@ -54,16 +54,18 @@
       
     "normaltx" : "skyhighheroes:sym/sym_stelar_normal.tx.json",
       
-    "transer" : "skyhighheroes:stelar_transer_dragon",
+    "transer" : "skyhighheroes:stelar_transer_pegasus",
       
     "transer_lights" : "skyhighheroes:sym/sym_stelar_transer_lights",
       
-    "blade" : "skyhighheroes:sym/sym_stelar_blade"
+    "blade" : "skyhighheroes:sym/sym_stelar_blade",
     
-      },
+    "hair" : "skyhighheroes:sym/sym_stelar_hair"
+    
+    },
     
   "custom": {
-
+    
     "fiskheroes:energy_bolt": {
       "color": "0x00F2FF"
     },
@@ -85,6 +87,33 @@
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
       "length": "Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0)",
+      "conditionals": ["vars:ANIM_FULL"]
+    },
+    "fiskheroes:beam|hairStart": {
+      "applicable": ["CHESTPLATE"],
+      "color": "0x00F2FF",
+      "anchor": "head",
+      "offset": [0.0, 0.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "componentBeams": [
+        {
+          "direction": [0.0, -7.5, 0.0],
+          "beam": {
+            "offset": [0.0, -8.0, 2.3125],
+            "size": [4.0, 4.0]
+          }
+        },
+        {
+          "direction": [0.0, -5.0, 0.0],
+          "beam": {
+            "offset": [0.0, -5.5, 5.3125],
+            "size": [2.0, 2.0]
+          }
+        }
+      ],
+      "mirror": false,
+      "renderer": "skyhighheroes:wave_glow",
+      "length": "Math.min(Math.max((((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0)",
       "conditionals": ["vars:ANIM_FULL"]
     },
     "fiskheroes:beam|bodyStart": {
@@ -125,6 +154,26 @@
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
       "length": "1",
+      "conditionals": ["vars:TRANSFORMED"]
+    },
+    "fiskheroes:beam|blade": {
+      "applicable": ["CHESTPLATE"],
+      "color": "0x00F2FF",
+      "anchor": "rightArm",
+      "offset": [0.0, -1.0, 0.0],
+      "rotation": [0.0, 0.0, 0.0],
+      "componentBeams": [
+        {
+          "direction": [0.0, 15.0, 0.0],
+          "beam": {
+            "offset": [-1.0, 5.5, 0.0],
+            "size": [8.0, 10.0]
+          }
+        }
+      ],
+      "mirror": false,
+      "renderer": "skyhighheroes:wave_glow",
+      "length": "entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0",
       "conditionals": ["vars:TRANSFORMED"]
     },
     "fiskheroes:beam|armRightStart": {
@@ -261,13 +310,13 @@
       ],
       "mirror": false,
       "renderer": "skyhighheroes:wave_glow",
-      "length": "(2.5 * (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 0.6)) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
+      "length": "((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)",
       "conditionals": ["vars:ANIM_FULL"]
     },
-        "fiskheroes:trail" : {
-            "type" : "skyhighheroes:sym_stelar_flight",
-            "conditionals" : ["vars:GLIDING"]
-        },
+    "fiskheroes:trail" : {
+        "type" : "skyhighheroes:sym_stelar_flight",
+        "conditionals" : ["vars:GLIDING"]
+    },
     "fiskheroes:forcefield": {
       "color": "0x00F2FF",
       "rotation": [0.0, 0.0, 0.0],
@@ -276,15 +325,14 @@
       "shape": [36, 36],
       "data": "entity.getData('fiskheroes:shield_blocking_timer') * 0.1"
     }
-        
   },
   
     "vars": {
-           "DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '340d3667-9ee9-49eb-b98b-e12c7534b577'"
+       "DISPLAY": "entity.isDisplayStand() || entity.getUUID() != '340d3667-9ee9-49eb-b98b-e12c7534b577'"
   },
     
   "itemIcons": {
-    "CHESTPLATE": "dragon_transer"
+    "CHESTPLATE": "pegasus_transer"
   }
 
 }
