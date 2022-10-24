@@ -8,7 +8,6 @@ function init(hero) {
   hero.setAliases("tobio_tenma");
   hero.setVersion("Tobio Tenma");
   hero.hide();
-  hero.addEquipment("fiskheroes:captain_americas_shield");
   
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
   hero.addAttribute("SPRINT_SPEED", 0.3, 1);

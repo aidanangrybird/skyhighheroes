@@ -4,31 +4,31 @@
     
   "resources": {
       
-    "lights" : "skyhighheroes:astro/fire/fire_tenma_lights",
+    "lights" : "skyhighheroes:fire/astro/fire_tenma_lights",
       
-    "lights_flying" : "skyhighheroes:astro/fire/fire_tenma_lights_flying",
+    "lights_flying" : "skyhighheroes:fire/astro/fire_tenma_lights_flying",
       
-    "lights_normal" : "skyhighheroes:astro/fire/fire_tenma_lights_normal",
+    "lights_normal" : "skyhighheroes:fire/astro/fire_tenma_lights_normal",
       
-    "lights_normal_flying" : "skyhighheroes:astro/fire/fire_tenma_lights_normal_flying",
+    "lights_normal_flying" : "skyhighheroes:fire/astro/fire_tenma_lights_normal_flying",
 
-    "base": "skyhighheroes:astro/fire/fire_tenma_base",
+    "base": "skyhighheroes:fire/astro/fire_tenma_base",
       
-    "base_flying": "skyhighheroes:astro/fire/fire_tenma_base_flying",
+    "base_flying": "skyhighheroes:fire/astro/fire_tenma_base_flying",
 
-    "long" : "skyhighheroes:astro/fire/fire_tenma_long",
+    "long" : "skyhighheroes:fire/astro/fire_tenma_long",
 
-    "long_flying" : "skyhighheroes:astro/fire/fire_tenma_long_flying",
+    "long_flying" : "skyhighheroes:fire/astro/fire_tenma_long_flying",
       
-    "short" : "skyhighheroes:astro/fire/fire_tenma_short",
+    "short" : "skyhighheroes:fire/astro/fire_tenma_short",
 
-    "short_flying" : "skyhighheroes:astro/fire/fire_tenma_short_flying",
+    "short_flying" : "skyhighheroes:fire/astro/fire_tenma_short_flying",
       
-    "normal" : "skyhighheroes:astro/fire/fire_tenma_normal",
+    "normal" : "skyhighheroes:fire/astro/fire_tenma_normal",
 
-    "normal_flying" : "skyhighheroes:astro/fire/fire_tenma_normal_flying",
+    "normal_flying" : "skyhighheroes:fire/astro/fire_tenma_normal_flying",
       
-    "cannon_lights_inner" : "skyhighheroes:astro/fire/fire_tenma_cannon_lights_inner"
+    "cannon_lights_inner" : "skyhighheroes:fire/astro/fire_tenma_cannon_lights_inner"
       
     
       },
