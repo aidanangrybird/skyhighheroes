@@ -1,8 +1,17 @@
-{
+ {
 
-  "parent": "skyhighheroes:base_stelar_flight",
-  "constants": {
-    "COLOR": "0x39E6BD"
+  "fade": 25,
+  
+  "lightning": {
+
+    "color": "0x39E6BD",
+
+    "density": 20,
+
+    "differ": 1,
+
+    "opacity": 1
+
   }
 
 }

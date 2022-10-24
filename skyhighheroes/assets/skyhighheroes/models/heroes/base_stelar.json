@@ -162,7 +162,7 @@
 
       "large": true,
 
-      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:glide_flying_timer') > 0 || entity.getData('fiskheroes:jetpacking_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1)"
 
     },
 
@@ -182,7 +182,7 @@
 
       "large": true,
 
-      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:glide_flying_timer') > 0 || entity.getData('fiskheroes:jetpacking_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1)"
 
     },
     
@@ -202,7 +202,7 @@
 
       "large": true,
 
-      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:glide_flying_timer') > 0 || entity.getData('fiskheroes:jetpacking_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1)"
 
     },
     
@@ -222,7 +222,7 @@
 
       "large": true,
 
-      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:glide_flying_timer') > 0 || entity.getData('fiskheroes:jetpacking_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1)"
 
     },
     
@@ -242,7 +242,7 @@
 
       "large": true,
 
-      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2)"
+      "data": "Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:glide_flying_timer') > 0 || entity.getData('fiskheroes:jetpacking_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1)"
 
     },
     "fiskheroes:shield|hair": {
@@ -279,7 +279,7 @@
         "OPEN": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 0",
         "ANIM_FULL": "entity.getData('skyhighheroes:dyn/wave_changing_timer') > 0",
     "TRANSFORMED": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1",
-        "VISUALIZER": "entity.getData('skyhighheroes:dyn/visualizer') == 1",
+        "VISUALIZER": "entity.getData('skyhighheroes:dyn/visualizer_toggle') == 1",
     "GLIDING" : "entity.getData('fiskheroes:glide_flying_timer') == 1 && entity.getData('fiskheroes:jetpacking_timer') == 1",
         "BASE" : "entity.getData('skyhighheroes:dyn/stelar_clothes') == 0",
         "SHORT" : "entity.getData('skyhighheroes:dyn/stelar_clothes') == 1",
