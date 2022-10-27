@@ -1,18 +1,18 @@
 {data} = curve {data}
 
-{leftLeg_posY} += 0{data} + {leftLeg_posY}
-{leftLeg_posX} += 0{data} + {leftLeg_posX}
-{leftLeg_posZ} += 0{data} + {leftLeg_posZ}
+{leftLeg_posY} -= -12{data} + {data}{leftLeg_posY}
+{leftLeg_posX} -= -2{data} + {data}{leftLeg_posX}
+{leftLeg_posZ} -= 0{data} + {data}{leftLeg_posZ}
 
-{rightLeg_posY} += 0{data} + {rightLeg_posY}
-{rightLeg_posX} += 0{data} + {rightLeg_posX}
-{rightLeg_posZ} += 0{data} + {rightLeg_posZ}
+{rightLeg_posY} -= -12{data} + {data}{rightLeg_posY}
+{rightLeg_posX} -= 2{data} + {data}{rightLeg_posX}
+{rightLeg_posZ} -= 0{data} + {data}{rightLeg_posZ}
 
-{head_posY} -= 0{data} + {head_posY}
-{head_posX} -= 0{data} + {head_posX}
-{head_posZ} -= 0{data} + {head_posZ}
+{head_posY} -= 0{data} + {data}{head_posY}
+{head_posX} -= 0{data} + {data}{head_posX}
+{head_posZ} -= 0{data} + {data}{head_posZ}
 
-{body_rotX} -= 0{data} + {body_rotX}
+{body_rotX} -= {data}{body_rotX}
 
 {head_rotX} @ {data} -> -{head_rotX}
 
