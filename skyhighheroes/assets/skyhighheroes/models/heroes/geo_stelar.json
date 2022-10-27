@@ -400,8 +400,8 @@
       "shape": [36, 36],
       "data": "entity.getData('fiskheroes:shield_blocking_timer') * 0.1"
     },
-    
-    "fiskheroes:animation": {
+
+    "fiskheroes:animation|flight": {
       "animation": "skyhighheroes:stelar_flight",
       "data": "fiskheroes:glide_flying_timer"
     },
@@ -566,7 +566,9 @@
   "animations" : {
     "BLOCKING" : "skyhighheroes:force_field_holding",
     "AIMING" : "skyhighheroes:stelar_aim",
-    "fiskheroes:gliding" : "skyhighheroes:stelar_flight"
+    "GLIDING" : "skyhighheroes:stelar_flight",
+    "WALL_CRAWL" : "skyhighheroes:em_wall_ceiling_stand",
+    "CEILING_CRAWL" : "skyhighheroes:em_wall_ceiling_stand"
   },
     
   "itemIcons": {

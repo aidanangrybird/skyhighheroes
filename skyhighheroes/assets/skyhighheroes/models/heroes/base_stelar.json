@@ -106,12 +106,12 @@
     },
     
   "custom": {
-      
+    
     "fiskheroes:animation": {
       "animation": "skyhighheroes:stelar_flight",
       "data": "fiskheroes:glide_flying_timer"
     },
-      
+    
     "fiskheroes:ears": {
       "applicable": ["CHESTPLATE"],
       "angle": 7.5,
@@ -288,8 +288,11 @@
   },
   
   "animations" : {
+    "WALL_CRAWL" : "skyhighheroes:em_wall_ceiling_stand",
+    "CEILING_CRAWL" : "skyhighheroes:em_wall_ceiling_stand",
     "BLOCKING" : "skyhighheroes:force_field_holding",
     "AIMING" : "skyhighheroes:stelar_aim",
-    "fiskheroes:gliding" : "skyhighheroes:stelar_flight"
+    "GLIDING" : "skyhighheroes:stelar_flight"
+    
   }
 }

@@ -7,10 +7,20 @@
       "texture":  "skyhighheroes:textures/gui/nodes/base.png"
     }
   },
-  "requirements": [ ],
-  "price": {
-    "TUTRIDIUM": 2048,
-    "IRID_GOLD": 2048,
-    "XP_LEVELS": 2048
+  "requirements": [],
+  "autoUnlock": true,
+  "criteria": {
+    "shh": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Thank you for downloading and using Sky High Heroes"
+      },
+      "condition": {
+        "variables": {
+          "entity": "PLAYER_TICKING"
+        },
+        "check": "entity.exists() || !entity.exists()"
+      }
+    }
   }
 }

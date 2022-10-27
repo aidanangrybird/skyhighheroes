@@ -20,6 +20,8 @@
         "TELEPORT": "skyhighheroes:wave_teleport"
       }
     },
+    "fiskheroes:wall_crawling": {
+    },
     "fiskheroes:intangibility": {
       "isAbsolute": true
     },
