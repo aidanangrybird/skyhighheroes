@@ -11,7 +11,7 @@
         }
       },
       "isExplosive": false,
-      "cooldown": 1.0,
+      "cooldownTime": 7.5,
       "soundEvents": {
         "SHOOT": "skyhighheroes:wave_shooting"
       }
