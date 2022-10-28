@@ -40,9 +40,9 @@
     
     "cannon_front" : "skyhighheroes:geo/geo_stelar_front_cannon",
     
-    "cannon_left_lights" : "skyhighheroes:omega_xis_left_eyes",
+    "cannon_left_lights" : "skyhighheroes:geo/omega_xis_geo_stelar_left_eyes",
       
-    "cannon_right_lights" : "skyhighheroes:omega_xis_right_eyes",
+    "cannon_right_lights" : "skyhighheroes:geo/omega_xis_geo_stelar_right_eyes",
       
     "transertx" : "skyhighheroes:geo/geo_stelar_transer.tx.json",
       

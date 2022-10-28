@@ -42,9 +42,9 @@
     
     "cannon_front" : "skyhighheroes:tobi/tobi_stelar_front_cannon",
     
-    "cannon_left_lights" : "skyhighheroes:omega_xis_left_eyes",
+    "cannon_left_lights" : "skyhighheroes:tobi/omega_xis_tobi_stelar_left_eyes",
       
-    "cannon_right_lights" : "skyhighheroes:omega_xis_right_eyes",
+    "cannon_right_lights" : "skyhighheroes:tobi/omega_xis_tobi_stelar_right_eyes",
       
     "transertx" : "skyhighheroes:tobi/tobi_stelar_transer.tx.json",
       

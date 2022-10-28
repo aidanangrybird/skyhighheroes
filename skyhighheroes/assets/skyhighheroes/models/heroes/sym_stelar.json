@@ -42,9 +42,9 @@
     
     "cannon_front" : "skyhighheroes:sym/sym_stelar_front_cannon",
     
-    "cannon_left_lights" : "skyhighheroes:omega_xis_left_eyes",
+    "cannon_left_lights" : "skyhighheroes:sym/omega_xis_sym_stelar_left_eyes",
       
-    "cannon_right_lights" : "skyhighheroes:omega_xis_right_eyes",
+    "cannon_right_lights" : "skyhighheroes:sym/omega_xis_sym_stelar_right_eyes",
       
     "transertx" : "skyhighheroes:sym/sym_stelar_transer.tx.json",
       
