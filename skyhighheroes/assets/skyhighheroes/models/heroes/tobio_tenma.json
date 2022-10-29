@@ -368,8 +368,8 @@
   },
   "itemIcons": {
     "HELMET": "tobio_tenma_head",
-    "CHESTPLATE": "tobio_tenma_chest",
+    "CHESTPLATE": "tobio_tenma_torso",
     "LEGGINGS": "tobio_tenma_legs",
-    "BOOTS": "tobio_tenma_feet"
+    "BOOTS": "tobio_tenma_boots"
   }
 }

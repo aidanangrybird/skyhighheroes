@@ -213,8 +213,8 @@
   },
   "itemIcons": {
     "HELMET": "%s_head",
-    "CHESTPLATE": "%s_chest",
+    "CHESTPLATE": "%s_torso",
     "LEGGINGS": "%s_legs",
-    "BOOTS": "%s_feet"
+    "BOOTS": "%s_boots"
   }
 }

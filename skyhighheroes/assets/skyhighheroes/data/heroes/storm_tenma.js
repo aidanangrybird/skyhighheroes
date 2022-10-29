@@ -3,9 +3,9 @@ function init(hero) {
     hero.setName("Astro Boy");
     hero.setTier(8);
     hero.setHelmet("Head");
-    hero.setChestplate("Chest");
+    hero.setChestplate("Torso");
     hero.setLeggings("Legs");
-    hero.setBoots("Feet");
+    hero.setBoots("Boots");
     hero.setAliases("storm_tenma");
     hero.setVersion("Storm Tenma");
     hero.hide();
