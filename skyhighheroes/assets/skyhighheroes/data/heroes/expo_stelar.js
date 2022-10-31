@@ -250,7 +250,7 @@ function isModifierEnabled(entity, modifier) {
 
       return entity.isAlive() && entity.getUUID() == uuid;
 
-    case "fiskheroes:gliding":
+    case "fiskheroes:controlled_flight":
 
       return (entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getData("skyhighheroes:dyn/wave_changed")) && entity.getUUID() == uuid;
 

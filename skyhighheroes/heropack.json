@@ -27,8 +27,7 @@
       "wave_teleport": 24.0,
       "wave_transform": 16.0,
       "tenma_flying_start": { "distance": 32.0, "sendToAll": true },
-      "tenma_flying": 32.0,
-      "tenma_flying": 24.0
+      "tenma_flying": 32.0
     }
   },
   "alts" : {
