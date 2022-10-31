@@ -44,7 +44,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:jetpacking_timer"
+      "data": "fiskheroes:flight_boost_timer"
     },
     "fiskheroes:booster|right1": {
       "applicable": ["BOOTS"],
@@ -56,7 +56,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:jetpacking_timer"  
+      "data": "fiskheroes:flight_boost_timer"  
     },
     "fiskheroes:booster|left2": {
       "applicable": ["BOOTS"],
@@ -68,7 +68,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:glide_flying_timer"
+      "data": "fiskheroes:flight_timer"
     },
     "fiskheroes:booster|right2": {
       "applicable": ["BOOTS"],
@@ -80,7 +80,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:glide_flying_timer"  
+      "data": "fiskheroes:flight_timer"  
     },
     "fiskheroes:booster|left3": {
       "applicable": ["BOOTS"],
@@ -92,7 +92,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:jetpacking_timer"
+      "data": "fiskheroes:flight_boost_timer"
     },
     "fiskheroes:booster|right3": {
       "applicable": ["BOOTS"],
@@ -104,7 +104,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:jetpacking_timer"  
+      "data": "fiskheroes:flight_boost_timer"  
     },
     "fiskheroes:booster|left4": {
       "applicable": ["BOOTS"],
@@ -116,7 +116,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:glide_flying_timer"
+      "data": "fiskheroes:flight_timer"
     },
     "fiskheroes:booster|right4": {
       "applicable": ["BOOTS"],
@@ -128,7 +128,7 @@
       "opacity": 1.0,
       "conditionals": ["vars:GLIDING"],
       "mirror": false,
-      "data": "fiskheroes:glide_flying_timer"  
+      "data": "fiskheroes:flight_timer"  
     },
     "fiskheroes:energy_bolt": {
       "color": "0xFF0000"
