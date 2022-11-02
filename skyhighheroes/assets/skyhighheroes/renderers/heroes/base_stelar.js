@@ -113,10 +113,10 @@ function init(renderer) {
         if (entity.isDisplayStand() || entity.getUUID() != uuid) {
             return "transer_lights";
         }
-        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
             return "visualizer_up_lights";
         }
-        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
             return "visualizer_down_lights";
         }
         if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
@@ -130,7 +130,6 @@ function init(renderer) {
         }
     }
     });
-    renderer.setItemIcons("pegasus_transer");
     initEffects(renderer);
     initAnimations(renderer);
 }
