@@ -12,15 +12,128 @@ var omegaXisRight
 var omegaXisTop
 var hair
 
-var namePerson = "aidan"
-
+var namePerson = ""
+namePerson = "aidan"
 var satellite = "pegasus"
 
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"
 
+loadTextures({
+    "base": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar"),
+    "lights": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_lights"),
+    "suit": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_suit.tx.json"),
+    "suit_lights": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_suit_lights.tx.json"),
+    "visualizer_up": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_up_transer"),
+    "visualizer_down": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_down_transer"),
+    "visualizer_up_short": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_up_short"),
+    "visualizer_down_short": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_down_short"),
+    "visualizer_up_swimsuit": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_up_swimsuit"),
+    "visualizer_down_swimsuit": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_down_swimsuit"),
+    "visualizer_up_normal": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_up_normal"),
+    "visualizer_down_normal": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_down_normal"),
+    "visualizer_up_lights": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_up_lights"),
+    "visualizer_down_lights": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_down_lights"),
+    "cannon_bottom": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_bottom_cannon"),
+    "cannon_left": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_left_cannon"),
+    "cannon_right": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_right_cannon"),
+    "cannon_top": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_top_cannon"),
+    "cannon_front": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_front_cannon"),
+    "cannon_left_lights": ("skyhighheroes:" + namePerson + "/omega_xis_" + namePerson + "_stelar_left_eyes"),
+    "cannon_right_lights": ("skyhighheroes:" +  namePerson + "/omega_xis_" + namePerson + "_stelar_right_eyes"),
+    "transertx": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_transer.tx.json"),
+    "shorttx": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_short.tx.json"),
+    "swimsuittx": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_swimsuit.tx.json"),
+    "normaltx": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_normal.tx.json"),
+    "transer": ("skyhighheroes:stelar_transer_" + satellite),
+    "transer_lights": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_transer_lights"),
+    "blade": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_blade"),
+    "hair": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar_hair")
+});
+
+
 function init(renderer) {
 
-    parent.init(renderer)
+    renderer.setTexture((entity, renderLayer) => {
+        if (renderLayer == "CHESTPLATE") {
+        
+        if (entity.isDisplayStand() || entity.getUUID() != uuid) {
+            return "transer";
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
+                return "transertx";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
+                return "shorttx";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
+                return "swimsuittx";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+                return "normaltx";
+            }
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
+            return "suit";
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+            return "base"
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
+                return "visualizer_up";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
+                return "visualizer_up_short";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
+                return "visualizer_up_swimsuit";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+                return "visualizer_up_normal";
+            }
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
+                return "visualizer_down";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
+                return "visualizer_down_short";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
+                return "visualizer_down_swimsuit";
+            }
+            if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+                return "visualizer_down_normal";
+            }
+        }
+        else {
+            return "null";
+        }
+    }
+    });
+    renderer.setLights((entity, renderLayer) => {
+        if (renderLayer == "CHESTPLATE") {
+        if (entity.isDisplayStand() || entity.getUUID() != uuid) {
+            return "transer_lights";
+        }
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
+            return "visualizer_up_lights";
+        }
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
+            return "visualizer_down_lights";
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
+            return "suit_lights";
+        }
+        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+            return "lights";
+        }
+        else {
+            return "null";
+        }
+    }
+    });
     renderer.setItemIcons("pegasus_transer");
     initEffects(renderer);
     initAnimations(renderer);

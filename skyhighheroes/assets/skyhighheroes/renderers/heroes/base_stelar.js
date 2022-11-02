@@ -1,14 +1,19 @@
 var utils = implement("fiskheroes:external/utils");
 
-var teleport
-var blade
-var ears
-var omegaXisBottom
-var omegaXisFront
-var omegaXisLeft
-var omegaXisRight
-var omegaXisTop
-var hair
+var teleport;
+var blade;
+var ears;
+var omegaXisBottom;
+var omegaXisFront;
+var omegaXisLeft;
+var omegaXisRight;
+var omegaXisTop;
+var hair;
+var namePerson;
+var satellite;
+var color;
+var uuid;
+
 
 loadTextures({
     "base": ("skyhighheroes:" + namePerson + "/" + namePerson + "_stelar"),
@@ -105,7 +110,7 @@ function init(renderer) {
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
-        if (entity.isDisplayStand()) {
+        if (entity.isDisplayStand() || entity.getUUID() != uuid) {
             return "transer_lights";
         }
         if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
