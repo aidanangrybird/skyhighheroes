@@ -2,10 +2,21 @@
   "name": "Jet-powered Flight",
   "value": 1,
   "modifiers": {
-    "fiskheroes:gliding": {
-      "boostSpeed": 0.2,
-      "isPowered": true,
-      "isControlled": true,
+    "fiskheroes:controlled_flight": {
+      "speed": 0.1,
+      "boostSpeed": 0.3,
+      "canBoost": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 0.4,
       "soundEvents": {
         "ENABLE": ["skyhighheroes:tenma_flying_start"],
         "BOOST": ["skyhighheroes:gliding", "skyhighheroes:tenma_flying", "skyhighheroes:tenma_hover"]
