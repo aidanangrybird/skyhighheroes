@@ -8,12 +8,30 @@ var cannonRight;
 var cannonTop;
 var cannonBack;
 
+loadTextures({
+    "lights" : "skyhighheroes:astro/tobio_tenma_lights",
+    "lights_flying" : "skyhighheroes:astro/tobio_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:astro/tobio_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:astro/tobio_tenma_lights_normal_flying",
+    "base": "skyhighheroes:astro/tobio_tenma_base",
+    "base_flying": "skyhighheroes:astro/tobio_tenma_base_flying",
+    "long" : "skyhighheroes:astro/tobio_tenma_long",
+    "long_flying" : "skyhighheroes:astro/tobio_tenma_long_flying",
+    "short" : "skyhighheroes:astro/tobio_tenma_short",
+    "short_flying" : "skyhighheroes:astro/tobio_tenma_short_flying",
+    "normal" : "skyhighheroes:astro/tobio_tenma_normal",
+    "normal_flying" : "skyhighheroes:astro/tobio_tenma_normal_flying",
+    "cannon_lights_inner" : "skyhighheroes:astro/tobio_tenma_cannon_lights_inner",
+    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
+    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
+});
+
 function init(renderer) {
 
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
         
-        if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+        if (entity.isDisplayStand()) {
             return "base";
         }
         if (entity.getData("fiskheroes:flying")) {
@@ -51,7 +69,7 @@ function init(renderer) {
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-        if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+        if (entity.isDisplayStand()) {
             return "lights";
         }
         if (entity.getData("fiskheroes:flying")) {
@@ -89,6 +107,16 @@ function init(renderer) {
 
 
 function initEffects(renderer) {
+    //Boot Rockets
+    rockets.init(renderer, "skyhighheroes:normal_fire_layer1", "skyhighheroes:normal_fire_layer2", true);
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorVar, [
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", colorVar, [
+        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
+    renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorVar);
+    utils.bindTrail(renderer, "skyhighheroes:tobio_tenma_speed")
     //Right
     cannonRight = renderer.createEffect("fiskheroes:shield");
     cannonRight.texture.set("cannon", null);
@@ -174,12 +202,4 @@ function render(entity, renderLayer, isFirstPersonArm) {
         }
 }
 
-function getID() {
-    return "";
-}
-function getNamePerson() {
-    return "";
-}
-function getCLR() {
-    return 0x00FF00;
-}
+var colorVar = 0xFFFFFF

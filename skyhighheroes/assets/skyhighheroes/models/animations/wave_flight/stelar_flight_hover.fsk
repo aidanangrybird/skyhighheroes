@@ -1,9 +1,11 @@
 {x} = 30{hover}min(1.5{vel}, 1)
+out "rotate" ({x}clamp({strafe}, -2, 2), 0, 0, 1)
+out "rotate" (-{x}clamp({forward}, -2, 2), 1, 0, 0)
 out "firstPerson" (true)
-out "rotate" (56{data}, 0, 1, 0)
-out "rotate" (20{data}, 1, 0, 0)
-out "rotate" (-30{data}, 0, 0, 1)
-out "translate" (0.06{data}, -0.15{data}, -0.5{data})
+out "translate" (-0.35{forward}, 0, 0.15{forward})
+out "rotate" (-27{forward}, 0, 1, 0)
+out "rotate" (-20{forward}, 1, 0, 0)
+out "rotate" (-30{forward}, 0, 0, 1)
 
 {x} = {hover}min(2{vel}, 1)
 {strafe} *= {x}
@@ -11,13 +13,15 @@ out "translate" (0.06{data}, -0.15{data}, -0.5{data})
 {adx} = abs {strafe}
 {adz} = abs {forward}
 
+{rightArm_rotX} @ {forward} -> ({head_rotY} - (pi / 2))
+{rightArm_rotY} @ {forward} -> -1.0{head_rotX}
+{rightArm_rotZ} @ {forward} -> (0.0{head_rotX} + 1.6)
+
 {head_rotX} -= 30'clamp({forward}, -2, 2)
-{rightArm_rotX} += -0.2{data} - 3.0{a1}
-{rightArm_rotY} += -0.2{data} + 1.0{a1}
-{rightArm_rotZ} -= 0.1{a1}
-{rightArm_posY} -= {data} - 2.0{a3}
-{rightArm_posZ} += {data} - 2.0{a3}
-{rightArm_posX} -= {data} + 2.0{a3}
+{rightArm_rotX} += 0.5{forward} - 0.4{adx}
+{rightArm_rotY} += -pi/2{forward}
+{rightArm_rotX} += 0.5{forward} - 0.4{adx} + {forward}
+{rightArm_rotZ} += 0.1{adz} + 0.4{strafe} + 7'{data_0}
 {leftArm_rotX} += 0.2{forward} - 0.4{adx}
 {leftArm_rotZ} -= 0.1{adz} - 0.4{strafe} + 7'{data_0}
 {rightLeg_posZ} -= 2{adz}
@@ -26,3 +30,4 @@ out "translate" (0.06{data}, -0.15{data}, -0.5{data})
 {rightLeg_rotZ} += 0.05{adz} + 0.4{strafe}
 {leftLeg_rotX} += 0.2{forward}
 {leftLeg_rotZ} -= 0.05{adz} - 0.4{strafe}
+{body_rotY} += -20'{forward}

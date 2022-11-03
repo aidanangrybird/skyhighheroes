@@ -1,7 +1,9 @@
 extend("skyhighheroes:base_tenma");
 
 var rockets = implement("skyhighheroes:external/astro_rockets");
-var stuff = implement("skyhighheroes:external/foosh");
+var utils = implement("fiskheroes:external/utils");
+
+var colorVar = 0xFF8900
 
 loadTextures({
     "lights" : "skyhighheroes:aidan/astro/aidan_tenma_lights",
@@ -25,8 +27,14 @@ function initEffects(renderer) {
     parent.initEffects(renderer);
     //Boot Rockets
     rockets.init(renderer, "skyhighheroes:orange_fire_layer1", "skyhighheroes:orange_fire_layer2", true);
-    stuff.bindLeftDigitBeam(renderer, 0xFF8900);
-    stuff.bindRightDigitBeam(renderer, 0xFF8900);
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorVar, [
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", colorVar, [
+        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
+    renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorVar);
+    utils.bindTrail(renderer, "skyhighheroes:aidan_tenma_speed")
 }
 
 function getID() {
