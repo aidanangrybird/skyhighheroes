@@ -29,7 +29,12 @@ loadTextures({
     "transer": ("skyhighheroes:stelar_transer_pegasus"),
     "transer_lights": ("skyhighheroes:aidan/aidan_stelar_transer_lights"),
     "blade": ("skyhighheroes:aidan/aidan_stelar_blade"),
-    "hair": ("skyhighheroes:aidan/aidan_stelar_hair")
+    "hair": ("skyhighheroes:aidan/aidan_stelar_hair"),
+    "shield": ("skyhighheroes:aidan/aidan_stelar_shield"),
+    "katana": ("skyhighheroes:aidan/aidan_stelar_katana"),
+    "katana_lights": ("skyhighheroes:aidan/aidan_stelar_katana_lights"),
+    "scythe": ("skyhighheroes:aidan/aidan_stelar_scythe"),
+    "scythe_lights": ("skyhighheroes:aidan/aidan_stelar_scythe_lights")
 });
 
 function getCLR() {
@@ -41,6 +46,6 @@ function getID() {
 }
 
 function init(renderer) {
-    parent.init(renderer)
-    renderer.setItemIcons("skyhighheroes:transer_pegasus");
+    parent.init(renderer);
+    renderer.setItemIcons("pegasus_transer");
 }

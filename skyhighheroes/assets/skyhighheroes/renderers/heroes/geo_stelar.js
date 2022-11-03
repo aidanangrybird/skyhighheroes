@@ -9,14 +9,50 @@ var omegaXisFront;
 var omegaXisLeft;
 var omegaXisRight;
 var omegaXisTop;
-var hair;
+var colorVar = 0x00FF00;
+
+loadTextures({
+    "base": ("skyhighheroes:geo/geo_stelar"),
+    "lights": ("skyhighheroes:geo/geo_stelar_lights"),
+    "suit": ("skyhighheroes:geo/geo_stelar_suit.tx.json"),
+    "suit_lights": ("skyhighheroes:geo/geo_stelar_suit_lights.tx.json"),
+    "visualizer_up": ("skyhighheroes:geo/geo_stelar_up_transer"),
+    "visualizer_down": ("skyhighheroes:geo/geo_stelar_down_transer"),
+    "visualizer_up_short": ("skyhighheroes:geo/geo_stelar_up_short"),
+    "visualizer_down_short": ("skyhighheroes:geo/geo_stelar_down_short"),
+    "visualizer_up_swimsuit": ("skyhighheroes:geo/geo_stelar_up_swimsuit"),
+    "visualizer_down_swimsuit": ("skyhighheroes:geo/geo_stelar_down_swimsuit"),
+    "visualizer_up_normal": ("skyhighheroes:geo/geo_stelar_up_normal"),
+    "visualizer_down_normal": ("skyhighheroes:geo/geo_stelar_down_normal"),
+    "visualizer_up_lights": ("skyhighheroes:geo/geo_stelar_up_lights"),
+    "visualizer_down_lights": ("skyhighheroes:geo/geo_stelar_down_lights"),
+    "cannon_bottom": ("skyhighheroes:geo/geo_stelar_bottom_cannon"),
+    "cannon_left": ("skyhighheroes:geo/geo_stelar_left_cannon"),
+    "cannon_right": ("skyhighheroes:geo/geo_stelar_right_cannon"),
+    "cannon_top": ("skyhighheroes:geo/geo_stelar_top_cannon"),
+    "cannon_front": ("skyhighheroes:geo/geo_stelar_front_cannon"),
+    "cannon_left_lights": ("skyhighheroes:geo/omega_xis_geo_stelar_left_eyes"),
+    "cannon_right_lights": ("skyhighheroes:geo/omega_xis_geo_stelar_right_eyes"),
+    "transertx": ("skyhighheroes:geo/geo_stelar_transer.tx.json"),
+    "shorttx": ("skyhighheroes:geo/geo_stelar_short.tx.json"),
+    "swimsuittx": ("skyhighheroes:geo/geo_stelar_swimsuit.tx.json"),
+    "normaltx": ("skyhighheroes:geo/geo_stelar_normal.tx.json"),
+    "transer": ("skyhighheroes:stelar_transer_pegasus"),
+    "transer_lights": ("skyhighheroes:geo/geo_stelar_transer_lights"),
+    "blade": ("skyhighheroes:geo/geo_stelar_blade"),
+    "shield": ("skyhighheroes:geo/geo_stelar_shield"),
+    "katana": ("skyhighheroes:geo/geo_stelar_katana"),
+    "katana_lights": ("skyhighheroes:geo/geo_stelar_katana_lights"),
+    "scythe": ("skyhighheroes:geo/geo_stelar_scythe"),
+    "scythe_lights": ("skyhighheroes:geo/geo_stelar_scythe_lights")
+});
 
 function init(renderer) {
 
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
         
-        if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+        if (entity.isDisplayStand()) {
             return "transer";
         }
         if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
@@ -74,7 +110,7 @@ function init(renderer) {
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
-        if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+        if (entity.isDisplayStand()) {
             return "transer_lights";
         }
         if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
@@ -105,49 +141,49 @@ function init(renderer) {
 
 function initEffects(renderer) {
     //Head
-    head_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    head_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "head", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [0.0, 0.5, -0.0], "end": [0.0, -9.5, 0.0], "size": [10.0, 10.0] }
         ]}
     ]);
     //Body
-    body_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    body_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.0, 0.0], "size": [5.0, 8.0] }
         ]}
     ]);
     //Arms start
-    armsStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    armsStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, -3.0, 0.0], "end": [-1.0, 11.0, 0.0], "size": [4.75, 4.75] }
         ]}
     ]);
     //Blade
-    blade_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    blade_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 0.0, 0.0], "end": [-1.0, -9.0, 0.0], "size": [8.0, 10.0] }
         ]}
     ]);
     //Right arm
-    armRightStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    armRightStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 11.0, 0.0], "end": [-1.0, -3.0, 0.0], "size": [4.75, 4.75] }
         ]}
     ]);
     //Left arm
-    armLeftStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    armLeftStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "leftArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [1.0, -3.0, 0.0], "end": [1.0, 11.0, 0.0], "size": [4.75, 4.75] }
         ]}
     ]);
     //Left Leg
-    legLeftStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    legLeftStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "leftLeg", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.5, 0.0], "size": [4.75, 4.75] }
         ]}
     ]);
     //Right Leg
-    legRightStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    legRightStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightLeg", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.5, 0.0], "size": [4.75, 4.75] }
         ]}
@@ -196,7 +232,7 @@ function initEffects(renderer) {
     omegaXisFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 12.0, 0.0);
     omegaXisFront.large = true;
     //Omega-Xis Beams
-    omegaXis_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    omegaXis_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 3.5, -1.5], "end": [-1.0, 12.5, 0.0], "size": [6.0, 6.0] },
             { "start": [-6.0, 3.7, -3.0], "end": [-5.5, 7.7, -3.0], "size": [1.0, 1.0] },
@@ -208,25 +244,12 @@ function initEffects(renderer) {
         ]},
     ]);
     //Omega-Xis First Person
-    omegaXisFP_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
+    omegaXisFP_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 15.5, 0.0], "size": [9.0, 9.0] }
         ]}
     ]);
-    //Hair
-    hair = renderer.createEffect("fiskheroes:shield");
-    hair.texture.set("hair", null);
-    hair.anchor.set("head");
-    hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-    hair.large = true;
-    //Beams
-    hair_beams = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
-        { anchor: "head", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [0.0, -8.0, 2.3125], "end": [0.0, -15.5, 2.3125], "size": [4.0, 4.0] },
-            { "start": [0.0, -5.5, 5.3125], "end": [0.0, -10.5, 5.3125], "size": [2.0, 2.0] }
-        ]}
-    ]);
-    renderer.bindProperty("fiskheroes:energy_bolt").color.set(getCLR());
+    renderer.bindProperty("fiskheroes:energy_bolt").color.set(0xFF00FF);
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
     livery_shield.weaponType = "SHIELD";
@@ -292,10 +315,6 @@ function render(entity, renderLayer, isFirstPersonArm) {
             omegaXisBottom.render();
             omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
             omegaXisFront.render();
-            hair.unfold = Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') < 0.5 ? (((-81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) + (50/32)) : (((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0) - entity.isDisplayStand();
-            hair.render();
-            hair_beams.progress = Math.min(Math.max((((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0);
-            hair_beams.render(renderLayer);
             head_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0);
             head_beam.render(renderLayer);
             body_beam.progress = Math.min(Math.max(((81/13) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (26/26)), 0.0), 1.0);
@@ -321,17 +340,4 @@ function render(entity, renderLayer, isFirstPersonArm) {
                 omegaXisFP_beam.render(renderLayer);
             }
     }
-}
-
-function getID() {
-    return "";
-}
-function getNamePerson() {
-    return "";
-}
-function getCLR() {
-    return 0x00FF00;
-}
-function getSatellite() {
-    return "pegasus";
 }

@@ -1,11 +1,6 @@
 {x} = 30{hover}min(1.5{vel}, 1)
 out "rotate" ({x}clamp({strafe}, -2, 2), 0, 0, 1)
 out "rotate" (-{x}clamp({forward}, -2, 2), 1, 0, 0)
-out "firstPerson" (true)
-out "translate" (-0.35{forward}, 0, 0.15{forward})
-out "rotate" (-27{forward}, 0, 1, 0)
-out "rotate" (-20{forward}, 1, 0, 0)
-out "rotate" (-30{forward}, 0, 0, 1)
 
 {x} = {hover}min(2{vel}, 1)
 {strafe} *= {x}
@@ -13,13 +8,11 @@ out "rotate" (-30{forward}, 0, 0, 1)
 {adx} = abs {strafe}
 {adz} = abs {forward}
 
-{rightArm_rotX} @ {forward} -> ({head_rotY} - (pi / 2))
-{rightArm_rotY} @ {forward} -> -1.0{head_rotX}
-{rightArm_rotZ} @ {forward} -> (0.0{head_rotX} + 1.6)
+
 
 {head_rotX} -= 30'clamp({forward}, -2, 2)
 {rightArm_rotX} += 0.5{forward} - 0.4{adx}
-{rightArm_rotY} += -pi/2{forward}
+{rightArm_rotY} += 0.5{forward}
 {rightArm_rotX} += 0.5{forward} - 0.4{adx} + {forward}
 {rightArm_rotZ} += 0.1{adz} + 0.4{strafe} + 7'{data_0}
 {leftArm_rotX} += 0.2{forward} - 0.4{adx}

@@ -117,7 +117,7 @@ function initEffects(renderer) {
     cannonFront = renderer.createEffect("fiskheroes:shield");
     cannonFront.texture.set(null, "cannon_lights_inner");
     cannonFront.anchor.set("rightArm");
-    cannonFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.0, 0.0);
+    cannonFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(2.0, 13.0, 0.0);
     cannonFront.large = true;
     //Back
     cannonBack = renderer.createEffect("fiskheroes:shield");
