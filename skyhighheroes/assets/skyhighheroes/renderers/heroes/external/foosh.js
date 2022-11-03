@@ -45,3 +45,31 @@ function emWaveBeingBeams(renderer, color) {
     };
     return obj;
 }
+
+function bindRightDigitBeam(renderer, color) {
+    var beamRight = renderer.bindProperty("fiskheroes:energy_projection").setAnchor("rightArm");
+    var constlnRight = renderer.createResource("BEAM_CONSTELLATION", null);
+    constlnRight.bindBeam([ {"firstPerson": [-4.5, 3.75, 8.0], "offset": [-0.5, 0.0, 0.0], "size": [2.0, 2.0]} ]);
+
+    beam = renderer.createResource("BEAM_RENDERER", "fiskheroes:energy_projection");
+
+    beamRight.setConstellation(constlnRight);
+    beamRight.setRenderer(beam);
+    beamRight.color.set(color);
+    beamRight.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"))
+    return beamRight;
+}
+
+function bindLeftDigitBeam(renderer, color) {
+    var beamLeft = renderer.bindProperty("fiskheroes:energy_projection").setAnchor("leftArm");
+    var constlnLeft = renderer.createResource("BEAM_CONSTELLATION", null);
+    constlnLeft.bindBeam([{ "firstPerson": [-4.5, 3.75, 8.0], "offset": [-0.5, 0.0, 0.0], "size": [2.0, 2.0]} ]);
+
+    beam = renderer.createResource("BEAM_RENDERER", "fiskheroes:energy_projection");
+
+    beamLeft.setConstellation(constlnLeft);
+    beamLeft.setRenderer(beam);
+    beamLeft.color.set(color);
+    beamLeft.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"))
+    return beamLeft;
+}

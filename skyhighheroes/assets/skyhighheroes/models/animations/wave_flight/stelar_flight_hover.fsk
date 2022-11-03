@@ -1,0 +1,28 @@
+{x} = 30{hover}min(1.5{vel}, 1)
+out "firstPerson" (true)
+out "rotate" (56{data}, 0, 1, 0)
+out "rotate" (20{data}, 1, 0, 0)
+out "rotate" (-30{data}, 0, 0, 1)
+out "translate" (0.06{data}, -0.15{data}, -0.5{data})
+
+{x} = {hover}min(2{vel}, 1)
+{strafe} *= {x}
+{forward} *= {x}
+{adx} = abs {strafe}
+{adz} = abs {forward}
+
+{head_rotX} -= 30'clamp({forward}, -2, 2)
+{rightArm_rotX} += -0.2{data} - 3.0{a1}
+{rightArm_rotY} += -0.2{data} + 1.0{a1}
+{rightArm_rotZ} -= 0.1{a1}
+{rightArm_posY} -= {data} - 2.0{a3}
+{rightArm_posZ} += {data} - 2.0{a3}
+{rightArm_posX} -= {data} + 2.0{a3}
+{leftArm_rotX} += 0.2{forward} - 0.4{adx}
+{leftArm_rotZ} -= 0.1{adz} - 0.4{strafe} + 7'{data_0}
+{rightLeg_posZ} -= 2{adz}
+{rightLeg_posY} -= {adz}
+{rightLeg_rotX} += 0.4{forward}
+{rightLeg_rotZ} += 0.05{adz} + 0.4{strafe}
+{leftLeg_rotX} += 0.2{forward}
+{leftLeg_rotZ} -= 0.05{adz} - 0.4{strafe}

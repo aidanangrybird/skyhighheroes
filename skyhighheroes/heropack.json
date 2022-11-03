@@ -12,7 +12,9 @@
     "head_toggle": "BYTE",
     "visualizer_toggle": "BYTE",
     "stelar_clothes": "BYTE",
-    "tenma_clothes": "BYTE"
+    "tenma_clothes": "BYTE",
+    "astro_booster_timer" : "FLOAT",
+    "superhero_landing_ticks" : "FLOAT"
   },
   "sounds": {
     "download": {

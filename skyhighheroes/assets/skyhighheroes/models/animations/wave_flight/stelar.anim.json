@@ -1,0 +1,7 @@
+{
+  "inputs": [
+    "skyhighheroes:em_flight/header",
+    "skyhighheroes:em_flight/stelar_flight_hover",
+    "skyhighheroes:em_flight/stelar_flight_boost"
+  ]
+}
