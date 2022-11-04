@@ -15,7 +15,11 @@
         "pitchOffset": 0.0
       },
       "knockback": 0.0,
-        "isToggle": true
+        "isToggle": true,
+        "soundEvents": {
+            "BLOCK_START": "skyhighheroes:forcefield",
+            "DEFLECT": "skyhighheroes:forcefield_deflect"
+          }
     },
     "fiskheroes:blade": {
         "isToggle": true

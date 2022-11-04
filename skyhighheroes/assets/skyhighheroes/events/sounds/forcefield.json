@@ -1,0 +1,8 @@
+{
+  "sound": "fiskheroes:suit.antimonitor.forcefield",
+  "condition": "fiskheroes:shield_blocking",
+  "volume": 0.4,
+  "loop": true,
+  "fadeIn": 5,
+  "fadeOut": 5
+}

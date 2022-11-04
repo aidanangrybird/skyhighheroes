@@ -14,8 +14,12 @@
         "yawOffset": 0.0,
         "pitchOffset": 0.0
       },
-      "knockback": 0.0,
-        "isToggle": false
-    }
+        "knockback": 0.0,
+        "isToggle": false,
+      "soundEvents": {
+          "BLOCK_START": "skyhighheroes:forcefield",
+          "DEFLECT": "skyhighheroes:forcefield_deflect"
+        }
+      }
   }
 }

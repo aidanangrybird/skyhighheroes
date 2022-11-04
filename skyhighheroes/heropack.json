@@ -6,14 +6,14 @@
   "watermark": "\u00A73\u00A7lS\u00A76\u00A7lH\u00A71\u00A7lC\u00A7r",
   "description": "Created by aidanangrybird",
   "dataVars": {
-    "wave_changing_timer": "FLOAT",
+    "wave_changing_timer": "FLOAT_INTERP",
     "wave_changed": "BOOLEAN",
     "battle_card": "BYTE",
     "head_toggle": "BYTE",
     "visualizer_toggle": "BYTE",
     "stelar_clothes": "BYTE",
     "tenma_clothes": "BYTE",
-    "astro_booster_timer" : "FLOAT",
+    "astro_booster_timer" : "FLOAT_INTERP",
     "superhero_landing_ticks" : "FLOAT"
   },
   "sounds": {
@@ -22,14 +22,14 @@
       "version": 0
     },
     "range": {
-      "wave_footstep": { "distance": 16.0, "sendToAll": true },
       "wave_flying_loop": 32.0,
       "wave_flying_start": 32.0,
       "wave_shooting": 16.0,
       "wave_teleport": 24.0,
       "wave_transform": 16.0,
-      "tenma_flying_start": { "distance": 32.0, "sendToAll": true },
-      "tenma_flying": 32.0
+      "tenma_boost": 32.0,
+      "tenma_flight_enable": 32.0,
+      "tenma_flight_loop": { "distance": 32.0, "target": "ALL" }
     }
   },
   "damageTypes": {

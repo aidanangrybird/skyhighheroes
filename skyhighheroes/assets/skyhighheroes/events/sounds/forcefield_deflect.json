@@ -1,0 +1,6 @@
+{
+  "parent": "fiskheroes:sound_base",
+  "sound": "fiskheroes:suit.antimonitor.forcefield.deflect",
+  "volume": 0.7,
+  "pitch": "1.0 - Math.random() * 0.3"
+}

@@ -227,6 +227,14 @@ function initEffects(renderer) {
             { "start": [0.0, -5.5, 5.3125], "end": [0.0, -10.5, 5.3125], "size": [2.0, 2.0] }
         ]}
     ]);
+    //Forcefield
+    var forcefield = renderer.bindProperty("fiskheroes:forcefield");
+    forcefield.color.set(getCLR());
+    forcefield.setShape(36, 36).setOffset(0.0, 10.0, 0.0).setScale(2.0);
+    forcefield.setCondition(entity => {
+        forcefield.opacity = entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * 0.1;
+        return true;
+    });
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(getCLR());
     renderer.bindProperty("fiskheroes:equipment_wheel").color.set(getCLR())
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
@@ -265,19 +273,6 @@ function initAnimations(renderer) {
     utils.addFlightAnimationWithLanding(renderer, "iron_man.FLIGHT", "skyhighheroes:wave_flight/stelar_flight.anim.json");
     addAnimationWithData(renderer, "iron_man.LAND", "fiskheroes:superhero_landing", "fiskheroes:dyn/superhero_landing_timer")
         .priority = -8;
-}
-
-function addAnimation(renderer, key, anim) {
-    if (typeof anim === "string") {
-        anim = renderer.createResource("ANIMATION", anim);
-    }
-
-    renderer.addCustomAnimation(key, anim);
-    return anim;
-}
-
-function addAnimationWithData(renderer, key, anim, dataVar) {
-    return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
