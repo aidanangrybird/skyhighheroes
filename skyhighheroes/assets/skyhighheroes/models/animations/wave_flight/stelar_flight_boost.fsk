@@ -1,7 +1,7 @@
 {x} = min({vel}, 1){data_1}{d1}{d} / 2.5
 {rightArm_rotX} += -180'{data_1} + {x}
 {rightArm_rotY} += 90'{data_1}
-{rightArm_rotZ} += 10'{data_1}
+{rightArm_rotZ} += 0'{data_1}
 {leftArm_rotX} += 15'{data_1} - {x}
 {leftArm_rotZ} -= 10'{data_1}
 {rightLeg_rotX} += 15'{data_1} + 0.3{x}
