@@ -32,6 +32,18 @@
       "tenma_flying": 32.0
     }
   },
+  "damageTypes": {
+    "WAVE_BLUNT": "Wave Blunt",
+    "WAVE_BULLET": "Wave Bullet",
+    "WAVE_COLD": "Wave Cold",
+    "WAVE_ELECTRICITY": "Wave Electricity",
+    "WAVE_ENERGY": "Wave Energy",
+    "WAVE_EXPLOSION": "Wave Explosion",
+    "WAVE_FIRE": "Wave Fire",
+    "WAVE_SHARP": "Wave Sharp",
+    "WAVE_SHURIKEN": "Wave Shuriken",
+    "WAVE_SOUND": "Wave Sound"
+  },
   "alts" : {
     "skyhighheroes:geo_stelar" : {
       "subaru" : "\u00A74Subaru Style\u00A7r"

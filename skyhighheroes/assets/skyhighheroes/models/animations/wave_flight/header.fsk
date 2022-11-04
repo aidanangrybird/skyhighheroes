@@ -18,7 +18,7 @@
 {leftLeg_rotX} @ {data_0} -> 0
 {leftLeg_rotY} @ {data_0} -'> 0
 {leftLeg_rotZ} @ {data_0} -> 0
-{head_rotX} @ {data_1} -> 0'
+{head_rotX} @ {data_1} -> -90'
 
 ; ==============================================
 {data_2} = if({data_2} > 0, {data_2}^0.25, 1)
