@@ -49,7 +49,8 @@ function init(hero) {
         "types": {
             "ELECTRICITY": 1.0,
             "ENERGY": 1.0,
-            "BLUNT": 1.0
+            "BLUNT": 1.0,
+            "WAVE_BLUNT": 1.0
         }
     });
 }

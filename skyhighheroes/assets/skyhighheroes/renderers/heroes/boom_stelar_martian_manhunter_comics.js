@@ -39,5 +39,5 @@ loadTextures({
 
 function init(renderer) {
     parent.init(renderer);
-    renderer.setItemIcons("pegasus_transer");
+    renderer.setItemIcons(null, "pegasus_transer", null, null);
 }

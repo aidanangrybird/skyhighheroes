@@ -11,10 +11,9 @@ out "rotate" (-{x}clamp({forward}, -2, 2), 1, 0, 0)
 
 
 {head_rotX} -= 30'clamp({forward}, -2, 2)
-{rightArm_rotX} += 0.5{forward} - 0.4{adx}
-{rightArm_rotY} += 0.5{forward}
-{rightArm_rotX} += 0.5{forward} - 0.4{adx} + {forward}
-{rightArm_rotZ} += 0.1{adz} + 0.4{strafe} + 7'{data_0}
+{rightArm_rotX} += -1.5{forward} - 0.4{adx} - ({forward}{data_1})
+{rightArm_rotY} += 1.5{forward} - ({forward}{data_1})
+{rightArm_rotZ} += 1.5{adz} + 0.4{strafe} + 7'{data_0} - ({forward}{data_1})
 {leftArm_rotX} += 0.2{forward} - 0.4{adx}
 {leftArm_rotZ} -= 0.1{adz} - 0.4{strafe} + 7'{data_0}
 {rightLeg_posZ} -= 2{adz}

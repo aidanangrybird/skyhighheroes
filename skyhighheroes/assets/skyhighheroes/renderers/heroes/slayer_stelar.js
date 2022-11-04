@@ -47,5 +47,13 @@ function getID() {
 
 function init(renderer) {
     parent.init(renderer);
-    renderer.setItemIcons("pegasus_transer");
+    initEffects(renderer);
+    renderer.setItemIcons(null, "pegasus_transer", null, null);
+}
+
+var thing = implement("skyhighheroes:external/thing");
+
+function initEffects(renderer) {
+    parent.initEffects(renderer);
+    thing.bindTrail(renderer, "skyhighheroes:slayer_stelar_flight");
 }

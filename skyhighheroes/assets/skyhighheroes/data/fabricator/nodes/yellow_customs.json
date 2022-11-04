@@ -1,0 +1,23 @@
+{
+  "display": {
+    "name": "Yellow's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/yellow_head.png"
+    }
+  },
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as yelloww69"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '60f30003-1148-416b-8b4d-347002891126'"
+      }
+    }
+  }
+}

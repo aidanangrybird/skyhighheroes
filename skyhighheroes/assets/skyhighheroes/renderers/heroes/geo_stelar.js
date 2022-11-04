@@ -1,5 +1,6 @@
 var utils = implement("fiskheroes:external/utils");
 var body_lines = implement("fiskheroes:external/body_lines");
+var thing = implement("skyhighheroes:external/thing");
 
 var teleport;
 var blade;
@@ -38,7 +39,7 @@ loadTextures({
     "swimsuittx": ("skyhighheroes:geo/geo_stelar_swimsuit.tx.json"),
     "normaltx": ("skyhighheroes:geo/geo_stelar_normal.tx.json"),
     "transer": ("skyhighheroes:stelar_transer_pegasus"),
-    "transer_lights": ("skyhighheroes:geo/geo_stelar_transer_lights"),
+    "transer_lights": ("skyhighheroes:stelar_transer_lights"),
     "blade": ("skyhighheroes:geo/geo_stelar_blade"),
     "shield": ("skyhighheroes:geo/geo_stelar_shield"),
     "katana": ("skyhighheroes:geo/geo_stelar_katana"),
@@ -133,6 +134,7 @@ function init(renderer) {
     
     renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm", "leftLeg", "rightLeg");
     renderer.fixHatLayer("CHESTPLATE");
+    renderer.setItemIcons(null, "pegasus_transer", null, null);
     initEffects(renderer);
     initAnimations(renderer);
 }
@@ -250,6 +252,7 @@ function initEffects(renderer) {
         ]}
     ]);
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(0xFF00FF);
+    thing.bindTrail(renderer, "skyhighheroes:geo_stelar_flight");
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
     livery_shield.weaponType = "SHIELD";

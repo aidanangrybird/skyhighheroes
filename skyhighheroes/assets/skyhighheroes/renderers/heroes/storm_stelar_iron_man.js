@@ -39,5 +39,5 @@ loadTextures({
 
 function init(renderer) {
     parent.init(renderer);
-    renderer.setItemIcons("leo_transer");
+    renderer.setItemIcons(null, "leo_transer", null, null);
 }

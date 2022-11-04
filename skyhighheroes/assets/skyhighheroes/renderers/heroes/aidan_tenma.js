@@ -42,7 +42,7 @@ function getID() {
 }
 
 function init(renderer) {
-    parent.init(renderer)
+    parent.init(renderer);
     initEffects(renderer);
     initAnimations(renderer);
 }

@@ -1,5 +1,6 @@
 var utils = implement("fiskheroes:external/utils");
 var body_lines = implement("fiskheroes:external/body_lines");
+var thing = implement("skyhighheroes:external/thing");
 
 var teleport;
 var blade;
@@ -227,6 +228,7 @@ function initEffects(renderer) {
         ]}
     ]);
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(getCLR());
+    renderer.bindProperty("fiskheroes:equipment_wheel").color.set(getCLR())
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
     livery_shield.weaponType = "SHIELD";
@@ -239,7 +241,7 @@ function initEffects(renderer) {
     //Shield
     renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
-    ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).addOffset("CHRONOS_RIFLE", 0.0, 0.0, 3.5).slotIndex = 0;
+    ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 0;
     //Katana
     renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 3.0], "rotation": [-148.0, 90.0, 0.0] },

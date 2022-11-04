@@ -38,13 +38,13 @@ loadTextures({
     "swimsuittx": ("skyhighheroes:geo/geo_stelar_swimsuit.tx.json"),
     "normaltx": ("skyhighheroes:geo/geo_stelar_normal.tx.json"),
     "transer": ("skyhighheroes:stelar_transer_pegasus"),
-    "transer_lights": ("skyhighheroes:geo/geo_stelar_transer_lights"),
-    "blade": ("skyhighheroes:geo/subaru/geo_stelar_blade"),
-    "shield": ("skyhighheroes:geo/subaru/geo_stelar_shield"),
-    "katana": ("skyhighheroes:geo/subaru/geo_stelar_katana"),
-    "katana_lights": ("skyhighheroes:geo/subaru/geo_stelar_katana_lights"),
-    "scythe": ("skyhighheroes:geo/subaru/geo_stelar_scythe"),
-    "scythe_lights": ("skyhighheroes:geo/subaru/geo_stelar_scythe_lights")
+    "transer_lights": ("skyhighheroes:stelar_transer_lights"),
+    "blade": ("skyhighheroes:geo/subaru/geo_stelar_subaru_blade"),
+    "shield": ("skyhighheroes:geo/subaru/geo_stelar_subaru_shield"),
+    "katana": ("skyhighheroes:geo/subaru/geo_stelar_subaru_katana"),
+    "katana_lights": ("skyhighheroes:geo/subaru/geo_stelar_subaru_katana_lights"),
+    "scythe": ("skyhighheroes:geo/subaru/geo_stelar_subaru_scythe"),
+    "scythe_lights": ("skyhighheroes:geo/subaru/geo_stelar_subaru_scythe_lights")
 });
 
 function init(renderer) {
@@ -133,6 +133,7 @@ function init(renderer) {
     
     renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm", "leftLeg", "rightLeg");
     renderer.fixHatLayer("CHESTPLATE");
+    renderer.setItemIcons(null, "pegasus_transer", null, null);
     initEffects(renderer);
     initAnimations(renderer);
 }
@@ -250,6 +251,7 @@ function initEffects(renderer) {
         ]}
     ]);
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(0x39D6BD);
+    thing.bindTrail(renderer, "skyhighheroes:geo_stelar_subaru_flight");
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
     livery_shield.weaponType = "SHIELD";

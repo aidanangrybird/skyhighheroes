@@ -46,12 +46,13 @@ function init(hero) {
     hero.setKeyBindEnabled(isKeyBindEnabled);
     hero.setDamageProfile(getDamageProfile);
     hero.addDamageProfile("MAIN", {
-        "types": {
-            "ELECTRICITY": 1.0,
-            "ENERGY": 1.0,
-            "BLUNT": 1.0
-        }
-    });
+      "types": {
+          "ELECTRICITY": 1.0,
+          "ENERGY": 1.0,
+          "BLUNT": 1.0,
+          "WAVE_BLUNT": 1.0
+      }
+  });
 }
 
 

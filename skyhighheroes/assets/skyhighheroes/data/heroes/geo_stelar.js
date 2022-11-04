@@ -4,6 +4,9 @@ function init(hero) {
     hero.setChestplate("Transer");
     hero.setAliases("geo_stelar");
     hero.setVersion("Mega Man Star Force");
+    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
+    hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
+    hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
     
     hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
     hero.addAttribute("SPRINT_SPEED", 0.2, 1);
@@ -44,7 +47,8 @@ function init(hero) {
         "types": {
             "ELECTRICITY": 1.0,
             "ENERGY": 1.0,
-            "BLUNT": 1.0
+            "BLUNT": 1.0,
+            "WAVE_BLUNT": 1.0
         }
     });
 }

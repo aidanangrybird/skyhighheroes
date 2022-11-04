@@ -38,6 +38,10 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.addAttributeProfile("SHIELD", shieldProfile);
   hero.setAttributeProfile(getAttributeProfile);
+  hero.setTickHandler((entity, manager) => {
+      var flying = entity.getData("fiskheroes:flying");
+      manager.incrementData(entity, "skyhighheroes:dyn/astro_booster_timer", 2, flying);
+  });
 }
 
 function cycleClothes(player, manager) {

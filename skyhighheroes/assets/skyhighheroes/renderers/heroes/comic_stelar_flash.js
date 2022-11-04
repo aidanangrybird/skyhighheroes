@@ -39,5 +39,5 @@ loadTextures({
 
 function init(renderer) {
     parent.init(renderer);
-    renderer.setItemIcons("dragon_transer");
+    renderer.setItemIcons(null, "dragon_transer", null, null);
 }
