@@ -308,7 +308,7 @@ function addAnimationWithData(renderer, key, anim, dataVar) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
     if (renderLayer == "CHESTPLATE") {
-            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) - (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 1);
+            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2);
             blade.render();
             omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
             omegaXisRight.render();

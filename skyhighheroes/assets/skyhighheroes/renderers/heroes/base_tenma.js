@@ -16,7 +16,7 @@ function init(renderer) {
         if (entity.isDisplayStand() || entity.getUUID() != getID()) {
             return "base";
         }
-        if (entity.getData("fiskheroes:flying")) {
+        if (entity.getData("fiskheroes:flight_timer") > 0 || entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                 return "base_flying";
             }
@@ -30,7 +30,7 @@ function init(renderer) {
                 return "normal_flying";
             }
         }
-        if (!entity.getData("fiskheroes:flying")) {
+        if (entity.getData("fiskheroes:flight_timer") == 0 || !entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                 return "base";
             }
@@ -188,9 +188,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
         cannonBack.render();
     }
-    if (renderLayer == "CHESTPLATE") {
-        rockets.render();
-    }
+    rockets.render(entity, renderLayer, isFirstPersonArm);
 }
 
 function getID() {

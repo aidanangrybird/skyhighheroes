@@ -41,7 +41,7 @@ var blue = 0x0000FF;
 var red = 0xFF0000;
 
 function getID() {
-    return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+    return "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0";
 }
 
 function init(renderer) {
@@ -240,7 +240,7 @@ function initEffects(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
     if (renderLayer == "CHESTPLATE") {
             ears.render();
-            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) - (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 1);
+            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2);
             blade.render();
             omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
             omegaXisRight.render();

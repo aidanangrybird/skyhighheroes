@@ -7,11 +7,6 @@ function getCLR() {
     return 0xFF8900;
 }
 
-var boosterLeft1;
-var boosterRight1;
-var boosterLeft2;
-var boosterRight2;
-
 loadTextures({
     "lights" : "skyhighheroes:aidan/astro/aidan_tenma_lights",
     "lights_flying" : "skyhighheroes:aidan/astro/aidan_tenma_lights_flying",

@@ -45,6 +45,11 @@ function init(hero) {
     hero.setTierOverride(getTierOverride);
     hero.setKeyBindEnabled(isKeyBindEnabled);
     hero.setDamageProfile(getDamageProfile);
+    hero.setTickHandler((entity, manager) => {
+      if (entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && ((!entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) || entity.getData('fiskheroes:flying'))){
+        manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
+      };
+    });
     hero.addDamageProfile("MAIN", {
       "types": {
           "ELECTRICITY": 1.0,
@@ -97,9 +102,6 @@ function cycleCard(player, manager) {
     manager.setData(player, "fiskheroes:shield", false);
     manager.setData(player, "fiskheroes:blade", false);
     manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
-  }
-  if (player.getData("fiskheroes:flight_timer") > 0) {
-    manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
   }
   if (player.getData("skyhighheroes:dyn/battle_card") == 1) {
     manager.setData(player, "fiskheroes:shield_timer", 1.0);
