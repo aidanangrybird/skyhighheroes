@@ -108,14 +108,16 @@ function init(renderer) {
 
 function initEffects(renderer) {
     //Boot Rockets
-    rockets.init(renderer, "skyhighheroes:normal_fire_layer1", "skyhighheroes:normal_fire_layer2", true);
+    rockets.init(renderer, "skyhighheroes:normal_fire_layer1", "skyhighheroes:normal_fire_layer2");
     utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorVar, [
         { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", colorVar, [
         { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-    renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorVar);
+    utils.bindBeam(renderer, "fiskheroes:energy_blast", "fiskheroes:repulsor_blast", "rightArm", colorVar, [
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     utils.bindTrail(renderer, "skyhighheroes:tobio_tenma_speed")
     //Right
     cannonRight = renderer.createEffect("fiskheroes:shield");
@@ -169,6 +171,8 @@ function initAnimations(renderer) {
     utils.addFlightAnimationWithLanding(renderer, "iron_man.FLIGHT", "fiskheroes:flight/iron_man.anim.json");
     addAnimationWithData(renderer, "iron_man.LAND", "fiskheroes:superhero_landing", "fiskheroes:dyn/superhero_landing_timer")
         .priority = -8;
+    renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
 function addAnimation(renderer, key, anim) {

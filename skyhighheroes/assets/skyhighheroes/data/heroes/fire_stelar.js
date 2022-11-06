@@ -1,4 +1,4 @@
-var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"
+var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"
 function init(hero) {
     hero.setName("Fire Stelar");
     hero.setTier(10);

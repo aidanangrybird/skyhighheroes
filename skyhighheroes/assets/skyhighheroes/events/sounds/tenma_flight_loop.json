@@ -1,7 +1,7 @@
 {
   "parent": "fiskheroes:sound_base",
   "sound": "fiskheroes:suit.ironman.boost.loop",
-  "override": "fiskheroes:funcs/tenma_flight_loop",
+  "override": "skyhighheroes:funcs/tenma_flight_loop",
   "loop": true,
   "fadeIn": 5,
   "fadeOut": 10

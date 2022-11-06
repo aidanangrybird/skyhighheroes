@@ -20,7 +20,7 @@ function init(renderer) {
         if (entity.isDisplayStand() || entity.getUUID() != getID()) {
             return "transer";
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
             if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
                 return "transertx";
             }
@@ -34,7 +34,7 @@ function init(renderer) {
                 return "normaltx";
             }
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
             return "suit";
         }
         if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
@@ -102,9 +102,21 @@ function init(renderer) {
     initAnimations(renderer);
 }
 
+function addAnimation(renderer, key, anim) {
+    if (typeof anim === "string") {
+        anim = renderer.createResource("ANIMATION", anim);
+    }
 
+    renderer.addCustomAnimation(key, anim);
+    return anim;
+}
+
+function addAnimationWithData(renderer, key, anim, dataVar) {
+    return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
+}
 
 function initEffects(renderer) {
+    
     //Head
     head_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
         { anchor: "head", renderLayer: "CHESTPLATE", mirror: false, entries: [
@@ -126,7 +138,7 @@ function initEffects(renderer) {
     //Blade
     blade_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 0.0, 0.0], "end": [-1.0, -9.0, 0.0], "size": [8.0, 10.0] }
+            { "start": [-1.0, 19.0, 0.0], "end": [-1.0, 4.0, 0.0], "size": [10.0, 7.0] }
         ]}
     ]);
     //Right arm
@@ -144,13 +156,13 @@ function initEffects(renderer) {
     //Left Leg
     legLeftStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
         { anchor: "leftLeg", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.5, 0.0], "size": [4.75, 4.75] }
+            { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.75, 0.0], "size": [4.75, 4.75] }
         ]}
     ]);
     //Right Leg
     legRightStart_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
         { anchor: "rightLeg", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.5, 0.0], "size": [4.75, 4.75] }
+            { "start": [0.0, 0.0, 0.0], "end": [0.0, 12.75, 0.0], "size": [4.75, 4.75] }
         ]}
     ]);
     //Teleportation Opacity
@@ -199,7 +211,7 @@ function initEffects(renderer) {
     //Omega-Xis Beams
     omegaXis_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", getCLR(), [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 3.5, -1.5], "end": [-1.0, 12.5, 0.0], "size": [6.0, 6.0] },
+            { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 12.5, 0.0], "size": [6.0, 6.0] },
             { "start": [-6.0, 3.7, -3.0], "end": [-5.5, 7.7, -3.0], "size": [1.0, 1.0] },
             { "start": [-6.0, 3.7, 3.0], "end": [-5.5, 7.7, 3.0], "size": [1.0, 1.0] },
             { "start": [-5.0, 3.6, -3.0], "end": [-4.5, 10.6, -3.0], "size": [1.0, 1.0] },
@@ -235,8 +247,9 @@ function initEffects(renderer) {
         forcefield.opacity = entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * 0.1;
         return true;
     });
-    renderer.bindProperty("fiskheroes:energy_bolt").color.set(getCLR());
-    renderer.bindProperty("fiskheroes:equipment_wheel").color.set(getCLR())
+    utils.bindBeam(renderer, "fiskheroes:energy_blast", "fiskheroes:repulsor_blast", "rightArm", getCLR(), [
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
     livery_shield.weaponType = "SHIELD";
@@ -273,11 +286,14 @@ function initAnimations(renderer) {
     utils.addFlightAnimationWithLanding(renderer, "iron_man.FLIGHT", "skyhighheroes:wave_flight/stelar_flight.anim.json");
     addAnimationWithData(renderer, "iron_man.LAND", "fiskheroes:superhero_landing", "fiskheroes:dyn/superhero_landing_timer")
         .priority = -8;
+    renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
     if (renderLayer == "CHESTPLATE") {
-            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2);
+            ears.render();
+            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) - (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 1);
             blade.render();
             omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
             omegaXisRight.render();

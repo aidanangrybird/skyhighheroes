@@ -14,7 +14,8 @@
     "stelar_clothes": "BYTE",
     "tenma_clothes": "BYTE",
     "astro_booster_timer" : "FLOAT_INTERP",
-    "superhero_landing_ticks" : "FLOAT"
+    "superhero_landing_ticks": "BYTE",
+    "superhero_landing_timer": "FLOAT_INTERP"
   },
   "sounds": {
     "download": {
@@ -22,7 +23,7 @@
       "version": 0
     },
     "range": {
-      "wave_flying_loop": 32.0,
+      "wave_flying_loop": { "distance": 32.0, "target": "ALL" },
       "wave_flying_start": 32.0,
       "wave_shooting": 16.0,
       "wave_teleport": 24.0,

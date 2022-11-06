@@ -56,7 +56,7 @@ function init(renderer) {
         if (entity.isDisplayStand()) {
             return "transer";
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
             if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
                 return "transertx";
             }
@@ -70,13 +70,13 @@ function init(renderer) {
                 return "normaltx";
             }
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
             return "suit";
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
             return "base"
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
             if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
                 return "visualizer_up";
             }
@@ -90,7 +90,7 @@ function init(renderer) {
                 return "visualizer_up_normal";
             }
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
             if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
                 return "visualizer_down";
             }
@@ -114,16 +114,16 @@ function init(renderer) {
         if (entity.isDisplayStand()) {
             return "transer_lights";
         }
-        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
             return "visualizer_up_lights";
         }
-        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
             return "visualizer_down_lights";
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
             return "suit_lights";
         }
-        if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
             return "lights";
         }
         else {
@@ -163,7 +163,7 @@ function initEffects(renderer) {
     //Blade
     blade_beam = body_lines.create(renderer, "skyhighheroes:wave_glow", colorVar, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 0.0, 0.0], "end": [-1.0, -9.0, 0.0], "size": [8.0, 10.0] }
+            { "start": [-1.0, 19.0, 0.0], "end": [-1.0, 4.0, 0.0], "size": [10.0, 7.0] }
         ]}
     ]);
     //Right arm
@@ -265,15 +265,15 @@ function initEffects(renderer) {
     //Shield
     renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
-    ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).addOffset("CHRONOS_RIFLE", 0.0, 0.0, 3.5).slotIndex = 0;
+    ]).setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1).addOffset("CHRONOS_RIFLE", 0.0, 0.0, 3.5).slotIndex = 0;
     //Katana
     renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 3.0], "rotation": [-148.0, 90.0, 0.0] },
         { "anchor": "body", "scale": 0.535, "offset": [3.05, 0.52, 3.0], "rotation": [-148.0, -90.0, 0.0] }
-    ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 1;
+    ]).setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 1;
     renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
-    ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 2;
+    ]).setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 2;
 }
 
 function initAnimations(renderer) {
@@ -289,6 +289,8 @@ function initAnimations(renderer) {
     utils.addFlightAnimationWithLanding(renderer, "iron_man.FLIGHT", "skyhighheroes:wave_flight/stelar_flight.anim.json");
     addAnimationWithData(renderer, "iron_man.LAND", "fiskheroes:superhero_landing", "fiskheroes:dyn/superhero_landing_timer")
         .priority = -8;
+    renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
 function addAnimation(renderer, key, anim) {
@@ -306,7 +308,7 @@ function addAnimationWithData(renderer, key, anim, dataVar) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
     if (renderLayer == "CHESTPLATE") {
-            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2);
+            blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) - (entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 1);
             blade.render();
             omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
             omegaXisRight.render();

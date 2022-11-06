@@ -86,9 +86,29 @@ function init(renderer) {
     initAnimations(renderer);
 }
 
+function addAnimation(renderer, key, anim) {
+    if (typeof anim === "string") {
+        anim = renderer.createResource("ANIMATION", anim);
+    }
 
+    renderer.addCustomAnimation(key, anim);
+    return anim;
+}
+
+function addAnimationWithData(renderer, key, anim, dataVar) {
+    return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
+}
 
 function initEffects(renderer) {
+    utils.bindBeam(renderer, "fiskheroes:energy_blast", "fiskheroes:repulsor_blast", "rightArm", getCLR(), [
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", getCLR(), [
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", getCLR(), [
+        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     //Forcefield
     var forcefield = renderer.bindProperty("fiskheroes:forcefield");
     forcefield.color.set(getCLR());
@@ -149,24 +169,28 @@ function initAnimations(renderer) {
     utils.addFlightAnimationWithLanding(renderer, "iron_man.FLIGHT", "fiskheroes:flight/iron_man.anim.json");
     addAnimationWithData(renderer, "iron_man.LAND", "fiskheroes:superhero_landing", "fiskheroes:dyn/superhero_landing_timer")
         .priority = -8;
+    renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    rockets.render(entity, renderLayer, isFirstPersonArm, false);
-    if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-            cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-            cannonRight.render();
-            cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-            cannonLeft.render();
-            cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-            cannonTop.render();
-            cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-            cannonBottom.render();
-            cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-            cannonFront.render();
-            cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-            cannonBack.render();
-        }
+    if (renderLayer == "CHESTPLATE") {
+        cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonRight.render();
+        cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonLeft.render();
+        cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonTop.render();
+        cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonBottom.render();
+        cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonFront.render();
+        cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonBack.render();
+    }
+    if (renderLayer == "CHESTPLATE") {
+        rockets.render();
+    }
 }
 
 function getID() {

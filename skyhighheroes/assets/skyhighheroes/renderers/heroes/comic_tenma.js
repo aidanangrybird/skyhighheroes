@@ -3,7 +3,9 @@ extend("skyhighheroes:base_tenma");
 var rockets = implement("skyhighheroes:external/astro_rockets");
 var utils = implement("fiskheroes:external/utils");
 
-var colorVar = 0x0000FF;
+function getCLR() {
+    return 0x0000FF;
+}
 
 loadTextures({
     "lights" : "skyhighheroes:comic/astro/comic_tenma_lights",
@@ -26,14 +28,14 @@ loadTextures({
 function initEffects(renderer) {
     parent.initEffects(renderer);
     //Boot Rockets
-    rockets.init(renderer, "skyhighheroes:blue_fire_layer1", "skyhighheroes:blue_fire_layer2", true);
-    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorVar, [
+    rockets.init(renderer, "skyhighheroes:blue_fire_layer1", "skyhighheroes:blue_fire_layer2");
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", getCLR(), [
         { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", colorVar, [
+    utils.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", getCLR(), [
         { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-    renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorVar);
+    renderer.bindProperty("fiskheroes:energy_bolt").color.set(getCLR());
     utils.bindTrail(renderer, "skyhighheroes:comic_tenma_speed")
 }
 
@@ -42,7 +44,7 @@ function getID() {
 }
 
 function init(renderer) {
-    parent.init(renderer)
+    parent.init(renderer);
     initEffects(renderer);
     initAnimations(renderer);
 }

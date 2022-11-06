@@ -18,8 +18,8 @@
       },
       "knockback": 0.4,
       "soundEvents": {
-        "ENABLE": ["fiskheroes:tenma_flight_enable", "fiskheroes:tenma_flight_loop"],
-        "BOOST": "fiskheroes:tenma_boost"
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_boost"
       }
     }
   }
