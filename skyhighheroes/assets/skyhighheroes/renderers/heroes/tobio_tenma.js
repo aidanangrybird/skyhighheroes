@@ -39,7 +39,7 @@ function init(renderer) {
         if (entity.isDisplayStand()) {
             return "base";
         }
-        if (entity.getData("fiskheroes:flight_timer") > 0 || entity.getData("fiskheroes:flying")) {
+        if (entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                 return "base_flying";
             }
@@ -53,7 +53,7 @@ function init(renderer) {
                 return "normal_flying";
             }
         }
-        if (entity.getData("fiskheroes:flight_timer") == 0 || !entity.getData("fiskheroes:flying")) {
+        if (!entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                 return "base";
             }
@@ -77,7 +77,7 @@ function init(renderer) {
         if (entity.isDisplayStand()) {
             return "lights";
         }
-        if (entity.getData("fiskheroes:flight_timer") > 0 || entity.getData("fiskheroes:flying")) {
+        if (entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
                 return "lights_flying";
             }
@@ -85,7 +85,7 @@ function init(renderer) {
                 return "lights_normal_flying";
             }
         }
-        if (entity.getData("fiskheroes:flight_timer") == 0 || !entity.getData("fiskheroes:flying")) {
+        if (!entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
                 return "lights";
             }
@@ -216,8 +216,8 @@ function addAnimationWithData(renderer, key, anim, dataVar) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    rockets.render(entity, renderLayer, isFirstPersonArm, false);
-    if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
+    rockets.render(entity, renderLayer, isFirstPersonArm);
+    if (renderLayer == "CHESTPLATE") {
             cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
             cannonRight.render();
             cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");

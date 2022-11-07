@@ -54,7 +54,7 @@ function init(renderer) {
         if (entity.isDisplayStand() || entity.getUUID() != getID()) {
             return "lights";
         }
-        if (entity.getData("fiskheroes:flying")) {
+        if (entity.getData("fiskheroes:flight_timer") != 0 || entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
                 return "lights_flying";
             }
@@ -62,7 +62,7 @@ function init(renderer) {
                 return "lights_normal_flying";
             }
         }
-        if (!entity.getData("fiskheroes:flying")) {
+        if (entity.getData("fiskheroes:flight_timer") != 0 || entity.getData("fiskheroes:flying")) {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
                 return "lights";
             }
