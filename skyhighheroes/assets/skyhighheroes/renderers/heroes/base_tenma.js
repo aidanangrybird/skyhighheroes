@@ -153,6 +153,28 @@ function initEffects(renderer) {
     cannonBack.anchor.set("rightArm");
     cannonBack.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(2.0, 4.0, 0.0);
     cannonBack.large = true;
+    var livery_shield = renderer.bindProperty("fiskheroes:livery");
+    livery_shield.texture.set("shield");
+    livery_shield.weaponType = "SHIELD";
+    var livery_katana = renderer.bindProperty("fiskheroes:livery");
+    livery_katana.texture.set("katana", "katana_lights");
+    livery_katana.weaponType = "KATANA";
+    var livery_scythe = renderer.bindProperty("fiskheroes:livery");
+    livery_scythe.texture.set("scythe", "scythe_lights");
+    livery_scythe.weaponType = "RUPTURES_SCYTHE";
+    //Shield
+    shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
+        { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
+    ]).slotIndex = 0;
+    //Katana
+    katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
+        { "anchor": "body", "scale": 0.45475, "offset": [-3.05, 0.52, 3.0], "rotation": [-148.0, 90.0, 0.0] },
+        { "anchor": "body", "scale": 0.45475, "offset": [3.05, 0.52, 3.0], "rotation": [-148.0, -90.0, 0.0] }
+    ]).slotIndex = 1;
+    //Scythe
+    scythe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
+        { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
+    ]).slotIndex = 2;
 }
 
 function initAnimations(renderer) {

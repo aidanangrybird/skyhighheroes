@@ -22,7 +22,12 @@ loadTextures({
     "normal_flying" : "skyhighheroes:tysen/astro/tysen_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:tysen/astro/tysen_tenma_cannon_lights_inner",
     "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
+    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
+    "shield": "skyhighheroes:tysen/astro/tysen_tenma_shield",
+    "katana": "skyhighheroes:tysen/astro/tysen_tenma_katana",
+    "katana_lights": "skyhighheroes:tysen/astro/tysen_tenma_katana_lights",
+    "scythe": "skyhighheroes:tysen/astro/tysen_tenma_scythe",
+    "scythe_lights": "skyhighheroes:tysen/astro/tysen_tenma_scythe_lights"
 });
 
 function initEffects(renderer) {

@@ -22,7 +22,12 @@ loadTextures({
     "normal_flying" : "skyhighheroes:slayer/astro/slayer_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:slayer/astro/slayer_tenma_cannon_lights_inner",
     "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
+    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
+    "shield": "skyhighheroes:slayer/astro/slayer_tenma_shield",
+    "katana": "skyhighheroes:slayer/astro/slayer_tenma_katana",
+    "katana_lights": "skyhighheroes:slayer/astro/slayer_tenma_katana_lights",
+    "scythe": "skyhighheroes:slayer/astro/slayer_tenma_scythe",
+    "scythe_lights": "skyhighheroes:slayer/astro/slayer_tenma_scythe_lights"
 });
 
 function initEffects(renderer) {

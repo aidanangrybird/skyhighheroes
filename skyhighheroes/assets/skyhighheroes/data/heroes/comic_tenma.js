@@ -9,6 +9,9 @@ function init(hero) {
     hero.setAliases("comic_tenma");
     hero.setVersion("Comic Tenma");
     hero.hide();
+    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
+    hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
+    hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
     
     hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
     hero.addAttribute("SPRINT_SPEED", 0.3, 1);

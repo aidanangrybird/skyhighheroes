@@ -125,15 +125,16 @@ function initEffects(renderer) {
     livery_scythe.texture.set("scythe", "scythe_lights");
     livery_scythe.weaponType = "RUPTURES_SCYTHE";
     //Shield
-    renderer.bindProperty("fiskheroes:equipped_item").setItems([
+    shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 0;
     //Katana
-    renderer.bindProperty("fiskheroes:equipped_item").setItems([
+    katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 3.0], "rotation": [-148.0, 90.0, 0.0] },
         { "anchor": "body", "scale": 0.535, "offset": [3.05, 0.52, 3.0], "rotation": [-148.0, -90.0, 0.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 1;
-    renderer.bindProperty("fiskheroes:equipped_item").setItems([
+    //Scythe
+    scythe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 2;
     //Head

@@ -22,7 +22,12 @@ loadTextures({
     "normal_flying" : "skyhighheroes:aidan/astro/aidan_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:aidan/astro/aidan_tenma_cannon_lights_inner",
     "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
+    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
+    "shield": "skyhighheroes:aidan/astro/aidan_tenma_shield",
+    "katana": "skyhighheroes:aidan/astro/aidan_tenma_katana",
+    "katana_lights": "skyhighheroes:aidan/astro/aidan_tenma_katana_lights",
+    "scythe": "skyhighheroes:aidan/astro/aidan_tenma_scythe",
+    "scythe_lights": "skyhighheroes:aidan/astro/aidan_tenma_scythe_lights"
 });
 
 function getID() {

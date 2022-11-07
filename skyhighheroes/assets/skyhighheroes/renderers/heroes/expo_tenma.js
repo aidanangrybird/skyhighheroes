@@ -22,7 +22,12 @@ loadTextures({
     "normal_flying" : "skyhighheroes:expo/astro/expo_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:expo/astro/expo_tenma_cannon_lights_inner",
     "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
+    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
+    "shield": "skyhighheroes:expo/astro/expo_tenma_shield",
+    "katana": "skyhighheroes:expo/astro/expo_tenma_katana",
+    "katana_lights": "skyhighheroes:expo/astro/expo_tenma_katana_lights",
+    "scythe": "skyhighheroes:expo/astro/expo_tenma_scythe",
+    "scythe_lights": "skyhighheroes:expo/astro/expo_tenma_scythe_lights"
 });
 
 function initEffects(renderer) {
