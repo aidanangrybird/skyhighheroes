@@ -1,0 +1,42 @@
+; data_0 = flight_timer
+; data_1 = flight_boost_timer
+; data_2 = scale
+
+{data_0} = curve {data_0}
+{data_1} = curve {data_1}
+
+; Boosted/stationary "base" positioning
+{rightArm_rotX} @ {data_0} -> 0
+{rightArm_rotY} @ {data_0} -'> 0
+{rightArm_rotZ} @ {data_0} -> 0
+{leftArm_rotX} @ {data_0} -> 0
+{leftArm_rotY} @ {data_0} -'> 0
+{leftArm_rotZ} @ {data_0} -> 0
+{rightLeg_rotX} @ {data_0} -> 0
+{rightLeg_rotY} @ {data_0} -'> 0
+{rightLeg_rotZ} @ {data_0} -> 0
+{leftLeg_rotX} @ {data_0} -> 0
+{leftLeg_rotY} @ {data_0} -'> 0
+{leftLeg_rotZ} @ {data_0} -> 0
+{head_rotX} @ {data_1} -> -40'
+
+; ==============================================
+{data_2} = if({data_2} > 0, {data_2}^0.25, 1)
+{motX} /= {data_2}
+{motY} /= {data_2}
+{motZ} /= {data_2}
+{data_2} = 0
+
+{vel} = sqrt({motX}^2 + {motZ}^2)
+{dir} = sqrt({lookX}^2 + {lookZ}^2)
+
+{d} = acos clamp(if({dir} > 0 && {vel} > 0, ({motX}{lookX} + {motZ}{lookZ}) / {vel} / {dir}, 1), -1, 1)
+{d1} = signum({motX}{lookZ} - {motZ}{lookX})
+
+{cosa} = cos({bodyYaw}')
+{sina} = sin({bodyYaw}')
+{strafe} = {motX}{cosa} + {motZ}{sina}
+{forward} = {motZ}{cosa} - {motX}{sina}
+{hover} = {data_0}(1 - {data_1})
+
+out "pivot" (0, 0.56{hover}, 0)

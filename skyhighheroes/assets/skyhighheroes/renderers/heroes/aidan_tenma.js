@@ -1,7 +1,8 @@
 extend("skyhighheroes:base_tenma");
 
-var rockets = implement("skyhighheroes:external/astro_rockets");
-var utils = implement("fiskheroes:external/utils");
+var rockets = implement("skyhighheroes:external/astro_rockets_dc");
+var astro = implement("skyhighheroes:external/astro");
+var stuff = implement("skyhighheroes:external/stuff");
 
 function getCLR() {
     return 0xFF8900;
@@ -30,6 +31,13 @@ loadTextures({
     "scythe_lights": "skyhighheroes:aidan/astro/aidan_tenma_scythe_lights"
 });
 
+function initEffects(renderer) {
+    parent.initEffects(renderer);
+    //Boot Rockets
+    rockets.initBoosters(renderer, "skyhighheroes:orange_fire_layer1", "skyhighheroes:orange_fire_layer2");
+    astro.initBeams(renderer, getCLR());
+}
+
 function getID() {
     return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 }
@@ -38,11 +46,4 @@ function init(renderer) {
     parent.init(renderer);
     initEffects(renderer);
     initAnimations(renderer);
-}
-
-function initEffects(renderer) {
-    parent.initEffects(renderer);
-    //Boot Rockets
-    rockets.init(renderer, "skyhighheroes:orange_fire_layer1", "skyhighheroes:orange_fire_layer2");
-    utils.bindTrail(renderer, "skyhighheroes:aidan_tenma_speed");
 }

@@ -19,9 +19,9 @@
 {leftLeg_rotY} @ {data_0} -'> 0
 {leftLeg_rotZ} @ {data_0} -> 0
 {rightLeg_posY} @ {data_0} -> 11.75
-{rightLeg_posZ} @ {data_0} -> -0.5
-{leftLeg_posY} @ {data_0} -> 12.05
-{leftLeg_posZ} @ {data_0} -> 0.25
+{rightLeg_posZ} @ {data_0} -> -0.25
+{leftLeg_posY} @ {data_0} -> 11.95
+{leftLeg_posZ} @ {data_0} -> 0.125
 
 ; ==============================================
 {data_2} = if({data_2} > 0, {data_2}^0.25, 1)
@@ -41,6 +41,5 @@
 {headY} = cos({head_rotX}')
 {strafe} = {motX}{cosa} + {motZ}{sina}
 {forward} = {motZ}{cosa} - {motX}{sina} + if({motY} > 0, {motY}{headY}, 0) + if({motY} < 0, -{motY}{headY}, 0)
-{hover} = {data_0}(1 - {data_1})
 
 out "pivot" (0, 0.56{hover}, 0)

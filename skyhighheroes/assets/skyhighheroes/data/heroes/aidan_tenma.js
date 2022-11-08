@@ -85,19 +85,19 @@ function isModifierEnabled(entity, modifier) {
 
     case "fiskheroes:energy_projection":
 
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
+        return entity.getUUID() == uuid && (entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.motionX() == 0 && entity.motionY() == 0 && entity.motionZ() == 0) && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
 
     case "fiskheroes:energy_blast":
 
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+        return entity.getUUID() == uuid && (entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.motionX() == 0 && entity.motionY() == 0 && entity.motionZ() == 0) && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 
     case "fiskheroes:super_speed":
 
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0 && !entity.getData("fiskheroes:shield_blocking");
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
 
     case "fiskheroes:shield":
 
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
 
     case "fiskheroes:leaping":
 
@@ -150,5 +150,5 @@ function hasProperty(entity, property) {
 }
 
 function canAim(entity) {
-    return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    return entity.getHeldItem().isEmpty() && (entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.motionX() == 0 && entity.motionY() == 0 && entity.motionZ() == 0) && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 }

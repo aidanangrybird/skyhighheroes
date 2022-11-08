@@ -1,7 +1,8 @@
 extend("skyhighheroes:base_tenma");
 
-var rockets = implement("skyhighheroes:external/astro_rockets");
-var utils = implement("fiskheroes:external/utils");
+var rockets = implement("skyhighheroes:external/astro_rockets_dc");
+var astro = implement("skyhighheroes:external/astro");
+var stuff = implement("skyhighheroes:external/stuff");
 
 function getCLR() {
     return 0xFF0000;
@@ -33,8 +34,8 @@ loadTextures({
 function initEffects(renderer) {
     parent.initEffects(renderer);
     //Boot Rockets
-    rockets.init(renderer, "skyhighheroes:red_fire_layer1", "skyhighheroes:red_fire_layer2");
-    utils.bindTrail(renderer, "skyhighheroes:storm_tenma_speed")
+    rockets.initBoosters(renderer, "skyhighheroes:red_fire_layer1", "skyhighheroes:red_fire_layer2");
+    astro.initBeams(renderer, getCLR());
 }
 
 function getID() {

@@ -1,5 +1,9 @@
 extend("skyhighheroes:base_stelar");
 
+var stelar = implement("skyhighheroes:external/stelar");
+var aura = implement("skyhighheroes:external/stelar_aura");
+var stuff = implement("skyhighheroes:external/stuff");
+
 loadTextures({
     "base": ("skyhighheroes:aidan/aidan_stelar"),
     "lights": ("skyhighheroes:aidan/aidan_stelar_lights"),
@@ -51,9 +55,16 @@ function init(renderer) {
     renderer.setItemIcons(null, "pegasus_transer", null, null);
 }
 
-var thing = implement("skyhighheroes:external/thing");
-
 function initEffects(renderer) {
     parent.initEffects(renderer);
-    thing.bindTrail(renderer, "skyhighheroes:aidan_stelar_flight");
+    aura.initHairAura(renderer, getCLR());
+    aura.initAura(renderer, getCLR());
+    aura.initOmegaXisAura(renderer, getCLR());
+}
+
+function render(entity, renderLayer, isFirstPersonArm) {
+    parent.render(entity, renderLayer, isFirstPersonArm);
+    aura.renderHairAura(entity, renderLayer);
+    aura.renderAura(entity, renderLayer);
+    aura.renderOmegaXisAura(entity, renderLayer, isFirstPersonArm);
 }

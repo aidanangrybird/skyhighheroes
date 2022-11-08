@@ -262,11 +262,11 @@ function isModifierEnabled(entity, modifier) {
 
     case "fiskheroes:blade":
 
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/battle_card") == 2 && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_timer") == 0;
 
     case "fiskheroes:shield":
 
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/battle_card") == 1 && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_timer") == 0;
 
     case "fiskheroes:arrow_catching":
 
@@ -284,11 +284,11 @@ function isKeyBindEnabled(entity, keyBind) {
 
     case "func_ELECTROMAGNETIC":
 
-      return entity.isAlive() && entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
+      return entity.isAlive() && entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
 
     case "WAVE_CHANGE":
 
-      return entity.isAlive() && entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
+      return entity.isAlive() && entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
 
     case "func_VISUALIZER_TOGGLE":
 
@@ -300,7 +300,7 @@ function isKeyBindEnabled(entity, keyBind) {
 
     case "INTANGIBILITY":
 
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && (entity.getData("fiskheroes:flight_timer") > 0 || entity.getData("fiskheroes:flight_boost_timer") > 0);
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") > 0;
 
     case "SHIELD_THROW":
 
@@ -312,7 +312,7 @@ function isKeyBindEnabled(entity, keyBind) {
 
     case "func_HEADTOGGLE":
 
-      return entity.isAlive() && entity.getUUID() == uuid && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking();
+      return entity.isAlive() && entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking();
 
     default:
 
@@ -340,6 +340,6 @@ function hasProperty(entity, property) {
 
 function canAim(entity) {
 
-  return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:flight_timer") > 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+  return entity.getHeldItem().isEmpty() && (entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.motionX() == 0 && entity.motionY() == 0 && entity.motionZ() == 0) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 
 }
