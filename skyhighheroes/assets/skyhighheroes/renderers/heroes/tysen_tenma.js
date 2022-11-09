@@ -1,6 +1,6 @@
 extend("skyhighheroes:base_tenma");
 
-var rockets = implement("skyhighheroes:external/astro_rockets_dc");
+var rockets = implement("skyhighheroes:external/astro_rockets");
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
@@ -36,6 +36,7 @@ function initEffects(renderer) {
     //Boot Rockets
     rockets.initBoosters(renderer, "skyhighheroes:purple_fire_layer1", "skyhighheroes:purple_fire_layer2");
     astro.initBeams(renderer, getCLR());
+    stuff.bindSpeedTrail(renderer, "skyhighheroes:tysen_tenma_speed");
 }
 
 function getID() {

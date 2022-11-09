@@ -1,7 +1,0 @@
-{
-  "inputs": [
-    "fiskheroes:flight/header",
-    "fiskheroes:flight/iron_man_hover",
-    "fiskheroes:flight/iron_man_boost"
-  ]
-}

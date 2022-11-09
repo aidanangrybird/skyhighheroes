@@ -93,12 +93,19 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-    stuff.bindFlightTrail(renderer, "skyhighheroes:%s_flight");
     stuff.initForceField(renderer, getCLR());
-    stelar.initHeadStuff(renderer);
     stelar.initOmegaXis(renderer);
     stelar.initMegaBuster(renderer, getCLR());
     stelar.initEquipment(renderer);
+    ears = renderer.createEffect("fiskheroes:ears");
+    ears.anchor.set("head");
+    ears.angle = 7.5;
+    ears.inset = -0.02;
+    hair = renderer.createEffect("fiskheroes:shield");
+    hair.texture.set("hair", null);
+    hair.anchor.set("head");
+    hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
+    hair.large = true;
 }
 
 function initAnimations(renderer) {
@@ -107,8 +114,10 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    stelar.renderHeadStuff(entity, renderLayer);
     stelar.renderOmegaXis(entity, renderLayer);
+    ears.render();
+    hair.unfold = Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') < 0.5 ? (((-81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) + (50/32)) : (((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0) - entity.isDisplayStand();
+    hair.render();
 }
 
 function getID() {

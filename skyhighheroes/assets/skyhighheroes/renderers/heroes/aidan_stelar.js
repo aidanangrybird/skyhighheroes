@@ -57,6 +57,7 @@ function init(renderer) {
 
 function initEffects(renderer) {
     parent.initEffects(renderer);
+    stuff.bindFlightTrail(renderer, "skyhighheroes:aidan_stelar_flight");
     aura.initHairAura(renderer, getCLR());
     aura.initAura(renderer, getCLR());
     aura.initOmegaXisAura(renderer, getCLR());

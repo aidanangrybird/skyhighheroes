@@ -34,6 +34,7 @@ function initEffects(renderer) {
     //Boot Rockets
     rockets.initDualBoosters(renderer, "skyhighheroes:red_fire_layer1", "skyhighheroes:blue_fire_layer1", "skyhighheroes:red_fire_layer2", "skyhighheroes:blue_fire_layer2");
     astro.initDualBeams(renderer, 0x0000FF, 0xFF0000);
+    stuff.bindSpeedTrail(renderer, "skyhighheroes:fire_tenma_speed");
 }
 
 function getID() {

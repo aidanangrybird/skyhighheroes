@@ -1,4 +1,4 @@
-var rockets = implement("skyhighheroes:external/astro_rockets_dc");
+var rockets = implement("skyhighheroes:external/astro_rockets");
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 

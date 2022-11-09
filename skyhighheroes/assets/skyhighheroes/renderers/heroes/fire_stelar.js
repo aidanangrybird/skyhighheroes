@@ -60,6 +60,7 @@ function init(renderer) {
 
 function initEffects(renderer) {
     parent.initEffects(renderer);
+    stuff.bindFlightTrail(renderer, "skyhighheroes:fire_stelar_flight");
     aura.initDualHairAura(renderer, 0x0000FF, 0xFF0000);
     aura.initDualAura(renderer, 0x0000FF, 0xFF0000);
     aura.initDualOmegaXisAura(renderer, 0x0000FF, 0xFF0000);

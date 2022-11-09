@@ -1,4 +1,7 @@
-setGlobal();
+var boosterLeft1;
+var boosterRight1;
+var boosterLeft2;
+var boosterRight2;
 
 function initBoosters(renderer, icon1, icon2) {
     var icon1 = renderer.createResource("ICON", icon1);

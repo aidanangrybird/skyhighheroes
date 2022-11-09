@@ -1,5 +1,6 @@
 var rockets = implement("skyhighheroes:external/astro_rockets");
 var astro = implement("skyhighheroes:external/astro");
+var stuff = implement("skyhighheroes:external/stuff");
 
 function init(renderer) {
 
@@ -83,7 +84,6 @@ function initEffects(renderer) {
     astro.initCannon(renderer);
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, getCLR());
-    stuff.bindSpeedTrail(renderer, "skyhighheroes:%s_speed");
 }
 
 function initAnimations(renderer) {

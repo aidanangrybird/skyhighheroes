@@ -1,4 +1,9 @@
-setGlobal();
+var blade;
+var omegaXisRight;
+var omegaXisLeft;
+var omegaXisTop;
+var omegaXisBottom;
+var omegaXisFront;
 
 //Beam setup
 function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
@@ -20,6 +25,35 @@ function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
 }
 
 //Animation stuff
+function addAnimationEvent(renderer, key, value) {
+    var event = renderer.createResource("ANIMATION_EVENT", null);
+
+    if (Array.isArray(value)) {
+        for (var i = 0; i < value.length; ++i) {
+            var e = parseAnimationEntry(renderer, value[i]);
+            event.bindAnimation(e.anim, e.weight);
+        }
+    }
+    else {
+        var e = parseAnimationEntry(renderer, value);
+        event.bindAnimation(e.anim, e.weight);
+    }
+
+    renderer.addAnimationEvent(key, event);
+    return event;
+}
+function parseAnimationEntry(renderer, value) {
+    if (typeof value === "string") {
+        return {
+            "anim": renderer.createResource("ANIMATION", value),
+            "weight": 1
+        };
+    }
+    return {
+        "anim": renderer.createResource("ANIMATION", value.key),
+        "weight": value.hasOwnProperty("weight") ? value.weight : 1
+    };
+}
 function addAnimation(renderer, key, anim) {
     if (typeof anim === "string") {
         anim = renderer.createResource("ANIMATION", anim);
@@ -68,32 +102,12 @@ function initStelarAnimations(renderer) {
     addAnimationWithData(renderer, "stelar.LAND", "skyhighheroes:stelar_landing", "skyhighheroes:dyn/superhero_landing_timer")
         .priority = -8;
 }
-
+//Init
 function initMegaBuster(renderer, color) {
     bindBeam(renderer, "fiskheroes:energy_blast", "fiskheroes:repulsor_blast", "rightArm", color, [
         { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
 }
-
-function initHeadStuff(renderer) {
-    hair = renderer.createEffect("fiskheroes:shield");
-    hair.texture.set("hair", null);
-    hair.anchor.set("head");
-    hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-    hair.large = true;
-    ears = renderer.createEffect("fiskheroes:ears");
-    ears.anchor.set("head");
-    ears.angle = 7.5;
-    ears.inset = -0.02;
-}
-
-function initEars(renderer) {
-    ears = renderer.createEffect("fiskheroes:ears");
-    ears.anchor.set("head");
-    ears.angle = 7.5;
-    ears.inset = -0.02;
-}
-
 function initOmegaXis(renderer) {
     //Blade
     blade = renderer.createEffect("fiskheroes:shield");
@@ -132,38 +146,6 @@ function initOmegaXis(renderer) {
     omegaXisFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 12.0, 0.0);
     omegaXisFront.large = true;
 }
-
-function renderHeadStuff(entity, renderLayer) {
-    if (renderLayer == "CHESTPLATE") {
-        ears.render();
-        hair.unfold = Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') < 0.5 ? (((-81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) + (50/32)) : (((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0) - entity.isDisplayStand();
-        hair.render();
-    }
-}
-
-function renderEars(renderLayer) {
-    if (renderLayer == "CHESTPLATE") {
-        ears.render();
-    }
-}
-
-function renderOmegaXis(entity, renderLayer) {
-    if (renderLayer == "CHESTPLATE") {
-        blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2);
-        blade.render();
-        omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-        omegaXisRight.render();
-        omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-        omegaXisLeft.render();
-        omegaXisTop.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-        omegaXisTop.render();
-        omegaXisBottom.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-        omegaXisBottom.render();
-        omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-        omegaXisFront.render();
-    }
-}
-
 function initEquipment(renderer) {
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
@@ -187,4 +169,22 @@ function initEquipment(renderer) {
     scythe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 2;
+}
+
+//Render
+function renderOmegaXis(entity, renderLayer) {
+    if (renderLayer == "CHESTPLATE") {
+        blade.unfold = 0 + (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2);
+        blade.render();
+        omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
+        omegaXisRight.render();
+        omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
+        omegaXisLeft.render();
+        omegaXisTop.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
+        omegaXisTop.render();
+        omegaXisBottom.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
+        omegaXisBottom.render();
+        omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
+        omegaXisFront.render();
+    }
 }

@@ -1,5 +1,3 @@
-setGlobal();
-
 //Flight Trail
 function bindFlightTrail(renderer, trailType) {
     var prop = renderer.bindProperty("fiskheroes:trail");

@@ -1,4 +1,24 @@
-setGlobal();
+var hair_beams;
+var hair_beams_left;
+var hair_beams_right;
+var head_beam;
+var head_beam_left;
+var head_beam_right;
+var body_beam;
+var body_beam_left;
+var body_beam_right;
+var armsStart_beam;
+var armRightStart_beam;
+var armLeftStart_beam;
+var legLeftStart_beam;
+var legRightStart_beam;
+var omegaXis_beam;
+var omegaXis_beam_left;
+var omegaXis_beam_right;
+var omegaXisFP_beam;
+var omegaXisFP_beam_left;
+var omegaXisFP_beam_right;
+var blade_beam;
 
 //Body Lines Beams
 function create(renderer, beam, color, map) {
@@ -277,7 +297,7 @@ function renderHairAura(entity, renderLayer) {
         hair_beams.render(renderLayer);
     }
 }
-function renderAura(entity, renderLayer, isFirstPersonArm) {
+function renderAura(entity, renderLayer) {
     if (renderLayer == "CHESTPLATE") {
         head_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0);
         head_beam.render(renderLayer);
@@ -285,8 +305,6 @@ function renderAura(entity, renderLayer, isFirstPersonArm) {
         body_beam.render(renderLayer);
         armsStart_beam.progress = (entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 ? 1.0 : 0.0);
         armsStart_beam.render(renderLayer);
-        blade_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
-        blade_beam.render(renderLayer);
         armRightStart_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (2/32)), 0.0), 1.0) - (entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 ? 1.0 : 0.0);
         armRightStart_beam.render(renderLayer);
         armLeftStart_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (36/32)), 0.0), 1.0);
@@ -295,14 +313,6 @@ function renderAura(entity, renderLayer, isFirstPersonArm) {
         legRightStart_beam.render(renderLayer);
         legLeftStart_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (50/32)), 0.0), 1.0);
         legLeftStart_beam.render(renderLayer);
-        if (!isFirstPersonArm) {
-            omegaXis_beam.progress = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-            omegaXis_beam.render(renderLayer);
-        }
-        if (isFirstPersonArm) {
-            omegaXisFP_beam.progress = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
-            omegaXisFP_beam.render(renderLayer);
-        }
     }
 }
 function renderOmegaXisAura(entity, renderLayer, isFirstPersonArm) {

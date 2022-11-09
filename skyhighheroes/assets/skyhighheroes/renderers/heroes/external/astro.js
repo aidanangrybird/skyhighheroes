@@ -1,4 +1,9 @@
-setGlobal();
+var cannonRight;
+var cannonLeft;
+var cannonTop;
+var cannonBottom;
+var cannonFront;
+var cannonBack;
 
 //Beam setup
 function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
@@ -80,11 +85,29 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
 }
 function addFlightAnimationWithLanding(renderer, name, value) {
     addFlightAnimation(renderer, name, value, (entity, data) => {
-        data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
+        data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("fiskheroes:dyn/superhero_landing_timer")));
         data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
     });
 }
 
+//Astro Animations
+function initAstroAnimations(renderer) {
+    //Aiming
+    addAnimationWithData(renderer, "astro.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
+        .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
+        .priority = 10;
+    //Dual Aiming
+    addAnimationWithData(renderer, "astro.DUAL_AIMING", "skyhighheroes:astro_dual_aim", "fiskheroes:energy_projection_timer")
+        .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
+        .priority = 10;
+    //Flight
+    addFlightAnimationWithLanding(renderer, "astro.FLIGHT", "skyhighheroes:flight/astro_flight.anim.json");
+    //Landing
+    addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "fiskheroes:dyn/superhero_landing_timer")
+        .priority = -8;
+}
+
+//Init
 //Beams
 function initBeams(renderer, color) {
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", color, [
@@ -97,7 +120,6 @@ function initBeams(renderer, color) {
         { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
 }
-
 function initDualBeams(renderer, colorLeft, colorRight) {
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorRight, [
         { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
@@ -109,7 +131,7 @@ function initDualBeams(renderer, colorLeft, colorRight) {
         { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
 }
-
+//Cannon
 function initCannon(renderer) {
     //Right
     cannonRight = renderer.createEffect("fiskheroes:shield");
@@ -148,23 +170,7 @@ function initCannon(renderer) {
     cannonBack.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(2.0, 4.0, 0.0);
     cannonBack.large = true;
 }
-function renderCannon(entity, renderLayer) {
-    if (renderLayer == "CHESTPLATE") {
-        cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonRight.render();
-        cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonLeft.render();
-        cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonTop.render();
-        cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonBottom.render();
-        cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonFront.render();
-        cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonBack.render();
-    }
-}
-
+//Equipment
 function initEquipment(renderer) {
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
     livery_shield.texture.set("shield");
@@ -190,19 +196,20 @@ function initEquipment(renderer) {
     ]).slotIndex = 2;
 }
 
-//Astro Animations
-function initAstroAnimations(renderer) {
-    //Aiming
-    addAnimationWithData(renderer, "astro.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
-        .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
-        .priority = 10;
-    //Dual Aiming
-    addAnimationWithData(renderer, "astro.DUAL_AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
-        .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
-        .priority = 10;
-    //Flight
-    addFlightAnimationWithLanding(renderer, "astro.FLIGHT", "skyhighheroes:flight/astro_flight.anim.json");
-    //Landing
-    addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
-        .priority = -8;
+//Render
+function renderCannon(entity, renderLayer) {
+    if (renderLayer == "CHESTPLATE") {
+        cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonRight.render();
+        cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonLeft.render();
+        cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonTop.render();
+        cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonBottom.render();
+        cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonFront.render();
+        cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+        cannonBack.render();
+    }
 }

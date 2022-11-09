@@ -150,5 +150,5 @@ function hasProperty(entity, property) {
 }
 
 function canAim(entity) {
-    return entity.getHeldItem().isEmpty() && (entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.motionX() == 0 && entity.motionY() == 0 && entity.motionZ() == 0) && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:flight_timer") > 0 && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 }
