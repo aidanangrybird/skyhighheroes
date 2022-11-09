@@ -1,6 +1,6 @@
 {data} = curve {data}
 {rightArm_rotX} @ {data} -> {head_rotX} - pi / 2
-{rightArm_rotY} @ {data} -'> {head_rotY}
+{rightArm_rotY} @ {data} -> {head_rotY}
 {rightArm_rotZ} @ {data} -> {head_rotZ}
 
 out "firstPerson" (true)

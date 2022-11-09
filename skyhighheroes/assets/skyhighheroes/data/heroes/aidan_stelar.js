@@ -1,4 +1,4 @@
-var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"
+var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 function init(hero) {
     hero.setName("Aidan Stelar");
     hero.setTier(10);
@@ -340,6 +340,6 @@ function hasProperty(entity, property) {
 
 function canAim(entity) {
 
-  return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:flight_timer") > 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+  return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 
 }

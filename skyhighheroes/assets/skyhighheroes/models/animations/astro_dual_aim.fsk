@@ -3,7 +3,7 @@
 {rightArm_rotY} @ {data} -> {head_rotY}
 {rightArm_rotZ} @ {data} -> {head_rotZ}
 
-{leftArm_rotX} @ {data} -> 0.9({head_rotX} - pi / 2)
+{leftArm_rotX} @ {data} -> ({head_rotX} - pi / 2)
 {leftArm_rotY} @ {data} -> {head_rotY}
 {leftArm_rotZ} @ {data} -> {head_rotZ}
 

@@ -99,8 +99,6 @@ function initStelarAnimations(renderer) {
     //Flight
     addFlightAnimationWithLanding(renderer, "stelar.FLIGHT", "skyhighheroes:flight/stelar_flight.anim.json");
     //Landing
-    addAnimationWithData(renderer, "stelar.LAND", "skyhighheroes:stelar_landing", "skyhighheroes:dyn/superhero_landing_timer")
-        .priority = -8;
 }
 //Init
 function initMegaBuster(renderer, color) {
