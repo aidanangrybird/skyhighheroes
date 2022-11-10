@@ -28,7 +28,11 @@ loadTextures({
     "katana": "skyhighheroes:boom/astro/boom_tenma_katana",
     "katana_lights": "skyhighheroes:boom/astro/boom_tenma_katana_lights",
     "scythe": "skyhighheroes:boom/astro/boom_tenma_scythe",
-    "scythe_lights": "skyhighheroes:boom/astro/boom_tenma_scythe_lights"
+    "scythe_lights": "skyhighheroes:boom/astro/boom_tenma_scythe_lights",
+    "rifle": "skyhighheroes:aidan/aidan_stelar_rifle",
+    "rifle_lights": "skyhighheroes:aidan/aidan_stelar_rifle_lights",
+    "rifle": "skyhighheroes:boom/astro/boom_tenma_rifle",
+    "rifle_lights": "skyhighheroes:boom/astro/boom_tenma_rifle_lights"
 });
 
 function initEffects(renderer) {

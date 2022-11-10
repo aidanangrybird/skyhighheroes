@@ -9,6 +9,7 @@ function init(hero) {
     hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
     hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
+    hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
 
     hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
     hero.addAttribute("SPRINT_SPEED", 0.2, 1);
@@ -36,6 +37,7 @@ function init(hero) {
 
     hero.setDefaultScale(0.8);
     hero.setHasProperty(hasProperty);
+    hero.setHasPermission(hasPermission);
     hero.addAttributeProfile("INACTIVE", inactiveProfile);
     hero.addAttributeProfile("BLADE", bladeProfile);
     hero.addAttributeProfile("SHIELD", shieldProfile);
@@ -328,8 +330,28 @@ function hasProperty(entity, property) {
 
     case "BREATHE_SPACE":
 
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0;
+      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0;
 
+    default:
+
+      return false;
+
+  }
+
+}
+
+function hasPermission(entity, permission) {
+  
+  switch (permission) {
+
+    case "USE_CHRONOS_RIFLE":
+
+      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+
+    case "USE_SHIELD":
+
+      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+  
     default:
 
       return false;
@@ -340,6 +362,7 @@ function hasProperty(entity, property) {
 
 function canAim(entity) {
 
-  return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
 }
+

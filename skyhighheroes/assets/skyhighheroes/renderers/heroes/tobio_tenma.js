@@ -22,7 +22,9 @@ loadTextures({
     "katana": "skyhighheroes:astro/tobio_tenma_katana",
     "katana_lights": "skyhighheroes:astro/tobio_tenma_katana_lights",
     "scythe": "skyhighheroes:astro/tobio_tenma_scythe",
-    "scythe_lights": "skyhighheroes:astro/tobio_tenma_scythe_lights"
+    "scythe_lights": "skyhighheroes:astro/tobio_tenma_scythe_lights",
+    "rifle": "skyhighheroes:astro/tobio_tenma_rifle",
+    "rifle_lights": "skyhighheroes:astro/tobio_tenma_rifle_lights"
 });
 
 function init(renderer) {

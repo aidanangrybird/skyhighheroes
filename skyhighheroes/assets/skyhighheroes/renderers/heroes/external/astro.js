@@ -181,6 +181,9 @@ function initEquipment(renderer) {
     var livery_scythe = renderer.bindProperty("fiskheroes:livery");
     livery_scythe.texture.set("scythe", "scythe_lights");
     livery_scythe.weaponType = "RUPTURES_SCYTHE";
+    var livery_rifle = renderer.bindProperty("fiskheroes:livery");
+    livery_rifle.texture.set("rifle", "rifle_lights");
+    livery_rifle.weaponType = "CHRONOS_RIFLE";
     //Shield
     shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
@@ -194,6 +197,10 @@ function initEquipment(renderer) {
     scythe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
     ]).slotIndex = 2;
+    //Rifle
+    rifle = renderer.bindProperty("fiskheroes:equipped_item").setItems([
+        { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 3.0], "rotation": [0.0, -90.0, 60.0] }
+    ]).slotIndex = 3;
 }
 
 //Render

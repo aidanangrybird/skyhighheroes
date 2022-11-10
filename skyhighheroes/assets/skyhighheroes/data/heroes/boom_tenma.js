@@ -12,6 +12,7 @@ function init(hero) {
     hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
     hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
+    hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
     
     hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
     hero.addAttribute("SPRINT_SPEED", 0.3, 1);
@@ -38,6 +39,7 @@ function init(hero) {
     
     hero.setDefaultScale(0.6);
     hero.setHasProperty(hasProperty);
+    hero.setHasPermission(hasPermission);
     hero.setModifierEnabled(isModifierEnabled);
     hero.supplyFunction("canAim", canAim);
     hero.setTierOverride(getTierOverride);
@@ -148,6 +150,26 @@ function hasProperty(entity, property) {
 
 }
 
+function hasPermission(entity, permission) {
+  
+    switch (permission) {
+  
+      case "USE_CHRONOS_RIFLE":
+  
+        return entity.getUUID() == uuid;
+  
+      case "USE_SHIELD":
+  
+        return entity.getUUID() == uuid;
+    
+      default:
+  
+        return false;
+  
+    }
+  
+}
+
 function canAim(entity) {
-    return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:flight_boost_timer") == 0 && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection") && entity.getUUID() == uuid;
 }

@@ -28,7 +28,9 @@ loadTextures({
     "katana": "skyhighheroes:dark/astro/dark_tenma_katana",
     "katana_lights": "skyhighheroes:dark/astro/dark_tenma_katana_lights",
     "scythe": "skyhighheroes:dark/astro/dark_tenma_scythe",
-    "scythe_lights": "skyhighheroes:dark/astro/dark_tenma_scythe_lights"
+    "scythe_lights": "skyhighheroes:dark/astro/dark_tenma_scythe_lights",
+    "rifle": "skyhighheroes:dark/astro/dark_tenma_rifle",
+    "rifle_lights": "skyhighheroes:dark/astro/dark_tenma_rifle_lights"
 });
 
 function initEffects(renderer) {

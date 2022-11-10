@@ -28,7 +28,9 @@ loadTextures({
     "katana": "skyhighheroes:expo/astro/expo_tenma_katana",
     "katana_lights": "skyhighheroes:expo/astro/expo_tenma_katana_lights",
     "scythe": "skyhighheroes:expo/astro/expo_tenma_scythe",
-    "scythe_lights": "skyhighheroes:expo/astro/expo_tenma_scythe_lights"
+    "scythe_lights": "skyhighheroes:expo/astro/expo_tenma_scythe_lights",
+    "rifle": "skyhighheroes:expo/astro/expo_tenma_rifle",
+    "rifle_lights": "skyhighheroes:expo/astro/expo_tenma_rifle_lights"
 });
 
 function initEffects(renderer) {

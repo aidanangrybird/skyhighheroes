@@ -36,6 +36,7 @@ function init(hero) {
   
   hero.setDefaultScale(0.6);
   hero.setHasProperty(hasProperty);
+  hero.setHasPermission(hasPermission);
   hero.setModifierEnabled(isModifierEnabled);
   hero.supplyFunction("canAim", canAim);
   hero.setKeyBindEnabled(isKeyBindEnabled);
@@ -76,11 +77,11 @@ function isModifierEnabled(entity, modifier) {
 
   case "fiskheroes:energy_projection":
 
-    return entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
+    return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
 
   case "fiskheroes:energy_blast":
 
-    return entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 
   case "fiskheroes:super_speed":
 
@@ -140,6 +141,26 @@ function hasProperty(entity, property) {
 
 }
 
+function hasPermission(entity, permission) {
+  
+  switch (permission) {
+
+    case "USE_CHRONOS_RIFLE":
+
+      return entity.isAlive();
+
+    case "USE_SHIELD":
+
+      return entity.isAlive();
+  
+    default:
+
+      return entity.isAlive();
+
+  }
+
+}
+
 function canAim(entity) {
-  return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 }
