@@ -38,7 +38,8 @@ loadTextures({
     "katana": ("skyhighheroes:aidan/aidan_stelar_katana"),
     "katana_lights": ("skyhighheroes:aidan/aidan_stelar_katana_lights"),
     "scythe": ("skyhighheroes:aidan/aidan_stelar_scythe"),
-    "scythe_lights": ("skyhighheroes:aidan/aidan_stelar_scythe_lights")
+    "scythe_lights": ("skyhighheroes:aidan/aidan_stelar_scythe_lights"),
+    "bow": ("skyhighheroes:aidan/aidan_stelar_bow")
 });
 
 function getCLR() {
@@ -56,6 +57,9 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
+    var livery_bow = renderer.bindProperty("fiskheroes:livery");
+    livery_bow.texture.set("bow");
+    livery_bow.weaponType = "COMPOUND_BOW";
     parent.initEffects(renderer);
     stuff.bindFlightTrail(renderer, "skyhighheroes:aidan_stelar_flight");
     aura.initHairAura(renderer, getCLR());
