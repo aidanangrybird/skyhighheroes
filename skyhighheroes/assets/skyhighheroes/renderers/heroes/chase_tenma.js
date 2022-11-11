@@ -22,8 +22,6 @@ loadTextures({
     "normal" : "skyhighheroes:chase/astro/chase_tenma_normal",
     "normal_flying" : "skyhighheroes:chase/astro/chase_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:chase/astro/chase_tenma_cannon_lights_inner",
-    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
     "shield": "skyhighheroes:chase/astro/chase_tenma_shield",
     "katana": "skyhighheroes:chase/astro/chase_tenma_katana",
     "katana_lights": "skyhighheroes:chase/astro/chase_tenma_katana_lights",

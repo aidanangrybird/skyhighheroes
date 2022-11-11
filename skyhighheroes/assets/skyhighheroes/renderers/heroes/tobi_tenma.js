@@ -22,8 +22,6 @@ loadTextures({
     "normal" : "skyhighheroes:tobi/astro/tobi_tenma_normal",
     "normal_flying" : "skyhighheroes:tobi/astro/tobi_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:tobi/astro/tobi_tenma_cannon_lights_inner",
-    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
     "shield": "skyhighheroes:tobi/astro/tobi_tenma_shield",
     "katana": "skyhighheroes:tobi/astro/tobi_tenma_katana",
     "katana_lights": "skyhighheroes:tobi/astro/tobi_tenma_katana_lights",

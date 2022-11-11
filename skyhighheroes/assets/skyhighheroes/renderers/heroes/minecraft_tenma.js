@@ -22,8 +22,6 @@ loadTextures({
     "normal" : "skyhighheroes:minecraft/astro/minecraft_tenma_normal",
     "normal_flying" : "skyhighheroes:minecraft/astro/minecraft_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:minecraft/astro/minecraft_tenma_cannon_lights_inner",
-    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
     "shield": "skyhighheroes:minecraft/astro/minecraft_tenma_shield",
     "katana": "skyhighheroes:minecraft/astro/minecraft_tenma_katana",
     "katana_lights": "skyhighheroes:minecraft/astro/minecraft_tenma_katana_lights",

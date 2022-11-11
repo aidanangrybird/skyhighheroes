@@ -6,7 +6,10 @@ function init(renderer) {
 
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-        
+        //Anything below the render layer thing is what sets the texture for that peice of the suit
+        //Idea for this: make it so that if you have only the legs on, 
+        //it shows wires coming out of the bottom of the legs indicating
+        //that your boots are missing
         if (entity.isDisplayStand() || entity.getUUID() != getID()) {
             return "base";
         }

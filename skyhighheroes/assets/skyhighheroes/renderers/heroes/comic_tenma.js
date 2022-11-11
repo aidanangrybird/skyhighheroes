@@ -22,8 +22,6 @@ loadTextures({
     "normal" : "skyhighheroes:comic/astro/comic_tenma_normal",
     "normal_flying" : "skyhighheroes:comic/astro/comic_tenma_normal_flying",
     "cannon_lights_inner" : "skyhighheroes:comic/astro/comic_tenma_cannon_lights_inner",
-    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
     "shield": "skyhighheroes:comic/astro/comic_tenma_shield",
     "katana": "skyhighheroes:comic/astro/comic_tenma_katana",
     "katana_lights": "skyhighheroes:comic/astro/comic_tenma_katana_lights",
