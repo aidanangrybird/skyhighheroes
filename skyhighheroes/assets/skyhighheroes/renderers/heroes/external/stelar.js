@@ -159,7 +159,7 @@ function initEquipment(renderer) {
     livery_rifle.weaponType = "CHRONOS_RIFLE";
     //Shield
     shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
+        { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 4.0], "rotation": [90.0, -180.0, 0.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 0;
     //Katana
     katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([

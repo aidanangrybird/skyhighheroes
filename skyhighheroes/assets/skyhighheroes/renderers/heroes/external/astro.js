@@ -186,7 +186,7 @@ function initEquipment(renderer) {
     livery_rifle.weaponType = "CHRONOS_RIFLE";
     //Shield
     shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
+        { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 4.0], "rotation": [90.0, -180.0, 0.0] }
     ]).slotIndex = 0;
     //Katana
     katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
