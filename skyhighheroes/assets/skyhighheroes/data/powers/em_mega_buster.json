@@ -2,7 +2,7 @@
   "name": "Mega Buster",
   "value": 1,
   "modifiers": {
-    "fiskheroes:energy_blast": {
+    "fiskheroes:energy_bolt": {
       "damageProfile": {
         "damage": 15.0,
         "types": {
@@ -10,6 +10,10 @@
           "ENERGY": 1.0,
           "WAVE_ELECTRICITY": 1.0,
           "WAVE_ENERGY": 1.0
+        },
+        "properties": {
+          "ADD_KNOCKBACK": 2.0,
+          "HIT_COOLDOWN": 0.0
         }
       },
       "isExplosive": false,
