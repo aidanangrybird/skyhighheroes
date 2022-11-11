@@ -66,6 +66,7 @@ function initEffects(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
+    parent.render(entity, renderLayer, isFirstPersonArm);
     aura.renderHairAura(entity, renderLayer);
     aura.renderAura(entity, renderLayer);
     aura.renderOmegaXisAura(entity, renderLayer, isFirstPersonArm);
