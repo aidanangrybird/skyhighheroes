@@ -1,7 +1,10 @@
 extend("skyhighheroes:base_tenma");
 
-var rockets = implement("skyhighheroes:external/astro_rockets");
 var astro = implement("skyhighheroes:external/astro");
+var stuff = implement("skyhighheroes:external/stuff");
+
+var colorLeft = 0x0000FF;
+var colorRight = 0xFF0000;
 
 function getCLR() {
     return 0xFF0000;
@@ -31,10 +34,11 @@ loadTextures({
 });
 
 function initEffects(renderer) {
+    parent.initEffects(renderer);
     //Boot Rockets
-    rockets.initDualBoosters(renderer, "skyhighheroes:red_fire_layer1", "skyhighheroes:blue_fire_layer1", "skyhighheroes:red_fire_layer2", "skyhighheroes:blue_fire_layer2");
-    astro.initDualBeams(renderer, 0x0000FF, 0xFF0000);
-    stuff.bindSpeedTrail(renderer, "skyhighheroes:fire_tenma_speed");
+    rockets = astro.initDualBoosters(renderer, getCLR());
+    astro.initBeams(renderer, getCLR());
+    stuff.bindSpeedTrail(renderer, "skyhighheroes:expo_tenma_speed")
 }
 
 function getID() {
@@ -45,4 +49,9 @@ function init(renderer) {
     parent.init(renderer);
     initEffects(renderer);
     initAnimations(renderer);
+}
+
+function render(entity, renderLayer, isFirstPersonArm) {
+    parent.render(entity, renderLayer, isFirstPersonArm);
+    rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
 }

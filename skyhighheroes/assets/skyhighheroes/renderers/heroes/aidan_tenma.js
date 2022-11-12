@@ -1,6 +1,5 @@
 extend("skyhighheroes:base_tenma");
 
-var rockets = implement("skyhighheroes:external/astro_rockets");
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
@@ -32,9 +31,11 @@ loadTextures({
 });
 
 function initEffects(renderer) {
-    parent.initEffects(renderer);
     //Boot Rockets
-    rockets.initBoosters(renderer, "skyhighheroes:orange_fire_layer1", "skyhighheroes:orange_fire_layer2");
+    astro.initCannon(renderer);
+    astro.initEquipment(renderer);
+    stuff.initForceField(renderer, getCLR());
+    rockets = astro.initBoosters(renderer, getCLR());
     astro.initBeams(renderer, getCLR());
     stuff.bindSpeedTrail(renderer, "skyhighheroes:aidan_tenma_speed");
 }
@@ -47,4 +48,9 @@ function init(renderer) {
     parent.init(renderer);
     initEffects(renderer);
     initAnimations(renderer);
+}
+
+function render(entity, renderLayer, isFirstPersonArm) {
+    parent.render(entity, renderLayer, isFirstPersonArm);
+    rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
 }

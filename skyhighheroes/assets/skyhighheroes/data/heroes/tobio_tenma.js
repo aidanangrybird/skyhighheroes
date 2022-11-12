@@ -44,7 +44,7 @@ function init(hero) {
   hero.setAttributeProfile(getAttributeProfile);
   hero.setTickHandler((entity, manager) => {
       var flying = entity.getData("fiskheroes:flying");
-      manager.incrementData(entity, "skyhighheroes:dyn/astro_booster_timer", 2, flying);
+      manager.incrementData(entity, "skyhighheroes:dyn/booster_timer", 2, flying);
   });
 }
 

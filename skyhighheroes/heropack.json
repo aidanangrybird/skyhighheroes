@@ -13,7 +13,7 @@
     "visualizer_toggle": "BYTE",
     "stelar_clothes": "BYTE",
     "tenma_clothes": "BYTE",
-    "astro_booster_timer" : "FLOAT_INTERP",
+    "booster_timer" : "FLOAT_INTERP",
     "superhero_landing_ticks": "BYTE",
     "superhero_landing_timer": "FLOAT_INTERP"
   },

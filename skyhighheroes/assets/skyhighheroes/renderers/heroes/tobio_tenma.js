@@ -1,4 +1,3 @@
-var rockets = implement("skyhighheroes:external/astro_rockets");
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
@@ -31,70 +30,72 @@ function init(renderer) {
 
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-        
-        if (entity.isDisplayStand()) {
-            return "base";
-        }
-        if (entity.getData("fiskheroes:flying")) {
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
-                return "base_flying";
-            }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                return "long_flying";
-            }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
-                return "short_flying";
-            }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                return "normal_flying";
-            }
-        }
-        if (!entity.getData("fiskheroes:flying")) {
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
+            //Anything below the render layer thing is what sets the texture for that peice of the suit
+            //Idea for this: make it so that if you have only the legs on, 
+            //it shows wires coming out of the bottom of the legs indicating
+            //that your boots are missing
+            if (entity.isDisplayStand()) {
                 return "base";
             }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                return "long";
+            if (entity.getData("fiskheroes:flying")) {
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
+                    return "base_flying";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
+                    return "long_flying";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
+                    return "short_flying";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                    return "normal_flying";
+                }
             }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
-                return "short";
+            if (!entity.getData("fiskheroes:flying")) {
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
+                    return "base";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
+                    return "long";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
+                    return "short";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                    return "normal";
+                }
             }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                return "normal";
+            else {
+                return "null";
             }
         }
-        else {
-            return "null";
-        }
-    }
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-        if (entity.isDisplayStand()) {
-            return "lights";
-        }
-        if (entity.getData("fiskheroes:flying")) {
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
-                return "lights_flying";
-            }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                return "lights_normal_flying";
-            }
-        }
-        if (!entity.getData("fiskheroes:flying")) {
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+            if (entity.isDisplayStand()) {
                 return "lights";
             }
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                return "lights_normal";
+            if (entity.getData("fiskheroes:flying")) {
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+                    return "lights_flying";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                    return "lights_normal_flying";
+                }
+            }
+            if (!entity.getData("fiskheroes:flying")) {
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+                    return "lights";
+                }
+                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                    return "lights_normal";
+                }
+            }
+            else {
+                return "null";
             }
         }
-        else {
-            return "null";
-        }
-    }
     });
-    
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");
     renderer.showModel("HELMET", "head", "headwear");
     renderer.showModel("CHESTPLATE", "body", "rightArm", "leftArm");
@@ -109,7 +110,7 @@ function initEffects(renderer) {
     astro.initCannon(renderer);
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, colorVar);
-    rockets.initBoosters(renderer, "skyhighheroes:normal_fire_layer1", "skyhighheroes:normal_fire_layer2");
+    rockets = astro.initNormalBoosters(renderer);
     astro.initBeams(renderer, colorVar);
     stuff.bindSpeedTrail(renderer, "skyhighheroes:tobio_tenma_speed");
 }
@@ -121,7 +122,7 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
     astro.renderCannon(entity, renderLayer);
-    rockets.render(entity, renderLayer, isFirstPersonArm);
+    rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
 }
 
 var colorVar = 0xFFFFFF
