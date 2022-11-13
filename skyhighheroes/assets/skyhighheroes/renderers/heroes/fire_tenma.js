@@ -36,9 +36,9 @@ loadTextures({
 function initEffects(renderer) {
     parent.initEffects(renderer);
     //Boot Rockets
-    rockets = astro.initDualBoosters(renderer, getCLR());
-    astro.initBeams(renderer, getCLR());
-    stuff.bindSpeedTrail(renderer, "skyhighheroes:expo_tenma_speed")
+    rockets = astro.initDualBoosters(renderer, 0x0000FF, 0xFF0000);
+    astro.initDualBeams(renderer, 0x0000FF, 0xFF0000);
+    stuff.bindSpeedTrail(renderer, "skyhighheroes:fire_tenma_speed")
 }
 
 function getID() {

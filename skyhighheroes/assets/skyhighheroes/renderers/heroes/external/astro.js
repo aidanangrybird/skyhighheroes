@@ -228,12 +228,12 @@ var bloomRightInner;
 
 function initBoosters(renderer, color) {
     var icon = renderer.createResource("ICON", "skyhighheroes:null");
-    //Left 1
+    //Left
     boosterLeft = renderer.createEffect("fiskheroes:booster");
     boosterLeft.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
     boosterLeft.anchor.set("leftLeg");
     boosterLeft.mirror = false;
-    //Right 1
+    //Right
     boosterRight = renderer.createEffect("fiskheroes:booster");
     boosterRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
     boosterRight.anchor.set("rightLeg");
@@ -354,12 +354,12 @@ function initBoosters(renderer, color) {
 
 function initDualBoosters(renderer, colorLeft, colorRight) {
     var icon = renderer.createResource("ICON", "skyhighheroes:null");
-    //Left 1
+    //Left
     boosterLeft = renderer.createEffect("fiskheroes:booster");
     boosterLeft.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
     boosterLeft.anchor.set("leftLeg");
     boosterLeft.mirror = false;
-    //Right 1
+    //Right
     boosterRight = renderer.createEffect("fiskheroes:booster");
     boosterRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
     boosterRight.anchor.set("rightLeg");
@@ -451,7 +451,7 @@ function initDualBoosters(renderer, colorLeft, colorRight) {
                     bloomLeftInner.progress = bloomLeftInner.opacity = flight;
                     bloomLeftInner.render();
         
-                    //Right 1
+                    //Right
                     //Booster
                     boosterRight.progress = boost;
                     boosterRight.speedScale = 0.5 * boost;

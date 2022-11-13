@@ -1,6 +1,11 @@
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
+loadTextures({
+    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
+    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
+});
+
 function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
