@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:mango_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:mango_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

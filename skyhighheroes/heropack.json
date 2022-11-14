@@ -23,11 +23,11 @@
       "version": 0
     },
     "range": {
-      "wave_flying_loop": { "distance": 32.0, "target": "ALL" },
-      "wave_flying_start": 32.0,
+      "wave_flying_loop": { "distance": 32.0, "target": "OTHERS_IN_RANGE" },
+      "wave_flying_start": { "distance": 32.0, "target": "OTHERS_IN_RANGE" },
       "wave_shooting": 16.0,
       "wave_teleport": 24.0,
-      "wave_transform": 16.0,
+      "wave_transform": { "distance": 8.0, "target": "OTHERS_IN_RANGE" },
       "tenma_boost": 32.0,
       "tenma_flight_enable": 32.0,
       "tenma_flight_loop": { "distance": 32.0, "target": "ALL" }
@@ -74,6 +74,9 @@
     },
     "skyhighheroes:fire_stelar" : {
       "firestorm" : "\u00A74Fire\u00A71storm \u00A74Jax \u00A71Style\u00A7r"
+    },
+    "skyhighheroes:mango_stelar" : {
+      "vision" : "\u00A78Vision \u00A78Style\u00A7r"
     },
     "skyhighheroes:minecraft_stelar" : {
       "deadpool" : "\u00A71Deadpool \u00A71Style\u00A7r"
