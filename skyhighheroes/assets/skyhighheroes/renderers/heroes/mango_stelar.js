@@ -30,7 +30,7 @@ loadTextures({
     "shorttx": "skyhighheroes:mango/mango_stelar_short.tx.json",
     "swimsuittx": "skyhighheroes:mango/mango_stelar_swimsuit.tx.json",
     "normaltx": "skyhighheroes:mango/mango_stelar_normal.tx.json",
-    "transer": "skyhighheroes:stelar_transer_pegasus",
+    "transer": "skyhighheroes:stelar_transer_dragon",
     "transer_lights": "skyhighheroes:mango/mango_stelar_transer_lights",
     "blade": "skyhighheroes:mango/mango_stelar_blade",
     "hair": "skyhighheroes:mango/mango_stelar_hair",
