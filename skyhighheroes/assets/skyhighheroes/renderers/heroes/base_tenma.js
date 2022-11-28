@@ -8,14 +8,7 @@ loadTextures({
 
 function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
-        if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-            //Anything below the render layer thing is what sets the texture for that peice of the suit
-            //Idea for this: make it so that if you have only the legs on, 
-            //it shows wires coming out of the bottom of the legs indicating
-            //that your boots are missing
-            if (entity.isDisplayStand() || entity.getUUID() != getID()) {
-                return "base";
-            }
+        if (entity.isWearingFullSuit()) {
             if (entity.getData("fiskheroes:flying")) {
                 if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                     return "base_flying";
@@ -44,9 +37,78 @@ function init(renderer) {
                     return "normal";
                 }
             }
-            else {
-                return "null";
+        }
+        if (renderLayer == "HELMET") {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
+                return entity.getWornChestplate().suitType() == $SUIT_NAME ? "long_head_torso" : "base_head";
+            } else {
+                return "base_head";
             }
+        }
+        if (renderLayer == "CHESTPLATE" || renderLayer == "BOOTS") {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
+                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "base_torso_boots_legs" : "base_torso_boots";
+            }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
+                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "long_torso_boots_legs" : "long_torso_boots";
+            }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
+                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "short_torso_boots_legs" : "short_torso_boots";
+            }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "normal_torso_boots_legs" : "normal_torso_boots";
+            }
+        }
+        if (renderLayer == "LEGGINGS") {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
+                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "base_legs_boots";
+                } else {
+                    return "base_legs";
+                }
+            }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
+                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "long_legs_torso_boots";
+                }
+                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                    return "long_legs_torso";
+                }
+                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "long_legs_boots";
+                } else {
+                    return "long_legs";
+                }
+            }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
+                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "short_legs_torso_boots";
+                }
+                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                    return "short_legs_torso";
+                }
+                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "short_legs_boots";
+                } else {
+                    return "short_legs";
+                }
+            }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "normal_legs_torso_boots";
+                }
+                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                    return "normal_legs_torso";
+                }
+                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                    return "normal_legs_boots";
+                } else {
+                    return "normal_legs";
+                }
+            }
+        }
+        else {
+            return "null";
         }
     });
     renderer.setLights((entity, renderLayer) => {
