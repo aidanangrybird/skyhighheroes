@@ -5,7 +5,6 @@ loadTextures({
     "lights": "skyhighheroes:aidan/aidan_stelar_gundam_lights",
     "suit": "skyhighheroes:aidan/aidan_stelar_gundam_suit.tx.json",
     "suit_lights": "skyhighheroes:aidan/aidan_stelar_gundam_suit_lights.tx.json",
-    "visualizer_up": "skyhighheroes:aidan/aidan_stelar_up_transer",
     "cannon_bottom": "skyhighheroes:aidan/aidan_stelar_gundam_bottom_cannon",
     "cannon_left": "skyhighheroes:aidan/aidan_stelar_gundam_left_cannon",
     "cannon_right": "skyhighheroes:aidan/aidan_stelar_gundam_right_cannon",

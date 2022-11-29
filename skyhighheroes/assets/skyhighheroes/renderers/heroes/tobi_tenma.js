@@ -27,21 +27,21 @@ loadTextures({
     "long_legs": "skyhighheroes:tobi/astro/tobi_tenma_long_legs",
     "long_legs_torso": "skyhighheroes:tobi/astro/tobi_tenma_long_legs_torso",
     "long_legs_boots": "skyhighheroes:tobi/astro/tobi_tenma_long_legs_boots",
-    "head_legs_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_long_legs_torso_boots",
+    "long_legs_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_long_legs_torso_boots",
     "short" : "skyhighheroes:tobi/astro/tobi_tenma_short",
     "short_flying" : "skyhighheroes:tobi/astro/tobi_tenma_short_flying",
-    "short_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_short",
-    "short_legs": "skyhighheroes:tobi/astro/tobi_tenma_short",
-    "short_legs_torso": "skyhighheroes:tobi/astro/tobi_tenma_short",
-    "short_legs_boots": "skyhighheroes:tobi/astro/tobi_tenma_short",
-    "short_legs_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_short",
+    "short_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_short_torso_boots",
+    "short_legs": "skyhighheroes:tobi/astro/tobi_tenma_short_legs",
+    "short_legs_torso": "skyhighheroes:tobi/astro/tobi_tenma_short_legs_torso",
+    "short_legs_boots": "skyhighheroes:tobi/astro/tobi_tenma_short_legs_boots",
+    "short_legs_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_short_torso_boots",
     "normal" : "skyhighheroes:tobi/astro/tobi_tenma_normal",
     "normal_flying" : "skyhighheroes:tobi/astro/tobi_tenma_normal_flying",
     "normal_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_normal_torso_boots",
     "normal_torso_boots_legs": "skyhighheroes:tobi/astro/tobi_tenma_normal_torso_boots_legs",
     "normal_legs": "skyhighheroes:tobi/astro/tobi_tenma_normal_legs",
-    "normal_legs_torso": "skyhighheroes:tobi/astro/tobi_tenma_legs_torso",
-    "normal_legs_boots": "skyhighheroes:tobi/astro/tobi_tenma_legs_boots",
+    "normal_legs_torso": "skyhighheroes:tobi/astro/tobi_tenma_normal_legs_torso",
+    "normal_legs_boots": "skyhighheroes:tobi/astro/tobi_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:tobi/astro/tobi_tenma_normal_legs_torso_boots",
     "cannon_lights_inner" : "skyhighheroes:tobi/astro/tobi_tenma_cannon_lights_inner",
     "shield": "skyhighheroes:tobi/astro/tobi_tenma_shield",
@@ -55,10 +55,13 @@ loadTextures({
 
 function initEffects(renderer) {
     parent.initEffects(renderer);
-    //Boot Rockets
-    rockets = astro.initBoosters(renderer, "skyhighheroes:light_gray_fire_layer1", "skyhighheroes:light_gray_fire_layer2", getCLR());
+    rockets = astro.initBoosters(renderer, getCLR());
     astro.initBeams(renderer, getCLR());
     stuff.bindSpeedTrail(renderer, "skyhighheroes:tobi_tenma_speed");
+}
+
+function getSuitID() {
+    return "skyhighheroes:tobi_tenma";
 }
 
 function getID() {

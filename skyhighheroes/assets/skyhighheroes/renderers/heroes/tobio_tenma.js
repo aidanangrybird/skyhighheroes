@@ -21,21 +21,21 @@ loadTextures({
     "long_legs": "skyhighheroes:astro/tobio_tenma_long_legs",
     "long_legs_torso": "skyhighheroes:astro/tobio_tenma_long_legs_torso",
     "long_legs_boots": "skyhighheroes:astro/tobio_tenma_long_legs_boots",
-    "head_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_long_legs_torso_boots",
+    "long_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_long_legs_torso_boots",
     "short" : "skyhighheroes:astro/tobio_tenma_short",
     "short_flying" : "skyhighheroes:astro/tobio_tenma_short_flying",
-    "short_torso_boots": "skyhighheroes:astro/tobio_tenma_short",
-    "short_legs": "skyhighheroes:astro/tobio_tenma_short",
-    "short_legs_torso": "skyhighheroes:astro/tobio_tenma_short",
-    "short_legs_boots": "skyhighheroes:astro/tobio_tenma_short",
-    "short_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_short",
+    "short_torso_boots": "skyhighheroes:astro/tobio_tenma_short_torso_boots",
+    "short_legs": "skyhighheroes:astro/tobio_tenma_short_legs",
+    "short_legs_torso": "skyhighheroes:astro/tobio_tenma_short_legs_torso",
+    "short_legs_boots": "skyhighheroes:astro/tobio_tenma_short_legs_boots",
+    "short_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_short_torso_boots",
     "normal" : "skyhighheroes:astro/tobio_tenma_normal",
     "normal_flying" : "skyhighheroes:astro/tobio_tenma_normal_flying",
     "normal_torso_boots": "skyhighheroes:astro/tobio_tenma_normal_torso_boots",
     "normal_torso_boots_legs": "skyhighheroes:astro/tobio_tenma_normal_torso_boots_legs",
     "normal_legs": "skyhighheroes:astro/tobio_tenma_normal_legs",
-    "normal_legs_torso": "skyhighheroes:astro/tobio_tenma_legs_torso",
-    "normal_legs_boots": "skyhighheroes:astro/tobio_tenma_legs_boots",
+    "normal_legs_torso": "skyhighheroes:astro/tobio_tenma_normal_legs_torso",
+    "normal_legs_boots": "skyhighheroes:astro/tobio_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_normal_legs_torso_boots",
     "cannon" : "skyhighheroes:astro/base_tenma_cannon",
     "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back",
@@ -83,67 +83,67 @@ function init(renderer) {
         }
         if (renderLayer == "HELMET") {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                return entity.getWornChestplate().suitType() == $SUIT_NAME ? "long_head_torso" : "base_head";
+                return entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma" ? "long_head_torso" : "base_head";
             } else {
                 return "base_head";
             }
         }
         if (renderLayer == "CHESTPLATE" || renderLayer == "BOOTS") {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "base_torso_boots_legs" : "base_torso_boots";
+                return entity.getWornLeggings().suitType() == "skyhighheroes:tobio_tenma" ? "base_torso_boots_legs" : "base_torso_boots";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "long_torso_boots_legs" : "long_torso_boots";
+                return entity.getWornLeggings().suitType() == "skyhighheroes:tobio_tenma" ? "long_torso_boots_legs" : "long_torso_boots";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "short_torso_boots_legs" : "short_torso_boots";
+                return entity.getWornLeggings().suitType() == "skyhighheroes:tobio_tenma" ? "short_torso_boots_legs" : "short_torso_boots";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "normal_torso_boots_legs" : "normal_torso_boots";
+                return entity.getWornLeggings().suitType() == "skyhighheroes:tobio_tenma" ? "normal_torso_boots_legs" : "normal_torso_boots";
             }
         }
         if (renderLayer == "LEGGINGS") {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "base_legs_boots";
                 } else {
                     return "base_legs";
                 }
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma" && entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "long_legs_torso_boots";
                 }
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma") {
                     return "long_legs_torso";
                 }
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "long_legs_boots";
                 } else {
                     return "long_legs";
                 }
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma" && entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "short_legs_torso_boots";
                 }
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma") {
                     return "short_legs_torso";
                 }
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "short_legs_boots";
                 } else {
                     return "short_legs";
                 }
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma" && entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "normal_legs_torso_boots";
                 }
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == "skyhighheroes:tobio_tenma") {
                     return "normal_legs_torso";
                 }
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == "skyhighheroes:tobio_tenma") {
                     return "normal_legs_boots";
                 } else {
                     return "normal_legs";
@@ -156,7 +156,7 @@ function init(renderer) {
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-            if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+            if (entity.isDisplayStand()) {
                 return "lights";
             }
             if (entity.getData("fiskheroes:flying")) {
@@ -182,8 +182,8 @@ function init(renderer) {
     });
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");
     renderer.showModel("HELMET", "head", "headwear");
-    renderer.showModel("CHESTPLATE", "body", "rightArm", "leftArm");
-    renderer.showModel("LEGGINGS", "rightLeg", "leftLeg");
+    renderer.showModel("LEGGINGS", "body", "rightLeg", "leftLeg");
+    renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm");
     renderer.showModel("BOOTS", "rightLeg", "leftLeg");
     renderer.fixHatLayer("HELMET");
     initEffects(renderer);

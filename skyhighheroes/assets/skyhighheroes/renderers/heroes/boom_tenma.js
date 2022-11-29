@@ -27,21 +27,21 @@ loadTextures({
     "long_legs": "skyhighheroes:boom/astro/boom_tenma_long_legs",
     "long_legs_torso": "skyhighheroes:boom/astro/boom_tenma_long_legs_torso",
     "long_legs_boots": "skyhighheroes:boom/astro/boom_tenma_long_legs_boots",
-    "head_legs_torso_boots": "skyhighheroes:boom/astro/boom_tenma_long_legs_torso_boots",
+    "long_legs_torso_boots": "skyhighheroes:boom/astro/boom_tenma_long_legs_torso_boots",
     "short" : "skyhighheroes:boom/astro/boom_tenma_short",
     "short_flying" : "skyhighheroes:boom/astro/boom_tenma_short_flying",
-    "short_torso_boots": "skyhighheroes:boom/astro/boom_tenma_short",
-    "short_legs": "skyhighheroes:boom/astro/boom_tenma_short",
-    "short_legs_torso": "skyhighheroes:boom/astro/boom_tenma_short",
-    "short_legs_boots": "skyhighheroes:boom/astro/boom_tenma_short",
-    "short_legs_torso_boots": "skyhighheroes:boom/astro/boom_tenma_short",
+    "short_torso_boots": "skyhighheroes:boom/astro/boom_tenma_short_torso_boots",
+    "short_legs": "skyhighheroes:boom/astro/boom_tenma_short_legs",
+    "short_legs_torso": "skyhighheroes:boom/astro/boom_tenma_short_legs_torso",
+    "short_legs_boots": "skyhighheroes:boom/astro/boom_tenma_short_legs_boots",
+    "short_legs_torso_boots": "skyhighheroes:boom/astro/boom_tenma_short_torso_boots",
     "normal" : "skyhighheroes:boom/astro/boom_tenma_normal",
     "normal_flying" : "skyhighheroes:boom/astro/boom_tenma_normal_flying",
     "normal_torso_boots": "skyhighheroes:boom/astro/boom_tenma_normal_torso_boots",
     "normal_torso_boots_legs": "skyhighheroes:boom/astro/boom_tenma_normal_torso_boots_legs",
     "normal_legs": "skyhighheroes:boom/astro/boom_tenma_normal_legs",
-    "normal_legs_torso": "skyhighheroes:boom/astro/boom_tenma_legs_torso",
-    "normal_legs_boots": "skyhighheroes:boom/astro/boom_tenma_legs_boots",
+    "normal_legs_torso": "skyhighheroes:boom/astro/boom_tenma_normal_legs_torso",
+    "normal_legs_boots": "skyhighheroes:boom/astro/boom_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:boom/astro/boom_tenma_normal_legs_torso_boots",
     "cannon_lights_inner" : "skyhighheroes:boom/astro/boom_tenma_cannon_lights_inner",
     "shield": "skyhighheroes:boom/astro/boom_tenma_shield",
@@ -60,6 +60,11 @@ function initEffects(renderer) {
     astro.initBeams(renderer, getCLR());
     stuff.bindSpeedTrail(renderer, "skyhighheroes:boom_tenma_speed");
 }
+
+function getSuitID() {
+    return "skyhighheroes:boom_tenma";
+}
+
 function getID() {
     return "9af1da24-6827-4c48-848d-df07952ff161";
 }

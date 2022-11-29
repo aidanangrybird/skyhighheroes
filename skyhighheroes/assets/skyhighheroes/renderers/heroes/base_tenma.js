@@ -40,67 +40,67 @@ function init(renderer) {
         }
         if (renderLayer == "HELMET") {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                return entity.getWornChestplate().suitType() == $SUIT_NAME ? "long_head_torso" : "base_head";
+                return entity.getWornChestplate().suitType() == getSuitID() ? "long_head_torso" : "base_head";
             } else {
                 return "base_head";
             }
         }
         if (renderLayer == "CHESTPLATE" || renderLayer == "BOOTS") {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "base_torso_boots_legs" : "base_torso_boots";
+                return entity.getWornLeggings().suitType() == getSuitID() ? "base_torso_boots_legs" : "base_torso_boots";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "long_torso_boots_legs" : "long_torso_boots";
+                return entity.getWornLeggings().suitType() == getSuitID() ? "long_torso_boots_legs" : "long_torso_boots";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "short_torso_boots_legs" : "short_torso_boots";
+                return "short_torso_boots";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                return entity.getWornLeggings().suitType() == $SUIT_NAME ? "normal_torso_boots_legs" : "normal_torso_boots";
+                return entity.getWornLeggings().suitType() == getSuitID() ? "normal_torso_boots_legs" : "normal_torso_boots";
             }
         }
         if (renderLayer == "LEGGINGS") {
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == getSuitID()) {
                     return "base_legs_boots";
                 } else {
                     return "base_legs";
                 }
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 1) {
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == getSuitID() && entity.getWornBoots().suitType() == getSuitID()) {
                     return "long_legs_torso_boots";
                 }
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == getSuitID()) {
                     return "long_legs_torso";
                 }
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == getSuitID()) {
                     return "long_legs_boots";
                 } else {
                     return "long_legs";
                 }
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 2) {
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == getSuitID() && entity.getWornBoots().suitType() == getSuitID()) {
                     return "short_legs_torso_boots";
                 }
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == getSuitID()) {
                     return "short_legs_torso";
                 }
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == getSuitID()) {
                     return "short_legs_boots";
                 } else {
                     return "short_legs";
                 }
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME && entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == getSuitID() && entity.getWornBoots().suitType() == getSuitID()) {
                     return "normal_legs_torso_boots";
                 }
-                if (entity.getWornChestplate().suitType() == $SUIT_NAME) {
+                if (entity.getWornChestplate().suitType() == getSuitID()) {
                     return "normal_legs_torso";
                 }
-                if (entity.getWornBoots().suitType() == $SUIT_NAME) {
+                if (entity.getWornBoots().suitType() == getSuitID()) {
                     return "normal_legs_boots";
                 } else {
                     return "normal_legs";
@@ -139,8 +139,8 @@ function init(renderer) {
     });
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");
     renderer.showModel("HELMET", "head", "headwear");
-    renderer.showModel("CHESTPLATE", "body", "rightArm", "leftArm");
-    renderer.showModel("LEGGINGS", "rightLeg", "leftLeg");
+    renderer.showModel("LEGGINGS", "body", "rightLeg", "leftLeg");
+    renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm");
     renderer.showModel("BOOTS", "rightLeg", "leftLeg");
     renderer.fixHatLayer("HELMET");
     initEffects(renderer);
@@ -166,6 +166,9 @@ function getNamePerson() {
     return "";
 }
 function getID() {
+    return "";
+}
+function getSuitID() {
     return "";
 }
 function getCLR() {

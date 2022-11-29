@@ -27,21 +27,21 @@ loadTextures({
     "long_legs": "skyhighheroes:minecraft/astro/minecraft_tenma_long_legs",
     "long_legs_torso": "skyhighheroes:minecraft/astro/minecraft_tenma_long_legs_torso",
     "long_legs_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_long_legs_boots",
-    "head_legs_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_long_legs_torso_boots",
+    "long_legs_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_long_legs_torso_boots",
     "short" : "skyhighheroes:minecraft/astro/minecraft_tenma_short",
     "short_flying" : "skyhighheroes:minecraft/astro/minecraft_tenma_short_flying",
-    "short_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_short",
-    "short_legs": "skyhighheroes:minecraft/astro/minecraft_tenma_short",
-    "short_legs_torso": "skyhighheroes:minecraft/astro/minecraft_tenma_short",
-    "short_legs_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_short",
-    "short_legs_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_short",
+    "short_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_short_torso_boots",
+    "short_legs": "skyhighheroes:minecraft/astro/minecraft_tenma_short_legs",
+    "short_legs_torso": "skyhighheroes:minecraft/astro/minecraft_tenma_short_legs_torso",
+    "short_legs_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_short_legs_boots",
+    "short_legs_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_short_torso_boots",
     "normal" : "skyhighheroes:minecraft/astro/minecraft_tenma_normal",
     "normal_flying" : "skyhighheroes:minecraft/astro/minecraft_tenma_normal_flying",
     "normal_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_normal_torso_boots",
     "normal_torso_boots_legs": "skyhighheroes:minecraft/astro/minecraft_tenma_normal_torso_boots_legs",
     "normal_legs": "skyhighheroes:minecraft/astro/minecraft_tenma_normal_legs",
-    "normal_legs_torso": "skyhighheroes:minecraft/astro/minecraft_tenma_legs_torso",
-    "normal_legs_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_legs_boots",
+    "normal_legs_torso": "skyhighheroes:minecraft/astro/minecraft_tenma_normal_legs_torso",
+    "normal_legs_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:minecraft/astro/minecraft_tenma_normal_legs_torso_boots",
     "cannon_lights_inner" : "skyhighheroes:minecraft/astro/minecraft_tenma_cannon_lights_inner",
     "shield": "skyhighheroes:minecraft/astro/minecraft_tenma_shield",
@@ -55,10 +55,13 @@ loadTextures({
 
 function initEffects(renderer) {
     parent.initEffects(renderer);
-    //Boot Rockets
     rockets = astro.initBoosters(renderer, getCLR());
     astro.initBeams(renderer, getCLR());
     stuff.bindSpeedTrail(renderer, "skyhighheroes:minecraft_tenma_speed");
+}
+
+function getSuitID() {
+    return "skyhighheroes:minecraft_tenma";
 }
 
 function getID() {
