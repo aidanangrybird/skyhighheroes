@@ -9,7 +9,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:mango/mango_stelar_vision_left_cannon",
     "cannon_right": "skyhighheroes:mango/mango_stelar_vision_right_cannon",
     "cannon_top": "skyhighheroes:mango/mango_stelar_vision_top_cannon",
-    "cannon_front": "skyhighheroes:mango/mango_stelar_vision_front_cannon"
+    "cannon_front": "skyhighheroes:mango/mango_stelar_vision_front_cannon",
+    "shield": "skyhighheroes:mango/mango_stelar_vision_shield",
+    "katana": "skyhighheroes:mango/mango_stelar_vision_katana",
+    "scythe": "skyhighheroes:mango/mango_stelar_vision_scythe",
+    "rifle": "skyhighheroes:mango/mango_stelar_vision_rifle",
 });
 
 function init(renderer) {

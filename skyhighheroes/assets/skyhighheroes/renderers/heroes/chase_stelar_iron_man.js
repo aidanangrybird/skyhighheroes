@@ -11,7 +11,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:chase/chase_stelar_iron_man_left_cannon",
     "cannon_right": "skyhighheroes:chase/chase_stelar_iron_man_right_cannon",
     "cannon_top": "skyhighheroes:chase/chase_stelar_iron_man_top_cannon",
-    "cannon_front": "skyhighheroes:chase/chase_stelar_iron_man_front_cannon"
+    "cannon_front": "skyhighheroes:chase/chase_stelar_iron_man_front_cannon",
+    "shield": "skyhighheroes:chase/chase_stelar_iron_man_shield",
+    "katana": "skyhighheroes:chase/chase_stelar_iron_man_katana",
+    "scythe": "skyhighheroes:chase/chase_stelar_iron_man_scythe",
+    "rifle": "skyhighheroes:chase/chase_stelar_iron_man_rifle",
 });
 
 function init(renderer) {

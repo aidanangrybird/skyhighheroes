@@ -9,7 +9,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:minecraft/minecraft_stelar_deadpool_left_cannon",
     "cannon_right": "skyhighheroes:minecraft/minecraft_stelar_deadpool_right_cannon",
     "cannon_top": "skyhighheroes:minecraft/minecraft_stelar_deadpool_top_cannon",
-    "cannon_front": "skyhighheroes:minecraft/minecraft_stelar_deadpool_front_cannon"
+    "cannon_front": "skyhighheroes:minecraft/minecraft_stelar_deadpool_front_cannon",
+    "shield": "skyhighheroes:minecraft/minecraft_stelar_deadpool_shield",
+    "katana": "skyhighheroes:minecraft/minecraft_stelar_deadpool_katana",
+    "scythe": "skyhighheroes:minecraft/minecraft_stelar_deadpool_scythe",
+    "rifle": "skyhighheroes:minecraft/minecraft_stelar_deadpool_rifle",
 });
 
 function init(renderer) {

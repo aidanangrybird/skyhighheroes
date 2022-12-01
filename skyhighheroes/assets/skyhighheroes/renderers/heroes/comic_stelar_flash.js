@@ -9,7 +9,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:comic/comic_stelar_flash_left_cannon",
     "cannon_right": "skyhighheroes:comic/comic_stelar_flash_right_cannon",
     "cannon_top": "skyhighheroes:comic/comic_stelar_flash_top_cannon",
-    "cannon_front": "skyhighheroes:comic/comic_stelar_flash_front_cannon"
+    "cannon_front": "skyhighheroes:comic/comic_stelar_flash_front_cannon",
+    "shield": "skyhighheroes:comic/comic_stelar_flash_shield",
+    "katana": "skyhighheroes:comic/comic_stelar_flash_katana",
+    "scythe": "skyhighheroes:comic/comic_stelar_flash_scythe",
+    "rifle": "skyhighheroes:comic/comic_stelar_flash_rifle",
 });
 
 function init(renderer) {

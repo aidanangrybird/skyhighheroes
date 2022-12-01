@@ -9,7 +9,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:aidan/aidan_stelar_gundam_left_cannon",
     "cannon_right": "skyhighheroes:aidan/aidan_stelar_gundam_right_cannon",
     "cannon_top": "skyhighheroes:aidan/aidan_stelar_gundam_top_cannon",
-    "cannon_front": "skyhighheroes:aidan/aidan_stelar_gundam_front_cannon"
+    "cannon_front": "skyhighheroes:aidan/aidan_stelar_gundam_front_cannon",
+    "shield": "skyhighheroes:aidan/aidan_stelar_gundam_shield",
+    "katana": "skyhighheroes:aidan/aidan_stelar_gundam_katana",
+    "scythe": "skyhighheroes:aidan/aidan_stelar_gundam_scythe",
+    "rifle": "skyhighheroes:aidan/aidan_stelar_gundam_rifle",
 });
 
 function init(renderer) {

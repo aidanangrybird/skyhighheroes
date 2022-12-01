@@ -10,8 +10,10 @@ loadTextures({
     "cannon_right": "skyhighheroes:tobi/tobi_stelar_reverse_flash_right_cannon",
     "cannon_top": "skyhighheroes:tobi/tobi_stelar_reverse_flash_top_cannon",
     "cannon_front": "skyhighheroes:tobi/tobi_stelar_reverse_flash_front_cannon",
-    "cannon_left_lights": "skyhighheroes:tobi/omega_xis_tobi_stelar_left_eyes",
-    "cannon_right_lights": "skyhighheroes:tobi/omega_xis_tobi_stelar_right_eyes"
+    "shield": "skyhighheroes:tobi/tobi_stelar_reverse_flash_shield",
+    "katana": "skyhighheroes:tobi/tobi_stelar_reverse_flash_katana",
+    "scythe": "skyhighheroes:tobi/tobi_stelar_reverse_flash_scythe",
+    "rifle": "skyhighheroes:tobi/tobi_stelar_reverse_flash_rifle",
 });
 
 function init(renderer) {

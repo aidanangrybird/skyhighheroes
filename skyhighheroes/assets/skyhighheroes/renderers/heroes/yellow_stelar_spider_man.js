@@ -10,8 +10,10 @@ loadTextures({
     "cannon_right": "skyhighheroes:yellow/yellow_stelar_spider_man_right_cannon",
     "cannon_top": "skyhighheroes:yellow/yellow_stelar_spider_man_top_cannon",
     "cannon_front": "skyhighheroes:yellow/yellow_stelar_spider_man_front_cannon",
-    "cannon_left_lights": "skyhighheroes:yellow/omega_xis_yellow_stelar_left_eyes",
-    "cannon_right_lights": "skyhighheroes:yellow/omega_xis_yellow_stelar_right_eyes"
+    "shield": "skyhighheroes:yellow/yellow_stelar_spider_man_shield",
+    "katana": "skyhighheroes:yellow/yellow_stelar_spider_man_katana",
+    "scythe": "skyhighheroes:yellow/yellow_stelar_spider_man_scythe",
+    "rifle": "skyhighheroes:yellow/yellow_stelar_spider_man_rifle",
 });
 
 function init(renderer) {

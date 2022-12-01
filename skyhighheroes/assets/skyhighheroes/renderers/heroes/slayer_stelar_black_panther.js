@@ -9,7 +9,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:slayer/slayer_stelar_black_panther_left_cannon",
     "cannon_right": "skyhighheroes:slayer/slayer_stelar_black_panther_right_cannon",
     "cannon_top": "skyhighheroes:slayer/slayer_stelar_black_panther_top_cannon",
-    "cannon_front": "skyhighheroes:slayer/slayer_stelar_black_panther_front_cannon"
+    "cannon_front": "skyhighheroes:slayer/slayer_stelar_black_panther_front_cannon",
+    "shield": "skyhighheroes:slayer/slayer_stelar_black_panther_shield",
+    "katana": "skyhighheroes:slayer/slayer_stelar_black_panther_katana",
+    "scythe": "skyhighheroes:slayer/slayer_stelar_black_panther_scythe",
+    "rifle": "skyhighheroes:slayer/slayer_stelar_black_panther_rifle",
 });
 
 function init(renderer) {

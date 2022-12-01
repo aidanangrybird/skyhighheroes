@@ -10,8 +10,10 @@ loadTextures({
     "cannon_right": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_right_cannon",
     "cannon_top": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_top_cannon",
     "cannon_front": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_front_cannon",
-    "cannon_left_lights": "skyhighheroes:tysen/omega_xis_tysen_stelar_left_eyes",
-    "cannon_right_lights": "skyhighheroes:tysen/omega_xis_tysen_stelar_right_eyes"
+    "shield": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_shield",
+    "katana": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_katana",
+    "scythe": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_scythe",
+    "rifle": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_rifle",
 });
 
 function init(renderer) {

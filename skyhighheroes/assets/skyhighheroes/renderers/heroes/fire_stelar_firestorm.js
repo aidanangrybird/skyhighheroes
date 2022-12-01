@@ -9,7 +9,11 @@ loadTextures({
     "cannon_left": "skyhighheroes:fire/fire_stelar_firestorm_left_cannon",
     "cannon_right": "skyhighheroes:fire/fire_stelar_firestorm_right_cannon",
     "cannon_top": "skyhighheroes:fire/fire_stelar_firestorm_top_cannon",
-    "cannon_front": "skyhighheroes:fire/fire_stelar_firestorm_front_cannon"
+    "cannon_front": "skyhighheroes:fire/fire_stelar_firestorm_front_cannon",
+    "shield": "skyhighheroes:fire/fire_stelar_firestorm_shield",
+    "katana": "skyhighheroes:fire/fire_stelar_firestorm_katana",
+    "scythe": "skyhighheroes:fire/fire_stelar_firestorm_scythe",
+    "rifle": "skyhighheroes:fire/fire_stelar_firestorm_rifle",
 });
 
 function init(renderer) {
