@@ -54,10 +54,8 @@ loadTextures({
 });
 
 function initEffects(renderer) {
+    parent.initEffects(renderer);
     //Boot Rockets
-    astro.initCannon(renderer);
-    astro.initEquipment(renderer);
-    stuff.initForceField(renderer, getCLR());
     rockets = astro.initBoosters(renderer, getCLR());
     astro.initBeams(renderer, getCLR());
     stuff.bindSpeedTrail(renderer, "skyhighheroes:aidan_tenma_speed");

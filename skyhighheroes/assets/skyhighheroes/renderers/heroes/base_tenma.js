@@ -148,7 +148,7 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-    astro.initCannon(renderer);
+    cannon = astro.initCannon(renderer);
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, getCLR());
 }
@@ -159,7 +159,7 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    astro.renderCannon(entity, renderLayer);
+    cannon.render(entity, renderLayer);
 }
 
 function getNamePerson() {

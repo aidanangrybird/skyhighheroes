@@ -1,5 +1,5 @@
 var stelar = implement("skyhighheroes:external/stelar");
-var aura = implement("skyhighheroes:external/stelar_aura");
+var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var colorVar = 0x00FF00;
@@ -135,10 +135,9 @@ function initEffects(renderer) {
     stuff.initForceField(renderer, colorVar);
     stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_flight");
     stelar.initMegaBuster(renderer, colorVar);
-    stelar.initOmegaXis(renderer);
+    omega_xis = stelar.initOmegaXis(renderer);
     stelar.initEquipment(renderer);
-    aura.initAura(renderer, colorVar);
-    aura.initOmegaXisAura(renderer, colorVar);
+    aura = em_aura.initNormal(renderer, colorVar);
     ears = renderer.createEffect("fiskheroes:ears");
     ears.anchor.set("head");
     ears.angle = 7.5;
@@ -152,8 +151,7 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    stelar.renderOmegaXis(entity, renderLayer);
-    aura.renderAura(entity, renderLayer);
-    aura.renderOmegaXisAura(entity, renderLayer, isFirstPersonArm);
+    omega_xis.render(entity, renderLayer);
+    aura.render(entity, renderLayer, isFirstPersonArm);
     ears.render();
 }

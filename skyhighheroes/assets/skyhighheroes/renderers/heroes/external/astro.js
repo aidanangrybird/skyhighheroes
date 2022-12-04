@@ -1,10 +1,3 @@
-var cannonRight;
-var cannonLeft;
-var cannonTop;
-var cannonBottom;
-var cannonFront;
-var cannonBack;
-
 //Beam setup
 function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
     var prop = renderer.bindProperty(propertyName).setAnchor(anchor);
@@ -165,6 +158,32 @@ function initCannon(renderer) {
     cannonBack.anchor.set("rightArm");
     cannonBack.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(2.0, 4.0, 0.0);
     cannonBack.large = true;
+
+    var obj = {
+        cannonRight: cannonRight,
+        cannonLeft: cannonLeft,
+        cannonTop: cannonTop,
+        cannonBottom: cannonBottom,
+        cannonFront: cannonFront,
+        cannonBack: cannonBack,
+        render: (entity, renderLayer) => {
+            if (renderLayer == "CHESTPLATE") {
+                cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+                cannonRight.render();
+                cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+                cannonLeft.render();
+                cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+                cannonTop.render();
+                cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+                cannonBottom.render();
+                cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+                cannonFront.render();
+                cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
+                cannonBack.render();
+            }
+        }
+    };
+    return obj;
 }
 //Equipment
 function initEquipment(renderer) {
@@ -199,42 +218,15 @@ function initEquipment(renderer) {
     ]).slotIndex = 3;
 }
 
-//Render
-function renderCannon(entity, renderLayer) {
-    if (renderLayer == "CHESTPLATE") {
-        cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonRight.render();
-        cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonLeft.render();
-        cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonTop.render();
-        cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonBottom.render();
-        cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonFront.render();
-        cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannonBack.render();
-    }
-}
-
-var boosterLeft;
-var boosterRight;
-var bloomLeftOuter;
-var bloomRightOuter;
-var bloomLeftMiddle;
-var bloomRightMiddle;
-var bloomLeftInner;
-var bloomRightInner;
-
 function initBoosters(renderer, color) {
     var icon = renderer.createResource("ICON", "skyhighheroes:null");
     //Left
-    boosterLeft = renderer.createEffect("fiskheroes:booster");
+    var boosterLeft = renderer.createEffect("fiskheroes:booster");
     boosterLeft.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
     boosterLeft.anchor.set("leftLeg");
     boosterLeft.mirror = false;
     //Right
-    boosterRight = renderer.createEffect("fiskheroes:booster");
+    var boosterRight = renderer.createEffect("fiskheroes:booster");
     boosterRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
     boosterRight.anchor.set("rightLeg");
     boosterRight.mirror = false;

@@ -1,7 +1,7 @@
 extend("skyhighheroes:geo_stelar");
 
 var stelar = implement("skyhighheroes:external/stelar");
-var aura = implement("skyhighheroes:external/stelar_aura");
+var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var colorVar = 0x39D6BD;
@@ -34,10 +34,5 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-    stuff.emTeleport(renderer);
-    stuff.initForceField(renderer, colorVar);
     stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_subaru_flight");
-    stelar.initMegaBuster(renderer, colorVar);
-    aura.initAura(renderer, colorVar);
-    aura.initOmegaXisAura(renderer, colorVar);
 }
