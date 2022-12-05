@@ -8,10 +8,9 @@ function getCLR() {
 }
 
 loadTextures({
-    "lights" : "skyhighheroes:tysen/astro/tysen_tenma_lights",
-    "lights_flying" : "skyhighheroes:tysen/astro/tysen_tenma_lights_flying",
-    "lights_normal" : "skyhighheroes:tysen/astro/tysen_tenma_lights_normal",
-    "lights_normal_flying" : "skyhighheroes:tysen/astro/tysen_tenma_lights_normal_flying",
+    "eyes" : "skyhighheroes:tysen/astro/tysen_tenma_eyes",
+    "boots_lights" : "skyhighheroes:tysen/astro/tysen_tenma_boots_lights",
+    "eyes_normal" : "skyhighheroes:tysen/astro/tysen_tenma_eyes_normal",
     "base": "skyhighheroes:tysen/astro/tysen_tenma_base",
     "base_flying": "skyhighheroes:tysen/astro/tysen_tenma_base_flying",
     "base_head": "skyhighheroes:tysen/astro/tysen_tenma_base_head",

@@ -112,29 +112,21 @@ function init(renderer) {
         }
     });
     renderer.setLights((entity, renderLayer) => {
-        if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-            if (entity.isDisplayStand() || entity.getUUID() != getID()) {
-                return "lights";
+        if (renderLayer == "HELMET") {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 || entity.isDisplayStand() || entity.getUUID() != getID()) {
+                return "eyes";
             }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                return "eyes_normal";
+            }
+        }
+        if (renderLayer == "BOOTS") {
             if (entity.getData("fiskheroes:flying")) {
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
-                    return "lights_flying";
-                }
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                    return "lights_normal_flying";
-                }
+                return "boots_lights";
             }
-            if (!entity.getData("fiskheroes:flying")) {
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
-                    return "lights";
-                }
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                    return "lights_normal";
-                }
-            }
-            else {
-                return "null";
-            }
+        }
+        else {
+            return null;
         }
     });
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");
