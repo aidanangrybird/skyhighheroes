@@ -140,7 +140,7 @@ function init(renderer) {
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");
     renderer.showModel("HELMET", "head", "headwear");
     renderer.showModel("LEGGINGS", "body", "rightLeg", "leftLeg");
-    renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm");
+    renderer.showModel("CHESTPLATE", "head", "body", "rightArm", "leftArm");
     renderer.showModel("BOOTS", "rightLeg", "leftLeg");
     renderer.fixHatLayer("HELMET");
     initEffects(renderer);
