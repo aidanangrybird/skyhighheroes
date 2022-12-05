@@ -8,9 +8,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:dark/astro/dark_tenma_eyes",
-    "boots_lights" : "skyhighheroes:dark/astro/dark_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:dark/astro/dark_tenma_eyes_normal",
+    "lights" : "skyhighheroes:dark/astro/dark_tenma_lights",
+    "lights_flying" : "skyhighheroes:dark/astro/dark_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:dark/astro/dark_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:dark/astro/dark_tenma_lights_normal_flying",
     "base": "skyhighheroes:dark/astro/dark_tenma_base",
     "base_flying": "skyhighheroes:dark/astro/dark_tenma_base_flying",
     "base_head": "skyhighheroes:dark/astro/dark_tenma_base_head",

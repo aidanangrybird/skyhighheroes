@@ -11,9 +11,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:fire/astro/fire_tenma_eyes",
-    "boots_lights" : "skyhighheroes:fire/astro/fire_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:fire/astro/fire_tenma_eyes_normal",
+    "lights" : "skyhighheroes:fire/astro/fire_tenma_lights",
+    "lights_flying" : "skyhighheroes:fire/astro/fire_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:fire/astro/fire_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:fire/astro/fire_tenma_lights_normal_flying",
     "base": "skyhighheroes:fire/astro/fire_tenma_base",
     "base_flying": "skyhighheroes:fire/astro/fire_tenma_base_flying",
     "base_head": "skyhighheroes:fire/astro/fire_tenma_base_head",

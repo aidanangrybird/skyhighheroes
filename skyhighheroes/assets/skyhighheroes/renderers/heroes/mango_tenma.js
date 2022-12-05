@@ -8,9 +8,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:mango/astro/mango_tenma_eyes",
-    "boots_lights" : "skyhighheroes:mango/astro/mango_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:mango/astro/mango_tenma_eyes_normal",
+    "lights" : "skyhighheroes:mango/astro/mango_tenma_lights",
+    "lights_flying" : "skyhighheroes:mango/astro/mango_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:mango/astro/mango_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:mango/astro/mango_tenma_lights_normal_flying",
     "base": "skyhighheroes:mango/astro/mango_tenma_base",
     "base_flying": "skyhighheroes:mango/astro/mango_tenma_base_flying",
     "base_head": "skyhighheroes:mango/astro/mango_tenma_base_head",

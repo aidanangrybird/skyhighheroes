@@ -8,9 +8,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:aidan/astro/aidan_tenma_eyes",
-    "boots_lights" : "skyhighheroes:aidan/astro/aidan_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:aidan/astro/aidan_tenma_eyes_normal",
+    "lights" : "skyhighheroes:aidan/astro/aidan_tenma_lights",
+    "lights_flying" : "skyhighheroes:aidan/astro/aidan_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:aidan/astro/aidan_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:aidan/astro/aidan_tenma_lights_normal_flying",
     "base": "skyhighheroes:aidan/astro/aidan_tenma_base",
     "base_flying": "skyhighheroes:aidan/astro/aidan_tenma_base_flying",
     "base_head": "skyhighheroes:aidan/astro/aidan_tenma_base_head",

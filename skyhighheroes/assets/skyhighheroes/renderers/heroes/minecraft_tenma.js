@@ -8,9 +8,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:minecraft/astro/minecraft_tenma_eyes",
-    "boots_lights" : "skyhighheroes:minecraft/astro/minecraft_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:minecraft/astro/minecraft_tenma_eyes_normal",
+    "lights" : "skyhighheroes:minecraft/astro/minecraft_tenma_lights",
+    "lights_flying" : "skyhighheroes:minecraft/astro/minecraft_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:minecraft/astro/minecraft_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:minecraft/astro/minecraft_tenma_lights_normal_flying",
     "base": "skyhighheroes:minecraft/astro/minecraft_tenma_base",
     "base_flying": "skyhighheroes:minecraft/astro/minecraft_tenma_base_flying",
     "base_head": "skyhighheroes:minecraft/astro/minecraft_tenma_base_head",

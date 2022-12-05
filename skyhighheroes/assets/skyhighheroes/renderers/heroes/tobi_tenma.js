@@ -8,9 +8,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:tobi/astro/tobi_tenma_eyes",
-    "boots_lights" : "skyhighheroes:tobi/astro/tobi_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:tobi/astro/tobi_tenma_eyes_normal",
+    "lights" : "skyhighheroes:tobi/astro/tobi_tenma_lights",
+    "lights_flying" : "skyhighheroes:tobi/astro/tobi_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:tobi/astro/tobi_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:tobi/astro/tobi_tenma_lights_normal_flying",
     "base": "skyhighheroes:tobi/astro/tobi_tenma_base",
     "base_flying": "skyhighheroes:tobi/astro/tobi_tenma_base_flying",
     "base_head": "skyhighheroes:tobi/astro/tobi_tenma_base_head",

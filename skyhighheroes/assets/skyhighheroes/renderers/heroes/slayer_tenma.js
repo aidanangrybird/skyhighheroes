@@ -8,9 +8,10 @@ function getCLR() {
 }
 
 loadTextures({
-    "eyes" : "skyhighheroes:slayer/astro/slayer_tenma_eyes",
-    "boots_lights" : "skyhighheroes:slayer/astro/slayer_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:slayer/astro/slayer_tenma_eyes_normal",
+    "lights" : "skyhighheroes:slayer/astro/slayer_tenma_lights",
+    "lights_flying" : "skyhighheroes:slayer/astro/slayer_tenma_lights_flying",
+    "lights_normal" : "skyhighheroes:slayer/astro/slayer_tenma_lights_normal",
+    "lights_normal_flying" : "skyhighheroes:slayer/astro/slayer_tenma_lights_normal_flying",
     "base": "skyhighheroes:slayer/astro/slayer_tenma_base",
     "base_flying": "skyhighheroes:slayer/astro/slayer_tenma_base_flying",
     "base_head": "skyhighheroes:slayer/astro/slayer_tenma_base_head",
