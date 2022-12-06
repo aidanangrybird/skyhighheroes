@@ -125,11 +125,11 @@ function init(renderer) {
                 return "boots_lights";
             }
             if (!entity.getData("fiskheroes:flying")) {
-                return "null";
+                return null;
             }
         }
         if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS") {
-            return "null";
+            return null;
         }
     });
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");

@@ -150,12 +150,12 @@ function init(renderer) {
             }
         }
         else {
-            return "null";
+            return null;
         }
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "HELMET") {
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 || entity.isDisplayStand() || entity.getUUID() != getID()) {
                 return "eyes";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
@@ -166,8 +166,11 @@ function init(renderer) {
             if (entity.getData("fiskheroes:flying")) {
                 return "boots_lights";
             }
+            if (!entity.getData("fiskheroes:flying")) {
+                return null;
+            }
         }
-        else {
+        if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS") {
             return null;
         }
     });
