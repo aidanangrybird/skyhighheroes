@@ -8,10 +8,9 @@ function getCLR() {
 }
 
 loadTextures({
-    "lights" : "skyhighheroes:expo/astro/expo_tenma_lights",
-    "lights_flying" : "skyhighheroes:expo/astro/expo_tenma_lights_flying",
-    "lights_normal" : "skyhighheroes:expo/astro/expo_tenma_lights_normal",
-    "lights_normal_flying" : "skyhighheroes:expo/astro/expo_tenma_lights_normal_flying",
+    "eyes" : "skyhighheroes:expo/astro/expo_tenma_eyes",
+    "boots_lights" : "skyhighheroes:expo/astro/expo_tenma_boots_lights",
+    "eyes_normal" : "skyhighheroes:expo/astro/expo_tenma_eyes_normal",
     "base": "skyhighheroes:expo/astro/expo_tenma_base",
     "base_flying": "skyhighheroes:expo/astro/expo_tenma_base_flying",
     "base_head": "skyhighheroes:expo/astro/expo_tenma_base_head",

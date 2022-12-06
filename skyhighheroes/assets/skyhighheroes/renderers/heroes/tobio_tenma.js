@@ -2,10 +2,9 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-    "lights" : "skyhighheroes:astro/tobio_tenma_lights",
-    "lights_flying" : "skyhighheroes:astro/tobio_tenma_lights_flying",
-    "lights_normal" : "skyhighheroes:astro/tobio_tenma_lights_normal",
-    "lights_normal_flying" : "skyhighheroes:astro/tobio_tenma_lights_normal_flying",
+    "eyes" : "skyhighheroes:astro/tobio_tenma_eyes",
+    "boots_lights" : "skyhighheroes:astro/tobio_tenma_boots_lights",
+    "eyes_normal" : "skyhighheroes:astro/tobio_tenma_eyes_normal",
     "base": "skyhighheroes:astro/tobio_tenma_base",
     "base_flying": "skyhighheroes:astro/tobio_tenma_base_flying",
     "base_head": "skyhighheroes:astro/tobio_tenma_base_head",
@@ -155,29 +154,21 @@ function init(renderer) {
         }
     });
     renderer.setLights((entity, renderLayer) => {
-        if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "HELMET" || renderLayer == "BOOTS") {
-            if (entity.isDisplayStand()) {
-                return "lights";
+        if (renderLayer == "HELMET") {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+                return "eyes";
             }
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+                return "eyes_normal";
+            }
+        }
+        if (renderLayer == "BOOTS") {
             if (entity.getData("fiskheroes:flying")) {
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
-                    return "lights_flying";
-                }
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                    return "lights_normal_flying";
-                }
+                return "boots_lights";
             }
-            if (!entity.getData("fiskheroes:flying")) {
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
-                    return "lights";
-                }
-                if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-                    return "lights_normal";
-                }
-            }
-            else {
-                return "null";
-            }
+        }
+        else {
+            return null;
         }
     });
     renderer.setItemIcons("%s_head", "%s_torso", "%s_legs", "%s_boots");
