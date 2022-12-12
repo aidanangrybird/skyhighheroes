@@ -1,0 +1,23 @@
+{
+  "display": {
+    "name": "Fish's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/fish_head.png"
+    }
+  },
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as FishZapp3r"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '226d4e9e-8665-4afc-9d4b-9e85bbecc039'"
+      }
+    }
+  }
+}

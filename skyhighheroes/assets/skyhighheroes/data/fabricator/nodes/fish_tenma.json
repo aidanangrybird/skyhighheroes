@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:fish_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:fish_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}
