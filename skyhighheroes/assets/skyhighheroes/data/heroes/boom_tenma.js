@@ -108,6 +108,10 @@ function isModifierEnabled(entity, modifier) {
 
         return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 
+    case "fiskheroes:energy_bolt":
+
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty();
+
     default:
 
         return entity.getUUID() == uuid;

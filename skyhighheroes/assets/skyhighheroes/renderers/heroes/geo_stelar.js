@@ -131,27 +131,25 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-    stuff.emTeleport(renderer);
     stuff.initForceField(renderer, colorVar);
-    stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_flight");
-    stelar.initMegaBuster(renderer, colorVar);
     omega_xis = stelar.initOmegaXis(renderer);
+    stelar.initMegaBuster(renderer, colorVar);
     stelar.initEquipment(renderer);
-    aura = em_aura.initNormal(renderer, colorVar);
     ears = renderer.createEffect("fiskheroes:ears");
     ears.anchor.set("head");
     ears.angle = 7.5;
     ears.inset = -0.02;
+    stuff.bindFlightTrail(renderer, "skyhighheroes:aidan_stelar_flight");
+    aura = em_aura.initNormal(renderer, colorVar);
 }
 
 function initAnimations(renderer) {
     stuff.forcefieldAnimation(renderer);
-    stuff.emCeilingAnimation(renderer);
     stelar.initStelarAnimations(renderer);
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
     omega_xis.render(entity, renderLayer);
-    aura.render(entity, renderLayer, isFirstPersonArm);
     ears.render();
+    aura.render(entity, renderLayer, isFirstPersonArm);
 }

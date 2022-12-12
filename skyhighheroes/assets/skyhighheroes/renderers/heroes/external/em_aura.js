@@ -149,7 +149,7 @@ function init(renderer, color) {
     //Omega-Xis First Person
     var omegaXisFP_beam = create(renderer, "skyhighheroes:wave_glow", color, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 18.5, 0.0], "size": [9.0, 9.0] }
+            { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 12.5, 0.0], "size": [9.0, 9.0] }
         ]}
     ]);
     //Blade
@@ -287,12 +287,12 @@ function initDual(renderer, colorLeft, colorRight) {
     //Omega-Xis First Person
     var omegaXisFP_beam_left = create(renderer, "skyhighheroes:wave_glow", colorLeft, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 3.5, -2.0], "end": [-1.0, 18.5, -2.0], "size": [3.0, 9.0] }
+            { "start": [-1.0, 3.5, -2.0], "end": [-1.0, 12.5, -2.0], "size": [3.0, 9.0] }
         ]}
     ]);
     var omegaXisFP_beam_right = create(renderer, "skyhighheroes:wave_glow", colorRight, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 3.5, 2.0], "end": [-1.0, 18.5, 2.0], "size": [3.0, 9.0] }
+            { "start": [-1.0, 3.5, 2.0], "end": [-1.0, 12.5, 2.0], "size": [3.0, 9.0] }
         ]}
     ]);
     //Blade
@@ -419,7 +419,7 @@ function initNormal(renderer, color) {
     //Omega-Xis First Person
     var omegaXisFP_beam = create(renderer, "skyhighheroes:wave_glow", color, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
-            { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 18.5, 0.0], "size": [9.0, 9.0] }
+            { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 12.5, 0.0], "size": [9.0, 9.0] }
         ]}
     ]);
     //Blade

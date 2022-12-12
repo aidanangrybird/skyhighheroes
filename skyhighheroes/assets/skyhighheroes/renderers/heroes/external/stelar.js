@@ -1,3 +1,22 @@
+//Beam stuff
+function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
+    var prop = renderer.bindProperty(propertyName).setAnchor(anchor);
+    var constln = renderer.createResource("BEAM_CONSTELLATION", null);
+
+    for (var i = 0; i < entries.length; ++i) {
+        constln.bindBeam(entries[i]);
+    }
+
+    if (typeof beam === "string") {
+        beam = renderer.createResource("BEAM_RENDERER", beam);
+    }
+
+    prop.setConstellation(constln);
+    prop.setRenderer(beam);
+    prop.color.set(color);
+    return prop;
+}
+
 //Animation stuff
 function addAnimationEvent(renderer, key, value) {
     var event = renderer.createResource("ANIMATION_EVENT", null);
@@ -93,22 +112,30 @@ function initEquipment(renderer) {
     var livery_rifle = renderer.bindProperty("fiskheroes:livery");
     livery_rifle.texture.set("rifle", "rifle_lights");
     livery_rifle.weaponType = "CHRONOS_RIFLE";
+    //Shield = 0
+    //Katana = 0,1
+    //Scythe = 0,1,2
+    //Rifle = 0,1,2,3
+    var katana_caused_offset = (entity => entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1) ? 1.0 : 0.0;
+    var rifle_scythe_caused_offset = (entity => entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0) .getInteger("Index") == 3 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1) .getInteger("Index") == 3 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2) .getInteger("Index") == 3 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(3) .getInteger("Index") == 3 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2) ? 1.0 : 0.0;
+    var shield_offset = rifle_scythe_caused_offset + katana_caused_offset + 3.0;
+    var rifle_scythe_offset = katana_caused_offset + 3.0;
     //Shield
     shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 4.0], "rotation": [90.0, -180.0, 0.0] }
+        { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 4.5], "rotation": [90.0, -180.0, 0.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 0;
     //Katana
     katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 3.0], "rotation": [-148.0, 90.0, 0.0] },
-        { "anchor": "body", "scale": 0.535, "offset": [3.05, 0.52, 3.0], "rotation": [-148.0, -90.0, 0.0] }
+        { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 2.5], "rotation": [-148.0, 90.0, 0.0] },
+        { "anchor": "body", "scale": 0.535, "offset": [3.05, 0.52, 2.5], "rotation": [-148.0, -90.0, 0.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 1;
     //Scythe
     scythe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
+        { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.5], "rotation": [0.0, -90.0, 35.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 2;
     //Rifle
     rifle = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.7, "offset": [-3.5, 2.0, 3.0], "rotation": [0.0, -90.0, 60.0] }
+        { "anchor": "body", "scale": 0.7, "offset": [-3.5, 2.0, 3.5], "rotation": [0.0, -90.0, 60.0] }
     ]).setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1).slotIndex = 3;
 }
 

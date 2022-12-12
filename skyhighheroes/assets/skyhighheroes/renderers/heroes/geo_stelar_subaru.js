@@ -34,5 +34,11 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
+    parent.initEffects(renderer);
     stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_subaru_flight");
+}
+
+function initAnimations(renderer) {
+    stuff.forcefieldAnimation(renderer);
+    stelar.initStelarAnimations(renderer);
 }

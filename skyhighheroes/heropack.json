@@ -13,7 +13,7 @@
     "visualizer_toggle": "BYTE",
     "stelar_clothes": "BYTE",
     "tenma_clothes": "BYTE",
-    "booster_timer" : "FLOAT_INTERP",
+    "booster_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "superhero_landing_ticks": "BYTE",
     "superhero_landing_timer": "FLOAT_INTERP"
   },
@@ -23,11 +23,11 @@
       "version": 0
     },
     "range": {
-      "wave_flying_loop": { "distance": 32.0, "target": "OTHERS_IN_RANGE" },
-      "wave_flying_start": { "distance": 32.0, "target": "OTHERS_IN_RANGE" },
+      "wave_flying_loop": { "distance": 32.0, "target": "ALL" },
+      "wave_flying_start": { "distance": 32.0, "target": "ALL" },
       "wave_shooting": 16.0,
       "wave_teleport": 24.0,
-      "wave_transform": { "distance": 8.0, "target": "OTHERS_IN_RANGE" },
+      "wave_transform": { "distance": 8.0, "target": "ALL_IN_RANGE" },
       "tenma_boost": 32.0,
       "tenma_flight_enable": 32.0,
       "tenma_flight_loop": { "distance": 32.0, "target": "ALL" }

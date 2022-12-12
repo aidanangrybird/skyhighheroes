@@ -201,20 +201,20 @@ function initEquipment(renderer) {
     livery_rifle.weaponType = "CHRONOS_RIFLE";
     //Shield
     shield = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 4.0], "rotation": [90.0, -180.0, 0.0] }
+        { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 4.5], "rotation": [90.0, -180.0, 0.0] }
     ]).slotIndex = 0;
     //Katana
     katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.45475, "offset": [-3.05, 0.52, 3.0], "rotation": [-148.0, 90.0, 0.0] },
-        { "anchor": "body", "scale": 0.45475, "offset": [3.05, 0.52, 3.0], "rotation": [-148.0, -90.0, 0.0] }
+        { "anchor": "body", "scale": 0.45475, "offset": [-3.05, 0.52, 2.5], "rotation": [-148.0, 90.0, 0.0] },
+        { "anchor": "body", "scale": 0.45475, "offset": [3.05, 0.52, 2.5], "rotation": [-148.0, -90.0, 0.0] }
     ]).slotIndex = 1;
     //Scythe
     scythe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 3.0], "rotation": [0.0, -90.0, 35.0] }
+        { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 3.5], "rotation": [0.0, -90.0, 35.0] }
     ]).slotIndex = 2;
     //Rifle
     rifle = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-        { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 3.0], "rotation": [0.0, -90.0, 60.0] }
+        { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 3.5], "rotation": [0.0, -90.0, 60.0] }
     ]).slotIndex = 3;
 }
 

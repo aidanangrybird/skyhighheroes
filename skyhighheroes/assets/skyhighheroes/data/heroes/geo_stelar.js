@@ -274,10 +274,16 @@ function isModifierEnabled(entity, modifier) {
 
     return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:blade");
 
+  case "fiskheroes:energy_bolt":
+
+    return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
+
   default:
 
     return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+
   }
+
 }
 
 function isKeyBindEnabled(entity, keyBind) {
