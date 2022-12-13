@@ -79,7 +79,7 @@ function isModifierEnabled(entity, modifier) {
 
     return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
 
-  case "fiskheroes:energy_blast":
+  case "fiskheroes:energy_bolt":
 
     return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
 

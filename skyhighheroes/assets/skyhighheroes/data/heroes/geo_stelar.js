@@ -31,7 +31,7 @@ function init(hero) {
   hero.addKeyBindFunc("func_ELECTROMAGNETIC", electroMagnetic, "key.emWaveChange", 5);
   hero.addKeyBind("WAVE_CHANGE", "key.emWaveChange", 5);
   hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "key.toggleHead", 5);
-  hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
+  hero.addKeyBind("INTANGIBILITY", "key.phase", 5);
   
   hero.setDefaultScale(0.8);
   hero.setHasProperty(hasProperty);
