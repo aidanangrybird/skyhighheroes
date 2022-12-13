@@ -1,13 +1,13 @@
 var uuid = "226d4e9e-8665-4afc-9d4b-9e85bbecc039"
 function init(hero) {
-    hero.setName("Astro Boy");
+    hero.setName("hero.skyhighheroes.astro_boy.name");
     hero.setTier(8);
     hero.setHelmet("item.skyhighheroes.piece.head");
     hero.setChestplate("item.skyhighheroes.piece.torso");
     hero.setLeggings("item.skyhighheroes.piece.legs");
     hero.setBoots("item.skyhighheroes.piece.boots");
     hero.setAliases("fish_tenma");
-    hero.setVersion("Fish Tenma");
+    hero.setVersion("hero.skyhighheroes.version.fish_tenma");
     hero.hide();
     hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
@@ -27,12 +27,12 @@ function init(hero) {
     hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
     hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
-    hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
-    hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
-    hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 3);
-    hero.addKeyBind("SHIELD", "Force Field", 5);
-    hero.addKeyBind("SUPER_SPEED", "Super Speed", 2);
-    hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+    hero.addKeyBind("AIM", "key.aimArmCannon", 4);
+    hero.addKeyBind("SHIELD_THROW", "key.throwShield", 4);
+    hero.addKeyBind("ENERGY_PROJECTION", "key.digitBeam", 3);
+    hero.addKeyBind("SHIELD", "key.forceField", 5);
+    hero.addKeyBind("SUPER_SPEED", "key.superSpeed", 2);
+    hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "key.cycleClothes", 1);
 
     hero.addSoundEvent("AIM_START", "fiskheroes:repulsor_charge");
     hero.addSoundEvent("AIM_STOP", "fiskheroes:repulsor_powerdown");
