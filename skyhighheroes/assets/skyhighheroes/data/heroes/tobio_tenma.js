@@ -2,9 +2,9 @@ function init(hero) {
   hero.setName("hero.skyhighheroes.astro_boy.name");
   hero.setTier(8);
   hero.setHelmet("item.skyhighheroes.piece.head");
-  hero.setHelmet("item.skyhighheroes.piece.torso");
-  hero.setHelmet("item.skyhighheroes.piece.legs");
-  hero.setHelmet("item.skyhighheroes.piece.boots");
+  hero.setChestplate("item.skyhighheroes.piece.torso");
+  hero.setLeggings("item.skyhighheroes.piece.legs");
+  hero.setBoots("item.skyhighheroes.piece.boots");
   hero.setAliases("tobio_tenma");
   hero.setVersion("hero.skyhighheroes.version.tobio_tenma");
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
