@@ -34,20 +34,20 @@
     }
   },
   "damageTypes": {
-    "WAVE_BLUNT": "damage_type.skyhighheroes.wave_blunt.name",
-    "WAVE_BULLET": "damage_type.skyhighheroes.wave_bullet.name",
-    "WAVE_COLD": "damage_type.skyhighheroes.wave_cold.name",
-    "WAVE_ELECTRICITY": "damage_type.skyhighheroes.wave_electricity.name",
-    "WAVE_ENERGY": "damage_type.skyhighheroes.wave_energy.name",
-    "WAVE_EXPLOSION": "damage_type.skyhighheroes.wave_explosion.name",
-    "WAVE_FIRE": "damage_type.skyhighheroes.wave_fire.name",
-    "WAVE_SHARP": "damage_type.skyhighheroes.wave_sharp.name",
-    "WAVE_SHURIKEN": "damage_type.skyhighheroes.wave_shuriken.name",
-    "WAVE_SOUND": "damage_type.skyhighheroes.wave_sound.name"
+    "WAVE_BLUNT": "Wave Blunt",
+    "WAVE_BULLET": "Wave Bullet",
+    "WAVE_COLD": "Wave Cold",
+    "WAVE_ELECTRICITY": "Wave Electricity",
+    "WAVE_ENERGY": "Wave Energy",
+    "WAVE_EXPLOSION": "Wave Explosion",
+    "WAVE_FIRE": "Wave Fire",
+    "WAVE_SHARP": "Wave Sharp",
+    "WAVE_SHURIKEN": "Wave Shuriken",
+    "WAVE_SOUND": "Wave Sound"
   },
   "alts" : {
     "skyhighheroes:geo_stelar" : {
-      "subaru" : "hero.skyhighheroes.geo_stelar.subaru.name"
+      "subaru" : "\u00A74Subaru Style\u00A7r"
     },
     "skyhighheroes:guyver" : {
       "1" : "Guyver I",
@@ -55,52 +55,49 @@
       "3" : "Guyver III"
     },
     "skyhighheroes:aidan_stelar" : {
-      "gundam" : "hero.skyhighheroes.aidan_stelar.gundam.name"
+      "gundam" : "\u00A76RX-0 \u00A76Unicorn \u00A76Gundam \u00A76Style\u00A7r"
     },
     "skyhighheroes:boom_stelar" : {
-      "martian_manhunter_comics" : "hero.skyhighheroes.boom_stelar.martian_manhunter_comics.name"
+      "martian_manhunter_comics" : "\u00A75Martian \u00A75Manhunter \u00A75(Comics) \u00A75Style\u00A7r"
     },
     "skyhighheroes:chase_stelar" : {
-      "iron_man" : "hero.skyhighheroes.chase_stelar.iron_man.name"
+      "iron_man" : "\u00A72Iron \u00A72Man \u00A72Mark \u00A7250 \u00A72Style\u00A7r"
     },
     "skyhighheroes:comic_stelar" : {
-      "flash" : "hero.skyhighheroes.comic_stelar.flash.name"
+      "flash" : "\u00A71The \u00A71Flash \u00A71Style\u00A7r"
     },
     "skyhighheroes:dark_stelar" : {
-      "batman" : "hero.skyhighheroes.dark_stelar.batman.name"
+      "batman" : "\u00A78Batman \u00A78Who \u00A78Laughs \u00A78Style\u00A7r"
     },
     "skyhighheroes:expo_stelar" : {
-      "mysterio" : "hero.skyhighheroes.expo_stelar.mysterio.name"
+      "mysterio" : "\u00A72Mysterio \u00A72Style\u00A7r"
     },
     "skyhighheroes:fire_stelar" : {
-      "firestorm" : "hero.skyhighheroes.fire_stelar.firestorm.name"
-    },
-    "skyhighheroes:fish_stelar" : {
-      "spider_man" : "hero.skyhighheroes.fish_stelar.spider_man.name"
+      "firestorm" : "\u00A74Fire\u00A71storm \u00A74Jax \u00A71Style\u00A7r"
     },
     "skyhighheroes:mango_stelar" : {
-      "vision" : "hero.skyhighheroes.mango_stelar.vision.name"
+      "vision" : "\u00A78Vision \u00A78Style\u00A7r"
     },
     "skyhighheroes:minecraft_stelar" : {
-      "deadpool" : "hero.skyhighheroes.minecraft_stelar.deadpool.name"
+      "deadpool" : "\u00A71Deadpool \u00A71Style\u00A7r"
     },
     "skyhighheroes:slayer_stelar" : {
-      "black_panther" : "hero.skyhighheroes.slayer_stelar.black_panther.name"
+      "black_panther" : "\u00A7eBlack \u00A7ePanther \u00A7eStyle\u00A7r"
     },
     "skyhighheroes:storm_stelar" : {
-      "iron_man" : "hero.skyhighheroes.storm_stelar.iron_man.name"
+      "iron_man" : "\u00A74Iron \u00A74Man \u00A74Mark \u00A7485 \u00A74Style\u00A7r"
     },
     "skyhighheroes:trell_stelar" : {
       "black_lightning" : "\u00A73Black \u00A73Lightning \u00A73Style\u00A7r"
     },
     "skyhighheroes:tobi_stelar" : {
-      "reverse_flash" : "hero.skyhighheroes.tobi_stelar.reverse_flash.name"
+      "reverse_flash" : "\u00A77Reverse \u00A77Flash \u00A77(Earth \u00A77X) \u00A77Style\u00A7r"
     },
     "skyhighheroes:tysen_stelar" : {
-      "martian_manhunter" : "hero.skyhighheroes.tysen_stelar.martian_manhunter.name"
+      "martian_manhunter" : "\u00A75Martian \u00A75Manhunter \u00A75Style\u00A7r"
     },
     "skyhighheroes:yellow_stelar" : {
-      "spider_man" : "hero.skyhighheroes.yellow_stelar.spider_man.name"
+      "spider_man" : "\u00A73Spider-Man \u00A73(PS4) \u00A73Style\u00A7r"
     }
   }
 }

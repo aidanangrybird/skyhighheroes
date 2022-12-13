@@ -1,10 +1,10 @@
 var uuid = "60f30003-1148-416b-8b4d-347002891126"
 function init(hero) {
-    hero.setName("hero.skyhighheroes.yellow_stelar.name");
+    hero.setName("Yellow Stelar");
     hero.setTier(10);
-    hero.setChestplate("item.skyhighheroes.piece.transer");
+    hero.setChestplate("Transer");
     hero.setAliases("yellow_stelar");
-    hero.setVersion("hero.skyhighheroes.version.mmsf");
+    hero.setVersion("Mega Man Star Force");
     hero.hide();
     hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
@@ -22,18 +22,18 @@ function init(hero) {
     hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
     hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
-    hero.addKeyBind("TELEPORT", "key.transmit", 1);
-    hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "key.cycleClothes", 1);
-    hero.addKeyBindFunc("func_VISUALIZER_TOGGLE", visualizerToggle, "key.toggleVisualizer", 2);
-    hero.addKeyBindFunc("func_CYCLE_CARD", cycleCard, "key.cycleBattleCard", 2);
-    hero.addKeyBind("INVISIBILITY", "key.becomeWave", 3);
-    hero.addKeyBind("AIM", "key.aimMegaBuster", 4);
-    hero.addKeyBind("SHIELD_THROW", "key.throwShield", 4);
-    hero.addKeyBindFunc("func_RESET_CARD", resetCard, "key.aimMegaBuster", 4);
-    hero.addKeyBindFunc("func_ELECTROMAGNETIC", electroMagnetic, "key.emWaveChange", 5);
-    hero.addKeyBind("WAVE_CHANGE", "key.emWaveChange", 5);
-    hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "key.toggleHead", 5);
-    hero.addKeyBind("INTANGIBILITY", "key.phase", 5);
+    hero.addKeyBind("TELEPORT", "Transmit", 1);
+    hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+    hero.addKeyBindFunc("func_VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
+    hero.addKeyBindFunc("func_CYCLE_CARD", cycleCard, "Cycle Battle Card", 2);
+    hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+    hero.addKeyBind("AIM", "Aim Mega Buster", 4);
+    hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
+    hero.addKeyBindFunc("func_RESET_CARD", resetCard, "Aim Mega Buster", 4);
+    hero.addKeyBindFunc("func_ELECTROMAGNETIC", electroMagnetic, "EM Wave Change", 5);
+    hero.addKeyBind("WAVE_CHANGE", "EM Wave Change", 5);
+    hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
+    hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     
     hero.setDefaultScale(0.8);
     hero.setHasProperty(hasProperty);
