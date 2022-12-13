@@ -1,5 +1,5 @@
 {
-  "name": "Mega Buster",
+  "name": "power.skyhighheroes.em_mega_buster.name",
   "value": 1,
   "modifiers": {
     "fiskheroes:energy_bolt": {

@@ -2,10 +2,10 @@ var uuid = "226d4e9e-8665-4afc-9d4b-9e85bbecc039"
 function init(hero) {
     hero.setName("Astro Boy");
     hero.setTier(8);
-    hero.setHelmet("Head");
-    hero.setChestplate("Torso");
-    hero.setLeggings("Legs");
-    hero.setBoots("Boots");
+    hero.setHelmet("item.skyhighheroes.piece.head");
+    hero.setChestplate("item.skyhighheroes.piece.torso");
+    hero.setLeggings("item.skyhighheroes.piece.legs");
+    hero.setBoots("item.skyhighheroes.piece.boots");
     hero.setAliases("fish_tenma");
     hero.setVersion("Fish Tenma");
     hero.hide();

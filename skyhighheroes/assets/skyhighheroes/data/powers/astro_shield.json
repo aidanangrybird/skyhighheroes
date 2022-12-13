@@ -1,5 +1,5 @@
 {
-  "name": "Force Field",
+  "name": "power.skyhighheroes.astro_shield.name",
   "value": 1,
   "modifiers": {
     "fiskheroes:shield": {

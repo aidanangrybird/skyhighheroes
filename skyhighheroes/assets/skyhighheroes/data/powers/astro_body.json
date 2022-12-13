@@ -1,5 +1,5 @@
 {
-  "name": "Robotic Body",
+  "name": "power.skyhighheroes.astro_body.name",
   "value": 1,
   "modifiers": {
     "fiskheroes:potion_immunity": {

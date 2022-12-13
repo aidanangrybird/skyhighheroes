@@ -2,7 +2,7 @@ var uuid = "f849622f-b7cc-4ff5-8ce1-484f75c1ffa3";
 function init(hero) {
     hero.setName("Minecraft Stelar");
     hero.setTier(10);
-    hero.setChestplate("Transer");
+    hero.setChestplate("item.skyhighheroes.piece.transer");
     hero.setAliases("minecraft_stelar");
     hero.setVersion("Mega Man Star Force");
     hero.hide();

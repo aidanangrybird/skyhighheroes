@@ -2,7 +2,7 @@ var uuid = "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"
 function init(hero) {
     hero.setName("Fire Stelar");
     hero.setTier(10);
-    hero.setChestplate("Transer");
+    hero.setChestplate("item.skyhighheroes.piece.transer");
     hero.setAliases("fire_stelar");
     hero.setVersion("Mega Man Star Force");
     hero.hide();

@@ -2,10 +2,10 @@ var uuid = "f849622f-b7cc-4ff5-8ce1-484f75c1ffa3";
 function init(hero) {
     hero.setName("Astro Boy");
     hero.setTier(8);
-    hero.setHelmet("Head");
-    hero.setChestplate("Torso");
-    hero.setLeggings("Legs");
-    hero.setBoots("Boots");
+    hero.setHelmet("item.skyhighheroes.piece.head");
+    hero.setChestplate("item.skyhighheroes.piece.torso");
+    hero.setLeggings("item.skyhighheroes.piece.legs");
+    hero.setBoots("item.skyhighheroes.piece.boots");
     hero.setAliases("minecraft_tenma");
     hero.setVersion("Minecraft Tenma");
     hero.hide();

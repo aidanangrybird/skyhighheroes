@@ -1,7 +1,7 @@
 function init(hero) {
   hero.setName("Geo Stelar");
   hero.setTier(10);
-  hero.setChestplate("Transer");
+  hero.setChestplate("item.skyhighheroes.piece.transer");
   hero.setAliases("geo_stelar");
   hero.setVersion("Mega Man Star Force");
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));

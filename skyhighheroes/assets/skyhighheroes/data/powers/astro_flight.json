@@ -1,5 +1,5 @@
 {
-  "name": "Jet-powered Flight",
+  "name": "power.skyhighheroes.astro_flight.name",
   "value": 1,
   "modifiers": {
     "fiskheroes:controlled_flight": {

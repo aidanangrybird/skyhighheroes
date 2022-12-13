@@ -1,5 +1,5 @@
 {
-  "name": "Digit Beams",
+  "name": "power.skyhighheroes.astro_beam.name",
   "value": 1,
   "modifiers": {
     "fiskheroes:energy_projection": {

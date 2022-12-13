@@ -1,5 +1,5 @@
 {
-  "name": "Laser Cannon Arm",
+  "name": "power.skyhighheroes.astro_blaster.name",
   "value": 1,
   "modifiers": {
     "fiskheroes:energy_bolt": {

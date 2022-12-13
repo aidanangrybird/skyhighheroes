@@ -2,7 +2,7 @@ var uuid = "19162f0a-d2c3-47b1-a640-fef7a624850d";
 function init(hero) {
     hero.setName("Tobi Stelar");
     hero.setTier(10);
-    hero.setChestplate("Transer");
+    hero.setChestplate("item.skyhighheroes.piece.transer");
     hero.setAliases("tobi_stelar");
     hero.setVersion("Mega Man Star Force");
     hero.hide();

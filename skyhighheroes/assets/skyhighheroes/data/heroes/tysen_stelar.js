@@ -2,7 +2,7 @@ var uuid = "0ccdd53f-70bc-4039-b89b-fd3781f746f2"
 function init(hero) {
     hero.setName("Tysen Stelar");
     hero.setTier(10);
-    hero.setChestplate("Transer");
+    hero.setChestplate("item.skyhighheroes.piece.transer");
     hero.setAliases("tysen_stelar");
     hero.setVersion("Mega Man Star Force");
     hero.hide();
