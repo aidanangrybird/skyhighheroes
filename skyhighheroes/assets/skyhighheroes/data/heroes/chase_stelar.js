@@ -6,10 +6,10 @@ function init(hero) {
     hero.setAliases("chase_stelar");
     hero.setVersion("Mega Man Star Force");
     hero.hide();
-    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
     hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
     hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
+    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     
     hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
     hero.addAttribute("SPRINT_SPEED", 0.2, 1);
@@ -35,7 +35,7 @@ function init(hero) {
     hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
     hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     
-    hero.setDefaultScale(0.8);
+    hero.setDefaultScale(1.0);
     hero.setHasProperty(hasProperty);
     hero.setHasPermission(hasPermission);
     hero.addAttributeProfile("INACTIVE", inactiveProfile);

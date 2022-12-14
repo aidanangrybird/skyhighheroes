@@ -6,11 +6,11 @@ function init(hero) {
     hero.setAliases("aidan_stelar");
     hero.setVersion("Mega Man Star Force");
     hero.hide();
-    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
     hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
     hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
-
+    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
+    
     hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
     hero.addAttribute("SPRINT_SPEED", 0.2, 1);
     hero.addAttribute("STEP_HEIGHT", 0.5, 0);
@@ -34,8 +34,8 @@ function init(hero) {
     hero.addKeyBind("WAVE_CHANGE", "EM Wave Change", 5);
     hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
     hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
-
-    hero.setDefaultScale(0.8);
+    
+    hero.setDefaultScale(1.0);
     hero.setHasProperty(hasProperty);
     hero.setHasPermission(hasPermission);
     hero.addAttributeProfile("INACTIVE", inactiveProfile);
@@ -53,13 +53,13 @@ function init(hero) {
       };
     });
     hero.addDamageProfile("MAIN", {
-        "types": {
-            "ELECTRICITY": 1.0,
-            "ENERGY": 1.0,
-            "BLUNT": 1.0,
-            "WAVE_BLUNT": 1.0
-        }
-    });
+      "types": {
+          "ELECTRICITY": 1.0,
+          "ENERGY": 1.0,
+          "BLUNT": 1.0,
+          "WAVE_BLUNT": 1.0
+      }
+  });
 }
 
 
@@ -89,7 +89,7 @@ function getTierOverride(entity) {
   return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1.0) ? 10 : 0;
 }
 
-function resetCard(player, manager) {
+function resetCard(player, manager) {    
     manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
     manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
     return true;
@@ -196,55 +196,55 @@ function isModifierEnabled(entity, modifier) {
 
       switch (modifier.id()) {
 
-        case "explosion":
+        case "explosion": 
 
            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
 
-          case "fire":
+          case "fire": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "magic":
+          case "magic": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
 
-          case "cactus":
+          case "cactus": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "cold":
+          case "cold": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "energy":
+          case "energy": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "electricity":
+          case "electricity": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "sound":
+          case "sound": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "thorns":
+          case "thorns": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
 
-          case "shuriken":
+          case "shuriken": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
 
-          case "sharp":
+          case "sharp": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
 
-          case "bullet":
+          case "bullet": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
 
-          case "blunt":
+          case "blunt": 
 
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
 

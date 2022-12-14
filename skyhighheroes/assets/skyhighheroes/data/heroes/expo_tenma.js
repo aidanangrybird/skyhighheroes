@@ -9,10 +9,10 @@ function init(hero) {
     hero.setAliases("expo_tenma");
     hero.setVersion("Expo Tenma");
     hero.hide();
-    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
     hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
     hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
+    hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
     
     hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
     hero.addAttribute("SPRINT_SPEED", 0.3, 1);
@@ -37,7 +37,7 @@ function init(hero) {
     hero.addSoundEvent("AIM_START", "fiskheroes:repulsor_charge");
     hero.addSoundEvent("AIM_STOP", "fiskheroes:repulsor_powerdown");
     
-    hero.setDefaultScale(0.6);
+    hero.setDefaultScale(1.0);
     hero.setHasProperty(hasProperty);
     hero.setHasPermission(hasPermission);
     hero.setModifierEnabled(isModifierEnabled);

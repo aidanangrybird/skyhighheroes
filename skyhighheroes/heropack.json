@@ -34,16 +34,16 @@
     }
   },
   "damageTypes": {
-    "WAVE_BLUNT": "Wave Blunt",
-    "WAVE_BULLET": "Wave Bullet",
-    "WAVE_COLD": "Wave Cold",
-    "WAVE_ELECTRICITY": "Wave Electricity",
-    "WAVE_ENERGY": "Wave Energy",
-    "WAVE_EXPLOSION": "Wave Explosion",
-    "WAVE_FIRE": "Wave Fire",
-    "WAVE_SHARP": "Wave Sharp",
-    "WAVE_SHURIKEN": "Wave Shuriken",
-    "WAVE_SOUND": "Wave Sound"
+    "WAVE_BLUNT": "Blunt (Wave)",
+    "WAVE_BULLET": "Bullet (Wave)",
+    "WAVE_COLD": "Cold (Wave)",
+    "WAVE_ELECTRICITY": "Electricity (Wave)",
+    "WAVE_ENERGY": "Energy (Wave)",
+    "WAVE_EXPLOSION": "Explosion (Wave)",
+    "WAVE_FIRE": "Fire (Wave)",
+    "WAVE_SHARP": "Sharp (Wave)",
+    "WAVE_SHURIKEN": "Shuriken (Wave)",
+    "WAVE_SOUND": "Sound (Wave)"
   },
   "alts" : {
     "skyhighheroes:geo_stelar" : {
