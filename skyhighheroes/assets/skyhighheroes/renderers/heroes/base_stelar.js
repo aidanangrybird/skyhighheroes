@@ -1,5 +1,4 @@
 var stelar = implement("skyhighheroes:external/stelar");
-var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 function init(renderer) {

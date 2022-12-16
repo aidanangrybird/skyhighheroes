@@ -1,7 +1,6 @@
 extend("skyhighheroes:geo_stelar");
 
 var stelar = implement("skyhighheroes:external/stelar");
-var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var colorVar = 0x39D6BD;

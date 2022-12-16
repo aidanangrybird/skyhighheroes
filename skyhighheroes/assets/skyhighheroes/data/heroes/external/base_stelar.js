@@ -1,4 +1,4 @@
-function initHero(hero) {
+function init(hero) {
     hero.setTier(10);
     hero.setChestplate("Transer");
     hero.setVersion("Mega Man Star Force");

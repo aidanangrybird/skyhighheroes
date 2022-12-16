@@ -1,5 +1,4 @@
 var stelar = implement("skyhighheroes:external/stelar");
-var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var colorVar = 0x00FF00;
@@ -140,7 +139,6 @@ function initEffects(renderer) {
     ears.angle = 7.5;
     ears.inset = -0.02;
     stuff.bindFlightTrail(renderer, "skyhighheroes:aidan_stelar_flight");
-    aura = em_aura.initNormal(renderer, colorVar);
 }
 
 function initAnimations(renderer) {
@@ -151,5 +149,4 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
     omega_xis.render(entity, renderLayer);
     ears.render();
-    aura.render(entity, renderLayer, isFirstPersonArm);
 }

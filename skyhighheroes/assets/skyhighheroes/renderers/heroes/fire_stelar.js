@@ -1,7 +1,6 @@
 extend("skyhighheroes:base_stelar");
 
 var stelar = implement("skyhighheroes:external/stelar");
-var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
@@ -65,5 +64,4 @@ function initEffects(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
     parent.render(entity, renderLayer, isFirstPersonArm);
-    aura.render(entity, renderLayer, isFirstPersonArm);
 }

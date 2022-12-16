@@ -160,6 +160,70 @@ function init(renderer, color) {
             { "start": [-1.0, 19.0, 0.0], "end": [-1.0, 4.0, 0.0], "size": [10.0, 7.0] }
         ]}
     ]);
+    //Katana
+    var katana_base_left_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [-3.05, 0.52, 2.75], rotation: [90.0, -58.0, 90.0], entries: [
+            { "start": [-0.5, 17.0, 0.0], "end": [-0.5, -7.0, 0.0], "size": [1.5, 1.5] }
+        ]}
+    ]);
+    var katana_base_right_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [3.05, 0.52, 2.75], rotation: [90.0, 58.0, -90.0], entries: [
+            { "start": [-0.5, 17.0, 0.0], "end": [-0.5, -7.0, 0.0], "size": [1.5, 1.5] }
+        ]}
+    ]);
+    var katana_holding_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: true, offset: [1.0, 8.25, -3.0], rotation: [-70.0, 85.0, -10.0], entries: [
+            { "start": [0.5, 20.0, 0.0], "end": [0.5, -8.0, 0.0], "size": [2.0, 2.0] }
+        ]}
+    ]);
+    //Scythe
+    var scythe_base_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [0.5, 4.5, 2.75], rotation: [0.0, 0.0, 35.0], entries: [
+            { "start": [0.75, 18.0, 0.0], "end": [0.75, -4.0, 0.0], "size": [1.0, 1.0] },
+            { "start": [0.75, -4.0, 0.0], "end": [0.75, -14.0, 0.0], "size": [2.0, 2.0] },
+            { "start": [-2.75, -12.0, 0.0], "end": [10.75, -12.0, 0.0], "size": [1.5, 3.0] }
+        ]}
+    ]);
+    var scythe_1_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [0.5, 4.5, 3.75], rotation: [0.0, 0.0, 35.0], entries: [
+            { "start": [0.75, 18.0, 0.0], "end": [0.75, -4.0, 0.0], "size": [1.0, 1.0] },
+            { "start": [0.75, -4.0, 0.0], "end": [0.75, -14.0, 0.0], "size": [2.0, 2.0] },
+            { "start": [-2.75, -12.0, 0.0], "end": [10.75, -12.0, 0.0], "size": [1.5, 3.0] }
+        ]}
+    ]);
+    var scythe_holding_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, offset: [1.0, 8.25, -3.0], rotation: [100.0, 90.0, 0.0], entries: [
+            { "start": [0.75, 20.0, 0.0], "end": [0.75, -4.0, 0.0], "size": [1.0, 1.0] },
+            { "start": [0.75, -4.0, 0.0], "end": [0.75, -14.0, 0.0], "size": [2.0, 2.0] },
+            { "start": [-3.75, -12.5, 0.0], "end": [11.75, -12.5, 0.0], "size": [1.5, 3.0] }
+        ]}
+    ]);
+    //Shield
+    var shield_base_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [0.0, 5.0, 2.75], rotation: [90.0, -180.0, 0.0], entries: [
+            { "start": [0.0, -0.25, 0.0], "end": [0.0, 1.75, 0.0], "size": [14.0, 14.0] }
+        ]}
+    ]);
+    var shield_1_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [0.0, 5.0, 3.75], rotation: [90.0, -180.0, 0.0], entries: [
+            { "start": [0.0, -0.25, 0.0], "end": [0.0, 1.75, 0.0], "size": [14.0, 14.0] }
+        ]}
+    ]);
+    var shield_2_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "body", renderLayer: "CHESTPLATE", mirror: false, offset: [0.0, 5.0, 4.75], rotation: [90.0, -180.0, 0.0], entries: [
+            { "start": [0.0, -0.25, 0.0], "end": [0.0, 1.75, 0.0], "size": [14.0, 14.0] }
+        ]}
+    ]);
+    var shield_holding_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, offset: [2.0, 6.0, 0.0], rotation: [90.0, -5.0, 90.0], entries: [
+            { "start": [0.0, -0.25, 0.0], "end": [0.0, 1.75, 0.0], "size": [14.0, 14.0] }
+        ]}
+    ]);
+    var shield_holding_blocking_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+        { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, offset: [0.1, 0.22, -0.05], rotation: [-95.0, -15.0, -57.0], entries: [
+            { "start": [0.0, -0.25, 0.0], "end": [0.0, 1.75, 0.0], "size": [14.0, 14.0] }
+        ]}
+    ]);
     return {
         head_beam: head_beam,
         body_beam: body_beam,
@@ -171,6 +235,17 @@ function init(renderer, color) {
         omegaXis_beam: omegaXis_beam,
         omegaXisFP_beam: omegaXisFP_beam,
         blade_beam: blade_beam,
+        scythe_base_beam: scythe_base_beam,
+        scythe_1_beam: scythe_1_beam,
+        scythe_holding_beam: scythe_holding_beam,
+        katana_base_left_beam: katana_base_left_beam,
+        katana_base_right_beam: katana_base_right_beam,
+        katana_holding_beam: katana_holding_beam,
+        shield_base_beam: shield_base_beam,
+        shield_1_beam: shield_1_beam,
+        shield_2_beam: shield_2_beam,
+        shield_holding_beam: shield_holding_beam,
+        shield_holding_blocking_beam: shield_holding_blocking_beam,
         render: (entity, renderLayer, isFirstPersonArm) => {
             if (renderLayer == "CHESTPLATE") {
                 head_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0);
@@ -191,9 +266,35 @@ function init(renderer, color) {
                 hair_beams.render(renderLayer);
                 blade_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
                 blade_beam.render(renderLayer);
+                scythe_base_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1) ? 1.0 : 0.0);
+                scythe_base_beam.render(renderLayer);
+                scythe_1_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1) ? 1.0 : 0.0);
+                scythe_1_beam.render(renderLayer);
+                katana_base_left_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() != 0) ? 1.0 : 0.0);
+                katana_base_left_beam.render(renderLayer);
+                katana_base_right_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() != 0) ? 1.0 : 0.0);
+                katana_base_right_beam.render(renderLayer);
+                shield_base_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 3) ? 1.0 : 0.0);
+                shield_base_beam.render(renderLayer);
+                shield_1_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 3) || ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 3))) ? 1.0 : 0.0);
+                shield_1_beam.render(renderLayer);
+                shield_2_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)) ? 1.0 : 0.0);
+                shield_2_beam.render(renderLayer);
                 if (!isFirstPersonArm) {
                     omegaXis_beam.progress = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
                     omegaXis_beam.render(renderLayer);
+                    scythe_holding_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe") ? 1.0 : 0.0);
+                    scythe_holding_beam.render(renderLayer);
+                    katana_holding_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:katana") ? 1.0 : 0.0);
+                    katana_holding_beam.render(renderLayer);
+                    if (entity.getInterpolatedData("fiskheroes:shield_blocking_timer") != 0){
+                        shield_holding_blocking_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield") ? 1.0 : 0.0);
+                        shield_holding_blocking_beam.render(renderLayer);
+                    }
+                    if (entity.getInterpolatedData("fiskheroes:shield_blocking_timer") == 0){
+                        shield_holding_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield") ? 1.0 : 0.0);
+                        shield_holding_beam.render(renderLayer);
+                    }
                 }
                 if (isFirstPersonArm) {
                     omegaXisFP_beam.progress = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);

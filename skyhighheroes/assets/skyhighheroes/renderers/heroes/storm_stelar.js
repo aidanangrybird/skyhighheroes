@@ -1,7 +1,6 @@
 extend("skyhighheroes:base_stelar");
 
 var stelar = implement("skyhighheroes:external/stelar");
-var em_aura = implement("skyhighheroes:external/em_aura");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
@@ -60,10 +59,8 @@ function init(renderer) {
 function initEffects(renderer) {
     parent.initEffects(renderer);
     stuff.bindFlightTrail(renderer, "skyhighheroes:storm_stelar_flight");
-    aura = em_aura.init(renderer, getCLR());
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
     parent.render(entity, renderLayer, isFirstPersonArm);
-    aura.render(entity, renderLayer, isFirstPersonArm);
 }
