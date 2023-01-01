@@ -20,17 +20,17 @@ function init(hero) {
     hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
     hero.addKeyBind("TELEPORT", "Transmit", 1);
-    hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
-    hero.addKeyBindFunc("func_VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
-    hero.addKeyBindFunc("func_CYCLE_CARD", cycleCard, "Cycle Battle Card", 2);
-    hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
-    hero.addKeyBind("AIM", "Aim Mega Buster", 4);
-    hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
-    hero.addKeyBindFunc("func_RESET_CARD", resetCard, "Aim Mega Buster", 4);
-    hero.addKeyBindFunc("func_ELECTROMAGNETIC", electroMagnetic, "EM Wave Change", 5);
-    hero.addKeyBind("WAVE_CHANGE", "EM Wave Change", 5);
-    hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
-    hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
+  hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("func_VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
+  hero.addKeyBindFunc("func_CYCLE_CARD", cycleCard, "Cycle Battle Card", 2);
+  hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+  hero.addKeyBind("AIM", "Aim Mega Buster", 4);
+  hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
+  hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
+  hero.addKeyBindFunc("func_ELECTROMAGNETIC", electroMagnetic, "EM Wave Change", 5);
+  hero.addKeyBind("WAVE_CHANGE", "EM Wave Change", 5);
+  hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
+  hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     
     hero.setDefaultScale(1.0);
     hero.setHasProperty(hasProperty);
@@ -45,7 +45,7 @@ function init(hero) {
     hero.setKeyBindEnabled(isKeyBindEnabled);
     hero.setDamageProfile(getDamageProfile);
     hero.setTickHandler((entity, manager) => {
-      if (entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && ((!entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) || entity.getData('fiskheroes:flying'))){
+      if (entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && ((!entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) || entity.getData('fiskheroes:flying') || entity.getData('fiskheroes:aiming'))){
         manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
       };
     });

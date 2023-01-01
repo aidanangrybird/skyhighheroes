@@ -6,6 +6,7 @@
       "speed": 0.1,
       "boostSpeed": 0.3,
       "canBoost": true,
+      "canRoll": true,
       "collision": {
         "blocks": {
           "stopFlying": false,

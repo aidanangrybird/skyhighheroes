@@ -110,6 +110,9 @@ function initBeams(renderer, color) {
         { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
+    bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
+        { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
+    ]);
 }
 function initDualBeams(renderer, colorLeft, colorRight) {
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorRight, [
@@ -119,6 +122,9 @@ function initDualBeams(renderer, colorLeft, colorRight) {
         { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorRight);
+    bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", colorRight, [
+        { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
+    ]);
 }
 //Cannon
 function initCannon(renderer) {
@@ -224,7 +230,7 @@ function initEquipment(renderer) {
     ]).setCondition(entity => entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1).slotIndex = 3;
     shield_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 3.5], "rotation": [90.0, -180.0, 0.0] }
-    ]).setCondition(entity => (((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3))).slotIndex = 3;
+    ]).setCondition(entity => ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3)).slotIndex = 3;
     shield_2 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
         { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 4.5], "rotation": [90.0, -180.0, 0.0] }
     ]).setCondition(entity => ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;

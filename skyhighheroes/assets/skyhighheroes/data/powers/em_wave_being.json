@@ -8,6 +8,7 @@
     "fiskheroes:controlled_flight": {
       "speed": 0.1,
       "boostSpeed": 0.35,
+      "canRoll": false,
       "canBoost": true,
       "collision": {
         "blocks": {
@@ -97,6 +98,17 @@
       "soundEvents": {
         "THROW": "fiskheroes:shield_throw"
       }
-	  }
+	  },
+    "fiskheroes:energy_manipulation": {
+      "damageProfile": {
+        "damage": 12.0,
+        "types": {
+          "WAVE_ELECTRICITY": 1.0,
+          "WAVE_ENERGY": 1.0
+        }
+      },
+      "chargeTime": 10,
+      "range": 64.0
+    }
   }
 }

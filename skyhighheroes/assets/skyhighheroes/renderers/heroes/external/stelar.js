@@ -96,6 +96,9 @@ function initStelarAnimations(renderer) {
 //Mega Buster
 function initMegaBuster(renderer, color) {
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
+    bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
+        { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
+    ]);
 }
 
 //Equipment

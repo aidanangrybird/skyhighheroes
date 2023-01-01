@@ -25,6 +25,16 @@
       "damageType": "BULLET"
     },
     "fiskheroes:projectile_immunity": {
+    },
+    "fiskheroes:energy_manipulation": {
+      "damageProfile": {
+        "damage": 8.0,
+        "types": {
+          "ENERGY": 1.0
+        }
+      },
+      "chargeTime": 10,
+      "range": 64.0
     }
   }
 }

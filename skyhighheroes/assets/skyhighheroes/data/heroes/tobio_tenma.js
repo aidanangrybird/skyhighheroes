@@ -7,6 +7,7 @@ function init(hero) {
   hero.setBoots("Boots");
   hero.setAliases("tobio_tenma");
   hero.setVersion("Tobio Tenma");
+  hero.hide();
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
@@ -27,6 +28,7 @@ function init(hero) {
 
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
+  hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
   hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 3);
   hero.addKeyBind("SHIELD", "Force Field", 5);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 2);
@@ -44,8 +46,8 @@ function init(hero) {
   hero.addAttributeProfile("SHIELD", shieldProfile);
   hero.setAttributeProfile(getAttributeProfile);
   hero.setTickHandler((entity, manager) => {
-      var flying = entity.getData("fiskheroes:flying");
-      manager.incrementData(entity, "skyhighheroes:dyn/booster_timer", 2, flying);
+    var flying = entity.getData("fiskheroes:flying");
+    manager.incrementData(entity, "skyhighheroes:dyn/booster_timer", 2, flying);
   });
 }
 
@@ -73,95 +75,55 @@ function shieldProfile(profile) {
 }
 
 function isModifierEnabled(entity, modifier) {
-
   switch (modifier.name()) {
-
-  case "fiskheroes:energy_projection":
-
-    return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
-
-  case "fiskheroes:energy_bolt":
-
-    return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-
-  case "fiskheroes:super_speed":
-
-    return entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
-
-  case "fiskheroes:shield":
-
-    return entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
-
-  case "fiskheroes:leaping":
-
-    return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-
-  case "fiskheroes:arrow_catching":
-
-    return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-
-  default:
-
-    return true;
-  
+    case "fiskheroes:energy_projection":
+      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
+    case "fiskheroes:energy_bolt":
+      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    case "fiskheroes:super_speed":
+      return entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
+    case "fiskheroes:shield":
+      return entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
+    case "fiskheroes:leaping":
+      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    case "fiskheroes:arrow_catching":
+      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    default:
+      return true;
   }
-
 }
 
 function isKeyBindEnabled(entity, keyBind) {
-
   switch (keyBind) {
-
-  case "SHIELD_THROW":
-
-    return entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
-
-  case "AIM":
-
-    return entity.getHeldItem().name() != "fiskheroes:captain_americas_shield";
-
-  default:
-
-    return true;
-
+    case "SHIELD_THROW":
+      return entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
+    case "AIM":
+      return (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
+    case "CHARGE_ENERGY":
+      return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+    default:
+      return true;
   }
-
 }
 
 function hasProperty(entity, property) {
-
   switch (property) {
-
-  case "BREATHE_SPACE":
-
-    return entity.isAlive();
-
-  default:
-
-    return entity.isAlive();
-
+    case "BREATHE_SPACE":
+      return true;
+    default:
+      return true;
   }
-
 }
 
 function hasPermission(entity, permission) {
-  
   switch (permission) {
-
     case "USE_CHRONOS_RIFLE":
-
-      return entity.isAlive();
-
+      return true;
     case "USE_SHIELD":
-
-      return entity.isAlive();
-  
+      return true;
     default:
-
-      return entity.isAlive();
-
+      return false;
   }
-
 }
 
 function canAim(entity) {
