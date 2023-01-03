@@ -42,7 +42,7 @@ loadTextures({
     "normal_legs_torso": "skyhighheroes:tysen/astro/tysen_tenma_normal_legs_torso",
     "normal_legs_boots": "skyhighheroes:tysen/astro/tysen_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:tysen/astro/tysen_tenma_normal_legs_torso_boots",
-    "cannon_lights_inner" : "skyhighheroes:tysen/astro/tysen_tenma_cannon_lights_inner",
+    "cannon_lights" : "skyhighheroes:tysen/astro/tysen_tenma_cannon_lights",
     "shield": "skyhighheroes:tysen/astro/tysen_tenma_shield",
     "katana": "skyhighheroes:tysen/astro/tysen_tenma_katana",
     "katana_lights": "skyhighheroes:tysen/astro/tysen_tenma_katana_lights",

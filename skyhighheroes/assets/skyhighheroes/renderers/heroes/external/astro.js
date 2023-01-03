@@ -104,10 +104,10 @@ function initAstroAnimations(renderer) {
 //Beams
 function initBeams(renderer, color) {
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", color, [
-        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", color, [
-        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [1.0, 1.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
     bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
@@ -116,10 +116,10 @@ function initBeams(renderer, color) {
 }
 function initDualBeams(renderer, colorLeft, colorRight) {
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorRight, [
-        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+        { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", colorLeft, [
-        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+        { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [1.0, 1.0] }
     ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
     renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorRight);
     bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", colorRight, [
@@ -128,64 +128,14 @@ function initDualBeams(renderer, colorLeft, colorRight) {
 }
 //Cannon
 function initCannon(renderer) {
-    //Right
-    cannonRight = renderer.createEffect("fiskheroes:shield");
-    cannonRight.texture.set("cannon", null);
-    cannonRight.anchor.set("rightArm");
-    cannonRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.0, 3.0);
-    cannonRight.large = true;
-    //Left
-    cannonLeft = renderer.createEffect("fiskheroes:shield");
-    cannonLeft.texture.set("cannon", null);
-    cannonLeft.anchor.set("rightArm");
-    cannonLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.0, -3.0);
-    cannonLeft.large = true;
-    //Top
-    cannonTop = renderer.createEffect("fiskheroes:shield");
-    cannonTop.texture.set("cannon", null);
-    cannonTop.anchor.set("rightArm");
-    cannonTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.0, 0.0);
-    cannonTop.large = true;
-    //Bottom
-    cannonBottom = renderer.createEffect("fiskheroes:shield");
-    cannonBottom.texture.set("cannon", null);
-    cannonBottom.anchor.set("rightArm");
-    cannonBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.0, 0.0);
-    cannonBottom.large = true;
-    //Front
-    cannonFront = renderer.createEffect("fiskheroes:shield");
-    cannonFront.texture.set(null, "cannon_lights_inner");
-    cannonFront.anchor.set("rightArm");
-    cannonFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(2.0, 13.0, 0.0);
-    cannonFront.large = true;
-    //Back
-    cannonBack = renderer.createEffect("fiskheroes:shield");
-    cannonBack.texture.set("cannon_back", null);
-    cannonBack.anchor.set("rightArm");
-    cannonBack.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(2.0, 4.0, 0.0);
-    cannonBack.large = true;
-
+    light = renderer.createEffect("fiskheroes:overlay");
     var obj = {
-        cannonRight: cannonRight,
-        cannonLeft: cannonLeft,
-        cannonTop: cannonTop,
-        cannonBottom: cannonBottom,
-        cannonFront: cannonFront,
-        cannonBack: cannonBack,
+        light: light,
         render: (entity, renderLayer) => {
-            if (renderLayer == "CHESTPLATE") {
-                cannonRight.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-                cannonRight.render();
-                cannonLeft.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-                cannonLeft.render();
-                cannonTop.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-                cannonTop.render();
-                cannonBottom.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-                cannonBottom.render();
-                cannonFront.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-                cannonFront.render();
-                cannonBack.unfold = entity.getInterpolatedData("fiskheroes:aiming_timer");
-                cannonBack.render();
+            if (renderLayer == "CHESTPLATE" && entity.getHeldItem().isEmpty()) {
+                light.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
+                light.texture.set(null, "cannon_lights");
+                light.render();
             }
         }
     };

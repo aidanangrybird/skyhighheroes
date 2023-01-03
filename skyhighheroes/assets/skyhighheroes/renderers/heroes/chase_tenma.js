@@ -42,7 +42,7 @@ loadTextures({
     "normal_legs_torso": "skyhighheroes:chase/astro/chase_tenma_normal_legs_torso",
     "normal_legs_boots": "skyhighheroes:chase/astro/chase_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:chase/astro/chase_tenma_normal_legs_torso_boots",
-    "cannon_lights_inner" : "skyhighheroes:chase/astro/chase_tenma_cannon_lights_inner",
+    "cannon_lights" : "skyhighheroes:chase/astro/chase_tenma_cannon_lights",
     "shield": "skyhighheroes:chase/astro/chase_tenma_shield",
     "katana": "skyhighheroes:chase/astro/chase_tenma_katana",
     "katana_lights": "skyhighheroes:chase/astro/chase_tenma_katana_lights",

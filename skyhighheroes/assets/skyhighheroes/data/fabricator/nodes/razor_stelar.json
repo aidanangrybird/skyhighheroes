@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:razor_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:razor_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

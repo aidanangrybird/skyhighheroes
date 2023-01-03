@@ -42,7 +42,7 @@ loadTextures({
     "normal_legs_torso": "skyhighheroes:boom/astro/boom_tenma_normal_legs_torso",
     "normal_legs_boots": "skyhighheroes:boom/astro/boom_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:boom/astro/boom_tenma_normal_legs_torso_boots",
-    "cannon_lights_inner" : "skyhighheroes:boom/astro/boom_tenma_cannon_lights_inner",
+    "cannon_lights" : "skyhighheroes:boom/astro/boom_tenma_cannon_lights",
     "shield": "skyhighheroes:boom/astro/boom_tenma_shield",
     "katana": "skyhighheroes:boom/astro/boom_tenma_katana",
     "katana_lights": "skyhighheroes:boom/astro/boom_tenma_katana_lights",

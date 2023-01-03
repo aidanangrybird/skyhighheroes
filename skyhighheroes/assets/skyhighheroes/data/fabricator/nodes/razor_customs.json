@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Razor's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/razor_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as RazorminerPlayz"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'de01ddcc-7dc8-437e-bf08-3f8bf11086dc'"
+      }
+    }
+  }
+}

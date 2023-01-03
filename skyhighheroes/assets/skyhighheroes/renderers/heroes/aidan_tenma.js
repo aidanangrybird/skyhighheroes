@@ -42,7 +42,7 @@ loadTextures({
     "normal_legs_torso": "skyhighheroes:aidan/astro/aidan_tenma_normal_legs_torso",
     "normal_legs_boots": "skyhighheroes:aidan/astro/aidan_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:aidan/astro/aidan_tenma_normal_legs_torso_boots",
-    "cannon_lights_inner" : "skyhighheroes:aidan/astro/aidan_tenma_cannon_lights_inner",
+    "cannon_lights" : "skyhighheroes:aidan/astro/aidan_tenma_cannon_lights",
     "shield": "skyhighheroes:aidan/astro/aidan_tenma_shield",
     "katana": "skyhighheroes:aidan/astro/aidan_tenma_katana",
     "katana_lights": "skyhighheroes:aidan/astro/aidan_tenma_katana_lights",

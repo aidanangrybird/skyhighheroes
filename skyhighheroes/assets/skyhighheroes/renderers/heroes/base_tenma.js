@@ -1,11 +1,6 @@
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
-loadTextures({
-    "cannon" : "skyhighheroes:astro/base_tenma_cannon",
-    "cannon_back" : "skyhighheroes:astro/base_tenma_cannon_back"
-});
-
 function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
         if (entity.isWearingFullSuit()) {
@@ -141,6 +136,8 @@ function init(renderer) {
     initEffects(renderer);
     initAnimations(renderer);
 }
+
+var cannon;
 
 function initEffects(renderer) {
     cannon = astro.initCannon(renderer);

@@ -6,6 +6,9 @@
       "texture":  "skyhighheroes:textures/gui/nodes/storm_head.png"
     }
   },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
   "criteria": {
     "exist": {
       "trigger": "fiskheroes:tick",
