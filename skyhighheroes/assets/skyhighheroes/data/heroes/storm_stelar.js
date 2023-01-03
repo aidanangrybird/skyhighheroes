@@ -52,11 +52,15 @@ function init(hero) {
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
     };
   });
+  hero.addDamageProfile("BLADE", {
+    "types": {
+      "SHARP": 0.0,
+      "WAVE_SHARP": 1.0
+    }
+  });
   hero.addDamageProfile("MAIN", {
     "types": {
-      "ELECTRICITY": 1.0,
-      "ENERGY": 1.0,
-      "BLUNT": 1.0,
+      "BLUNT": 0.0,
       "WAVE_BLUNT": 1.0
     }
   });
@@ -176,6 +180,9 @@ function getAttributeProfile(entity) {
 }
 
 function getDamageProfile(entity) {
+  if (entity.getData("fiskheroes:blade")) {
+    return "BLADE";
+  }
   return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? "MAIN" : null;
 }
 
@@ -211,7 +218,7 @@ function isModifierEnabled(entity, modifier) {
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid && entity.getData("fiskheroes:invisible");
         default:
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getUUID() == uuid;
-      }
+      };
     case "fiskheroes:transformation":
       return entity.isAlive() && entity.getUUID() == uuid;
     case "fiskheroes:controlled_flight":

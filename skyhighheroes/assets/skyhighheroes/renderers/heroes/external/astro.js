@@ -128,14 +128,14 @@ function initDualBeams(renderer, colorLeft, colorRight) {
 }
 //Cannon
 function initCannon(renderer) {
-    light = renderer.createEffect("fiskheroes:overlay");
+    light_thing = renderer.createEffect("fiskheroes:overlay");
+    light_thing.texture.set(null, "cannon_lights");
     var obj = {
-        light: light,
+        light_thing: light_thing,
         render: (entity, renderLayer) => {
             if (renderLayer == "CHESTPLATE" && entity.getHeldItem().isEmpty()) {
-                light.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
-                light.texture.set(null, "cannon_lights");
-                light.render();
+                light_thing.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
+                light_thing.render();
             }
         }
     };

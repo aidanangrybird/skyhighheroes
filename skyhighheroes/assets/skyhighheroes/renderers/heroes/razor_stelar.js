@@ -29,7 +29,7 @@ loadTextures({
     "shorttx": "skyhighheroes:razor/razor_stelar_short.tx.json",
     "swimsuittx": "skyhighheroes:razor/razor_stelar_swimsuit.tx.json",
     "normaltx": "skyhighheroes:razor/razor_stelar_normal.tx.json",
-    "transer": "skyhighheroes:stelar_transer_dragon",
+    "transer": "skyhighheroes:stelar_transer_leo",
     "transer_lights": "skyhighheroes:razor/razor_stelar_transer_lights",
     "blade": "skyhighheroes:razor/razor_stelar_blade",
     "hair": "skyhighheroes:razor/razor_stelar_hair",

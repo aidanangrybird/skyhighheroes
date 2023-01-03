@@ -137,10 +137,9 @@ function init(renderer) {
     initAnimations(renderer);
 }
 
-var cannon;
-
 function initEffects(renderer) {
-    cannon = astro.initCannon(renderer);
+    cannon = renderer.createEffect("fiskheroes:overlay");
+    cannon.texture.set(null, "cannon_lights");
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, getCLR());
 }
@@ -151,7 +150,10 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    cannon.render(entity, renderLayer);
+    if (renderLayer == "CHESTPLATE" && entity.getHeldItem().isEmpty()) {
+        cannon.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
+        cannon.render();
+    }
 }
 
 function getNamePerson() {

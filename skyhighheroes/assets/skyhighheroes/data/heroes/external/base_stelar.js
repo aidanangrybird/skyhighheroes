@@ -181,6 +181,9 @@ function getAttributeProfile(entity) {
 }
 
 function getDamageProfile(entity) {
+  if (entity.getData("fiskheroes:blade")) {
+    return "BLADE";
+  }
   return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? "MAIN" : null;
 }
 
