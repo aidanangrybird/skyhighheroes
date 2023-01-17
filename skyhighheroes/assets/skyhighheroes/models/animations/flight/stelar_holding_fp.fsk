@@ -1,0 +1,8 @@
+;First person stuff
+{foosh} = if({adx} > 0, {vel}, 0)
+{thing} = (clamp({foosh}, 0, 1)){hover} + {data_1}
+out "firstPerson" (true)
+out "translate" (-0.35{thing}, 0, 0.15{thing})
+out "rotate" (-27{thing}, 0, 1, 0)
+out "rotate" (-20{thing}, 1, 0, 0)
+out "rotate" (-30{thing}, 0, 0, 1)

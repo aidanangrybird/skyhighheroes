@@ -48,8 +48,17 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
-    if (entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && ((!entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) || entity.getData('fiskheroes:flying') || entity.getData('fiskheroes:aiming'))){
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 0 && (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 2)){
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
+      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
+    };
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 0 && entity.getData("fiskheroes:flying")){
+      manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
+      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
+    };
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 0 && entity.getData("fiskheroes:aiming")){
+      manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
+      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
     };
   });
   hero.addDamageProfile("BLADE", {

@@ -1,10 +1,14 @@
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
+loadTextures({
+    "boots": "skyhighheroes:astro/boots"
+});
+
 function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
         if (entity.isWearingFullSuit()) {
-            if (entity.getData("fiskheroes:flying")) {
+            if (entity.getInterpolatedData("fiskheroes:flight_timer") > 0) {
                 if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                     return "base_flying";
                 }
@@ -18,7 +22,7 @@ function init(renderer) {
                     return "normal_flying";
                 }
             }
-            if (!entity.getData("fiskheroes:flying")) {
+            if (entity.getInterpolatedData("fiskheroes:flight_timer") == 0) {
                 if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                     return "base";
                 }
@@ -115,15 +119,7 @@ function init(renderer) {
                 return "eyes_normal";
             }
         }
-        if (renderLayer == "BOOTS") {
-            if (entity.getData("fiskheroes:flying")) {
-                return "boots_lights";
-            }
-            if (!entity.getData("fiskheroes:flying")) {
-                return null;
-            }
-        }
-        if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS") {
+        if (renderLayer == "CHESTPLATE" || renderLayer == "LEGGINGS" || renderLayer == "BOOTS") {
             return null;
         }
     });
@@ -140,6 +136,12 @@ function init(renderer) {
 function initEffects(renderer) {
     cannon = renderer.createEffect("fiskheroes:overlay");
     cannon.texture.set(null, "cannon_lights");
+    armLights = renderer.createEffect("fiskheroes:overlay");
+    armLights.texture.set(null, "arms_lights");
+    bootLights = renderer.createEffect("fiskheroes:overlay");
+    bootLights.texture.set(null, "boots_lights");
+    bootOpening = renderer.createEffect("fiskheroes:overlay");
+    bootOpening.texture.set("boots", null);
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, getCLR());
 }
@@ -150,7 +152,19 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    if (renderLayer == "CHESTPLATE" && entity.getHeldItem().isEmpty()) {
+    if (renderLayer == "CHESTPLATE") {
+        armLights.opacity = entity.getInterpolatedData('fiskheroes:flight_boost_timer');
+        armLights.render();
+    }
+    if (renderLayer == "BOOTS") {
+        if (entity.getInterpolatedData("fiskheroes:flight_timer") > 0) {
+            bootOpening.opacity = (-1 * entity.getInterpolatedData('fiskheroes:flight_timer')) + 1;
+            bootOpening.render();
+            bootLights.opacity = entity.getInterpolatedData('fiskheroes:flight_timer');
+            bootLights.render();
+        }
+    }
+    if (entity.getHeldItem().isEmpty()) {
         cannon.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
         cannon.render();
     }

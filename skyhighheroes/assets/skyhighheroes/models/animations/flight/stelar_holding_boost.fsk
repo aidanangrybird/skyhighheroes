@@ -1,0 +1,25 @@
+{x} = 40{data_1}min(3{vel}, 1)
+out "rotate" (-{data_1}({pitch} + {x}), 1, 0, 0)
+
+{x} = min({vel}, 1){data_1}{d1}{d} / 2.5
+
+{rightArm_rotX} += -6'{data_1}
+{rightArm_rotY} += ({head_rotX} + 30'){data_1}
+{rightArm_rotZ} += 0.0{data_1}
+{leftArm_rotX} += 1.5{data_1}
+{leftArm_rotZ} -= 1.0{data_1}
+{rightLeg_posZ} += 1.0{data_1}
+{rightLeg_rotX} += 0.1{data_1} + 0.05{x}
+{rightLeg_rotZ} += 0.05{data_1}
+{leftLeg_posZ} -= 0.25{data_1}
+{leftLeg_posY} -= 1.0{data_1}
+{leftLeg_rotX} += 0.3{data_1} - 0.05{x}
+{leftLeg_rotZ} -= 0.05{data_1}
+{body_rotY} += -20'{data_1}
+
+{d} *= {data_1} / 1'
+{x} = min({vel} / 2, 1) / 2
+out "rotate" ({d1}{d}, 0, 1, 0)
+out "rotate" (-{d1}{d}{x}, 0, 0, 1)
+out "rotate" ({d}{x}, 1, 0, 0)
+out "translate" (0, -0.8{data_1}, 0)

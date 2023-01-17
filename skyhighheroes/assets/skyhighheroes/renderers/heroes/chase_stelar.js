@@ -29,7 +29,7 @@ loadTextures({
     "shorttx": "skyhighheroes:chase/chase_stelar_short.tx.json",
     "swimsuittx": "skyhighheroes:chase/chase_stelar_swimsuit.tx.json",
     "normaltx": "skyhighheroes:chase/chase_stelar_normal.tx.json",
-    "transer": "skyhighheroes:stelar_transer_pegasus",
+    "transer": "skyhighheroes:stelar_transer_leo",
     "transer_lights": "skyhighheroes:chase/chase_stelar_transer_lights",
     "blade": "skyhighheroes:chase/chase_stelar_blade",
     "hair": "skyhighheroes:chase/chase_stelar_hair",

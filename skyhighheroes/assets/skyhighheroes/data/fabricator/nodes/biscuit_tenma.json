@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:aidan_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:aidan_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

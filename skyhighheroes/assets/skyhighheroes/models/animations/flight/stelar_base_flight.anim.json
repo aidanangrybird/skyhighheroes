@@ -1,0 +1,8 @@
+{
+  "inputs": [
+    "skyhighheroes:flight/stelar_base_header",
+    "skyhighheroes:flight/stelar_base_hover",
+    "skyhighheroes:flight/stelar_base_boost",
+    "skyhighheroes:flight/stelar_base_fp"
+  ]
+}

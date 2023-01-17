@@ -2,9 +2,11 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-    "eyes" : "skyhighheroes:astro/tobio_tenma_eyes",
-    "boots_lights" : "skyhighheroes:astro/tobio_tenma_boots_lights",
-    "eyes_normal" : "skyhighheroes:astro/tobio_tenma_eyes_normal",
+    "eyes": "skyhighheroes:astro/tobio_tenma_eyes",
+    "boots_lights": "skyhighheroes:astro/tobio_tenma_boots_lights",
+    "boots": "skyhighheroes:astro/boots_normal",
+    "arms_lights": "skyhighheroes:astro/tobio_tenma_arms_lights",
+    "eyes_normal": "skyhighheroes:astro/tobio_tenma_eyes_normal",
     "base": "skyhighheroes:astro/tobio_tenma_base",
     "base_flying": "skyhighheroes:astro/tobio_tenma_base_flying",
     "base_head": "skyhighheroes:astro/tobio_tenma_base_head",
@@ -12,8 +14,8 @@ loadTextures({
     "base_torso_boots_legs": "skyhighheroes:astro/tobio_tenma_base_torso_boots_legs",
     "base_legs": "skyhighheroes:astro/tobio_tenma_base_legs",
     "base_legs_boots": "skyhighheroes:astro/tobio_tenma_base_legs_boots",
-    "long" : "skyhighheroes:astro/tobio_tenma_long",
-    "long_flying" : "skyhighheroes:astro/tobio_tenma_long_flying",
+    "longk": "syhighheroes:astro/tobio_tenma_long",
+    "long_flying": "skyhighheroes:astro/tobio_tenma_long_flying",
     "long_head_torso": "skyhighheroes:astro/tobio_tenma_long_head_torso",
     "long_torso_boots": "skyhighheroes:astro/tobio_tenma_long_torso_boots",
     "long_torso_boots_legs": "skyhighheroes:astro/tobio_tenma_long_torso_boots_legs",
@@ -21,22 +23,22 @@ loadTextures({
     "long_legs_torso": "skyhighheroes:astro/tobio_tenma_long_legs_torso",
     "long_legs_boots": "skyhighheroes:astro/tobio_tenma_long_legs_boots",
     "long_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_long_legs_torso_boots",
-    "short" : "skyhighheroes:astro/tobio_tenma_short",
-    "short_flying" : "skyhighheroes:astro/tobio_tenma_short_flying",
+    "short": "skyhighheroes:astro/tobio_tenma_short",
+    "short_flying": "skyhighheroes:astro/tobio_tenma_short_flying",
     "short_torso_boots": "skyhighheroes:astro/tobio_tenma_short_torso_boots",
     "short_legs": "skyhighheroes:astro/tobio_tenma_short_legs",
     "short_legs_torso": "skyhighheroes:astro/tobio_tenma_short_legs_torso",
     "short_legs_boots": "skyhighheroes:astro/tobio_tenma_short_legs_boots",
     "short_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_short_torso_boots",
-    "normal" : "skyhighheroes:astro/tobio_tenma_normal",
-    "normal_flying" : "skyhighheroes:astro/tobio_tenma_normal_flying",
+    "normal": "skyhighheroes:astro/tobio_tenma_normal",
+    "normal_flying": "skyhighheroes:astro/tobio_tenma_normal_flying",
     "normal_torso_boots": "skyhighheroes:astro/tobio_tenma_normal_torso_boots",
     "normal_torso_boots_legs": "skyhighheroes:astro/tobio_tenma_normal_torso_boots_legs",
     "normal_legs": "skyhighheroes:astro/tobio_tenma_normal_legs",
     "normal_legs_torso": "skyhighheroes:astro/tobio_tenma_normal_legs_torso",
     "normal_legs_boots": "skyhighheroes:astro/tobio_tenma_normal_legs_boots",
     "normal_legs_torso_boots": "skyhighheroes:astro/tobio_tenma_normal_legs_torso_boots",
-    "cannon_lights" : "skyhighheroes:astro/tobio_tenma_cannon_lights",
+    "cannon_lights": "skyhighheroes:astro/tobio_tenma_cannon_lights",
     "shield": "skyhighheroes:astro/tobio_tenma_shield",
     "katana": "skyhighheroes:astro/tobio_tenma_katana",
     "katana_lights": "skyhighheroes:astro/tobio_tenma_katana_lights",
@@ -49,7 +51,7 @@ loadTextures({
 function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
         if (entity.isWearingFullSuit()) {
-            if (entity.getData("fiskheroes:flying")) {
+            if (entity.getInterpolatedData("fiskheroes:flight_timer") > 0) {
                 if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                     return "base_flying";
                 }
@@ -63,7 +65,7 @@ function init(renderer) {
                     return "normal_flying";
                 }
             }
-            if (!entity.getData("fiskheroes:flying")) {
+            if (entity.getInterpolatedData("fiskheroes:flight_timer") == 0) {
                 if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 0) {
                     return "base";
                 }
@@ -185,6 +187,12 @@ function init(renderer) {
 function initEffects(renderer) {
     cannon = renderer.createEffect("fiskheroes:overlay");
     cannon.texture.set(null, "cannon_lights");
+    armLights = renderer.createEffect("fiskheroes:overlay");
+    armLights.texture.set(null, "arms_lights");
+    bootLights = renderer.createEffect("fiskheroes:overlay");
+    bootLights.texture.set(null, "boots_lights");
+    bootOpening = renderer.createEffect("fiskheroes:overlay");
+    bootOpening.texture.set("boots", null);
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, colorVar);
     rockets = astro.initNormalBoosters(renderer);
@@ -199,7 +207,19 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    if (renderLayer == "CHESTPLATE" && entity.getHeldItem().isEmpty()) {
+    if (renderLayer == "CHESTPLATE") {
+        armLights.opacity = entity.getInterpolatedData('fiskheroes:flight_boost_timer');
+        armLights.render();
+    }
+    if (renderLayer == "BOOTS") {
+        if (entity.getInterpolatedData("fiskheroes:flight_timer") > 0) {
+            bootOpening.opacity = (-1 * entity.getInterpolatedData('fiskheroes:flight_timer')) + 1;
+            bootOpening.render();
+            bootLights.opacity = entity.getInterpolatedData('fiskheroes:flight_timer');
+            bootLights.render();
+        }
+    }
+    if (entity.getHeldItem().isEmpty()) {
         cannon.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
         cannon.render();
     }

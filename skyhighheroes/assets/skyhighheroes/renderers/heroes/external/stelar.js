@@ -76,12 +76,6 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
     renderer.reprioritizeDefaultAnimation("PUNCH", -9);
     renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
-function addFlightAnimationWithLanding(renderer, name, value) {
-    addFlightAnimation(renderer, name, value, (entity, data) => {
-        data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
-        data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-    });
-}
 
 //Stelar Animations
 function initStelarAnimations(renderer) {
@@ -90,8 +84,7 @@ function initStelarAnimations(renderer) {
         .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
         .priority = 10;
     //Flight
-    addFlightAnimationWithLanding(renderer, "stelar.FLIGHT", "skyhighheroes:flight/stelar_flight.anim.json");
-    //Landing
+    addFlightAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
 }
 //Mega Buster
 function initMegaBuster(renderer, color) {
