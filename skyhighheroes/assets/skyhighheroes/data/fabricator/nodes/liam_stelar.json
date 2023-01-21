@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:liam_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:liam_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

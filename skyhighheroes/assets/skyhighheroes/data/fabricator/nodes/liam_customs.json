@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Liam's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/liam_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as Liam_Does_Stuff"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'cd71352c-8cb2-448c-a69d-a310a905ce7b'"
+      }
+    }
+  }
+}
