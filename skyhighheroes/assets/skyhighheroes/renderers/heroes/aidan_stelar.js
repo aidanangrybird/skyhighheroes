@@ -53,7 +53,7 @@ function getID() {
 function init(renderer) {
     parent.init(renderer);
     initEffects(renderer);
-    renderer.setItemIcons(null, "pegasus_transer", null, null);
+    renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
 }
 
 function initEffects(renderer) {

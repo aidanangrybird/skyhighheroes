@@ -383,40 +383,44 @@ function initBoosters(renderer, color) {
                     boosterLeftArm.speedScale = 0.5 * boost;
                     boosterLeftArm.flutter = 1 + boost;
                     boosterLeftArm.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-                    boosterLeftArm.render();
                     //Beams
                     lineArmOuter.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3.5 * 3.5 / 8;
                     lineArmMiddle.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3.25 * 3.25 / 8;
                     lineArmInner.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3 * 3 / 8;
                     //Outer
                     bloomLeftArmOuter.opacity = boost;
-                    bloomLeftArmOuter.render();
                     //Middle
                     bloomLeftArmMiddle.opacity = boost;
-                    bloomLeftArmMiddle.render();
                     //Inner
                     bloomLeftInner.opacity = boost;
-                    bloomLeftInner.render();
+                    if (entity.getData("fiskheroes:energy_projection_timer") == 0) {
+                        boosterLeftArm.render();
+                        bloomLeftArmOuter.render();
+                        bloomLeftArmMiddle.render();
+                        bloomLeftInner.render();
+                    }
 
                     //Right
                     boosterRightArm.progress = boost;
                     boosterRightArm.speedScale = 0.5 * boost;
                     boosterRightArm.flutter = 1 + boost;
                     boosterRightArm.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-                    boosterRightArm.render();
                     //Beams
                     lineArmOuter.end.y = (1 + f * boosterRightArm.flutter / 4) * 3.5 * 3.5 / 8;
                     lineArmMiddle.end.y = (1 + f * boosterRightArm.flutter / 4) * 3.25 * 3.25 / 8;
                     lineArmInner.end.y = (1 + f * boosterRightArm.flutter / 4) * 3 * 3 / 8;
                     //Outer
                     bloomRightArmOuter.opacity = boost;
-                    bloomRightArmOuter.render();
                     //Middle
                     bloomRightArmMiddle.opacity = boost;
-                    bloomRightArmMiddle.render();
                     //Inner
                     bloomRightInner.opacity = boost;
-                    bloomRightInner.render();
+                    if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0) {
+                        boosterRightArm.render();
+                        bloomRightArmOuter.render();
+                        bloomRightArmMiddle.render();
+                        bloomRightInner.render();
+                    }
                 }
             }
         }
@@ -621,40 +625,44 @@ function initNormalBoosters(renderer) {
                     boosterLeftArm.speedScale = 0.5 * boost;
                     boosterLeftArm.flutter = 1 + boost;
                     boosterLeftArm.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-                    boosterLeftArm.render();
                     //Beams
                     lineArmOuter.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3.5 * 3.5 / 8;
                     lineArmMiddle.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3.25 * 3.25 / 8;
                     lineArmInner.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3 * 3 / 8;
                     //Outer
                     bloomLeftArmOuter.opacity = boost;
-                    bloomLeftArmOuter.render();
                     //Middle
                     bloomLeftArmMiddle.opacity = boost;
-                    bloomLeftArmMiddle.render();
                     //Inner
                     bloomLeftInner.opacity = boost;
-                    bloomLeftInner.render();
+                    if (entity.getData("fiskheroes:energy_projection_timer") == 0) {
+                        boosterLeftArm.render();
+                        bloomLeftArmOuter.render();
+                        bloomLeftArmMiddle.render();
+                        bloomLeftInner.render();
+                    }
 
                     //Right
                     boosterRightArm.progress = boost;
                     boosterRightArm.speedScale = 0.5 * boost;
                     boosterRightArm.flutter = 1 + boost;
                     boosterRightArm.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-                    boosterRightArm.render();
                     //Beams
                     lineArmOuter.end.y = (1 + f * boosterRightArm.flutter / 4) * 3.5 * 3.5 / 8;
                     lineArmMiddle.end.y = (1 + f * boosterRightArm.flutter / 4) * 3.25 * 3.25 / 8;
                     lineArmInner.end.y = (1 + f * boosterRightArm.flutter / 4) * 3 * 3 / 8;
                     //Outer
                     bloomRightArmOuter.opacity = boost;
-                    bloomRightArmOuter.render();
                     //Middle
                     bloomRightArmMiddle.opacity = boost;
-                    bloomRightArmMiddle.render();
                     //Inner
                     bloomRightInner.opacity = boost;
-                    bloomRightInner.render();
+                    if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0) {
+                        boosterRightArm.render();
+                        bloomRightArmOuter.render();
+                        bloomRightArmMiddle.render();
+                        bloomRightInner.render();
+                    }
                 }
             }
         }
@@ -859,40 +867,44 @@ function initDualBoosters(renderer, colorLeft, colorRight) {
                     boosterLeftArm.speedScale = 0.5 * boost;
                     boosterLeftArm.flutter = 1 + boost;
                     boosterLeftArm.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-                    boosterLeftArm.render();
                     //Beams
                     lineArmOuter.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3.5 * 3.5 / 8;
                     lineArmMiddle.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3.25 * 3.25 / 8;
                     lineArmInner.end.y = (1 + f * boosterLeftArm.flutter / 4) * 3 * 3 / 8;
                     //Outer
                     bloomLeftArmOuter.opacity = boost;
-                    bloomLeftArmOuter.render();
                     //Middle
                     bloomLeftArmMiddle.opacity = boost;
-                    bloomLeftArmMiddle.render();
                     //Inner
                     bloomLeftInner.opacity = boost;
-                    bloomLeftInner.render();
+                    if (entity.getData("fiskheroes:energy_projection_timer") == 0) {
+                        boosterLeftArm.render();
+                        bloomLeftArmOuter.render();
+                        bloomLeftArmMiddle.render();
+                        bloomLeftInner.render();
+                    }
 
                     //Right
                     boosterRightArm.progress = boost;
                     boosterRightArm.speedScale = 0.5 * boost;
                     boosterRightArm.flutter = 1 + boost;
                     boosterRightArm.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-                    boosterRightArm.render();
                     //Beams
                     lineArmOuter.end.y = (1 + f * boosterRightArm.flutter / 4) * 3.5 * 3.5 / 8;
                     lineArmMiddle.end.y = (1 + f * boosterRightArm.flutter / 4) * 3.25 * 3.25 / 8;
                     lineArmInner.end.y = (1 + f * boosterRightArm.flutter / 4) * 3 * 3 / 8;
                     //Outer
                     bloomRightArmOuter.opacity = boost;
-                    bloomRightArmOuter.render();
                     //Middle
                     bloomRightArmMiddle.opacity = boost;
-                    bloomRightArmMiddle.render();
                     //Inner
                     bloomRightInner.opacity = boost;
-                    bloomRightInner.render();
+                    if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0) {
+                        boosterRightArm.render();
+                        bloomRightArmOuter.render();
+                        bloomRightArmMiddle.render();
+                        bloomRightInner.render();
+                    }
                 }
             }
         }

@@ -124,7 +124,7 @@ function init(renderer) {
     });
     renderer.showModel("CHESTPLATE", "head", "headwear", "body", "rightArm", "leftArm", "leftLeg", "rightLeg");
     renderer.fixHatLayer("CHESTPLATE");
-    renderer.setItemIcons(null, "pegasus_transer", null, null);
+    renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
     initEffects(renderer);
     initAnimations(renderer);
 }
@@ -138,11 +138,12 @@ function initEffects(renderer) {
     ears.anchor.set("head");
     ears.angle = 7.5;
     ears.inset = -0.02;
-    stuff.bindFlightTrail(renderer, "skyhighheroes:aidan_stelar_flight");
+    stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_flight");
 }
 
 function initAnimations(renderer) {
     stuff.forcefieldAnimation(renderer);
+    stuff.emCeilingAnimation(renderer);
     stelar.initStelarAnimations(renderer);
 }
 

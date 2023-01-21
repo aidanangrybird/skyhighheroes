@@ -106,16 +106,13 @@ function initEffects(renderer) {
 
 function initAnimations(renderer) {
     stuff.forcefieldAnimation(renderer);
+    stuff.emCeilingAnimation(renderer);
     stelar.initStelarAnimations(renderer);
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
     omega_xis.render(entity, renderLayer);
     ears.render();
-    if (entity.getUUID() == getID() && !entity.isDisplayStand()) {
-        hair.unfold = Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') < 0.5 ? (((-81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) + (50/32)) : (((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0);
-        hair.render();
-    }
 }
 
 function getNamePerson() {

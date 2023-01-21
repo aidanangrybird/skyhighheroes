@@ -1,9 +1,9 @@
 {
   "display": {
-    "name": "Aidan's Custom Suits",
+    "name": "Biscuit's Custom Suits",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/aidan_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/biscuit_head.png"
     }
   },
   "requirements": [
@@ -13,13 +13,13 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Exist as aidanangrybird"
+        "translate": "Exist as Soggybiscuit2612"
       },
       "condition": {
         "variables": {
           "player": "PLAYER_TICKING"
           },
-        "check": "player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+        "check": "player.getUUID() == '324ccf33-d7b4-4cd5-b85f-d8f16a8cb862'"
       }
     }
   }

@@ -19,7 +19,7 @@ loadTextures({
     "base_torso_boots_legs": "skyhighheroes:fish/astro/fish_tenma_base_torso_boots_legs",
     "base_legs": "skyhighheroes:fish/astro/fish_tenma_base_legs",
     "base_legs_boots": "skyhighheroes:fish/astro/fish_tenma_base_legs_boots",
-    "longk": "syhighheroes:fish/astro/fish_tenma_long",
+    "long": "skyhighheroes:fish/astro/fish_tenma_long",
     "long_flying": "skyhighheroes:fish/astro/fish_tenma_long_flying",
     "long_head_torso": "skyhighheroes:fish/astro/fish_tenma_long_head_torso",
     "long_torso_boots": "skyhighheroes:fish/astro/fish_tenma_long_torso_boots",

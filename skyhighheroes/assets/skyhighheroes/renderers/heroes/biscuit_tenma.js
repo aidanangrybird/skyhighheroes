@@ -19,7 +19,7 @@ loadTextures({
     "base_torso_boots_legs": "skyhighheroes:biscuit/astro/biscuit_tenma_base_torso_boots_legs",
     "base_legs": "skyhighheroes:biscuit/astro/biscuit_tenma_base_legs",
     "base_legs_boots": "skyhighheroes:biscuit/astro/biscuit_tenma_base_legs_boots",
-    "longk": "syhighheroes:biscuit/astro/biscuit_tenma_long",
+    "long": "skyhighheroes:biscuit/astro/biscuit_tenma_long",
     "long_flying": "skyhighheroes:biscuit/astro/biscuit_tenma_long_flying",
     "long_head_torso": "skyhighheroes:biscuit/astro/biscuit_tenma_long_head_torso",
     "long_torso_boots": "skyhighheroes:biscuit/astro/biscuit_tenma_long_torso_boots",

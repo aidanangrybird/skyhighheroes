@@ -19,7 +19,7 @@ loadTextures({
     "base_torso_boots_legs": "skyhighheroes:slayer/astro/slayer_tenma_base_torso_boots_legs",
     "base_legs": "skyhighheroes:slayer/astro/slayer_tenma_base_legs",
     "base_legs_boots": "skyhighheroes:slayer/astro/slayer_tenma_base_legs_boots",
-    "longk": "syhighheroes:slayer/astro/slayer_tenma_long",
+    "long": "skyhighheroes:slayer/astro/slayer_tenma_long",
     "long_flying": "skyhighheroes:slayer/astro/slayer_tenma_long_flying",
     "long_head_torso": "skyhighheroes:slayer/astro/slayer_tenma_long_head_torso",
     "long_torso_boots": "skyhighheroes:slayer/astro/slayer_tenma_long_torso_boots",

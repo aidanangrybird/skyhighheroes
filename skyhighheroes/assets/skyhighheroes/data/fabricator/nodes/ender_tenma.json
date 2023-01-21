@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:ender_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:ender_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

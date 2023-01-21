@@ -29,7 +29,7 @@ loadTextures({
     "shorttx": "skyhighheroes:biscuit/biscuit_stelar_short.tx.json",
     "swimsuittx": "skyhighheroes:biscuit/biscuit_stelar_swimsuit.tx.json",
     "normaltx": "skyhighheroes:biscuit/biscuit_stelar_normal.tx.json",
-    "transer": "skyhighheroes:stelar_transer_leo",
+    "transer": "skyhighheroes:stelar_transer_pegasus",
     "transer_lights": "skyhighheroes:biscuit/biscuit_stelar_transer_lights",
     "blade": "skyhighheroes:biscuit/biscuit_stelar_blade",
     "hair": "skyhighheroes:biscuit/biscuit_stelar_hair",
@@ -53,7 +53,7 @@ function getID() {
 function init(renderer) {
     parent.init(renderer);
     initEffects(renderer);
-    renderer.setItemIcons(null, "pegasus_transer", null, null);
+    renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
 }
 
 function initEffects(renderer) {

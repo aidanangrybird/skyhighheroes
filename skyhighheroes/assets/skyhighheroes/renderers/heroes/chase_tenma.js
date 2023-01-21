@@ -19,7 +19,7 @@ loadTextures({
     "base_torso_boots_legs": "skyhighheroes:chase/astro/chase_tenma_base_torso_boots_legs",
     "base_legs": "skyhighheroes:chase/astro/chase_tenma_base_legs",
     "base_legs_boots": "skyhighheroes:chase/astro/chase_tenma_base_legs_boots",
-    "longk": "syhighheroes:chase/astro/chase_tenma_long",
+    "long": "skyhighheroes:chase/astro/chase_tenma_long",
     "long_flying": "skyhighheroes:chase/astro/chase_tenma_long_flying",
     "long_head_torso": "skyhighheroes:chase/astro/chase_tenma_long_head_torso",
     "long_torso_boots": "skyhighheroes:chase/astro/chase_tenma_long_torso_boots",

@@ -77,7 +77,7 @@ function initForceField(renderer, color) {
     });
 }
 function emCeilingAnimation(renderer) {
-    addAnimationEvent(renderer, "em_wave.CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
+    addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
 }
 
 function emTeleport(renderer) {

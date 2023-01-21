@@ -1,10 +1,10 @@
 {
-  "suit": "skyhighheroes:aidan_tenma",
+  "suit": "skyhighheroes:biscuit_tenma",
   "display": {
     "hideUntilAvailable": true
   },
   "requirements": [
-    "skyhighheroes:aidan_customs"
+    "skyhighheroes:biscuit_customs"
   ],
   "price": {
     "XP_LEVELS": 1

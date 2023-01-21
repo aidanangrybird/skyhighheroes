@@ -1,43 +1,7 @@
 {data} = curve {data}
 
-{leftLeg_posY} -= -12{data} + {data}{leftLeg_posY}
-{leftLeg_posX} -= -2{data} + {data}{leftLeg_posX}
-{leftLeg_posZ} -= 0{data} + {data}{leftLeg_posZ}
-
-{rightLeg_posY} -= -12{data} + {data}{rightLeg_posY}
-{rightLeg_posX} -= 2{data} + {data}{rightLeg_posX}
-{rightLeg_posZ} -= 0{data} + {data}{rightLeg_posZ}
-
-{head_posY} -= 0{data} + {data}{head_posY}
-{head_posX} -= 0{data} + {data}{head_posX}
-{head_posZ} -= 0{data} + {data}{head_posZ}
-
-{body_rotX} -= {data}{body_rotX}
-
 {head_rotX} @ {data} -> -{head_rotX}
-
-{body_posY} += 17.5{data}
-{rightArm_posY} += 13.5{data}
-{leftArm_posY} += 13.5{data}
-{rightLeg_posY} += -6.5{data}
-{leftLeg_posY} += -6.5{data}
-{head_posY} += 17.5{data}
-
-{rightArm_posX} += 10{data}
-{leftArm_posX} += -10{data}
-{rightLeg_posX} -= -4{data}
-{leftLeg_posX} -= 4{data}
-
-{head_rotY} += -180'{data}
-{rightArm_rotY} += -180'{data}
-{leftArm_rotY} += -180'{data}
-{rightLeg_rotY} -= 180'{data}
-{leftLeg_rotY} += -180'{data}
-{body_rotY} += -180'{data}
-
-{head_rotX} -= 180'{data}
-{rightArm_rotX} += -180'{data}
-{leftArm_rotX} += -180'{data}
-{rightLeg_rotX} -= 180'{data}
-{leftLeg_rotX} -= 180'{data}
-{body_rotX} -= 180'{data}
+{head_rotY} @ {data} -> -{head_rotY}
+out "pivot" (0, 0.5{data}, 0)
+out "rotate" (-180{data}, 1, 0, 0)
+out "rotate" (180{data}, 0, 1, 0)

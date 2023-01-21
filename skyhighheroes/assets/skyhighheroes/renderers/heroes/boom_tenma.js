@@ -19,7 +19,7 @@ loadTextures({
     "base_torso_boots_legs": "skyhighheroes:boom/astro/boom_tenma_base_torso_boots_legs",
     "base_legs": "skyhighheroes:boom/astro/boom_tenma_base_legs",
     "base_legs_boots": "skyhighheroes:boom/astro/boom_tenma_base_legs_boots",
-    "longk": "syhighheroes:boom/astro/boom_tenma_long",
+    "long": "skyhighheroes:boom/astro/boom_tenma_long",
     "long_flying": "skyhighheroes:boom/astro/boom_tenma_long_flying",
     "long_head_torso": "skyhighheroes:boom/astro/boom_tenma_long_head_torso",
     "long_torso_boots": "skyhighheroes:boom/astro/boom_tenma_long_torso_boots",

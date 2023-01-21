@@ -18,5 +18,5 @@ loadTextures({
 
 function init(renderer) {
     parent.init(renderer);
-    renderer.setItemIcons(null, "dragon_transer", null, null);
+    renderer.setItemIcon("CHESTPLATE", "dragon_transer");
 }

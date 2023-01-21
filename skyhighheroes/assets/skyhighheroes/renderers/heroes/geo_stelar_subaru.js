@@ -33,11 +33,23 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-    parent.initEffects(renderer);
+    stuff.initForceField(renderer, colorVar);
+    omega_xis = stelar.initOmegaXis(renderer);
+    stelar.initMegaBuster(renderer, colorVar);
+    stelar.initEquipment(renderer);
+    ears = renderer.createEffect("fiskheroes:ears");
+    ears.anchor.set("head");
+    ears.angle = 7.5;
+    ears.inset = -0.02;
     stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_subaru_flight");
 }
 
 function initAnimations(renderer) {
     stuff.forcefieldAnimation(renderer);
     stelar.initStelarAnimations(renderer);
+}
+
+function render(entity, renderLayer, isFirstPersonArm) {
+    omega_xis.render(entity, renderLayer);
+    ears.render();
 }
