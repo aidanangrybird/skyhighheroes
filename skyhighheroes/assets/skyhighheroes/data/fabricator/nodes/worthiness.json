@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Omega-Xis: The Fugitive",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/liam_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:player_struck_by_lightning",
+      "description": {
+        "translate": "Fate has choosen you"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_STRUCK"
+          },
+        "check": "(player.world().getLocation(player.pos()).biome().startsWith('Beach') || player.world().getLocation(player.pos()).biome().startsWith('Beach') || player.world().getLocation(player.pos()).biome().startsWith('Beach')) && player.world().getLocation(player.pos()).biome().startsWith('Plains') && !player.world().isDaytime() && player.rotPitch() > 10 && player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@
     "fiskheroes:controlled_flight": {
       "speed": 0.1,
       "boostSpeed": 0.35,
-      "canRoll": false,
+      "canRoll": true,
       "canBoost": true,
       "collision": {
         "blocks": {

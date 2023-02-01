@@ -58,10 +58,32 @@ function addAnimation(renderer, key, anim) {
 function addAnimationWithData(renderer, key, anim, dataVar) {
     return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
 }
+function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
+    var anim = renderer.createResource("ANIMATION", value);
+    renderer.addCustomAnimation(name, anim);
+
+    if (typeof dataLoader === "undefined") {
+        anim.setData((entity, data) => {
+        data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
+        data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+        });
+    }
+    else {
+        anim.setData((entity, data) => dataLoader(entity, data));
+    }
+    anim.setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isEmpty());
+
+    anim.priority = -10;
+    renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
+}
+
 function addFlightAnimation(renderer, name, value, dataLoader) {
     var anim = renderer.createResource("ANIMATION", value);
     renderer.addCustomAnimation(name, anim);
 
+    
+    anim.setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && entity.getHeldItem().isEmpty())
     if (typeof dataLoader === "undefined") {
         anim.setData((entity, data) => {
         data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
@@ -85,6 +107,9 @@ function initStelarAnimations(renderer) {
         .priority = 10;
     //Flight
     addFlightAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
+    addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/stelar_holding_flight.anim.json");
+    addAnimationWithData(renderer, "stelar.ROLL", "skyhighheroes:flight/stelar_barrel_roll", "fiskheroes:barrel_roll_timer")
+        .priority = 10;
 }
 //Mega Buster
 function initMegaBuster(renderer, color) {

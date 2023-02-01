@@ -66,35 +66,17 @@
     "skyhighheroes:chase_stelar" : {
       "iron_man" : "\u00A72Iron \u00A72Man \u00A72Mark \u00A7250 \u00A72Style\u00A7r"
     },
-    "skyhighheroes:comic_stelar" : {
-      "flash" : "\u00A71The \u00A71Flash \u00A71Style\u00A7r"
-    },
-    "skyhighheroes:dark_stelar" : {
-      "batman" : "\u00A78Batman \u00A78Who \u00A78Laughs \u00A78Style\u00A7r"
-    },
     "skyhighheroes:ender_stelar" : {
       "dr_fate" : "\u00A73Dr \u00A73Fate \u00A73Style\u00A7r"
-    },
-    "skyhighheroes:expo_stelar" : {
-      "mysterio" : "\u00A72Mysterio \u00A72Style\u00A7r"
-    },
-    "skyhighheroes:fire_stelar" : {
-      "firestorm" : "\u00A74Fire\u00A71storm \u00A74Jax \u00A71Style\u00A7r"
     },
     "skyhighheroes:fish_stelar" : {
       "spider_man" : "\u00A75Spider-Man \u00A75(Raimi) \u00A75Style\u00A7r"
     },
     "skyhighheroes:liam_stelar" : {
-      "iron_man" : "\u00A75Iron \u00A75Man \u00A75Mark \u00A7585 \u00A75Style\u00A7r"
-    },
-    "skyhighheroes:mango_stelar" : {
-      "vision" : "\u00A78Vision \u00A78Style\u00A7r"
+      "iron_man" : "\u00A71Iron \u00A71Man \u00A71Mark \u00A7185 \u00A71Style\u00A7r"
     },
     "skyhighheroes:razor_stelar" : {
       "iron_man" : "\u00A71Iron \u00A71Man \u00A71Mark \u00A7150 \u00A71Style\u00A7r"
-    },
-    "skyhighheroes:minecraft_stelar" : {
-      "deadpool" : "\u00A71Deadpool \u00A71(X-Men) \u00A71Style\u00A7r"
     },
     "skyhighheroes:slayer_stelar" : {
       "black_panther" : "\u00A7eBlack \u00A7ePanther \u00A7eStyle\u00A7r"
@@ -102,17 +84,8 @@
     "skyhighheroes:storm_stelar" : {
       "iron_man" : "\u00A74Iron \u00A74Man \u00A74Mark \u00A7485 \u00A74Style\u00A7r"
     },
-    "skyhighheroes:trell_stelar" : {
-      "black_lightning" : "\u00A73Black \u00A73Lightning \u00A73Style\u00A7r"
-    },
-    "skyhighheroes:tobi_stelar" : {
-      "reverse_flash" : "\u00A77Reverse \u00A77Flash \u00A77(Earth \u00A77X) \u00A77Style\u00A7r"
-    },
     "skyhighheroes:tysen_stelar" : {
       "martian_manhunter" : "\u00A75Martian \u00A75Manhunter \u00A75Style\u00A7r"
-    },
-    "skyhighheroes:yellow_stelar" : {
-      "spider_man" : "\u00A73Spider-Man \u00A73(PS4) \u00A73Style\u00A7r"
     }
   }
 }

@@ -7,6 +7,7 @@ function init(hero) {
   hero.setBoots("Boots");
   hero.setAliases("tobio_tenma");
   hero.setVersion("Tobio Tenma");
+  hero.hide();
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);

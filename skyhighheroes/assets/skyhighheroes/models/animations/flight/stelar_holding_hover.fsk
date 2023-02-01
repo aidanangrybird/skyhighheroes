@@ -9,9 +9,9 @@ out "rotate" (-{x}clamp({forward}, -2, 2), 1, 0, 0)
 {adz} = abs {forward}
 
 {head_rotX} -= 15'clamp({forward}, -2, 2)
-{rightArm_rotX} += ({head_rotX}){forward}{hover}
-{rightArm_rotY} += 0.0{adx} + 0.4{forward}
-{rightArm_rotZ} += 7'{data_0}
+{rightArm_rotX} += -0.3{forward} - 0.3{adx}
+{rightArm_rotZ} += 0.3{adz} + 0.3{strafe} + 7'{data_0}
+{rightLeg_posZ} += -0.75{adz}
 {leftArm_rotX} += 0.4{forward} - 0.4{adx}
 {leftArm_rotZ} -= 0.4{adz} - 0.4{strafe} + 7'{data_0}
 {leftLeg_posZ} -= 0.75{adz}

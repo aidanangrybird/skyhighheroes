@@ -1,7 +1,7 @@
 {
   "suit": "skyhighheroes:geo_stelar",
   "requirements": [
-    "skyhighheroes:wave_beings",
+    "skyhighheroes:worthiness",
     "fiskheroes:tier10"
   ]
 }

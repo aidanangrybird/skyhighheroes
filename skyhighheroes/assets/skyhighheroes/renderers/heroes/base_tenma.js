@@ -2,7 +2,7 @@ var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
-    "boots": "skyhighheroes:astro/boots"
+    "boots": "skyhighheroes:boots"
 });
 
 function init(renderer) {
@@ -180,5 +180,5 @@ function getSuitID() {
     return "";
 }
 function getCLR() {
-    return 0x00FF00;
+    return 0x000000;
 }

@@ -5,8 +5,7 @@
 {leftArm_rotZ} -= 10'{data_1}
 {rightLeg_rotX} += 15'{data_1} + 0.2{x}
 {leftLeg_rotX} += 15'{data_1} - 0.2{x}
-{head_rotX} @ {data_1} -> -90'
-{head_posZ} @ {data_1} -> -4
+{head_rotX} @ {data_1} -> -50'
 
 {d} *= {data_1} / 1'
 {x} = min({vel} / 2, 1) / 2

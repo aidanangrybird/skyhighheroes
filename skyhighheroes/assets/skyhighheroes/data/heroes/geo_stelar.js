@@ -4,6 +4,7 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setAliases("geo_stelar");
   hero.setVersion("Mega Man Star Force");
+  hero.hide();
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);

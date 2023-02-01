@@ -98,6 +98,7 @@ function initAstroAnimations(renderer) {
     //Landing
     addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
         .priority = -8;
+    addAnimationWithData(renderer, "astro.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
 }
 
 //Init
