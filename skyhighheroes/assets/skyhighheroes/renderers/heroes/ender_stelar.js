@@ -42,7 +42,7 @@ loadTextures({
     "rifle_lights": "skyhighheroes:ender/ender_stelar_rifle_lights"
 });
 
-function getCLR() {
+function getColor() {
     return 0x00FFFF;
 }
 

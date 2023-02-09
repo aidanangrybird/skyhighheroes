@@ -15,7 +15,7 @@ out "rotate" (-{x}clamp({forward}, -2, 2), 1, 0, 0)
 {leftArm_rotX} += 0.4{forward} - 0.4{adx}
 {leftArm_rotZ} -= 0.4{adz} - 0.4{strafe} + 7'{data_0}
 {leftLeg_posZ} -= 0.75{adz}
-{leftLeg_posY} -= 0.1{adz}
+{leftLeg_posY} -= 1.5{adz}
 {rightLeg_rotX} += 0.1{forward}
 {rightLeg_rotZ} += 0.05{adz} + 0.4{strafe}
 {leftLeg_rotX} += 0.3{forward}

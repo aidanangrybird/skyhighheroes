@@ -3,6 +3,7 @@
     "name": {
       "translate": "EM Wave Beings"
     },
+    "hideUntilAvailable": true,
     "icon": {
       "texture": "skyhighheroes:textures/gui/nodes/star_force.png"
     }

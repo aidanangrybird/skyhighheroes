@@ -3,14 +3,15 @@
     "name": "Omega-Xis: The Fugitive",
     "hideUntilAvailable": true,
     "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/liam_head.png"
+      "texture":  "skyhighheroes:textures/gui/nodes/star_force.png"
     }
   },
   "requirements": [
-    "skyhighheroes:base"
+    "skyhighheroes:wave_beings",
+    "fiskheroes:tier10"
   ],
   "criteria": {
-    "exist": {
+    "chance": {
       "trigger": "fiskheroes:player_struck_by_lightning",
       "description": {
         "translate": "Fate has choosen you"
@@ -19,7 +20,7 @@
         "variables": {
           "player": "PLAYER_STRUCK"
           },
-        "check": "(player.world().getLocation(player.pos()).biome().startsWith('Beach') || player.world().getLocation(player.pos()).biome().startsWith('Beach') || player.world().getLocation(player.pos()).biome().startsWith('Beach')) && player.world().getLocation(player.pos()).biome().startsWith('Plains') && !player.world().isDaytime() && player.rotPitch() > 10 && player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+        "check": "(player.world().getLocation(player.pos().add(6, 0, 0)).biome().startsWith('Beach') || player.world().getLocation(player.pos().add(-6, 0, 0)).biome().startsWith('Beach') || player.world().getLocation(player.pos().add(0, 0, -6)).biome().startsWith('Beach')) && player.world().getLocation(player.pos() ||  player.world().getLocation(player.pos().add(-10, 0, 0)).biome().startsWith('Beach') || player.world().getLocation(player.pos().add(0, 0, 6)).biome().startsWith('Beach')) && player.world().getLocation(player.pos()).biome().startsWith('Plains') && !player.world().isDaytime() && player.rotPitch() > 60 && player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
       }
     }
   }

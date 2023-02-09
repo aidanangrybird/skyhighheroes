@@ -1,0 +1,28 @@
+{
+  "display": {
+    "name": "Death",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:robot",
+    "fiskheroes:tier8_9"
+  ],
+  "criteria": {
+    "death": {
+      "trigger": "fiskheroes:player_killed",
+      "description": {
+        "translate": "You have died and have been rebuilt"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_KILLED",
+          "other_player": "DAMAGE_SOURCE"
+          },
+        "check": "player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && (player.getWornChestplate() == 'fiskheroes:falcon' || player.getWornChestplate() == 'fiskheroes:captain_america_sam') && (other_player.getEntity().as('PLAYER').getWornChestplate() == 'fiskheroes:falcon' || other_player.getEntity().as('PLAYER').getWornChestplate() == 'fiskheroes:captain_america_sam') && player.getData('fiskheroes:glide_flying') && player.isSprinting() && other_player.getEntity().as('PLAYER').getData('fiskheroes:glide_flying') && other_player.getEntity().as('PLAYER').isSprinting() && other_player.hasDamageType('COLLISION')"
+      }
+    }
+  }
+}

@@ -83,6 +83,24 @@ function addFlightAnimationWithLanding(renderer, name, value) {
     });
 }
 
+function addHoverAnimation(renderer, name, value, dataLoader) {
+    var anim = renderer.createResource("ANIMATION", value);
+    renderer.addCustomAnimation(name, anim);
+
+    if (typeof dataLoader === "undefined") {
+        anim.setData((entity, data) => {
+            data.load(0, entity.getInterpolatedData("fiskheroes:levitate_timer"));
+            data.load(1, entity.loop(20 * Math.PI) + 0.4);
+        });
+    }
+    else {
+        anim.setData((entity, data) => dataLoader(entity, data));
+    }
+
+    anim.priority = -9.5;
+    return anim;
+}
+
 //Astro Animations
 function initAstroAnimations(renderer) {
     //Aiming
@@ -99,6 +117,7 @@ function initAstroAnimations(renderer) {
     addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
         .priority = -8;
     addAnimationWithData(renderer, "astro.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
+    addHoverAnimation(renderer, "astro.HOVER", "skyhighheroes:astro_hover");
 }
 
 //Init

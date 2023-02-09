@@ -99,6 +99,24 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
     renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
+function addHoverAnimation(renderer, name, value, dataLoader) {
+    var anim = renderer.createResource("ANIMATION", value);
+    renderer.addCustomAnimation(name, anim);
+
+    if (typeof dataLoader === "undefined") {
+        anim.setData((entity, data) => {
+            data.load(0, entity.getInterpolatedData("fiskheroes:levitate_timer"));
+            data.load(1, entity.loop(20 * Math.PI) + 0.4);
+        });
+    }
+    else {
+        anim.setData((entity, data) => dataLoader(entity, data));
+    }
+
+    anim.priority = -9.5;
+    return anim;
+}
+
 //Stelar Animations
 function initStelarAnimations(renderer) {
     //Aiming
@@ -110,6 +128,7 @@ function initStelarAnimations(renderer) {
     addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/stelar_holding_flight.anim.json");
     addAnimationWithData(renderer, "stelar.ROLL", "skyhighheroes:flight/stelar_barrel_roll", "fiskheroes:barrel_roll_timer")
         .priority = 10;
+    addHoverAnimation(renderer, "stelar.HOVER", "skyhighheroes:stelar_hover");
 }
 //Mega Buster
 function initMegaBuster(renderer, color) {

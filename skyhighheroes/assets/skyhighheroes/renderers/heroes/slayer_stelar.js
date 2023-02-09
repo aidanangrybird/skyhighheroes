@@ -42,7 +42,7 @@ loadTextures({
     "rifle_lights": "skyhighheroes:slayer/slayer_stelar_rifle_lights"
 });
 
-function getCLR() {
+function getColor() {
     return 0xFFC400;
 }
 

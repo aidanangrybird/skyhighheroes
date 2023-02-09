@@ -3,7 +3,7 @@ extend("skyhighheroes:base_tenma");
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
-function getCLR() {
+function getColor() {
     return 0xFF0000;
 }
 
@@ -56,8 +56,8 @@ loadTextures({
 function initEffects(renderer) {
     parent.initEffects(renderer);
     //Boot Rockets
-    rockets = astro.initBoosters(renderer, getCLR());
-    astro.initBeams(renderer, getCLR());
+    rockets = astro.initBoosters(renderer, getColor());
+    astro.initBeams(renderer, getColor());
     stuff.bindSpeedTrail(renderer, "skyhighheroes:biscuit_tenma_speed");
 }
 

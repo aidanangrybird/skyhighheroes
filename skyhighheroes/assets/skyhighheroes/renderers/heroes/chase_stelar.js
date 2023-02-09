@@ -42,7 +42,7 @@ loadTextures({
     "rifle_lights": "skyhighheroes:chase/chase_stelar_rifle_lights"
 });
 
-function getCLR() {
+function getColor() {
     return 0xBFFF00;
 }
 

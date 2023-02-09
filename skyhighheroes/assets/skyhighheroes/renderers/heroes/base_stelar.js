@@ -89,9 +89,10 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-    stuff.initForceField(renderer, getCLR());
+    stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
+    stuff.initForceField(renderer, getColor());
     omega_xis = stelar.initOmegaXis(renderer);
-    stelar.initMegaBuster(renderer, getCLR());
+    stelar.initMegaBuster(renderer, getColor());
     stelar.initEquipment(renderer);
     hair = renderer.createEffect("fiskheroes:shield");
     hair.texture.set("hair", null);
@@ -123,7 +124,7 @@ function getNamePerson() {
 function getID() {
     return "";
 }
-function getCLR() {
+function getColor() {
     return 0x00FF00;
 }
 function getSatellite() {

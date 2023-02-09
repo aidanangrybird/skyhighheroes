@@ -42,7 +42,7 @@ loadTextures({
     "rifle_lights": "skyhighheroes:boom/boom_stelar_rifle_lights"
 });
 
-function getCLR() {
+function getColor() {
     return 0xAA00FF;
 }
 

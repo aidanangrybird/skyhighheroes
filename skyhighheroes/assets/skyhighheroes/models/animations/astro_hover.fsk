@@ -1,0 +1,18 @@
+{data_0} = curve {data_0}
+{wobble2} = {data_0}sin(2pi{data_1})
+{wobble4} = {data_0}sin(4pi{data_1})
+{wobble2p05} = {data_0}sin(2pi{data_1} + pi / 2)
+
+{head_rotX} -= 0.5'{wobble2}
+{head_rotZ} -= 0.4'{wobble2p05}
+
+{rightArm_rotX} -= 2'{wobble4}{wobble2}
+{leftArm_rotX} += 2'{wobble4}{wobble2p05}
+{rightArm_rotZ} += 2'{data_0} + 1'{wobble2}
+{leftArm_rotZ} -= 2'{data_0} + 1'{wobble2}
+
+{rightLeg_rotX} += 1'{wobble4}{wobble2}
+{leftLeg_rotX} -= 1'{wobble4}{wobble2p05}
+
+out "rotate" (0.2{wobble2p05}, 0, 0, 1)
+out "rotate" (0.2{wobble2}, 1, 0, 0)

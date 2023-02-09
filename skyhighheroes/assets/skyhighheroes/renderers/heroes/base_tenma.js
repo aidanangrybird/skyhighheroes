@@ -143,7 +143,7 @@ function initEffects(renderer) {
     bootOpening = renderer.createEffect("fiskheroes:overlay");
     bootOpening.texture.set("boots", null);
     astro.initEquipment(renderer);
-    stuff.initForceField(renderer, getCLR());
+    stuff.initForceField(renderer, getColor());
 }
 
 function initAnimations(renderer) {
@@ -179,6 +179,6 @@ function getID() {
 function getSuitID() {
     return "";
 }
-function getCLR() {
+function getColor() {
     return 0x000000;
 }

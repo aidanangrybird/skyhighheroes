@@ -130,6 +130,7 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
+    stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
     stuff.initForceField(renderer, colorVar);
     omega_xis = stelar.initOmegaXis(renderer);
     stelar.initMegaBuster(renderer, colorVar);

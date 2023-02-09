@@ -1,0 +1,28 @@
+{vel} = sqrt({motX}^2 + {motZ}^2) + (0.3{motY})^2
+{vel} = 1 - curve min(1.5{vel}, 1)
+{data_0} = {vel}curve({data_0})
+{data_1} = 0.2{data_0}sin(2pi{data_1})
+
+{head_rotX} += 3'{data_0}
+
+{rightLeg_posY} -= 0.75{data_0} + 0.25{data_1}
+{rightLeg_posZ} -= -0.25{data_0} + 0.5{data_1}
+{rightLeg_rotX} += 6'{data_0} - 20'{data_1}
+{rightLeg_rotY} += 5'{data_0} + 2'{data_1}
+{rightLeg_rotZ} += 2'{data_0} - 2'{data_1}
+
+{leftLeg_posY} -= 0.75{data_0} + 2{data_1}
+{leftLeg_posZ} -= {data_0} + 2{data_1}
+{leftLeg_rotX} += 5'{data_0} + 10'{data_1}
+{leftLeg_rotY} -= 8'{data_0} + 4'{data_1}
+{leftLeg_rotZ} -= 3'{data_0} - 2'{data_1}
+
+{rightArm_rotX} += 2'{data_0} - 0.2{data_1}
+{rightArm_rotY} += 10'{data_0}
+{rightArm_rotZ} += 5'({data_0} + 1.5{data_1})
+{leftArm_rotX} += 7'{data_0} + 0.2{data_1}
+{leftArm_rotY} -= 10'{data_0}
+{leftArm_rotZ} -= 7'({data_0} + 1.5{data_1})
+
+out "pivot" (0, 0.56, 0)
+out "rotate" ({data_0}, 1, 0, 0)

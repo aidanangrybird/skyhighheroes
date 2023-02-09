@@ -3,6 +3,7 @@
     "name": {
       "translate": "Robots"
     },
+    "hideUntilAvailable": true,
     "icon": {
       "item": "fiskheroes:suit_data_drive"
     }
