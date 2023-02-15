@@ -32,7 +32,6 @@ loadTextures({
     "transer": "skyhighheroes:stelar_transer_pegasus",
     "transer_lights": "skyhighheroes:slayer/slayer_stelar_transer_lights",
     "blade": "skyhighheroes:slayer/slayer_stelar_blade",
-    "hair": "skyhighheroes:slayer/slayer_stelar_hair",
     "shield": "skyhighheroes:slayer/slayer_stelar_shield",
     "katana": "skyhighheroes:slayer/slayer_stelar_katana",
     "katana_lights": "skyhighheroes:slayer/slayer_stelar_katana_lights",

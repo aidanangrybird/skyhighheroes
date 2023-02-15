@@ -32,7 +32,6 @@ loadTextures({
     "transer": "skyhighheroes:stelar_transer_leo",
     "transer_lights": "skyhighheroes:liam/liam_stelar_transer_lights",
     "blade": "skyhighheroes:liam/liam_stelar_blade",
-    "hair": "skyhighheroes:liam/liam_stelar_hair",
     "shield": "skyhighheroes:liam/liam_stelar_shield",
     "katana": "skyhighheroes:liam/liam_stelar_katana",
     "katana_lights": "skyhighheroes:liam/liam_stelar_katana_lights",

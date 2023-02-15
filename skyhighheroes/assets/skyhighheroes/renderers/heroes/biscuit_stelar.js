@@ -32,7 +32,6 @@ loadTextures({
     "transer": "skyhighheroes:stelar_transer_pegasus",
     "transer_lights": "skyhighheroes:biscuit/biscuit_stelar_transer_lights",
     "blade": "skyhighheroes:biscuit/biscuit_stelar_blade",
-    "hair": "skyhighheroes:biscuit/biscuit_stelar_hair",
     "shield": "skyhighheroes:biscuit/biscuit_stelar_shield",
     "katana": "skyhighheroes:biscuit/biscuit_stelar_katana",
     "katana_lights": "skyhighheroes:biscuit/biscuit_stelar_katana_lights",

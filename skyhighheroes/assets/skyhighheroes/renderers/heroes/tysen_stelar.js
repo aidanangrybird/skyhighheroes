@@ -32,7 +32,6 @@ loadTextures({
     "transer": "skyhighheroes:stelar_transer_dragon",
     "transer_lights": "skyhighheroes:tysen/tysen_stelar_transer_lights",
     "blade": "skyhighheroes:tysen/tysen_stelar_blade",
-    "hair": "skyhighheroes:tysen/tysen_stelar_hair",
     "shield": "skyhighheroes:tysen/tysen_stelar_shield",
     "katana": "skyhighheroes:tysen/tysen_stelar_katana",
     "katana_lights": "skyhighheroes:tysen/tysen_stelar_katana_lights",

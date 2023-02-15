@@ -94,11 +94,6 @@ function initEffects(renderer) {
     omega_xis = stelar.initOmegaXis(renderer);
     stelar.initMegaBuster(renderer, getColor());
     stelar.initEquipment(renderer);
-    hair = renderer.createEffect("fiskheroes:shield");
-    hair.texture.set("hair", null);
-    hair.anchor.set("head");
-    hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-    hair.large = true;
     ears = renderer.createEffect("fiskheroes:ears");
     ears.anchor.set("head");
     ears.angle = 7.5;
