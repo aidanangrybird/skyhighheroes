@@ -153,19 +153,19 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
     if (renderLayer == "CHESTPLATE") {
-        armLights.opacity = entity.getInterpolatedData('fiskheroes:flight_boost_timer');
+        armLights.opacity = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
         armLights.render();
     }
     if (renderLayer == "BOOTS") {
         if (entity.getInterpolatedData("fiskheroes:flight_timer") > 0) {
-            bootOpening.opacity = (-1 * entity.getInterpolatedData('fiskheroes:flight_timer')) + 1;
+            bootOpening.opacity = (-1 * entity.getInterpolatedData("fiskheroes:flight_timer")) + 1;
             bootOpening.render();
-            bootLights.opacity = entity.getInterpolatedData('fiskheroes:flight_timer');
+            bootLights.opacity = entity.getInterpolatedData("fiskheroes:flight_timer");
             bootLights.render();
         }
     }
     if (entity.getHeldItem().isEmpty()) {
-        cannon.opacity = entity.getInterpolatedData('fiskheroes:aiming_timer');
+        cannon.opacity = entity.getInterpolatedData("fiskheroes:aiming_timer");
         cannon.render();
     }
 }
