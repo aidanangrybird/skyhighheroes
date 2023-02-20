@@ -8,6 +8,8 @@
   "dataVars": {
     "wave_changing_timer": "FLOAT_INTERP",
     "wave_changed": "BOOLEAN",
+    "predation_timer": "FLOAT_INTERP",
+    "predation": "BOOLEAN",
     "battle_card": "BYTE",
     "head_toggle": "BYTE",
     "visualizer_toggle": "BYTE",

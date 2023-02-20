@@ -96,25 +96,6 @@ function cycleCard(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/battle_card") + 1);
   if (player.getData("skyhighheroes:dyn/battle_card") > 2) {
     manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
-    manager.setData(player, "fiskheroes:shield_timer", 0.0);
-    manager.setData(player, "fiskheroes:blade_timer", 0.0);
-    manager.setData(player, "fiskheroes:shield", false);
-    manager.setData(player, "fiskheroes:blade", false);
-    manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
-  }
-  if (player.getData("skyhighheroes:dyn/battle_card") == 1) {
-    manager.setData(player, "fiskheroes:shield_timer", 1.0);
-    manager.setData(player, "fiskheroes:blade_timer", 0.0);
-    manager.setData(player, "fiskheroes:shield", true);
-    manager.setData(player, "fiskheroes:blade", false);
-    manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
-  }
-  if (player.getData("skyhighheroes:dyn/battle_card") == 2) {
-    manager.setData(player, "fiskheroes:shield_timer", 0.0);
-    manager.setData(player, "fiskheroes:blade_timer", 1.0);
-    manager.setData(player, "fiskheroes:shield", false);
-    manager.setData(player, "fiskheroes:blade", true);
-    manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
   }
   return true;
 }

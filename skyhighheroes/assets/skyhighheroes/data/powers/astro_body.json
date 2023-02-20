@@ -28,7 +28,7 @@
     },
     "fiskheroes:energy_manipulation": {
       "damageProfile": {
-        "damage": 8.0,
+        "damage": 10.0,
         "types": {
           "ENERGY": 1.0
         }

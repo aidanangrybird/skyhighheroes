@@ -2,6 +2,15 @@
   "name": "Battle Card Predation",
   "value": 1,
   "modifiers": {
+    "fiskheroes:transformation": {
+      "key": "PREDATION",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/predation",
+        "timerData": "skyhighheroes:dyn/predation_timer",
+        "time": 5
+      },
+      "isToggle": false
+    },
     "fiskheroes:shield": {
       "shield": {
         "health": 1000.0,

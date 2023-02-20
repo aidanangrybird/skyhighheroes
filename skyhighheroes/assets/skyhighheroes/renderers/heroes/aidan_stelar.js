@@ -33,6 +33,7 @@ loadTextures({
     "transer_lights": "skyhighheroes:aidan/aidan_stelar_transer_lights",
     "blade": "skyhighheroes:aidan/aidan_stelar_blade",
     "shield": "skyhighheroes:aidan/aidan_stelar_shield",
+    "shield_lights": "skyhighheroes:aidan/aidan_stelar_shield_lights",
     "katana": "skyhighheroes:aidan/aidan_stelar_katana",
     "katana_lights": "skyhighheroes:aidan/aidan_stelar_katana_lights",
     "scythe": "skyhighheroes:aidan/aidan_stelar_scythe",

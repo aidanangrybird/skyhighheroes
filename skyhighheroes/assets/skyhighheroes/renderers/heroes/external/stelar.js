@@ -129,6 +129,8 @@ function initStelarAnimations(renderer) {
     addAnimationWithData(renderer, "stelar.ROLL", "skyhighheroes:flight/stelar_barrel_roll", "fiskheroes:barrel_roll_timer")
         .priority = 10;
     addHoverAnimation(renderer, "stelar.HOVER", "skyhighheroes:stelar_hover");
+    /*addAnimationWithData(renderer, "stelar.PREDATION", "fiskheroes:blocking_arm", "skyhighheroes:dyn/predation_timer")
+        .priority = 10;*/
 }
 //Mega Buster
 function initMegaBuster(renderer, color) {
@@ -136,12 +138,15 @@ function initMegaBuster(renderer, color) {
     bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
         { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
     ]);
+    bindBeam(renderer, "fiskheroes:lightning_cast", "skyhighheroes:wave_discharge", "rightArm", color, [
+        { "firstPerson": [-8.0, 4.5, -10.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+    ]);
 }
 
 //Equipment
 function initEquipment(renderer) {
     var livery_shield = renderer.bindProperty("fiskheroes:livery");
-    livery_shield.texture.set("shield");
+    livery_shield.texture.set("shield", "shield_lights");
     livery_shield.weaponType = "SHIELD";
     var livery_katana = renderer.bindProperty("fiskheroes:livery");
     livery_katana.texture.set("katana", "katana_lights");

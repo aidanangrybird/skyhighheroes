@@ -89,7 +89,7 @@ function isModifierEnabled(entity, modifier) {
     case "fiskheroes:super_speed":
       return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
     case "fiskheroes:shield":
-      return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
+      return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
     case "fiskheroes:leaping":
       return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
     case "fiskheroes:arrow_catching":
