@@ -33,6 +33,7 @@ loadTextures({
     "transer_lights": "skyhighheroes:ender/ender_stelar_transer_lights",
     "blade": "skyhighheroes:ender/ender_stelar_blade",
     "shield": "skyhighheroes:ender/ender_stelar_shield",
+    "shield_lights": "skyhighheroes:ender/ender_stelar_shield_lights",
     "katana": "skyhighheroes:ender/ender_stelar_katana",
     "katana_lights": "skyhighheroes:ender/ender_stelar_katana_lights",
     "scythe": "skyhighheroes:ender/ender_stelar_scythe",

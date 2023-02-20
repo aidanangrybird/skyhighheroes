@@ -19,6 +19,7 @@ loadTextures({
     "cannon_right_lights": "skyhighheroes:geo/subaru/omega_xis_geo_stelar_subaru_right_eyes",
     "blade": "skyhighheroes:geo/subaru/geo_stelar_subaru_blade",
     "shield": "skyhighheroes:geo/subaru/geo_stelar_subaru_shield",
+    "shield_lights": "skyhighheroes:geo/subaru/geo_stelar_subaru_shield_lights",
     "katana": "skyhighheroes:geo/subaru/geo_stelar_subaru_katana",
     "katana_lights": "skyhighheroes:geo/subaru/geo_stelar_subaru_katana_lights",
     "scythe": "skyhighheroes:geo/subaru/geo_stelar_subaru_scythe",

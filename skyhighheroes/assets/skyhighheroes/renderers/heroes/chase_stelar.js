@@ -33,6 +33,7 @@ loadTextures({
     "transer_lights": "skyhighheroes:chase/chase_stelar_transer_lights",
     "blade": "skyhighheroes:chase/chase_stelar_blade",
     "shield": "skyhighheroes:chase/chase_stelar_shield",
+    "shield_lights": "skyhighheroes:chase/chase_stelar_shield_lights",
     "katana": "skyhighheroes:chase/chase_stelar_katana",
     "katana_lights": "skyhighheroes:chase/chase_stelar_katana_lights",
     "scythe": "skyhighheroes:chase/chase_stelar_scythe",

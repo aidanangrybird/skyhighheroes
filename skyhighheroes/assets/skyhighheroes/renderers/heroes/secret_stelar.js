@@ -33,6 +33,7 @@ loadTextures({
     "transer_lights": "skyhighheroes:secret/secret_stelar_transer_lights",
     "blade": "skyhighheroes:secret/secret_stelar_blade",
     "shield": "skyhighheroes:secret/secret_stelar_shield",
+    "shield_lights": "skyhighheroes:secret/secret_stelar_shield_lights",
     "katana": "skyhighheroes:secret/secret_stelar_katana",
     "katana_lights": "skyhighheroes:secret/secret_stelar_katana_lights",
     "scythe": "skyhighheroes:secret/secret_stelar_scythe",

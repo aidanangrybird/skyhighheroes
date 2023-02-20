@@ -33,6 +33,7 @@ loadTextures({
     "transer_lights": "skyhighheroes:storm/storm_stelar_transer_lights",
     "blade": "skyhighheroes:storm/storm_stelar_blade",
     "shield": "skyhighheroes:storm/storm_stelar_shield",
+    "shield_lights": "skyhighheroes:storm/storm_stelar_shield_lights",
     "katana": "skyhighheroes:storm/storm_stelar_katana",
     "katana_lights": "skyhighheroes:storm/storm_stelar_katana_lights",
     "scythe": "skyhighheroes:storm/storm_stelar_scythe",

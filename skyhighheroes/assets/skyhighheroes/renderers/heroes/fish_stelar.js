@@ -33,6 +33,7 @@ loadTextures({
     "transer_lights": "skyhighheroes:fish/fish_stelar_transer_lights",
     "blade": "skyhighheroes:fish/fish_stelar_blade",
     "shield": "skyhighheroes:fish/fish_stelar_shield",
+    "shield_lights": "skyhighheroes:fish/fish_stelar_shield_lights",
     "katana": "skyhighheroes:fish/fish_stelar_katana",
     "katana_lights": "skyhighheroes:fish/fish_stelar_katana_lights",
     "scythe": "skyhighheroes:fish/fish_stelar_scythe",
