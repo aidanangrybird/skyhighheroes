@@ -155,7 +155,7 @@ function init(renderer) {
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "HELMET") {
-            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 || entity.isDisplayStand() || entity.getUUID() != getID()) {
+            if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 || entity.isDisplayStand()) {
                 return "eyes";
             }
             if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
