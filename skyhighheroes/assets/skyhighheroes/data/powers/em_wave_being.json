@@ -86,8 +86,26 @@
     "fiskheroes:damage_immunity|bullet": {
       "damageType": "BULLET"
     },
-    "fiskheroes:damage_immunity|blunt": {
-      "damageType": "BLUNT"
+    "fiskheroes:damage_immunity|radiation": {
+      "damageType": "RADIATION"
+    },
+    "fiskheroes:damage_immunity|water": {
+      "damageType": "WATER"
+    },
+    "fiskheroes:damage_immunity|hulk": {
+      "damageType": "HULK"
+    },
+    "fiskheroes:damage_immunity|holy": {
+      "damageType": "HOLY"
+    },
+    "fiskheroes:damage_immunity|hellfire": {
+      "damageType": "HELLFIRE"
+    },
+    "fiskheroes:damage_immunity|mineral": {
+      "damageType": "MINERAL"
+    },
+    "fiskheroes:damage_immunity|shockwave": {
+      "damageType": "SHOCKWAVE"
     },
     "fiskheroes:projectile_immunity": {
     },
@@ -97,10 +115,13 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ELECTRICITY": 1.0
+          "WAVE_ELECTRICITY": 1.0,
+          "WAVE_ENERGY": 1.0
         },
         "properties": {
-          "LIGHTNING_STRIKE": 1.0
+          "LIGHTNING_STRIKE": 1.0,
+          "HEAT_TRANSFER": 640,
+          "ADD_KNOCKBACK": 5.0
         }
       },
       "range": 128.0,
@@ -122,6 +143,11 @@
         "types": {
           "WAVE_ELECTRICITY": 1.0,
           "WAVE_ENERGY": 1.0
+        },
+        "properties": {
+          "LIGHTNING_STRIKE": 1.0,
+          "HEAT_TRANSFER": 640,
+          "ADD_KNOCKBACK": 5.0
         }
       },
       "chargeTime": 10,

@@ -15,6 +15,9 @@
     },
     "fiskheroes:fire_immunity": {
     },
+    "fiskheroes:damage_immunity|fire": {
+      "damageType": "FIRE"
+    },
     "fiskheroes:damage_immunity|cactus": {
       "damageType": "CACTUS"
     },
@@ -23,6 +26,15 @@
     },
     "fiskheroes:damage_immunity|bullet": {
       "damageType": "BULLET"
+    },
+    "fiskheroes:damage_immunity|water": {
+      "damageType": "WATER"
+    },
+    "fiskheroes:damage_immunity|radiation": {
+      "damageType": "RADIATION"
+    },
+    "fiskheroes:damage_immunity|gamma": {
+      "damageType": "GAMMA"
     },
     "fiskheroes:projectile_immunity": {
     },

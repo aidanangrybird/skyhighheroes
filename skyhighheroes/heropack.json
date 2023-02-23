@@ -36,6 +36,14 @@
     }
   },
   "damageTypes": {
+    "GAMMA": "Gamma",
+    "HELLFIRE": "Hellfire",
+    "HOLY": "Holy",
+    "HULK": "",
+    "MINERAL": "Mineral",
+    "RADIATION": "Radiation",
+    "SHOCKWAVE": "Shockwave",
+    "WATER": "Water",
     "WAVE_BLUNT": "Blunt (Wave)",
     "WAVE_BULLET": "Bullet (Wave)",
     "WAVE_COLD": "Cold (Wave)",
@@ -45,7 +53,8 @@
     "WAVE_FIRE": "Fire (Wave)",
     "WAVE_SHARP": "Sharp (Wave)",
     "WAVE_SHURIKEN": "Shuriken (Wave)",
-    "WAVE_SOUND": "Sound (Wave)"
+    "WAVE_SOUND": "Sound (Wave)",
+    "WAVE_SHOCKWAVE": "Shockwave (Wave)"
   },
   "alts" : {
     "skyhighheroes:geo_stelar" : {

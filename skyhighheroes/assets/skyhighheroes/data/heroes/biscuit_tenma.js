@@ -35,8 +35,6 @@ function init(hero) {
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 2);
   hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
 
-  hero.addSoundEvent("AIM_START", "fiskheroes:repulsor_charge");
-  hero.addSoundEvent("AIM_STOP", "fiskheroes:repulsor_powerdown");
   
   hero.setDefaultScale(0.6);
   hero.setHasProperty(hasProperty);

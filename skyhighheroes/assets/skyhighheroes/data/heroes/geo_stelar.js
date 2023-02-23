@@ -207,22 +207,8 @@ function isModifierEnabled(entity, modifier) {
       switch (modifier.id()) {
         case "explosion": 
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
-        case "fire": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "magic": 
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
-        case "cactus": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        case "cold": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        case "energy": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        case "electricity": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        case "sound": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        case "thorns": 
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "shuriken": 
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "sharp": 
