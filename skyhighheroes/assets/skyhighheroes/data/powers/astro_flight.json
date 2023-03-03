@@ -20,7 +20,7 @@
       "knockback": 0.4,
       "soundEvents": {
         "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
-        "BOOST": "skyhighheroes:tenma_boost"
+        "BOOST": "skyhighheroes:tenma_flight_boost"
       }
     }
   }

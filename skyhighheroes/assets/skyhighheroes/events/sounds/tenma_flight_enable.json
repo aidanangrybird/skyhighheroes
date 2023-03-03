@@ -2,7 +2,7 @@
   "parent": "fiskheroes:sound_base",
   "sound": "fiskheroes:suit.ironman.flight.enable",
   "condition": "!(entity.isSprinting() && entity.getData('fiskheroes:flying'))",
-  "volume": 0.6,
+  "volume": 0.5,
   "pitch": "1.1 - Math.random() * 0.3",
   "fadeOut": 5
 }

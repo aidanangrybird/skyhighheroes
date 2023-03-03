@@ -85,7 +85,10 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:shield", true);
       manager.setData(entity, "fiskheroes:blade", false);
     };
-  });
+  });/*
+  hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
+  hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
+  hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");*/
   hero.addDamageProfile("BLADE", {
     "types": {
       "SHARP": 0.0,

@@ -1,5 +1,5 @@
 function continuePlaying(entity, sound) {
-    if (!entity.getData("fiskheroes:gliding")) {
+    if (entity.getData("fiskheroes:flight_boost_timer") == 0) {
         return false;
     }
     
@@ -8,20 +8,20 @@ function continuePlaying(entity, sound) {
     var volume = 0;
     
     if (vel >= 0.01) {
-        volume = Math.min(Math.max(vel * vel / 8, 0), 1);
+        volume = Math.min(Math.max(vel * vel / 4, 0), 1);
     }
     
     if (ticks < 10) {
         volume *= ticks / 10;
     }
     
-    if (volume > 0.25) {
-        sound.setPitch(volume);
+    if (volume > 0.8) {
+        sound.setPitch(0.2 + volume);
     }
     else {
-        sound.setPitch(0.25);
+        sound.setPitch(1);
     }
     
-    sound.setVolume(volume * 0.25);
+    sound.setVolume(volume * 0.6);
     return true;
 }
