@@ -31,6 +31,8 @@
       "wave_initial_rush": { "distance": 16.0, "target": "ONLY_SELF" },
       "wave_flight_hit": { "distance": 16.0, "target": "ALL_IN_RANGE" },
       "wave_equip": { "distance": 8.0, "target": "ALL_IN_RANGE" },
+      "wave_footstep": { "distance": 16.0, "target": "ALL_IN_RANGE" },
+      "wave_punch": { "distance": 8.0, "target": "ALL_IN_RANGE" },
       "wave_shooting": 32.0,
       "wave_teleport": { "distance": 24.0, "target": "ALL_IN_RANGE" },
       "wave_transform": { "distance": 8.0, "target": "ALL_IN_RANGE" },

@@ -22,7 +22,7 @@
       },
       "knockback": 0.4,
       "soundEvents": {
-        "BOOST": ["skyhighheroes:wave_rushing_past", "skyhighheroes:wave_initial_rush", "skyhighheroes:wave_flying_start", "skyhighheroes:wave_flying_loop"]
+        "BOOST": ["skyhighheroes:wave_flying_start", "skyhighheroes:wave_flying_loop"]
       }
     },
     "fiskheroes:teleportation": {

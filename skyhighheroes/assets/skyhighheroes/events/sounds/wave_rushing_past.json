@@ -1,5 +1,4 @@
 {
-  "parent": "fiskheroes:sound_base",
   "sound": "fiskheroes:ambient.flight",
   "override": "skyhighheroes:funcs/flight",
   "loop": true,

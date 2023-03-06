@@ -6,10 +6,10 @@ function init(hero) {
   hero.setAliases("slayer_stelar");
   hero.setVersion("Mega Man Star Force");
   hero.hide();
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7eSlayer Stelar's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7eSlayer Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7eSlayer Stelar's Rifle},ench:[{id:34,lvl:5}]}", true);
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7eSlayer Stelar's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
   
   hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
@@ -48,7 +48,7 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 0 && entity.getData("fiskheroes:aiming")){
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") != 0 || entity.getData("skyhighheroes:dyn/head_toggle") != 0) && entity.getData("fiskheroes:aiming")){
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
       manager.setData(entity, "fiskheroes:shield_timer", 0.0);
@@ -56,7 +56,7 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:shield", false);
       manager.setData(entity, "fiskheroes:blade", false);
     };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 0 && entity.getData("fiskheroes:flight_boost_timer") > 0){
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") != 0 || entity.getData("skyhighheroes:dyn/head_toggle") != 0) && entity.getData("fiskheroes:flight_boost_timer") > 0){
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
       manager.setData(entity, "fiskheroes:shield_timer", 0.0);
@@ -64,7 +64,7 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:shield", false);
       manager.setData(entity, "fiskheroes:blade", false);
     };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 0 && (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 2)){
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") != 0 || entity.getData("skyhighheroes:dyn/head_toggle") != 0) && (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 2)){
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
       manager.setData(entity, "fiskheroes:shield_timer", 0.0);
@@ -86,10 +86,11 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:shield", true);
       manager.setData(entity, "fiskheroes:blade", false);
     };
-  });/*
+  });
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
   hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
-  hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");*/
+  hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
+  hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.addDamageProfile("BLADE", {
     "types": {
       "SHARP": 0.0,

@@ -1,7 +1,7 @@
 {
   "sound": "skyhighheroes:wave.footstep",
   "override": null,
-  "condition": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1",
+  "condition": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && entity.getData('fiskheroes:flight_timer') == 0",
   "volume": 0.75,
   "pitch": 1.0,
   "loop": false,

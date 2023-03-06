@@ -9,10 +9,10 @@ function init(hero) {
   hero.setAliases("slayer_tenma");
   hero.setVersion("Slayer Tenma");
   hero.hide();
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1}", true, item => item.nbt().getBoolean("Dual"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe", true);
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle", true);
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1}", true, item => item.nbt().getBoolean("Electromagnetic"));
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7eAstro Boy's Katanas (Slayer Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7eAstro Boy's Scythe (Slayer Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7eAstro Boy's Rifle (Slayer Tenma)},ench:[{id:34,lvl:5}]}", true);
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7eAstro Boy's Shield (Slayer Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
   
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
   hero.addAttribute("SPRINT_SPEED", 0.3, 1);

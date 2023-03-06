@@ -83,7 +83,7 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
     renderer.addCustomAnimation(name, anim);
 
     
-    anim.setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && entity.getHeldItem().isEmpty())
+    anim.setCondition(entity => entity.getHeldItem().isEmpty())
     if (typeof dataLoader === "undefined") {
         anim.setData((entity, data) => {
         data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));

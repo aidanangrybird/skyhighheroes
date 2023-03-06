@@ -1,5 +1,4 @@
 {
-  "parent": "fiskheroes:sound_base",
   "sound": "fiskheroes:modifier.flight.boost",
   "condition": "entity.isSprinting() && entity.getData('fiskheroes:flying')",
   "pitch": "1.1 - Math.random() * 0.4",
