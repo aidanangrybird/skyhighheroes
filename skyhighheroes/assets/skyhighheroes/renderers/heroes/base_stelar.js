@@ -4,7 +4,10 @@ var stuff = implement("skyhighheroes:external/stuff");
 function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
-            if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+            if (entity.isDisplayStand()) {
+                return "base";
+            }
+            if (entity.getUUID() != getID()) {
                 return "transer";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
@@ -62,7 +65,10 @@ function init(renderer) {
     });
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
-            if (entity.isDisplayStand() || entity.getUUID() != getID()) {
+            if (entity.isDisplayStand()) {
+                return "lights"
+            }
+            if (entity.getUUID() != getID()) {
                 return "transer_lights"
             }
             if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {

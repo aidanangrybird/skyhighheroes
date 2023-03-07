@@ -46,7 +46,7 @@ function init(renderer) {
     renderer.setTexture((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
             if (entity.isDisplayStand()) {
-                return "transer";
+                return "base";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
@@ -104,7 +104,7 @@ function init(renderer) {
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
             if (entity.isDisplayStand()) {
-                return "transer_lights"
+                return "lights"
             }
             if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
                 return "visualizer_up_lights";
