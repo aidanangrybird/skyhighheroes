@@ -1,7 +1,7 @@
 {
   "inputs": [
     "skyhighheroes:flight/astro_header",
-    "skyhighheroes:flight/astro_hover",
+    "skyhighheroes:flight/astro_idle",
     "skyhighheroes:flight/astro_boost"
   ]
 }

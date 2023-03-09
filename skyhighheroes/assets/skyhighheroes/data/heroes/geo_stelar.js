@@ -4,7 +4,6 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setAliases("geo_stelar");
   hero.setVersion("Mega Man Star Force");
-  hero.hide();
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bGeo Stelar's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bGeo Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bGeo Stelar's Rifle},ench:[{id:34,lvl:5}]}", true);

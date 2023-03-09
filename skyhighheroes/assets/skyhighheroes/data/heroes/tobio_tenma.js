@@ -7,7 +7,6 @@ function init(hero) {
   hero.setBoots("Boots");
   hero.setAliases("tobio_tenma");
   hero.setVersion("Tobio Tenma");
-  hero.hide();
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A74Astro Boy's Katanas (Tobio Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A74Astro Boy's Scythe (Tobio Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Astro Boy's Rifle (Tobio Tenma)},ench:[{id:34,lvl:5}]}", true);

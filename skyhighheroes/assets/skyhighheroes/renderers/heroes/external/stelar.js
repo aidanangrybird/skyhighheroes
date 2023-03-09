@@ -71,7 +71,7 @@ function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
     else {
         anim.setData((entity, data) => dataLoader(entity, data));
     }
-    anim.setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isEmpty());
+    anim.setCondition(entity => !entity.getHeldItem().isEmpty());
 
     anim.priority = -10;
     renderer.reprioritizeDefaultAnimation("PUNCH", -9);
@@ -93,7 +93,7 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
     else {
         anim.setData((entity, data) => dataLoader(entity, data));
     }
-
+    
     anim.priority = -10;
     renderer.reprioritizeDefaultAnimation("PUNCH", -9);
     renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
