@@ -113,9 +113,7 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
-    if (entity.getUUID() == getID()) {
-        omega_xis.render(entity, renderLayer);
-    }
+    omega_xis.render(entity, renderLayer);
     ears.render();
 }
 

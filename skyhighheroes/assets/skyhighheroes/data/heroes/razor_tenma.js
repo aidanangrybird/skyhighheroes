@@ -80,6 +80,8 @@ function shieldProfile(profile) {
 
 function isModifierEnabled(entity, modifier) {
   switch (modifier.name()) {
+    case "fiskheroes:metal_skin":
+      return entity.getUUID() == uuid && entity.getData("fiskheroes:metal_heat") < 1.0;
     case "fiskheroes:energy_projection":
       return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
     case "fiskheroes:energy_bolt":

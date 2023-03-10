@@ -1,6 +1,8 @@
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
+var metal_heat;
+
 loadTextures({
     "boots": "skyhighheroes:boots"
 });
@@ -144,6 +146,7 @@ function initEffects(renderer) {
     bootOpening.texture.set("boots", null);
     astro.initEquipment(renderer);
     stuff.initForceField(renderer, getColor());
+    metal_heat = renderer.createEffect("fiskheroes:metal_heat");
 }
 
 function initAnimations(renderer) {
@@ -152,6 +155,8 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
+    metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
+    metal_heat.render();
     if (renderLayer == "CHESTPLATE") {
         armLights.opacity = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
         armLights.render();
@@ -166,7 +171,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
     }
     if (entity.getHeldItem().isEmpty()) {
         cannon.opacity = entity.getInterpolatedData("fiskheroes:aiming_timer");
-        cannon.render();
+        cannon.render(); 
     }
 }
 

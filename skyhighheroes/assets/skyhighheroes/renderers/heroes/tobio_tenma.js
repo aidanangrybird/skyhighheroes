@@ -1,6 +1,8 @@
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
+var metal_heat;
+
 loadTextures({
     "eyes": "skyhighheroes:astro/tobio_tenma_eyes",
     "boots_lights": "skyhighheroes:astro/tobio_tenma_boots_lights",
@@ -190,6 +192,7 @@ function initEffects(renderer) {
     rockets = astro.initNormalBoosters(renderer);
     astro.initBeams(renderer, colorVar);
     stuff.bindSpeedTrail(renderer, "skyhighheroes:tobio_tenma_speed");
+    metal_heat = renderer.createEffect("fiskheroes:metal_heat");
     
 }
 
@@ -199,6 +202,8 @@ function initAnimations(renderer) {
 }
 
 function render(entity, renderLayer, isFirstPersonArm) {
+    metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
+    metal_heat.render();
     if (renderLayer == "CHESTPLATE") {
         armLights.opacity = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
         armLights.render();

@@ -53,6 +53,8 @@
       },
       "chargeTime": 10,
       "range": 64.0
+    },
+    "fiskheroes:metal_skin": {
     }
   }
 }
