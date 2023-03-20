@@ -9,8 +9,8 @@
           "ENERGY": 1.0
         },
         "properties": {
-          "ADD_KNOCKBACK": 1.0,
-          "HIT_COOLDOWN": 0.0
+          "HEAT_TRANSFER": 320,
+          "HIT_COOLDOWN": 0
         }
       },
       "isExplosive": false,

@@ -10,7 +10,6 @@
           "FIRE": 0.5
         },
         "properties": {
-          "COOK_ENTITY": true,
           "HEAT_TRANSFER": 80
         }
       },

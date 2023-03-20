@@ -10,8 +10,7 @@
           "WAVE_ENERGY": 1.0
         },
         "properties": {
-          "ADD_KNOCKBACK": 2.0,
-          "HIT_COOLDOWN": 0.0
+          "HIT_COOLDOWN": 0
         }
       },
       "isExplosive": false,

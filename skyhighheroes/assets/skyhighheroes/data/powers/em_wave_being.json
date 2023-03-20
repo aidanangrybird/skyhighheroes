@@ -129,8 +129,6 @@
         },
         "properties": {
           "LIGHTNING_STRIKE": 1.0,
-          "HEAT_TRANSFER": 640,
-          "ADD_KNOCKBACK": 5.0,
           "HIT_COOLDOWN": 0
         }
       },
@@ -156,8 +154,6 @@
         },
         "properties": {
           "LIGHTNING_STRIKE": 1.0,
-          "HEAT_TRANSFER": 640,
-          "ADD_KNOCKBACK": 5.0,
           "HIT_COOLDOWN": 0
         }
       },
