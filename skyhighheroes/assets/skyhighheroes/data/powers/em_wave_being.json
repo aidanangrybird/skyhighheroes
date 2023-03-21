@@ -128,7 +128,7 @@
           "WAVE_ENERGY": 1.0
         },
         "properties": {
-          "LIGHTNING_STRIKE": 1.0,
+          "LIGHTNING_STRIKE": 0.0,
           "HIT_COOLDOWN": 0
         }
       },
@@ -153,7 +153,7 @@
           "WAVE_ENERGY": 1.0
         },
         "properties": {
-          "LIGHTNING_STRIKE": 1.0,
+          "LIGHTNING_STRIKE": 0.0,
           "HIT_COOLDOWN": 0
         }
       },
