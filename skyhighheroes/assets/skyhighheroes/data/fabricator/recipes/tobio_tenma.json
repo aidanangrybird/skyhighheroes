@@ -1,5 +1,8 @@
 {
     "items": {
-        "fiskheroes:supercharged_eternium": 64
+        "fiskheroes:tutridium_gem": 20,
+        "minecraft:titanium_ingot": 6,
+        "fiskheroes:dwarf_star_alloy": 4,
+        "fiskheroes:supercharged_eternium": 640
     }
 }

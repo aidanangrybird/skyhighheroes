@@ -13,9 +13,9 @@
     },
     "fiskheroes:shield": {
       "shield": {
-        "health": 1000.0,
-        "regeneration": 100.0,
-        "recoveryDelay": 0
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
       },
       "coverage": {
         "yawRadius": 360.0,

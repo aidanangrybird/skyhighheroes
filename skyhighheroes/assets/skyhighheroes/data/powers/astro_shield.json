@@ -4,9 +4,9 @@
   "modifiers": {
     "fiskheroes:shield": {
       "shield": {
-        "health": 500.0,
-        "regeneration": 50.0,
-        "recoveryDelay": 0
+        "health": 250.0,
+        "regeneration": 20.0,
+        "recoveryDelay": 120
       },
       "coverage": {
         "yawRadius": 360.0,
