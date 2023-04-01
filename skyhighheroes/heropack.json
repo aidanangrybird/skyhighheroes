@@ -50,6 +50,8 @@
     "RADIATION": "Radiation",
     "SHOCKWAVE": "Shockwave",
     "WATER": "Water",
+    "KRYPTONITE": "Kryptonite",
+	  "LIGHT": "Light",
     "WAVE_BLUNT": "Blunt (Wave)",
     "WAVE_BULLET": "Bullet (Wave)",
     "WAVE_COLD": "Cold (Wave)",
@@ -61,7 +63,8 @@
     "WAVE_SHURIKEN": "Shuriken (Wave)",
     "WAVE_SOUND": "Sound (Wave)",
     "WAVE_WATER": "Water (Wave)",
-    "WAVE_SHOCKWAVE": "Shockwave (Wave)"
+    "WAVE_SHOCKWAVE": "Shockwave (Wave)",
+    "WAVE_LIGHT": "Light (Wave)"
   },
   "alts" : {
     "skyhighheroes:geo_stelar" : {

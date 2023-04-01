@@ -53,11 +53,23 @@
     "fiskheroes:damage_immunity|explosion": {
       "damageType": "EXPLOSION"
     },
-    "fiskheroes:damage_immunity|fire": {
-      "damageType": "FIRE"
-    },
     "fiskheroes:damage_immunity|magic": {
       "damageType": "MAGIC"
+    },
+    "fiskheroes:damage_immunity|shuriken": {
+      "damageType": "SHURIKEN"
+    },
+    "fiskheroes:damage_immunity|sharp": {
+      "damageType": "SHARP"
+    },
+    "fiskheroes:damage_immunity|bullet": {
+      "damageType": "BULLET"
+    },
+    "fiskheroes:damage_immunity|blunt": {
+      "damageType": "BLUNT"
+    },
+    "fiskheroes:damage_immunity|fire": {
+      "damageType": "FIRE"
     },
     "fiskheroes:damage_immunity|cactus": {
       "damageType": "CACTUS"
@@ -76,15 +88,6 @@
     },
     "fiskheroes:damage_immunity|thorns": {
       "damageType": "THORNS"
-    },
-    "fiskheroes:damage_immunity|shuriken": {
-      "damageType": "SHURIKEN"
-    },
-    "fiskheroes:damage_immunity|sharp": {
-      "damageType": "SHARP"
-    },
-    "fiskheroes:damage_immunity|bullet": {
-      "damageType": "BULLET"
     },
     "fiskheroes:damage_immunity|radiation": {
       "damageType": "RADIATION"
@@ -115,6 +118,12 @@
     },
     "fiskheroes:damage_immunity|cosmic": {
       "damageType": "COSMIC"
+    },
+    "fiskheroes:damage_immunity|kryptonite": {
+      "damageType": "KRYPTONITE"
+    },
+    "fiskheroes:damage_immunity|light": {
+      "damageType": "LIGHT"
     },
     "fiskheroes:projectile_immunity": {
     },

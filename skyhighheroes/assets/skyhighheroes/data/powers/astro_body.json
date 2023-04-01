@@ -42,6 +42,9 @@
     "fiskheroes:damage_immunity|eternium": {
       "damageType": "ETERNIUM"
     },
+    "fiskheroes:damage_immunity|kryptonite": {
+      "damageType": "KRYPTONITE"
+    },
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:energy_manipulation": {
