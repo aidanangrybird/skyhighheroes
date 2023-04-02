@@ -133,12 +133,12 @@ function initStelarAnimations(renderer) {
         .priority = 10;*/
 }
 //Mega Buster
-function initMegaBuster(renderer, color) {
-    renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
-    bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
+function initMegaBuster(renderer, color_main, color_other) {
+    renderer.bindProperty("fiskheroes:energy_bolt").color.set(color_main);
+    bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color_other, [
         { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
     ]);
-    bindBeam(renderer, "fiskheroes:lightning_cast", "skyhighheroes:wave_discharge", "rightArm", color, [
+    bindBeam(renderer, "fiskheroes:lightning_cast", "skyhighheroes:wave_discharge", "rightArm", color_other, [
         { "firstPerson": [-8.0, 4.5, -10.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
     ]);
 }

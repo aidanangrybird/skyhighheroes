@@ -98,7 +98,7 @@ function initEffects(renderer) {
     stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
     stuff.initForceField(renderer, getColor());
     omega_xis = stelar.initOmegaXis(renderer);
-    stelar.initMegaBuster(renderer, getColor());
+    stelar.initMegaBuster(renderer, getColor(), getColor());
     stelar.initEquipment(renderer);
     ears = renderer.createEffect("fiskheroes:ears");
     ears.anchor.set("head");
