@@ -7,9 +7,9 @@
       "transformation": {
         "toggleData": "skyhighheroes:dyn/predation",
         "timerData": "skyhighheroes:dyn/predation_timer",
-        "time": 5
+        "time": 15
       },
-      "isToggle": false
+      "isToggle": true
     },
     "fiskheroes:shield": {
       "shield": {

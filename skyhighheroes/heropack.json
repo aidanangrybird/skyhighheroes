@@ -11,6 +11,7 @@
     "predation_timer": "FLOAT_INTERP",
     "predation": "BOOLEAN",
     "battle_card": "BYTE",
+    "selected_battle_card": "BYTE",
     "head_toggle": "BYTE",
     "visualizer_toggle": "BYTE",
     "stelar_clothes": "BYTE",

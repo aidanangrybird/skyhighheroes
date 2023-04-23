@@ -1,10 +1,10 @@
 {data} = curve {data}
 {rightArm_rotX} @ {data} -> ({head_rotY} - (pi / 2))
 {rightArm_rotY} @ {data} -> -1.0{head_rotX}
-{rightArm_rotZ} @ {data} -> (0.0{head_rotX} + 1.6)
+{rightArm_rotZ} @ {data} -> (0.0{head_rotX} + 90')
 {leftArm_rotX} @ {data} -> (-0.35{head_rotY} - (17pi / 16)) + 0.85
 {leftArm_rotY} @ {data} -> {head_rotX}
-{leftArm_rotZ} @ {data} -> (0.0{head_rotX} - 1.6)
+{leftArm_rotZ} @ {data} -> (0.0{head_rotX} - 90')
 
 out "firstPerson" (true)
 out "translate" (-0.35{data}, 0, 0.15{data})

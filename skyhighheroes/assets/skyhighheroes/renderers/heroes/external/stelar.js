@@ -58,6 +58,19 @@ function addAnimation(renderer, key, anim) {
 function addAnimationWithData(renderer, key, anim, dataVar) {
     return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
 }
+
+function addPredationAnimation(renderer, key, value) {
+    if (typeof value === "string") {
+        anim = renderer.createResource("ANIMATION", value);
+    }
+    renderer.addCustomAnimation(key, anim);
+    anim.setData((entity, data) => {
+        data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
+        data.load(1, entity.getData("skyhighheroes:dyn/predation"));
+    });
+    anim.priority = -9;
+}
+
 function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
     var anim = renderer.createResource("ANIMATION", value);
     renderer.addCustomAnimation(name, anim);
@@ -129,8 +142,7 @@ function initStelarAnimations(renderer) {
     addAnimationWithData(renderer, "stelar.ROLL", "skyhighheroes:flight/stelar_barrel_roll", "fiskheroes:barrel_roll_timer")
         .priority = 10;
     addHoverAnimation(renderer, "stelar.HOVER", "skyhighheroes:stelar_hover");
-    /*addAnimationWithData(renderer, "stelar.PREDATION", "fiskheroes:blocking_arm", "skyhighheroes:dyn/predation_timer")
-        .priority = 10;*/
+    addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:predation");
 }
 //Mega Buster
 function initMegaBuster(renderer, color_main, color_other) {

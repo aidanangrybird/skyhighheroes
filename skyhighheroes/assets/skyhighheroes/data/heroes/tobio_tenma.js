@@ -45,6 +45,9 @@ function init(hero) {
   hero.setTickHandler((entity, manager) => {
     var flying = entity.getData("fiskheroes:flying");
     manager.incrementData(entity, "skyhighheroes:dyn/booster_timer", 2, flying);
+    if (entity.motionY() < -0.45 && !entity.isSneaking() && !entity.isOnGround()) {
+      manager.setData(entity, "fiskheroes:flying", true);
+    };
   });
 }
 

@@ -2,7 +2,7 @@
   "sound": "skyhighheroes:wave.punch",
   "override": null,
   "condition": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1",
-  "volume": 0.75,
+  "volume": 1.0,
   "pitch": 1.0,
   "loop": false,
   "delay": 0,

@@ -21,9 +21,14 @@ function init(hero) {
 
     hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("func_CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
   hero.addKeyBindFunc("func_VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
-  hero.addKeyBindFunc("func_CYCLE_CARD", cycleCard, "Cycle Battle Card", 2);
+  hero.addKeyBindFunc("func_BATTLE_CARD_0", activateCard0, "Return To Mega Buster", 2);
+  hero.addKeyBindFunc("func_BATTLE_CARD_1", activateCard1, "Choose Shield", 2);
+  hero.addKeyBindFunc("func_BATTLE_CARD_2", activateCard2, "Choose Blade", 2);
+  hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+  hero.addKeyBindFunc("func_CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
   hero.addKeyBind("AIM", "Aim Mega Buster", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
@@ -92,12 +97,35 @@ function resetCard(player, manager) {
     return true;
 }
 
-function cycleCard(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/battle_card") + 1);
-  if (player.getData("skyhighheroes:dyn/battle_card") > 2) {
-    manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+function cycleUpCard(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
+  if (player.getData("skyhighheroes:dyn/selected_battle_card") > 2) {
+    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
   }
   return true;
+}
+
+function cycleDownCard(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
+  if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
+    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 2);
+  }
+  return true;
+}
+
+function activateCard0(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+  return true; 
+}
+
+function activateCard1(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/battle_card", 1);
+  return true; 
+}
+
+function activateCard2(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/battle_card", 2);
+  return true; 
 }
 
 function electroMagnetic(player, manager) {
