@@ -59,7 +59,7 @@ function init(hero) {
       manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
     }
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
-    var pain = entity.rotPitch() > 10 && (entity.motionY() < -0.05 && entity.motionZ() > 0.1) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid();
+    var pain = (entity.rotPitch() > 5 && entity.motionY() < -0.075 && entity.motionZ() > 0.125) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid();
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.motionY() < 0 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid()) {
       manager.setData(entity, "fiskheroes:flying", true);
