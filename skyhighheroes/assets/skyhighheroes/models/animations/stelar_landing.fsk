@@ -1,53 +1,49 @@
 {data} = curve {data}
 
-{head_rotX} @ {data} -> -45'
-{head_rotY} @ {data} -'> -35'
-{head_rotZ} @ {data} -> 0
-{head_posX} @ {data} -> 0.5
-{head_posY} @ {data} -> 0
-{head_posZ} @ {data} -> -1
-
-{body_rotX} @ {data} -> -5'
+;Makes everything stand still
+{head_rotX} @ {data} -'> 0
+{head_rotY} @ {data} -'> 0
+{head_rotZ} @ {data} -'> 0
+{body_rotX} @ {data} -'> 0
 {body_rotY} @ {data} -'> 0
-{body_rotZ} @ {data} -> 0
-{body_posX} @ {data} -> 0
-{body_posY} @ {data} -> 0
-{body_posZ} @ {data} -> 0
+{body_rotZ} @ {data} -'> 0
+{leftArm_rotX} @ {data} -'> 0'
+{leftArm_rotY} @ {data} -'> 0'
+{leftArm_rotZ} @ {data} -'> 0'
+{rightArm_rotX} @ {data} -'> 0'
+{rightArm_rotY} @ {data} -'> 0'
+{rightArm_rotZ} @ {data} -'> 0'
+{leftLeg_rotX} @ {data} -'> 0'
+{leftLeg_rotY} @ {data} -'> 0'
+{leftLeg_rotZ} @ {data} -'> 0'
+{rightLeg_rotX} @ {data} -'> 0'
+{rightLeg_rotY} @ {data} -'> 0'
+{rightLeg_rotZ} @ {data} -'> 0'
 
-{rightArm_rotX} @ {data} -> -40'
-{rightArm_rotY} @ {data} -'> 30'
-{rightArm_rotZ} @ {data} -> 60'
-{rightArm_posX} @ {data} -> -3
-{rightArm_posY} @ {data} -> 5
-{rightArm_posZ} @ {data} -> 2.5
-{leftArm_rotX} @ {data} -> -60'
-{leftArm_rotY} @ {data} -'> -10'
-{leftArm_rotZ} @ {data} -> -30'
-{leftArm_posX} @ {data} -> 4
-{leftArm_posY} @ {data} -> 3
-{leftArm_posZ} @ {data} -> -1
+{head_rotX} += 20'{data}
+{head_rotY} += 0'{data}
+{head_rotZ} += 0'{data}
 
-{d} = sin(pi{data})
-{rightLeg_rotX} @ {data} -> -60'
-{rightLeg_rotY} @ {data} -'> -5'
-{rightLeg_rotZ} @ {data} -> -10'
-{rightLeg_posX} @ {data} -> -3
-{rightLeg_posY} @ {data} -> 8
-{rightLeg_posZ} @ {data} -> -0.5
-{rightLeg_rotX} += 40'{d}
-{rightLeg_posY} -= 2{d}
-{rightLeg_posZ} -= 4{d}
-{leftLeg_rotX} @ {data} -> 5'
-{leftLeg_rotY} @ {data} -'> -30'
-{leftLeg_rotZ} @ {data} -> 0
-{leftLeg_posX} @ {data} -> 4
-{leftLeg_posY} @ {data} -> 10
-{leftLeg_posZ} @ {data} -> -4
-{leftLeg_rotX} += 25'{d}
-{leftLeg_posZ} -= 2{d}
+{body_rotX} += -30'{data}
 
-out "pivot" (0, 0.56, 0)
-out "translate" (0, -0.35{data}, 0.25{data})
-out "rotate" (25{data}, 0, 0, 1)
-out "rotate" (-20{data}, 0, 1, 0)
-out "rotate" (-75{data}, 1, 0, 0)
+{leftArm_rotX} += 10'{data}
+{leftArm_rotY} += 10'{data}
+{leftArm_rotZ} += -45'{data}
+{leftArm_posZ} += -0.5{data}
+
+{rightArm_rotX} += 10'{data}
+{rightArm_rotY} += -10'{data}
+{rightArm_rotZ} += 45'{data}
+{rightArm_posZ} += -0.5{data}
+
+{leftLeg_rotX} += -25'{data}
+{leftLeg_rotY} += -4'{data}
+{leftLeg_rotZ} += -3'{data}
+{leftLeg_posY} += -5.5{data}
+{leftLeg_posZ} -= 5.75{data}
+
+{rightLeg_rotX} += -22'{data}
+{rightLeg_rotY} += 3'{data}
+{rightLeg_rotZ} += 3'{data}
+{rightLeg_posY} += -3.25{data}
+{rightLeg_posZ} -= 4.5{data} 

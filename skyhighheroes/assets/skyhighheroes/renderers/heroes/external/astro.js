@@ -78,7 +78,7 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
 }
 function addFlightAnimationWithLanding(renderer, name, value) {
     addFlightAnimation(renderer, name, value, (entity, data) => {
-        data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
+        data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_boosting_landing_timer") - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
         data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
     });
 }
@@ -115,6 +115,8 @@ function initAstroAnimations(renderer) {
     addFlightAnimationWithLanding(renderer, "astro.FLIGHT", "skyhighheroes:flight/astro_flight.anim.json");
     //Landing
     addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
+        .priority = -8;
+    addAnimationWithData(renderer, "astro.LAND_BOOST", "skyhighheroes:astro_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
         .priority = -8;
     addAnimationWithData(renderer, "astro.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
     addHoverAnimation(renderer, "astro.HOVER", "skyhighheroes:astro_hover");

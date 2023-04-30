@@ -8,10 +8,10 @@
 ; Boosted/stationary "base" positioning
 {rightArm_rotX} @ {data_0} -> 0
 {rightArm_rotY} @ {data_0} -'> 0
-{rightArm_rotZ} @ {data_0} -> 0
+{rightArm_rotZ} @ {data_0} -> 0 + 7'
 {leftArm_rotX} @ {data_0} -> 0
 {leftArm_rotY} @ {data_0} -'> 0
-{leftArm_rotZ} @ {data_0} -> 0
+{leftArm_rotZ} @ {data_0} -> 0 - 7'
 {rightLeg_rotX} @ {data_0} -> 10'
 {rightLeg_rotY} @ {data_0} -'> 0
 {rightLeg_rotZ} @ {data_0} -> 0

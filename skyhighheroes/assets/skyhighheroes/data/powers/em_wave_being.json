@@ -125,6 +125,9 @@
     "fiskheroes:damage_immunity|light": {
       "damageType": "LIGHT"
     },
+    "fiskheroes:damage_immunity|cs": {
+      "damageType": "CELESTIALSAPIEN"
+    },
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:arrow_catching": {

@@ -10,15 +10,17 @@
     "wave_changed": "BOOLEAN",
     "predation_timer": "FLOAT_INTERP",
     "predation": "BOOLEAN",
-    "battle_card": "BYTE",
-    "selected_battle_card": "BYTE",
-    "head_toggle": "BYTE",
-    "visualizer_toggle": "BYTE",
+    "battle_card": { "type": "BYTE", "resetWithoutSuit": true },
+    "selected_battle_card": { "type": "BYTE", "resetWithoutSuit": true },
+    "head_toggle": { "type": "BYTE", "resetWithoutSuit": true },
+    "visualizer_toggle": { "type": "BYTE", "resetWithoutSuit": true },
     "stelar_clothes": "BYTE",
     "tenma_clothes": "BYTE",
     "booster_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "superhero_landing_ticks": "BYTE",
-    "superhero_landing_timer": "FLOAT_INTERP"
+    "superhero_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "superhero_boosting_landing_ticks": "BYTE",
+    "superhero_boosting_landing_timer": "FLOAT_INTERP"
   },
   "sounds": {
     "download": {
@@ -53,6 +55,7 @@
     "WATER": "Water",
     "KRYPTONITE": "Kryptonite",
 	  "LIGHT": "Light",
+    "CELESTIALSAPIEN": "Celestialsapien",
     "WAVE_BLUNT": "Blunt (Wave)",
     "WAVE_BULLET": "Bullet (Wave)",
     "WAVE_COLD": "Cold (Wave)",
