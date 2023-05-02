@@ -26,6 +26,7 @@ function init(hero) {
   hero.addKeyBindFunc("func_BATTLE_CARD_0", activateCard0, "Return To Mega Buster", 2);
   hero.addKeyBindFunc("func_BATTLE_CARD_1", activateCard1, "Choose Shield", 2);
   hero.addKeyBindFunc("func_BATTLE_CARD_2", activateCard2, "Choose Blade", 2);
+  hero.addKeyBindFunc("func_BATTLE_CARD_3", activateCard3, "Choose Shurikens", 2);
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
   hero.addKeyBindFunc("func_CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
