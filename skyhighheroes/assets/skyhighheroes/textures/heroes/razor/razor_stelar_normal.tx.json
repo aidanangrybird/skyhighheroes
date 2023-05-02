@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:razor/razor_stelar_normal",
+    "in": "skyhighheroes:razor/razor_stelar_up_normal",
     "transform": [
       {
         "operation": "XOR",

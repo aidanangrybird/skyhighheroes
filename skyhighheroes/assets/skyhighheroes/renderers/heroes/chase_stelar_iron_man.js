@@ -1,10 +1,11 @@
 extend("skyhighheroes:chase_stelar");
 
 loadTextures({
-    "base": "skyhighheroes:chase/chase_stelar_iron_man",
+    "base": "skyhighheroes:chase/chase_stelar_iron_man_base",
     "lights": "skyhighheroes:chase/chase_stelar_iron_man_lights",
-    "suit": "skyhighheroes:chase/chase_stelar_iron_man_suit.tx.json",
-    "suit_lights": "skyhighheroes:chase/chase_stelar_iron_man_suit_lights.tx.json",
+    "base_tx": "skyhighheroes:chase/chase_stelar_iron_man_base.tx.json",
+    "lights_tx": "skyhighheroes:chase/chase_stelar_iron_man_lights.tx.json",
+    "wave_change_lights": "skyhighheroes:chase/chase_stelar_iron_man_wave_change_lights.tx.json",
     "visualizer_up_lights": "skyhighheroes:chase/chase_stelar_up_lights",
     "visualizer_down_lights": "skyhighheroes:chase/chase_stelar_down_lights",
     "cannon_bottom": "skyhighheroes:chase/chase_stelar_iron_man_bottom_cannon",

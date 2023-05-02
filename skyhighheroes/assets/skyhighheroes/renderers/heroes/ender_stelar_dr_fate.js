@@ -1,10 +1,11 @@
 extend("skyhighheroes:ender_stelar");
 
 loadTextures({
-    "base": "skyhighheroes:ender/ender_stelar_dr_fate",
+    "base": "skyhighheroes:ender/ender_stelar_dr_fate_base",
     "lights": "skyhighheroes:ender/ender_stelar_dr_fate_lights",
-    "suit": "skyhighheroes:ender/ender_stelar_dr_fate_suit.tx.json",
-    "suit_lights": "skyhighheroes:ender/ender_stelar_dr_fate_suit_lights.tx.json",
+    "base_tx": "skyhighheroes:ender/ender_stelar_dr_fate_base.tx.json",
+    "lights_tx": "skyhighheroes:ender/ender_stelar_dr_fate_lights.tx.json",
+    "wave_change_lights": "skyhighheroes:ender/ender_stelar_dr_fate_wave_change_lights.tx.json",
     "cannon_bottom": "skyhighheroes:ender/ender_stelar_dr_fate_bottom_cannon",
     "cannon_left": "skyhighheroes:ender/ender_stelar_dr_fate_left_cannon",
     "cannon_right": "skyhighheroes:ender/ender_stelar_dr_fate_right_cannon",

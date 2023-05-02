@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:liam/liam_stelar_short",
+    "in": "skyhighheroes:liam/liam_stelar_up_short",
     "transform": [
       {
         "operation": "XOR",

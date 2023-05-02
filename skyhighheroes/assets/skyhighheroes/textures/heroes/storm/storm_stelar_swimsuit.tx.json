@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:storm/storm_stelar_swimsuit",
+    "in": "skyhighheroes:storm/storm_stelar_up_swimsuit",
     "transform": [
       {
         "operation": "XOR",

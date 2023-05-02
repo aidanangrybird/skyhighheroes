@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:tysen/tysen_stelar_short",
+    "in": "skyhighheroes:tysen/tysen_stelar_up_short",
     "transform": [
       {
         "operation": "XOR",

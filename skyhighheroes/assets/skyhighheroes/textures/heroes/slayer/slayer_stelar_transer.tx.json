@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:slayer/slayer_stelar_transer",
+    "in": "skyhighheroes:slayer/slayer_stelar_up_transer",
     "transform": [
       {
         "operation": "XOR",

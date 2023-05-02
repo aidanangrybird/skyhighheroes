@@ -255,8 +255,8 @@ function initOmegaXis(renderer) {
                     blade.unfold = 1;
                     blade.render();
                 }
-                if (entity.getData('skyhighheroes:dyn/battle_card') != 2 && entity.getData('skyhighheroes:dyn/battle_card') != 3) {
-                    if (entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
+                if (entity.getData('skyhighheroes:dyn/battle_card') != 2 && entity.getData('skyhighheroes:dyn/battle_card') != 3 && entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
+                    if (entity.getHeldItem().isEmpty()) {
                         omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
                         omegaXisRight.render();
                         omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);

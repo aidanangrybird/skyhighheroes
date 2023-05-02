@@ -1,10 +1,10 @@
 extend("skyhighheroes:fish_stelar");
 
 loadTextures({
-    "base": "skyhighheroes:fish/fish_stelar_spider_man",
+    "base": "skyhighheroes:fish/fish_stelar_spider_man_base",
     "lights": "skyhighheroes:fish/fish_stelar_spider_man_lights",
-    "suit": "skyhighheroes:fish/fish_stelar_spider_man_suit.tx.json",
-    "suit_lights": "skyhighheroes:fish/fish_stelar_spider_man_suit_lights.tx.json",
+    "base_tx": "skyhighheroes:fish/fish_stelar_spider_man_base.tx.json",
+    "wave_change_lights": "skyhighheroes:fish/fish_stelar_spider_man_wave_change_lights.tx.json",
     "cannon_bottom": "skyhighheroes:fish/fish_stelar_spider_man_bottom_cannon",
     "cannon_left": "skyhighheroes:fish/fish_stelar_spider_man_left_cannon",
     "cannon_right": "skyhighheroes:fish/fish_stelar_spider_man_right_cannon",

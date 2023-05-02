@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:fish/fish_stelar_swimsuit",
+    "in": "skyhighheroes:fish/fish_stelar_up_swimsuit",
     "transform": [
       {
         "operation": "XOR",

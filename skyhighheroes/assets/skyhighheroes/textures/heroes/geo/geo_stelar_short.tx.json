@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:geo/geo_stelar_short",
+    "in": "skyhighheroes:geo/geo_stelar_up_short",
     "transform": [
       {
         "operation": "XOR",

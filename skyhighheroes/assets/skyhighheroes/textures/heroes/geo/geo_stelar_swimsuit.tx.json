@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:geo/geo_stelar_swimsuit",
+    "in": "skyhighheroes:geo/geo_stelar_up_swimsuit",
     "transform": [
       {
         "operation": "XOR",

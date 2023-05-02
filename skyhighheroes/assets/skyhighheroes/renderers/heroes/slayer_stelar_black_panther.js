@@ -1,10 +1,11 @@
 extend("skyhighheroes:slayer_stelar");
 
 loadTextures({
-    "base": "skyhighheroes:slayer/slayer_stelar_black_panther",
+    "base": "skyhighheroes:slayer/slayer_stelar_black_panther_base",
     "lights": "skyhighheroes:slayer/slayer_stelar_black_panther_lights",
-    "suit": "skyhighheroes:slayer/slayer_stelar_black_panther_suit.tx.json",
-    "suit_lights": "skyhighheroes:slayer/slayer_stelar_black_panther_suit_lights.tx.json",
+    "base_tx": "skyhighheroes:slayer/slayer_stelar_black_panther_base.tx.json",
+    "lights_tx": "skyhighheroes:slayer/slayer_stelar_black_panther_lights.tx.json",
+    "wave_change_lights": "skyhighheroes:slayer/slayer_stelar_black_panther_wave_change_lights.tx.json",
     "cannon_bottom": "skyhighheroes:slayer/slayer_stelar_black_panther_bottom_cannon",
     "cannon_left": "skyhighheroes:slayer/slayer_stelar_black_panther_left_cannon",
     "cannon_right": "skyhighheroes:slayer/slayer_stelar_black_panther_right_cannon",

@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:chase/chase_stelar_swimsuit",
+    "in": "skyhighheroes:chase/chase_stelar_up_swimsuit",
     "transform": [
       {
         "operation": "XOR",

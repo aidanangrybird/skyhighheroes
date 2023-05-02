@@ -1,10 +1,11 @@
 extend("skyhighheroes:liam_stelar");
 
 loadTextures({
-    "base": "skyhighheroes:liam/liam_stelar_iron_man",
+    "base": "skyhighheroes:liam/liam_stelar_iron_man_base",
     "lights": "skyhighheroes:liam/liam_stelar_iron_man_lights",
-    "suit": "skyhighheroes:liam/liam_stelar_iron_man_suit.tx.json",
-    "suit_lights": "skyhighheroes:liam/liam_stelar_iron_man_suit_lights.tx.json",
+    "base_tx": "skyhighheroes:liam/liam_stelar_iron_man_base.tx.json",
+    "lights_tx": "skyhighheroes:liam/liam_stelar_iron_man_lights.tx.json",
+    "wave_change_lights": "skyhighheroes:liam/liam_stelar_iron_man_wave_change_lights.tx.json",
     "cannon_bottom": "skyhighheroes:liam/liam_stelar_iron_man_bottom_cannon",
     "cannon_left": "skyhighheroes:liam/liam_stelar_iron_man_left_cannon",
     "cannon_right": "skyhighheroes:liam/liam_stelar_iron_man_right_cannon",

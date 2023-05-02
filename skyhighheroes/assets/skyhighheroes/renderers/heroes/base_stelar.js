@@ -12,20 +12,20 @@ function init(renderer) {
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
-                    return "transertx";
+                    return "transer_tx";
                 }
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
-                    return "shorttx";
+                    return "short_tx";
                 }
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
-                    return "swimsuittx";
+                    return "swimsuit_tx";
                 }
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-                    return "normaltx";
+                    return "normal_tx";
                 }
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
-                return "suit";
+                return "base_tx";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                 return "base"
@@ -71,14 +71,17 @@ function init(renderer) {
             if (entity.getUUID() != getID()) {
                 return "transer_lights"
             }
+            if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
+                return "visualizer_lights_tx";
+            }
+            if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
+                return "lights_tx";
+            }
             if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
                 return "visualizer_up_lights";
             }
             if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
                 return "visualizer_down_lights";
-            }
-            if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
-                return "suit_lights";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                 return "lights";
@@ -100,6 +103,8 @@ function initEffects(renderer) {
     omega_xis = stelar.initOmegaXis(renderer);
     stelar.initMegaBuster(renderer, getColor(), getColor());
     stelar.initEquipment(renderer);
+    wave_change_lights = renderer.createEffect("fiskheroes:overlay");
+    wave_change_lights.texture.set(null, "wave_change_lights");
     ears = renderer.createEffect("fiskheroes:ears");
     ears.anchor.set("head");
     ears.angle = 7.5;
@@ -115,6 +120,9 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
     omega_xis.render(entity, renderLayer);
     ears.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+        wave_change_lights.render();
+    }
 }
 
 function getNamePerson() {
