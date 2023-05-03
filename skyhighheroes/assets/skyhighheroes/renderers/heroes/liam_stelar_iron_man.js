@@ -14,7 +14,7 @@ loadTextures({
     "shield": "skyhighheroes:liam/liam_stelar_iron_man_shield",
     "katana": "skyhighheroes:liam/liam_stelar_iron_man_katana",
     "scythe": "skyhighheroes:liam/liam_stelar_iron_man_scythe",
-    "rifle": "skyhighheroes:liam/liam_stelar_iron_man_rifle",
+    "rifle": "skyhighheroes:liam/liam_stelar_iron_man_rifle"
 });
 
 function init(renderer) {

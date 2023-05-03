@@ -116,11 +116,11 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:blade", false);
       manager.setData(entity, "fiskheroes:utility_belt_type", 1);
     };
-  });/*
+  });
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
   hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
   hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
-  hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");*/
+  hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.addDamageProfile("BLADE", {
     "types": {
       "SHARP": 0.0,
@@ -400,8 +400,6 @@ function isKeyBindEnabled(entity, keyBind) {
 function hasProperty(entity, property) {
   switch (property) {
     case "BREATHE_SPACE":
-      return !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0;
-    case "MASK_TOGGLE":
       return !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0;
     default:
       return false;

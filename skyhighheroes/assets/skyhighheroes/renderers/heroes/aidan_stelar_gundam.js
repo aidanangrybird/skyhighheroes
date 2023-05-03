@@ -14,7 +14,7 @@ loadTextures({
     "shield": "skyhighheroes:aidan/aidan_stelar_gundam_shield",
     "katana": "skyhighheroes:aidan/aidan_stelar_gundam_katana",
     "scythe": "skyhighheroes:aidan/aidan_stelar_gundam_scythe",
-    "rifle": "skyhighheroes:aidan/aidan_stelar_gundam_rifle",
+    "rifle": "skyhighheroes:aidan/aidan_stelar_gundam_rifle"
 });
 
 function init(renderer) {

@@ -13,7 +13,7 @@ loadTextures({
     "shield": "skyhighheroes:fish/fish_stelar_spider_man_shield",
     "katana": "skyhighheroes:fish/fish_stelar_spider_man_katana",
     "scythe": "skyhighheroes:fish/fish_stelar_spider_man_scythe",
-    "rifle": "skyhighheroes:fish/fish_stelar_spider_man_rifle",
+    "rifle": "skyhighheroes:fish/fish_stelar_spider_man_rifle"
 });
 
 function init(renderer) {

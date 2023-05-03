@@ -66,10 +66,10 @@ function init(renderer) {
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
             if (entity.isDisplayStand()) {
-                return "lights"
+                return "lights";
             }
             if (entity.getUUID() != getID()) {
-                return "transer_lights"
+                return "transer_lights";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
                 return "visualizer_lights_tx";

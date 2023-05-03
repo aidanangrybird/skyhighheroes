@@ -14,7 +14,7 @@ loadTextures({
     "shield": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_shield",
     "katana": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_katana",
     "scythe": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_scythe",
-    "rifle": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_rifle",
+    "rifle": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_rifle"
 });
 
 function init(renderer) {

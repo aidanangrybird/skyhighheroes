@@ -14,7 +14,7 @@ loadTextures({
     "shield": "skyhighheroes:razor/razor_stelar_iron_man_shield",
     "katana": "skyhighheroes:razor/razor_stelar_iron_man_katana",
     "scythe": "skyhighheroes:razor/razor_stelar_iron_man_scythe",
-    "rifle": "skyhighheroes:razor/razor_stelar_iron_man_rifle",
+    "rifle": "skyhighheroes:razor/razor_stelar_iron_man_rifle"
 });
 
 function init(renderer) {

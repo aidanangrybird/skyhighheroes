@@ -16,7 +16,7 @@ loadTextures({
     "shield": "skyhighheroes:chase/chase_stelar_iron_man_shield",
     "katana": "skyhighheroes:chase/chase_stelar_iron_man_katana",
     "scythe": "skyhighheroes:chase/chase_stelar_iron_man_scythe",
-    "rifle": "skyhighheroes:chase/chase_stelar_iron_man_rifle",
+    "rifle": "skyhighheroes:chase/chase_stelar_iron_man_rifle"
 });
 
 function init(renderer) {

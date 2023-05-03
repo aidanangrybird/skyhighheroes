@@ -14,7 +14,7 @@ loadTextures({
     "shield": "skyhighheroes:ender/ender_stelar_dr_fate_shield",
     "katana": "skyhighheroes:ender/ender_stelar_dr_fate_katana",
     "scythe": "skyhighheroes:ender/ender_stelar_dr_fate_scythe",
-    "rifle": "skyhighheroes:ender/ender_stelar_dr_fate_rifle",
+    "rifle": "skyhighheroes:ender/ender_stelar_dr_fate_rifle"
 });
 
 function init(renderer) {

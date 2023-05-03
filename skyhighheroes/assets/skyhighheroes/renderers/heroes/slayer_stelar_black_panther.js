@@ -14,7 +14,7 @@ loadTextures({
     "shield": "skyhighheroes:slayer/slayer_stelar_black_panther_shield",
     "katana": "skyhighheroes:slayer/slayer_stelar_black_panther_katana",
     "scythe": "skyhighheroes:slayer/slayer_stelar_black_panther_scythe",
-    "rifle": "skyhighheroes:slayer/slayer_stelar_black_panther_rifle",
+    "rifle": "skyhighheroes:slayer/slayer_stelar_black_panther_rifle"
 });
 
 function init(renderer) {
