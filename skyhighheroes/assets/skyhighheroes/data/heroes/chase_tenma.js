@@ -1,18 +1,18 @@
 var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
 function init(hero) {
-  hero.setName("Astro Boy");
+  hero.setName("Chase Tenma");
   hero.setTier(8);
   hero.setHelmet("Head");
   hero.setChestplate("Torso");
   hero.setLeggings("Legs");
   hero.setBoots("Boots");
   hero.setAliases("chase_tenma");
-  hero.setVersion("Chase Tenma");
+  hero.setVersion("Astro Boy");
   hero.hide();
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A72Astro Boy's Katanas (Chase Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A72Astro Boy's Scythe (Chase Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A72Astro Boy's Rifle (Chase Tenma)},ench:[{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A72Astro Boy's Shield (Chase Tenma)},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A72Chase Tenma's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A72Chase Tenma's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A72Chase Tenma's Rifle},ench:[{id:34,lvl:5}]}", true);
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A72Chase Tenma's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
   
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
   hero.addAttribute("SPRINT_SPEED", 0.3, 1);
@@ -54,7 +54,7 @@ function init(hero) {
       manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
     }
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
-    var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid());
+    var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0;
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
     if (entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid()) {
       manager.setData(entity, "fiskheroes:flying", true);

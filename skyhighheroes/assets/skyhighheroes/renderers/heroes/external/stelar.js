@@ -143,17 +143,17 @@ function initStelarAnimations(renderer) {
         .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
         .priority = 10;
     addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
+    addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:predation");
     //Flight
     addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
+    addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/stelar_holding_flight.anim.json");
     addAnimationWithData(renderer, "stelar.LAND", "skyhighheroes:stelar_landing", "skyhighheroes:dyn/superhero_landing_timer")
         .priority = -8;
     addAnimationWithData(renderer, "stelar.LAND_BOOST", "skyhighheroes:stelar_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
         .priority = -8;
-    addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/stelar_holding_flight.anim.json");
     addAnimationWithData(renderer, "stelar.ROLL", "skyhighheroes:flight/stelar_barrel_roll", "fiskheroes:barrel_roll_timer")
         .priority = 10;
     addHoverAnimation(renderer, "stelar.HOVER", "skyhighheroes:stelar_hover");
-    addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:predation");
 }
 //Mega Buster
 function initMegaBuster(renderer, color_main, color_other) {
