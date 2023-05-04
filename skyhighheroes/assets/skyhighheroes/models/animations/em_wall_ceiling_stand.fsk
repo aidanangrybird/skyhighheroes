@@ -3,6 +3,6 @@
 {head_rotX} @ {data} -> -{head_rotX}
 {head_rotY} @ {data} -> -{head_rotY}
 out "pivot" (0, 0.5{data}, 0)
-out "rotate" (-180{data}, 0, 0, 1)
+;out "rotate" (-180{data}, 0, 0, 1)
 out "rotate" (-180{data}, 1, 0, 0)
 out "rotate" (180{data}, 0, 1, 0)

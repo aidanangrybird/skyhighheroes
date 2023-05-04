@@ -106,7 +106,7 @@ function init(renderer) {
     renderer.setLights((entity, renderLayer) => {
         if (renderLayer == "CHESTPLATE") {
             if (entity.isDisplayStand()) {
-                return "lights"
+                return "lights";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
                 return "visualizer_lights_tx";
@@ -119,9 +119,6 @@ function init(renderer) {
             }
             if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
                 return "visualizer_down_lights";
-            }
-            if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
-                return "suit_lights";
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                 return "lights";

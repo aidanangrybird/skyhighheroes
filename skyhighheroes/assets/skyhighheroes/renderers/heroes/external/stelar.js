@@ -68,7 +68,7 @@ function addPredationAnimation(renderer, key, value) {
         data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
         data.load(1, entity.getData("skyhighheroes:dyn/predation"));
     });
-    anim.priority = -9;
+    anim.priority = -9.75;
 }
 
 function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
@@ -88,6 +88,9 @@ function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
 
     anim.priority = -10;
     renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+    renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+    renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
     renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
@@ -109,6 +112,9 @@ function addFlightBaseAnimation(renderer, name, value, dataLoader) {
     
     anim.priority = -10;
     renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+    renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+    renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
     renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 
@@ -136,6 +142,7 @@ function initStelarAnimations(renderer) {
     addAnimationWithData(renderer, "stelar.AIMING", "skyhighheroes:stelar_aim", "fiskheroes:aiming_timer")
         .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
         .priority = 10;
+    addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
     //Flight
     addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
     addAnimationWithData(renderer, "stelar.LAND", "skyhighheroes:stelar_landing", "skyhighheroes:dyn/superhero_landing_timer")

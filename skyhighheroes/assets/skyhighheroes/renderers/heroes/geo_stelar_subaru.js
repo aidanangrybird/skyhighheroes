@@ -40,6 +40,8 @@ function initEffects(renderer) {
     omega_xis = stelar.initOmegaXis(renderer);
     stelar.initMegaBuster(renderer, colorVar, colorVar);
     stelar.initEquipment(renderer);
+    wave_change_lights = renderer.createEffect("fiskheroes:overlay");
+    wave_change_lights.texture.set(null, "wave_change_lights");
     ears = renderer.createEffect("fiskheroes:ears");
     ears.anchor.set("head");
     ears.angle = 7.5;
@@ -55,4 +57,7 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
     omega_xis.render(entity, renderLayer);
     ears.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+        wave_change_lights.render();
+    }
 }

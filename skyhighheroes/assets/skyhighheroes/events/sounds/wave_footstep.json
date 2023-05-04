@@ -1,9 +1,9 @@
 {
   "sound": "skyhighheroes:wave.footstep",
   "override": null,
-  "condition": "entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && entity.getData('fiskheroes:flight_timer') == 0",
+  "condition": "entity.getData('skyhighheroes:dyn/superhero_landing_timer') >= 0.5 || (entity.getData('fiskheroes:flight_timer') <= 0.5 && entity.getData('skyhighheroes:dyn/wave_changing_timer') == 1 && entity.getData('skyhighheroes:dyn/wave_changed'))",
   "volume": 1.0,
-  "pitch": 1.0,
+  "pitch": "1.0 + Math.random(-1, 1) * 0.1",
   "loop": false,
   "delay": 0,
   "fadeIn": 0,

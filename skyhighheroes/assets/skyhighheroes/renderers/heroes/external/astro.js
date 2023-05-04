@@ -74,6 +74,9 @@ function addFlightAnimation(renderer, name, value, dataLoader) {
 
     anim.priority = -10;
     renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+    renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+    renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+    renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
     renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 }
 function addFlightAnimationWithLanding(renderer, name, value) {
