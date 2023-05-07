@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "226d4e9e-8665-4afc-9d4b-9e85bbecc039";
 function init(hero) {
   hero.setName("Fish Stelar");

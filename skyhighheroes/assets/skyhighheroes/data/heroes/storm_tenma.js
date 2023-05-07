@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "0bafb632-bb1b-4c49-bb35-b23d3285f615";
 function init(hero) {
   hero.setName("Storm Tenma");

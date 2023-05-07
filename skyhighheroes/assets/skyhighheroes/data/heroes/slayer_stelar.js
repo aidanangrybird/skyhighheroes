@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "85f45fed-d7f1-4966-bfad-915c3dba0153";
 function init(hero) {
   hero.setName("Slayer Stelar");

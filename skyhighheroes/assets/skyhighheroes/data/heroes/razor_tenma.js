@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "de01ddcc-7dc8-437e-bf08-3f8bf11086dc";
 function init(hero) {
   hero.setName("Razor Tenma");

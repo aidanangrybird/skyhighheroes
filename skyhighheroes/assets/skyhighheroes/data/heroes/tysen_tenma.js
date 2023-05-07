@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "0ccdd53f-70bc-4039-b89b-fd3781f746f2";
 function init(hero) {
   hero.setName("Tysen Tenma");

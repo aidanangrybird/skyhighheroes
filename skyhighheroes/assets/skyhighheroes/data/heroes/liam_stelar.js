@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "cd71352c-8cb2-448c-a69d-a310a905ce7b";
 function init(hero) {
   hero.setName("Liam Stelar");

@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "4663f7f2-784c-467d-945c-4cc049f77d7c";
 function init(hero) {
   hero.setName("Ender Tenma");

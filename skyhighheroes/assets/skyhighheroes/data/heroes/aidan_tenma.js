@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 function init(hero) {
   hero.setName("Aidan Tenma");

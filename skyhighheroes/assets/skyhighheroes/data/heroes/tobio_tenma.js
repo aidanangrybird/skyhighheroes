@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 function init(hero) {
   hero.setName("Tobio Tenma");
   hero.setTier(8);
