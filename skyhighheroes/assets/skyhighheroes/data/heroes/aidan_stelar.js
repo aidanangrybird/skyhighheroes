@@ -1,3 +1,4 @@
+var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 function init(hero) {
   hero.setName("Aidan Stelar");
@@ -54,6 +55,17 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
+    var x = entity.posX();
+    var y = (entity.posY() - 3627);
+    var z = entity.posZ();
+    if(entity.world().getDimension() == 0 && entity.posY() > 4000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1){
+      manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
+      manager.setData(entity, "fiskheroes:teleport_delay", 6);
+    }
+    if(entity.world().getDimension() == 2595 && entity.posY() > 4000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1){
+      manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
+      manager.setData(entity, "fiskheroes:teleport_delay", 6);
+    }
     var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
     if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && !entity.getData("fiskheroes:intangible")) {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
