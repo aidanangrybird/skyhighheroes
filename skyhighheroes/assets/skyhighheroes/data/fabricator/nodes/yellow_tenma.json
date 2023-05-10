@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:yellow_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:yellow_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}
