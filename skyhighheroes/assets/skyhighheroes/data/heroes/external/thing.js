@@ -173,23 +173,11 @@ function isKeyBindEnabled(entity, keyBind) {
 }
 
 function hasProperty(entity, property) {
-  switch (property) {
-    case "BREATHE_SPACE":
-      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0;
-    default:
-      return false;
-  }
+  return property == "BREATHE_SPACE" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 }
 
 function hasPermission(entity, permission) {
-  switch (permission) {
-    case "USE_CHRONOS_RIFLE":
-      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    case "USE_SHIELD":
-      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    default:
-      return false;
-  }
+  return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 }
 
 function canAim(entity) {

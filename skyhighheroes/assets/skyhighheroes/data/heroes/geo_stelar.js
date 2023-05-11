@@ -22,22 +22,22 @@ function init(hero) {
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
-  hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
-  hero.addKeyBindFunc("func_CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
-  hero.addKeyBindFunc("func_VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
-  hero.addKeyBindFunc("func_BATTLE_CARD_0", activateCard0, "Return To Mega Buster", 2);
-  hero.addKeyBindFunc("func_BATTLE_CARD_1", activateCard1, "Choose Shield", 2);
-  hero.addKeyBindFunc("func_BATTLE_CARD_2", activateCard2, "Choose Blade", 2);
-  hero.addKeyBindFunc("func_BATTLE_CARD_3", activateCard3, "Choose Shurikens", 2);
+  hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
+  hero.addKeyBindFunc("VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
+  hero.addKeyBindFunc("BATTLE_CARD_0", activateBattleCard, "Return To Mega Buster", 2);
+  hero.addKeyBindFunc("BATTLE_CARD_1", activateBattleCard, "Shield", 2);
+  hero.addKeyBindFunc("BATTLE_CARD_2", activateBattleCard, "Blade", 2);
+  hero.addKeyBindFunc("BATTLE_CARD_3", activateBattleCard, "Shurikens", 2);
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
-  hero.addKeyBindFunc("func_CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
+  hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
   hero.addKeyBind("AIM", "Aim Mega Buster", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
-  hero.addKeyBindFunc("func_ELECTROMAGNETIC", electroMagnetic, "EM Wave Change", 5);
+  hero.addKeyBindFunc("WAVE_CHANGE", electroMagnetic, "EM Wave Change", 5);
   hero.addKeyBind("WAVE_CHANGE", "EM Wave Change", 5);
-  hero.addKeyBindFunc("func_HEADTOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
+  hero.addKeyBindFunc("HEAD_TOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
   hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
   
   hero.setDefaultScale(0.8);
@@ -75,59 +75,32 @@ function init(hero) {
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
     var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && !entity.getData("fiskheroes:intangible");
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid()) {
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid()) {
       manager.setData(entity, "fiskheroes:flying", true);
     };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") != 0 || entity.getData("skyhighheroes:dyn/head_toggle") != 0) && entity.getData("fiskheroes:aiming")){
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:aiming") || entity.getData("fiskheroes:flight_boost_timer") > 0 || !entity.getHeldItem().isEmpty() || (entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/predation")))){
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
+      manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
-      manager.setData(entity, "fiskheroes:shield_timer", 0.0);
-      manager.setData(entity, "fiskheroes:blade_timer", 0.0);
-      manager.setData(entity, "fiskheroes:shield", false);
-      manager.setData(entity, "fiskheroes:blade", false);
-      manager.setData(entity, "fiskheroes:utility_belt_type", -1);
     };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") != 0 || entity.getData("skyhighheroes:dyn/head_toggle") != 0) && entity.getData("fiskheroes:flight_boost_timer") > 0){
-      manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
-      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
-      manager.setData(entity, "fiskheroes:shield_timer", 0.0);
-      manager.setData(entity, "fiskheroes:blade_timer", 0.0);
-      manager.setData(entity, "fiskheroes:shield", false);
-      manager.setData(entity, "fiskheroes:blade", false);
-      manager.setData(entity, "fiskheroes:utility_belt_type", -1);
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") != 0 || entity.getData("skyhighheroes:dyn/head_toggle") != 0) && (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 2)){
-      manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
-      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
-      manager.setData(entity, "fiskheroes:shield_timer", 0.0);
-      manager.setData(entity, "fiskheroes:blade_timer", 0.0);
-      manager.setData(entity, "fiskheroes:shield", false);
-      manager.setData(entity, "fiskheroes:blade", false);
-      manager.setData(entity, "fiskheroes:utility_belt_type", -1);
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.75 && !entity.getData("skyhighheroes:dyn/predation")){
-      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
-      manager.setData(entity, "fiskheroes:shield_timer", 1.0);
-      manager.setData(entity, "fiskheroes:blade_timer", 0.0);
-      manager.setData(entity, "fiskheroes:shield", true);
-      manager.setData(entity, "fiskheroes:blade", false);
-      manager.setData(entity, "fiskheroes:utility_belt_type", -1);
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.75 && !entity.getData("skyhighheroes:dyn/predation")){
-      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
-      manager.setData(entity, "fiskheroes:shield_timer", 0.0);
-      manager.setData(entity, "fiskheroes:blade_timer", 1.0);
-      manager.setData(entity, "fiskheroes:shield", false);
-      manager.setData(entity, "fiskheroes:blade", true);
-      manager.setData(entity, "fiskheroes:utility_belt_type", -1);
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.75 && !entity.getData("skyhighheroes:dyn/predation")){
-      manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
-      manager.setData(entity, "fiskheroes:shield_timer", 0.0);
-      manager.setData(entity, "fiskheroes:blade_timer", 0.0);
-      manager.setData(entity, "fiskheroes:shield", false);
-      manager.setData(entity, "fiskheroes:blade", false);
-      manager.setData(entity, "fiskheroes:utility_belt_type", 1);
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.75 && !entity.getData("skyhighheroes:dyn/predation")){
+      if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
+        manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "fiskheroes:shield_timer", 1.0);
+        manager.setData(entity, "fiskheroes:shield", true);
+      }
+      if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
+        manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "fiskheroes:blade_timer", 1.0);
+        manager.setData(entity, "fiskheroes:blade", true);
+      }
+      if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
+        manager.setData(entity, "skyhighheroes:dyn/head_toggle", 0);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "fiskheroes:utility_belt_type", 1);
+      }
     };
   });
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
@@ -189,38 +162,21 @@ function cycleDownCard(player, manager) {
   return true;
 }
 
-function activateCard0(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
-  return true; 
-}
-
-function activateCard1(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/battle_card", 1);
-  return true; 
-}
-
-function activateCard2(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/battle_card", 2);
-  return true; 
-}
-
-function activateCard3(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/battle_card", 3);
-  return true; 
+function activateBattleCard(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
+  return true;
 }
 
 function electroMagnetic(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+  manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+  manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
+  manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
   if (player.getData("skyhighheroes:dyn/wave_changed") == false) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
-    manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
-    manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
-    manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
   }
   if (player.getData("skyhighheroes:dyn/wave_changed") == true) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
-    manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
-    manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
-    manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
   }
   return true;
 }
@@ -294,142 +250,126 @@ function isModifierEnabled(entity, modifier) {
     case "fiskheroes:damage_immunity":
       switch (modifier.id()) {
         case "explosion":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:invisible");
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "magic":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:invisible");
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "shuriken":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:invisible");
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "sharp":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:invisible");
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "bullet":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:invisible");
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "blunt":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:invisible");
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "fire":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "cactus":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "cold":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "energy":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "electricity":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "sound":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "thorns":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "radiation":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "water":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "hulk":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "holy":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "hellfire":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "mineral":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "shockwave":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "atlantean_steel":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "eternium":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "cosmic":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "kryptonite":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "light":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "cs":
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         default:
-          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
       };
     case "fiskheroes:transformation":
-      return entity.isAlive() && !entity.isDisplayStand();
-    case "fiskheroes:controlled_flight":
-      return (entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getData("skyhighheroes:dyn/wave_changed")) && !entity.isDisplayStand();
+      return entity.isAlive();
     case "fiskheroes:equipment":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
     case "fiskheroes:blade":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
     case "fiskheroes:shield":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
     case "fiskheroes:arrow_catching":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:blade") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("fiskheroes:utility_belt_type") < 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:blade") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("fiskheroes:utility_belt_type") < 0;
     case "fiskheroes:energy_bolt":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getHeldItem().isEmpty();
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
     case "fiskheroes:lightning_cast":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:blade") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("fiskheroes:utility_belt_type") < 0 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/head_toggle") == 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:blade") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("fiskheroes:utility_belt_type") < 0 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/head_toggle") == 0;
     default:
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
   }
 }
 
 function isKeyBindEnabled(entity, keyBind) {
   switch (keyBind) {
-    case "func_ELECTROMAGNETIC":
-      return entity.isAlive() && !entity.isDisplayStand() && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
     case "WAVE_CHANGE":
-      return entity.isAlive() && !entity.isDisplayStand() && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
-    case "func_VISUALIZER_TOGGLE":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isDisplayStand();
-    case "func_CYCLE_CLOTHES":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isDisplayStand();
+      return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0);
+    case "VISUALIZER_TOGGLE":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+    case "CYCLE_CLOTHES":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     case "INTANGIBILITY":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("fiskheroes:flight_timer") > 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") > 0;
     case "SHIELD_THROW":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
     case "CHARGE_ENERGY":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
     case "TELEPORT":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") < 0.5;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.5;
     case "INVISIBILITY":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") < 0.5;
-    case "func_CYCLE_UP_CARD":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5;
-    case "func_CYCLE_DOWN_CARD":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5;
-    case "func_BATTLE_CARD_0":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;
-    case "func_BATTLE_CARD_1":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 1;
-    case "func_BATTLE_CARD_2":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 2;
-    case "func_BATTLE_CARD_3":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 3;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.5;
+    case "CYCLE_UP_CARD":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5;
+    case "CYCLE_DOWN_CARD":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5;
+    case "BATTLE_CARD_0":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;
+    case "BATTLE_CARD_1":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 1;
+    case "BATTLE_CARD_2":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 2;
+    case "BATTLE_CARD_3":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 3;
     case "AIM":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand() && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
-    case "func_HEADTOGGLE":
-      return entity.isAlive() && !entity.isDisplayStand() && entity.getData("fiskheroes:flight_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking();
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
+    case "HEAD_TOGGLE":
+      return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking();
     default:
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
   }
 }
 
 function hasProperty(entity, property) {
-  switch (property) {
-    case "BREATHE_SPACE":
-      return !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0;
-    default:
-      return false;
-  }
+  return property == "BREATHE_SPACE" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 }
 
 function hasPermission(entity, permission) {
-  switch (permission) {
-    case "USE_CHRONOS_RIFLE":
-      return !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    case "USE_SHIELD":
-      return !entity.isDisplayStand() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    default:
-      return false;
-  }
+  return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 }
 
 function canAim(entity) {
-  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isDisplayStand();
+  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
 }

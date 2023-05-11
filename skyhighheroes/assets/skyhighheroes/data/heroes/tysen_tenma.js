@@ -28,13 +28,13 @@ function init(hero) {
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
+  hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
+  hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
-  hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 3);
   hero.addKeyBind("SHIELD", "Force Field", 5);
-  hero.addKeyBind("SUPER_SPEED", "Super Speed", 2);
-  hero.addKeyBindFunc("func_CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
 
   
   hero.setDefaultScale(0.6);
@@ -136,23 +136,11 @@ function isKeyBindEnabled(entity, keyBind) {
 }
 
 function hasProperty(entity, property) {
-  switch (property) {
-    case "BREATHE_SPACE":
-      return entity.getUUID() == uuid;
-    default:
-      return entity.getUUID() == uuid;
-  }
+  return property == "BREATHE_SPACE" && entity.getUUID() == uuid;
 }
 
 function hasPermission(entity, permission) {
-  switch (permission) {
-    case "USE_CHRONOS_RIFLE":
-      return entity.getUUID() == uuid;
-    case "USE_SHIELD":
-      return entity.getUUID() == uuid;
-    default:
-      return false;
-  }
+  return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getUUID() == uuid;
 }
 
 function canAim(entity) {

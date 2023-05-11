@@ -21,7 +21,7 @@
     "superhero_landing_ticks": "BYTE",
     "superhero_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "superhero_boosting_landing_ticks": "BYTE",
-    "superhero_boosting_landing_timer": "FLOAT_INTERP"
+    "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
   },
   "sounds": {
     "download": {
