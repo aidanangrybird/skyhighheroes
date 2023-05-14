@@ -1,7 +1,7 @@
 extend("skyhighheroes:yellow_stelar");
 
 loadTextures({
-    "base": "skyhighheroes:yellow/yellow_stelar_spider_man",
+    "base": "skyhighheroes:yellow/yellow_stelar_spider_man_base",
     "lights": "skyhighheroes:yellow/yellow_stelar_spider_man_lights",
     "base_tx": "skyhighheroes:yellow/yellow_stelar_spider_man_base.tx.json",
     "lights_tx": "skyhighheroes:yellow/yellow_stelar_spider_man_lights.tx.json",
