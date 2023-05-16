@@ -68,6 +68,7 @@ function addPredationAnimation(renderer, key, value) {
         data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
         data.load(1, entity.getData("skyhighheroes:dyn/predation"));
     });
+    anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0)
     anim.priority = -9.75;
 }
 
@@ -258,11 +259,11 @@ function initOmegaXis(renderer) {
         omegaXisFront: omegaXisFront,
         render: (entity, renderLayer) => {
             if (renderLayer == "CHESTPLATE") {
-                if (entity.getHeldItem().isEmpty() && entity.getData('skyhighheroes:dyn/battle_card') == 2) {
+                if (entity.getHeldItem().isEmpty() && entity.getData('fiskheroes:blade_timer') == 1) {
                     blade.unfold = 1;
                     blade.render();
                 }
-                if (entity.getData('skyhighheroes:dyn/battle_card') != 2 && entity.getData('skyhighheroes:dyn/battle_card') != 3 && entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
+                if (entity.getData('fiskheroes:blade_timer') == 0 && entity.getData('fiskheroes:utility_belt_type') != 1 && entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
                     if (entity.getHeldItem().isEmpty()) {
                         omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
                         omegaXisRight.render();
