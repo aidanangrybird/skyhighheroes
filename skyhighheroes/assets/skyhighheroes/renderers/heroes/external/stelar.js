@@ -68,7 +68,19 @@ function addPredationAnimation(renderer, key, value) {
         data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
         data.load(1, entity.getData("skyhighheroes:dyn/predation"));
     });
-    anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0)
+    anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") != 0)
+    anim.priority = -9.75;
+}
+
+function addBasePredationAnimation(renderer, key, value) {
+    if (typeof value === "string") {
+        anim = renderer.createResource("ANIMATION", value);
+    }
+    renderer.addCustomAnimation(key, anim);
+    anim.setData((entity, data) => {
+        data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
+    });
+    anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 0)
     anim.priority = -9.75;
 }
 
@@ -144,7 +156,8 @@ function initStelarAnimations(renderer) {
         .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
         .priority = 10;
     addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
-    addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:predation");
+    addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:stelar_predation");
+    addBasePredationAnimation(renderer, "stelar.PREDATION_BASE", "skyhighheroes:stelar_predation_base");
     //Flight
     addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
     addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/stelar_holding_flight.anim.json");
@@ -258,13 +271,9 @@ function initOmegaXis(renderer) {
         omegaXisBottom: omegaXisBottom,
         omegaXisFront: omegaXisFront,
         render: (entity, renderLayer) => {
-            if (renderLayer == "CHESTPLATE") {
-                if (entity.getHeldItem().isEmpty() && entity.getData('fiskheroes:blade_timer') == 1) {
-                    blade.unfold = 1;
-                    blade.render();
-                }
-                if (entity.getData('fiskheroes:blade_timer') == 0 && entity.getData('fiskheroes:utility_belt_type') != 1 && entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
-                    if (entity.getHeldItem().isEmpty()) {
+            if (renderLayer == "CHESTPLATE") {                
+                if (entity.getHeldItem().isEmpty() || !(entity.getInterpolatedData("skyhighheroes:dyn/predation_timer") < 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") > 1)) {
+                    if (!entity.getData('fiskheroes:blade') && entity.getData('fiskheroes:utility_belt_type') != 1 && entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
                         omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
                         omegaXisRight.render();
                         omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
@@ -275,9 +284,13 @@ function initOmegaXis(renderer) {
                         omegaXisBottom.render();
                         omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
                         omegaXisFront.render();
-                    }
-                }
-            }
+                    };
+                };
+            };
+            if (entity.getHeldItem().isEmpty() && entity.getInterpolatedData('fiskheroes:blade_timer') == 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                blade.unfold = 1;
+                blade.render();
+            };
         }
     };
 }
