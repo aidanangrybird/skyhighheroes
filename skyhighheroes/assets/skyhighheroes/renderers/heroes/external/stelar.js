@@ -235,33 +235,33 @@ function initOmegaXis(renderer) {
     blade.large = true;
     //Right
     var omegaXisRight = renderer.createEffect("fiskheroes:shield");
-    omegaXisRight.texture.set("cannon_right", "cannon_right_lights");
+    omegaXisRight.texture.set("omega_xis_right", "omega_xis_right_lights");
     omegaXisRight.anchor.set("rightArm");
-    omegaXisRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 7.0, 3.0);
+    omegaXisRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
     omegaXisRight.large = true;
     //Left
     var omegaXisLeft = renderer.createEffect("fiskheroes:shield");
-    omegaXisLeft.texture.set("cannon_left", "cannon_left_lights");
+    omegaXisLeft.texture.set("omega_xis_left", "omega_xis_left_lights");
     omegaXisLeft.anchor.set("rightArm");
-    omegaXisLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 7.0, -3.0);
+    omegaXisLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
     omegaXisLeft.large = true;
     //Top
     var omegaXisTop = renderer.createEffect("fiskheroes:shield");
-    omegaXisTop.texture.set("cannon_top", null);
+    omegaXisTop.texture.set("omega_xis_top", "omega_xis_top_lights");
     omegaXisTop.anchor.set("rightArm");
-    omegaXisTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 7.0, 0.0);
+    omegaXisTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
     omegaXisTop.large = true;
     //Bottom
     var omegaXisBottom = renderer.createEffect("fiskheroes:shield");
-    omegaXisBottom.texture.set("cannon_bottom", null);
+    omegaXisBottom.texture.set("omega_xis_bottom", "omega_xis_bottom_lights");
     omegaXisBottom.anchor.set("rightArm");
-    omegaXisBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 7.0, 0.0);
+    omegaXisBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
     omegaXisBottom.large = true;
     //Front
     var omegaXisFront = renderer.createEffect("fiskheroes:shield");
-    omegaXisFront.texture.set("cannon_front", null);
+    omegaXisFront.texture.set("omega_xis_front", null);
     omegaXisFront.anchor.set("rightArm");
-    omegaXisFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 12.0, 0.0);
+    omegaXisFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
     omegaXisFront.large = true;
     return {
         blade: blade,
@@ -272,17 +272,17 @@ function initOmegaXis(renderer) {
         omegaXisFront: omegaXisFront,
         render: (entity, renderLayer) => {
             if (renderLayer == "CHESTPLATE") {                
-                if (entity.getHeldItem().isEmpty() || !(entity.getInterpolatedData("skyhighheroes:dyn/predation_timer") < 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") > 1)) {
-                    if (!entity.getData('fiskheroes:blade') && entity.getData('fiskheroes:utility_belt_type') != 1 && entity.getData('skyhighheroes:dyn/head_toggle') != 1) {
-                        omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
+                if (!(entity.getInterpolatedData("skyhighheroes:dyn/predation_timer") < 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") > 1)) {
+                    if ((!entity.getData('fiskheroes:blade') && entity.getData('fiskheroes:utility_belt_type') != 1 && entity.getData('skyhighheroes:dyn/head_toggle') != 1)) {
+                        omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
                         omegaXisRight.render();
-                        omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
+                        omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
                         omegaXisLeft.render();
-                        omegaXisTop.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
+                        omegaXisTop.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
                         omegaXisTop.render();
-                        omegaXisBottom.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
+                        omegaXisBottom.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
                         omegaXisBottom.render();
-                        omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0);
+                        omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
                         omegaXisFront.render();
                     };
                 };
