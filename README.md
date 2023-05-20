@@ -1,4 +1,4 @@
-This is a repository for the Sky High Heroes heropack. You can go ahead and learn from what I have made, just please don't steal anything as I have worked very hard on this. 
+This is a repository for the Sky High Heroes heropack. You can go ahead and learn from what I have made, just please don't steal anything as I have worked very hard on this. If you want to see the results of any of the commits on here, join the Sky High Heroes Discord server: https://discord.gg/CseTMEhu3f
 
 You will notice that there are certain people's custom suits in this heropack. Those will obviously not be in the release version. 
 
