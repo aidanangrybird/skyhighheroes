@@ -171,7 +171,6 @@ function cycleDownCard(player, manager) {
 
 function activateBattleCard(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
-  manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
   return true;
 }
 
