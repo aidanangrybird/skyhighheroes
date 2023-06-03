@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:robin_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:robin_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

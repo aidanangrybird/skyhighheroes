@@ -21,6 +21,9 @@ function init(renderer) {
                     return "swimsuit_tx";
                 }
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+                    return "winter_tx";
+                }
+                if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 4) {
                     return "normal_tx";
                 }
             }
@@ -41,6 +44,14 @@ function init(renderer) {
                     return "visualizer_up_swimsuit";
                 }
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+                    if (entity.getData("skyhighheroes:dyn/hood_toggle") == 0) {
+                        return "visualizer_up_winter_hood_down";
+                    }
+                    if (entity.getData("skyhighheroes:dyn/hood_toggle") == 1) {
+                        return "visualizer_up_winter_hood_up";
+                    }
+                }
+                if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 4) {
                     return "visualizer_up_normal";
                 }
             }
@@ -55,6 +66,14 @@ function init(renderer) {
                     return "visualizer_down_swimsuit";
                 }
                 if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+                    if (entity.getData("skyhighheroes:dyn/hood_toggle") == 0) {
+                        return "visualizer_down_winter_hood_down";
+                    }
+                    if (entity.getData("skyhighheroes:dyn/hood_toggle") == 1) {
+                        return "visualizer_down_winter_hood_up";
+                    }
+                }
+                if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 4) {
                     return "visualizer_down_normal";
                 }
             }
@@ -76,6 +95,9 @@ function init(renderer) {
             }
             if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
                 return "lights_tx";
+            }
+            if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/hood_toggle") == 1) {
+                return "visualizer_up_lights_winter_hood";
             }
             if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
                 return "visualizer_up_lights";

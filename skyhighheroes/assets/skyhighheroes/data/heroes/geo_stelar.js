@@ -32,6 +32,7 @@ function init(hero) {
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
   hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
+  hero.addKeyBindFunc("HOOD_TOGGLE", hoodToggle, "Toggle Hood", 3);
   hero.addKeyBind("AIM", "Aim Mega Buster", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
@@ -75,7 +76,7 @@ function init(hero) {
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
     var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid()) {
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && (!entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.getData("fiskheroes:intangible"))) {
       manager.setData(entity, "fiskheroes:flying", true);
     };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:aiming") || entity.getData("fiskheroes:flight_boost_timer") > 0 || !entity.getHeldItem().isEmpty() || (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0 && entity.getData("skyhighheroes:dyn/predation_timer") < 1))) {
@@ -176,7 +177,10 @@ function electroMagnetic(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
   manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
   manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
+  manager.setData(player, "skyhighheroes:dyn/hood_toggle", 0);
   manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
+  manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
+  manager.setData(player, "skyhighheroes:dyn/predation", false);
   if (player.getData("skyhighheroes:dyn/wave_changed") == false) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
   }
@@ -202,8 +206,16 @@ function visualizerToggle(player, manager) {
 
 function cycleClothes(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/stelar_clothes", player.getData("skyhighheroes:dyn/stelar_clothes") + 1);
-  if (player.getData("skyhighheroes:dyn/stelar_clothes") > 3) {
+  if (player.getData("skyhighheroes:dyn/stelar_clothes") > 4) {
     manager.setData(player, "skyhighheroes:dyn/stelar_clothes", 0);
+  }
+  return true;
+}
+
+function hoodToggle(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/hood_toggle", player.getData("skyhighheroes:dyn/hood_toggle") + 1);
+  if (player.getData("skyhighheroes:dyn/hood_toggle") > 1) {
+    manager.setData(player, "skyhighheroes:dyn/hood_toggle", 0);
   }
   return true;
 }
@@ -336,6 +348,8 @@ function isKeyBindEnabled(entity, keyBind) {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     case "CYCLE_CLOTHES":
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+    case "HOOD_TOGGLE":
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
     case "INTANGIBILITY":
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") > 0;
     case "SHIELD_THROW":
