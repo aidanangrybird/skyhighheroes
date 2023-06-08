@@ -1,4 +1,5 @@
 var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
+//var bodyTemp = implement("skyhighheroes:external/body_temperature");
 function init(hero) {
   hero.setName("Geo Stelar");
   hero.setTier(10);
@@ -46,7 +47,15 @@ function init(hero) {
   hero.setHasPermission(hasPermission);
   hero.addAttributeProfile("INACTIVE", inactiveProfile);
   hero.addAttributeProfile("BLADE", bladeProfile);
-  hero.addAttributeProfile("SHIELD", shieldProfile);
+  hero.addAttributeProfile("SHIELD", shieldProfile);/*
+  hero.addAttributeProfile("FROZEN", frozenProfile);
+  hero.addAttributeProfile("COLD3", cold3Profile);
+  hero.addAttributeProfile("COLD2", cold2Profile);
+  hero.addAttributeProfile("COLD1", cold1Profile);
+  hero.addAttributeProfile("HOT1", hot1Profile);
+  hero.addAttributeProfile("HOT2", hot2Profile);
+  hero.addAttributeProfile("HOT3", hot3Profile);
+  hero.addAttributeProfile("FIRE", fireProfile);*/
   hero.setAttributeProfile(getAttributeProfile);
   hero.supplyFunction("canAim", canAim);
   hero.setModifierEnabled(isModifierEnabled);
@@ -107,7 +116,70 @@ function init(hero) {
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "fiskheroes:utility_belt_type", 1);
       };
-    };
+    };/*
+    bodyTemp.change(entity, manager, "skyhighheroes:dyn/body_temperature", "skyhighheroes:dyn/stelar_clothes", 500, [
+    { clothing: 0, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
+    { clothing: 0, biome: "Frozen", tempChangeTicks: -1000.0 },
+    { clothing: 0, biome: "Ice", tempChangeTicks: -1000.0 },
+    { clothing: 0, biome: "Beach", tempChangeTicks: 10000.0 },
+    { clothing: 0, biome: "Desert", tempChangeTicks: 400.0 },
+    { clothing: 0, biome: "Hell", tempChangeTicks: 100.0 },
+    { clothing: 0, biome: "Jungle", tempChangeTicks: 500.0 },
+    { clothing: 0, biome: "Mesa", tempChangeTicks: 1000.0 },
+    { clothing: 0, biome: "Savanna", tempChangeTicks: 2000.0 },
+    { clothing: 0, biome: "Swampland", tempChangeTicks: 1000.0 },
+    { clothing: 1, biome: "Frozen", tempChangeTicks: -1000.0 },
+    { clothing: 1, biome: "Ice", tempChangeTicks: -1000.0 },
+    { clothing: 1, biome: "Cold Taiga", tempChangeTicks: -2000.0 },
+    { clothing: 1, biome: "Cold Beach", tempChangeTicks: -3000.0 },
+    { clothing: 1, biome: "Extreme", tempChangeTicks: -4000.0 },
+    { clothing: 1, biome: "Mega", tempChangeTicks: -5000.0 },
+    { clothing: 1, biome: "Stone Beach", tempChangeTicks: -3000.0 },
+    { clothing: 2, biome: "Ice", tempChangeTicks: -300.0 },
+    { clothing: 2, biome: "Frozen", tempChangeTicks: -300.0 },
+    { clothing: 2, biome: "Cold Taiga", tempChangeTicks: -500.0 },
+    { clothing: 2, biome: "Cold Beach", tempChangeTicks: -1000.0 },
+    { clothing: 2, biome: "Extreme", tempChangeTicks: -1000.0 },
+    { clothing: 2, biome: "Mega", tempChangeTicks: -1000.0 },
+    { clothing: 2, biome: "Stone", tempChangeTicks: -1000.0 },
+    { clothing: 2, biome: "Birch", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Flower", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Forest", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Mesa", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Plains", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Roofed", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Sunflower", tempChangeTicks: -10000.0 },
+    { clothing: 2, biome: "Taiga", tempChangeTicks: -10000.0 },
+    { clothing: 3, biome: "Taiga", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "River", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Sunflower", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Stone", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Roofed", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Plains", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Mega", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Forest", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Flower", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Extreme", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Birch", tempChangeTicks: 5000.0 },
+    { clothing: 3, biome: "Mushroom", tempChangeTicks: 2000.0 },
+    { clothing: 3, biome: "Savanna", tempChangeTicks: 1000.0 },
+    { clothing: 3, biome: "Beach", tempChangeTicks: 800.0 },
+    { clothing: 3, biome: "Mesa", tempChangeTicks: 500.0 },
+    { clothing: 3, biome: "Jungle", tempChangeTicks: 160.0 },
+    { clothing: 3, biome: "Swampland", tempChangeTicks: 160.0 },
+    { clothing: 3, biome: "Hell", tempChangeTicks: 80.0 },
+    { clothing: 3, biome: "Desert", tempChangeTicks: 100.0 },
+    { clothing: 4, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
+    { clothing: 4, biome: "Frozen", tempChangeTicks: -1000.0 },
+    { clothing: 4, biome: "Ice", tempChangeTicks: -1000.0 },
+    { clothing: 4, biome: "Beach", tempChangeTicks: 10000.0 },
+    { clothing: 4, biome: "Desert", tempChangeTicks: 400.0 },
+    { clothing: 4, biome: "Hell", tempChangeTicks: 100.0 },
+    { clothing: 4, biome: "Jungle", tempChangeTicks: 500.0 },
+    { clothing: 4, biome: "Mesa", tempChangeTicks: 1000.0 },
+    { clothing: 4, biome: "Savanna", tempChangeTicks: 2000.0 },
+    { clothing: 4, biome: "Swampland", tempChangeTicks: 1000.0 }
+    ]);*/
   });
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
   hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
@@ -127,6 +199,8 @@ function init(hero) {
   });
 }
 
+
+//Normal Profiles
 function shieldProfile(profile) {
   profile.inheritDefaults();
   profile.addAttribute("BASE_SPEED", -0.75, 1);
@@ -137,13 +211,84 @@ function shieldProfile(profile) {
   profile.addAttribute("KNOCKBACK", 0.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
 }
-
 function bladeProfile(profile) {
   profile.inheritDefaults();
   profile.addAttribute("SPRINT_SPEED", 0.5, 1);
   profile.addAttribute("KNOCKBACK", 5.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
 }
+function inactiveProfile(profile) {
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+}
+/*
+//Temperature Profiles
+function frozenProfile(profile) {
+  profile.addAttribute("BASE_SPEED", -1.0, 1);
+  profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+  profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
+  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+  profile.addAttribute("MAX_HEALTH", -12.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 1);
+};
+function cold3Profile(profile) {
+  profile.addAttribute("BASE_SPEED", -1.0, 1);
+  profile.addAttribute("SPRINT_SPEED", -0.8, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -0.9, 1);
+  profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
+  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
+function cold2Profile(profile) {
+  profile.addAttribute("BASE_SPEED", -0.5, 1);
+  profile.addAttribute("SPRINT_SPEED", -0.35, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -0.5, 1);
+  profile.addAttribute("JUMP_HEIGHT", -0.25, 0);
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
+function cold1Profile(profile) {
+  profile.addAttribute("BASE_SPEED", -0.05, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
+  profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
+function hot1Profile(profile) {
+  profile.addAttribute("BASE_SPEED", -0.1, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
+  profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
+function hot2Profile(profile) {
+  profile.addAttribute("BASE_SPEED", -0.5, 1);
+  profile.addAttribute("SPRINT_SPEED", -0.4, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -0.6, 1);
+  profile.addAttribute("JUMP_HEIGHT", -0.5, 0);
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
+function hot3Profile(profile) {
+  profile.addAttribute("BASE_SPEED", -1.0, 1);
+  profile.addAttribute("SPRINT_SPEED", -0.5, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -0.95, 1);
+  profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
+  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+  profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
+function fireProfile(profile) {
+  profile.addAttribute("BASE_SPEED", -1.0, 1);
+  profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+  profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
+  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+  profile.addAttribute("MAX_HEALTH", -12.0, 0);
+  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};*/
 
 function getTierOverride(entity) {
   if ((entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) && (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1)) {
@@ -228,19 +373,47 @@ function headToggle(player, manager) {
   return true;
 }
 
-function inactiveProfile(profile) {
-  profile.addAttribute("MAX_HEALTH", -8.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
-}
-
 function getAttributeProfile(entity) {
-  if (entity.getData("fiskheroes:shield_blocking")) {
-    return "SHIELD";
-  }
-  if (entity.getData("fiskheroes:blade")) {
-    return "BLADE";
-  }
-  return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? null : "INACTIVE";
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {/*
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.0 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95) {
+        return "FROZEN";
+      }
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85) {
+        return "COLD3";
+      }
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.85 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.5) {
+        return "COLD2";
+      }
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < 0) {
+        return "COLD1";
+      }*/
+      if (entity.getData("skyhighheroes:dyn/body_temperature") == 0) {
+        return "INACTIVE";
+      }/*
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0) {
+        return "HOT1";
+      }
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.9 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.55) {
+        return "HOT2";
+      }
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9) {
+        return "HOT3";
+      }
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.0 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95) {
+        return "FIRE";
+      }*/
+    }
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+      if (entity.getData("fiskheroes:shield_blocking")) {
+        return "SHIELD";
+      }
+      if (entity.getData("fiskheroes:blade")) {
+        return "BLADE";
+      }
+      if (!entity.getData("fiskheroes:blade") && !entity.getData("fiskheroes:shield_blocking")) {
+        return null;
+      }
+    } 
 }
 
 function getDamageProfile(entity) {

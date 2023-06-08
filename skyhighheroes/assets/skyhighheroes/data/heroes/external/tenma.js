@@ -1,18 +1,13 @@
 var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
-function init(hero) {
-  hero.setName("Tobio Tenma");
+function init(hero, uuid) {
   hero.setTier(8);
   hero.setHelmet("Head");
   hero.setChestplate("Torso");
   hero.setLeggings("Legs");
   hero.setBoots("Boots");
-  hero.setAliases("tobio_tenma");
   hero.setVersion("Astro Boy");
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A74Tobio Tenma's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A74Tobio Tenma's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Tobio Tenma's Rifle},ench:[{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Tobio Tenma's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
-  
+  hero.hide();
+   
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
   hero.addAttribute("SPRINT_SPEED", 0.3, 1);
   hero.addAttribute("BASE_SPEED", 0.2, 1);
@@ -34,13 +29,51 @@ function init(hero) {
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
   hero.addKeyBind("SHIELD", "Force Field", 5);
 
-  
   hero.setDefaultScale(0.6);
-  hero.setHasProperty(hasProperty);
-  hero.setHasPermission(hasPermission);
-  hero.setModifierEnabled(isModifierEnabled);
-  hero.supplyFunction("canAim", canAim);
-  hero.setKeyBindEnabled(isKeyBindEnabled);
+  hero.setHasProperty((entity, property) => {
+    return property == "BREATHE_SPACE" && entity.getUUID() == uuid;
+  });
+  hero.setHasPermission((entity, permission) => {
+    return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getUUID() == uuid;
+  });
+  hero.setModifierEnabled((entity, modifier) => {
+    switch (modifier.name()) {
+      case "fiskheroes:metal_skin":
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:metal_heat") < 1.0;
+      case "fiskheroes:energy_projection":
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
+      case "fiskheroes:energy_bolt":
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+      case "fiskheroes:super_speed":
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
+      case "fiskheroes:shield":
+        return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
+      case "fiskheroes:leaping":
+        return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+      case "fiskheroes:arrow_catching":
+        return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+      default:
+        return entity.getUUID() == uuid;
+    };
+  });
+  hero.supplyFunction("canAim", (entity) => {
+    return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+  });
+  hero.setTierOverride((entity) => {
+    return (entity.getUUID() == uuid) ? 8 : 0;
+  });
+  hero.setKeyBindEnabled((entity, keyBind) => {
+    switch (keyBind) {
+      case "SHIELD_THROW":
+        return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
+      case "AIM":
+        return entity.getUUID() == uuid && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
+      case "CHARGE_ENERGY":
+        return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+      default:
+        return entity.getUUID() == uuid;
+    };
+  });
   hero.addAttributeProfile("SHIELD", shieldProfile);
   hero.setAttributeProfile(getAttributeProfile);
   hero.setTickHandler((entity, manager) => {
@@ -69,7 +102,7 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:flying", true);
     };
   });
-}
+};
 
 function cycleClothes(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/tenma_clothes", player.getData("skyhighheroes:dyn/tenma_clothes") + 1);
@@ -77,15 +110,11 @@ function cycleClothes(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/tenma_clothes", 0);
   };
   return true;
-}
-
-function getTierOverride(entity) {
-  return (!entity.isDisplayStand()) ? 8 : 0;
-}
+};
 
 function getAttributeProfile(entity) {
   return (entity.getData("fiskheroes:shield_blocking")) ? "SHIELD" : null;
-}
+};
 
 function shieldProfile(profile) {
   profile.inheritDefaults();
@@ -96,50 +125,4 @@ function shieldProfile(profile) {
   profile.addAttribute("STEP_HEIGHT", -1.0, 1);
   profile.addAttribute("KNOCKBACK", 0.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-}
-
-function isModifierEnabled(entity, modifier) {
-  switch (modifier.name()) {
-    case "fiskheroes:metal_skin":
-      return entity.getData("fiskheroes:metal_heat") < 1.0;
-    case "fiskheroes:energy_projection":
-      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
-    case "fiskheroes:energy_bolt":
-      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-    case "fiskheroes:super_speed":
-      return entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
-    case "fiskheroes:shield":
-      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
-    case "fiskheroes:leaping":
-      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-    case "fiskheroes:arrow_catching":
-      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-    default:
-      return !entity.isDisplayStand();
-  }
-}
-
-function isKeyBindEnabled(entity, keyBind) {
-  switch (keyBind) {
-    case "SHIELD_THROW":
-      return entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
-    case "AIM":
-      return (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
-    case "CHARGE_ENERGY":
-      return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
-    default:
-      return !entity.isDisplayStand();
-  }
-}
-
-function hasProperty(entity, property) {
-  return property == "BREATHE_SPACE";
-}
-
-function hasPermission(entity, permission) {
-  return permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD";
-}
-
-function canAim(entity) {
-  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-}
+};
