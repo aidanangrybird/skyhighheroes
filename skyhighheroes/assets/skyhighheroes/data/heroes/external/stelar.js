@@ -52,7 +52,7 @@ function init(hero, uuid) {
   hero.addAttributeProfile("FIRE", fireProfile);
   hero.setAttributeProfile((entity) => {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid) {
-      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.1 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95) {
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95) {
         return "FROZEN";
       }
       if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85) {
@@ -76,7 +76,7 @@ function init(hero, uuid) {
       if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9) {
         return "HOT3";
       }
-      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.1 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95) {
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.4 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95) {
         return "FIRE";
       }
     }

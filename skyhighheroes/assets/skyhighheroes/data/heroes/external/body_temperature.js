@@ -45,10 +45,10 @@ function getTemperatureProfile(entity, map, clothingVar) {
 function change(entity, manager, map, tempVar, stableRate, clothingVar) {
     var profile = getTemperatureProfile(entity, map, clothingVar);
     if (profile.isMismatch) {
-      if (profile.getTicks > 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.1) {
+      if (profile.getTicks > 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
         manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/profile.getTicks)));
       }
-      if (profile.getTicks < 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.1) {
+      if (profile.getTicks < 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
         manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/profile.getTicks)));
       }
     } else if (!profile.isMismatch) {
