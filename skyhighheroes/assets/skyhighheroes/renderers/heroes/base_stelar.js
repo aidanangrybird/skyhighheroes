@@ -123,7 +123,7 @@ function initEffects(renderer) {
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stuff.initForceField(renderer, getColor());
   omega_xis = stelar.initOmegaXis(renderer);
-  stelar.initMegaBuster(renderer, getColor());
+  stelar.initMegaBuster(renderer, getColor(), getColor());
   stelar.initEquipment(renderer);
   wave_change_lights = renderer.createEffect("fiskheroes:overlay");
   wave_change_lights.texture.set(null, "wave_change_lights");
