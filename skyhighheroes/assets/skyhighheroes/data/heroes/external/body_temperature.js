@@ -1,86 +1,62 @@
 //I spent a lot of time trying to figure this out
 //If you want to use this in your heropack, please contact aidanangrybird on Discord and make sure to credit aidanangrybird in your heropack
-function getTemperatureProfile(entity, array, clothingVar) {
+function getTemperatureProfile(entity, map, clothingVar) {
   var i = 0;
   if (typeof clothingVar === "string") {
-    while (i < array.length) {
-      if (entity.getData(clothingVar) == array[i].clothing && entity.world().getLocation(entity.pos()).biome().startsWith(array[i].biome)) {
+    while (i < map.length) {
+      var clothes = map[i].clothingType;
+      var locat = map[i].biome;
+      var ticks = map[i].tempChangeTicks;
+      if (entity.getData(clothingVar) == clothes && entity.world().getLocation(entity.pos()).biome().startsWith(locat) && map[i].hasOwnProperty("clothingType")) {
         mismatch = true;
-        ticks = array[i].tempChangeTicks;
-        return {
-          isMismatch: mismatch,
-          getTicks: ticks,
-        };
+        i = 10000000000;
       } else {
         ticks = 0;
         mismatch = false;
         i = i + 1;
-        return {
-          isMismatch: mismatch,
-          getTicks: ticks,
-        };
       };
     };
-  };
-  if (typeof clothingVar === "undefined") {
-    while (i < array.length) {
-      if (entity.world().getLocation(entity.pos()).biome().startsWith(array[i].biome)) {
+    var obj = {
+      isMismatch: mismatch,
+      getTicks: ticks,
+    };
+    return obj;
+  } else {
+    while (i < map.length) {
+      var locat = map[i].biome;
+      var ticks = map[i].tempChangeTicks;
+      if (entity.world().getLocation(entity.pos()).biome().startsWith(locat) && !map[i].hasOwnProperty("clothingType")) {
         mismatch = true;
-        ticks = array[i].tempChangeTicks;
-        return {
-          isMismatch: mismatch,
-          getTicks: ticks,
-        };
+        i = 10000000000;
       } else {
         ticks = 0;
         mismatch = false;
         i = i + 1;
-        return {
-          isMismatch: mismatch,
-          getTicks: ticks,
-        };
       };
     };
+    var obj = {
+      isMismatch: mismatch,
+      getTicks: ticks,
+    };
+    return obj;
   };
 };
 
-function changeTemperature(entity, manager, tempVar, clothingVar, stableRate, map) {
-  if (typeof clothingVar === "string") {
+function change(entity, manager, map, tempVar, stableRate, clothingVar) {
     var profile = getTemperatureProfile(entity, map, clothingVar);
     if (profile.isMismatch) {
-      if (profile.getTicks > 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.0) {
-        manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0 / profile.getTicks)))
+      if (profile.getTicks > 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.1) {
+        manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/profile.getTicks)));
       }
-      if (profile.getTicks < 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.0) {
-        manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0 / profile.getTicks)))
+      if (profile.getTicks < 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.1) {
+        manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/profile.getTicks)));
       }
-    }
-    if (!profile.isMismatch) {
-      if (entity.getData(tempVar) > 0.0 && entity.getData(tempVar) <= 1.0) {
-        manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0 / stableRate)))
+    } else if (!profile.isMismatch) {
+      if (entity.getData(tempVar) > 0.0 && entity.getData(tempVar) <= 1.3) {
+        manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/stableRate)));
       }
-      if (entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) < 0.0) {
-        manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0 / stableRate)))
-      }
-    }
-    if (typeof clothingVar !== "string") {
-      var profile = getTemperatureProfile(entity, map);
-      if (profile.isMismatch) {
-        if (profile.getTicks > 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.0) {
-          manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0 / profile.getTicks)))
-        }
-        if (profile.getTicks < 0.0 && entity.getData(tempVar) > -1.0 && entity.getData(tempVar) < 1.0) {
-          manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0 / profile.getTicks)))
-        }
-      }
-      if (!profile.isMismatch) {
-        if (entity.getData(tempVar) > 0.0 && entity.getData(tempVar) <= 1.0) {
-          manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0 / stableRate)))
-        }
-        if (entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) < 0.0) {
-          manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0 / stableRate)))
-        }
+      if (entity.getData(tempVar) < 0.0 && entity.getData(tempVar) >= -1.3) {
+        manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/stableRate)));
       }
     }
-  }
 };
