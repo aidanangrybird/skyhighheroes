@@ -53,8 +53,11 @@ loadTextures({
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.isDisplayStand()) {
+      if ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) {
         return "base";
+      }
+      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW")) {
+        return "transer";
       }
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
         if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
@@ -130,8 +133,11 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.isDisplayStand()) {
+      if ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) {
         return "lights";
+      }
+      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW")) {
+        return "transer_lights";
       }
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
         return "visualizer_lights_tx";
@@ -164,6 +170,10 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
+  nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0;
+  nv.factor = 10;
+  nv.setCondition(entity => (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 || entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0.75));
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stuff.initForceField(renderer, 0x00FF00);
   omega_xis = stelar.initOmegaXis(renderer);
@@ -179,6 +189,8 @@ function initEffects(renderer) {
 }
 
 function initAnimations(renderer) {
+  //Waiting for Fisk to fix issue with this
+  //stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json", "skyhighheroes:stelar_hover");
   stuff.forcefieldAnimation(renderer);
   stuff.emCeilingAnimation(renderer);
   stelar.initStelarAnimations(renderer);

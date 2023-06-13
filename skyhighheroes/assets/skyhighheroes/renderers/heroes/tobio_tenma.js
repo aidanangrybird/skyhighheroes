@@ -157,7 +157,7 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "HELMET") {
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 || entity.isDisplayStand()) {
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 || (entity.as("DISPLAY").getDisplayType() != "null")) {
         return "eyes";
       }
       if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
@@ -179,14 +179,9 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-  cannon = renderer.createEffect("fiskheroes:overlay");
-  cannon.texture.set(null, "cannon_lights");
-  armLights = renderer.createEffect("fiskheroes:overlay");
-  armLights.texture.set(null, "arms_lights");
-  bootLights = renderer.createEffect("fiskheroes:overlay");
-  bootLights.texture.set(null, "boots_lights");
-  bootOpening = renderer.createEffect("fiskheroes:overlay");
-  bootOpening.texture.set("boots", null);
+  nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.factor = 1.0;
   astro.initEquipment(renderer);
   stuff.initForceField(renderer, 0xFFFFFF);
   rockets = astro.initNormalBoosters(renderer);
@@ -197,6 +192,8 @@ function initEffects(renderer) {
 }
 
 function initAnimations(renderer) {
+  //Waiting for Fisk to fix issue with this
+  //stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:flight/astro_flight.anim.json", "skyhighheroes:astro_hover");
   astro.initAstroAnimations(renderer);
   stuff.forcefieldAnimation(renderer);
 }
@@ -204,15 +201,5 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
   metal_heat.render();
-  if (renderLayer == "CHESTPLATE") {
-    armLights.opacity = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-    armLights.render();
-  }
-  if (entity.getHeldItem().isEmpty()) {
-    cannon.opacity = entity.getInterpolatedData("fiskheroes:aiming_timer");
-    cannon.render();
-  }
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
 }
-
-var colorVar = 0xFFFFFF

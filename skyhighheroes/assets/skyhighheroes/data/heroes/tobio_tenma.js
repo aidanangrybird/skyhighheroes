@@ -128,7 +128,7 @@ function isKeyBindEnabled(entity, keyBind) {
     case "CHARGE_ENERGY":
       return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
     default:
-      return !entity.isDisplayStand();
+      return true;
   }
 }
 

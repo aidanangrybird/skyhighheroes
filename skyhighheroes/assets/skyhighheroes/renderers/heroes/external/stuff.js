@@ -83,3 +83,58 @@ function emCeilingAnimation(renderer) {
 function emTeleport(renderer) {
   setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
 };
+
+function holoFlightHoverAnim(renderer, name, value) {
+  var anim = renderer.createResource("ANIMATION", value);
+  renderer.addCustomAnimation(name, anim);
+
+  if (typeof dataLoader === "undefined") {
+    anim.setData((entity, data) => {
+      data.load(0, 1.0);
+      data.load(1, entity.loop(20 * Math.PI) + 0.4);
+    });
+  }
+  else {
+    anim.setData((entity, data) => dataLoader(entity, data));
+  };
+
+  anim.priority = -9.5;
+  anim.setCondition(entity => (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
+  renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+  renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
+  renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
+  return anim;
+};
+
+function holoFlightBaseAnim(renderer, name , value) {
+  var anim = renderer.createResource("ANIMATION", value);
+  renderer.addCustomAnimation(name, anim);
+
+  
+  anim.setCondition(entity => entity.getHeldItem().isEmpty())
+  if (typeof dataLoader === "undefined") {
+    anim.setData((entity, data) => {
+      data.load(0, 1.0);
+      data.load(1, 0.0);
+    });
+  }
+  else {
+    anim.setData((entity, data) => dataLoader(entity, data));
+  };
+  
+  anim.priority = -10;
+  anim.setCondition(entity => (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
+  renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+  renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
+  renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
+  return anim;
+};
+
+function initHoloFlightAnim(renderer, name, flightAnim, hoverAnim) {
+  holoFlightBaseAnim(renderer, name, flightAnim);
+  holoFlightHoverAnim(renderer, name, hoverAnim);
+};

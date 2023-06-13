@@ -198,31 +198,31 @@ function initEquipment(renderer) {
   katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 2.75], "rotation": [-148.0, 90.0, 0.0] },
     { "anchor": "body", "scale": 0.535, "offset": [3.05, 0.52, 2.75], "rotation": [-148.0, -90.0, 0.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1)).slotIndex = 0;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1)).slotIndex = 0;
   //Scythe
   scythe_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 2.75], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
   scythe_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.75], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
   //Rifle
   rifle_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.7, "offset": [-3.5, 2.0, 2.75], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
   rifle_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.7, "offset": [-3.5, 2.0, 3.75], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
   //Shield
   shield_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1).slotIndex = 3;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 1).slotIndex = 3;
   shield_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 3.75], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3))).slotIndex = 3;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3))).slotIndex = 3;
   shield_2 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 4.75], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => (entity.isDisplayStand() || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
+  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
 };
 
 //Omega-Xis
@@ -274,15 +274,15 @@ function initOmegaXis(renderer) {
       if (renderLayer == "CHESTPLATE") {
         if (!(entity.getInterpolatedData("skyhighheroes:dyn/predation_timer") < 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") > 1)) {
           if ((!entity.getData('fiskheroes:blade') && entity.getData('fiskheroes:utility_belt_type') != 1 && entity.getData('skyhighheroes:dyn/head_toggle') != 1)) {
-            omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
+            omegaXisRight.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") - !entity.getHeldItem().isEmpty();
             omegaXisRight.render();
-            omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
+            omegaXisLeft.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") - !entity.getHeldItem().isEmpty();
             omegaXisLeft.render();
-            omegaXisTop.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
+            omegaXisTop.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") - !entity.getHeldItem().isEmpty();
             omegaXisTop.render();
-            omegaXisBottom.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
+            omegaXisBottom.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") - !entity.getHeldItem().isEmpty();
             omegaXisBottom.render();
-            omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + entity.isDisplayStand() - !entity.getHeldItem().isEmpty();
+            omegaXisFront.unfold = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) + (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") - !entity.getHeldItem().isEmpty();
             omegaXisFront.render();
           };
         };

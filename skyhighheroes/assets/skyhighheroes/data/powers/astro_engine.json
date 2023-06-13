@@ -6,7 +6,8 @@
       "leapAmount": [2.0, 2.0]
     },
 	"fiskheroes:super_speed": {
-      "canUseTreadmill": false
+      "canUseTreadmill": false,
+      "canUseTachyons": false
     }
   }
 }
