@@ -375,7 +375,7 @@ function headToggle(player, manager) {
 }
 
 function getAttributeProfile(entity) {
-  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid) {
+  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
     if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.3 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95) {
       return "FROZEN";
     }
