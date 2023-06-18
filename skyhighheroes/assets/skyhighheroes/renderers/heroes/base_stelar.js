@@ -120,10 +120,7 @@ function init(renderer) {
 }
 
 function initEffects(renderer) {
-  nv = renderer.bindProperty("fiskheroes:night_vision");
-  nv.fogStrength = 0.0;
-  nv.factor = 1.0;
-  nv.setCondition(entity => (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 || entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0.75));
+  stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stuff.initForceField(renderer, getColor());
   omega_xis = stelar.initOmegaXis(renderer);

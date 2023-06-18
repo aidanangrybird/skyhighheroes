@@ -180,6 +180,18 @@ function initMegaBuster(renderer, color, color_other) {
   ]);
 };
 
+function initNV(renderer) {
+  nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
+  nv_wave_change.fogStrength = 0.0;
+  nv_wave_change.factor = 1.0;
+  nv_wave_change.setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0.75);
+  nv_visualizer = renderer.bindProperty("fiskheroes:night_vision");
+  nv_visualizer.fogStrength = 0.0;
+  nv_visualizer.factor = 1.0;
+  nv_visualizer.firstPersonOnly = true;
+  nv_visualizer.setCondition(entity => entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1);
+}
+
 //Equipment
 function initEquipment(renderer) {
   var livery_shield = renderer.bindProperty("fiskheroes:livery");
