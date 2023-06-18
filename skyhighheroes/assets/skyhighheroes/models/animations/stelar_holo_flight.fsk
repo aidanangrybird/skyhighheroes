@@ -1,0 +1,48 @@
+; data = entity loop ticks
+
+{thing} = 1
+
+; Boosted/stationary "base" positioning
+{rightArm_rotX} @ {thing} -> 0 - {thing}{rightArm_rotX}
+{rightArm_rotY} @ {thing} -'> 0 - {thing}{rightArm_rotY}
+{rightArm_rotZ} @ {thing} -> 0 + 7' - {thing}{rightArm_rotZ}
+{leftArm_rotX} @ {thing} -> 0 - {thing}{leftArm_rotX}
+{leftArm_rotY} @ {thing} -'> 0 - {thing}{leftArm_rotY}
+{leftArm_rotZ} @ {thing} -> 0 - 7' - {thing}{leftArm_rotZ}
+{rightLeg_rotX} @ {thing} -> 10'
+{rightLeg_rotY} @ {thing} -'> 0
+{rightLeg_rotZ} @ {thing} -> 0
+{leftLeg_rotX} @ {thing} -> 10'
+{leftLeg_rotY} @ {thing} -'> 0
+{leftLeg_rotZ} @ {thing} -> 0
+{rightLeg_posY} @ {thing} -> 11.95
+{rightLeg_posZ} @ {thing} -> 0.125
+{leftLeg_posY} @ {thing} -> 11.75
+{leftLeg_posZ} @ {thing} -> -0.125
+
+{data} = 0.2{thing}sin(2pi{data})
+
+{head_rotX} += 1'{thing}
+
+{rightLeg_posY} -= 0.75{thing} + 0.25{data}
+{rightLeg_posZ} -= -0.25{thing} + 0.5{data}
+{rightLeg_rotX} += 6'{thing} - 20'{data}
+{rightLeg_rotY} += 5'{thing} + 2'{data}
+{rightLeg_rotZ} += 2'{thing} - 2'{data}
+
+{leftLeg_posY} -= 0.75{thing} + 2{data}
+{leftLeg_posZ} -= {thing} + 2{data}
+{leftLeg_rotX} += 5'{thing} + 10'{data}
+{leftLeg_rotY} -= 8'{thing} + 4'{data}
+{leftLeg_rotZ} -= 3'{thing} - 2'{data}
+
+{rightArm_rotX} += 7'{thing} - 11'{data}
+{rightArm_rotY} += 10'{thing} - 10'{data}
+{rightArm_rotZ} += 7'{thing} + 10'{data}
+{leftArm_rotX} += 7'{thing} - 11'{data}
+{leftArm_rotY} -= 10'{thing} - 10'{data}
+{leftArm_rotZ} -= 7'{thing} + 10'{data}
+
+out "pivot" (0, 0.56, 0)
+out "rotate" ({thing}, 1, 0, 0)
+out "translate" (0, 0.1{data}+0.3, 0)

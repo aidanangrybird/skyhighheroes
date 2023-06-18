@@ -192,8 +192,7 @@ function initEffects(renderer) {
 }
 
 function initAnimations(renderer) {
-  //Waiting for Fisk to fix issue with this
-  //stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:flight/astro_flight.anim.json", "skyhighheroes:astro_hover");
+  stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
   astro.initAstroAnimations(renderer);
   stuff.forcefieldAnimation(renderer);
 }

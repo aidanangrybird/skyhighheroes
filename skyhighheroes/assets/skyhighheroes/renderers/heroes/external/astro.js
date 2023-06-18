@@ -354,7 +354,7 @@ function initBoosters(renderer, color) {
         if (renderLayer == "BOOTS") {
           //Equations
           var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-          var flight = entity.getInterpolatedData("fiskheroes:flight_timer");
+          var flight = entity.getInterpolatedData("fiskheroes:flight_timer") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
           var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
           b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
           var f = Math.PI * 2;
@@ -413,7 +413,6 @@ function initBoosters(renderer, color) {
         if (renderLayer == "CHESTPLATE") {
           //Equations
           var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-          var flight = entity.getInterpolatedData("fiskheroes:flight_timer");
           var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
           b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
           var f = Math.PI * 2;
@@ -616,7 +615,7 @@ function initNormalBoosters(renderer) {
         if (renderLayer == "BOOTS") {
           //Equations
           var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-          var flight = entity.getInterpolatedData("fiskheroes:flight_timer");
+          var flight = entity.getInterpolatedData("fiskheroes:flight_timer") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
           var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
           b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
           var f = Math.PI * 2;
@@ -675,7 +674,6 @@ function initNormalBoosters(renderer) {
         if (renderLayer == "CHESTPLATE") {
           //Equations
           var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-          var flight = entity.getInterpolatedData("fiskheroes:flight_timer");
           var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
           b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
           var f = Math.PI * 2;
@@ -878,7 +876,7 @@ function initDualBoosters(renderer, colorLeft, colorRight) {
         if (renderLayer == "BOOTS") {
           //Equations
           var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-          var flight = entity.getInterpolatedData("fiskheroes:flight_timer");
+          var flight = entity.getInterpolatedData("fiskheroes:flight_timer") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
           var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
           b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
           var f = Math.PI * 2;
@@ -937,7 +935,6 @@ function initDualBoosters(renderer, colorLeft, colorRight) {
         if (renderLayer == "CHESTPLATE") {
           //Equations
           var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-          var flight = entity.getInterpolatedData("fiskheroes:flight_timer");
           var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
           b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
           var f = Math.PI * 2;

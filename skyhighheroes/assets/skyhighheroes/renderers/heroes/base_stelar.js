@@ -138,8 +138,7 @@ function initEffects(renderer) {
 }
 
 function initAnimations(renderer) {
-  //Waiting for Fisk to fix issue with this
-  //stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json", "skyhighheroes:stelar_hover");
+  stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:stelar_holo_flight");
   stuff.forcefieldAnimation(renderer);
   stuff.emCeilingAnimation(renderer);
   stelar.initStelarAnimations(renderer);

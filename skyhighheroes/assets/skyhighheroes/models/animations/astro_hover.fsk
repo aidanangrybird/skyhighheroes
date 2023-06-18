@@ -1,18 +1,31 @@
-{data_0} = curve {data_0}
-{wobble2} = {data_0}sin(2pi{data_1})
-{wobble4} = {data_0}sin(4pi{data_1})
-{wobble2p05} = {data_0}sin(2pi{data_1} + pi / 2)
+{vel} = sqrt({motX}^2 + {motZ}^2) + (0.3{motY})^2
+{vel} = 1 - curve min(1.5{vel}, 1)
+{data_0} = {vel}curve({data_0})
+{data_1} = 0.2{data_0}sin(2pi{data_1})
 
-{head_rotX} -= 0.5'{wobble2}
-{head_rotZ} -= 0.4'{wobble2p05}
+{body_rotX} @ {data_0} -> 4'
 
-{rightArm_rotX} -= 2'{wobble4}{wobble2}
-{leftArm_rotX} += 2'{wobble4}{wobble2p05}
-{rightArm_rotZ} += 2'{data_0} + 1'{wobble2}
-{leftArm_rotZ} -= 2'{data_0} + 1'{wobble2}
+{head_rotX} -= 0.2'{data_1}
+{head_rotZ} -= 0.1'{data_1}
 
-{rightLeg_rotX} += 1'{wobble4}{wobble2}
-{leftLeg_rotX} -= 1'{wobble4}{wobble2p05}
+{leftLeg_posY} -= 1{data_0} + 2{data_1}
+{leftLeg_posZ} -= -1.375{data_0} + 0.5{data_1}
+{leftLeg_rotX} += 11'{data_0} - 10'{data_1}
+{leftLeg_rotY} -= 10'{data_0} + 2'{data_1}
+{leftLeg_rotZ} -= 3'{data_0} - 3'{data_1}
 
-out "rotate" (0.2{wobble2p05}, 0, 0, 1)
-out "rotate" (0.2{wobble2}, 1, 0, 0)
+{rightLeg_posY} -= 2{data_0} + 1.25{data_1}
+{rightLeg_posZ} -= 1.375{data_0} + 2{data_1}
+{rightLeg_rotX} += 10'{data_0} + 10'{data_1}
+{rightLeg_rotY} += 10'{data_0} + 4'{data_1}
+{rightLeg_rotZ} += 4'{data_0} - 3'{data_1}
+
+{rightArm_rotX} += 5'{data_0} + 5'{data_1}
+{rightArm_rotY} += 10'{data_0} - 4'{data_1}
+{rightArm_rotZ} += 10'{data_0} + 12'{data_1}
+{leftArm_rotX} += 5'{data_0} + 5'{data_1}
+{leftArm_rotY} -= 10'{data_0} - 4'{data_1}
+{leftArm_rotZ} -= 10'{data_0} + 12'{data_1}
+
+out "pivot" (0, 0.56, 0)
+out "rotate" ({data_0}, 1, 0, 0)
