@@ -1,8 +1,8 @@
 {
     "items": {
+        "fiskheroes:supercharged_eternium": 640,
         "fiskheroes:tutridium_gem": 50,
         "minecraft:glass": 6,
-        "fiskheroes:dwarf_star_alloy": 4,
-        "fiskheroes:supercharged_eternium": 640
+        "fiskheroes:dwarf_star_alloy": 4
     }
 }

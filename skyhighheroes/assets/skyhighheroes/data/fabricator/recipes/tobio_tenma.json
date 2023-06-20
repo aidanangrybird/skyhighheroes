@@ -1,8 +1,11 @@
 {
     "items": {
+        "minecraft:nether_star": 1,
+        "fiskheroes:supercharged_eternium": 1,
         "fiskheroes:tutridium_gem": 20,
-        "minecraft:titanium_ingot": 6,
+        "fiskheroes:titanium_ingot": 6,
         "fiskheroes:dwarf_star_alloy": 4,
-        "fiskheroes:supercharged_eternium": 640
+        "minecraft:firework": 64,
+        "minecraft:fire_charge": 32
     }
 }
