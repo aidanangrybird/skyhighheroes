@@ -51,7 +51,9 @@ function initEffects(renderer) {
 }
 
 function initAnimations(renderer) {
+  stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:stelar_holo_flight");
   stuff.forcefieldAnimation(renderer);
+  stuff.emCeilingAnimation(renderer);
   stelar.initStelarAnimations(renderer);
 }
 
