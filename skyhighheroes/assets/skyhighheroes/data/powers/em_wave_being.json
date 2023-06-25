@@ -128,6 +128,18 @@
     "fiskheroes:damage_immunity|cs": {
       "damageType": "CELESTIALSAPIEN"
     },
+    "fiskheroes:damage_immunity|lightside": {
+      "damageType": "LIGHTSIDE"
+    },
+    "fiskheroes:damage_immunity|darkside": {
+      "damageType": "DARKSIDE"
+    },
+    "fiskheroes:damage_immunity|jv": {
+      "damageType": "JORMUNGANDR_VENOM"
+    },
+    "fiskheroes:damage_immunity|primordial": {
+      "damageType": "PRIMORDIAL"
+    },
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:arrow_catching": {

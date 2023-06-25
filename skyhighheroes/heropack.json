@@ -61,6 +61,8 @@
     "CELESTIALSAPIEN": "Celestialsapien",
     "LIGHTSIDE": "Light Side",
     "DARKSIDE": "Dark Side",
+    "JORMUNGANDR_VENOM": "damage_type.eitr.name",
+    "PRIMORDIAL": "damage_type.primordial.name",
     "WAVE_BLUNT": "Blunt (Wave)",
     "WAVE_BULLET": "Bullet (Wave)",
     "WAVE_COLD": "Cold (Wave)",

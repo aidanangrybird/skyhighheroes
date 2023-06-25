@@ -45,6 +45,12 @@
     "fiskheroes:damage_immunity|kryptonite": {
       "damageType": "KRYPTONITE"
     },
+    "fiskheroes:damage_immunity|jv": {
+      "damageType": "JORMUNGANDR_VENOM"
+    },
+    "fiskheroes:damage_immunity|primordial": {
+      "damageType": "PRIMORDIAL"
+    },
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:energy_manipulation": {
