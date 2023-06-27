@@ -57,6 +57,7 @@ function initEffects(renderer) {
   parent.initEffects(renderer);
   //Boot Rockets
   rockets = astro.initBoosters(renderer, getColor());
+  cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, getColor());
   stuff.bindSpeedTrail(renderer, "skyhighheroes:sym_tenma_speed");
 }
@@ -77,5 +78,6 @@ function init(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
+  cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
 }

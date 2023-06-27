@@ -185,6 +185,7 @@ function initEffects(renderer) {
   astro.initEquipment(renderer);
   stuff.initForceField(renderer, 0xFFFFFF);
   rockets = astro.initNormalBoosters(renderer);
+  cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, 0xFFFFFF);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:tobio_tenma_speed");
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
@@ -200,5 +201,6 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
   metal_heat.render();
+  cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
 }
