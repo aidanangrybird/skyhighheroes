@@ -148,9 +148,7 @@ function init(hero, uuid) {
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "cs":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-          case "lightside":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-          case "darkside":
+          case "force":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "jv":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
