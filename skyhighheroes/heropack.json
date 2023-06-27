@@ -89,6 +89,9 @@
     "skyhighheroes:aidan_stelar" : {
       "gundam" : "\u00A76RX-0 \u00A76Unicorn \u00A76Gundam \u00A76Style\u00A7r"
     },
+    "skyhighheroes:biscuit_stelar" : {
+      "martian_manhunter" : "\u00A74Martian \u00A74Manhunter \u00A74Style\u00A7r"
+    },
     "skyhighheroes:chase_stelar" : {
       "iron_man" : "\u00A72Iron \u00A72Man \u00A72Mark \u00A7250 \u00A72Style\u00A7r"
     },
@@ -118,9 +121,6 @@
     },
     "skyhighheroes:tysen_stelar" : {
       "martian_manhunter" : "\u00A75Martian \u00A75Manhunter \u00A75Style\u00A7r"
-    },
-    "skyhighheroes:yellow_stelar" : {
-      "spider_man" : "\u00A73Spider-Man \u00A73(PS4) \u00A73Style\u00A7r"
     }
   }
 }
