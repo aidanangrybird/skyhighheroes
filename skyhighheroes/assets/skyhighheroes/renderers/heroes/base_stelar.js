@@ -132,6 +132,18 @@ function initEffects(renderer) {
   ears.anchor.set("head");
   ears.angle = 7.5;
   ears.inset = -0.02;
+  /*opacity_creetle = renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
+    return (entity.getData("skyhighheroes:dyn/battle_card") == 4) ? 1.0 : 0.0;
+  });
+  var creetle = renderer.createResource("MODEL", "skyhighheroes:creetle");
+  creetle.texture.set("creetle");
+  creetle.bindAnimation("skyhighheroes:creetle").setData((entity, data) => {
+    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
+    data.load(1, entity.loop(1));
+  });
+  the_creetle = renderer.createEffect("fiskheroes:model").setModel(creetle);
+  the_creetle.anchor.set("body");
+  the_creetle.setScale(1.0);*/
 }
 
 function initAnimations(renderer) {
@@ -147,6 +159,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     wave_change_lights.render();
   }
+  /*if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
+    the_creetle.render();
+  }*/
 }
 
 function getID() {

@@ -23,6 +23,7 @@ function init(hero, uuid) {
   hero.addKeyBindFunc("BATTLE_CARD_1", activateBattleCard, "Shield", 2);
   hero.addKeyBindFunc("BATTLE_CARD_2", activateBattleCard, "Blade", 2);
   hero.addKeyBindFunc("BATTLE_CARD_3", activateBattleCard, "Shurikens", 2);
+  //hero.addKeyBindFunc("BATTLE_CARD_4", activateBattleCard, "Creetle", 2);
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
   hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
@@ -156,7 +157,15 @@ function init(hero, uuid) {
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           default:
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        }
+      }
+      case "fiskheroes:controlled_flight":
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+        /*switch (modifier.id()) {
+          case "base":
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 4;
+          case "creetle":
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1  && entity.getData("skyhighheroes:dyn/battle_card") == 4;
+      }*/
       case "fiskheroes:transformation":
         return entity.isAlive() && entity.getUUID() == uuid;
       case "fiskheroes:equipment":
@@ -208,6 +217,8 @@ function init(hero, uuid) {
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 2;
       case "BATTLE_CARD_3":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 3;
+      //case "BATTLE_CARD_4":
+        //return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 4;
       case "AIM":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
       case "HEAD_TOGGLE":

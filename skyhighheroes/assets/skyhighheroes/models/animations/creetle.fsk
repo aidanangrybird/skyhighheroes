@@ -1,0 +1,120 @@
+;data_0 is flight timer
+;data_1 is entity loop
+;data_2 is limbSwing
+;data_3 is limbSwingAmount
+;data_4 is yaw
+;data_5 is pitch
+
+{data_0} = curve({data_0})
+{f} = {limbSwing}/100
+{f1} = {limbSwingAmount}
+{f2} = {data_1}
+{f3} = {pitch}'
+{f4} = {yaw}' - {bodyYaw}'
+
+{bob} = cos({f2}*0.15)*{data_0}
+out "pivot" (0, 0, (22.5 + sin(0.15) * {data_0}))
+{bodyC_rotX} += {bob}*0.05
+{headC_rotX} += {f3}/57.295776'
+{headC_rotY} += {f4}/57.295776'
+
+{f} *= 2.0
+
+;field_78795_f is rotX
+;field_78796_g is rotY
+;field_78808_h is rotZ
+;func_76126_a is sin
+;func_76134_b is cos
+
+{f9} = -(cos({f}*0.6662*2.0+0.0)*0.4+0.2)*{f1}
+{f10} = -(cos({f}*0.6662*2.0+2.3561945)*0.4+0.2)*{f1}
+{f11} = -(cos({f}*0.6662*2.0+4.712389)*0.4+0.2)*{f1}
+{f13} = abs(sin({f}*0.6662*2.0+0.0)*0.4)*{f1}
+{f14} = abs(sin({f}*0.6662*2.0+2.3561945)*0.4)*{f1}
+{f15} = abs(sin({f}*0.6662*2.0+4.712389)*0.4)*{f1}
+
+
+
+{legR1_rotX} = 0.0
+{legR1_rotY} = 1.134464 + {f9}
+{legR1_rotZ} = -0.6632251 + {f13}
+
+{legR2_rotX} = 0.0
+{legR2_rotY} = 0.6981317 + {f10}
+{legR2_rotZ} = -0.4537856 + {f14}
+
+{legR3_rotX} = 0.0
+{legR3_rotY} = -0.87266463 + {f11}
+{legR3_rotZ} = -0.5235988 + {f15}
+
+{legL1_rotX} = 0.0
+{legL1_rotY} = -1.134464 - {f9}
+{legL1_rotZ} = 0.6632251 - {f13}
+
+{legL2_rotX} = 0.0
+{legL2_rotY} = -0.6981317 - {f10}
+{legL2_rotZ} = 0.4537856 - {f14}
+
+{legL3_rotX} = 0.0
+{legL3_rotY} = 0.87266463 - {f11}
+{legL3_rotZ} = 0.5235988 - {f15}
+
+;flight
+
+{bob} = cos({f2} * 0.15 + 2.0) * {data_0}
+{f9} = 1.0 - 0.9 * {data_0}
+{f10} = (0.15 + {f1}) * {data_0} + {bob} * 0.1
+{f11} = 0.9 * {data_0}
+
+{legR1_rotY} *= {f9}
+{legR2_rotY} *= {f9}
+{legR3_rotY} *= {f9}
+{legL1_rotY} *= {f9}
+{legL2_rotY} *= {f9}
+{legL3_rotY} *= {f9}
+
+{legR1_rotY} += {f10}
+{legR2_rotY} += {f10}
+{legR3_rotY} += {f10}
+
+{legR1_rotZ} -= {f11}
+{legR2_rotZ} -= {f11}
+{legR3_rotZ} -= {f11}
+
+{legL1_rotY} -= {f10}
+{legL2_rotY} -= {f10}
+{legL3_rotY} -= {f10}
+
+{legL1_rotZ} += {f11}
+{legL2_rotZ} += {f11}
+{legL3_rotZ} += {f11}
+
+{f9} = 1.3*{data_0} + {bob}*0.1
+{f10} = 0.2*{data_0}
+{f11} = 1.0*{data_0}
+
+{shellR_rotX} = 0.08726646 + {f9}
+{shellR_rotY} = -0.017453292 - {f10}
+{shellR_rotZ} = -0.08726646 - {f11}
+
+{shellL_rotX} = 0.08726646 + {f9}
+{shellL_rotY} = 0.017453292 + {f10}
+{shellL_rotZ} = 0.08726646 + {f11}
+
+{data_0} *= {data_0} * {data_0}
+{f2} *= 3.0
+
+{f9} = (cos({f2})*0.4+0.6)*{data_0}
+{f10} = (sin({f2})*0.6+0.2)*{data_0}
+{f11} = (-sin({f2}+1.0)*0.3+0.3)*{data_0}
+
+{wingR2_rotY} = 1.3089969 * (1.0 - {data_0})
+{wingL2_rotY} = -1.3089969 * (1.0 - {data_0})
+
+{wingR1_rotX} = 0.08726646 + {f9}
+{wingR1_rotY} = -{f10}
+{wingR1_rotZ} = -0.08726646 - {f11}
+
+{wingL1_rotX} = 0.08726646 + {f9}
+{wingL1_rotY} = {f10}
+{wingL1_rotZ} = 0.08726646 + {f11}
