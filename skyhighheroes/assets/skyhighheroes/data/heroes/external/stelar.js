@@ -17,6 +17,7 @@ function init(hero, uuid) {
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Shimmer Toggle", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
   hero.addKeyBindFunc("BATTLE_CARD_0", activateBattleCard, "Return To Mega Buster", 2);
@@ -192,7 +193,9 @@ function init(hero, uuid) {
       case "VISUALIZER_TOGGLE":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid;
       case "CYCLE_CLOTHES":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
+      case "SHIMMER_TOGGLE":
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
       case "HOOD_TOGGLE":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
       case "INTANGIBILITY":
@@ -326,6 +329,19 @@ function headToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/head_toggle", player.getData("skyhighheroes:dyn/head_toggle") + 1);
   if (player.getData("skyhighheroes:dyn/head_toggle") > 1) {
     manager.setData(player, "skyhighheroes:dyn/head_toggle", 0);
+  }
+  return true;
+};
+
+function shimmerToggle(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);
+  if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
+    player.getWornChestplate().nbt().getTagList("ench");
+    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+  }
+  if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
+    manager.removeTag(player.getWornChestplate().nbt(), "ench");
+    manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
   }
   return true;
 };

@@ -21,6 +21,7 @@ function init(hero, uuid) {
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Toggle Shimmer", 1);
   hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
@@ -63,6 +64,10 @@ function init(hero, uuid) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
+      case "CYCLE_CLOTHES":
+        return entity.getUUID() == uuid && !entity.isSneaking();
+      case "SHIMMER_TOGGLE":
+        return entity.getUUID() == uuid && entity.isSneaking();
       case "SHIELD_THROW":
         return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
       case "AIM":
@@ -108,6 +113,28 @@ function cycleClothes(player, manager) {
   if (player.getData("skyhighheroes:dyn/tenma_clothes") > 3) {
     manager.setData(player, "skyhighheroes:dyn/tenma_clothes", 0);
   };
+  return true;
+};
+
+function shimmerToggle(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);
+  if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
+    player.getWornHelmet().nbt().getTagList("ench");
+    player.getWornChestplate().nbt().getTagList("ench");
+    player.getWornLeggings().nbt().getTagList("ench");
+    player.getWornBoots().nbt().getTagList("ench");
+    manager.setTagList(player.getWornHelmet().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+    manager.setTagList(player.getWornLeggings().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+    manager.setTagList(player.getWornBoots().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+  }
+  if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
+    manager.removeTag(player.getWornHelmet().nbt(), "ench");
+    manager.removeTag(player.getWornChestplate().nbt(), "ench");
+    manager.removeTag(player.getWornLeggings().nbt(), "ench");
+    manager.removeTag(player.getWornBoots().nbt(), "ench");
+    manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
+  }
   return true;
 };
 
