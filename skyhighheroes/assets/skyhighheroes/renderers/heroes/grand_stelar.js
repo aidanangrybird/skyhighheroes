@@ -39,7 +39,7 @@ loadTextures({
   "swimsuit_tx": "skyhighheroes:grand/grand_stelar_swimsuit.tx.json",
   "winter_tx": "skyhighheroes:grand/grand_stelar_winter.tx.json",
   "normal_tx": "skyhighheroes:grand/grand_stelar_normal.tx.json",
-  "transer": "skyhighheroes:stelar_transer_pegasus",
+  "transer": "skyhighheroes:stelar_transer_leo",
   "transer_lights": "skyhighheroes:grand/grand_stelar_transer_lights",
   "blade": "skyhighheroes:grand/grand_stelar_blade",
   "shield": "skyhighheroes:grand/grand_stelar_shield",
