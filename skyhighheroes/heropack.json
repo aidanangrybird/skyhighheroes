@@ -98,14 +98,17 @@
     "skyhighheroes:ender_stelar" : {
       "dr_fate" : "\u00A73Dr \u00A73Fate \u00A73Style\u00A7r"
     },
-    "skyhighheroes:fish_stelar" : {
-      "spider_man" : "\u00A75Spider-Man \u00A75(Raimi) \u00A75Style\u00A7r"
+    "skyhighheroes:grand_stelar" : {
+      "rival" : "\u00A74The \u00A74Rival \u00A74Style\u00A7r"
     },
     "skyhighheroes:liam_stelar" : {
       "iron_man" : "\u00A71Iron \u00A71Man \u00A71Mark \u00A7185 \u00A71Style\u00A7r"
     },
     "skyhighheroes:razor_stelar" : {
       "iron_man" : "\u00A71Iron \u00A71Man \u00A71Mark \u00A7150 \u00A71Style\u00A7r"
+    },
+    "skyhighheroes:scorched_stelar" : {
+      "iron_man" : "\u00A7eIron \u00A7eMan \u00A7eMark \u00A7e85 \u00A7eStyle\u00A7r"
     },
     "skyhighheroes:sym_stelar" : {
       "blue_beetle" : "\u00A73Blue \u00A73Beetle \u00A73Style\u00A7r"

@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:scorched_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:scorched_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

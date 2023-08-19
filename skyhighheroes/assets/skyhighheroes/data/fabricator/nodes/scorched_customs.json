@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Scorched's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/scorched_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as ScorchedUnity"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '5429d1b5-7828-4b04-a0b0-fc8b41ffac27'"
+      }
+    }
+  }
+}
