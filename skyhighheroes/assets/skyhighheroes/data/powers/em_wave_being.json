@@ -137,8 +137,6 @@
     "fiskheroes:damage_immunity|primordial": {
       "damageType": "PRIMORDIAL"
     },
-    "fiskheroes:projectile_immunity": {
-    },
     "fiskheroes:arrow_catching": {
     },
     "fiskheroes:lightning_cast": {
