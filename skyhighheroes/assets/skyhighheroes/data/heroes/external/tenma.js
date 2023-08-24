@@ -123,10 +123,10 @@ function shimmerToggle(player, manager) {
     player.getWornChestplate().nbt().getTagList("ench");
     player.getWornLeggings().nbt().getTagList("ench");
     player.getWornBoots().nbt().getTagList("ench");
-    manager.setTagList(player.getWornHelmet().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
-    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
-    manager.setTagList(player.getWornLeggings().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
-    manager.setTagList(player.getWornBoots().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+    manager.setTagList(player.getWornHelmet().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
+    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
+    manager.setTagList(player.getWornLeggings().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
+    manager.setTagList(player.getWornBoots().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
   }
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
     manager.removeTag(player.getWornHelmet().nbt(), "ench");

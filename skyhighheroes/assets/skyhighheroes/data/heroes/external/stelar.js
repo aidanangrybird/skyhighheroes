@@ -337,7 +337,7 @@ function shimmerToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
     player.getWornChestplate().nbt().getTagList("ench");
-    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("{[{id: 35,lvl: -1}]}"));
+    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
   }
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
     manager.removeTag(player.getWornChestplate().nbt(), "ench");
