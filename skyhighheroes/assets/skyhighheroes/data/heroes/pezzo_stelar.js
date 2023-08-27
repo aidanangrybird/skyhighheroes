@@ -8,7 +8,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A74Pezzo Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Pezzo Stelar's Rifle},ench:[{id:34,lvl:5}]}", true);
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Pezzo Stelar's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
-  stelar.init(hero, "c4bc5db6-3CF6-44FE-8427-304a7b211bc4");
+  stelar.init(hero, "c4bc5db6-3cf6-44fe-8427-304a7b211bc4");
   hero.setTickHandler((entity, manager) => {
     stelar.tickHandler(entity, manager);
     bodyTemp.change(entity, manager, [
