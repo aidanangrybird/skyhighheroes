@@ -67,7 +67,7 @@ function getSuitID() {
 }
 
 function getID() {
-  return "c4bc5db6-3CF6-44FE-8427-304a7b211bc4";
+  return "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
 }
 
 function init(renderer) {
