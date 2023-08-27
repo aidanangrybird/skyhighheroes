@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Pezzo's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/pezzo_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as pezzo134"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'c4bc5db6-3cf6-44fe-8427-304a7b211bc4'"
+      }
+    }
+  }
+}

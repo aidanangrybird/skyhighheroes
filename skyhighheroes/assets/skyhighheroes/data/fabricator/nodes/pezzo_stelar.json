@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:pezzo_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:pezzo_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}
