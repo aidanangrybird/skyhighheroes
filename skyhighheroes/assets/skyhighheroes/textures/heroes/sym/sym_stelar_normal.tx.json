@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/stelar_suit_<TIMER>"
+        "supply": "skyhighheroes:xor/stelar_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighheroes:generated/sym_stelar_normal_<TIMER>"
