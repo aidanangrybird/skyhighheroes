@@ -16,7 +16,7 @@ function init(hero) {
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
   hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
-  hero.addAttribute("REACH_DISTANCE", -1.0, 0);
+  //hero.addAttribute("REACH_DISTANCE", -1.0, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
@@ -41,7 +41,7 @@ function init(hero) {
   hero.addKeyBindFunc("HEAD_TOGGLE", headToggle, "Toggle Omega-Xis Head", 5);
   hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
   
-  hero.setDefaultScale(0.8);
+  hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
   hero.setHasPermission(hasPermission);
   hero.addAttributeProfile("INACTIVE", inactiveProfile);
@@ -214,9 +214,9 @@ function bladeProfile(profile) {
   profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
 }
 function inactiveProfile(profile) {
-  profile.addAttribute("MAX_HEALTH", -8.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
-}
+  //profile.addAttribute("MAX_HEALTH", -8.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+};
 
 //Temperature Profiles
 function frozenProfile(profile) {
@@ -226,7 +226,7 @@ function frozenProfile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -19.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 1);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 1);
 };
 function cold3Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.7, 1);
@@ -234,38 +234,38 @@ function cold3Profile(profile) {
   profile.addAttribute("WEAPON_DAMAGE", -0.9, 1);
   profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-  profile.addAttribute("MAX_HEALTH", -15.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  profile.addAttribute("MAX_HEALTH", -13.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function cold2Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.35, 1);
   profile.addAttribute("SPRINT_SPEED", -0.35, 1);
   profile.addAttribute("WEAPON_DAMAGE", -0.5, 1);
   profile.addAttribute("JUMP_HEIGHT", -0.25, 0);
-  profile.addAttribute("MAX_HEALTH", -11.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  profile.addAttribute("MAX_HEALTH", -7.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function cold1Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.05, 1);
   profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
   profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
-  profile.addAttribute("MAX_HEALTH", -9.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  profile.addAttribute("MAX_HEALTH", -2.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function hot1Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.1, 1);
   profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
   profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
-  profile.addAttribute("MAX_HEALTH", -9.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  profile.addAttribute("MAX_HEALTH", -2.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function hot2Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.35, 1);
   profile.addAttribute("SPRINT_SPEED", -0.35, 1);
   profile.addAttribute("WEAPON_DAMAGE", -0.6, 1);
   profile.addAttribute("JUMP_HEIGHT", -0.5, 0);
-  profile.addAttribute("MAX_HEALTH", -11.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  profile.addAttribute("MAX_HEALTH", -7.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function hot3Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.7, 1);
@@ -274,7 +274,7 @@ function hot3Profile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -14.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function fireProfile(profile) {
   profile.addAttribute("BASE_SPEED", -1.0, 1);
@@ -283,7 +283,7 @@ function fireProfile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -19.0, 0);
-  profile.addAttribute("REACH_DISTANCE", -1.0, 0);
+  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 
 function getTierOverride(entity) {
@@ -384,7 +384,7 @@ function getAttributeProfile(entity) {
     if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < 0) {
       return "COLD1";
     }
-    if (entity.getData("skyhighheroes:dyn/body_temperature") == 0) {
+    if (entity.getData("skyhighheroes:dyn/body_temperature") == 0 || (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.01 && entity.getData("skyhighheroes:dyn/body_temperature") <= 0.01)) {
       return "INACTIVE";
     }
     if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0) {

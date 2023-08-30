@@ -20,7 +20,7 @@ function init(hero) {
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
   hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
-  hero.addAttribute("REACH_DISTANCE", -1.5, 0);
+  //hero.addAttribute("REACH_DISTANCE", -1.5, 0);
   hero.addAttribute("BASE_SPEED_LEVELS", 6.0, 0);
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
@@ -34,7 +34,7 @@ function init(hero) {
   hero.addKeyBind("SHIELD", "Force Field", 5);
 
   
-  hero.setDefaultScale(0.6);
+  hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
   hero.setHasPermission(hasPermission);
   hero.setModifierEnabled(isModifierEnabled);
