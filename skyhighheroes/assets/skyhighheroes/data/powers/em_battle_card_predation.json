@@ -2,7 +2,7 @@
   "name": "Battle Card Predation",
   "value": 1,
   "modifiers": {
-    "fiskheroes:transformation": {
+    "fiskheroes:transformation|predation": {
       "key": "PREDATION",
       "transformation": {
         "toggleData": "skyhighheroes:dyn/predation",

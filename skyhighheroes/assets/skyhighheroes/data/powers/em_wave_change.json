@@ -2,7 +2,7 @@
   "name": "EM Wave Change",
   "value": 1,
   "modifiers": {
-    "fiskheroes:transformation": {
+    "fiskheroes:transformation|wave_change": {
       "key": "WAVE_CHANGE",
       "transformation": {
         "toggleData": "skyhighheroes:dyn/wave_changed",
