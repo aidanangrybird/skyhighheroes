@@ -11,6 +11,14 @@
       },
       "isToggle": true
     },
+    "fiskheroes:cooldown": {
+      "cooldown": {
+        "toggleData": "skyhighheroes:dyn/predation",
+        "cooldownData": "skyhighheroes:dyn/predation_cooldown",
+        "duration": 200,
+        "recovery": 50.0
+      }
+    },
     "fiskheroes:shield": {
       "shield": {
         "health": 300.0,
@@ -51,5 +59,12 @@
         }
       }
     }
-  }
+  },
+  "hud": [
+    {
+      "type": "PROGRESS",
+      "texture": "skyhighheroes:textures/gui/bars/predation.png",
+      "data": "skyhighheroes:dyn/predation_cooldown"
+    }
+  ]
 }
