@@ -225,7 +225,7 @@ function init(hero, uuid) {
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0);
       case "BATTLE_CARD_RESET":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") > 0;
-        case "BATTLE_CARD_0":
+      case "BATTLE_CARD_0":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;
       case "BATTLE_CARD_1":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 1;

@@ -313,8 +313,10 @@ function initOmegaXis(renderer) {
     omegaXisBottomWaveChange: omegaXisBottomWaveChange,
     omegaXisFrontWaveChange: omegaXisFrontWaveChange,
     render: (entity, renderLayer) => {
-      blade.unfold = blade.opacity = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer");
-      blade.setOffset(1.5, 8.0, -5.0 * -(entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")));
+      blade.unfold = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")
+      blade.opacity = Math.min(Math.max((2 * entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")), 0), 1);
+      blade.setOffset(1.5, Math.min(Math.max((16.0 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) - 4), 0), 8), 0.0);
+      blade.setScale(Math.min(Math.max((2 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) + 0.5), 0), 1), Math.min(Math.max((1.75 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1), Math.min(Math.max((1 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1));
       //Base Omega-Xis
       omegaXisRight.unfold = omegaXisLeft.unfold = omegaXisTop.unfold = omegaXisBottom.unfold = omegaXisFront.unfold = 1.0;
       //Wave Change Omega-Xis
