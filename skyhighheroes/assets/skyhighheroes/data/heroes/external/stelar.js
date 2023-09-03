@@ -304,6 +304,7 @@ function electroMagnetic(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
   manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
   manager.setData(player, "skyhighheroes:dyn/predation", false);
+  manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
   if (player.getData("skyhighheroes:dyn/wave_changed") == false) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
   }
