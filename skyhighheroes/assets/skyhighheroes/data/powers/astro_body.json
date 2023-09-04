@@ -57,6 +57,9 @@
     "fiskheroes:damage_immunity|bifrost": {
       "damageType": "BIFROST"
     },
+    "fiskheroes:damage_immunity|ice": {
+      "damageType": "ICE"
+    },
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:energy_manipulation": {

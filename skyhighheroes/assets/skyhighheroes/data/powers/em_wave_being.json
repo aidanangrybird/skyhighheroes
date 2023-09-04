@@ -143,6 +143,9 @@
     "fiskheroes:damage_immunity|bifrost": {
       "damageType": "BIFROST"
     },
+    "fiskheroes:damage_immunity|ice": {
+      "damageType": "ICE"
+    },
     "fiskheroes:arrow_catching": {
     },
     "fiskheroes:lightning_cast": {
