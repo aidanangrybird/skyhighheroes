@@ -51,6 +51,12 @@
     "fiskheroes:damage_immunity|primordial": {
       "damageType": "PRIMORDIAL"
     },
+    "fiskheroes:damage_immunity|gale": {
+      "damageType": "GALE"
+    },
+    "fiskheroes:damage_immunity|bifrost": {
+      "damageType": "BIFROST"
+    },
     "fiskheroes:projectile_immunity": {
     },
     "fiskheroes:energy_manipulation": {

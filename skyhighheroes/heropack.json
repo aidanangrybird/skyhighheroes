@@ -67,6 +67,8 @@
     "FORCE": "Force",
     "JORMUNGANDR_VENOM": "damage_type.eitr.name",
     "PRIMORDIAL": "damage_type.primordial.name",
+    "GALE": "damage_type.gale.name",
+    "BIFROST": "damage_type.bifrost.name",
     "WAVE_BLUNT": "Blunt (Wave)",
     "WAVE_BULLET": "Bullet (Wave)",
     "WAVE_COLD": "Cold (Wave)",

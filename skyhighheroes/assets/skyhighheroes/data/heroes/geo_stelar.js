@@ -498,6 +498,10 @@ function isModifierEnabled(entity, modifier) {
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "primordial":
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        case "gale":
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        case "bifrost":
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         default:
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     }
