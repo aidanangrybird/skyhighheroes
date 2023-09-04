@@ -71,7 +71,7 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
       manager.setData(entity, "fiskheroes:teleport_delay", 6);
     };
-    if (entity.world().getDimension() == 2595 && entity.posY() > 4000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+    if (entity.world().getDimension() == 2595 && entity.posY() > 1000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1) {
       manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
       manager.setData(entity, "fiskheroes:teleport_delay", 6);
     };
