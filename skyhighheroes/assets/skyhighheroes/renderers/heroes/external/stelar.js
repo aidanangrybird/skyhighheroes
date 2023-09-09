@@ -322,7 +322,7 @@ function initOmegaXis(renderer) {
       //Wave Change Omega-Xis
       omegaXisRightWaveChange.unfold = omegaXisLeftWaveChange.unfold = omegaXisTopWaveChange.unfold = omegaXisBottomWaveChange.unfold = omegaXisFrontWaveChange.unfold = 1.0;
       if (renderLayer == "CHESTPLATE") {
-        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") && entity.getHeldItem().isEmpty())) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
           omegaXisRight.render();
           omegaXisLeft.render();
           omegaXisTop.render();
