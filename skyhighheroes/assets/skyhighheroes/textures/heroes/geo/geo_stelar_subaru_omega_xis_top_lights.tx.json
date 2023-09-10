@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighheroes:geo/geo_stelar_omega_xis_top_lights",
+    "in": "skyhighheroes:geo/geo_stelar_subaru_omega_xis_top_lights",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighheroes:xor/omega_xis_bottom_top_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/geo_stelar_omega_xis_top_lights_<TIMER>"
+    "out": "skyhighheroes:generated/geo_stelar_subaru_omega_xis_top_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {
