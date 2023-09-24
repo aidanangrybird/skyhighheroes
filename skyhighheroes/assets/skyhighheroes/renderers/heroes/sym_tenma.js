@@ -64,7 +64,7 @@ function initEffects(renderer) {
 
 function getSuitID() {
   return "skyhighheroes:sym_tenma";
-}
+};
 
 function getID() {
   return "340d3667-9ee9-49eb-b98b-e12c7534b577";
