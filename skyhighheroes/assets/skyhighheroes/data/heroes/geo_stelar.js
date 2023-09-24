@@ -6,10 +6,10 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setAliases("geo_stelar");
   hero.setVersion("Mega Man Star Force");
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bGeo Stelar's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bGeo Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bGeo Stelar's Rifle},ench:[{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7bGeo Stelar's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bGeo Stelar's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Katanas"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bGeo Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Scythe"));
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bGeo Stelar's Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Rifle"));
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7bGeo Stelar's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Shield"));
   
   hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
@@ -97,7 +97,7 @@ function init(hero) {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:aiming") || entity.getData("fiskheroes:flight_boost_timer") > 0 || (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0 && entity.getData("skyhighheroes:dyn/predation_timer") < 1))) {
       manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
     };
-    var item_holding = (!entity.getHeldItem().isEmpty());
+    var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
     manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);
     var sword = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 2);
     manager.incrementData(entity, "skyhighheroes:dyn/sword_timer", 10, sword);
@@ -545,7 +545,7 @@ function isModifierEnabled(entity, modifier) {
 function isKeyBindEnabled(entity, keyBind) {
   switch (keyBind) {
     case "WAVE_CHANGE":
-      return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25));
+      return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && (((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 4) && !entity.isSneaking()) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 4) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25));
     case "VISUALIZER_TOGGLE":
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     case "CYCLE_CLOTHES":
@@ -583,7 +583,7 @@ function isKeyBindEnabled(entity, keyBind) {
     case "AIM":
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
     case "OMEGA_XIS_TOGGLE":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getHeldItem().isEmpty();
     default:
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
   }

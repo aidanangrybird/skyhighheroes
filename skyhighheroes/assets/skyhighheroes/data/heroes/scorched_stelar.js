@@ -4,10 +4,10 @@ var stelar = implement("skyhighheroes:external/stelar");
 function init(hero) {
   hero.setName("Scorched Stelar");
   hero.setAliases("scorched_stelar");
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7eScorched Stelar's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Dual"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7eScorched Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7eScorched Stelar's Rifle},ench:[{id:34,lvl:5}]}", true);
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7eScorched Stelar's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => item.nbt().getBoolean("Electromagnetic"));
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7eScorched Stelar's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7eScorched Stelar's Katanas"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7eScorched Stelar's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7eScorched Stelar's Scythe"));
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7eScorched Stelar's Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7eScorched Stelar's Rifle"));
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7eScorched Stelar's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7eScorched Stelar's Shield"));
   stelar.init(hero, "5429d1b5-7828-4b04-a0b0-fc8b41ffac27");
   hero.setTickHandler((entity, manager) => {
     stelar.tickHandler(entity, manager);
