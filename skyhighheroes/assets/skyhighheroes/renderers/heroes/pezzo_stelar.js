@@ -58,23 +58,23 @@ loadTextures({
 
 function getColor() {
   return 0xFF0000;
-}
+};
 
 function getID() {
   return "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
-}
+};
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
   stuff.bindFlightTrail(renderer, "skyhighheroes:pezzo_stelar_flight");
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
-}
+};

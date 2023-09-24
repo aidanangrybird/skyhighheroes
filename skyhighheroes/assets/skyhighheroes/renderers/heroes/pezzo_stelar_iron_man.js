@@ -20,4 +20,4 @@ loadTextures({
 function init(renderer) {
   parent.init(renderer);
   renderer.setItemIcon("CHESTPLATE", "dragon_transer");
-}
+};

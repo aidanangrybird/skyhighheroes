@@ -47,16 +47,16 @@ function change(entity, manager, map, tempVar, stableRate, clothingVar) {
     if (profile.isMismatch) {
       if (profile.getTicks > 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
         manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/profile.getTicks)));
-      }
+      };
       if (profile.getTicks < 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
         manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/profile.getTicks)));
-      }
+      };
     } else if (!profile.isMismatch) {
       if (entity.getData(tempVar) > 0.0 && entity.getData(tempVar) <= 1.3) {
         manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/stableRate)));
-      }
+      };
       if (entity.getData(tempVar) < 0.0 && entity.getData(tempVar) >= -1.3) {
         manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/stableRate)));
-      }
-    }
+      };
+    };
 };

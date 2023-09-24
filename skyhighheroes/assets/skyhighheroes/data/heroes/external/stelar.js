@@ -408,19 +408,19 @@ function tickHandler(entity, manager) {
       manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
       manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       manager.setData(entity, "fiskheroes:shield", true);
-    }
+    };
     if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
       entity.playSound("skyhighheroes:wave.equip", 1, 1);
       manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
       manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       manager.setData(entity, "fiskheroes:blade", true);
-    }
+    };
     if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
       entity.playSound("skyhighheroes:wave.equip", 1, 1);
       manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
       manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       manager.setData(entity, "fiskheroes:utility_belt_type", 1);
-    }
+    };
   };
 };
 

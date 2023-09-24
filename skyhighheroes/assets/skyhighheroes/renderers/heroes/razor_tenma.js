@@ -60,24 +60,24 @@ function initEffects(renderer) {
   cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, getColor());
   stuff.bindSpeedTrail(renderer, "skyhighheroes:razor_tenma_speed");
-}
+};
 
 function getSuitID() {
   return "skyhighheroes:razor_tenma";
-}
+};
 
 function getID() {
   return "de01ddcc-7dc8-437e-bf08-3f8bf11086dc";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   initAnimations(renderer);
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
-}
+};

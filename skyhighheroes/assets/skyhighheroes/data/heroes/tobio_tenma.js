@@ -49,18 +49,18 @@ function init(hero) {
     if (entity.world().getDimension() == 0 && entity.posY() > 4000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1){
       manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
       manager.setData(entity, "fiskheroes:teleport_delay", 6);
-    }
+    };
     if (entity.world().getDimension() == 2595 && entity.posY() > 1000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1){
       manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
       manager.setData(entity, "fiskheroes:teleport_delay", 6);
-    }
+    };
     var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
     if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
     }
     else if (t > 0) {
       manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
-    }
+    };
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
     var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
@@ -68,7 +68,7 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:flying", true);
     };
   });
-}
+};
 
 function cycleClothes(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/tenma_clothes", player.getData("skyhighheroes:dyn/tenma_clothes") + 1);
@@ -76,15 +76,15 @@ function cycleClothes(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/tenma_clothes", 0);
   };
   return true;
-}
+};
 
 function getTierOverride(entity) {
   return (!entity.isDisplayStand()) ? 8 : 0;
-}
+};
 
 function getAttributeProfile(entity) {
   return (entity.getData("fiskheroes:shield_blocking")) ? "SHIELD" : null;
-}
+};
 
 function shieldProfile(profile) {
   profile.inheritDefaults();
@@ -95,7 +95,7 @@ function shieldProfile(profile) {
   profile.addAttribute("STEP_HEIGHT", -1.0, 1);
   profile.addAttribute("KNOCKBACK", 0.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-}
+};
 
 function isModifierEnabled(entity, modifier) {
   switch (modifier.name()) {
@@ -115,8 +115,8 @@ function isModifierEnabled(entity, modifier) {
       return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
     default:
       return !entity.isDisplayStand();
-  }
-}
+  };
+};
 
 function isKeyBindEnabled(entity, keyBind) {
   switch (keyBind) {
@@ -128,17 +128,17 @@ function isKeyBindEnabled(entity, keyBind) {
       return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
     default:
       return true;
-  }
-}
+  };
+};
 
 function hasProperty(entity, property) {
   return property == "BREATHE_SPACE";
-}
+};
 
 function hasPermission(entity, permission) {
   return permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD";
-}
+};
 
 function canAim(entity) {
   return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
-}
+};

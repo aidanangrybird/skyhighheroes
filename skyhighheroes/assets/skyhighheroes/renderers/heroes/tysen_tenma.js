@@ -5,7 +5,7 @@ var stuff = implement("skyhighheroes:external/stuff");
 
 function getColor() {
   return 0xAA00FF;
-}
+};
 
 loadTextures({
   "eyes": "skyhighheroes:tysen/astro/tysen_tenma_eyes",
@@ -60,24 +60,24 @@ function initEffects(renderer) {
   cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, getColor());
   stuff.bindSpeedTrail(renderer, "skyhighheroes:tysen_tenma_speed");
-}
+};
 
 function getSuitID() {
   return "skyhighheroes:tysen_tenma";
-}
+};
 
 function getID() {
   return "0ccdd53f-70bc-4039-b89b-fd3781f746f2";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   initAnimations(renderer);
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
-}
+};

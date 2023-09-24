@@ -87,18 +87,18 @@ function init(hero, uuid) {
     if (entity.world().getDimension() == 0 && entity.posY() > 4000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1){
       manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
       manager.setData(entity, "fiskheroes:teleport_delay", 6);
-    }
+    };
     if (entity.world().getDimension() == 2595 && entity.posY() > 1000 && entity.rotPitch() < -80 && entity.getData("fiskheroes:flight_boost_timer") == 1){
       manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
       manager.setData(entity, "fiskheroes:teleport_delay", 6);
-    }
+    };
     var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
     if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
     }
     else if (t > 0) {
       manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
-    }
+    };
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
     var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
@@ -127,14 +127,14 @@ function shimmerToggle(player, manager) {
     manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
     manager.setTagList(player.getWornLeggings().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
     manager.setTagList(player.getWornBoots().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
-  }
+  };
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
     manager.removeTag(player.getWornHelmet().nbt(), "ench");
     manager.removeTag(player.getWornChestplate().nbt(), "ench");
     manager.removeTag(player.getWornLeggings().nbt(), "ench");
     manager.removeTag(player.getWornBoots().nbt(), "ench");
     manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
-  }
+  };
   return true;
 };
 

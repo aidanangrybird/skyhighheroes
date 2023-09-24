@@ -72,4 +72,4 @@ function init(hero) {
       { clothingType: 4, biome: "Swampland", tempChangeTicks: 1000.0 }
       ], "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
-}
+};

@@ -365,7 +365,7 @@ function initBoosters(renderer, color) {
             bootOpening.render();
             bootLights.opacity = flight;
             bootLights.render();
-          }
+          };
 
           //Left
           //Booster

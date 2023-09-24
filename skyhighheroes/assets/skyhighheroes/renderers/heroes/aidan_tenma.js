@@ -5,7 +5,7 @@ var stuff = implement("skyhighheroes:external/stuff");
 
 function getColor() {
   return 0xFF8900;
-}
+};
 
 loadTextures({
   "eyes": "skyhighheroes:aidan/astro/aidan_tenma_eyes",
@@ -60,24 +60,24 @@ function initEffects(renderer) {
   cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, getColor());
   stuff.bindSpeedTrail(renderer, "skyhighheroes:aidan_tenma_speed");
-}
+};
 
 function getSuitID() {
   return "skyhighheroes:aidan_tenma";
-}
+};
 
 function getID() {
   return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   initAnimations(renderer);
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
-}
+};

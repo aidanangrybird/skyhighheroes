@@ -36,7 +36,7 @@ loadTextures({
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
-}
+};
 
 function initEffects(renderer) {
   stelar.initNV(renderer);
@@ -52,19 +52,19 @@ function initEffects(renderer) {
   ears.angle = 7.5;
   ears.inset = -0.02;
   stuff.bindFlightTrail(renderer, "skyhighheroes:geo_stelar_subaru_flight");
-}
+};
 
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:stelar_holo_flight");
   stuff.forcefieldAnimation(renderer);
   stuff.emCeilingAnimation(renderer);
   stelar.initStelarAnimations(renderer);
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   omega_xis.render(entity, renderLayer);
   ears.render();
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     wave_change_lights.render();
-  }
-}
+  };
+};

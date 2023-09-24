@@ -58,23 +58,23 @@ loadTextures({
 
 function getColor() {
   return 0x0000FF;
-}
+};
 
 function getID() {
   return "de01ddcc-7dc8-437e-bf08-3f8bf11086dc";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   renderer.setItemIcon("CHESTPLATE", "leo_transer");
-}
+};
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
   stuff.bindFlightTrail(renderer, "skyhighheroes:razor_stelar_flight");
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
-}
+};

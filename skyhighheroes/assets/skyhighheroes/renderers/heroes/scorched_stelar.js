@@ -58,23 +58,23 @@ loadTextures({
 
 function getColor() {
   return 0xFFC400;
-}
+};
 
 function getID() {
   return "5429d1b5-7828-4b04-a0b0-fc8b41ffac27";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   renderer.setItemIcon("CHESTPLATE", "pegasus_transer");
-}
+};
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
   stuff.bindFlightTrail(renderer, "skyhighheroes:scorched_stelar_flight");
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
-}
+};

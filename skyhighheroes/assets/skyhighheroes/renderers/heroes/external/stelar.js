@@ -190,7 +190,7 @@ function initNV(renderer) {
   nv_visualizer.factor = 1.0;
   nv_visualizer.firstPersonOnly = true;
   nv_visualizer.setCondition(entity => entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1);
-}
+};
 
 //Equipment
 function initEquipment(renderer) {
@@ -333,7 +333,7 @@ function initOmegaXis(renderer) {
           omegaXisTopWaveChange.render();
           omegaXisBottomWaveChange.render();
           omegaXisFrontWaveChange.render();
-        }
+        };
         if (entity.getHeldItem().isEmpty() && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:blade_timer") > 0) {
           blade.render();
         };

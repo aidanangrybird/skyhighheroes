@@ -60,7 +60,7 @@ function initEffects(renderer) {
   cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, getColor());
   stuff.bindSpeedTrail(renderer, "skyhighheroes:sym_tenma_speed");
-}
+};
 
 function getSuitID() {
   return "skyhighheroes:sym_tenma";
@@ -68,16 +68,16 @@ function getSuitID() {
 
 function getID() {
   return "340d3667-9ee9-49eb-b98b-e12c7534b577";
-}
+};
 
 function init(renderer) {
   parent.init(renderer);
   initEffects(renderer);
   initAnimations(renderer);
-}
+};
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
   cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
-}
+};
