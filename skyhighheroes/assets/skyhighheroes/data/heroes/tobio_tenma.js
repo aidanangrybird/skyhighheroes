@@ -67,6 +67,19 @@ function init(hero) {
     if (entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() && !entity.getData("fiskheroes:speeding")) {
       manager.setData(entity, "fiskheroes:flying", true);
     };
+    var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
+    if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
+      manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
+    };
+    if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
+      manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
+    };
+    if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
+      manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
+    };
+    if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
+      manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
+    };
   });
 };
 

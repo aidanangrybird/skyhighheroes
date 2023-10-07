@@ -460,6 +460,25 @@ function tickHandler(entity, manager) {
       manager.setData(entity, "fiskheroes:utility_belt_type", 1);
     };
   };
+  var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
+  if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(4).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(4).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(5).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(5).getCompoundTag("Item"), "Damage", 0)
+  };
 };
 
 //Normal Profiles
