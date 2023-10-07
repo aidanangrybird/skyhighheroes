@@ -2,7 +2,7 @@ var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords'
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 function init(hero) {
-  hero.setName("Chase Stelar");
+  hero.setName("\u00A72Chase Stelar");
   hero.setAliases("chase_stelar");
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A72Chase Stelar's Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A72Chase Stelar's Katanas"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A72Chase Stelar's Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A72Chase Stelar's Scythe"));

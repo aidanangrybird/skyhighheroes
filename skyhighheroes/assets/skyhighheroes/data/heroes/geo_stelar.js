@@ -1,7 +1,7 @@
 var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 function init(hero) {
-  hero.setName("Geo Stelar");
+  hero.setName("\u00A7bGeo Stelar");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setAliases("geo_stelar");

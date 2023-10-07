@@ -1,7 +1,7 @@
 var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var tenma = implement("skyhighheroes:external/tenma");
 function init(hero) {
-  hero.setName("Tysen Tenma");
+  hero.setName("\u00A75Tysen Tenma");
   hero.setAliases("tysen_tenma");
   hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A75Tysen Tenma's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 3 && item.displayName() == "\u00A75Tysen Tenma's Katanas"));
   hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A75Tysen Tenma's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 3 && item.displayName() == "\u00A75Tysen Tenma's Scythe"));
