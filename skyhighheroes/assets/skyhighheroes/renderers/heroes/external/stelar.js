@@ -328,7 +328,7 @@ function initOmegaXis(renderer) {
       //Wave Change Omega-Xis
       omegaXisRightWaveChange.unfold = omegaXisLeftWaveChange.unfold = omegaXisTopWaveChange.unfold = omegaXisBottomWaveChange.unfold = omegaXisFrontWaveChange.unfold = 1.0;
       if (renderLayer == "CHESTPLATE") {
-        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {/*
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
           omegaXisRight.render();
           omegaXisLeft.render();
           omegaXisTop.render();
@@ -338,7 +338,7 @@ function initOmegaXis(renderer) {
           omegaXisLeftWaveChange.render();
           omegaXisTopWaveChange.render();
           omegaXisBottomWaveChange.render();
-          omegaXisFrontWaveChange.render();*/
+          omegaXisFrontWaveChange.render();
         };
         if (entity.getHeldItem().isEmpty() && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:blade_timer") > 0) {
           blade.render();
