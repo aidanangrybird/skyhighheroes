@@ -30,6 +30,8 @@ function init(hero, uuid) {
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
   hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
   hero.addKeyBindFunc("HOOD_TOGGLE", hoodToggle, "Toggle Hood", 3);
+  hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
+  hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
   hero.addKeyBind("AIM", "Aim Mega Buster", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
@@ -57,43 +59,43 @@ function init(hero, uuid) {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid) {
       if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "FROZEN";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "COLD3";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.85 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.5 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "COLD2";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "COLD1";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") == 0 || (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.01 && entity.getData("skyhighheroes:dyn/body_temperature") <= 0.01) || (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "INACTIVE";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "HOT1";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.9 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.55 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "HOT2";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "HOT3";
-      }
+      };
       if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.4 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "FIRE";
-      }
-    }
+      };
+    };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
       if (entity.getData("fiskheroes:shield_blocking")) {
         return "SHIELD";
-      }
+      };
       if (entity.getData("fiskheroes:blade")) {
         return "BLADE";
-      }
+      };
       if (!entity.getData("fiskheroes:blade") && !entity.getData("fiskheroes:shield_blocking")) {
         return null;
-      }
-    }
+      };
+    };
   });
   hero.supplyFunction("canAim", canAim);
   hero.setModifierEnabled((entity, modifier) => {
@@ -166,7 +168,7 @@ function init(hero, uuid) {
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           default:
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-      }
+      };
       case "fiskheroes:controlled_flight":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
         /*switch (modifier.id()) {
@@ -198,13 +200,13 @@ function init(hero, uuid) {
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:blade") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("fiskheroes:utility_belt_type") < 0 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/omega_xis") == 0;
       default:
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    }
+    };
   });
   hero.setTierOverride(getTierOverride);
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
       case "WAVE_CHANGE":
-        return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && (((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 4) && !entity.isSneaking()) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 4) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25)) && entity.getUUID() == uuid;
+        return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && (((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && !entity.isSneaking()) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25)) && entity.getUUID() == uuid;
       case "VISUALIZER_TOGGLE":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid;
       case "CYCLE_CLOTHES":
@@ -241,13 +243,17 @@ function init(hero, uuid) {
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 3;
       //case "BATTLE_CARD_4":
         //return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation_timer") >= 0.5 && entity.getData("skyhighheroes:dyn/selected_battle_card") == 4;
+      case "SILK_SWITCH":
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/tool_enchant") == 0 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 6 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
+      case "FORTUNE_SWITCH":
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/tool_enchant") == 1 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 6 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
       case "AIM":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe") && !(entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel");
       case "OMEGA_XIS_TOGGLE":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getHeldItem().isEmpty();
       default:
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    }
+    };
   });
   hero.setDamageProfile(getDamageProfile);
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
@@ -271,7 +277,7 @@ function init(hero, uuid) {
 function getTierOverride(entity) {
   if ((entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) && (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1)) {
     return 1;
-  }
+  };
   return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1.0) ? 10 : 0;
 };
 
@@ -279,7 +285,7 @@ function cycleUpCard(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
   if (player.getData("skyhighheroes:dyn/selected_battle_card") > 3) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
-  }
+  };
   return true;
 };
 
@@ -287,7 +293,7 @@ function cycleDownCard(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
   if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 3);
-  }
+  };
   return true;
 };
 
@@ -312,12 +318,12 @@ function electroMagnetic(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/predation", false);
   manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
   manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
-  if (player.getData("skyhighheroes:dyn/wave_changed") == false) {
+  if (!player.getData("skyhighheroes:dyn/wave_changed")) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
-  }
+  };
   if (player.getData("skyhighheroes:dyn/wave_changed") == true) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
-  }
+  };
   return true;
 };
 
@@ -325,13 +331,13 @@ function visualizerToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", player.getData("skyhighheroes:dyn/visualizer_toggle") + 1);
   if (player.getData("skyhighheroes:dyn/visualizer_toggle") > 1) {
     manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
-  }
+  };
   if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
-  }
+  };
   if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
-  }
+  };
   return true;
 };
 
@@ -339,7 +345,7 @@ function cycleClothes(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/stelar_clothes", player.getData("skyhighheroes:dyn/stelar_clothes") + 1);
   if (player.getData("skyhighheroes:dyn/stelar_clothes") > 4) {
     manager.setData(player, "skyhighheroes:dyn/stelar_clothes", 0);
-  }
+  };
   return true;
 };
 
@@ -347,7 +353,7 @@ function hoodToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/hood_toggle", player.getData("skyhighheroes:dyn/hood_toggle") + 1);
   if (player.getData("skyhighheroes:dyn/hood_toggle") > 1) {
     manager.setData(player, "skyhighheroes:dyn/hood_toggle", 0);
-  }
+  };
   return true;
 };
 
@@ -356,11 +362,25 @@ function shimmerToggle(player, manager) {
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
     player.getWornChestplate().nbt().getTagList("ench");
     manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
-  }
+  };
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
     manager.removeTag(player.getWornChestplate().nbt(), "ench");
     manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
-  }
+  };
+  return true;
+};
+
+function toolSwitchEnchant(player, manager) {
+  //Silk Touch
+  if (player.getData("skyhighheroes:dyn/tool_enchant") == 0) {
+    manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "id", 33);
+    manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "lvl", 1);
+  };
+  //Fortune
+  if (player.getData("skyhighheroes:dyn/tool_enchant") == 1) {
+    manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "id", 35);
+    manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "lvl", 4);
+  };
   return true;
 };
 
@@ -397,6 +417,24 @@ function tickHandler(entity, manager) {
   };
   if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:aiming") || entity.getData("fiskheroes:flight_boost_timer") > 0 || (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0 && entity.getData("skyhighheroes:dyn/predation_timer") < 1))) {
     manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
+  };
+  if (entity.getWornChestplate().getEnchantmentLevel(35) == -1) {
+    manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
+  };
+  if (entity.getWornChestplate().getEnchantmentLevel(35) == 0) {
+    manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
+  };
+  if (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 6 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+    manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
+  };
+  if (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 6 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+    manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
+  };
+  if (entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 6 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+    manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
+  };
+  if (entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 6 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+    manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
   };
   var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
   manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);

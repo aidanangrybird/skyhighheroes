@@ -24,6 +24,7 @@
     "hood_toggle": "BYTE",
     "tenma_clothes": "BYTE",
     "shimmer_toggle": "BYTE",
+    "tool_enchant": "BYTE",
     "booster_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "superhero_landing_ticks": "BYTE",
     "superhero_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },

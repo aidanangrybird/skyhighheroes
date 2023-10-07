@@ -81,6 +81,12 @@ function init(hero, uuid) {
   hero.addAttributeProfile("SHIELD", shieldProfile);
   hero.setAttributeProfile(getAttributeProfile);
   hero.setTickHandler((entity, manager) => {
+    if (entity.getWornHelmet().getEnchantmentLevel(35) == -1 && entity.getWornChestplate().getEnchantmentLevel(35) == -1 && entity.getWornLeggings().getEnchantmentLevel(35) == -1 && entity.getWornBoots().getEnchantmentLevel(35) == -1) {
+      manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
+    };
+    if (entity.getWornHelmet().getEnchantmentLevel(35) == 0 && entity.getWornChestplate().getEnchantmentLevel(35) == 0 && entity.getWornLeggings().getEnchantmentLevel(35) == 0 && entity.getWornBoots().getEnchantmentLevel(35) == 0) {
+      manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
+    };
     var x = entity.posX();
     var y = entity.posY();
     var z = entity.posZ();
