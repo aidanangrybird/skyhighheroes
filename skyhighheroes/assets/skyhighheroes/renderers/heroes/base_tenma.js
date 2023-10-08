@@ -140,14 +140,12 @@ function initEffects(renderer) {
   nv.factor = 1.0;
   nv.setCondition(entity => (entity.getUUID() == getID()));
   astro.initEquipment(renderer);
-  stuff.initForceField(renderer, getColor());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
 };
 
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
   astro.initAstroAnimations(renderer);
-  stuff.forcefieldAnimation(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

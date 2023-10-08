@@ -13,7 +13,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Tobio Tenma's Rifle},ench:[{id:34,lvl:4}]}", true, item => (item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Tobio Tenma's Rifle"));
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Tobio Tenma's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Tobio Tenma's Shield"));
   
-  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
+  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
   hero.addAttribute("SPRINT_SPEED", 0.3, 1);
   hero.addAttribute("BASE_SPEED", 0.2, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
@@ -31,7 +31,7 @@ function init(hero) {
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
-  hero.addKeyBind("SHIELD", "Force Field", 5);
+  hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 5);
 
   
   hero.setDefaultScale(1.0);
@@ -40,8 +40,6 @@ function init(hero) {
   hero.setModifierEnabled(isModifierEnabled);
   hero.supplyFunction("canAim", canAim);
   hero.setKeyBindEnabled(isKeyBindEnabled);
-  hero.addAttributeProfile("SHIELD", shieldProfile);
-  hero.setAttributeProfile(getAttributeProfile);
   hero.setTickHandler((entity, manager) => {
     var x = entity.posX();
     var y = entity.posY();
@@ -95,37 +93,22 @@ function getTierOverride(entity) {
   return (!entity.isDisplayStand()) ? 8 : 0;
 };
 
-function getAttributeProfile(entity) {
-  return (entity.getData("fiskheroes:shield_blocking")) ? "SHIELD" : null;
-};
-
-function shieldProfile(profile) {
-  profile.inheritDefaults();
-  profile.addAttribute("BASE_SPEED", -0.75, 1);
-  profile.addAttribute("SPRINT_SPEED", 0.0, 0);
-  profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
-  profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
-  profile.addAttribute("STEP_HEIGHT", -1.0, 1);
-  profile.addAttribute("KNOCKBACK", 0.0, 0);
-  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-};
-
 function isModifierEnabled(entity, modifier) {
   switch (modifier.name()) {
     case "fiskheroes:metal_skin":
       return entity.getData("fiskheroes:metal_heat") < 1.0;
     case "fiskheroes:energy_projection":
-      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
+      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:beam_charge") == 0;
     case "fiskheroes:energy_bolt":
-      return entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+      return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
     case "fiskheroes:super_speed":
-      return entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
+      return entity.getData("fiskheroes:flight_timer") == 0;
     case "fiskheroes:shield":
-      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
+      return !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:energy_projection_timer") == 0;
     case "fiskheroes:leaping":
-      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+      return !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
     case "fiskheroes:arrow_catching":
-      return !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+      return !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
     default:
       return !entity.isDisplayStand();
   };
@@ -153,5 +136,5 @@ function hasPermission(entity, permission) {
 };
 
 function canAim(entity) {
-  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
 };

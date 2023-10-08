@@ -182,7 +182,6 @@ function initEffects(renderer) {
   nv.fogStrength = 0.0;
   nv.factor = 1.0;
   astro.initEquipment(renderer);
-  stuff.initForceField(renderer, 0xFFFFFF);
   rockets = astro.initNormalBoosters(renderer);
   cannon = astro.initCannon(renderer);
   astro.initBeams(renderer, 0xFFFFFF);
@@ -193,7 +192,6 @@ function initEffects(renderer) {
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
   astro.initAstroAnimations(renderer);
-  stuff.forcefieldAnimation(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

@@ -8,7 +8,7 @@ function init(hero, uuid) {
   hero.setVersion("Astro Boy");
   hero.hide();
    
-  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_shield", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain");
+  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
   hero.addAttribute("SPRINT_SPEED", 0.3, 1);
   hero.addAttribute("BASE_SPEED", 0.2, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
@@ -27,7 +27,7 @@ function init(hero, uuid) {
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
-  hero.addKeyBind("SHIELD", "Force Field", 5);
+  hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 5);
 
   hero.setDefaultScale(1.0);
   hero.setHasProperty((entity, property) => {
@@ -41,23 +41,21 @@ function init(hero, uuid) {
       case "fiskheroes:metal_skin":
         return entity.getUUID() == uuid && entity.getData("fiskheroes:metal_heat") < 1.0;
       case "fiskheroes:energy_projection":
-        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking");
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:aiming_timer") == 0 && entity.getData("fiskheroes:beam_charge") == 0;
       case "fiskheroes:energy_bolt":
-        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
       case "fiskheroes:super_speed":
-        return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && !entity.getData("fiskheroes:shield_blocking");
-      case "fiskheroes:shield":
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:energy_projection");
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0;
       case "fiskheroes:leaping":
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:aiming_timer") == 0 && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
       case "fiskheroes:arrow_catching":
-        return entity.getUUID() == uuid && !entity.getData("fiskheroes:aiming") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+        return entity.getUUID() == uuid && entity.getData("fiskheroes:aiming_timer") == 0 && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
       default:
         return entity.getUUID() == uuid;
     };
   });
   hero.supplyFunction("canAim", (entity) => {
-    return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && !entity.getData("fiskheroes:shield_blocking") && !entity.getData("fiskheroes:energy_projection");
+    return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
   });
   hero.setTierOverride((entity) => {
     return (entity.getUUID() == uuid) ? 8 : 0;
@@ -78,8 +76,6 @@ function init(hero, uuid) {
         return entity.getUUID() == uuid;
     };
   });
-  hero.addAttributeProfile("SHIELD", shieldProfile);
-  hero.setAttributeProfile(getAttributeProfile);
   hero.setTickHandler((entity, manager) => {
     if (entity.getWornHelmet().getEnchantmentLevel(35) == -1 && entity.getWornChestplate().getEnchantmentLevel(35) == -1 && entity.getWornLeggings().getEnchantmentLevel(35) == -1 && entity.getWornBoots().getEnchantmentLevel(35) == -1) {
       manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
@@ -155,19 +151,4 @@ function shimmerToggle(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
   };
   return true;
-};
-
-function getAttributeProfile(entity) {
-  return (entity.getData("fiskheroes:shield_blocking")) ? "SHIELD" : null;
-};
-
-function shieldProfile(profile) {
-  profile.inheritDefaults();
-  profile.addAttribute("BASE_SPEED", -0.75, 1);
-  profile.addAttribute("SPRINT_SPEED", 0.0, 0);
-  profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
-  profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
-  profile.addAttribute("STEP_HEIGHT", -1.0, 1);
-  profile.addAttribute("KNOCKBACK", 0.0, 0);
-  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
 };

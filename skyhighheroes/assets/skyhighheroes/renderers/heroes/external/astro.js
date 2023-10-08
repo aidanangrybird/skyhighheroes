@@ -138,6 +138,8 @@ function initBeams(renderer, color) {
   bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
     { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
   ]);
+  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "head", color, [
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
 };
 function initDualBeams(renderer, colorLeft, colorRight) {
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorRight, [
@@ -150,6 +152,8 @@ function initDualBeams(renderer, colorLeft, colorRight) {
   bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", colorRight, [
     { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
   ]);
+  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "head", colorRight, [
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
 };
 //Cannon
 function initCannon(renderer) {

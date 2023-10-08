@@ -1,0 +1,8 @@
+{
+  "parent": "fiskheroes:sound_base",
+  "sound": "skyhighheroes:tenma.machinegun.shoot",
+  "condition": "entity.getData('fiskheroes:beam_shooting') > 0",
+  "volume": 1.0,
+  "pitch": "1.1 - Math.random() * 0.3",
+  "fadeOut": 10
+}

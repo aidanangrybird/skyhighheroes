@@ -50,6 +50,7 @@
       "wave_transform": { "distance": 8.0, "target": "ALL_IN_RANGE" },
       "tenma_flight_boost": { "distance": 32.0, "target": "ALL" },
       "tenma_flight_enable": 32.0,
+      "tenma_machine_gun_shoot": 32.0,
       "tenma_flight_loop": { "distance": 32.0, "target": "ALL" }
     }
   },

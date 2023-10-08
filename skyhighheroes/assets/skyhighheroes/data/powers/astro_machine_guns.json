@@ -1,0 +1,35 @@
+{
+  "name": "Butt Machine Guns",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:charged_beam": {
+      "damageProfile": {
+        "damage": 10.0,
+        "types": {
+          "ENERGY": 1.0,
+          "BULLET": 1.0,
+          "FIRE": 0.25
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HEAT_TRANSFER": 20
+        }
+      },
+      "chargeTime": 20,
+      "duration": 120,
+      "cooldownTime": 20,
+      "range": -32.0,
+      "radius": 0.6,
+      "soundEvents": {
+        "SHOOT": ["skyhighheroes:tenma_machine_gun_shoot"]
+      }
+    }
+  },
+  "hud": [
+    {
+      "type": "CIRCLE",
+      "color": "fiskheroes:charged_beam",
+      "data": "fiskheroes:beam_charge"
+    }
+  ]
+}
