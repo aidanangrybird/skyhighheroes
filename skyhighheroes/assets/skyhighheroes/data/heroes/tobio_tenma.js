@@ -21,7 +21,7 @@ function init(hero) {
   hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
   //hero.addAttribute("REACH_DISTANCE", -1.5, 0);
-  hero.addAttribute("BASE_SPEED_LEVELS", 10.0, 0);
+  hero.addAttribute("BASE_SPEED_LEVELS", 30.0, 0);
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
