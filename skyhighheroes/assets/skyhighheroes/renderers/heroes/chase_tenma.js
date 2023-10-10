@@ -56,9 +56,9 @@ loadTextures({
 function initEffects(renderer) {
   parent.initEffects(renderer);
   //Boot Rockets
-  rockets = astro.initBoosters(renderer, getColor());
+  rockets = astro.initBoosters(renderer, 0xBFFF00);
   cannon = astro.initCannon(renderer);
-  astro.initBeams(renderer, getColor());
+  astro.initBeams(renderer, 0xBFFF00);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:chase_tenma_speed");
 };
 

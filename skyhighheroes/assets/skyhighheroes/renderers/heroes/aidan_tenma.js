@@ -3,10 +3,6 @@ extend("skyhighheroes:base_tenma");
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
-function getColor() {
-  return 0xFF8900;
-};
-
 loadTextures({
   "eyes": "skyhighheroes:aidan/astro/aidan_tenma_eyes",
   "boots_lights": "skyhighheroes:aidan/astro/aidan_tenma_boots_lights",
@@ -56,9 +52,9 @@ loadTextures({
 function initEffects(renderer) {
   parent.initEffects(renderer);
   //Boot Rockets
-  rockets = astro.initBoosters(renderer, getColor());
+  rockets = astro.initBoosters(renderer, 0xFF8900);
   cannon = astro.initCannon(renderer);
-  astro.initBeams(renderer, getColor());
+  astro.initBeams(renderer, 0xFF8900);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:aidan_tenma_speed");
 };
 

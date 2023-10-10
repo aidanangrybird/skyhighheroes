@@ -20,7 +20,7 @@ function init(hero, uuid) {
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
-  hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Toggle Shimmer", 1);
   hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);

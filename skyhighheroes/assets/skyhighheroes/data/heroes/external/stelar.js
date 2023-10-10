@@ -16,7 +16,7 @@ function init(hero, uuid) {
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
-  hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Cycle Clothes", 1);
+  hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Shimmer Toggle", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
@@ -40,6 +40,9 @@ function init(hero, uuid) {
   hero.addKeyBindFunc("BATTLE_CARD_RESET", resetBattleCard, "Return To Mega Buster", 5);
   hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle Omega-Xis Head", 5);
   hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
+  hero.addKeyBind("MISSING_EQUIPMENT", "\u00A7mEM Wave Change\u00A7r Equipment Missing", 5);
+  hero.addKeyBind("COLD_TEMPERATURE", "\u00A7mEM Wave Change\u00A7r You are too cold", 5);
+  hero.addKeyBind("HOT_TEMPERATURE", "\u00A7mEM Wave Change\u00A7r You are too hot", 5);
   
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
@@ -184,7 +187,7 @@ function init(hero, uuid) {
           case "omega_xis":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "predation":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:aiming_timer") == 0;
       };
       case "fiskheroes:equipment":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
@@ -207,6 +210,12 @@ function init(hero, uuid) {
     switch (keyBind) {
       case "WAVE_CHANGE":
         return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && (((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && !entity.isSneaking()) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25)) && entity.getUUID() == uuid;
+      case "MISSING_EQUIPMENT":
+        return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && (((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() < 6) && !entity.isSneaking()) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() < 6) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25)) && entity.getUUID() == uuid;
+      case "COLD_TEMPERATURE":
+        return entity.isAlive() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") <= -0.25 && entity.getUUID() == uuid;
+      case "HOT_TEMPERATURE":
+        return entity.isAlive() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") >= 0.25 && entity.getUUID() == uuid;
       case "VISUALIZER_TOGGLE":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid;
       case "CYCLE_CLOTHES":

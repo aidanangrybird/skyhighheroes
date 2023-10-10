@@ -158,6 +158,3 @@ function getID() {
 function getSuitID() {
   return "";
 };
-function getColor() {
-  return 0x000000;
-};
