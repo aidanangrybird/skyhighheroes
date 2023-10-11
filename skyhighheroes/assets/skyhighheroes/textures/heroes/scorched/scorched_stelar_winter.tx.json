@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:scorched/scorched_stelar_up_winter_hood_down",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/stelar_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/scorched_stelar_winter_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.ceil(81 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) | 0",
+      "values": {
+        "min": 1,
+        "max": 41
+      }
+    }
+  },
+  "isDynamic": true
+}
