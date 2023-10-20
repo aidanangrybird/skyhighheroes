@@ -12,7 +12,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A74Grand Stelar's Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A74Grand Stelar's Shovel"));
   stelar.init(hero, "d699ffcd-8177-4325-91ac-3e815e87bb95");
   hero.setTickHandler((entity, manager) => {
-    stelar.tickHandler(entity, manager);
+    stelar.getTickHandler(entity, manager);
     bodyTemp.change(entity, manager, [
       { clothingType: 0, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
       { clothingType: 0, biome: "Frozen", tempChangeTicks: -1000.0 },

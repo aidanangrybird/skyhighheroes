@@ -10,7 +10,6 @@ function init(hero, uuid) {
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
   hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
-  //hero.addAttribute("REACH_DISTANCE", -1.0, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
@@ -188,7 +187,7 @@ function init(hero, uuid) {
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "predation":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:aiming_timer") == 0;
-      };
+        };
       case "fiskheroes:equipment":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       case "fiskheroes:blade":
@@ -393,7 +392,7 @@ function toolSwitchEnchant(player, manager) {
   return true;
 };
 
-function tickHandler(entity, manager) {
+function getTickHandler(entity, manager) {
   var x = entity.posX();
   var y = entity.posY();
   var z = entity.posZ();
@@ -508,8 +507,6 @@ function bladeProfile(profile) {
   profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
 };
 function inactiveProfile(profile) {
-  //profile.addAttribute("MAX_HEALTH", -8.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 
 //Temperature Profiles
@@ -520,7 +517,6 @@ function frozenProfile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -19.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 1);
 };
 function cold3Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.7, 1);
@@ -529,7 +525,6 @@ function cold3Profile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -13.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function cold2Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.35, 1);
@@ -537,21 +532,18 @@ function cold2Profile(profile) {
   profile.addAttribute("WEAPON_DAMAGE", -0.5, 1);
   profile.addAttribute("JUMP_HEIGHT", -0.25, 0);
   profile.addAttribute("MAX_HEALTH", -7.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function cold1Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.05, 1);
   profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
   profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
   profile.addAttribute("MAX_HEALTH", -2.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function hot1Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.1, 1);
   profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
   profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
   profile.addAttribute("MAX_HEALTH", -2.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function hot2Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.35, 1);
@@ -559,7 +551,6 @@ function hot2Profile(profile) {
   profile.addAttribute("WEAPON_DAMAGE", -0.6, 1);
   profile.addAttribute("JUMP_HEIGHT", -0.5, 0);
   profile.addAttribute("MAX_HEALTH", -7.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function hot3Profile(profile) {
   profile.addAttribute("BASE_SPEED", -0.7, 1);
@@ -568,7 +559,6 @@ function hot3Profile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -14.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 function fireProfile(profile) {
   profile.addAttribute("BASE_SPEED", -1.0, 1);
@@ -577,7 +567,6 @@ function fireProfile(profile) {
   profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
   profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
   profile.addAttribute("MAX_HEALTH", -19.0, 0);
-  //profile.addAttribute("REACH_DISTANCE", -1.0, 0);
 };
 
 function getDamageProfile(entity) {

@@ -20,7 +20,6 @@ function init(hero) {
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
   hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
-  //hero.addAttribute("REACH_DISTANCE", -1.5, 0);
   hero.addAttribute("BASE_SPEED_LEVELS", 30.0, 0);
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
@@ -40,45 +39,47 @@ function init(hero) {
   hero.setModifierEnabled(isModifierEnabled);
   hero.supplyFunction("canAim", canAim);
   hero.setKeyBindEnabled(isKeyBindEnabled);
-  hero.setTickHandler((entity, manager) => {
-    var x = entity.posX();
-    var y = entity.posY();
-    var z = entity.posZ();
-    if (entity.world().getDimension() == 0 && entity.posY() >= 4000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-      manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
-      manager.setData(entity, "fiskheroes:teleport_delay", 6);
-    };
-    if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-      manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
-      manager.setData(entity, "fiskheroes:teleport_delay", 6);
-    };
-    var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
-    if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
-    }
-    else if (t > 0) {
-      manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
-    };
-    manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
-    var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
-    manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-    if (entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() && !entity.getData("fiskheroes:speeding")) {
-      manager.setData(entity, "fiskheroes:flying", true);
-    };
-    var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
-    if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
-      manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
-    };
-    if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
-      manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
-    };
-    if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
-      manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
-    };
-    if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
-      manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
-    };
-  });
+  hero.setTickHandler(getTickHandler);
+};
+
+function getTickHandler(entity, manager) {
+  var x = entity.posX();
+  var y = entity.posY();
+  var z = entity.posZ();
+  if (entity.world().getDimension() == 0 && entity.posY() >= 4000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+    manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
+    manager.setData(entity, "fiskheroes:teleport_delay", 6);
+  };
+  if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
+    manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
+    manager.setData(entity, "fiskheroes:teleport_delay", 6);
+  };
+  var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");
+  if (t == 0 && !entity.isSprinting() && !entity.isOnGround() && entity.motionY() < -1.25 && entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() && entity.world().blockAt(entity.pos()).name() == "minecraft:air") {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", t = 12);
+  }
+  else if (t > 0) {
+    manager.setData(entity, "skyhighheroes:dyn/superhero_boosting_landing_ticks", --t);
+  };
+  manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
+  var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
+  manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
+  if (entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() && !entity.getData("fiskheroes:speeding")) {
+    manager.setData(entity, "fiskheroes:flying", true);
+  };
+  var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
+  if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
+  };
+  if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
+    manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
+  };
 };
 
 function cycleClothes(player, manager) {
