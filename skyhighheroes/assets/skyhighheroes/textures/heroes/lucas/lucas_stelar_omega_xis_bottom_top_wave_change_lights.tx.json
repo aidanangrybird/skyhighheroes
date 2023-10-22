@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:lucas/lucas_stelar_omega_xis_bottom_top_wave_change_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/omega_xis_bottom_top_wave_change_lights_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/lucas_stelar_omega_xis_bottom_top_wave_change_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil((87 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 58) - (29 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer')) - (29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer'))), 3), 29) | 0",
+      "values": {
+        "min": 3,
+        "max": 29
+      }
+    }
+  },
+  "isDynamic": true
+}
