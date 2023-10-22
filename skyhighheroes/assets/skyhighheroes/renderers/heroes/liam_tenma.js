@@ -1,6 +1,6 @@
 extend("skyhighheroes:base_tenma");
 
-var astro = implement("skyhighheroes:external/astro");
+var tenma = implement("skyhighheroes:external/tenma");
 var stuff = implement("skyhighheroes:external/stuff");
 
 function getColor() {
@@ -14,35 +14,14 @@ loadTextures({
   "eyes_normal": "skyhighheroes:liam/astro/liam_tenma_eyes_normal",
   "base": "skyhighheroes:liam/astro/liam_tenma_base",
   "base_flying": "skyhighheroes:liam/astro/liam_tenma_base_flying",
-  "base_head": "skyhighheroes:liam/astro/liam_tenma_base_head",
-  "base_torso_boots": "skyhighheroes:liam/astro/liam_tenma_base_torso_boots",
-  "base_torso_boots_legs": "skyhighheroes:liam/astro/liam_tenma_base_torso_boots_legs",
-  "base_legs": "skyhighheroes:liam/astro/liam_tenma_base_legs",
-  "base_legs_boots": "skyhighheroes:liam/astro/liam_tenma_base_legs_boots",
+  "boots": "skyhighheroes:liam/astro/liam_tenma_boots",
+  "shorts": "skyhighheroes:liam/astro/liam_tenma_shorts",
   "long": "skyhighheroes:liam/astro/liam_tenma_long",
   "long_flying": "skyhighheroes:liam/astro/liam_tenma_long_flying",
-  "long_head_torso": "skyhighheroes:liam/astro/liam_tenma_long_head_torso",
-  "long_torso_boots": "skyhighheroes:liam/astro/liam_tenma_long_torso_boots",
-  "long_torso_boots_legs": "skyhighheroes:liam/astro/liam_tenma_long_torso_boots_legs",
-  "long_legs": "skyhighheroes:liam/astro/liam_tenma_long_legs",
-  "long_legs_torso": "skyhighheroes:liam/astro/liam_tenma_long_legs_torso",
-  "long_legs_boots": "skyhighheroes:liam/astro/liam_tenma_long_legs_boots",
-  "long_legs_torso_boots": "skyhighheroes:liam/astro/liam_tenma_long_legs_torso_boots",
   "short": "skyhighheroes:liam/astro/liam_tenma_short",
   "short_flying": "skyhighheroes:liam/astro/liam_tenma_short_flying",
-  "short_torso_boots": "skyhighheroes:liam/astro/liam_tenma_short_torso_boots",
-  "short_legs": "skyhighheroes:liam/astro/liam_tenma_short_legs",
-  "short_legs_torso": "skyhighheroes:liam/astro/liam_tenma_short_legs_torso",
-  "short_legs_boots": "skyhighheroes:liam/astro/liam_tenma_short_legs_boots",
-  "short_legs_torso_boots": "skyhighheroes:liam/astro/liam_tenma_short_torso_boots",
   "normal": "skyhighheroes:liam/astro/liam_tenma_normal",
   "normal_flying": "skyhighheroes:liam/astro/liam_tenma_normal_flying",
-  "normal_torso_boots": "skyhighheroes:liam/astro/liam_tenma_normal_torso_boots",
-  "normal_torso_boots_legs": "skyhighheroes:liam/astro/liam_tenma_normal_torso_boots_legs",
-  "normal_legs": "skyhighheroes:liam/astro/liam_tenma_normal_legs",
-  "normal_legs_torso": "skyhighheroes:liam/astro/liam_tenma_normal_legs_torso",
-  "normal_legs_boots": "skyhighheroes:liam/astro/liam_tenma_normal_legs_boots",
-  "normal_legs_torso_boots": "skyhighheroes:liam/astro/liam_tenma_normal_legs_torso_boots",
   "cannon_lights": "skyhighheroes:liam/astro/liam_tenma_cannon_lights",
   "shield": "skyhighheroes:liam/astro/liam_tenma_shield",
   "katana": "skyhighheroes:liam/astro/liam_tenma_katana",
@@ -55,10 +34,9 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  //Boot Rockets
-  rockets = astro.initBoosters(renderer, 0x0000FF);
-  cannon = astro.initCannon(renderer);
-  astro.initBeams(renderer, 0x0000FF);
+  rockets = tenma.initBoosters(renderer, 0x0000FF);
+  cannon = tenma.initCannon(renderer);
+  tenma.initBeams(renderer, 0x0000FF);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:liam_tenma_speed");
 };
 

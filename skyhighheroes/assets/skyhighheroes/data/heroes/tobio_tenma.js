@@ -2,9 +2,7 @@ var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords'
 function init(hero) {
   hero.setName("\u00A74Tobio Tenma");
   hero.setTier(8);
-  hero.setHelmet("Head");
-  hero.setChestplate("Torso");
-  hero.setLeggings("Legs");
+  hero.setLeggings("Shorts");
   hero.setBoots("Boots");
   hero.setAliases("tobio_tenma");
   hero.setVersion("Astro Boy");

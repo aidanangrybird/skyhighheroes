@@ -1,6 +1,6 @@
 extend("skyhighheroes:base_tenma");
 
-var astro = implement("skyhighheroes:external/astro");
+var tenma = implement("skyhighheroes:external/tenma");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
@@ -10,35 +10,14 @@ loadTextures({
   "eyes_normal": "skyhighheroes:scorched/astro/scorched_tenma_eyes_normal",
   "base": "skyhighheroes:scorched/astro/scorched_tenma_base",
   "base_flying": "skyhighheroes:scorched/astro/scorched_tenma_base_flying",
-  "base_head": "skyhighheroes:scorched/astro/scorched_tenma_base_head",
-  "base_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_base_torso_boots",
-  "base_torso_boots_legs": "skyhighheroes:scorched/astro/scorched_tenma_base_torso_boots_legs",
-  "base_legs": "skyhighheroes:scorched/astro/scorched_tenma_base_legs",
-  "base_legs_boots": "skyhighheroes:scorched/astro/scorched_tenma_base_legs_boots",
+  "boots": "skyhighheroes:scorched/astro/scorched_tenma_boots",
+  "shorts": "skyhighheroes:scorched/astro/scorched_tenma_shorts",
   "long": "skyhighheroes:scorched/astro/scorched_tenma_long",
   "long_flying": "skyhighheroes:scorched/astro/scorched_tenma_long_flying",
-  "long_head_torso": "skyhighheroes:scorched/astro/scorched_tenma_long_head_torso",
-  "long_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_long_torso_boots",
-  "long_torso_boots_legs": "skyhighheroes:scorched/astro/scorched_tenma_long_torso_boots_legs",
-  "long_legs": "skyhighheroes:scorched/astro/scorched_tenma_long_legs",
-  "long_legs_torso": "skyhighheroes:scorched/astro/scorched_tenma_long_legs_torso",
-  "long_legs_boots": "skyhighheroes:scorched/astro/scorched_tenma_long_legs_boots",
-  "long_legs_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_long_legs_torso_boots",
   "short": "skyhighheroes:scorched/astro/scorched_tenma_short",
   "short_flying": "skyhighheroes:scorched/astro/scorched_tenma_short_flying",
-  "short_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_short_torso_boots",
-  "short_legs": "skyhighheroes:scorched/astro/scorched_tenma_short_legs",
-  "short_legs_torso": "skyhighheroes:scorched/astro/scorched_tenma_short_legs_torso",
-  "short_legs_boots": "skyhighheroes:scorched/astro/scorched_tenma_short_legs_boots",
-  "short_legs_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_short_torso_boots",
   "normal": "skyhighheroes:scorched/astro/scorched_tenma_normal",
   "normal_flying": "skyhighheroes:scorched/astro/scorched_tenma_normal_flying",
-  "normal_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_normal_torso_boots",
-  "normal_torso_boots_legs": "skyhighheroes:scorched/astro/scorched_tenma_normal_torso_boots_legs",
-  "normal_legs": "skyhighheroes:scorched/astro/scorched_tenma_normal_legs",
-  "normal_legs_torso": "skyhighheroes:scorched/astro/scorched_tenma_normal_legs_torso",
-  "normal_legs_boots": "skyhighheroes:scorched/astro/scorched_tenma_normal_legs_boots",
-  "normal_legs_torso_boots": "skyhighheroes:scorched/astro/scorched_tenma_normal_legs_torso_boots",
   "cannon_lights": "skyhighheroes:scorched/astro/scorched_tenma_cannon_lights",
   "shield": "skyhighheroes:scorched/astro/scorched_tenma_shield",
   "katana": "skyhighheroes:scorched/astro/scorched_tenma_katana",
@@ -51,10 +30,9 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  //Boot Rockets
-  rockets = astro.initBoosters(renderer, 0xFFC400);
-  cannon = astro.initCannon(renderer);
-  astro.initBeams(renderer, 0xFFC400);
+  rockets = tenma.initBoosters(renderer, 0xFFC400);
+  cannon = tenma.initCannon(renderer);
+  tenma.initBeams(renderer, 0xFFC400);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:scorched_tenma_speed");
 };
 

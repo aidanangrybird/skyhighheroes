@@ -1,9 +1,7 @@
 var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 function init(hero, uuid) {
   hero.setTier(8);
-  hero.setHelmet("Head");
-  hero.setChestplate("Torso");
-  hero.setLeggings("Legs");
+  hero.setLeggings("Shorts");
   hero.setBoots("Boots");
   hero.setVersion("Astro Boy");
   hero.hide();
@@ -79,10 +77,10 @@ function init(hero, uuid) {
 };
 
 function getTickHandler(entity, manager) {
-  if (entity.getWornHelmet().getEnchantmentLevel(35) == -1 && entity.getWornChestplate().getEnchantmentLevel(35) == -1 && entity.getWornLeggings().getEnchantmentLevel(35) == -1 && entity.getWornBoots().getEnchantmentLevel(35) == -1) {
+  if (entity.getWornLeggings().getEnchantmentLevel(35) == -1 && entity.getWornBoots().getEnchantmentLevel(35) == -1) {
     manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
   };
-  if (entity.getWornHelmet().getEnchantmentLevel(35) == 0 && entity.getWornChestplate().getEnchantmentLevel(35) == 0 && entity.getWornLeggings().getEnchantmentLevel(35) == 0 && entity.getWornBoots().getEnchantmentLevel(35) == 0) {
+  if (entity.getWornLeggings().getEnchantmentLevel(35) == 0 && entity.getWornBoots().getEnchantmentLevel(35) == 0) {
     manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
   };
   var x = entity.posX();
@@ -109,7 +107,7 @@ function getTickHandler(entity, manager) {
   if (entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() && !entity.getData("fiskheroes:speeding")) {
     manager.setData(entity, "fiskheroes:flying", true);
   };
-  var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
+  var equipment = entity.getWornLeggings().nbt().getTagList("Equipment");
   if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
     manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
   };
@@ -135,18 +133,12 @@ function cycleClothes(player, manager) {
 function shimmerToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
-    player.getWornHelmet().nbt().getTagList("ench");
-    player.getWornChestplate().nbt().getTagList("ench");
     player.getWornLeggings().nbt().getTagList("ench");
     player.getWornBoots().nbt().getTagList("ench");
-    manager.setTagList(player.getWornHelmet().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
-    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
     manager.setTagList(player.getWornLeggings().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
     manager.setTagList(player.getWornBoots().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
   };
   if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
-    manager.removeTag(player.getWornHelmet().nbt(), "ench");
-    manager.removeTag(player.getWornChestplate().nbt(), "ench");
     manager.removeTag(player.getWornLeggings().nbt(), "ench");
     manager.removeTag(player.getWornBoots().nbt(), "ench");
     manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);

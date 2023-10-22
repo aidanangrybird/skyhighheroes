@@ -1,6 +1,6 @@
 extend("skyhighheroes:base_tenma");
 
-var astro = implement("skyhighheroes:external/astro");
+var tenma = implement("skyhighheroes:external/tenma");
 var stuff = implement("skyhighheroes:external/stuff");
 
 loadTextures({
@@ -10,35 +10,14 @@ loadTextures({
   "eyes_normal": "skyhighheroes:grand/astro/grand_tenma_eyes_normal",
   "base": "skyhighheroes:grand/astro/grand_tenma_base",
   "base_flying": "skyhighheroes:grand/astro/grand_tenma_base_flying",
-  "base_head": "skyhighheroes:grand/astro/grand_tenma_base_head",
-  "base_torso_boots": "skyhighheroes:grand/astro/grand_tenma_base_torso_boots",
-  "base_torso_boots_legs": "skyhighheroes:grand/astro/grand_tenma_base_torso_boots_legs",
-  "base_legs": "skyhighheroes:grand/astro/grand_tenma_base_legs",
-  "base_legs_boots": "skyhighheroes:grand/astro/grand_tenma_base_legs_boots",
+  "boots": "skyhighheroes:grand/astro/grand_tenma_boots",
+  "shorts": "skyhighheroes:grand/astro/grand_tenma_shorts",
   "long": "skyhighheroes:grand/astro/grand_tenma_long",
   "long_flying": "skyhighheroes:grand/astro/grand_tenma_long_flying",
-  "long_head_torso": "skyhighheroes:grand/astro/grand_tenma_long_head_torso",
-  "long_torso_boots": "skyhighheroes:grand/astro/grand_tenma_long_torso_boots",
-  "long_torso_boots_legs": "skyhighheroes:grand/astro/grand_tenma_long_torso_boots_legs",
-  "long_legs": "skyhighheroes:grand/astro/grand_tenma_long_legs",
-  "long_legs_torso": "skyhighheroes:grand/astro/grand_tenma_long_legs_torso",
-  "long_legs_boots": "skyhighheroes:grand/astro/grand_tenma_long_legs_boots",
-  "long_legs_torso_boots": "skyhighheroes:grand/astro/grand_tenma_long_legs_torso_boots",
   "short": "skyhighheroes:grand/astro/grand_tenma_short",
   "short_flying": "skyhighheroes:grand/astro/grand_tenma_short_flying",
-  "short_torso_boots": "skyhighheroes:grand/astro/grand_tenma_short_torso_boots",
-  "short_legs": "skyhighheroes:grand/astro/grand_tenma_short_legs",
-  "short_legs_torso": "skyhighheroes:grand/astro/grand_tenma_short_legs_torso",
-  "short_legs_boots": "skyhighheroes:grand/astro/grand_tenma_short_legs_boots",
-  "short_legs_torso_boots": "skyhighheroes:grand/astro/grand_tenma_short_torso_boots",
   "normal": "skyhighheroes:grand/astro/grand_tenma_normal",
   "normal_flying": "skyhighheroes:grand/astro/grand_tenma_normal_flying",
-  "normal_torso_boots": "skyhighheroes:grand/astro/grand_tenma_normal_torso_boots",
-  "normal_torso_boots_legs": "skyhighheroes:grand/astro/grand_tenma_normal_torso_boots_legs",
-  "normal_legs": "skyhighheroes:grand/astro/grand_tenma_normal_legs",
-  "normal_legs_torso": "skyhighheroes:grand/astro/grand_tenma_normal_legs_torso",
-  "normal_legs_boots": "skyhighheroes:grand/astro/grand_tenma_normal_legs_boots",
-  "normal_legs_torso_boots": "skyhighheroes:grand/astro/grand_tenma_normal_legs_torso_boots",
   "cannon_lights": "skyhighheroes:grand/astro/grand_tenma_cannon_lights",
   "shield": "skyhighheroes:grand/astro/grand_tenma_shield",
   "katana": "skyhighheroes:grand/astro/grand_tenma_katana",
@@ -51,10 +30,9 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  //Boot Rockets
-  rockets = astro.initBoosters(renderer, 0xFF0000);
-  cannon = astro.initCannon(renderer);
-  astro.initBeams(renderer, 0xFF0000);
+  rockets = tenma.initBoosters(renderer, 0xFF0000);
+  cannon = tenma.initCannon(renderer);
+  tenma.initBeams(renderer, 0xFF0000);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:grand_tenma_speed");
 };
 
