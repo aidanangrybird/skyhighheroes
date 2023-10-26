@@ -26,6 +26,7 @@ function init(hero) {
   hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
+  hero.addKeyBind("AIM_RIFLE", "Aim Rifle", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
   hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 5);
@@ -118,7 +119,7 @@ function isKeyBindEnabled(entity, keyBind) {
     case "SHIELD_THROW":
       return entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
     case "AIM":
-      return (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
+      return !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe");
     case "CHARGE_ENERGY":
       return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
     default:

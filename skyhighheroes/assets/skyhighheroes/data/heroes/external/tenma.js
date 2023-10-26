@@ -66,7 +66,7 @@ function init(hero, uuid) {
       case "SHIELD_THROW":
         return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
       case "AIM":
-        return entity.getUUID() == uuid && (entity.getHeldItem().name() != "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() != "fiskheroes:ruptures_scythe");
+        return entity.getUUID() == uuid && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe");
       case "CHARGE_ENERGY":
         return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
       default:
