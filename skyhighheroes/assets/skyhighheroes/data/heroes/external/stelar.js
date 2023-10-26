@@ -20,7 +20,7 @@ function init(hero, uuid) {
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
   hero.addKeyBindFunc("BATTLE_CARD_0", activateBattleCard, "Return To Mega Buster", 2);
-  hero.addKeyBindFunc("BATTLE_CARD_1", activateBattleCard, "Shield", 2);
+  hero.addKeyBindFunc("BATTLE_CARD_1", activateBattleCard, "Barrier", 2);
   hero.addKeyBindFunc("BATTLE_CARD_2", activateBattleCard, "Sword", 2);
   hero.addKeyBindFunc("BATTLE_CARD_3", activateBattleCard, "Shurikens", 2);
   //hero.addKeyBindFunc("BATTLE_CARD_4", activateBattleCard, "Creetle", 2);
