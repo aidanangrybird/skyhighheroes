@@ -525,7 +525,7 @@ function initNormalBoosters(renderer) {
   var bootLights = renderer.createEffect("fiskheroes:overlay");
   bootLights.texture.set(null, "boots_lights");
   var bootOpening = renderer.createEffect("fiskheroes:overlay");
-  bootOpening.texture.set("boots", null);
+  bootOpening.texture.set("boots_opening", null);
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
