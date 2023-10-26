@@ -260,7 +260,7 @@ function initEquipment(renderer) {
   ]).setCondition(entity => ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
 };
 
-function initBoosters(renderer, color) {
+function initCustomBoosters(renderer, color) {
   var armLights = renderer.createEffect("fiskheroes:overlay");
   armLights.texture.set(null, "arms_lights");
   var bootLights = renderer.createEffect("fiskheroes:overlay");
@@ -784,7 +784,7 @@ function initNormalBoosters(renderer) {
   return obj;
 };
 
-function initDualBoosters(renderer, colorLeft, colorRight) {
+function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   var armLights = renderer.createEffect("fiskheroes:overlay");
   armLights.texture.set(null, "arms_lights");
   var bootLights = renderer.createEffect("fiskheroes:overlay");
