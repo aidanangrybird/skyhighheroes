@@ -125,6 +125,13 @@ function initAstroAnimations(renderer) {
   addHoverAnimation(renderer, "astro.HOVER", "skyhighheroes:astro_hover");
 };
 
+function initNV(renderer, uuid) {
+  nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.factor = 1.0;
+  nv.setCondition(entity => entity.getUUID() == uuid);
+};
+
 //Init
 //Beams
 function initBeams(renderer, color) {

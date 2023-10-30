@@ -70,6 +70,7 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  tenma.initNV(renderer, getID());
   tenma.initCustomEquipment(renderer, getID());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
 };
