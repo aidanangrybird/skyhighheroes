@@ -70,18 +70,6 @@ function init(renderer) {
       return "null";
     };
   });
-  renderer.setLights((entity, renderLayer) => {
-    if (entity.isWearingFullSuit()) {
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
-        return "eyes";
-      };
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-        return "eyes_normal";
-      };
-    } else {
-      return "null";
-    };
-  });
   renderer.setItemIcon("LEGGINGS", "%s_shorts");
   renderer.setItemIcon("BOOTS", "%s_boots");
   renderer.showModel("LEGGINGS", "head", "headwear", "body", "rightArm", "leftArm", "rightLeg", "leftLeg");
@@ -100,7 +88,9 @@ function initEffects(renderer) {
   cannon = tenma.initCannon(renderer);
   tenma.initBeams(renderer, 0xFFFFFF);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:tobio_tenma_speed");
+  eyes = tenma.initEyes(renderer);
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
+  metal_heat.includeEffects(eyes.eyes_off);
 };
 
 function initAnimations(renderer) {
@@ -109,6 +99,7 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  eyes.render(entity);
   metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
   metal_heat.render();
   cannon.render(entity, renderLayer);
