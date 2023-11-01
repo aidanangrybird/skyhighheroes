@@ -12,8 +12,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Tobio Tenma's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Tobio Tenma's Shield"));
   
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
-  hero.addAttribute("SPRINT_SPEED", 0.3, 1);
-  hero.addAttribute("BASE_SPEED", 0.2, 1);
+  hero.addAttribute("SPRINT_SPEED", 0.5, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
   hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
@@ -26,7 +25,6 @@ function init(hero) {
   hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("AIM", "Aim Arm Cannon", 4);
-  hero.addKeyBind("AIM_RIFLE", "Aim Rifle", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
   hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 5);
@@ -63,9 +61,6 @@ function getTickHandler(entity, manager) {
   manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
   var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
   manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-  if (entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && !entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() && !entity.getData("fiskheroes:speeding")) {
-    manager.setData(entity, "fiskheroes:flying", true);
-  };
   var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
   if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
     manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
@@ -87,10 +82,6 @@ function cycleClothes(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/tenma_clothes", 0);
   };
   return true;
-};
-
-function getTierOverride(entity) {
-  return (!entity.isDisplayStand()) ? 8 : 0;
 };
 
 function isModifierEnabled(entity, modifier) {
