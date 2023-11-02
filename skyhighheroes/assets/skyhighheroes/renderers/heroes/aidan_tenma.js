@@ -36,10 +36,6 @@ function initEffects(renderer) {
   stuff.bindSpeedTrail(renderer, "skyhighheroes:aidan_tenma_speed");
 };
 
-function getSuitID() {
-  return "skyhighheroes:aidan_tenma";
-};
-
 function getID() {
   return "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 };

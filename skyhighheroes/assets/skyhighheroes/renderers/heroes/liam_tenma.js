@@ -40,10 +40,6 @@ function initEffects(renderer) {
   stuff.bindSpeedTrail(renderer, "skyhighheroes:liam_tenma_speed");
 };
 
-function getSuitID() {
-  return "skyhighheroes:liam_tenma";
-};
-
 function getID() {
   return "cd71352c-8cb2-448c-a69d-a310a905ce7b";
 };

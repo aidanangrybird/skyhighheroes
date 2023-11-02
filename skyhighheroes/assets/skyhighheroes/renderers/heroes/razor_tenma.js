@@ -36,10 +36,6 @@ function initEffects(renderer) {
   stuff.bindSpeedTrail(renderer, "skyhighheroes:razor_tenma_speed");
 };
 
-function getSuitID() {
-  return "skyhighheroes:razor_tenma";
-};
-
 function getID() {
   return "de01ddcc-7dc8-437e-bf08-3f8bf11086dc";
 };

@@ -78,6 +78,3 @@ function render(entity, renderLayer, isFirstPersonArm) {
 function getID() {
   return "";
 };
-function getSuitID() {
-  return "";
-};

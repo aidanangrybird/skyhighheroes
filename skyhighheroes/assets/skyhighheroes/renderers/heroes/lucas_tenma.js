@@ -35,10 +35,6 @@ function initEffects(renderer) {
   stuff.bindSpeedTrail(renderer, "skyhighheroes:lucas_tenma_speed");
 };
 
-function getSuitID() {
-  return "skyhighheroes:lucas_tenma";
-};
-
 function getID() {
   return "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
 };
