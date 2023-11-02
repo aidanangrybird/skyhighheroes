@@ -57,7 +57,7 @@ loadTextures({
 });
 
 function getColor() {
-  return 0xFF8900;
+  return 0x00FFFF;
 };
 
 function getID() {
