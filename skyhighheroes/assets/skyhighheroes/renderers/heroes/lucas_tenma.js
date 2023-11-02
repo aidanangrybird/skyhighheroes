@@ -17,6 +17,7 @@ loadTextures({
   "short": "skyhighheroes:lucas/astro/lucas_tenma_short",
   "short_flying": "skyhighheroes:lucas/astro/lucas_tenma_short_flying",
   "normal": "skyhighheroes:lucas/astro/lucas_tenma_normal",
+  "normal_flying": "skyhighheroes:lucas/astro/lucas_tenma_normal_flying",
   "cannon_lights": "skyhighheroes:lucas/astro/lucas_tenma_cannon_lights",
   "shield": "skyhighheroes:lucas/astro/lucas_tenma_shield",
   "katana": "skyhighheroes:lucas/astro/lucas_tenma_katana",
