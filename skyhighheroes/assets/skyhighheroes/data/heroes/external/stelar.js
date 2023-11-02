@@ -31,7 +31,7 @@ function init(hero, uuid) {
   hero.addKeyBindFunc("HOOD_TOGGLE", hoodToggle, "Toggle Hood", 3);
   hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
   hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
-  hero.addKeyBind("AIM", "Aim Mega Buster", 4);
+  hero.addKeyBind("AIM", "Aim", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
   hero.addKeyBindFunc("WAVE_CHANGE", electroMagnetic, "EM Wave Change", 5);
