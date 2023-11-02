@@ -13,7 +13,7 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Exist as YourMaidVEnjoyer"
+        "translate": "Exist as CaspianButMC"
       },
       "condition": {
         "variables": {
