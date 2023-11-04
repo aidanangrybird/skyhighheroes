@@ -19,6 +19,7 @@ loadTextures({
   "short_flying": "skyhighheroes:tobio/tobio_tenma_short_flying",
   "normal": "skyhighheroes:tobio/tobio_tenma_normal",
   "normal_flying": "skyhighheroes:tobio/tobio_tenma_normal_flying",
+  "cannon": "skyhighheroes:cannon",
   "cannon_lights": "skyhighheroes:tobio/tobio_tenma_cannon_lights",
   "shield": "skyhighheroes:tobio/tobio_tenma_shield",
   "katana": "skyhighheroes:tobio/tobio_tenma_katana",

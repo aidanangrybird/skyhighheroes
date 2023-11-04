@@ -165,7 +165,7 @@ function initDualBeams(renderer, colorLeft, colorRight) {
 //Cannon
 function initCannon(renderer) {
   var light_thing = renderer.createEffect("fiskheroes:overlay");
-  light_thing.texture.set(null, "cannon_lights");
+  light_thing.texture.set("cannon", "cannon_lights");
   var obj = {
     light_thing: light_thing,
     render: (entity, renderLayer) => {

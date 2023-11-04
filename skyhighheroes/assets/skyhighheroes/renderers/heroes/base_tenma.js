@@ -4,7 +4,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 var metal_heat;
 
 loadTextures({
-  "boots_opening": "skyhighheroes:boots"
+  "boots_opening": "skyhighheroes:boots",
+  "cannon": "skyhighheroes:cannon"
 });
 
 function init(renderer) {
