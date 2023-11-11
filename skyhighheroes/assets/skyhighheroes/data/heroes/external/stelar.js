@@ -188,6 +188,13 @@ function init(hero, uuid) {
           case "predation":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:aiming_timer") == 0;
         };
+      case "fiskheroes:intangibility":
+        switch (modifier.id()) {
+          case "not_absolute":
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getPunchTimer() > 0;
+          case "absolute":
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getPunchTimer() == 0;
+        };
       case "fiskheroes:equipment":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       case "fiskheroes:blade":

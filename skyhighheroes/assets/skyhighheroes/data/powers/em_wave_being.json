@@ -34,8 +34,11 @@
     },
     "fiskheroes:wall_crawling": {
     },
-    "fiskheroes:intangibility": {
+    "fiskheroes:intangibility|absolute": {
       "isAbsolute": true
+    },
+    "fiskheroes:intangibility|not_absolute": {
+      "isAbsolute": false
     },
     "fiskheroes:regeneration": {
       "factor": 5
