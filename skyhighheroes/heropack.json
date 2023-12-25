@@ -141,6 +141,12 @@
       },
       "iron_man" : "\u00A7eIron \u00A7eMan \u00A7eMark \u00A7e85 \u00A7eStyle\u00A7r"
     },
+    "skyhighheroes:spartan_stelar" : {
+      "$DEFAULT": {
+        "name": "\u00A75Normal \u00A75Style\u00A7r"
+      },
+      "mysterio" : "\u00A75Mysterio \u00A75Style\u00A7r"
+    },
     "skyhighheroes:tysen_stelar" : {
       "$DEFAULT": {
         "name": "\u00A75Normal \u00A75Style\u00A7r"

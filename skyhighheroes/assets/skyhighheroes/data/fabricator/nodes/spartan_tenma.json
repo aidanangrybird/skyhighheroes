@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:spartan_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:spartan_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}
