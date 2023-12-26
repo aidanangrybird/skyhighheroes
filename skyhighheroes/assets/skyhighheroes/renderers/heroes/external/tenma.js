@@ -179,6 +179,26 @@ function initCannon(renderer) {
 };
 
 //Eyes
+function initCustomEyes(renderer, uuid) {
+  var eyes_on = renderer.createEffect("fiskheroes:overlay");
+  eyes_on.texture.set(null, "eyes");
+  var eyes_off = renderer.createEffect("fiskheroes:overlay");
+  eyes_off.texture.set("eyes_normal", null);
+  var obj = {
+    eyes_on: eyes_on,
+    eyes_off: eyes_off,
+    render: (entity) => {
+      if (entity.isWearingFullSuit() && entity.getUUID() == uuid) {
+        eyes_off.opacity = 1;
+        eyes_off.render();
+        eyes_on.opacity = entity.getInterpolatedData("fiskheroes:energy_projection_timer") + entity.getInterpolatedData("fiskheroes:aimed_timer") + entity.getInterpolatedData("fiskheroes:energy_charge") + entity.getInterpolatedData("fiskheroes:flight_timer") + entity.getInterpolatedData("fiskheroes:beam_charge") + entity.getData("fiskheroes:speeding");
+        eyes_on.render();
+      };
+    }
+  };
+  return obj;
+};
+
 function initEyes(renderer) {
   var eyes_on = renderer.createEffect("fiskheroes:overlay");
   eyes_on.texture.set(null, "eyes");

@@ -61,9 +61,9 @@ function init(renderer) {
 function initEffects(renderer) {
   tenma.initNV(renderer, getID());
   tenma.initCustomEquipment(renderer, getID());
-  eyes = tenma.initEyes(renderer);
+  eyes = tenma.initCustomEyes(renderer, getID());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
-  metal_heat.includeEffects(eyes.eyes_off);
+  metal_heat.includeEffects(eyes.eyes_off, eyes.eyes_on);
 };
 
 function initAnimations(renderer) {
