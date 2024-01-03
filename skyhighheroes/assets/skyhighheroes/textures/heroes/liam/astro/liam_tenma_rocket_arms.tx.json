@@ -1,0 +1,26 @@
+{
+  "texture": {
+    "in": "skyhighheroes:liam/astro/liam_tenma_<CLOTHING><FLYING>",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_rocket_arms"
+      },
+      {
+        "operation": "ADD",
+        "supply": "skyhighheroes:tenma_rockets"
+      }
+    ],
+    "out": "skyhighheroes:generated/liam_tenma_<CLOTHING><FLYING>_rocket_arms"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",
+      "values": ["base", "long", "short", "normal"]
+    },
+    "FLYING": {
+      "key": "entity.getData('fiskheroes:flight_timer') > 0 ? '_flying' : ''",
+      "values": ["", "_flying"]
+    }
+  }
+}

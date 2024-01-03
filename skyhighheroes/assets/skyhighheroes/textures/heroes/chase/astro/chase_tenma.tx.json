@@ -1,0 +1,13 @@
+{
+  "texture": "skyhighheroes:chase/astro/chase_tenma_<CLOTHING><FLYING>",
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",
+      "values": ["base", "long", "short", "normal"]
+    },
+    "FLYING": {
+      "key": "entity.getData('fiskheroes:flight_timer') > 0 ? '_flying' : ''",
+      "values": ["", "_flying"]
+    }
+  }
+}

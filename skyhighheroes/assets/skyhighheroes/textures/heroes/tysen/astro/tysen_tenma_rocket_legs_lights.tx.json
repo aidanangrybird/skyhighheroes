@@ -1,0 +1,16 @@
+{
+  "texture": {
+    "in": "skyhighheroes:tysen/astro/tysen_tenma_boots_lights",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_rocket_legs"
+      },
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:tenma_rockets_xor"
+      }
+    ],
+    "out": "skyhighheroes:generated/tysen_tenma_rocket_legs_lights"
+  }
+}

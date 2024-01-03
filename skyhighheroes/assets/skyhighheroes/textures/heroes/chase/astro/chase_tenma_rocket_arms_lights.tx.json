@@ -1,0 +1,16 @@
+{
+  "texture": {
+    "in": "skyhighheroes:chase/astro/chase_tenma_arms_lights",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_rocket_arms"
+      },
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:tenma_rockets_xor"
+      }
+    ],
+    "out": "skyhighheroes:generated/chase_tenma_rocket_arms_lights"
+  }
+}

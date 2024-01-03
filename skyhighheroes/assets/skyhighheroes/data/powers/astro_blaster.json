@@ -1,7 +1,25 @@
 {
-  "name": "Laser Cannon Arm",
+  "name": "Laser Cannon Arms",
   "value": 1,
   "modifiers": {
+    "fiskheroes:transformation|single": {
+      "key": "ARM_CANNON",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/arm_cannon",
+        "timerData": "skyhighheroes:dyn/arm_cannon_timer",
+        "time": 15
+      },
+      "isToggle": false
+    },
+    "fiskheroes:transformation|dual": {
+      "key": "DUAL_ARM_CANNONS",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/dual_arm_cannon",
+        "timerData": "skyhighheroes:dyn/dual_arm_cannon_timer",
+        "time": 15
+      },
+      "isToggle": false
+    },
     "fiskheroes:energy_bolt": {
       "damageProfile": {
         "damage": 10.0,
@@ -17,6 +35,23 @@
       "cooldownTime": 10.0,
       "soundEvents": {
         "SHOOT": "fiskheroes:energy_blast"
+      }
+    },
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 2.5,
+        "types": {
+          "ENERGY": 1.0,
+          "FIRE": 0.5
+        },
+        "properties": {
+          "HEAT_TRANSFER": 80
+        }
+      },
+      "range": 32.0,
+      "radius": 0.1,
+      "soundEvents": {
+        "SHOOT": "fiskheroes:cosmic_beam"
       }
     }
   }

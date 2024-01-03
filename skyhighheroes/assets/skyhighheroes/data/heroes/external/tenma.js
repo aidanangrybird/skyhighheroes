@@ -6,7 +6,7 @@ function init(hero, uuid) {
   hero.setVersion("Astro Boy");
   hero.hide();
    
-  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
+  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
@@ -18,8 +18,11 @@ function init(hero, uuid) {
 
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Toggle Shimmer", 1);
-  hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
+  hero.addKeyBind("ENERGY_PROJECTION", "Charged Arm Cannons", 2);
+  hero.addKeyBind("DUAL_ARM_CANNONS", "Charged Arm Cannons", 2);
+  hero.addKeyBind("DUAL_ARM_CANNON", "Charged Arm Cannons", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
+  hero.addKeyBind("ARM_CANNON", "Aim", 4);
   hero.addKeyBind("AIM", "Aim", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
@@ -58,6 +61,8 @@ function init(hero, uuid) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
+      case "ARM_CANNON":
+        return entity.getUUID() == uuid && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3;
       case "CYCLE_CLOTHES":
         return entity.getUUID() == uuid && !entity.isSneaking();
       case "SHIMMER_TOGGLE":
@@ -65,9 +70,31 @@ function init(hero, uuid) {
       case "SHIELD_THROW":
         return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
       case "AIM":
-        return entity.getUUID() == uuid && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe");
+        if (entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:chronos_rifle") {
+          return true;
+        };
+        if (entity.getUUID() == uuid && (entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe")) {
+          return false;
+        };
+        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1) {
+          return true;
+        };
+        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+          return true;
+        };
+      case "ENERGY_PROJECTION":
+        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 && entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1) {
+          return true;
+        };
+        if (entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+          return true;
+        };
       case "CHARGE_ENERGY":
         return entity.getUUID() == uuid && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+      case "DUAL_ARM_CANNONS":
+        return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3;
+      case "DUAL_ARM_CANNON":
+        return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3;
       default:
         return entity.getUUID() == uuid;
     };
@@ -125,6 +152,14 @@ function cycleClothes(player, manager) {
   };
   return true;
 };
+/*
+function cannonType(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/cannon_type", player.getData("skyhighheroes:dyn/cannon_type") + 1);
+  if (player.getData("skyhighheroes:dyn/cannon_type") > 1) {
+    manager.setData(player, "skyhighheroes:dyn/cannon_type", 0);
+  };
+  return true;
+};*/
 
 function shimmerToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);

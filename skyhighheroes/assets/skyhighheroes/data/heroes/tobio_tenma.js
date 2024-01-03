@@ -11,7 +11,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Tobio Tenma's Rifle},ench:[{id:34,lvl:4}]}", true, item => (item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Tobio Tenma's Rifle"));
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Tobio Tenma's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Tobio Tenma's Shield"));
   
-  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_beam", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
+  hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
@@ -22,8 +22,11 @@ function init(hero) {
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
-  hero.addKeyBind("ENERGY_PROJECTION", "Digit Beams", 2);
+  hero.addKeyBind("ENERGY_PROJECTION", "Charged Arm Cannons", 2);
+  hero.addKeyBind("DUAL_ARM_CANNONS", "Charged Arm Cannons", 2);
+  hero.addKeyBind("DUAL_ARM_CANNON", "Charged Arm Cannons", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
+  hero.addKeyBind("ARM_CANNON", "Aim", 4);
   hero.addKeyBind("AIM", "Aim", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
@@ -107,12 +110,36 @@ function isModifierEnabled(entity, modifier) {
 
 function isKeyBindEnabled(entity, keyBind) {
   switch (keyBind) {
+    case "ARM_CANNON":
+      return entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3;
     case "SHIELD_THROW":
       return entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
     case "AIM":
-      return !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe");
+      if (entity.getHeldItem().name() == "fiskheroes:chronos_rifle") {
+        return true;
+      };
+      if ((entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe")) {
+        return false;
+      };
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1) {
+        return true;
+      };
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+        return true;
+      };
+    case "ENERGY_PROJECTION":
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 && entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1) {
+        return true;
+      };
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+        return true;
+      };
     case "CHARGE_ENERGY":
       return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+    case "DUAL_ARM_CANNONS":
+      return entity.getData("skyhighheroes:dyn/tenma_clothes") != 3;
+    case "DUAL_ARM_CANNON":
+      return entity.getData("skyhighheroes:dyn/tenma_clothes") == 3;
     default:
       return true;
   };

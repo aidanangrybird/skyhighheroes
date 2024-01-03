@@ -110,8 +110,8 @@ function initAstroAnimations(renderer) {
   addAnimationWithData(renderer, "astro.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 10;
-  //Dual Aiming
-  addAnimationWithData(renderer, "astro.DUAL_AIMING", "skyhighheroes:astro_dual_aim", "fiskheroes:energy_projection_timer")
+  //Dual Cannons
+  addAnimationWithData(renderer, "astro.DUAL_CANNONS", "skyhighheroes:astro_dual_aim", "fiskheroes:energy_projection_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 10;
   //Flight
@@ -135,32 +135,48 @@ function initNV(renderer, uuid) {
 //Init
 //Beams
 function initBeams(renderer, color) {
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", color, [
-    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", color, [
-    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [1.0, 1.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
   renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
   bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
     { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
   ]);
-  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "head", color, [
+  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "body", color, [
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
+
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
+    { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
+    { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
+    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
+    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
 };
 function initDualBeams(renderer, colorLeft, colorRight) {
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", colorRight, [
-    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [1.0, 1.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "leftArm", colorLeft, [
-    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [1.0, 1.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_energy_projection"));
   renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorRight);
   bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", colorRight, [
     { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
   ]);
-  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "head", colorRight, [
+  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "body", colorRight, [
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
+
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", colorRight, [
+    { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", colorLeft, [
+    { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", colorRight, [
+    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
+  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", colorLeft, [
+    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
 };
 //Cannon
 function initCannon(renderer) {
@@ -169,7 +185,7 @@ function initCannon(renderer) {
   var obj = {
     light_thing: light_thing,
     render: (entity, renderLayer) => {
-      if (entity.getHeldItem().isEmpty()) {
+      if (entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
         light_thing.opacity = entity.getInterpolatedData("fiskheroes:aiming_timer");
         light_thing.render();
       };
@@ -446,17 +462,55 @@ function initCustomBoosters(renderer, color) {
     bloomArmRightMiddle: bloomArmRightMiddle,
     bloomArmRightInner: bloomArmRightInner,
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+        boosterLegLeft.setOffset(0.0, 10.0, 0.0);
+        boosterLegRight.setOffset(0.0, 10.0, 0.0);
+        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
+        boosterArmRight.setOffset(1.0, 8.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);
+        bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
+        bloomArmLeftMiddle.setOffset(-1.0, 8.0, 0.0);
+        bloomArmLeftInner.setOffset(-1.0, 8.0, 0.0);
+        bloomArmRightOuter.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
+      };
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+        boosterLegLeft.setOffset(0.0, 12.0, 0.0);
+        boosterLegRight.setOffset(0.0, 12.0, 0.0);
+        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
+        boosterArmRight.setOffset(1.0, 10.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
+        bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);
+        bloomArmLeftOuter.setOffset(-1.0, 10.0, 0.0);
+        bloomArmLeftMiddle.setOffset(-1.0, 10.0, 0.0);
+        bloomArmLeftInner.setOffset(-1.0, 10.0, 0.0);
+        bloomArmRightOuter.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
+      };
       if (!isFirstPersonArm) {
         //Boots
         //Equations
-        var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var flight = entity.getInterpolatedData("fiskheroes:flight_timer") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+        var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+        var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+        var boost = data_1;
+        var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
         var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
         b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
         var f = Math.PI * 2;
         f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
         
-        if (flight > 0) {
+        if (flight > 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
           bootOpening.opacity = (-1 * flight) + 1;
           bootOpening.render();
           bootLights.opacity = flight;
@@ -507,14 +561,16 @@ function initCustomBoosters(renderer, color) {
 
         //Arms
         //Equations
-        var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+        var boost = data_1;
         var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
         b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
         var f = Math.PI * 2;
         f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
         
-        armLights.opacity = boost;
-        armLights.render();
+        if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+          armLights.opacity = boost;
+          armLights.render();
+        }
 
         //Left
         //Booster
@@ -705,17 +761,55 @@ function initNormalBoosters(renderer) {
     bloomArmRightMiddle: bloomArmRightMiddle,
     bloomArmRightInner: bloomArmRightInner,
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+        boosterLegLeft.setOffset(0.0, 10.0, 0.0);
+        boosterLegRight.setOffset(0.0, 10.0, 0.0);
+        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
+        boosterArmRight.setOffset(1.0, 8.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);
+        bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
+        bloomArmLeftMiddle.setOffset(-1.0, 8.0, 0.0);
+        bloomArmLeftInner.setOffset(-1.0, 8.0, 0.0);
+        bloomArmRightOuter.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
+      };
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+        boosterLegLeft.setOffset(0.0, 12.0, 0.0);
+        boosterLegRight.setOffset(0.0, 12.0, 0.0);
+        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
+        boosterArmRight.setOffset(1.0, 10.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
+        bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);
+        bloomArmLeftOuter.setOffset(-1.0, 10.0, 0.0);
+        bloomArmLeftMiddle.setOffset(-1.0, 10.0, 0.0);
+        bloomArmLeftInner.setOffset(-1.0, 10.0, 0.0);
+        bloomArmRightOuter.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
+      };
       if (!isFirstPersonArm) {
         //Boots
         //Equations
-        var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var flight = entity.getInterpolatedData("fiskheroes:flight_timer") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+        var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+        var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+        var boost = data_1;
+        var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
         var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
         b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
         var f = Math.PI * 2;
         f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
         
-        if (flight > 0) {
+        if (flight > 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
           bootOpening.opacity = (-1 * flight) + 1;
           bootOpening.render();
           bootLights.opacity = flight;
@@ -772,8 +866,10 @@ function initNormalBoosters(renderer) {
         var f = Math.PI * 2;
         f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
         
-        armLights.opacity = boost;
-        armLights.render();
+        if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+          armLights.opacity = boost;
+          armLights.render();
+        }
 
         //Left
         //Booster
@@ -819,12 +915,6 @@ function initNormalBoosters(renderer) {
           bloomArmRightOuter.render();
           bloomArmRightMiddle.render();
           bloomLegRightInner.render();
-        };
-
-        if (renderLayer == "BOOTS") {
-        };
-
-        if (renderLayer == "CHESTPLATE") {
         };
       };
     }
@@ -970,17 +1060,55 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
     bloomArmRightMiddle: bloomArmRightMiddle,
     bloomArmRightInner: bloomArmRightInner,
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+        boosterLegLeft.setOffset(0.0, 10.0, 0.0);
+        boosterLegRight.setOffset(0.0, 10.0, 0.0);
+        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
+        boosterArmRight.setOffset(1.0, 8.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);
+        bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
+        bloomArmLeftMiddle.setOffset(-1.0, 8.0, 0.0);
+        bloomArmLeftInner.setOffset(-1.0, 8.0, 0.0);
+        bloomArmRightOuter.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
+      };
+      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+        boosterLegLeft.setOffset(0.0, 12.0, 0.0);
+        boosterLegRight.setOffset(0.0, 12.0, 0.0);
+        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
+        boosterArmRight.setOffset(1.0, 10.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
+        bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);
+        bloomArmLeftOuter.setOffset(-1.0, 10.0, 0.0);
+        bloomArmLeftMiddle.setOffset(-1.0, 10.0, 0.0);
+        bloomArmLeftInner.setOffset(-1.0, 10.0, 0.0);
+        bloomArmRightOuter.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
+      };
       if (!isFirstPersonArm) {
         //Boots
         //Equations
-        var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var flight = entity.getInterpolatedData("fiskheroes:flight_timer") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+        var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+        var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+        var boost = data_1;
+        var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
         var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
         b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
         var f = Math.PI * 2;
         f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
         
-        if (flight > 0) {
+        if (flight > 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
           bootOpening.opacity = (-1 * flight) + 1;
           bootOpening.render();
           bootLights.opacity = flight;
@@ -1031,14 +1159,16 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
 
         //Arms
         //Equations
-        var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+        var boost = data_1;
         var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
         b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
         var f = Math.PI * 2;
         f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
         
-        armLights.opacity = boost;
-        armLights.render();
+        if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+          armLights.opacity = boost;
+          armLights.render();
+        }
 
         //Left
         //Booster
