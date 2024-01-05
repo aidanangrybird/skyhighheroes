@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:rain_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:rain_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

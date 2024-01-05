@@ -133,11 +133,11 @@
       },
       "iron_man" : "\u00A74Iron \u00A74Man \u00A74Mark \u00A7485 \u00A74Style\u00A7r"
     },
-    "skyhighheroes:razor_stelar" : {
+    "skyhighheroes:rain_stelar" : {
       "$DEFAULT": {
         "name": "\u00A71Normal \u00A71Style\u00A7r"
       },
-      "iron_man" : "\u00A71Iron \u00A71Man \u00A71Mark \u00A7150 \u00A71Style\u00A7r"
+      "savitar" : "\u00A71Savitar \u00A71Style\u00A7r"
     },
     "skyhighheroes:scorched_stelar" : {
       "$DEFAULT": {
