@@ -139,6 +139,12 @@
       },
       "savitar" : "\u00A71Savitar \u00A71Style\u00A7r"
     },
+    "skyhighheroes:robin_stelar" : {
+      "$DEFAULT": {
+        "name": "\u00A72Normal \u00A72Style\u00A7r"
+      },
+      "spider_man" : "\u00A72Spider-Man \u00A72(PS4) \u00A72Style\u00A7r"
+    },
     "skyhighheroes:scorched_stelar" : {
       "$DEFAULT": {
         "name": "\u00A7eNormal \u00A7eStyle\u00A7r"

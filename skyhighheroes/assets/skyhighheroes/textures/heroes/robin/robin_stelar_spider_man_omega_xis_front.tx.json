@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:robin/robin_stelar_spider_man_omega_xis_front",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/omega_xis_front_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/robin_stelar_spider_man_omega_xis_front_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil((87 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 58) - (29 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer')) - (29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer'))), 15), 21) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 6 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 6 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 6 : 0) | 0",
+      "values": {
+        "min": 15,
+        "max": 21
+      }
+    }
+  },
+  "isDynamic": true
+}
