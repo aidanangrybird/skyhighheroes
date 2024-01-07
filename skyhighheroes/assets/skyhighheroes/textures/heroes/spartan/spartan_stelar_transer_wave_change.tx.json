@@ -1,0 +1,30 @@
+{
+  "texture": {
+    "in": "skyhighheroes:spartan/spartan_stelar_<VISUALIZER>_<CLOTHING>",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/stelar_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/spartan_stelar_<VISUALIZER>_<CLOTHING>_<TIMER>"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighheroes:dyn/stelar_clothes') == 0 ? 'transer' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 1 ? 'short' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 2 ? 'swimsuit' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 4 ? 'normal' : entity.getData('skyhighheroes:dyn/hood_toggle') == 1 ? 'winter_hood_up' : 'winter_hood_down'",
+      "values": ["transer", "short", "swimsuit", "winter_hood_up", "winter_hood_down", "normal"]
+    },
+    "VISUALIZER": {
+      "key": "entity.getData('skyhighheroes:dyn/visualizer_toggle') == 1 ? 'down' : 'up'",
+      "values": ["up", "down"]
+    },
+    "TIMER": {
+      "key": "Math.ceil(81 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) | 0",
+      "values": {
+        "min": 1,
+        "max": 41
+      }
+    }
+  },
+  "isDynamic": true
+}

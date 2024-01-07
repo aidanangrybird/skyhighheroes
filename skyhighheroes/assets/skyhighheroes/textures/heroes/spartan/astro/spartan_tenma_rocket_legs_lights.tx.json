@@ -12,5 +12,6 @@
       }
     ],
     "out": "skyhighheroes:generated/spartan_tenma_rocket_legs_lights"
-  }
+  },
+  "isDynamic": true
 }

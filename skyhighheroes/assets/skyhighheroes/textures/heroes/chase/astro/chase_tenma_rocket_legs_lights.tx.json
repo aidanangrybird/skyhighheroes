@@ -12,5 +12,6 @@
       }
     ],
     "out": "skyhighheroes:generated/chase_tenma_rocket_legs_lights"
-  }
+  },
+  "isDynamic": true
 }

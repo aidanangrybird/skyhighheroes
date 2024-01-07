@@ -4,45 +4,28 @@ var stuff = implement("skyhighheroes:external/stuff");
 loadTextures({
   "base": "skyhighheroes:geo/geo_stelar_base",
   "lights": "skyhighheroes:geo/geo_stelar_lights",
-  "base_tx": "skyhighheroes:geo/geo_stelar_base.tx.json",
-  "lights_tx": "skyhighheroes:geo/geo_stelar_lights.tx.json",
-  "wave_change_lights": "skyhighheroes:geo/geo_stelar_wave_change_lights.tx.json",
-  "visualizer_up": "skyhighheroes:geo/geo_stelar_up_transer",
-  "visualizer_down": "skyhighheroes:geo/geo_stelar_down_transer",
-  "visualizer_up_short": "skyhighheroes:geo/geo_stelar_up_short",
-  "visualizer_down_short": "skyhighheroes:geo/geo_stelar_down_short",
-  "visualizer_up_swimsuit": "skyhighheroes:geo/geo_stelar_up_swimsuit",
-  "visualizer_down_swimsuit": "skyhighheroes:geo/geo_stelar_down_swimsuit",
-  "visualizer_up_winter_hood_down": "skyhighheroes:geo/geo_stelar_up_winter_hood_down",
-  "visualizer_up_winter_hood_up": "skyhighheroes:geo/geo_stelar_up_winter_hood_up",
-  "visualizer_down_winter_hood_down": "skyhighheroes:geo/geo_stelar_down_winter_hood_down",
-  "visualizer_down_winter_hood_up": "skyhighheroes:geo/geo_stelar_down_winter_hood_up",
-  "visualizer_up_normal": "skyhighheroes:geo/geo_stelar_up_normal",
-  "visualizer_down_normal": "skyhighheroes:geo/geo_stelar_down_normal",
-  "visualizer_up_lights": "skyhighheroes:geo/geo_stelar_up_lights",
-  "visualizer_down_lights": "skyhighheroes:geo/geo_stelar_down_lights",
-  "visualizer_up_lights_winter_hood": "skyhighheroes:geo/geo_stelar_up_lights_winter_hood",
-  "visualizer_lights_tx": "skyhighheroes:geo/geo_stelar_visualizer_lights.tx.json",
+  "base_wave_change": "skyhighheroes:geo/geo_stelar_wave_change.tx.json",
+  "lights_wave_change": "skyhighheroes:geo/geo_stelar_wave_change_lights.tx.json",
+  "wave_changing_lights": "skyhighheroes:geo/geo_stelar_wave_changing_lights.tx.json",
   "omega_xis_right": "skyhighheroes:geo/geo_stelar_omega_xis_right.tx.json",
   "omega_xis_right_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_lights.tx.json",
-  "omega_xis_right_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_wave_change_lights.tx.json",
+  "omega_xis_right_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_wave_changing_lights.tx.json",
   "omega_xis_left": "skyhighheroes:geo/geo_stelar_omega_xis_left.tx.json",
   "omega_xis_left_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_lights.tx.json",
-  "omega_xis_left_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_wave_change_lights.tx.json",
+  "omega_xis_left_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_wave_changing_lights.tx.json",
   "omega_xis_top": "skyhighheroes:geo/geo_stelar_omega_xis_top.tx.json",
   "omega_xis_top_lights": "skyhighheroes:geo/geo_stelar_omega_xis_top_lights.tx.json",
   "omega_xis_bottom": "skyhighheroes:geo/geo_stelar_omega_xis_bottom.tx.json",
   "omega_xis_bottom_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_lights.tx.json",
-  "omega_xis_bottom_top_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_top_wave_change_lights.tx.json",
+  "omega_xis_bottom_top_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_top_wave_changing_lights.tx.json",
   "omega_xis_front": "skyhighheroes:geo/geo_stelar_omega_xis_front.tx.json",
-  "omega_xis_front_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_front_wave_change_lights.tx.json",
-  "transer_tx": "skyhighheroes:geo/geo_stelar_transer.tx.json",
-  "short_tx": "skyhighheroes:geo/geo_stelar_short.tx.json",
-  "swimsuit_tx": "skyhighheroes:geo/geo_stelar_swimsuit.tx.json",
-  "winter_tx": "skyhighheroes:geo/geo_stelar_winter.tx.json",
-  "normal_tx": "skyhighheroes:geo/geo_stelar_normal.tx.json",
-  "transer": "skyhighheroes:stelar_transer_pegasus",
-  "transer_lights": "skyhighheroes:geo/geo_stelar_transer_lights",
+  "omega_xis_front_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_front_wave_changing_lights.tx.json",
+  "transer": "skyhighheroes:geo/geo_stelar_transer.tx.json",
+  "transer_wave_change": "skyhighheroes:geo/geo_stelar_transer_wave_change.tx.json",
+  "visualizer_lights": "skyhighheroes:geo/geo_stelar_visualizer_lights.tx.json",
+  "visualizer_lights_wave_change": "skyhighheroes:geo/geo_stelar_visualizer_lights_wave_change.tx.json",
+  "transer_default": "skyhighheroes:stelar_transer_pegasus",
+  "transer_default_lights": "skyhighheroes:geo/geo_stelar_transer_lights",
   "blade": "skyhighheroes:geo/geo_stelar_blade",
   "shield": "skyhighheroes:geo/geo_stelar_shield",
   "shield_lights": "skyhighheroes:geo/geo_stelar_shield_lights",
@@ -60,75 +43,20 @@ function init(renderer) {
       if ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) {
         return "base";
       };
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW")) {
-        return "transer";
+      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW") {
+        return "transer_default";
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
-          return "transer_tx";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
-          return "short_tx";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
-          return "swimsuit_tx";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-          return "winter_tx";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 4) {
-          return "normal_tx";
-        };
+        return "transer_wave_change";
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
-        return "base_tx";
+        return "base_wave_change";
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
         return "base"
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
-          return "visualizer_up";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
-          return "visualizer_up_short";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
-          return "visualizer_up_swimsuit";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-          if (entity.getData("skyhighheroes:dyn/hood_toggle") == 0) {
-            return "visualizer_up_winter_hood_down";
-          };
-          if (entity.getData("skyhighheroes:dyn/hood_toggle") == 1) {
-            return "visualizer_up_winter_hood_up";
-          };
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 4) {
-          return "visualizer_up_normal";
-        };
-      };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 0) {
-          return "visualizer_down";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 1) {
-          return "visualizer_down_short";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2) {
-          return "visualizer_down_swimsuit";
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-          if (entity.getData("skyhighheroes:dyn/hood_toggle") == 0) {
-            return "visualizer_down_winter_hood_down";
-          };
-          if (entity.getData("skyhighheroes:dyn/hood_toggle") == 1) {
-            return "visualizer_down_winter_hood_up";
-          };
-        };
-        if (entity.getData("skyhighheroes:dyn/stelar_clothes") == 4) {
-          return "visualizer_down_normal";
-        };
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+        return "transer"
       } else {
         return "null";
       };
@@ -139,26 +67,20 @@ function init(renderer) {
       if ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) {
         return "lights";
       };
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW")) {
-        return "transer_lights";
+      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW") {
+        return "transer_default_lights";
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
-        return "visualizer_lights_tx";
+        return "visualizer_lights_wave_change";
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") >= 0.5) {
-        return "lights_tx";
-      };
-      if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/hood_toggle") == 1) {
-        return "visualizer_up_lights_winter_hood";
-      };
-      if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-        return "visualizer_up_lights";
-      };
-      if (entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-        return "visualizer_down_lights";
+        return "lights_wave_change";
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
         return "lights";
+      }
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+        return "visualizer_lights";
       } else {
         return "null";
       };
@@ -179,7 +101,7 @@ function initEffects(renderer) {
   stelar.initMegaBuster(renderer, 0xFF00FF, 0x00FF00);
   stelar.initEquipment(renderer);
   wave_change_lights = renderer.createEffect("fiskheroes:overlay");
-  wave_change_lights.texture.set(null, "wave_change_lights");
+  wave_change_lights.texture.set(null, "wave_changing_lights");
   ears = renderer.createEffect("fiskheroes:ears");
   ears.anchor.set("head");
   ears.angle = 7.5;

@@ -8,5 +8,6 @@
       }
     ],
     "out": "skyhighheroes:generated/tobio_tenma_cannon_arms_lights"
-  }
+  },
+  "isDynamic": true
 }

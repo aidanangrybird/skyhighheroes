@@ -8,5 +8,6 @@
       }
     ],
     "out": "skyhighheroes:generated/chase_tenma_cannon_arms_lights"
-  }
+  },
+  "isDynamic": true
 }

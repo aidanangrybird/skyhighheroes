@@ -3,9 +3,9 @@ extend("skyhighheroes:tysen_stelar");
 loadTextures({
   "base": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_base",
   "lights": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_lights",
-  "base_tx": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_base.tx.json",
-  "lights_tx": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_lights.tx.json",
-  "wave_change_lights": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_wave_change_lights.tx.json",
+  "base_wave_change": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_wave_change.tx.json",
+  "lights_wave_change": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_wave_change_lights.tx.json",
+  "wave_changing_lights": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_wave_changing_lights.tx.json",
   "omega_xis_right": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_omega_xis_right.tx.json",
   "omega_xis_left": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_omega_xis_left.tx.json",
   "omega_xis_top": "skyhighheroes:tysen/tysen_stelar_martian_manhunter_omega_xis_top.tx.json",

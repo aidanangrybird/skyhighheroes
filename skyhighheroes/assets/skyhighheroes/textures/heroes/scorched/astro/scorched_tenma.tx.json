@@ -9,5 +9,6 @@
       "key": "entity.getData('fiskheroes:flight_timer') > 0 ? '_flying' : ''",
       "values": ["", "_flying"]
     }
-  }
+  },
+  "isDynamic": true
 }

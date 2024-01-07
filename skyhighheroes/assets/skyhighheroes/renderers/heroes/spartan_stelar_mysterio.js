@@ -3,9 +3,9 @@ extend("skyhighheroes:spartan_stelar");
 loadTextures({
   "base": "skyhighheroes:spartan/spartan_stelar_mysterio_base",
   "lights": "skyhighheroes:spartan/spartan_stelar_mysterio_lights",
-  "base_tx": "skyhighheroes:spartan/spartan_stelar_mysterio_base.tx.json",
-  "lights_tx": "skyhighheroes:spartan/spartan_stelar_mysterio_lights.tx.json",
-  "wave_change_lights": "skyhighheroes:spartan/spartan_stelar_mysterio_wave_change_lights.tx.json",
+  "base_wave_change": "skyhighheroes:spartan/spartan_stelar_mysterio_wave_change.tx.json",
+  "lights_wave_change": "skyhighheroes:spartan/spartan_stelar_mysterio_wave_change_lights.tx.json",
+  "wave_changing_lights": "skyhighheroes:spartan/spartan_stelar_mysterio_wave_changing_lights.tx.json",
   "omega_xis_right": "skyhighheroes:spartan/spartan_stelar_mysterio_omega_xis_right.tx.json",
   "omega_xis_left": "skyhighheroes:spartan/spartan_stelar_mysterio_omega_xis_left.tx.json",
   "omega_xis_top": "skyhighheroes:spartan/spartan_stelar_mysterio_omega_xis_top.tx.json",

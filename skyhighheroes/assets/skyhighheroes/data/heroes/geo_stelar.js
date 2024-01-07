@@ -41,7 +41,8 @@ function init(hero) {
   hero.addKeyBind("AIM", "Aim", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
   hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
-  hero.addKeyBindFunc("WAVE_CHANGE", electroMagnetic, "EM Wave Change", 5);
+  hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", desynchronizeWaves, "EM Wave Change", 5);
+  hero.addKeyBindFunc("SYNCHRONIZE_WAVES", synchronizeWaves, "EM Wave Change", 5);
   hero.addKeyBind("WAVE_CHANGE", "EM Wave Change", 5);
   hero.addKeyBindFunc("BATTLE_CARD_RESET", resetBattleCard, "Return To Mega Buster", 5);
   hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle Omega-Xis Head", 5);
@@ -353,20 +354,30 @@ function resetBattleCard(player, manager) {
   return true;
 };
 
-function electroMagnetic(player, manager) {
+function synchronizeWaves(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
   manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
-  manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
-  manager.setData(player, "skyhighheroes:dyn/hood_toggle", 0);
   manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
   manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
   manager.setData(player, "skyhighheroes:dyn/predation", false);
   manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
   manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
-  if (player.getData("skyhighheroes:dyn/wave_changed") == false) {
+  manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
+  return true;
+};
+
+function desynchronizeWaves(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+  manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+  manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
+  manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
+  manager.setData(player, "skyhighheroes:dyn/predation", false);
+  manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
+  manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
+  if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
   };
-  if (player.getData("skyhighheroes:dyn/wave_changed") == true) {
+  if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
     manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
   };
   return true;
@@ -550,7 +561,7 @@ function isModifierEnabled(entity, modifier) {
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     };
     case "fiskheroes:controlled_flight":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
       /*switch (modifier.id()) {
         case "base":
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 4;
@@ -593,6 +604,8 @@ function isModifierEnabled(entity, modifier) {
 
 function isKeyBindEnabled(entity, keyBind) {
   switch (keyBind) {
+    case "DESYNCHRONIZE_WAVES":
+      return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && !entity.isSneaking());
     case "WAVE_CHANGE":
       return entity.isAlive() && entity.getData("fiskheroes:flight_timer") == 0 && (((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && !entity.isSneaking()) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25));
     case "MISSING_EQUIPMENT":
@@ -601,6 +614,8 @@ function isKeyBindEnabled(entity, keyBind) {
       return entity.isAlive() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") <= -0.25;
     case "HOT_TEMPERATURE":
       return entity.isAlive() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") >= 0.25;
+    case "SYNCHRONIZE_WAVES":
+      return entity.isAlive() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").tagCount() == 6) && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
     case "VISUALIZER_TOGGLE":
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     case "CYCLE_CLOTHES":
