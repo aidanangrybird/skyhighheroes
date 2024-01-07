@@ -1,3 +1,4 @@
+{data_1} = {data_1}(1-{data_0})
 {data_0} = curve({data_0})
 {part1} = if({data_0} != 1, animate2({data_0}, 1.0, 0.0, 0.1, 0.0), 1)
 {part2} = if({data_0} != 1, animate2({data_0}, 0.8, 0.2, 0.1, 0.0), 1)

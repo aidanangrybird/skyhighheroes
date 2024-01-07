@@ -116,6 +116,9 @@ function initAstroAnimations(renderer) {
     .priority = 10;
   //Flight
   addFlightAnimationWithLanding(renderer, "astro.FLIGHT", "skyhighheroes:flight/astro_flight.anim.json");
+  addAnimation(renderer, "astro.FLIGHT_FP", "skyhighheroes:flight/astro_fp")
+    .setData((entity, data) => data.load(entity.getInterpolatedData("fiskheroes:flight_boost_timer")*(1-entity.getInterpolatedData("fiskheroes:energy_projection_timer"))*(1-entity.getInterpolatedData("fiskheroes:aiming_timer"))))
+    .priority = -9.5;
   //Landing
   addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
     .priority = -8;
@@ -325,12 +328,6 @@ function initEquipment(renderer) {
 };
 
 function initCustomBoosters(renderer, color) {
-  var armLights = renderer.createEffect("fiskheroes:overlay");
-  armLights.texture.set(null, "arms_lights");
-  var bootLights = renderer.createEffect("fiskheroes:overlay");
-  bootLights.texture.set(null, "boots_lights");
-  var bootOpening = renderer.createEffect("fiskheroes:overlay");
-  bootOpening.texture.set("boots_opening", null);
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
@@ -442,9 +439,6 @@ function initCustomBoosters(renderer, color) {
   bloomArmRightMiddle.setScale(16.0);
 
   var obj = {
-    armLights: armLights,
-    bootLights: bootLights,
-    bootOpening: bootOpening,
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
     boosterArmLeft: boosterArmLeft,
@@ -498,125 +492,114 @@ function initCustomBoosters(renderer, color) {
         bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
         bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
       };
+      //Boots
+      //Equations
+      var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var boost = data_1;
+      var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
+
+      //Left
+      //Booster
+      boosterLegLeft.progress = boost;
+      boosterLegLeft.speedScale = 0.5 * boost;
+      boosterLegLeft.flutter = 1 + boost;
+      boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
+      lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
+      lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
+      //Middle
+      bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
+      //Inner
+      bloomLegLeftInner.progress = bloomLegLeftInner.opacity = flight;
+      //Right
+      //Booster
+      boosterLegRight.progress = boost;
+      boosterLegRight.speedScale = 0.5 * boost;
+      boosterLegRight.flutter = 1 + boost;
+      boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beam
+      lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
+      lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
+      lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
+      //Middle
+      bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
+      //Inner
+      bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
       if (!isFirstPersonArm) {
-        //Boots
-        //Equations
-        var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-        var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var boost = data_1;
-        var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
-        var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
-        b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
-        var f = Math.PI * 2;
-        f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
-        
-        if (flight > 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-          bootOpening.opacity = (-1 * flight) + 1;
-          bootOpening.render();
-          bootLights.opacity = flight;
-          bootLights.render();
-        };
-
         //Left
-        //Booster
-        boosterLegLeft.progress = boost;
-        boosterLegLeft.speedScale = 0.5 * boost;
-        boosterLegLeft.flutter = 1 + boost;
-        boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
         boosterLegLeft.render();
-        //Beams
-        lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
-        lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
-        lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
         bloomLegLeftOuter.render();
-        //Middle
-        bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
         bloomLegLeftMiddle.render();
-        //Inner
-        bloomLegLeftInner.progress = bloomLegLeftInner.opacity = flight;
         bloomLegLeftInner.render();
-  
         //Right
-        //Booster
-        boosterLegRight.progress = boost;
-        boosterLegRight.speedScale = 0.5 * boost;
-        boosterLegRight.flutter = 1 + boost;
-        boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
         boosterLegRight.render();
-        //Beam
-        lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
-        lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
-        lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
         bloomLegRightOuter.render();
-        //Middle
-        bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
         bloomLegRightMiddle.render();
-        //Inner
-        bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
         bloomLegRightInner.render();
+      };
+      
+      //Arms
+      //Equations
+      var boost = data_1;
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-        //Arms
-        //Equations
-        var boost = data_1;
-        var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
-        b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
-        var f = Math.PI * 2;
-        f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
-        
-        if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-          armLights.opacity = boost;
-          armLights.render();
-        }
+      //Left
+      //Booster
+      boosterArmLeft.progress = boost;
+      boosterArmLeft.speedScale = 0.5 * boost;
+      boosterArmLeft.flutter = 1 + boost;
+      boosterArmLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineArmOuter.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.5 * 3.5 / 8;
+      lineArmMiddle.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.25 * 3.25 / 8;
+      lineArmInner.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomArmLeftOuter.opacity = boost;
+      //Middle
+      bloomArmLeftMiddle.opacity = boost;
+      //Inner
+      bloomLegLeftInner.opacity = boost;
+      if (!isFirstPersonArm && entity.getData("fiskheroes:energy_projection_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0) {
+        boosterArmLeft.render();
+        bloomArmLeftOuter.render();
+        bloomArmLeftMiddle.render();
+        bloomLegLeftInner.render();
+      };
 
-        //Left
-        //Booster
-        boosterArmLeft.progress = boost;
-        boosterArmLeft.speedScale = 0.5 * boost;
-        boosterArmLeft.flutter = 1 + boost;
-        boosterArmLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-        //Beams
-        lineArmOuter.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.5 * 3.5 / 8;
-        lineArmMiddle.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.25 * 3.25 / 8;
-        lineArmInner.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomArmLeftOuter.opacity = boost;
-        //Middle
-        bloomArmLeftMiddle.opacity = boost;
-        //Inner
-        bloomLegLeftInner.opacity = boost;
-        if (entity.getData("fiskheroes:energy_projection_timer") == 0) {
-          boosterArmLeft.render();
-          bloomArmLeftOuter.render();
-          bloomArmLeftMiddle.render();
-          bloomLegLeftInner.render();
-        };
-
-        //Right
-        //Booster
-        boosterArmRight.progress = boost;
-        boosterArmRight.speedScale = 0.5 * boost;
-        boosterArmRight.flutter = 1 + boost;
-        boosterArmRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-        //Beams
-        lineArmOuter.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.5 * 3.5 / 8;
-        lineArmMiddle.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.25 * 3.25 / 8;
-        lineArmInner.end.y = (1 + f * boosterArmRight.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomArmRightOuter.opacity = boost;
-        //Middle
-        bloomArmRightMiddle.opacity = boost;
-        //Inner
-        bloomLegRightInner.opacity = boost;
-        if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0) {
-          boosterArmRight.render();
-          bloomArmRightOuter.render();
-          bloomArmRightMiddle.render();
-          bloomLegRightInner.render();
-        };
+      //Right
+      //Booster
+      boosterArmRight.progress = boost;
+      boosterArmRight.speedScale = 0.5 * boost;
+      boosterArmRight.flutter = 1 + boost;
+      boosterArmRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineArmOuter.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.5 * 3.5 / 8;
+      lineArmMiddle.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.25 * 3.25 / 8;
+      lineArmInner.end.y = (1 + f * boosterArmRight.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomArmRightOuter.opacity = boost;
+      //Middle
+      bloomArmRightMiddle.opacity = boost;
+      //Inner
+      bloomLegRightInner.opacity = boost;
+      if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0) {
+        boosterArmRight.render();
+        bloomArmRightOuter.render();
+        bloomArmRightMiddle.render();
+        bloomLegRightInner.render();
       };
     }
   };
@@ -624,12 +607,6 @@ function initCustomBoosters(renderer, color) {
 };
 
 function initNormalBoosters(renderer) {
-  var armLights = renderer.createEffect("fiskheroes:overlay");
-  armLights.texture.set(null, "arms_lights");
-  var bootLights = renderer.createEffect("fiskheroes:overlay");
-  bootLights.texture.set(null, "boots_lights");
-  var bootOpening = renderer.createEffect("fiskheroes:overlay");
-  bootOpening.texture.set("boots_opening", null);
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
@@ -741,9 +718,6 @@ function initNormalBoosters(renderer) {
   bloomArmRightMiddle.setScale(16.0);
 
   var obj = {
-    armLights: armLights,
-    bootLights: bootLights,
-    bootOpening: bootOpening,
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
     boosterArmLeft: boosterArmLeft,
@@ -797,125 +771,114 @@ function initNormalBoosters(renderer) {
         bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
         bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
       };
+      //Boots
+      //Equations
+      var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var boost = data_1;
+      var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
+
+      //Left
+      //Booster
+      boosterLegLeft.progress = boost;
+      boosterLegLeft.speedScale = 0.5 * boost;
+      boosterLegLeft.flutter = 1 + boost;
+      boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
+      lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
+      lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
+      //Middle
+      bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
+      //Inner
+      bloomLegLeftInner.progress = bloomLegLeftInner.opacity = flight;
+      //Right
+      //Booster
+      boosterLegRight.progress = boost;
+      boosterLegRight.speedScale = 0.5 * boost;
+      boosterLegRight.flutter = 1 + boost;
+      boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beam
+      lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
+      lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
+      lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
+      //Middle
+      bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
+      //Inner
+      bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
       if (!isFirstPersonArm) {
-        //Boots
-        //Equations
-        var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-        var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var boost = data_1;
-        var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
-        var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
-        b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
-        var f = Math.PI * 2;
-        f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
-        
-        if (flight > 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-          bootOpening.opacity = (-1 * flight) + 1;
-          bootOpening.render();
-          bootLights.opacity = flight;
-          bootLights.render();
-        };
-        
         //Left
-        //Booster
-        boosterLegLeft.progress = boost;
-        boosterLegLeft.speedScale = 0.5 * boost;
-        boosterLegLeft.flutter = 1 + boost;
-        boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
         boosterLegLeft.render();
-        //Beams
-        lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
-        lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
-        lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
         bloomLegLeftOuter.render();
-        //Middle
-        bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
         bloomLegLeftMiddle.render();
-        //Inner
-        bloomLegLeftInner.progress = bloomLegLeftInner.opacity = flight;
         bloomLegLeftInner.render();
-  
         //Right
-        //Booster
-        boosterLegRight.progress = boost;
-        boosterLegRight.speedScale = 0.5 * boost;
-        boosterLegRight.flutter = 1 + boost;
-        boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
         boosterLegRight.render();
-        //Beam
-        lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
-        lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
-        lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
         bloomLegRightOuter.render();
-        //Middle
-        bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
         bloomLegRightMiddle.render();
-        //Inner
-        bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
         bloomLegRightInner.render();
+      };
+      
+      //Arms
+      //Equations
+      var boost = data_1;
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-        //Arms
-        //Equations
-        var boost = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
-        b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
-        var f = Math.PI * 2;
-        f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
-        
-        if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-          armLights.opacity = boost;
-          armLights.render();
-        }
+      //Left
+      //Booster
+      boosterArmLeft.progress = boost;
+      boosterArmLeft.speedScale = 0.5 * boost;
+      boosterArmLeft.flutter = 1 + boost;
+      boosterArmLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineArmOuter.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.5 * 3.5 / 8;
+      lineArmMiddle.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.25 * 3.25 / 8;
+      lineArmInner.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomArmLeftOuter.opacity = boost;
+      //Middle
+      bloomArmLeftMiddle.opacity = boost;
+      //Inner
+      bloomLegLeftInner.opacity = boost;
+      if (!isFirstPersonArm && entity.getData("fiskheroes:energy_projection_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0) {
+        boosterArmLeft.render();
+        bloomArmLeftOuter.render();
+        bloomArmLeftMiddle.render();
+        bloomLegLeftInner.render();
+      };
 
-        //Left
-        //Booster
-        boosterArmLeft.progress = boost;
-        boosterArmLeft.speedScale = 0.5 * boost;
-        boosterArmLeft.flutter = 1 + boost;
-        boosterArmLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-        //Beams
-        lineArmOuter.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.5 * 3.5 / 8;
-        lineArmMiddle.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.25 * 3.25 / 8;
-        lineArmInner.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomArmLeftOuter.opacity = boost;
-        //Middle
-        bloomArmLeftMiddle.opacity = boost;
-        //Inner
-        bloomLegLeftInner.opacity = boost;
-        if (entity.getData("fiskheroes:energy_projection_timer") == 0) {
-          boosterArmLeft.render();
-          bloomArmLeftOuter.render();
-          bloomArmLeftMiddle.render();
-          bloomLegLeftInner.render();
-        };
-
-        //Right
-        //Booster
-        boosterArmRight.progress = boost;
-        boosterArmRight.speedScale = 0.5 * boost;
-        boosterArmRight.flutter = 1 + boost;
-        boosterArmRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-        //Beams
-        lineArmOuter.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.5 * 3.5 / 8;
-        lineArmMiddle.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.25 * 3.25 / 8;
-        lineArmInner.end.y = (1 + f * boosterArmRight.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomArmRightOuter.opacity = boost;
-        //Middle
-        bloomArmRightMiddle.opacity = boost;
-        //Inner
-        bloomLegRightInner.opacity = boost;
-        if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0) {
-          boosterArmRight.render();
-          bloomArmRightOuter.render();
-          bloomArmRightMiddle.render();
-          bloomLegRightInner.render();
-        };
+      //Right
+      //Booster
+      boosterArmRight.progress = boost;
+      boosterArmRight.speedScale = 0.5 * boost;
+      boosterArmRight.flutter = 1 + boost;
+      boosterArmRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineArmOuter.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.5 * 3.5 / 8;
+      lineArmMiddle.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.25 * 3.25 / 8;
+      lineArmInner.end.y = (1 + f * boosterArmRight.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomArmRightOuter.opacity = boost;
+      //Middle
+      bloomArmRightMiddle.opacity = boost;
+      //Inner
+      bloomLegRightInner.opacity = boost;
+      if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0) {
+        boosterArmRight.render();
+        bloomArmRightOuter.render();
+        bloomArmRightMiddle.render();
+        bloomLegRightInner.render();
       };
     }
   };
@@ -923,12 +886,6 @@ function initNormalBoosters(renderer) {
 };
 
 function initCustomDualBoosters(renderer, colorLeft, colorRight) {
-  var armLights = renderer.createEffect("fiskheroes:overlay");
-  armLights.texture.set(null, "arms_lights");
-  var bootLights = renderer.createEffect("fiskheroes:overlay");
-  bootLights.texture.set(null, "boots_lights");
-  var bootOpening = renderer.createEffect("fiskheroes:overlay");
-  bootOpening.texture.set("boots", null);
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
@@ -1040,9 +997,6 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   bloomArmRightMiddle.setScale(16.0);
 
   var obj = {
-    armLights: armLights,
-    bootLights: bootLights,
-    bootOpening: bootOpening,
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
     boosterArmLeft: boosterArmLeft,
@@ -1096,125 +1050,114 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
         bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
         bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
       };
+      //Boots
+      //Equations
+      var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var boost = data_1;
+      var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
+
+      //Left
+      //Booster
+      boosterLegLeft.progress = boost;
+      boosterLegLeft.speedScale = 0.5 * boost;
+      boosterLegLeft.flutter = 1 + boost;
+      boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
+      lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
+      lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
+      //Middle
+      bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
+      //Inner
+      bloomLegLeftInner.progress = bloomLegLeftInner.opacity = flight;
+      //Right
+      //Booster
+      boosterLegRight.progress = boost;
+      boosterLegRight.speedScale = 0.5 * boost;
+      boosterLegRight.flutter = 1 + boost;
+      boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beam
+      lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
+      lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
+      lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
+      //Middle
+      bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
+      //Inner
+      bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
       if (!isFirstPersonArm) {
-        //Boots
-        //Equations
-        var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-        var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
-        var boost = data_1;
-        var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
-        var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
-        b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
-        var f = Math.PI * 2;
-        f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
-        
-        if (flight > 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-          bootOpening.opacity = (-1 * flight) + 1;
-          bootOpening.render();
-          bootLights.opacity = flight;
-          bootLights.render();
-        };
-        
         //Left
-        //Booster
-        boosterLegLeft.progress = boost;
-        boosterLegLeft.speedScale = 0.5 * boost;
-        boosterLegLeft.flutter = 1 + boost;
-        boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
         boosterLegLeft.render();
-        //Beams
-        lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
-        lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
-        lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
         bloomLegLeftOuter.render();
-        //Middle
-        bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
         bloomLegLeftMiddle.render();
-        //Inner
-        bloomLegLeftInner.progress = bloomLegLeftInner.opacity = flight;
         bloomLegLeftInner.render();
-  
         //Right
-        //Booster
-        boosterLegRight.progress = boost;
-        boosterLegRight.speedScale = 0.5 * boost;
-        boosterLegRight.flutter = 1 + boost;
-        boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
         boosterLegRight.render();
-        //Beam
-        lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
-        lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
-        lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
         bloomLegRightOuter.render();
-        //Middle
-        bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
         bloomLegRightMiddle.render();
-        //Inner
-        bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
         bloomLegRightInner.render();
+      };
+      
+      //Arms
+      //Equations
+      var boost = data_1;
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-        //Arms
-        //Equations
-        var boost = data_1;
-        var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
-        b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
-        var f = Math.PI * 2;
-        f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
-        
-        if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
-          armLights.opacity = boost;
-          armLights.render();
-        }
+      //Left
+      //Booster
+      boosterArmLeft.progress = boost;
+      boosterArmLeft.speedScale = 0.5 * boost;
+      boosterArmLeft.flutter = 1 + boost;
+      boosterArmLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineArmOuter.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.5 * 3.5 / 8;
+      lineArmMiddle.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.25 * 3.25 / 8;
+      lineArmInner.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomArmLeftOuter.opacity = boost;
+      //Middle
+      bloomArmLeftMiddle.opacity = boost;
+      //Inner
+      bloomLegLeftInner.opacity = boost;
+      if (!isFirstPersonArm && entity.getData("fiskheroes:energy_projection_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0) {
+        boosterArmLeft.render();
+        bloomArmLeftOuter.render();
+        bloomArmLeftMiddle.render();
+        bloomLegLeftInner.render();
+      };
 
-        //Left
-        //Booster
-        boosterArmLeft.progress = boost;
-        boosterArmLeft.speedScale = 0.5 * boost;
-        boosterArmLeft.flutter = 1 + boost;
-        boosterArmLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-        //Beams
-        lineArmOuter.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.5 * 3.5 / 8;
-        lineArmMiddle.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3.25 * 3.25 / 8;
-        lineArmInner.end.y = (1 + f * boosterArmLeft.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomArmLeftOuter.opacity = boost;
-        //Middle
-        bloomArmLeftMiddle.opacity = boost;
-        //Inner
-        bloomLegLeftInner.opacity = boost;
-        if (entity.getData("fiskheroes:energy_projection_timer") == 0) {
-          boosterArmLeft.render();
-          bloomArmLeftOuter.render();
-          bloomArmLeftMiddle.render();
-          bloomLegLeftInner.render();
-        };
-
-        //Right
-        //Booster
-        boosterArmRight.progress = boost;
-        boosterArmRight.speedScale = 0.5 * boost;
-        boosterArmRight.flutter = 1 + boost;
-        boosterArmRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
-        //Beams
-        lineArmOuter.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.5 * 3.5 / 8;
-        lineArmMiddle.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.25 * 3.25 / 8;
-        lineArmInner.end.y = (1 + f * boosterArmRight.flutter / 4) * 3 * 3 / 8;
-        //Outer
-        bloomArmRightOuter.opacity = boost;
-        //Middle
-        bloomArmRightMiddle.opacity = boost;
-        //Inner
-        bloomLegRightInner.opacity = boost;
-        if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0) {
-          boosterArmRight.render();
-          bloomArmRightOuter.render();
-          bloomArmRightMiddle.render();
-          bloomLegRightInner.render();
-        };
+      //Right
+      //Booster
+      boosterArmRight.progress = boost;
+      boosterArmRight.speedScale = 0.5 * boost;
+      boosterArmRight.flutter = 1 + boost;
+      boosterArmRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      //Beams
+      lineArmOuter.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.5 * 3.5 / 8;
+      lineArmMiddle.end.y = (1 + f * boosterArmRight.flutter / 4) * 3.25 * 3.25 / 8;
+      lineArmInner.end.y = (1 + f * boosterArmRight.flutter / 4) * 3 * 3 / 8;
+      //Outer
+      bloomArmRightOuter.opacity = boost;
+      //Middle
+      bloomArmRightMiddle.opacity = boost;
+      //Inner
+      bloomLegRightInner.opacity = boost;
+      if (entity.getInterpolatedData("fiskheroes:aiming_timer") == 0 && entity.getHeldItem().isEmpty() && entity.getInterpolatedData("fiskheroes:energy_projection_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0) {
+        boosterArmRight.render();
+        bloomArmRightOuter.render();
+        bloomArmRightMiddle.render();
+        bloomLegRightInner.render();
       };
     }
   };

@@ -13,7 +13,6 @@ loadTextures({
   "eyes": "skyhighheroes:scorched/astro/scorched_tenma_eyes",
   "boots_lights": "skyhighheroes:scorched/astro/scorched_tenma_boots_lights",
   "arms_lights": "skyhighheroes:scorched/astro/scorched_tenma_arms_lights",
-  "eyes_normal": "skyhighheroes:scorched/astro/scorched_tenma_eyes_normal",
   "boots": "skyhighheroes:scorched/astro/scorched_tenma_boots",
   "shorts": "skyhighheroes:scorched/astro/scorched_tenma_shorts",
   "cannon_lights": "skyhighheroes:scorched/astro/scorched_tenma_cannon_lights",
@@ -29,7 +28,6 @@ loadTextures({
 function initEffects(renderer) {
   parent.initEffects(renderer);
   rockets = tenma.initCustomBoosters(renderer, 0xFFC400);
-  cannon = tenma.initCannon(renderer);
   tenma.initBeams(renderer, 0xFFC400);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:scorched_tenma_speed");
 };
@@ -45,7 +43,6 @@ function init(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  parent.render(entity, renderLayer, isFirstPersonArm);
-  cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
+  parent.render(entity, renderLayer, isFirstPersonArm);
 };

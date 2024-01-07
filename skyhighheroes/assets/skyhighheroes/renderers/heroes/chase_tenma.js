@@ -3,10 +3,6 @@ extend("skyhighheroes:base_tenma");
 var tenma = implement("skyhighheroes:external/tenma");
 var stuff = implement("skyhighheroes:external/stuff");
 
-function getColor() {
-  return 0xBFFF00;
-};
-
 loadTextures({
   "base": "skyhighheroes:chase/astro/chase_tenma.tx.json",
   "rocket_legs": "skyhighheroes:chase/astro/chase_tenma_rocket_legs.tx.json",
@@ -17,7 +13,6 @@ loadTextures({
   "eyes": "skyhighheroes:chase/astro/chase_tenma_eyes",
   "boots_lights": "skyhighheroes:chase/astro/chase_tenma_boots_lights",
   "arms_lights": "skyhighheroes:chase/astro/chase_tenma_arms_lights",
-  "eyes_normal": "skyhighheroes:chase/astro/chase_tenma_eyes_normal",
   "boots": "skyhighheroes:chase/astro/chase_tenma_boots",
   "shorts": "skyhighheroes:chase/astro/chase_tenma_shorts",
   "cannon_lights": "skyhighheroes:chase/astro/chase_tenma_cannon_lights",
@@ -33,7 +28,6 @@ loadTextures({
 function initEffects(renderer) {
   parent.initEffects(renderer);
   rockets = tenma.initCustomBoosters(renderer, 0xBFFF00);
-  cannon = tenma.initCannon(renderer);
   tenma.initBeams(renderer, 0xBFFF00);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:chase_tenma_speed");
 };
@@ -49,7 +43,6 @@ function init(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  parent.render(entity, renderLayer, isFirstPersonArm);
-  cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
+  parent.render(entity, renderLayer, isFirstPersonArm);
 };

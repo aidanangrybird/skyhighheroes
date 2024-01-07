@@ -13,7 +13,6 @@ loadTextures({
   "eyes": "skyhighheroes:tysen/astro/tysen_tenma_eyes",
   "boots_lights": "skyhighheroes:tysen/astro/tysen_tenma_boots_lights",
   "arms_lights": "skyhighheroes:tysen/astro/tysen_tenma_arms_lights",
-  "eyes_normal": "skyhighheroes:tysen/astro/tysen_tenma_eyes_normal",
   "boots": "skyhighheroes:tysen/astro/tysen_tenma_boots",
   "shorts": "skyhighheroes:tysen/astro/tysen_tenma_shorts",
   "cannon_lights": "skyhighheroes:tysen/astro/tysen_tenma_cannon_lights",
@@ -29,7 +28,6 @@ loadTextures({
 function initEffects(renderer) {
   parent.initEffects(renderer);
   rockets = tenma.initCustomBoosters(renderer, 0xAA00FF);
-  cannon = tenma.initCannon(renderer);
   tenma.initBeams(renderer, 0xAA00FF);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:tysen_tenma_speed");
 };
@@ -45,7 +43,6 @@ function init(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  parent.render(entity, renderLayer, isFirstPersonArm);
-  cannon.render(entity, renderLayer);
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
+  parent.render(entity, renderLayer, isFirstPersonArm);
 };
