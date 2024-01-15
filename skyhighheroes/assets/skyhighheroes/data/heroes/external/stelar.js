@@ -59,6 +59,9 @@ function init(hero, uuid) {
   hero.addAttributeProfile("HOT3", hot3Profile);
   hero.addAttributeProfile("FIRE", fireProfile);
   hero.setAttributeProfile((entity) => {
+    if (entity.getUUID() != uuid) {
+      return "INACTIVE";
+    };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid) {
       if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
         return "FROZEN";
