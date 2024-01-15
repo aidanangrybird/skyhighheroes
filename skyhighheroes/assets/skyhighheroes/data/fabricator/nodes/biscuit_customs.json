@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Biscuit's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/biscuit_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as SoggyBiscuit2612"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '324ccf33-d7b4-4cd5-b85f-d8f16a8cb862'"
+      }
+    }
+  }
+}

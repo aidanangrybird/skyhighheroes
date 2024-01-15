@@ -109,6 +109,12 @@
       },
       "gundam" : "\u00A76RX-0 \u00A76Unicorn \u00A76Gundam \u00A76Style\u00A7r"
     },
+    "skyhighheroes:biscuit_stelar" : {
+      "$DEFAULT": {
+        "name": "\u00A74Normal \u00A74Style\u00A7r"
+      },
+      "martian_manhunter" : "\u00A74Martian \u00A74Manhunter \u00A74Style\u00A7r"
+    },
     "skyhighheroes:chase_stelar" : {
       "$DEFAULT": {
         "name": "\u00A72Normal \u00A72Style\u00A7r"

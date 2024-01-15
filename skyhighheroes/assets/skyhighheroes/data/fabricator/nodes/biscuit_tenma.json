@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:biscuit_tenma",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:biscuit_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

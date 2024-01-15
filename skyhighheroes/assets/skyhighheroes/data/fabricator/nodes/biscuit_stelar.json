@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:biscuit_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:biscuit_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}
