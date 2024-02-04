@@ -139,12 +139,6 @@
       },
       "iron_man" : "\u00A74Iron \u00A74Man \u00A74Mark \u00A7485 \u00A74Style\u00A7r"
     },
-    "skyhighheroes:rain_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A71Normal \u00A71Style\u00A7r"
-      },
-      "savitar" : "\u00A71Savitar \u00A71Style\u00A7r"
-    },
     "skyhighheroes:robin_stelar" : {
       "$DEFAULT": {
         "name": "\u00A72Normal \u00A72Style\u00A7r"
