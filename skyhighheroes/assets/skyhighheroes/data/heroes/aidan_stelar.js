@@ -1,4 +1,3 @@
-var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 function init(hero) {

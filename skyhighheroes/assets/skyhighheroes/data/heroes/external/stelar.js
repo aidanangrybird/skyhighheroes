@@ -1,4 +1,3 @@
-var DimensionalCoords = Java.type("com.fiskmods.heroes.common.DimensionalCoords");
 function init(hero, uuid) {
   hero.setTier(10);
   hero.setChestplate("Transer");
@@ -422,11 +421,11 @@ function getTickHandler(entity, manager) {
   var y = entity.posY();
   var z = entity.posZ();
   if (entity.world().getDimension() == 0 && entity.posY() >= 4000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-    manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 2595));
+    manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 2595));
     manager.setData(entity, "fiskheroes:teleport_delay", 6);
   };
   if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-    manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
+    manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 0));
     manager.setData(entity, "fiskheroes:teleport_delay", 6);
   };
   var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");

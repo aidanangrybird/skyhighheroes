@@ -1,4 +1,3 @@
-var DimensionalCoords = Java.type('com.fiskmods.heroes.common.DimensionalCoords');
 var tenma = implement("skyhighheroes:external/tenma");
 function init(hero) {
   hero.setName("\u00A72Robin Tenma");
