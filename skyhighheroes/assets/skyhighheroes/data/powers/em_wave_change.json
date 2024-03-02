@@ -13,6 +13,8 @@
         "ENABLE": "skyhighheroes:wave_transform",
         "DISABLE": "skyhighheroes:wave_transform"
       }
+    },
+    "fiskheroes:shape_shifting": {
     }
   }
 }

@@ -44,7 +44,7 @@ function initEffects(renderer) {
   stuff.initForceField(renderer, 0x39D6BD);
   omega_xis = stelar.initOmegaXis(renderer);
   stelar.initMegaBuster(renderer, 0x39D6BD, 0x39D6BD);
-  stelar.initEquipment(renderer);
+  //stelar.initEquipment(renderer);
   wave_change_lights = renderer.createEffect("fiskheroes:overlay");
   wave_change_lights.texture.set(null, "wave_changing_lights");
   ears = renderer.createEffect("fiskheroes:ears");

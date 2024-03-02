@@ -9,7 +9,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A72Robin Stelar's Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A72Robin Stelar's Shield"));
   hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A72Robin Stelar's Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A72Robin Stelar's Pickaxe"));
   hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A72Robin Stelar's Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A72Robin Stelar's Shovel"));
-  stelar.init(hero, "8d53a071-d3fc-428e-806b-ed16ebe41fe4");
+  stelar.init(hero, "8d53a071-d3fc-428e-806b-ed16ebe41fe4", "\u00A72Robin Stelar", "\u00A72Spiega");
   hero.setTickHandler((entity, manager) => {
     stelar.getTickHandler(entity, manager);
     bodyTemp.change(entity, manager, [
