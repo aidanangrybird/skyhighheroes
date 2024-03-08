@@ -62,6 +62,7 @@ function initEffects(renderer) {
   stuff.initForceField(renderer, getColor());
   omega_xis = stelar.initOmegaXis(renderer);
   stelar.initMegaBuster(renderer, getColor(), getColor());
+  stelar.initLiveries(renderer);
   //stelar.initEquipment(renderer);
   wave_change_lights = renderer.createEffect("fiskheroes:overlay");
   wave_change_lights.texture.set(null, "wave_changing_lights");

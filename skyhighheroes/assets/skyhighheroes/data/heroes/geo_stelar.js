@@ -128,12 +128,7 @@ function init(hero) {
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      manager.setData(entity, "fiskheroes:shape_shift_timer", 1.0);
-      manager.setData(entity, "fiskheroes:shape_shifting", true);
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
-      manager.setData(entity, "fiskheroes:shape_shift_timer", 0.0);
-      manager.setData(entity, "fiskheroes:shape_shifting", false);
+      manager.setData(entity, "fiskheroes:disguise", "Mega Man");
     };
     var x = entity.posX();
     var y = entity.posY();
@@ -156,9 +151,6 @@ function init(hero) {
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
     var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.motionY() < -0.05 && !entity.isSneaking() && !entity.isOnGround() && (!entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.getData("fiskheroes:intangible"))) {
-      manager.setData(entity, "fiskheroes:flying", true);
-    };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:aiming") || entity.getData("fiskheroes:flight_boost_timer") > 0 || !entity.getHeldItem().isEmpty() || (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0 && entity.getData("skyhighheroes:dyn/predation_timer") < 1))) {
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -491,7 +483,7 @@ function toolSwitchEnchant(player, manager) {
 };
 
 function getAttributeProfile(entity) {
-  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.3 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
       return "FROZEN";
     };

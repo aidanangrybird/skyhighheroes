@@ -193,7 +193,7 @@ function initNV(renderer) {
 };
 
 //Equipment
-function initEquipment(renderer) {
+function initLiveries(renderer) {
   var livery_shield = renderer.bindProperty("fiskheroes:livery");
   livery_shield.texture.set("shield", "shield_lights");
   livery_shield.weaponType = "SHIELD";
@@ -206,6 +206,8 @@ function initEquipment(renderer) {
   var livery_rifle = renderer.bindProperty("fiskheroes:livery");
   livery_rifle.texture.set("rifle", "rifle_lights");
   livery_rifle.weaponType = "CHRONOS_RIFLE";
+}
+function initEquipment(renderer) {
   //Katana
   katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 2.75], "rotation": [-148.0, 90.0, 0.0] },
