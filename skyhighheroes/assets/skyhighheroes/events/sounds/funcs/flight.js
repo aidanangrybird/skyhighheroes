@@ -17,8 +17,7 @@ function continuePlaying(entity, sound) {
     
     if (volume > 0.8) {
         sound.setPitch(0.2 + volume);
-    }
-    else {
+    } else {
         sound.setPitch(1);
     }
     

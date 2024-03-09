@@ -26,8 +26,7 @@ function addAnimationEvent(renderer, key, value) {
       var e = parseAnimationEntry(renderer, value[i]);
       event.bindAnimation(e.anim, e.weight);
     };
-  }
-  else {
+  } else {
     var e = parseAnimationEntry(renderer, value);
     event.bindAnimation(e.anim, e.weight);
   };
@@ -93,8 +92,7 @@ function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
       data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_boosting_landing_timer") - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
       data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
     });
-  }
-  else {
+  } else {
     anim.setData((entity, data) => dataLoader(entity, data));
   };
   anim.setCondition(entity => !entity.getHeldItem().isEmpty());
@@ -118,8 +116,7 @@ function addFlightBaseAnimation(renderer, name, value, dataLoader) {
       data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") * (1 - entity.getInterpolatedData("skyhighheroes:dyn/superhero_boosting_landing_timer") - entity.getInterpolatedData("skyhighheroes:dyn/superhero_landing_timer")));
       data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
     });
-  }
-  else {
+  } else {
     anim.setData((entity, data) => dataLoader(entity, data));
   };
   
@@ -140,8 +137,7 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
       data.load(0, entity.getInterpolatedData("fiskheroes:levitate_timer"));
       data.load(1, entity.loop(20 * Math.PI) + 0.4);
     });
-  }
-  else {
+  } else {
     anim.setData((entity, data) => dataLoader(entity, data));
   };
 

@@ -151,25 +151,6 @@
     },
     "fiskheroes:arrow_catching": {
     },
-    "fiskheroes:lightning_cast": {
-      "damageProfile": {
-        "damage": 15.0,
-        "types": {
-          "WAVE_ELECTRICITY": 1.0,
-          "WAVE_ENERGY": 1.0
-        },
-        "properties": {
-          "LIGHTNING_STRIKE": 1.0,
-          "HIT_COOLDOWN": 0
-        }
-      },
-      "range": 128.0,
-      "chainRadius": 8.0,
-      "cooldownTime": 10,
-      "soundEvents": {
-        "SHOOT": "fiskheroes:lightning_cast"
-      }
-    },
     "fiskheroes:shield_throwing": {
       "cooldownTime": 0,
       "soundEvents": {

@@ -33,8 +33,7 @@ function create(renderer, beam, color, map) {
         if (map[i].hasOwnProperty("scale")) {
             if (Array.isArray(map[i].scale)) {
                 scale = map[i].scale;
-            }
-            else if (typeof map[i].scale === "number") {
+            } else if (typeof map[i].scale === "number") {
                 scale = [map[i].scale, map[i].scale, map[i].scale];
             }
         }

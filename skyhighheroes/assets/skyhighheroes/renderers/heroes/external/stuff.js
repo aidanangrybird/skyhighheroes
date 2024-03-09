@@ -35,8 +35,7 @@ function addAnimationEvent(renderer, key, value) {
       var e = parseAnimationEntry(renderer, value[i]);
       event.bindAnimation(e.anim, e.weight);
     };
-  } 
-  else {
+  } else {
     var e = parseAnimationEntry(renderer, value);
     event.bindAnimation(e.anim, e.weight);
   };
