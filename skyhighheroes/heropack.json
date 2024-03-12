@@ -109,29 +109,11 @@
       },
       "gundam" : "\u00A76RX-0 \u00A76Unicorn \u00A76Gundam \u00A76Style\u00A7r"
     },
-    "skyhighheroes:biscuit_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A74Normal \u00A74Style\u00A7r"
-      },
-      "martian_manhunter" : "\u00A74Martian \u00A74Manhunter \u00A74Style\u00A7r"
-    },
     "skyhighheroes:chase_stelar" : {
       "$DEFAULT": {
         "name": "\u00A72Normal \u00A72Style\u00A7r"
       },
       "iron_man" : "\u00A72Iron \u00A72Man \u00A72Mark \u00A7250 \u00A72Style\u00A7r"
-    },
-    "skyhighheroes:grand_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A74Normal \u00A74Style\u00A7r"
-      },
-      "rival" : "\u00A74The \u00A74Rival \u00A74Style\u00A7r"
-    },
-    "skyhighheroes:liam_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A71Normal \u00A71Style\u00A7r"
-      },
-      "iron_man" : "\u00A71Iron \u00A71Man \u00A71Mark \u00A7185 \u00A71Style\u00A7r"
     },
     "skyhighheroes:lucas_stelar" : {
       "$DEFAULT": {
@@ -144,12 +126,6 @@
         "name": "\u00A72Normal \u00A72Style\u00A7r"
       },
       "spider_man" : "\u00A72Spider-Man \u00A72(PS4) \u00A72Style\u00A7r"
-    },
-    "skyhighheroes:scorched_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A7eNormal \u00A7eStyle\u00A7r"
-      },
-      "iron_man" : "\u00A7eIron \u00A7eMan \u00A7eMark \u00A7e85 \u00A7eStyle\u00A7r"
     },
     "skyhighheroes:spartan_stelar" : {
       "$DEFAULT": {
