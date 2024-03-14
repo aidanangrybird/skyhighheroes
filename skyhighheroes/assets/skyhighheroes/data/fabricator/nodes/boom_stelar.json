@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:boom_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:boom_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}
