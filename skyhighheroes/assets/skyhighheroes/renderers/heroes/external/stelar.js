@@ -278,7 +278,7 @@ function initOmegaXis(renderer) {
   omegaXisTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
   omegaXisTop.large = true;
   var omegaXisTopWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisTopWaveChange.texture.set(null, "omega_xis_bottom_top_wave_change_lights");
+  omegaXisTopWaveChange.texture.set(null, "omega_xis_top_wave_change_lights");
   omegaXisTopWaveChange.anchor.set("rightArm");
   omegaXisTopWaveChange.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
   omegaXisTopWaveChange.large = true;
@@ -289,7 +289,7 @@ function initOmegaXis(renderer) {
   omegaXisBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
   omegaXisBottom.large = true;
   var omegaXisBottomWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisBottomWaveChange.texture.set(null, "omega_xis_bottom_top_wave_change_lights");
+  omegaXisBottomWaveChange.texture.set(null, "omega_xis_bottom_wave_change_lights");
   omegaXisBottomWaveChange.anchor.set("rightArm");
   omegaXisBottomWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
   omegaXisBottomWaveChange.large = true;

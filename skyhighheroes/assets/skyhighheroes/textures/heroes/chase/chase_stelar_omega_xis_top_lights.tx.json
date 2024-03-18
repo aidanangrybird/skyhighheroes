@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/omega_xis_bottom_top_wave_change_<TIMER>"
+        "supply": "skyhighheroes:xor/omega_xis_bottom_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighheroes:generated/chase_stelar_omega_xis_top_lights_<TIMER>"
