@@ -12,11 +12,18 @@ function init(hero, uuid, base, head, transformed, color) {
     color = "\u00A7r";
   };
   reset = "\u00A7r";
-  hero.setName(color + base);
+  hero.setName(color + transformed);
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
+  
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:" + color + transformed + "'s Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Katanas"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:" + color + transformed + "'s Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Scythe"));
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:" + color + transformed + "'s Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Rifle"));
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:" + color + transformed + "'s Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Shield"));
+  hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:" + color + transformed + "'s Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Pickaxe"));
+  hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:" + color + transformed + "'s Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Shovel"));
 
   hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
@@ -76,6 +83,12 @@ function init(hero, uuid, base, head, transformed, color) {
     manager.setData(player, "skyhighheroes:dyn/predation", false);
     manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
     manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
+    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 0);
+    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 1);
+    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 2);
+    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 3);
+    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 4);
+    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 5);
     if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
       manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
     };
