@@ -83,12 +83,6 @@ function init(hero, uuid, base, head, transformed, color) {
     manager.setData(player, "skyhighheroes:dyn/predation", false);
     manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
     manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
-    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 0);
-    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 1);
-    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 2);
-    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 3);
-    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 4);
-    manager.removeTag(player.getWornChestplate().nbt().getTagList("Equipment"), 5);
     if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
       manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
     };

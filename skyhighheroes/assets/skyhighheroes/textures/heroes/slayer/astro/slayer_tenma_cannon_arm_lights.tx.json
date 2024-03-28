@@ -1,0 +1,13 @@
+{
+  "texture": {
+    "in": "skyhighheroes:slayer/astro/slayer_tenma_cannon_lights",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_cannon_arms_lights"
+      }
+    ],
+    "out": "skyhighheroes:generated/slayer_tenma_cannon_arms_lights"
+  },
+  "isDynamic": true
+}

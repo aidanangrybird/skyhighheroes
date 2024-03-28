@@ -1,0 +1,14 @@
+{
+  "texture": "skyhighheroes:slayer/slayer_stelar_<VISUALIZER>_<CLOTHING>",
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighheroes:dyn/stelar_clothes') == 0 ? 'transer' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 1 ? 'short' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 2 ? 'swimsuit' : entity.getData('skyhighheroes:dyn/stelar_clothes') == 4 ? 'normal' : entity.getData('skyhighheroes:dyn/hood_toggle') == 1 ? 'winter_hood_up' : 'winter_hood_down'",
+      "values": ["transer", "short", "swimsuit", "winter_hood_up", "winter_hood_down", "normal"]
+    },
+    "VISUALIZER": {
+      "key": "entity.getData('skyhighheroes:dyn/visualizer_toggle') == 1 ? 'down' : 'up'",
+      "values": ["up", "down"]
+    }
+  },
+  "isDynamic": true
+}

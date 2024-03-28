@@ -133,6 +133,12 @@
       },
       "spider_man" : "\u00A72Spider-Man \u00A72(PS4) \u00A72Style\u00A7r"
     },
+    "skyhighheroes:slayer_stelar" : {
+      "$DEFAULT": {
+        "name": "\u00A7eNormal \u00A7eStyle\u00A7r"
+      },
+      "black_panther" : "\u00A7eBlack \u00A7ePanther \u00A7eStyle\u00A7r"
+    },
     "skyhighheroes:spartan_stelar" : {
       "$DEFAULT": {
         "name": "\u00A75Normal \u00A75Style\u00A7r"

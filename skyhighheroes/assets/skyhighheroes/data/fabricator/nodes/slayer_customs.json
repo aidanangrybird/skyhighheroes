@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Slayer's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/slayer_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as SlayerE_2"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == 'dde85392-d2d7-4213-8e52-05f42f8e0c48'"
+      }
+    }
+  }
+}
