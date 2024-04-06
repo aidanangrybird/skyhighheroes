@@ -4,16 +4,16 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/omega_xis_bottom_wave_change_<TIMER>"
+        "supply": "skyhighheroes:xor/omega_xis_top_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighheroes:generated/slayer_stelar_omega_xis_top_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil((87 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 58) - (29 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer')) - (29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer'))), 17), 29) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 12 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 12 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 12 : 0) | 0",
+      "key": "Math.min(Math.max(Math.ceil(29 - ((entity.getData('skyhighheroes:dyn/omega_xis') ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer') + (entity.getData('skyhighheroes:dyn/omega_xis') ? 29 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 29 : 0))), (entity.getData('skyhighheroes:dyn/omega_xis') || !entity.getHeldItem().isEmpty() ? 3 : 17)), (entity.getData('skyhighheroes:dyn/omega_xis') || !entity.getHeldItem().isEmpty() ? 17 : 29)) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 12 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 12 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 12 : 0) | 0",
       "values": {
-        "min": 17,
+        "min": 3,
         "max": 29
       }
     }

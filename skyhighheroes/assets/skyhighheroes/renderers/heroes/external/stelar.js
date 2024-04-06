@@ -242,7 +242,7 @@ function initEquipment(renderer) {
 };
 
 //Omega-Xis
-function initOmegaXis(renderer) {
+function initHead(renderer) {
   //Blade
   var blade = renderer.createEffect("fiskheroes:shield");
   blade.texture.set(null, "blade");
@@ -250,93 +250,127 @@ function initOmegaXis(renderer) {
   blade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.5, 8.0, 0.0);
   blade.large = true;
   //Right
-  var omegaXisRight = renderer.createEffect("fiskheroes:shield");
-  omegaXisRight.texture.set("omega_xis_right", "omega_xis_right_lights");
-  omegaXisRight.anchor.set("rightArm");
-  omegaXisRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
-  omegaXisRight.large = true;
-  var omegaXisRightWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisRightWaveChange.texture.set(null, "omega_xis_right_wave_change_lights");
-  omegaXisRightWaveChange.anchor.set("rightArm");
-  omegaXisRightWaveChange.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
-  omegaXisRightWaveChange.large = true;
+  var headRight = renderer.createEffect("fiskheroes:shield");
+  headRight.texture.set("head_right", "head_right_lights");
+  headRight.anchor.set("rightArm");
+  headRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
+  headRight.large = true;
+  var headRightWaveChange = renderer.createEffect("fiskheroes:shield");
+  headRightWaveChange.texture.set("head_right_wave_change", "head_right_wave_change_lights");
+  headRightWaveChange.anchor.set("rightArm");
+  headRightWaveChange.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
+  headRightWaveChange.large = true;
+  var headRightWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headRightWaveChanging.texture.set(null, "head_right_wave_changing_lights");
+  headRightWaveChanging.anchor.set("rightArm");
+  headRightWaveChanging.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
+  headRightWaveChanging.large = true;
   //Left
-  var omegaXisLeft = renderer.createEffect("fiskheroes:shield");
-  omegaXisLeft.texture.set("omega_xis_left", "omega_xis_left_lights");
-  omegaXisLeft.anchor.set("rightArm");
-  omegaXisLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
-  omegaXisLeft.large = true;
-  var omegaXisLeftWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisLeftWaveChange.texture.set(null, "omega_xis_left_wave_change_lights");
-  omegaXisLeftWaveChange.anchor.set("rightArm");
-  omegaXisLeftWaveChange.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
-  omegaXisLeftWaveChange.large = true;
+  var headLeft = renderer.createEffect("fiskheroes:shield");
+  headLeft.texture.set("head_left", "head_left_lights");
+  headLeft.anchor.set("rightArm");
+  headLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
+  headLeft.large = true;
+  var headLeftWaveChange = renderer.createEffect("fiskheroes:shield");
+  headLeftWaveChange.texture.set("head_left_wave_change", "head_left_wave_change_lights");
+  headLeftWaveChange.anchor.set("rightArm");
+  headLeftWaveChange.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
+  headLeftWaveChange.large = true;
+  var headLeftWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headLeftWaveChanging.texture.set(null, "head_left_wave_changing_lights");
+  headLeftWaveChanging.anchor.set("rightArm");
+  headLeftWaveChanging.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
+  headLeftWaveChanging.large = true;
   //Top
-  var omegaXisTop = renderer.createEffect("fiskheroes:shield");
-  omegaXisTop.texture.set("omega_xis_top", "omega_xis_top_lights");
-  omegaXisTop.anchor.set("rightArm");
-  omegaXisTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
-  omegaXisTop.large = true;
-  var omegaXisTopWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisTopWaveChange.texture.set(null, "omega_xis_top_wave_change_lights");
-  omegaXisTopWaveChange.anchor.set("rightArm");
-  omegaXisTopWaveChange.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
-  omegaXisTopWaveChange.large = true;
+  var headTop = renderer.createEffect("fiskheroes:shield");
+  headTop.texture.set("head_top", "head_top_lights");
+  headTop.anchor.set("rightArm");
+  headTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
+  headTop.large = true;
+  var headTopWaveChange = renderer.createEffect("fiskheroes:shield");
+  headTopWaveChange.texture.set("head_top_wave_change", "head_top_wave_change_lights");
+  headTopWaveChange.anchor.set("rightArm");
+  headTopWaveChange.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
+  headTopWaveChange.large = true;
+  var headTopWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headTopWaveChanging.texture.set(null, "head_top_wave_changing_lights");
+  headTopWaveChanging.anchor.set("rightArm");
+  headTopWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
+  headTopWaveChanging.large = true;
   //Bottom
-  var omegaXisBottom = renderer.createEffect("fiskheroes:shield");
-  omegaXisBottom.texture.set("omega_xis_bottom", "omega_xis_bottom_lights");
-  omegaXisBottom.anchor.set("rightArm");
-  omegaXisBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
-  omegaXisBottom.large = true;
-  var omegaXisBottomWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisBottomWaveChange.texture.set(null, "omega_xis_bottom_wave_change_lights");
-  omegaXisBottomWaveChange.anchor.set("rightArm");
-  omegaXisBottomWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
-  omegaXisBottomWaveChange.large = true;
+  var headBottom = renderer.createEffect("fiskheroes:shield");
+  headBottom.texture.set("head_bottom", "head_bottom_lights");
+  headBottom.anchor.set("rightArm");
+  headBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
+  headBottom.large = true;
+  var headBottomWaveChange = renderer.createEffect("fiskheroes:shield");
+  headBottomWaveChange.texture.set("head_bottom_wave_change", "head_bottom_wave_change_lights");
+  headBottomWaveChange.anchor.set("rightArm");
+  headBottomWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
+  headBottomWaveChange.large = true;
+  var headBottomWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headBottomWaveChanging.texture.set(null, "head_bottom_wave_changing_lights");
+  headBottomWaveChanging.anchor.set("rightArm");
+  headBottomWaveChanging.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
+  headBottomWaveChanging.large = true;
   //Front
-  var omegaXisFront = renderer.createEffect("fiskheroes:shield");
-  omegaXisFront.texture.set("omega_xis_front", null);
-  omegaXisFront.anchor.set("rightArm");
-  omegaXisFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
-  omegaXisFront.large = true;
-  var omegaXisFrontWaveChange = renderer.createEffect("fiskheroes:shield");
-  omegaXisFrontWaveChange.texture.set(null, "omega_xis_front_wave_change_lights");
-  omegaXisFrontWaveChange.anchor.set("rightArm");
-  omegaXisFrontWaveChange.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
-  omegaXisFrontWaveChange.large = true;
+  var headFront = renderer.createEffect("fiskheroes:shield");
+  headFront.texture.set("head_front", null);
+  headFront.anchor.set("rightArm");
+  headFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
+  headFront.large = true;
+  var headFrontWaveChange = renderer.createEffect("fiskheroes:shield");
+  headFrontWaveChange.texture.set("head_front_wave_change", null);
+  headFrontWaveChange.anchor.set("rightArm");
+  headFrontWaveChange.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
+  headFrontWaveChange.large = true;
+  var headFrontWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headFrontWaveChanging.texture.set(null, "head_front_wave_changing_lights");
+  headFrontWaveChanging.anchor.set("rightArm");
+  headFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
+  headFrontWaveChanging.large = true;
   return {
     blade: blade,
-    omegaXisRight: omegaXisRight,
-    omegaXisLeft: omegaXisLeft,
-    omegaXisTop: omegaXisTop,
-    omegaXisBottom: omegaXisBottom,
-    omegaXisFront: omegaXisFront,
-    omegaXisRightWaveChange: omegaXisRightWaveChange,
-    omegaXisLeftWaveChange: omegaXisLeftWaveChange,
-    omegaXisTopWaveChange: omegaXisTopWaveChange,
-    omegaXisBottomWaveChange: omegaXisBottomWaveChange,
-    omegaXisFrontWaveChange: omegaXisFrontWaveChange,
+    headRight: headRight,
+    headLeft: headLeft,
+    headTop: headTop,
+    headBottom: headBottom,
+    headFront: headFront,
+    headRightWaveChanging: headRightWaveChanging,
+    headLeftWaveChanging: headLeftWaveChanging,
+    headTopWaveChanging: headTopWaveChanging,
+    headBottomWaveChanging: headBottomWaveChanging,
+    headFrontWaveChanging: headFrontWaveChanging,
     render: (entity, renderLayer) => {
       blade.unfold = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")
       blade.opacity = Math.min(Math.max((2 * entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")), 0), 1);
       blade.setOffset(1.5, Math.min(Math.max((16.0 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) - 4), 0), 8), 0.0);
       blade.setScale(Math.min(Math.max((2 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) + 0.5), 0), 1), Math.min(Math.max((1.75 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1), Math.min(Math.max((1 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1));
       //Base Omega-Xis
-      omegaXisRight.unfold = omegaXisLeft.unfold = omegaXisTop.unfold = omegaXisBottom.unfold = omegaXisFront.unfold = 1.0;
+      headRight.unfold = headLeft.unfold = headTop.unfold = headBottom.unfold = headFront.unfold = 1.0;
       //Wave Change Omega-Xis
-      omegaXisRightWaveChange.unfold = omegaXisLeftWaveChange.unfold = omegaXisTopWaveChange.unfold = omegaXisBottomWaveChange.unfold = omegaXisFrontWaveChange.unfold = 1.0;
+      headRightWaveChanging.unfold = headLeftWaveChanging.unfold = headTopWaveChanging.unfold = headBottomWaveChanging.unfold = headFrontWaveChanging.unfold = 1.0;
       if (renderLayer == "CHESTPLATE") {
         if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
-          omegaXisRight.render();
-          omegaXisLeft.render();
-          omegaXisTop.render();
-          omegaXisBottom.render();
-          omegaXisFront.render();
-          omegaXisRightWaveChange.render();
-          omegaXisLeftWaveChange.render();
-          omegaXisTopWaveChange.render();
-          omegaXisBottomWaveChange.render();
-          omegaXisFrontWaveChange.render();
+          if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+            headRightWaveChange.render();
+            headLeftWaveChange.render();
+            headTopWaveChange.render();
+            headBottomWaveChange.render();
+            headFrontWaveChange.render();
+          };
+          if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+            headRight.render();
+            headLeft.render();
+            headTop.render();
+            headBottom.render();
+            headFront.render();
+          }
+          headRightWaveChanging.render();
+          headLeftWaveChanging.render();
+          headTopWaveChanging.render();
+          headBottomWaveChanging.render();
+          headFrontWaveChanging.render();
         };
         if (entity.getHeldItem().isEmpty() && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:blade_timer") > 0) {
           blade.render();

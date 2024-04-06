@@ -7,20 +7,29 @@ loadTextures({
   "base_wave_change": "skyhighheroes:geo/geo_stelar_wave_change.tx.json",
   "lights_wave_change": "skyhighheroes:geo/geo_stelar_wave_change_lights.tx.json",
   "wave_changing_lights": "skyhighheroes:geo/geo_stelar_wave_changing_lights.tx.json",
-  "omega_xis_right": "skyhighheroes:geo/geo_stelar_omega_xis_right.tx.json",
-  "omega_xis_right_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_lights.tx.json",
-  "omega_xis_right_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_wave_changing_lights.tx.json",
-  "omega_xis_left": "skyhighheroes:geo/geo_stelar_omega_xis_left.tx.json",
-  "omega_xis_left_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_lights.tx.json",
-  "omega_xis_left_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_wave_changing_lights.tx.json",
-  "omega_xis_top": "skyhighheroes:geo/geo_stelar_omega_xis_top.tx.json",
-  "omega_xis_top_lights": "skyhighheroes:geo/geo_stelar_omega_xis_top_lights.tx.json",
-  "omega_xis_top_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_top_wave_changing_lights.tx.json",
-  "omega_xis_bottom": "skyhighheroes:geo/geo_stelar_omega_xis_bottom.tx.json",
-  "omega_xis_bottom_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_lights.tx.json",
-  "omega_xis_bottom_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_wave_changing_lights.tx.json",
-  "omega_xis_front": "skyhighheroes:geo/geo_stelar_omega_xis_front.tx.json",
-  "omega_xis_front_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_front_wave_changing_lights.tx.json",
+  "head_right": "skyhighheroes:geo/geo_stelar_omega_xis_right.tx.json",
+  "head_right_wave_change": "skyhighheroes:geo/geo_stelar_omega_xis_right_wave_change.tx.json",
+  "head_right_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_wave_change_lights.tx.json",
+  "head_right_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_lights.tx.json",
+  "head_right_wave_changing_lights": "skyhighheroes:geo/geo_stelar_omega_xis_right_wave_changing_lights.tx.json",
+  "head_left": "skyhighheroes:geo/geo_stelar_omega_xis_left.tx.json",
+  "head_left_wave_change": "skyhighheroes:geo/geo_stelar_omega_xis_left_wave_change.tx.json",
+  "head_left_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_lights.tx.json",
+  "head_left_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_wave_change_lights.tx.json",
+  "head_left_wave_changing_lights": "skyhighheroes:geo/geo_stelar_omega_xis_left_wave_changing_lights.tx.json",
+  "head_top": "skyhighheroes:geo/geo_stelar_omega_xis_top.tx.json",
+  "head_top_wave_change": "skyhighheroes:geo/geo_stelar_omega_xis_top_wave_change.tx.json",
+  "head_top_lights": "skyhighheroes:geo/geo_stelar_omega_xis_top_lights.tx.json",
+  "head_top_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_top_wave_change_lights.tx.json",
+  "head_top_wave_changing_lights": "skyhighheroes:geo/geo_stelar_omega_xis_top_wave_changing_lights.tx.json",
+  "head_bottom": "skyhighheroes:geo/geo_stelar_omega_xis_bottom.tx.json",
+  "head_bottom_wave_change": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_wave_change.tx.json",
+  "head_bottom": "skyhighheroes:geo/geo_stelar_omega_xis_bottom.tx.json",
+  "head_bottom_wave_change_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_wave_change_lights.tx.json",
+  "head_bottom_wave_changing_lights": "skyhighheroes:geo/geo_stelar_omega_xis_bottom_wave_changing_lights.tx.json",
+  "head_front": "skyhighheroes:geo/geo_stelar_omega_xis_front.tx.json",
+  "head_front_wave_change": "skyhighheroes:geo/geo_stelar_omega_xis_front_wave_change.tx.json",
+  "head_front_wave_changing_lights": "skyhighheroes:geo/geo_stelar_omega_xis_front_wave_changing_lights.tx.json",
   "transer": "skyhighheroes:geo/geo_stelar_transer.tx.json",
   "transer_wave_change": "skyhighheroes:geo/geo_stelar_transer_wave_change.tx.json",
   "visualizer_lights": "skyhighheroes:geo/geo_stelar_visualizer_lights.tx.json",
@@ -98,7 +107,7 @@ function initEffects(renderer) {
   stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stuff.initForceField(renderer, 0x00FF00);
-  omega_xis = stelar.initOmegaXis(renderer);
+  omega_xis = stelar.initHead(renderer);
   stelar.initMegaBuster(renderer, 0xFF00FF, 0x00FF00);
   stelar.initLiveries(renderer);
   //stelar.initEquipment(renderer);
