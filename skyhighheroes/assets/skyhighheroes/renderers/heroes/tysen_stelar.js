@@ -38,7 +38,7 @@ loadTextures({
   "visualizer_lights_wave_change": "skyhighheroes:tysen/tysen_stelar_visualizer_lights_wave_change.tx.json",
   "transer_default": "skyhighheroes:stelar_transer_dragon",
   "transer_default_lights": "skyhighheroes:tysen/tysen_stelar_transer_lights",
-  "blade": "skyhighheroes:tysen/tysen_stelar_blade",
+  "sword": "skyhighheroes:tysen/tysen_stelar_sword",
   "shield": "skyhighheroes:tysen/tysen_stelar_shield",
   "shield_lights": "skyhighheroes:tysen/tysen_stelar_shield_lights",
   "katana": "skyhighheroes:tysen/tysen_stelar_katana",
@@ -65,9 +65,11 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
+  head = stelar.initOmegaXis(renderer);
   stuff.bindFlightTrail(renderer, "skyhighheroes:tysen_stelar_flight");
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
+  head.render(entity, renderLayer);
 };

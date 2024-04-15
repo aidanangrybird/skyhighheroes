@@ -1,0 +1,15 @@
+{data_0} = curve({data_0})
+{data_1} = curve({data_1})
+
+{rightArm_rotX} @ {data_0} -> -30'
+{rightArm_rotX} @ {data_1} -> 10'{rightArm_rotX} - 1.3
+{rightArm_rotY} -= 50'{data_1}
+{rightArm_rotZ} += -50'{data_1}
+
+{rightArm_posY} += 0.5{data_1}
+{rightArm_posZ} -= 1{data_1}
+
+out "firstPerson" (true)
+out "translate" (-0.6{data_1}, -0.2{data_1}, 0)
+out "rotate" (70{data_1}, 0, 1, 0)
+out "rotate" (-80{data_1}, 0, 0, 1)

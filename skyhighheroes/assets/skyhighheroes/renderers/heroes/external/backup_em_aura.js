@@ -153,8 +153,8 @@ function init(renderer, color) {
             { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 12.5, 0.0], "size": [9.0, 9.0] }
         ]}
     ]);
-    //Blade
-    var blade_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+    //sword
+    var sword_beam = create(renderer, "skyhighheroes:wave_glow", color, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 19.0, 0.0], "end": [-1.0, 4.0, 0.0], "size": [10.0, 7.0] }
         ]}
@@ -233,7 +233,7 @@ function init(renderer, color) {
         legLeftStart_beam: legLeftStart_beam,
         omegaXis_beam: omegaXis_beam,
         omegaXisFP_beam: omegaXisFP_beam,
-        blade_beam: blade_beam,
+        sword_beam: sword_beam,
         scythe_base_beam: scythe_base_beam,
         scythe_1_beam: scythe_1_beam,
         scythe_holding_beam: scythe_holding_beam,
@@ -263,8 +263,8 @@ function init(renderer, color) {
                 legLeftStart_beam.render(renderLayer);
                 hair_beams.progress = Math.min(Math.max((((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0);
                 hair_beams.render(renderLayer);
-                blade_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
-                blade_beam.render(renderLayer);
+                sword_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
+                sword_beam.render(renderLayer);
                 scythe_base_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1) ? 1.0 : 0.0);
                 scythe_base_beam.render(renderLayer);
                 scythe_1_beam.progress = ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1) ? 1.0 : 0.0);
@@ -397,8 +397,8 @@ function initDual(renderer, colorLeft, colorRight) {
             { "start": [-1.0, 3.5, 2.0], "end": [-1.0, 12.5, 2.0], "size": [3.0, 9.0] }
         ]}
     ]);
-    //Blade
-    var blade_beam = create(renderer, "skyhighheroes:wave_glow", colorRight, [
+    //sword
+    var sword_beam = create(renderer, "skyhighheroes:wave_glow", colorRight, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 19.0, 0.0], "end": [-1.0, 4.0, 0.0], "size": [10.0, 7.0] }
         ]}
@@ -415,7 +415,7 @@ function initDual(renderer, colorLeft, colorRight) {
         legLeftStart_beam: legLeftStart_beam,
         hair_beams_left: hair_beams_left,
         hair_beams_right: hair_beams_right,
-        blade_beam: blade_beam,
+        sword_beam: sword_beam,
         omegaXis_beam_right: omegaXis_beam_right,
         omegaXis_beam_left: omegaXis_beam_left,
         omegaXisFP_beam_right: omegaXisFP_beam_right,
@@ -444,8 +444,8 @@ function initDual(renderer, colorLeft, colorRight) {
                 hair_beams_left.render(renderLayer);
                 hair_beams_right.progress = Math.min(Math.max((((162/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - (284/32)), 0.0), 1.0);
                 hair_beams_right.render(renderLayer);
-                blade_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
-                blade_beam.render(renderLayer);
+                sword_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
+                sword_beam.render(renderLayer);
                 if (!isFirstPersonArm) {
                     omegaXis_beam_left.progress = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
                     omegaXis_beam_left.render(renderLayer);
@@ -524,8 +524,8 @@ function initNormal(renderer, color) {
             { "start": [-1.0, 3.5, 0.0], "end": [-1.0, 12.5, 0.0], "size": [9.0, 9.0] }
         ]}
     ]);
-    //Blade
-    var blade_beam = create(renderer, "skyhighheroes:wave_glow", color, [
+    //sword
+    var sword_beam = create(renderer, "skyhighheroes:wave_glow", color, [
         { anchor: "rightArm", renderLayer: "CHESTPLATE", mirror: false, entries: [
             { "start": [-1.0, 19.0, 0.0], "end": [-1.0, 4.0, 0.0], "size": [10.0, 7.0] }
         ]}
@@ -540,7 +540,7 @@ function initNormal(renderer, color) {
         legLeftStart_beam: legLeftStart_beam,
         omegaXis_beam: omegaXis_beam,
         omegaXisFP_beam: omegaXisFP_beam,
-        blade_beam: blade_beam,
+        sword_beam: sword_beam,
         render: (entity, renderLayer, isFirstPersonArm) => {
             if (renderLayer == "CHESTPLATE") {
                 head_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (32/32)), 0.0), 1.0);
@@ -557,8 +557,8 @@ function initNormal(renderer, color) {
                 legRightStart_beam.render(renderLayer);
                 legLeftStart_beam.progress = Math.min(Math.max(((81/16) * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - (50/32)), 0.0), 1.0);
                 legLeftStart_beam.render(renderLayer);
-                blade_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
-                blade_beam.render(renderLayer);
+                sword_beam.progress = (entity.getData('skyhighheroes:dyn/battle_card') == 2 ? 1.0 : 0.0);
+                sword_beam.render(renderLayer);
                 if (!isFirstPersonArm) {
                     omegaXis_beam.progress = Math.min(Math.max(((2.5 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) - 0.6), 0.0), 1.0) - (!entity.getHeldItem().isEmpty() || entity.getData('skyhighheroes:dyn/battle_card') == 2 || entity.getData('skyhighheroes:dyn/head_toggle') == 1) + ((entity.getData('fiskheroes:flight_timer') > 0 || entity.getData('fiskheroes:flight_boost_timer') > 0) && entity.getData('skyhighheroes:dyn/head_toggle') == 1);
                     omegaXis_beam.render(renderLayer);

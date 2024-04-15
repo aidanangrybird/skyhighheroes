@@ -62,19 +62,6 @@ function setOpacityWithData(renderer, min, max, data) {
 };
 
 //Useful Stuff
-function forcefieldAnimation(renderer) {
-  addAnimationWithData(renderer, "skyhigh.BLOCKING", "skyhighheroes:force_field_holding", "fiskheroes:shield_blocking_timer")
-    .priority = -5;
-};
-function initForceField(renderer, color) {
-  var forcefield = renderer.bindProperty("fiskheroes:forcefield");
-  forcefield.color.set(color);
-  forcefield.setShape(36, 36).setOffset(0.0, 10.0, 0.0).setScale(2.0);
-  forcefield.setCondition(entity => {
-    forcefield.opacity = entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * 0.1;
-    return true;
-  });
-};
 function emCeilingAnimation(renderer) {
   addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
 };

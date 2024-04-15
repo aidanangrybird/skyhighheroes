@@ -83,6 +83,19 @@ function addBasePredationAnimation(renderer, key, value) {
   anim.priority = -9.75;
 };
 
+function addSwordAnimations(renderer, key, value) {
+  if (typeof value === "string") {
+    anim = renderer.createResource("ANIMATION", value);
+  };
+  renderer.addCustomAnimation(key, anim);
+  anim.setData((entity, data) => {
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"));
+    data.load(1, entity.getInterpolatedData("fiskheroes:shield_blocking_timer"));
+  });
+  anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 2);
+  anim.priority = -9.75;
+};
+
 function addFlightHoldingAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
@@ -145,6 +158,19 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
   return anim;
 };
 
+function initForceField(renderer, color) {
+  addAnimationWithData(renderer, "skyhigh.BLOCKING", "skyhighheroes:force_field_holding", "fiskheroes:shield_blocking_timer")
+    .setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 1)
+    .priority = -5;
+  var forcefield = renderer.bindProperty("fiskheroes:forcefield");
+  forcefield.color.set(color);
+  forcefield.setShape(36, 36).setOffset(0.0, 10.0, 0.0).setScale(2.0);
+  forcefield.setCondition(entity => {
+    forcefield.opacity = (entity.getData("skyhighheroes:dyn/battle_card") == 1) * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * 0.1;
+    return true;
+  });
+};
+
 //Stelar Animations
 function initStelarAnimations(renderer) {
   //Aiming
@@ -153,6 +179,7 @@ function initStelarAnimations(renderer) {
     .priority = 10;
   addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
   addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:stelar_predation");
+  addSwordAnimations(renderer, "stelar.SWORD", "skyhighheroes:stelar_sword");
   addBasePredationAnimation(renderer, "stelar.PREDATION_BASE", "skyhighheroes:stelar_predation_base");
   //Flight
   addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
@@ -243,12 +270,78 @@ function initEquipment(renderer) {
 
 //Omega-Xis
 function initHead(renderer) {
-  //Blade
-  var blade = renderer.createEffect("fiskheroes:shield");
-  blade.texture.set(null, "blade");
-  blade.anchor.set("rightArm");
-  blade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.5, 8.0, 0.0);
-  blade.large = true;
+  //sword
+  var swordMain = renderer.createEffect("fiskheroes:shield");
+  swordMain.texture.set("sword", "sword_lights");
+  swordMain.anchor.set("rightArm");
+  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  swordMain.large = true;
+  var swordBlade = renderer.createEffect("fiskheroes:shield");
+  swordBlade.texture.set(null, "sword_blade");
+  swordBlade.anchor.set("rightArm");
+  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  swordBlade.large = true;
+  var swordWaveChanging = renderer.createEffect("fiskheroes:shield");
+  swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
+  swordWaveChanging.anchor.set("rightArm");
+  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  swordWaveChanging.large = true;
+  //Right
+  var swordRight = renderer.createEffect("fiskheroes:shield");
+  swordRight.texture.set("sword_sides");
+  swordRight.anchor.set("rightArm");
+  swordRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
+  swordRight.large = true;
+  var swordRightWaveChanging = renderer.createEffect("fiskheroes:shield");
+  swordRightWaveChanging.texture.set(null, "sword_sides_wave_changing_lights");
+  swordRightWaveChanging.anchor.set("rightArm");
+  swordRightWaveChanging.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
+  swordRightWaveChanging.large = true;
+  //Left
+  var swordLeft = renderer.createEffect("fiskheroes:shield");
+  swordLeft.texture.set("sword_sides");
+  swordLeft.anchor.set("rightArm");
+  swordLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
+  swordLeft.large = true;
+  var swordLeftWaveChanging = renderer.createEffect("fiskheroes:shield");
+  swordLeftWaveChanging.texture.set(null, "sword_sides_wave_changing_lights");
+  swordLeftWaveChanging.anchor.set("rightArm");
+  swordLeftWaveChanging.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
+  swordLeftWaveChanging.large = true;
+  //Top
+  var swordTop = renderer.createEffect("fiskheroes:shield");
+  swordTop.texture.set("sword_sides");
+  swordTop.anchor.set("rightArm");
+  swordTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
+  swordTop.large = true;
+  var swordTopWaveChanging = renderer.createEffect("fiskheroes:shield");
+  swordTopWaveChanging.texture.set(null, "sword_sides_wave_changing_lights");
+  swordTopWaveChanging.anchor.set("rightArm");
+  swordTopWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
+  swordTopWaveChanging.large = true;
+  //Bottom
+  var swordBottom = renderer.createEffect("fiskheroes:shield");
+  swordBottom.texture.set("sword_sides");
+  swordBottom.anchor.set("rightArm");
+  swordBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
+  swordBottom.large = true;
+  var swordBottomWaveChanging = renderer.createEffect("fiskheroes:shield");
+  swordBottomWaveChanging.texture.set(null, "sword_sides_wave_changing_lights");
+  swordBottomWaveChanging.anchor.set("rightArm");
+  swordBottomWaveChanging.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
+  swordBottomWaveChanging.large = true;
+  //Front
+  var swordFront = renderer.createEffect("fiskheroes:shield");
+  swordFront.texture.set("sword_front");
+  swordFront.anchor.set("rightArm");
+  swordFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
+  swordFront.large = true;
+  var swordFrontWaveChanging = renderer.createEffect("fiskheroes:shield");
+  swordFrontWaveChanging.texture.set(null, "sword_front_wave_changing_lights");
+  swordFrontWaveChanging.anchor.set("rightArm");
+  swordFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
+  swordFrontWaveChanging.large = true;
+  //Head
   //Right
   var headRight = renderer.createEffect("fiskheroes:shield");
   headRight.texture.set("head_right", "head_right_lights");
@@ -330,26 +423,11 @@ function initHead(renderer) {
   headFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
   headFrontWaveChanging.large = true;
   return {
-    blade: blade,
-    headRight: headRight,
-    headLeft: headLeft,
-    headTop: headTop,
-    headBottom: headBottom,
-    headFront: headFront,
-    headRightWaveChanging: headRightWaveChanging,
-    headLeftWaveChanging: headLeftWaveChanging,
-    headTopWaveChanging: headTopWaveChanging,
-    headBottomWaveChanging: headBottomWaveChanging,
-    headFrontWaveChanging: headFrontWaveChanging,
     render: (entity, renderLayer) => {
-      blade.unfold = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")
-      blade.opacity = Math.min(Math.max((2 * entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")), 0), 1);
-      blade.setOffset(1.5, Math.min(Math.max((16.0 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) - 4), 0), 8), 0.0);
-      blade.setScale(Math.min(Math.max((2 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) + 0.5), 0), 1), Math.min(Math.max((1.75 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1), Math.min(Math.max((1 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1));
-      //Base Omega-Xis
-      headRight.unfold = headLeft.unfold = headTop.unfold = headBottom.unfold = headFront.unfold = 1.0;
-      //Wave Change Omega-Xis
-      headRightWaveChanging.unfold = headLeftWaveChanging.unfold = headTopWaveChanging.unfold = headBottomWaveChanging.unfold = headFrontWaveChanging.unfold = 1.0;
+      //sword.unfold = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer");
+      //sword.opacity = Math.min(Math.max((2 * entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")), 0), 1);
+      //sword.setOffset(1.5, Math.min(Math.max((16.0 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) - 4), 0), 8), 0.0);
+      //sword.setScale(Math.min(Math.max((2 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) + 0.5), 0), 1), Math.min(Math.max((1.75 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1), Math.min(Math.max((1 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1));
       if (renderLayer == "CHESTPLATE") {
         if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
           if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
@@ -359,21 +437,164 @@ function initHead(renderer) {
             headBottomWaveChange.render();
             headFrontWaveChange.render();
           };
-          if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+          if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) {
             headRight.render();
             headLeft.render();
             headTop.render();
             headBottom.render();
             headFront.render();
           }
-          headRightWaveChanging.render();
-          headLeftWaveChanging.render();
-          headTopWaveChanging.render();
-          headBottomWaveChanging.render();
-          headFrontWaveChanging.render();
+          if (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) {
+            headRightWaveChanging.render();
+            headLeftWaveChanging.render();
+            headTopWaveChanging.render();
+            headBottomWaveChanging.render();
+            headFrontWaveChanging.render();
+          }
         };
-        if (entity.getHeldItem().isEmpty() && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("fiskheroes:blade_timer") > 0) {
-          blade.render();
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") > 0) {
+          swordMain.render();
+          swordRight.render();
+          swordLeft.render();
+          swordTop.render();
+          swordBottom.render();
+          swordFront.render();
+          swordWaveChanging.render();
+          swordRightWaveChanging.render();
+          swordLeftWaveChanging.render();
+          swordTopWaveChanging.render();
+          swordBottomWaveChanging.render();
+          swordFrontWaveChanging.render();
+          if (entity.getData("skyhighheroes:dyn/sword") && entity.getHeldItem().isEmpty()) {
+            swordBlade.render();
+          };
+        };
+      };
+    }
+  };
+};
+
+function initOmegaXis(renderer) {
+  //Blade
+  var swordBlade = renderer.createEffect("fiskheroes:shield");
+  swordBlade.texture.set(null, "sword");
+  swordBlade.anchor.set("rightArm");
+  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.5, 8.0, 0.0);
+  swordBlade.large = true;
+  //Right
+  var headRight = renderer.createEffect("fiskheroes:shield");
+  headRight.texture.set("head_right", "head_right_lights");
+  headRight.anchor.set("rightArm");
+  headRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
+  headRight.large = true;
+  var headRightWaveChange = renderer.createEffect("fiskheroes:shield");
+  headRightWaveChange.texture.set("head_right_wave_change", "head_right_wave_change_lights");
+  headRightWaveChange.anchor.set("rightArm");
+  headRightWaveChange.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
+  headRightWaveChange.large = true;
+  var headRightWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headRightWaveChanging.texture.set(null, "head_right_wave_changing_lights");
+  headRightWaveChanging.anchor.set("rightArm");
+  headRightWaveChanging.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, 3.0);
+  headRightWaveChanging.large = true;
+  //Left
+  var headLeft = renderer.createEffect("fiskheroes:shield");
+  headLeft.texture.set("head_left", "head_left_lights");
+  headLeft.anchor.set("rightArm");
+  headLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
+  headLeft.large = true;
+  var headLeftWaveChange = renderer.createEffect("fiskheroes:shield");
+  headLeftWaveChange.texture.set("head_left_wave_change", "head_left_wave_change_lights");
+  headLeftWaveChange.anchor.set("rightArm");
+  headLeftWaveChange.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
+  headLeftWaveChange.large = true;
+  var headLeftWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headLeftWaveChanging.texture.set(null, "head_left_wave_changing_lights");
+  headLeftWaveChanging.anchor.set("rightArm");
+  headLeftWaveChanging.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 8.5, -3.0);
+  headLeftWaveChanging.large = true;
+  //Top
+  var headTop = renderer.createEffect("fiskheroes:shield");
+  headTop.texture.set("head_top", "head_top_lights");
+  headTop.anchor.set("rightArm");
+  headTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
+  headTop.large = true;
+  var headTopWaveChange = renderer.createEffect("fiskheroes:shield");
+  headTopWaveChange.texture.set("head_top_wave_change", "head_top_wave_change_lights");
+  headTopWaveChange.anchor.set("rightArm");
+  headTopWaveChange.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
+  headTopWaveChange.large = true;
+  var headTopWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headTopWaveChanging.texture.set(null, "head_top_wave_changing_lights");
+  headTopWaveChanging.anchor.set("rightArm");
+  headTopWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 8.5, 0.0);
+  headTopWaveChanging.large = true;
+  //Bottom
+  var headBottom = renderer.createEffect("fiskheroes:shield");
+  headBottom.texture.set("head_bottom", "head_bottom_lights");
+  headBottom.anchor.set("rightArm");
+  headBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
+  headBottom.large = true;
+  var headBottomWaveChange = renderer.createEffect("fiskheroes:shield");
+  headBottomWaveChange.texture.set("head_bottom_wave_change", "head_bottom_wave_change_lights");
+  headBottomWaveChange.anchor.set("rightArm");
+  headBottomWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
+  headBottomWaveChange.large = true;
+  var headBottomWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headBottomWaveChanging.texture.set(null, "head_bottom_wave_changing_lights");
+  headBottomWaveChanging.anchor.set("rightArm");
+  headBottomWaveChanging.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 8.5, 0.0);
+  headBottomWaveChanging.large = true;
+  //Front
+  var headFront = renderer.createEffect("fiskheroes:shield");
+  headFront.texture.set("head_front", null);
+  headFront.anchor.set("rightArm");
+  headFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
+  headFront.large = true;
+  var headFrontWaveChange = renderer.createEffect("fiskheroes:shield");
+  headFrontWaveChange.texture.set("head_front_wave_change", null);
+  headFrontWaveChange.anchor.set("rightArm");
+  headFrontWaveChange.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
+  headFrontWaveChange.large = true;
+  var headFrontWaveChanging = renderer.createEffect("fiskheroes:shield");
+  headFrontWaveChanging.texture.set(null, "head_front_wave_changing_lights");
+  headFrontWaveChanging.anchor.set("rightArm");
+  headFrontWaveChanging.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 13.5, 0.0);
+  headFrontWaveChanging.large = true;
+  return {
+    render: (entity, renderLayer) => {
+      swordBlade.unfold = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")
+      swordBlade.opacity = Math.min(Math.max((2 * entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")), 0), 1);
+      swordBlade.setOffset(1.5, Math.min(Math.max((16.0 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) - 4), 0), 8), 0.0);
+      swordBlade.setScale(Math.min(Math.max((2 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) + 0.5), 0), 1), Math.min(Math.max((1.75 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1), Math.min(Math.max((1 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1));
+      if (renderLayer == "CHESTPLATE") {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
+          if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+            headRightWaveChange.render();
+            headLeftWaveChange.render();
+            headTopWaveChange.render();
+            headBottomWaveChange.render();
+            headFrontWaveChange.render();
+          };
+          if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) {
+            headRight.render();
+            headLeft.render();
+            headTop.render();
+            headBottom.render();
+            headFront.render();
+          }
+          if (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) {
+            headRightWaveChanging.render();
+            headLeftWaveChanging.render();
+            headTopWaveChanging.render();
+            headBottomWaveChanging.render();
+            headFrontWaveChanging.render();
+          }
+        };
+        if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") > 0) {
+          if (entity.getData("skyhighheroes:dyn/sword") && entity.getHeldItem().isEmpty()) {
+            swordBlade.render();
+          };
         };
       };
     }

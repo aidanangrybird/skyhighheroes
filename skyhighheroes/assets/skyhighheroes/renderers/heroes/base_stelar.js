@@ -59,8 +59,8 @@ function init(renderer) {
 function initEffects(renderer) {
   stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
-  stuff.initForceField(renderer, getColor());
-  omega_xis = stelar.initHead(renderer);
+  stelar.initForceField(renderer, getColor());
+  //omega_xis = stelar.initHead(renderer);
   stelar.initMegaBuster(renderer, getColor(), getColor());
   stelar.initLiveries(renderer);
   //stelar.initEquipment(renderer);
@@ -86,13 +86,12 @@ function initEffects(renderer) {
 
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:stelar_holo_flight");
-  stuff.forcefieldAnimation(renderer);
   stuff.emCeilingAnimation(renderer);
   stelar.initStelarAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  omega_xis.render(entity, renderLayer);
+  //omega_xis.render(entity, renderLayer);
   ears.render();
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     wave_change_lights.render();

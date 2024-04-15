@@ -149,7 +149,7 @@ function init(renderer, texture_head, lights_head, texture_body, lights_body, te
   leftLeg.anchor.set("leftLeg");
 
   return {
-    blade: blade,
+    sword: sword,
     omegaXisRight: omegaXisRight,
     omegaXisLeft: omegaXisLeft,
     omegaXisTop: omegaXisTop,

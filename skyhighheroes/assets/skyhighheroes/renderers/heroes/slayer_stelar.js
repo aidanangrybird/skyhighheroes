@@ -38,7 +38,7 @@ loadTextures({
   "visualizer_lights_wave_change": "skyhighheroes:slayer/slayer_stelar_visualizer_lights_wave_change.tx.json",
   "transer_default": "skyhighheroes:stelar_transer_pegasus",
   "transer_default_lights": "skyhighheroes:slayer/slayer_stelar_transer_lights",
-  "blade": "skyhighheroes:slayer/slayer_stelar_blade",
+  "sword": "skyhighheroes:slayer/slayer_stelar_sword",
   "shield": "skyhighheroes:slayer/slayer_stelar_shield",
   "shield_lights": "skyhighheroes:slayer/slayer_stelar_shield_lights",
   "katana": "skyhighheroes:slayer/slayer_stelar_katana",
@@ -65,9 +65,11 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
+  head = stelar.initOmegaXis(renderer);
   stuff.bindFlightTrail(renderer, "skyhighheroes:slayer_stelar_flight");
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
   parent.render(entity, renderLayer, isFirstPersonArm);
+  head.render(entity, renderLayer);
 };

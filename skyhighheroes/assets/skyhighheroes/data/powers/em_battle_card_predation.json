@@ -2,6 +2,15 @@
   "name": "Battle Card Predation",
   "value": 1,
   "modifiers": {
+    "fiskheroes:gravity_manipulation": {
+      "affectsUser": false,
+      "minGravity": 1.0,
+      "maxGravity": 1.0,
+      "range": 0.0,
+      "radius": 0.0,
+      "soundEvents": {
+      }
+    },
     "fiskheroes:transformation|predation": {
       "key": "PREDATION",
       "transformation": {
@@ -19,7 +28,7 @@
         "recovery": 50.0
       }
     },
-    "fiskheroes:shield": {
+    "fiskheroes:shield|barrier": {
       "shield": {
         "health": 300.0,
         "regeneration": 25.0,
@@ -36,6 +45,23 @@
       "soundEvents": {
         "BLOCK_START": "skyhighheroes:forcefield",
         "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:shield|sword": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 130.0,
+        "pitchRadius": 180.0,
+        "yawOffset": 0.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": true,
+      "soundEvents": {
       }
     },
     "fiskheroes:blade": {

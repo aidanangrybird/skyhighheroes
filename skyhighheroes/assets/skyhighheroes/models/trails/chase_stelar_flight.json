@@ -1,6 +1,6 @@
 {
   "parent": "skyhighheroes:base_stelar_flight",
   "constants": {
-    "COLOR": "0xbfff00"
+    "COLOR": "0x44ff00"
   }
 }

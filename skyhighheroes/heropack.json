@@ -18,7 +18,9 @@
     "battle_card": { "type": "BYTE", "resetWithoutSuit": true },
     "item_holding_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "selected_battle_card": { "type": "BYTE", "resetWithoutSuit": true },
+    "sword": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "sword_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "sword_blade_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "visualizer_toggle": { "type": "BYTE", "resetWithoutSuit": true },
     "stelar_clothes": "BYTE",
     "hood_toggle": "BYTE",
@@ -103,23 +105,11 @@
       "2" : "Guyver II",
       "3" : "Guyver III"
     },
-    "skyhighheroes:aidan_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A76Normal \u00A76Style\u00A7r"
-      },
-      "gundam" : "\u00A76RX-0 \u00A76Unicorn \u00A76Gundam \u00A76Style\u00A7r"
-    },
     "skyhighheroes:boom_stelar" : {
       "$DEFAULT": {
         "name": "\u00A75Normal \u00A75Style\u00A7r"
       },
       "martian_manhunter_comics" : "\u00A75Martian \u00A75Manhunter \u00A75(Comics) \u00A75Style\u00A7r"
-    },
-    "skyhighheroes:chase_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A72Normal \u00A72Style\u00A7r"
-      },
-      "iron_man" : "\u00A72Iron \u00A72Man \u00A72Mark \u00A7250 \u00A72Style\u00A7r"
     },
     "skyhighheroes:lucas_stelar" : {
       "$DEFAULT": {
