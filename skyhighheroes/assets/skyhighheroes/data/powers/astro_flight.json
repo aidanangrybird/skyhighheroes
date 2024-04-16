@@ -4,7 +4,7 @@
   "modifiers": {
     "fiskheroes:controlled_flight": {
       "speed": 0.1,
-      "boostSpeed": 0.3,
+      "boostSpeed": 0.4,
       "canBoost": true,
       "canRoll": true,
       "collision": {
@@ -17,7 +17,7 @@
           "dealDamage": true
         }
       },
-      "knockback": 0.4,
+      "knockback": 1.0,
       "soundEvents": {
         "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
         "BOOST": "skyhighheroes:tenma_flight_boost"

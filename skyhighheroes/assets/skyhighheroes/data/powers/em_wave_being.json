@@ -7,7 +7,7 @@
     },
     "fiskheroes:controlled_flight": {
       "speed": 0.1,
-      "boostSpeed": 0.35,
+      "boostSpeed": 0.45,
       "canRoll": true,
       "canBoost": true,
       "collision": {
@@ -20,7 +20,7 @@
           "dealDamage": true
         }
       },
-      "knockback": 0.4,
+      "knockback": 1.0,
       "soundEvents": {
         "BOOST": ["skyhighheroes:wave_flying_start", "skyhighheroes:wave_flying_loop"]
       }
