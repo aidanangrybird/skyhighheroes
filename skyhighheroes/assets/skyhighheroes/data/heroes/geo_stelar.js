@@ -616,6 +616,12 @@ function isModifierEnabled(entity, modifier) {
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "ice":
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        case "positive":
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        case "cursed":
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        case "cancel":
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         default:
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     };

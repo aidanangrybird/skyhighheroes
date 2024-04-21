@@ -149,6 +149,15 @@
     "fiskheroes:damage_immunity|ice": {
       "damageType": "ICE"
     },
+    "fiskheroes:damage_immunity|positive": {
+      "damageType": "POSITIVE"
+    },
+    "fiskheroes:damage_immunity|cursed": {
+      "damageType": "CURSED"
+    },
+    "fiskheroes:damage_immunity|cancel": {
+      "damageType": "CANCEL"
+    },
     "fiskheroes:arrow_catching": {
     },
     "fiskheroes:shield_throwing": {
