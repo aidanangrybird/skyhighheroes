@@ -104,7 +104,7 @@ function init(hero, uuid, base, head, transformed, color) {
     manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
     return true;
-  }, "EM Wave Change", 5);
+  }, "EM Wave Change!", 5);
   hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
   hero.addKeyBindFunc("BATTLE_CARD_RESET", resetBattleCard, "Return To Mega Buster", 5);
   hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle \u00A7r" + head + "\u00A7r Head", 5);
@@ -114,13 +114,13 @@ function init(hero, uuid, base, head, transformed, color) {
       PackLoader.printChat("\u00A7r<" + color + head + "\u00A7r> You are too cold for us to EM Wave Change.");
     };
     return true;
-  }, color + "\u00A7mEM Wave Change\u00A7r You are too cold", 5);
+  }, "\u00A7mEM Wave Change!\u00A7r You are too cold", 5);
   hero.addKeyBindFunc("HOT_TEMPERATURE", (player, manager) => {
     if (PackLoader.getSide() == "CLIENT") {
       PackLoader.printChat("\u00A7r<" + color + head + "\u00A7r> You are too hot for us to EM Wave Change.");
     };
     return true;
-  }, color + "\u00A7mEM Wave Change\u00A7r You are too hot", 5);
+  }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
   
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
