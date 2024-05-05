@@ -457,6 +457,24 @@ function init(hero, uuid, base, head, transformed, color) {
         manager.setData(entity, "fiskheroes:utility_belt_type", 1);
       };
     };
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty()) {
+      if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
+        manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "fiskheroes:shield", true);
+      };
+      if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
+        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "fiskheroes:shield", true);
+        manager.setData(entity, "fiskheroes:blade", true);
+      };
+      if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
+        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "fiskheroes:utility_belt_type", 1);
+      };
+    };
     var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
     if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
       manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
