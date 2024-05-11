@@ -14,7 +14,7 @@ function init(hero) {
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
-  hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+  hero.addAttribute("PUNCH_DAMAGE", 10.0, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
   hero.addAttribute("BASE_SPEED_LEVELS", 30.0, 0);
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);

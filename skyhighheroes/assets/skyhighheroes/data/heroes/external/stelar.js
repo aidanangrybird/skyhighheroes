@@ -29,7 +29,7 @@ function init(hero, uuid, base, head, transformed, color) {
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
-  hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
+  hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
   hero.addAttribute("KNOCKBACK", 2.5, 0);
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);

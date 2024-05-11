@@ -16,8 +16,8 @@ function init(hero) {
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
-  hero.addAttribute("PUNCH_DAMAGE", 9.5, 0);
-  hero.addAttribute("KNOCKBACK", 2.5, 0);
+  hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
+  hero.addAttribute("KNOCKBACK", 0.5, 0);
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
@@ -76,7 +76,7 @@ function init(hero) {
   }, "EM Wave Change!", 5);
   hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
     if (PackLoader.getSide() == "CLIENT") {
-      PackLoader.printChat("<" + player.getName() + "> EM Wave Change! \u00A7bGeo Stelar\u00A7r, On-Air!");
+      PackLoader.printChat("<" + player.getName() + "> EM Wave Change! \u00A7b" + player.getName() + "\u00A7r, On-Air!");
     }
     manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -334,7 +334,7 @@ function swordProfile(profile) {
   profile.inheritDefaults();
   profile.addAttribute("SPRINT_SPEED", 0.5, 1);
   profile.addAttribute("KNOCKBACK", 5.0, 0);
-  profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
+  profile.addAttribute("PUNCH_DAMAGE", 15.0, 0);
 };
 function inactiveProfile(profile) {
 };
