@@ -584,6 +584,8 @@ function isModifierEnabled(entity, modifier) {
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "blunt":
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
+        case "saitama":
+          return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         case "fire":
           return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
         case "cactus":
