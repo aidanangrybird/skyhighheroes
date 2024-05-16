@@ -68,8 +68,8 @@ function initEffects(renderer) {
   wave_change_lights.texture.set(null, "wave_changing_lights");
   ears = renderer.createEffect("fiskheroes:ears");
   ears.anchor.set("head");
-  ears.angle = 7.5;
-  ears.inset = -0.02;
+  ears.angle = 0;
+  ears.inset = -0.039;
   /*opacity_creetle = renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return (entity.getData("skyhighheroes:dyn/battle_card") == 4) ? 1.0 : 0.0;
   });

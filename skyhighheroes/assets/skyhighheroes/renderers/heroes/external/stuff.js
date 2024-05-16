@@ -14,6 +14,10 @@ function bindSpeedTrail(renderer, trailType) {
   return prop;
 };
 
+function bindCloud(renderer, propertyName, cloudType) {
+  return renderer.bindProperty(propertyName).setCloud(renderer.createResource("PARTICLE_CLOUD", cloudType));
+}
+
 //Animation stuff
 function parseAnimationEntry(renderer, value) {
   if (typeof value === "string") {

@@ -21,6 +21,18 @@
     "sword": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "sword_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "sword_blade_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "derecho": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "derecho_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "hail_cannon": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "hail_cannon_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "lightning": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "lightning_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "galaxys_weight": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "galaxys_weight_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "nebula_burst": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "nebula_burst_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "voids_grasp": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "voids_grasp_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "visualizer_toggle": { "type": "BYTE", "resetWithoutSuit": true },
     "stelar_clothes": "BYTE",
     "hood_toggle": "BYTE",
@@ -35,7 +47,9 @@
     "superhero_landing_ticks": "BYTE",
     "superhero_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "superhero_boosting_landing_ticks": "BYTE",
-    "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
+    "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
   },
   "sounds": {
     "download": {
@@ -95,7 +109,8 @@
     "WAVE_SOUND": "Sound (Wave)",
     "WAVE_WATER": "Water (Wave)",
     "WAVE_SHOCKWAVE": "Shockwave (Wave)",
-    "WAVE_LIGHT": "Light (Wave)"
+    "WAVE_LIGHT": "Light (Wave)",
+    "WAVE_WIND": "Wind (Wave)"
   },
   "alts" : {
     "skyhighheroes:geo_stelar" : {
@@ -109,11 +124,21 @@
       "2" : "Guyver II",
       "3" : "Guyver III"
     },
+    "skyhighheroes:aidan_stelar": {
+      "$DEFAULT": {
+        "maskToggleTicks": 10
+      }
+    },
     "skyhighheroes:boom_stelar" : {
       "$DEFAULT": {
         "name": "\u00A75Normal \u00A75Style\u00A7r"
       },
       "martian_manhunter_comics" : "\u00A75Martian \u00A75Manhunter \u00A75(Comics) \u00A75Style\u00A7r"
+    },
+    "skyhighheroes:chase_stelar": {
+      "$DEFAULT": {
+        "maskToggleTicks": 10
+      }
     },
     "skyhighheroes:lucas_stelar" : {
       "$DEFAULT": {

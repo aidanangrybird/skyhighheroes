@@ -18,21 +18,9 @@ function init(hero, uuid, base, head, transformed, color) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
   
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:" + color + transformed + "'s Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Katanas"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:" + color + transformed + "'s Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Scythe"));
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:" + color + transformed + "'s Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Rifle"));
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:" + color + transformed + "'s Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Shield"));
-  hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:" + color + transformed + "'s Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Pickaxe"));
-  hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:" + color + transformed + "'s Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Shovel"));
+  initEquipment(hero, transformed, color);
 
-  hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_mega_buster");
-  hero.addAttribute("SPRINT_SPEED", 0.2, 1);
-  hero.addAttribute("STEP_HEIGHT", 0.5, 0);
-  hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
-  hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
-  hero.addAttribute("KNOCKBACK", 2.5, 0);
-  hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
-  hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
+  hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_mega_buster");
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
@@ -107,7 +95,7 @@ function init(hero, uuid, base, head, transformed, color) {
   }, "EM Wave Change!", 5);
   hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
   hero.addKeyBindFunc("BATTLE_CARD_RESET", resetBattleCard, "Return To Mega Buster", 5);
-  hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle \u00A7r" + head + "\u00A7r Head", 5);
+  hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle " + head + " Head", 5);
   hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
   hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
     if (PackLoader.getSide() == "CLIENT") {
@@ -125,62 +113,7 @@ function init(hero, uuid, base, head, transformed, color) {
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
   hero.setHasPermission(hasPermission);
-  hero.addAttributeProfile("INACTIVE", inactiveProfile);
-  hero.addAttributeProfile("SWORD", swordProfile);
-  hero.addAttributeProfile("SHIELD", shieldProfile);
-  hero.addAttributeProfile("FROZEN", frozenProfile);
-  hero.addAttributeProfile("COLD3", cold3Profile);
-  hero.addAttributeProfile("COLD2", cold2Profile);
-  hero.addAttributeProfile("COLD1", cold1Profile);
-  hero.addAttributeProfile("HOT1", hot1Profile);
-  hero.addAttributeProfile("HOT2", hot2Profile);
-  hero.addAttributeProfile("HOT3", hot3Profile);
-  hero.addAttributeProfile("FIRE", fireProfile);
-  hero.setAttributeProfile((entity) => {
-    if (entity.getUUID() != uuid) {
-      return "INACTIVE";
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getUUID() == uuid) {
-      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "FROZEN";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "COLD3";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.85 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.5 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "COLD2";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "COLD1";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") == 0 || (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.01 && entity.getData("skyhighheroes:dyn/body_temperature") <= 0.01) || (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "INACTIVE";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "HOT1";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.9 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.55 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "HOT2";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "HOT3";
-      };
-      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.4 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
-        return "FIRE";
-      };
-    };
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      if (entity.getData("fiskheroes:shield_blocking")) {
-        return "SHIELD";
-      };
-      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 ) {
-        return "SWORD";
-      };
-      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
-        return null;
-      };
-    };
-  });
+  initProfiles(hero, uuid);
   hero.supplyFunction("canAim", canAim);
   hero.setModifierEnabled((entity, modifier) => {
     switch (modifier.name()) {
@@ -433,7 +366,7 @@ function init(hero, uuid, base, head, transformed, color) {
     };
     var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
     manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);
-    var sword = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting());
+    var sword = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
     manager.setData(entity, "skyhighheroes:dyn/sword", sword);
     manager.incrementData(entity, "skyhighheroes:dyn/sword_timer", 10, 10, entity.getData("skyhighheroes:dyn/sword"));
     var sword_on = entity.getData("skyhighheroes:dyn/sword_timer") == 1 && entity.getData("skyhighheroes:dyn/item_holding_timer") == 0;
@@ -498,66 +431,7 @@ function init(hero, uuid, base, head, transformed, color) {
     if (equipment.getCompoundTag(5).getCompoundTag("Item").getShort("Damage") > 0) {
       manager.setShort(equipment.getCompoundTag(5).getCompoundTag("Item"), "Damage", 0)
     };
-    change(entity, manager, [
-      { clothingType: 0, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
-      { clothingType: 0, biome: "Frozen", tempChangeTicks: -1000.0 },
-      { clothingType: 0, biome: "Ice", tempChangeTicks: -1000.0 },
-      { clothingType: 0, biome: "Beach", tempChangeTicks: 10000.0 },
-      { clothingType: 0, biome: "Desert", tempChangeTicks: 400.0 },
-      { clothingType: 0, biome: "Hell", tempChangeTicks: 100.0 },
-      { clothingType: 0, biome: "Jungle", tempChangeTicks: 500.0 },
-      { clothingType: 0, biome: "Mesa", tempChangeTicks: 1000.0 },
-      { clothingType: 0, biome: "Savanna", tempChangeTicks: 2000.0 },
-      { clothingType: 0, biome: "Swampland", tempChangeTicks: 1000.0 },
-      { clothingType: 1, biome: "Frozen", tempChangeTicks: -1000.0 },
-      { clothingType: 1, biome: "Ice", tempChangeTicks: -1000.0 },
-      { clothingType: 1, biome: "Cold Taiga", tempChangeTicks: -2000.0 },
-      { clothingType: 1, biome: "Cold Beach", tempChangeTicks: -3000.0 },
-      { clothingType: 1, biome: "Extreme", tempChangeTicks: -4000.0 },
-      { clothingType: 1, biome: "Mega", tempChangeTicks: -5000.0 },
-      { clothingType: 1, biome: "Stone Beach", tempChangeTicks: -3000.0 },
-      { clothingType: 2, biome: "Ice", tempChangeTicks: -300.0 },
-      { clothingType: 2, biome: "Frozen", tempChangeTicks: -300.0 },
-      { clothingType: 2, biome: "Cold Taiga", tempChangeTicks: -500.0 },
-      { clothingType: 2, biome: "Cold Beach", tempChangeTicks: -1000.0 },
-      { clothingType: 2, biome: "Extreme", tempChangeTicks: -1000.0 },
-      { clothingType: 2, biome: "Mega", tempChangeTicks: -1000.0 },
-      { clothingType: 2, biome: "Stone", tempChangeTicks: -1000.0 },
-      { clothingType: 2, biome: "Birch", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Flower", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Forest", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Mesa", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Plains", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Roofed", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Sunflower", tempChangeTicks: -10000.0 },
-      { clothingType: 2, biome: "Taiga", tempChangeTicks: -2500.0 },
-      { clothingType: 3, biome: "River", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Sunflower", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Stone", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Roofed", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Plains", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Forest", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Flower", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Birch", tempChangeTicks: 5000.0 },
-      { clothingType: 3, biome: "Mushroom", tempChangeTicks: 2000.0 },
-      { clothingType: 3, biome: "Savanna", tempChangeTicks: 1000.0 },
-      { clothingType: 3, biome: "Beach", tempChangeTicks: 800.0 },
-      { clothingType: 3, biome: "Mesa", tempChangeTicks: 500.0 },
-      { clothingType: 3, biome: "Jungle", tempChangeTicks: 160.0 },
-      { clothingType: 3, biome: "Swampland", tempChangeTicks: 160.0 },
-      { clothingType: 3, biome: "Hell", tempChangeTicks: 80.0 },
-      { clothingType: 3, biome: "Desert", tempChangeTicks: 100.0 },
-      { clothingType: 4, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
-      { clothingType: 4, biome: "Frozen", tempChangeTicks: -1000.0 },
-      { clothingType: 4, biome: "Ice", tempChangeTicks: -1000.0 },
-      { clothingType: 4, biome: "Beach", tempChangeTicks: 10000.0 },
-      { clothingType: 4, biome: "Desert", tempChangeTicks: 400.0 },
-      { clothingType: 4, biome: "Hell", tempChangeTicks: 100.0 },
-      { clothingType: 4, biome: "Jungle", tempChangeTicks: 500.0 },
-      { clothingType: 4, biome: "Mesa", tempChangeTicks: 1000.0 },
-      { clothingType: 4, biome: "Savanna", tempChangeTicks: 2000.0 },
-      { clothingType: 4, biome: "Swampland", tempChangeTicks: 1000.0 }
-      ], "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
+    change(entity, manager, tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   })
 };
 
@@ -568,18 +442,24 @@ function getTierOverride(entity) {
   return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1.0) ? 10 : 0;
 };
 
-function cycleUpCard(player, manager) {
+function cycleUpCard(player, manager, battleCardAmount) {
+  if (typeof battleCardAmount === "undefined") {
+    battleCardAmount = 3;
+  };
   manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
-  if (player.getData("skyhighheroes:dyn/selected_battle_card") > 3) {
+  if (player.getData("skyhighheroes:dyn/selected_battle_card") > battleCardAmount) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
   };
   return true;
 };
 
-function cycleDownCard(player, manager) {
+function cycleDownCard(player, manager, battleCardAmount) {
+  if (typeof battleCardAmount === "undefined") {
+    battleCardAmount = 3;
+  };
   manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
   if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
-    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 3);
+    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", battleCardAmount);
   };
   return true;
 };
@@ -869,3 +749,142 @@ function change(entity, manager, map, tempVar, stableRate, clothingVar) {
     };
   };
 };
+
+function initEquipment(hero, transformed, color) {
+  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:" + color + transformed + "'s Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Katanas"));
+  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:" + color + transformed + "'s Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Scythe"));
+  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:" + color + transformed + "'s Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Rifle"));
+  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:" + color + transformed + "'s Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Shield"));
+  hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:" + color + transformed + "'s Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Pickaxe"));
+  hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:" + color + transformed + "'s Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == color + transformed + "'s Shovel"));
+};
+
+function tempProfiles() {
+  var obj = [
+    { clothingType: 0, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
+    { clothingType: 0, biome: "Frozen", tempChangeTicks: -1000.0 },
+    { clothingType: 0, biome: "Ice", tempChangeTicks: -1000.0 },
+    { clothingType: 0, biome: "Beach", tempChangeTicks: 10000.0 },
+    { clothingType: 0, biome: "Desert", tempChangeTicks: 400.0 },
+    { clothingType: 0, biome: "Hell", tempChangeTicks: 100.0 },
+    { clothingType: 0, biome: "Jungle", tempChangeTicks: 500.0 },
+    { clothingType: 0, biome: "Mesa", tempChangeTicks: 1000.0 },
+    { clothingType: 0, biome: "Savanna", tempChangeTicks: 2000.0 },
+    { clothingType: 0, biome: "Swampland", tempChangeTicks: 1000.0 },
+    { clothingType: 1, biome: "Frozen", tempChangeTicks: -1000.0 },
+    { clothingType: 1, biome: "Ice", tempChangeTicks: -1000.0 },
+    { clothingType: 1, biome: "Cold Taiga", tempChangeTicks: -2000.0 },
+    { clothingType: 1, biome: "Cold Beach", tempChangeTicks: -3000.0 },
+    { clothingType: 1, biome: "Extreme", tempChangeTicks: -4000.0 },
+    { clothingType: 1, biome: "Mega", tempChangeTicks: -5000.0 },
+    { clothingType: 1, biome: "Stone Beach", tempChangeTicks: -3000.0 },
+    { clothingType: 2, biome: "Ice", tempChangeTicks: -300.0 },
+    { clothingType: 2, biome: "Frozen", tempChangeTicks: -300.0 },
+    { clothingType: 2, biome: "Cold Taiga", tempChangeTicks: -500.0 },
+    { clothingType: 2, biome: "Cold Beach", tempChangeTicks: -1000.0 },
+    { clothingType: 2, biome: "Extreme", tempChangeTicks: -1000.0 },
+    { clothingType: 2, biome: "Mega", tempChangeTicks: -1000.0 },
+    { clothingType: 2, biome: "Stone", tempChangeTicks: -1000.0 },
+    { clothingType: 2, biome: "Birch", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Flower", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Forest", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Mesa", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Plains", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Roofed", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Sunflower", tempChangeTicks: -10000.0 },
+    { clothingType: 2, biome: "Taiga", tempChangeTicks: -2500.0 },
+    { clothingType: 3, biome: "River", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Sunflower", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Stone", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Roofed", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Plains", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Forest", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Flower", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Birch", tempChangeTicks: 5000.0 },
+    { clothingType: 3, biome: "Mushroom", tempChangeTicks: 2000.0 },
+    { clothingType: 3, biome: "Savanna", tempChangeTicks: 1000.0 },
+    { clothingType: 3, biome: "Beach", tempChangeTicks: 800.0 },
+    { clothingType: 3, biome: "Mesa", tempChangeTicks: 500.0 },
+    { clothingType: 3, biome: "Jungle", tempChangeTicks: 160.0 },
+    { clothingType: 3, biome: "Swampland", tempChangeTicks: 160.0 },
+    { clothingType: 3, biome: "Hell", tempChangeTicks: 80.0 },
+    { clothingType: 3, biome: "Desert", tempChangeTicks: 100.0 },
+    { clothingType: 4, biome: "Cold Taiga", tempChangeTicks: -5000.0 },
+    { clothingType: 4, biome: "Frozen", tempChangeTicks: -1000.0 },
+    { clothingType: 4, biome: "Ice", tempChangeTicks: -1000.0 },
+    { clothingType: 4, biome: "Beach", tempChangeTicks: 10000.0 },
+    { clothingType: 4, biome: "Desert", tempChangeTicks: 400.0 },
+    { clothingType: 4, biome: "Hell", tempChangeTicks: 100.0 },
+    { clothingType: 4, biome: "Jungle", tempChangeTicks: 500.0 },
+    { clothingType: 4, biome: "Mesa", tempChangeTicks: 1000.0 },
+    { clothingType: 4, biome: "Savanna", tempChangeTicks: 2000.0 },
+    { clothingType: 4, biome: "Swampland", tempChangeTicks: 1000.0 }
+  ];
+  return obj
+};
+
+function initProfiles(hero, uuid) {
+  hero.addAttribute("SPRINT_SPEED", 0.2, 1);
+  hero.addAttribute("STEP_HEIGHT", 0.5, 0);
+  hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
+  hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
+  hero.addAttribute("KNOCKBACK", 2.5, 0);
+  hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
+  hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
+  hero.addAttributeProfile("INACTIVE", inactiveProfile);
+  hero.addAttributeProfile("SWORD", swordProfile);
+  hero.addAttributeProfile("SHIELD", shieldProfile);
+  hero.addAttributeProfile("FROZEN", frozenProfile);
+  hero.addAttributeProfile("COLD3", cold3Profile);
+  hero.addAttributeProfile("COLD2", cold2Profile);
+  hero.addAttributeProfile("COLD1", cold1Profile);
+  hero.addAttributeProfile("HOT1", hot1Profile);
+  hero.addAttributeProfile("HOT2", hot2Profile);
+  hero.addAttributeProfile("HOT3", hot3Profile);
+  hero.addAttributeProfile("FIRE", fireProfile);
+  hero.setAttributeProfile((entity) => {
+    if (entity.getUUID() != uuid) {
+      return "INACTIVE";
+    };
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getUUID() == uuid) {
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "FROZEN";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "COLD3";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.85 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.5 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "COLD2";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "COLD1";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") == 0 || (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.01 && entity.getData("skyhighheroes:dyn/body_temperature") <= 0.01) || (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "INACTIVE";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "HOT1";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.9 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.55 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "HOT2";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "HOT3";
+      };
+      if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.4 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+        return "FIRE";
+      };
+    };
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+      if (entity.getData("fiskheroes:shield_blocking")) {
+        return "SHIELD";
+      };
+      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 ) {
+        return "SWORD";
+      };
+      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
+        return null;
+      };
+    };
+  });
+}

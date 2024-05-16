@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:chase/chase_stelar_nebula_burst_front",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/sword_front_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/chase_stelar_nebula_burst_front_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(29 - ((entity.getData('skyhighheroes:dyn/nebula_burst') ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/nebula_burst_timer') + (entity.getData('skyhighheroes:dyn/nebula_burst') ? 29 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 29 : 0))), (entity.getData('skyhighheroes:dyn/nebula_burst') && entity.getHeldItem().isEmpty() ? 15 : 1)), (entity.getData('skyhighheroes:dyn/nebula_burst') && entity.getHeldItem().isEmpty() ? 20 : 15)) | 0",
+      "values": {
+        "min": 1,
+        "max": 20
+      }
+    }
+  },
+  "isDynamic": true
+}

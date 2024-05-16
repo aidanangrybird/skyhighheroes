@@ -198,9 +198,6 @@ function initMegaBuster(renderer, color, color_other) {
   bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color_other, [
     { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
   ]);
-  bindBeam(renderer, "fiskheroes:lightning_cast", "skyhighheroes:wave_discharge", "rightArm", color_other, [
-    { "firstPerson": [-8.0, 4.5, -10.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]);
 };
 
 function initNV(renderer) {
@@ -424,10 +421,6 @@ function initHead(renderer) {
   headFrontWaveChanging.large = true;
   return {
     render: (entity, renderLayer) => {
-      //sword.unfold = entity.getInterpolatedData("skyhighheroes:dyn/sword_timer");
-      //sword.opacity = Math.min(Math.max((2 * entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")), 0), 1);
-      //sword.setOffset(1.5, Math.min(Math.max((16.0 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) - 4), 0), 8), 0.0);
-      //sword.setScale(Math.min(Math.max((2 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer")) + 0.5), 0), 1), Math.min(Math.max((1.75 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1), Math.min(Math.max((1 * (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"))), 0), 1));
       if (renderLayer == "CHESTPLATE") {
         if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))) {
           if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
