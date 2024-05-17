@@ -57,7 +57,7 @@ loadTextures({
   "transer_wave_change": "skyhighheroes:chase/chase_stelar_transer_wave_change.tx.json",
   "visualizer_lights": "skyhighheroes:chase/chase_stelar_visualizer_lights.tx.json",
   "visualizer_lights_wave_change": "skyhighheroes:chase/chase_stelar_visualizer_lights_wave_change.tx.json",
-  "transer_default": "skyhighheroes:stelar_transer_leo",
+  "transer_default": "skyhighheroes:chase/chase_stelar_transer",
   "transer_default_lights": "skyhighheroes:chase/chase_stelar_transer_lights",
   "shield": "skyhighheroes:chase/chase_stelar_shield",
   "shield_lights": "skyhighheroes:chase/chase_stelar_shield_lights",

@@ -55,7 +55,7 @@ loadTextures({
   "transer_wave_change": "skyhighheroes:aidan/aidan_stelar_transer_wave_change.tx.json",
   "visualizer_lights": "skyhighheroes:aidan/aidan_stelar_visualizer_lights.tx.json",
   "visualizer_lights_wave_change": "skyhighheroes:aidan/aidan_stelar_visualizer_lights_wave_change.tx.json",
-  "transer_default": "skyhighheroes:stelar_transer_pegasus",
+  "transer_default": "skyhighheroes:aidan/aidan_stelar_transer",
   "transer_default_lights": "skyhighheroes:aidan/aidan_stelar_transer_lights",
   "shield": "skyhighheroes:aidan/aidan_stelar_shield",
   "shield_lights": "skyhighheroes:aidan/aidan_stelar_shield_lights",
