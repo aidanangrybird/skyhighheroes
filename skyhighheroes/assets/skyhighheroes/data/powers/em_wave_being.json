@@ -98,6 +98,9 @@
     "fiskheroes:damage_immunity|hellfire": {
       "damageType": "HELLFIRE"
     },
+    "fiskheroes:damage_immunity|adamantium": {
+      "damageType": "ADAMANTIUM"
+    },
     "fiskheroes:damage_immunity|hulk": {
       "damageType": "HULK"
     },

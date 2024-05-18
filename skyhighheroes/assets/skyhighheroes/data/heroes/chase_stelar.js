@@ -173,6 +173,8 @@ function init(hero) {
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "hellfire":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+          case "adamantium":
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "mineral":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "shockwave":
