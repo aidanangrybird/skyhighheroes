@@ -1,5 +1,5 @@
 {
-  "name": "Battle Cards",
+  "name": "Pryetak Nebula's Battle Cards",
   "value": 1,
   "modifiers": {
     "fiskheroes:telekinesis": {
@@ -47,63 +47,6 @@
       "soundEvents": {
         "SWITCH": "fiskheroes:gravity_manip_switch",
         "WAVE": "fiskheroes:gravity_manip_wave"
-      }
-    },
-    "fiskheroes:shield|barrier": {
-      "shield": {
-        "health": 300.0,
-        "regeneration": 25.0,
-        "recoveryDelay": 200
-      },
-      "coverage": {
-        "yawRadius": 360.0,
-        "pitchRadius": 360.0,
-        "yawOffset": 0.0,
-        "pitchOffset": 0.0
-      },
-      "knockback": 0.0,
-      "isToggle": true,
-      "soundEvents": {
-        "BLOCK_START": "skyhighheroes:forcefield",
-        "DEFLECT": "skyhighheroes:forcefield_deflect"
-      }
-    },
-    "fiskheroes:shield|sword": {
-      "shield": {
-        "health": 300.0,
-        "regeneration": 25.0,
-        "recoveryDelay": 200
-      },
-      "coverage": {
-        "yawRadius": 130.0,
-        "pitchRadius": 180.0,
-        "yawOffset": 0.0,
-        "pitchOffset": 0.0
-      },
-      "knockback": 0.0,
-      "isToggle": true,
-      "soundEvents": {
-      }
-    },
-    "fiskheroes:blade": {
-      "isToggle": true
-    },
-    "fiskheroes:equipment": {
-      "equipment": {
-        "fiskheroes:throwing_star": {
-          "cooldown": 10,
-          "uses": 100,
-          "damageProfile": {
-            "damage": 10.0,
-            "types": {
-              "WAVE_SHURIKEN": 1.0
-            },
-            "properties": {
-              "DAMAGE_DROPOFF": 0.0,
-              "HIT_COOLDOWN": 0
-            }
-          }
-        }
       }
     }
   }

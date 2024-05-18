@@ -12,7 +12,7 @@ function init(hero) {
   
   stelar.initEquipment(hero, "Pryetak Nebula", "\u00A72")
 
-  hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards_chase", "skyhighheroes:em_mega_buster");
+  hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_chase", "skyhighheroes:em_mega_buster");
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => stelar.cycleClothes(player, manager), "Change Clothes", 1);
