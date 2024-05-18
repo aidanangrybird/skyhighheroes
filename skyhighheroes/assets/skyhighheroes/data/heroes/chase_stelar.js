@@ -64,7 +64,7 @@ function init(hero) {
       PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Nebula Burst\u00A7r!");
     };
     return true;
-  }, "Battle Card! Energy Blast!", 2);
+  }, "Battle Card! Nebula Burst!", 2);
   //hero.addKeyBindFunc("BATTLE_CARD_4", activateBattleCard, "Creetle", 2);
   hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => stelar.resetBattleCard(player, manager), "Return To Mega Buster", 2);
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
