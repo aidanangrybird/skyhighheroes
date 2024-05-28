@@ -134,7 +134,8 @@ function init(hero) {
   hero.setModifierEnabled((entity, modifier) => {
     switch (modifier.name()) {
       case "fiskheroes:damage_immunity":
-        switch (modifier.id()) {
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
+        /* switch (modifier.id()) {
           case "explosion":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "magic":
@@ -156,9 +157,9 @@ function init(hero) {
           case "cold":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "energy":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "electricity":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "sound":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "thorns":
@@ -178,7 +179,7 @@ function init(hero) {
           case "mineral":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "shockwave":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "atlantean_steel":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "eternium":
@@ -192,26 +193,26 @@ function init(hero) {
           case "cs":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           case "force":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "jv":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "primordial":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "gale":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "bifrost":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "ice":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "positive":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "cursed":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "cancel":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           default:
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-      };
+        }; */
       case "fiskheroes:controlled_flight":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
         /*switch (modifier.id()) {
