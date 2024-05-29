@@ -131,8 +131,8 @@ function init(hero) {
   hero.setModifierEnabled((entity, modifier) => {
     switch (modifier.name()) {
       case "fiskheroes:damage_immunity":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
-        /* switch (modifier.id()) {
+        //return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
+        switch (modifier.id()) {
           case "explosion":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
           case "magic":
@@ -209,7 +209,7 @@ function init(hero) {
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
           default:
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-        }; */
+        };
       case "fiskheroes:controlled_flight":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
         /*switch (modifier.id()) {
