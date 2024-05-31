@@ -1,0 +1,17 @@
+{
+  "texture": {
+    "in": "skyhighheroes:fire/astro/fire_tenma_boots_lights",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_rocket_legs"
+      },
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:tenma_rockets_xor"
+      }
+    ],
+    "out": "skyhighheroes:generated/fire_tenma_rocket_legs_lights"
+  },
+  "isDynamic": true
+}
