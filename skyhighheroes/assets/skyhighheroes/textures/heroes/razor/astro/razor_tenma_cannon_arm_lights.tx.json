@@ -1,0 +1,13 @@
+{
+  "texture": {
+    "in": "skyhighheroes:aidan/astro/aidan_tenma_cannon_lights",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_boy_cannon_arms_lights"
+      }
+    ],
+    "out": "skyhighheroes:generated/aidan_tenma_cannon_arms_lights"
+  },
+  "isDynamic": true
+}
