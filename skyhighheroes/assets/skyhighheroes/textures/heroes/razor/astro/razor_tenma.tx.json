@@ -1,5 +1,5 @@
 {
-  "texture": "skyhighheroes:aidan/astro/aidan_tenma_<CLOTHING><FLYING>",
+  "texture": "skyhighheroes:razor/astro/razor_tenma_<CLOTHING><FLYING>",
   "getters": {
     "CLOTHING": {
       "key": "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",

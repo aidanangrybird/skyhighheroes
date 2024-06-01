@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:aidan/astro/aidan_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighheroes:razor/astro/razor_tenma_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_cannons"
       }
     ],
-    "out": "skyhighheroes:generated/aidan_tenma_<CLOTHING><FLYING>_cannon_arms"
+    "out": "skyhighheroes:generated/razor_tenma_<CLOTHING><FLYING>_cannon_arms"
   },
   "getters": {
     "CLOTHING": {
