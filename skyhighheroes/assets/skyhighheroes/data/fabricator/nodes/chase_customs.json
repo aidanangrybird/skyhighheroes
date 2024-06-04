@@ -13,7 +13,7 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Exist as CaspianButMC"
+        "translate": "Exist as C_sp"
       },
       "condition": {
         "variables": {
