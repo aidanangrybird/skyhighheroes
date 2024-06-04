@@ -189,7 +189,7 @@ function initEffects(renderer) {
   hailCannonFront.anchor.set("rightArm");
   hailCannonFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
   hailCannonFront.large = true;
-  //Wind cannon
+  //Derecho
   //Right
   derechoRight = renderer.createEffect("fiskheroes:shield");
   derechoRight.texture.set("derecho_sides");
