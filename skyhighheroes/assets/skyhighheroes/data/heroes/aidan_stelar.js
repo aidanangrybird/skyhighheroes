@@ -82,8 +82,8 @@ function init(hero) {
     manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
     manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
     manager.setData(player, "skyhighheroes:dyn/predation", false);
-    manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
-    manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
+    manager.setData(player, "skyhighheroes:dyn/head_timer", 0);
+    manager.setData(player, "skyhighheroes:dyn/head", false);
     if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
       manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
     };
@@ -101,8 +101,8 @@ function init(hero) {
     manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
     manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
     manager.setData(player, "skyhighheroes:dyn/predation", false);
-    manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
-    manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
+    manager.setData(player, "skyhighheroes:dyn/head_timer", 0);
+    manager.setData(player, "skyhighheroes:dyn/head", false);
     manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
     return true;
   }, "EM Wave Change!", 5);
@@ -362,7 +362,7 @@ function init(hero) {
       manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       manager.setData(entity, "skyhighheroes:dyn/sword", false);
-      manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
+      manager.setData(entity, "skyhighheroes:dyn/head", false);
     };
     if (entity.getWornChestplate().getEnchantmentLevel(35) == -1) {
       manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
@@ -401,41 +401,41 @@ function init(hero) {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0.45 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.55) {
       if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
         entity.playSound("skyhighheroes:wave.equip", 1, 1);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
+        manager.setData(entity, "skyhighheroes:dyn/head", false);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "fiskheroes:shield", true);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
         entity.playSound("skyhighheroes:wave.equip", 1, 1);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "fiskheroes:shield", true);
         manager.setData(entity, "fiskheroes:blade", true);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
         entity.playSound("skyhighheroes:wave.equip", 1, 1);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "fiskheroes:utility_belt_type", 1);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
         entity.playSound("skyhighheroes:wave.equip", 1, 1);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
         entity.playSound("skyhighheroes:wave.equip", 1, 1);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
         entity.playSound("skyhighheroes:wave.equip", 1, 1);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       };
     };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && ((entity.getData("fiskheroes:flight_boost_timer") > 0 && entity.isSprinting()) || !entity.getHeldItem().isEmpty())) {
-      manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
+      manager.setData(entity, "skyhighheroes:dyn/head", false);
     };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("fiskheroes:flight_boost_timer") < 1 && !entity.isSprinting()) && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/predation_timer") == 0) {
       if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
@@ -443,26 +443,26 @@ function init(hero) {
         manager.setData(entity, "fiskheroes:shield", true);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "fiskheroes:shield", true);
         manager.setData(entity, "fiskheroes:blade", true);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "fiskheroes:utility_belt_type", 1);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       };
       if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
+        manager.setData(entity, "skyhighheroes:dyn/head", true);
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
       };
     };
