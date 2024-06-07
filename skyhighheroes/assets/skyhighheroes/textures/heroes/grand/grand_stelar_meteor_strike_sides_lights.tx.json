@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:grand/grand_stelar_meteor_strike_sides_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/omega_xis_bottom_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/grand_stelar_meteor_strike_sides_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(29 - (((entity.getData('skyhighheroes:dyn/meteor_strike')) ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/meteor_strike_timer') + ((entity.getData('skyhighheroes:dyn/meteor_strike')) ? 29 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 29 : 0))), ((entity.getData('skyhighheroes:dyn/meteor_strike') && entity.getHeldItem().isEmpty()) ? 17 : 3)), ((entity.getData('skyhighheroes:dyn/meteor_strike') && entity.getHeldItem().isEmpty()) ? 29 : 17)) | 0",
+      "values": {
+        "min": 3,
+        "max": 29
+      }
+    }
+  },
+  "isDynamic": true
+}

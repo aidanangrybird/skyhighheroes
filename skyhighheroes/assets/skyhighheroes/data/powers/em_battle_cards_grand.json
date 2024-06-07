@@ -1,0 +1,61 @@
+{
+  "name": "Blazing Singularity's Battle Cards",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:telekinesis": {
+      "telekinesis": {
+        "crushMelons": true,
+        "crushThrowables": true,
+        "squeezeChickens": true,
+        "explodeCreepers": true,
+        "destroyInanimates": true
+      },
+      "canGrab": {
+        "mobs": true,
+        "items": true,
+        "projectiles": true,
+        "inanimates": true
+      },
+      "range": 20.0
+    },
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_ENERGY": 1.0,
+          "WAVE_EXPLOSION": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HIT_COOLDOWN": 5,
+          "HEAT_TRANSFER": 80
+        }
+      },
+      "range": 48.0,
+      "radius": 0.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:fireball": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_FIRE": 1.0,
+          "WAVE_EXPLOSION": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HEAT_TRANSFER": 20,
+          "IGNITE": 3
+        }
+      },
+      "radius": 5,
+      "cooldownTime": 5,
+      "soundEvents": {
+        "SHOOT": "fiskheroes:fireball"
+      }
+    }
+  }
+}

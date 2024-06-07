@@ -217,7 +217,7 @@ function initEffects(renderer) {
   starCollapseFront.large = true;
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword", "sword_lights");
+  swordMain.texture.set("sword", null);
   swordMain.anchor.set("rightArm");
   swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
   swordMain.large = true;
