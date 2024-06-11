@@ -142,12 +142,6 @@
         "maskToggleTicks": 10
       }
     },
-    "skyhighheroes:boom_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A75Normal \u00A75Style\u00A7r"
-      },
-      "martian_manhunter_comics" : "\u00A75Martian \u00A75Manhunter \u00A75(Comics) \u00A75Style\u00A7r"
-    },
     "skyhighheroes:chase_stelar": {
       "$DEFAULT": {
         "maskToggleTicks": 10
