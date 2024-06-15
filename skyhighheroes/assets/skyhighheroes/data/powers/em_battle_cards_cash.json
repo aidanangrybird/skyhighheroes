@@ -1,0 +1,56 @@
+{
+  "name": "Amethyst Galaxy's Battle Cards",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_LIGHT": 1.0,
+          "WAVE_EXPLOSION": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "LIGHTNING_STRIKE": 0.01,
+          "ADD_KNOCKBACK": 5.0,
+          "HIT_COOLDOWN": 10
+        }
+      },
+      "range": 64.0,
+      "radius": 0.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:charged_beam": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_ENERGY": 1.0,
+          "WAVE_EXPLOSION": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HIT_COOLDOWN": 5,
+          "HEAT_TRANSFER": 80
+        }
+      },
+      "chargeTime": 10,
+      "duration": 240,
+      "cooldownTime": 20,
+      "range": 48.0,
+      "radius": 1.0
+    },
+    "fiskheroes:gravity_manipulation": {
+      "affectsUser": false,
+      "minGravity": 0.1,
+      "maxGravity": 16.0,
+      "range": 48.0,
+      "radius": 32.0,
+      "soundEvents": {
+        "SWITCH": "fiskheroes:gravity_manip_switch",
+        "WAVE": "fiskheroes:gravity_manip_wave"
+      }
+    }
+  }
+}

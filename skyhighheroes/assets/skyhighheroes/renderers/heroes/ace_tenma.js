@@ -27,8 +27,8 @@ loadTextures({
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  rockets = tenma.initCustomDualBoosters(renderer, 0x0000FF, 0xFF0000);
-  tenma.initDualBeams(renderer, 0x0000FF, 0xFF0000);
+  rockets = tenma.initCustomBoosters(renderer, 0xFF0000);
+  tenma.initBeams(renderer, 0xFF0000);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:ace_tenma_speed");
 };
 

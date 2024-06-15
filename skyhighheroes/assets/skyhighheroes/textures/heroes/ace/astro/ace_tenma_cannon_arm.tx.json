@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:fire/astro/fire_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighheroes:ace/astro/ace_tenma_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_cannons"
       }
     ],
-    "out": "skyhighheroes:generated/fire_tenma_<CLOTHING><FLYING>_cannon_arms"
+    "out": "skyhighheroes:generated/ace_tenma_<CLOTHING><FLYING>_cannon_arms"
   },
   "getters": {
     "CLOTHING": {

@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:ace_stelar",
+  "display": {
+    "hideUntilAvailable": true
+  },
+  "requirements": [
+    "skyhighheroes:ace_customs"
+  ],
+  "price": {
+    "XP_LEVELS": 1
+  }
+}

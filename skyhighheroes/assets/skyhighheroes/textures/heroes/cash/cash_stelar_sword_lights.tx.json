@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:cash/cash_stelar_sword_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/sword_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/cash_stelar_sword_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(29 - ((entity.getData('skyhighheroes:dyn/sword') ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/sword_timer') + (entity.getData('skyhighheroes:dyn/sword') ? 29 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 29 : 0))), (entity.getData('skyhighheroes:dyn/sword') && entity.getHeldItem().isEmpty() ? 15 : 1)), (entity.getData('skyhighheroes:dyn/sword') && entity.getHeldItem().isEmpty() ? 24 : 15)) | 0",
+      "values": {
+        "min": 1,
+        "max": 24
+      }
+    }
+  },
+  "isDynamic": true
+}

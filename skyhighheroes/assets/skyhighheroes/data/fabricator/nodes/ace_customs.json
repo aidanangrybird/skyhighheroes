@@ -1,0 +1,26 @@
+{
+  "display": {
+    "name": "Ace's Custom Suits",
+    "hideUntilAvailable": true,
+    "icon": {
+      "texture":  "skyhighheroes:textures/gui/nodes/ace_head.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Exist as FieryAceOfSpades"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+          },
+        "check": "player.getUUID() == '87fa6187-4fa6-4dc6-8742-19a2b67c4cc0'"
+      }
+    }
+  }
+}

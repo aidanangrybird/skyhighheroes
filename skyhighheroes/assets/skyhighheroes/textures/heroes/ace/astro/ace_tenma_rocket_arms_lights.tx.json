@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:fire/astro/fire_tenma_arms_lights",
+    "in": "skyhighheroes:ace/astro/ace_tenma_arms_lights",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,7 +11,7 @@
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighheroes:generated/fire_tenma_rocket_arms_lights"
+    "out": "skyhighheroes:generated/ace_tenma_rocket_arms_lights"
   },
   "isDynamic": true
 }
