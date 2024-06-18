@@ -128,7 +128,7 @@ function init(hero) {
   hero.setHasProperty(hasProperty);
   hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
   stelar.initProfiles(hero, uuid);
-  hero.supplyFunction("canAim", entity => stelar.canAim(entity));
+  hero.supplyFunction("canAim", entity => stelar.canAim(entity, "jet_streak"));
   hero.setModifierEnabled((entity, modifier) => {
     switch (modifier.name()) {
       case "fiskheroes:damage_immunity":

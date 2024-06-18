@@ -11,7 +11,7 @@
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(29 - ((entity.getData('skyhighheroes:dyn/head') ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/head_timer') + (entity.getData('skyhighheroes:dyn/head') ? 29 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 29 : 0))), (entity.getData('skyhighheroes:dyn/head') || !entity.getHeldItem().isEmpty() ? 1 : 15)), (entity.getData('skyhighheroes:dyn/head') || !entity.getHeldItem().isEmpty() ? 15 : 21)) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 6 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 6 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 6 : 0) | 0",
+      "key": "Math.min(Math.max(Math.ceil(29 - ((entity.getData('skyhighheroes:dyn/amethyst') ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/amethyst_timer') + (entity.getData('skyhighheroes:dyn/amethyst') ? 29 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 29 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 29 : 0))), (entity.getData('skyhighheroes:dyn/amethyst') || !entity.getHeldItem().isEmpty() ? 1 : 15)), (entity.getData('skyhighheroes:dyn/amethyst') || !entity.getHeldItem().isEmpty() ? 15 : 21)) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 6 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 6 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 6 : 0) | 0",
       "values": {
         "min": 1,
         "max": 21
