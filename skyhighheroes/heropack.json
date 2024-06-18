@@ -174,12 +174,6 @@
         "name": "\u00A75Normal \u00A75Style\u00A7r"
       },
       "mysterio" : "\u00A75Mysterio \u00A75Style\u00A7r"
-    },
-    "skyhighheroes:tysen_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A75Normal \u00A75Style\u00A7r"
-      },
-      "martian_manhunter" : "\u00A75Martian \u00A75Manhunter \u00A75Style\u00A7r"
     }
   }
 }
