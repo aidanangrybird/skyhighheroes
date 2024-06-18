@@ -16,7 +16,7 @@
         "projectiles": true,
         "inanimates": true
       },
-      "range": 20.0
+      "range": 30.0
     },
     "fiskheroes:charged_beam": {
       "damageProfile": {
