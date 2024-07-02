@@ -306,13 +306,11 @@ function init(hero, uuid, base, head, transformed, color) {
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.addDamageProfile("SWORD", {
     "types": {
-      "SHARP": 0.0,
       "WAVE_SHARP": 1.0
     }
   });
   hero.addDamageProfile("MAIN", {
     "types": {
-      "BLUNT": 0.0,
       "WAVE_BLUNT": 1.0
     }
   });
