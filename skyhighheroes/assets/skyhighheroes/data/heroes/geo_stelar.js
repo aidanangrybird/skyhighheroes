@@ -303,7 +303,7 @@ function init(hero) {
   });
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
   hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
-  hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
+  //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.addDamageProfile("SWORD", {
     "types": {
