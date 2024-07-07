@@ -2,6 +2,24 @@
   "name": "Robotic Body",
   "value": 1,
   "modifiers": {
+    "fiskheroes:transformation|power_state": {
+      "key": "POWER_STATE",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/power_state",
+        "timerData": "skyhighheroes:dyn/power_state_timer",
+        "time": 100
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|system_test": {
+      "key": "SYSTEM_TEST",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/system_test",
+        "timerData": "skyhighheroes:dyn/system_test_timer",
+        "time": 500
+      },
+      "isToggle": false
+    },
     "fiskheroes:potion_immunity": {
       "potionEffects": ["minecraft:nausea", "minecraft:poison", "minecraft:wither", "minecraft:weakness", "minecraft:slowness", "minecraft:blindness", "minecraft:hunger", "minecraft:instant_damage", "minecraft:mining_fatigue", "minecraft:haste", "minecraft:fire_resistance", "minecraft:health_boost", "minecraft:instant_health", "minecraft:jump_boost", "minecraft:regeneration", "minecraft:resistance", "minecraft:saturation", "minecraft:speed", "minecraft:strength", "minecraft:water_breathing"]
     },

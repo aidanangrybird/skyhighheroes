@@ -20,6 +20,7 @@ function init(hero) {
   hero.addAttribute("IMPACT_DAMAGE", 25.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
 
+  //hero.addKeyBind("POWER_STATE", "Power Up/Shut Down", 2);
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBind("ENERGY_PROJECTION", "Charged Arm Cannons", 2);
   hero.addKeyBind("DUAL_ARM_CANNONS", "Charged Arm Cannons", 2);
@@ -34,7 +35,9 @@ function init(hero) {
   
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
-  hero.setHasPermission(hasPermission);
+  hero.setHasPermission(hasPermission);/* 
+  hero.addAttributeProfile("OFFLINE", offlineProfile);
+  hero.setAttributeProfile(getAttributeProfile); */
   hero.setModifierEnabled(isModifierEnabled);
   hero.supplyFunction("canAim", canAim);
   hero.setKeyBindEnabled(isKeyBindEnabled);
@@ -95,19 +98,24 @@ function isModifierEnabled(entity, modifier) {
       return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
     case "fiskheroes:super_speed":
       return entity.getData("fiskheroes:flight_timer") == 0;
-    case "fiskheroes:shield":
-      return !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:energy_projection_timer") == 0;
     case "fiskheroes:leaping":
-      return !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
+      return entity.getData("fiskheroes:aiming_timer") == 0 && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
     case "fiskheroes:arrow_catching":
-      return !entity.getData("fiskheroes:aiming") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
+      return entity.getData("fiskheroes:aiming_timer") == 0 && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;/* 
+    case "fiskheroes:transformation":
+      switch (modifier.id()) {
+        case "power_state":
+          return true;
+      }; */
     default:
-      return !entity.isDisplayStand();
+      return entity.getData("skyhighheroes:dyn/power_state_timer") == 1;
   };
 };
 
 function isKeyBindEnabled(entity, keyBind) {
-  switch (keyBind) {
+  switch (keyBind) {/* 
+    case "POWER_STATE":
+      return true; */
     case "ARM_CANNON":
       return entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3;
     case "SHIELD_THROW":
@@ -149,6 +157,22 @@ function hasProperty(entity, property) {
 
 function hasPermission(entity, permission) {
   return permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD";
+};
+
+function offlineProfile(profile) {
+  profile.addAttribute("BASE_SPEED", -1.0, 1);
+  profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+  profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+  profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
+  profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+};
+
+function getAttributeProfile(entity) {
+  if (entity.getData("skyhighheroes:dyn/power_state_timer") < 1) {
+    return "OFFLINE";
+  } else {
+    return null;
+  };
 };
 
 function canAim(entity) {

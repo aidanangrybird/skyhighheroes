@@ -2,6 +2,24 @@
   "name": "Jet-powered Flight",
   "value": 1,
   "modifiers": {
+    "fiskheroes:transformation|arm": {
+      "key": "ARM_BOOSTERS",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/arm_boosters",
+        "timerData": "skyhighheroes:dyn/arm_boosters_timer",
+        "time": 15
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|boots": {
+      "key": "BOOT_BOOSTERS",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/boot_boosters",
+        "timerData": "skyhighheroes:dyn/boot_boosters_timer",
+        "time": 15
+      },
+      "isToggle": true
+    },
     "fiskheroes:controlled_flight": {
       "speed": 0.1,
       "boostSpeed": 0.4,
