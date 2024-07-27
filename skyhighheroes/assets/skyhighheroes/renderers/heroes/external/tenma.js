@@ -118,13 +118,7 @@ function initAstroAnimations(renderer) {
     .priority = -9.5;
   //Landing
   addAnimationWithData(renderer, "astro.LAND", "skyhighheroes:astro_landing", "skyhighheroes:dyn/superhero_landing_timer")
-    .priority = -8;/* 
-  addAnimationWithData(renderer, "astro.POWER_STATE", "skyhighheroes:astro_power_state", "skyhighheroes:dyn/power_state_timer")
-    .setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/power_state_timer") < 1)
-    .priority = 7;
-  addAnimation(renderer, "astro.POWERED_DOWN", "skyhighheroes:astro_powered_down")
-    .setData((entity, data) => data.load(1.0))
-    .setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/power_state_timer") == 0); */
+    .priority = -8;
   addAnimationWithData(renderer, "astro.LAND_BOOST", "skyhighheroes:astro_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
     .priority = -8;
   addAnimationWithData(renderer, "astro.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
