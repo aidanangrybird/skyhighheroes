@@ -1,19 +1,21 @@
-{data_0} = curve {data_0}
-{data_out} = (0.5sin({data_0}2pi-0.5pi)+0.5)
+{data} = -1*{data}+1
+;animate2(input, duration, start, ramp up, ramp down)
+{part0} = curve(if({data} != 1, animate2({data}, 1.0, 0.0, 0.25, 0.35), 0))
+{part1} = curve(if({data} != 1, animate2({data}, 0.9, 0.1, 0.15, 0.35), 0))
+{part2} = curve(if({data} != 1, animate2({data}, 0.75, 0.25, 0.2, 0.35), 0))
+{part3} = curve(if({data} != 1, animate2({data}, 0.6, 0.4, 0.25, 0.35), 0))
+{rightArm} = curve(if({data} != 1, animate2({data}, 0.6, 0.4, 0.25, 0.35), 0))
 
-{leftArm_rotX} @ {data_0} -'> 0.3 - if({data_1}, 0, 0.3{data_out}) - if({data_1}, 0, 180'{data_out})
-{leftArm_rotY} @ {data_0} -'> if({data_1}, 0, 0'{data_out}) + if({data_1}, 0, 85'{data_out})
-{leftArm_rotZ} @ {data_0} -'> 0.4 - if({data_1}, 0, 0.4{data_out})
+{leftArm_rotX} += 17'{part0} - 10'{part2} - 97'{part3}
+{leftArm_rotY} += -10'{part1} -50'{part2} + 111.5'{part3}
+{leftArm_rotZ} += 23'{part1} - 50'{part2} + 27'{part3}
 
-
-{rightArm_rotX} @ {data_0} -'> 0 + if({data_1}, {rightArm_rotX}, -180'{data_out})
-{rightArm_rotY} @ {data_0} -'> 0 + if({data_1}, {rightArm_rotY}, -0'{data_out})
-{rightArm_rotZ} @ {data_0} -'> 0 + if({data_1}, {rightArm_rotZ}, 180'{data_out})
-
-{data_thing} = if({data_1}, 0, {data_out})
+{rightArm_rotX} += -80'{part3} - 10'{part2}
+{rightArm_rotY} += 60'{part2} - 60'{part3}
+{rightArm_rotZ} += 78'{part3} + 12'{part2}
 
 out "firstPerson" (true)
-out "translate" (-0.35{data_thing}, 0, 0.15{data_thing})
-out "rotate" (-27{data_thing}, 0, 1, 0)
-out "rotate" (-20{data_thing}, 1, 0, 0)
-out "rotate" (-30{data_thing}, 0, 0, 1)
+out "translate" (-0.35{rightArm}, 0, 0.15{rightArm})
+out "rotate" (-27{rightArm}, 0, 1, 0)
+out "rotate" (-20{rightArm}, 1, 0, 0)
+out "rotate" (-30{rightArm}, 0, 0, 1)

@@ -7,7 +7,7 @@
       "transformation": {
         "toggleData": "skyhighheroes:dyn/predation",
         "timerData": "skyhighheroes:dyn/predation_timer",
-        "time": 15
+        "time": 20
       },
       "isToggle": true
     },

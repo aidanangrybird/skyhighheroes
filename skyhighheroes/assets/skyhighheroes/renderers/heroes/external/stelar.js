@@ -63,10 +63,7 @@ function addPredationAnimation(renderer, key, value) {
     anim = renderer.createResource("ANIMATION", value);
   };
   renderer.addCustomAnimation(key, anim);
-  anim.setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
-    data.load(1, entity.getData("skyhighheroes:dyn/predation"));
-  });
+  anim.setData((entity, data) => data.load(entity.getInterpolatedData("skyhighheroes:dyn/predation_timer")));
   anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") > 0)
   anim.priority = -9.75;
 };
@@ -180,7 +177,6 @@ function initStelarAnimations(renderer) {
   addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wall_ceiling_stand");
   addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:stelar_predation");
   addSwordAnimations(renderer, "stelar.SWORD", "skyhighheroes:stelar_sword");
-  addBasePredationAnimation(renderer, "stelar.PREDATION_BASE", "skyhighheroes:stelar_predation_base");
   //Flight
   addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/stelar_base_flight.anim.json");
   addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/stelar_holding_flight.anim.json");
