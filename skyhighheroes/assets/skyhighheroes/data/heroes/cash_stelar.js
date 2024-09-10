@@ -53,10 +53,10 @@ function init(hero) {
   hero.addKeyBindFunc("BATTLE_CARD_5", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
     if (PackLoader.getSide() == "CLIENT") {
-      PackLoader.printChat("\u00A7r<\u00A75Amethyst Galaxy\u00A7r> Battle Card Predation! \u00A75Asteroid Blast\u00A7r!");
+      PackLoader.printChat("\u00A7r<\u00A75Amethyst Galaxy\u00A7r> Battle Card Predation! \u00A75Planetary Blast\u00A7r!");
     };
     return true;
-  }, "Battle Card! Asteroid Blast!", 2);
+  }, "Battle Card! Planetary Blast!", 2);
   hero.addKeyBindFunc("BATTLE_CARD_6", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
     if (PackLoader.getSide() == "CLIENT") {
@@ -400,9 +400,9 @@ function init(hero) {
     var gravity_pulse = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
     manager.setData(entity, "skyhighheroes:dyn/gravity_pulse", gravity_pulse);
     manager.incrementData(entity, "skyhighheroes:dyn/gravity_pulse_timer", 10, 10, entity.getData("skyhighheroes:dyn/gravity_pulse"));
-    var asteroid_blast = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
-    manager.setData(entity, "skyhighheroes:dyn/asteroid_blast", asteroid_blast);
-    manager.incrementData(entity, "skyhighheroes:dyn/asteroid_blast_timer", 10, 10, entity.getData("skyhighheroes:dyn/asteroid_blast"));
+    var planetary_blast = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+    manager.setData(entity, "skyhighheroes:dyn/planetary_blast", planetary_blast);
+    manager.incrementData(entity, "skyhighheroes:dyn/planetary_blast_timer", 10, 10, entity.getData("skyhighheroes:dyn/planetary_blast"));
     var star_cutter = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 6 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
     manager.setData(entity, "skyhighheroes:dyn/star_cutter", star_cutter);
     manager.incrementData(entity, "skyhighheroes:dyn/star_cutter_timer", 10, 10, entity.getData("skyhighheroes:dyn/star_cutter"));

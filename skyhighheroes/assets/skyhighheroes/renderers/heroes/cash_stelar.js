@@ -16,9 +16,9 @@ loadTextures({
   "sword_wave_changing_lights": "skyhighheroes:cash/cash_stelar_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighheroes:cash/cash_stelar_sword_sides.tx.json",
   "sword_front": "skyhighheroes:cash/cash_stelar_sword_front.tx.json",
-  "asteroid_blast_sides": "skyhighheroes:cash/cash_stelar_asteroid_blast_sides.tx.json",
-  "asteroid_blast_front": "skyhighheroes:cash/cash_stelar_asteroid_blast_front.tx.json",
-  "asteroid_blast_front_lights": "skyhighheroes:cash/cash_stelar_asteroid_blast_front_lights.tx.json",
+  "planetary_blast_sides": "skyhighheroes:cash/cash_stelar_planetary_blast_sides.tx.json",
+  "planetary_blast_front": "skyhighheroes:cash/cash_stelar_planetary_blast_front.tx.json",
+  "planetary_blast_front_lights": "skyhighheroes:cash/cash_stelar_planetary_blast_front_lights.tx.json",
   "star_cutter_sides": "skyhighheroes:cash/cash_stelar_star_cutter_sides.tx.json",
   "star_cutter_front": "skyhighheroes:cash/cash_stelar_star_cutter_front.tx.json",
   "star_cutter_front_lights": "skyhighheroes:cash/cash_stelar_star_cutter_front_lights.tx.json",
@@ -79,7 +79,7 @@ function init(renderer) {
   initEffects(renderer);
   stelar.addAnimationWithData(renderer, "stelar.GALAXYS_PULSE_AIM", "skyhighheroes:stelar_aim", "skyhighheroes:dyn/gravity_manip_timer")
   .priority = 10;
-  stelar.addAnimationWithData(renderer, "stelar.ASTEROID_BLAST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
+  stelar.addAnimationWithData(renderer, "stelar.PLANETARY_BLAST_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
   stelar.addAnimationWithData(renderer, "stelar.STAR_CUTTER_AIM", "skyhighheroes:stelar_aim", "fiskheroes:beam_charge")
   .priority = 10;
@@ -88,7 +88,7 @@ function init(renderer) {
 
 function initEffects(renderer) {
   parent.initEffects(renderer);
-  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:wave_asteroid_blast_cash", "rightArm", 0xD000FF, [
+  stelar.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:wave_planetary_blast_cash", "rightArm", 0xD000FF, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [4.0, 4.0] }
   ]);
   stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:wave_star_cutter_cash", "rightArm", 0xD000FF, [
@@ -191,35 +191,35 @@ function initEffects(renderer) {
   starCutterFront.large = true;
   //Asteroid Blast
   //Right
-  asteroidBlastRight = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastRight.texture.set("asteroid_blast_sides");
-  asteroidBlastRight.anchor.set("rightArm");
-  asteroidBlastRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
-  asteroidBlastRight.large = true;
+  planetaryBlastRight = renderer.createEffect("fiskheroes:shield");
+  planetaryBlastRight.texture.set("planetary_blast_sides");
+  planetaryBlastRight.anchor.set("rightArm");
+  planetaryBlastRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, 3.0);
+  planetaryBlastRight.large = true;
   //Left
-  asteroidBlastLeft = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastLeft.texture.set("asteroid_blast_sides");
-  asteroidBlastLeft.anchor.set("rightArm");
-  asteroidBlastLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
-  asteroidBlastLeft.large = true;
+  planetaryBlastLeft = renderer.createEffect("fiskheroes:shield");
+  planetaryBlastLeft.texture.set("planetary_blast_sides");
+  planetaryBlastLeft.anchor.set("rightArm");
+  planetaryBlastLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5, -3.0);
+  planetaryBlastLeft.large = true;
   //Top
-  asteroidBlastTop = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastTop.texture.set("asteroid_blast_sides");
-  asteroidBlastTop.anchor.set("rightArm");
-  asteroidBlastTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
-  asteroidBlastTop.large = true;
+  planetaryBlastTop = renderer.createEffect("fiskheroes:shield");
+  planetaryBlastTop.texture.set("planetary_blast_sides");
+  planetaryBlastTop.anchor.set("rightArm");
+  planetaryBlastTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5, 0.0);
+  planetaryBlastTop.large = true;
   //Bottom
-  asteroidBlastBottom = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastBottom.texture.set("asteroid_blast_sides");
-  asteroidBlastBottom.anchor.set("rightArm");
-  asteroidBlastBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
-  asteroidBlastBottom.large = true;
+  planetaryBlastBottom = renderer.createEffect("fiskheroes:shield");
+  planetaryBlastBottom.texture.set("planetary_blast_sides");
+  planetaryBlastBottom.anchor.set("rightArm");
+  planetaryBlastBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5, 0.0);
+  planetaryBlastBottom.large = true;
   //Front
-  asteroidBlastFront = renderer.createEffect("fiskheroes:shield");
-  asteroidBlastFront.texture.set("asteroid_blast_front", "asteroid_blast_front_lights");
-  asteroidBlastFront.anchor.set("rightArm");
-  asteroidBlastFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
-  asteroidBlastFront.large = true;
+  planetaryBlastFront = renderer.createEffect("fiskheroes:shield");
+  planetaryBlastFront.texture.set("planetary_blast_front", "planetary_blast_front_lights");
+  planetaryBlastFront.anchor.set("rightArm");
+  planetaryBlastFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
+  planetaryBlastFront.large = true;
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword");
@@ -360,14 +360,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
         headBottomWaveChange.render();
         headFrontWaveChange.render();
       };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/gravity_pulse_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_blast_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/star_cutter_timer") < 1)) {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/gravity_pulse_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/planetary_blast_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/star_cutter_timer") < 1)) {
         headRight.render();
         headLeft.render();
         headTop.render();
         headBottom.render();
         headFront.render();
       }
-      if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/gravity_pulse_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/asteroid_blast_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/star_cutter_timer") < 1)) {
+      if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/gravity_pulse_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/planetary_blast_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/star_cutter_timer") < 1)) {
         headRightWaveChanging.render();
         headLeftWaveChanging.render();
         headTopWaveChanging.render();
@@ -401,12 +401,12 @@ function render(entity, renderLayer, isFirstPersonArm) {
       gravityPulseBottom.render();
       gravityPulseFront.render();
     };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/asteroid_blast_timer") > 0) {
-      asteroidBlastRight.render();
-      asteroidBlastLeft.render();
-      asteroidBlastTop.render();
-      asteroidBlastBottom.render();
-      asteroidBlastFront.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/planetary_blast_timer") > 0) {
+      planetaryBlastRight.render();
+      planetaryBlastLeft.render();
+      planetaryBlastTop.render();
+      planetaryBlastBottom.render();
+      planetaryBlastFront.render();
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/star_cutter_timer") > 0) {
       starCutterRight.render();
