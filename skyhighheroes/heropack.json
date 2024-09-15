@@ -24,6 +24,8 @@
     "solar": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "amethyst_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "amethyst": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "crimson_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "crimson": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "predation_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "predation_cooldown": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "predation": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -69,6 +71,12 @@
     "planetary_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "star_cutter": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "star_cutter_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "asteroid_crash": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "asteroid_crash_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "asteroid_pull": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "asteroid_pull_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "asteroid_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "visualizer_toggle": { "type": "BYTE", "resetWithoutSuit": true },
     "stelar_clothes": "BYTE",
     "hood_toggle": "BYTE",
@@ -171,17 +179,10 @@
         "maskToggleTicks": 10
       }
     },
-    "skyhighheroes:lucas_stelar" : {
+    "skyhighheroes:lucas_stelar": {
       "$DEFAULT": {
-        "name": "\u00A74Normal \u00A74Style\u00A7r"
-      },
-      "iron_man" : "\u00A74Iron \u00A74Man \u00A74Mark \u00A7485 \u00A74Style\u00A7r"
-    },
-    "skyhighheroes:spartan_stelar" : {
-      "$DEFAULT": {
-        "name": "\u00A75Normal \u00A75Style\u00A7r"
-      },
-      "mysterio" : "\u00A75Mysterio \u00A75Style\u00A7r"
+        "maskToggleTicks": 10
+      }
     }
   }
 }

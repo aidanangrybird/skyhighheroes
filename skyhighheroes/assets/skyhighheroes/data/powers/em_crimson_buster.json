@@ -1,0 +1,32 @@
+{
+  "name": "Crimson Buster",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:energy_bolt": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_ELECTRICITY": 1.0,
+          "WAVE_ENERGY": 1.0
+        },
+        "properties": {
+          "HIT_COOLDOWN": 0
+        }
+      },
+      "isExplosive": false,
+      "cooldownTime": 7.5,
+      "soundEvents": {
+        "SHOOT": "skyhighheroes:wave_shooting"
+      }
+    },
+    "fiskheroes:transformation|crimson": {
+      "key": "CRIMSON_TOGGLE",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/crimson",
+        "timerData": "skyhighheroes:dyn/crimson_timer",
+        "time": 10
+      },
+      "isToggle": true
+    }
+  }
+}

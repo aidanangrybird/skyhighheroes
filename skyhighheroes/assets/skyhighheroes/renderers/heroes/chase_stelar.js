@@ -14,7 +14,6 @@ loadTextures({
   "helmet_wave_changing_lights": "skyhighheroes:chase/chase_stelar_helmet_wave_changing_lights.tx.json",
   "sword_blade": "skyhighheroes:chase/chase_stelar_sword_blade.tx.json",
   "sword": "skyhighheroes:chase/chase_stelar_sword.tx.json",
-  "sword_lights": "skyhighheroes:null",
   "sword_wave_changing_lights": "skyhighheroes:chase/chase_stelar_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighheroes:chase/chase_stelar_sword_sides.tx.json",
   "sword_front": "skyhighheroes:chase/chase_stelar_sword_front.tx.json",
@@ -232,7 +231,7 @@ function initEffects(renderer) {
   nebulaBurstFront.large = true;
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword", "sword_lights");
+  swordMain.texture.set("sword");
   swordMain.anchor.set("rightArm");
   swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
   swordMain.large = true;
