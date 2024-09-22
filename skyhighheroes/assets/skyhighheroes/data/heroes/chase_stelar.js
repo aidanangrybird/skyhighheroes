@@ -65,7 +65,6 @@ function init(hero) {
     };
     return true;
   }, "Battle Card! Nebula Burst!", 2);
-  //hero.addKeyBindFunc("BATTLE_CARD_4", activateBattleCard, "Creetle", 2);
   hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => stelar.resetBattleCard(player, manager), "Return To Nebula Buster", 2);
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
@@ -216,12 +215,6 @@ function init(hero) {
         };
       case "fiskheroes:controlled_flight":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
-        /*switch (modifier.id()) {
-          case "base":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") != 4;
-          case "creetle":
-            return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1  && entity.getData("skyhighheroes:dyn/battle_card") == 4;
-      }*/
       case "fiskheroes:transformation":
         switch (modifier.id()) {
           case "wave_change":
