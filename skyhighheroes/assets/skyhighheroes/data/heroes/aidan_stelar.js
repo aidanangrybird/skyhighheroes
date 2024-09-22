@@ -1,6 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+var transerChat = implement("skyhighheroes:external/transer_chat");
 function init(hero) {
   hero.setAliases("aidan_stelar");
   hero.setName("\u00A76Squall Vortex");
@@ -8,7 +9,9 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
-  
+
+  transerChat.keyBinds(hero); 
+
   stelar.initEquipment(hero, "Squall Vortex", "\u00A76")
 
   hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_aidan", "skyhighheroes:em_vortex_buster");
@@ -254,6 +257,14 @@ function init(hero) {
   hero.setTierOverride(entity => stelar.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
+      case "EDITING_MODE":
+        return entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "ADD_CONTACT":
+        return entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "SHOW_INFO":
+        return !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "CYCLE_CHATS":
+        return !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "DESYNCHRONIZE_WAVES":
         return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       case "WAVE_CHANGE":
@@ -265,13 +276,13 @@ function init(hero) {
       case "SYNCHRONIZE_WAVES":
         return entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
       case "VISUALIZER_TOGGLE":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true;
+        return !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true;
       case "CYCLE_CLOTHES":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
+        return !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
       case "SHIMMER_TOGGLE":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
+        return !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
       case "HOOD_TOGGLE":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+        return !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
       case "INTANGIBILITY":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") > 0;
       case "SHIELD_THROW":
