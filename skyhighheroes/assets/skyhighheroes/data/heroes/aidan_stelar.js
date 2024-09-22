@@ -18,6 +18,7 @@ function init(hero) {
   hero.addKeyBindFunc("SHIMMER_TOGGLE", (player, manager) => stelar.shimmerToggle(player, manager), "Shimmer Toggle", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => stelar.cycleUpCard(player, manager, 6), "Next Battle Card", 1);
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", (player, manager) => stelar.visualizerToggle(player, manager), "Toggle Visualizer", 2);
+  hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 2);
   hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
     return true;
@@ -68,7 +69,6 @@ function init(hero) {
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
   hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => stelar.cycleDownCard(player, manager, 6), "Previous Battle Card", 3);
-  hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 3);
   hero.addKeyBindFunc("FORTUNE_SWITCH", (player, manager) => stelar.toolSwitchEnchant(player, manager), "Active Enchant: Silk Touch", 4);
   hero.addKeyBindFunc("SILK_SWITCH", (player, manager) => stelar.toolSwitchEnchant(player, manager), "Active Enchant: Fortune", 4);
   hero.addKeyBind("AIM", "Aim Vortex Buster", 4);
@@ -265,13 +265,13 @@ function init(hero) {
       case "SYNCHRONIZE_WAVES":
         return entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
       case "VISUALIZER_TOGGLE":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true;
       case "CYCLE_CLOTHES":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
       case "SHIMMER_TOGGLE":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
       case "HOOD_TOGGLE":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
       case "INTANGIBILITY":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") > 0;
       case "SHIELD_THROW":
