@@ -93,7 +93,9 @@
     "superhero_boosting_landing_ticks": "BYTE",
     "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true }
+    "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "chatting": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "chat_mode": { "type": "BYTE", "resetWithoutSuit": true }
   },
   "sounds": {
     "download": {
