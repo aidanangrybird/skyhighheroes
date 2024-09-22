@@ -1,3 +1,5 @@
+//If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
+//So please don't steal this, it will look very bad on you
 
 function isWearingTranser(entities) {
   entities.forEach(person => {
