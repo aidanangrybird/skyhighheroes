@@ -27,6 +27,7 @@ function init(hero, uuid, base, head, transformed, color) {
   hero.addKeyBindFunc("SHIMMER_TOGGLE", shimmerToggle, "Shimmer Toggle", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", visualizerToggle, "Toggle Visualizer", 2);
+  hero.addKeyBindFunc("HOOD_TOGGLE", hoodToggle, "Toggle Hood", 2);
   hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
     return true;
@@ -56,7 +57,6 @@ function init(hero, uuid, base, head, transformed, color) {
   hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
   hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
   hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
-  hero.addKeyBindFunc("HOOD_TOGGLE", hoodToggle, "Toggle Hood", 3);
   hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
   hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
   hero.addKeyBind("AIM", "Aim", 4);
