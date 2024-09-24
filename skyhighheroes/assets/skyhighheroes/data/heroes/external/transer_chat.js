@@ -1,19 +1,52 @@
 //If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
 //So please don't steal this, it will look very bad on you
 
+var suits = [
+  {suit: "skyhighheros:aegon_stelar", id: "411ed8b9-b246-449c-b941-02790d0971dd"},
+  {suit: "skyhighheros:aidan_stelar", id: "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
+  {suit: "skyhighheros:cash_stelar", id: "2389f9cd-351e-4d96-a277-847a24fd9048"},
+  {suit: "skyhighheros:chase_stelar", id: "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
+  {suit: "skyhighheros:ace_stelar", id: "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
+  {suit: "skyhighheros:grand_stelar", id: "d699ffcd-8177-4325-91ac-3e815e87bb95"},
+  {suit: "skyhighheros:lucas_stelar", id: "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
+  {suit: "skyhighheroes:geo_stelar"},
+  {suit: "skyhighheroes:geo_stelar/subaru"}
+];
 /**
  * Checks if an entity is wearing a transer
  * @param {JSEntity} entity - Entity getting checked
  * @returns If the entity is wearing a transer
  **/
-function isWearingTranser(entity) {
+function isWearingTranser(entity) {/* 
   var wearingTranser = false
   suits.forEach(entry => {
     if (entity.getWornChestplate().nbt().getString("HeroType") == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
       wearingTranser = true;
     };
   });
-  return wearingTranser;
+  return wearingTranser; */
+  switch (entity.getWornChestplate().nbt().getString("HeroType")) {
+    case "skyhighheros:aegon_stelar":
+      return (entity.getUUID() == "411ed8b9-b246-449c-b941-02790d0971dd") ? true : false;
+    case "skyhighheros:aidan_stelar":
+      return (entity.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") ? true : false;
+    case "skyhighheros:cash_stelar":
+      return (entity.getUUID() == "2389f9cd-351e-4d96-a277-847a24fd9048") ? true : false;
+    case "skyhighheros:chase_stelar":
+      return (entity.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c") ? true : false;
+    case "skyhighheros:ace_stelar":
+      return (entity.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0") ? true : false;
+    case "skyhighheros:grand_stelar":
+      return (entity.getUUID() == "d699ffcd-8177-4325-91ac-3e815e87bb95") ? true : false;
+    case "skyhighheros:lucas_stelar":
+      return (entity.getUUID() == "c4bc5db6-3cf6-44fe-8427-304a7b211bc4") ? true : false;
+    case "skyhighheros:geo_stelar":
+      return true;
+    case "skyhighheros:geo_stelar/subaru":
+      return true;
+    default:
+      return false;
+  };
 };
 
 /**
@@ -57,17 +90,6 @@ function playerMessage(player, sender, message) {
   chatMessage(player, "<" + sender + "> " + message);
 };
 
-var suits = [
-  {suit: "skyhighheros:aegon_stelar", id: "411ed8b9-b246-449c-b941-02790d0971dd"},
-  {suit: "skyhighheros:aidan_stelar", id: "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {suit: "skyhighheros:cash_stelar", id: "2389f9cd-351e-4d96-a277-847a24fd9048"},
-  {suit: "skyhighheros:chase_stelar", id: "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {suit: "skyhighheros:ace_stelar", id: "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {suit: "skyhighheros:grand_stelar", id: "d699ffcd-8177-4325-91ac-3e815e87bb95"},
-  {suit: "skyhighheros:lucas_stelar", id: "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
-  {suit: "skyhighheroes:geo_stelar"},
-  {suit: "skyhighheroes:geo_stelar/subaru"}
-];
 
 //The point of BrotherBand is to allow communication and to give buffs when you are near each other
 /**
