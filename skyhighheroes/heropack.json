@@ -94,10 +94,10 @@
     "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "contact_progress": { "type": "BYTE", "resetWithoutSuit": true },
-    "group_progress": { "type": "BYTE", "resetWithoutSuit": true },
     "active_chat": { "type": "INTEGER", "resetWithoutSuit": true },
-    "editing_mode": { "type": "BOOLEAN", "resetWithoutSuit": true }
+    "editing_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "edit_type": { "type": "BYTE", "resetWithoutSuit": true },
+    "entry": { "type": "STRING", "resetWithoutSuit": true }
   },
   "sounds": {
     "download": {

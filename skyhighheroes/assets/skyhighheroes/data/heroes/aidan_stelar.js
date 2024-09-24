@@ -250,6 +250,8 @@ function init(hero) {
         };
       case "fiskheroes:energy_bolt":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
+      case "fiskheroes:shape_shifting":
+        return true;
       default:
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     };
@@ -257,12 +259,14 @@ function init(hero) {
   hero.setTierOverride(entity => stelar.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
+      case "FINISH_CONTACT":
+        return entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "SHAPE_SHIFT":
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "EDITING_MODE":
         return entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "ADD_CONTACT":
         return entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
-      case "SHOW_INFO":
-        return !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "CYCLE_CHATS":
         return !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/editing_mode") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "DESYNCHRONIZE_WAVES":

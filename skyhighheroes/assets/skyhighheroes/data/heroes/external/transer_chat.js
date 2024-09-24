@@ -23,8 +23,38 @@ function isWearingTranser(entity) {
  **/
 function chatMessage(player, message) {
   if (PackLoader.getSide() == "SERVER") {
-    player.addChatMessage(message);
+    player.as("PLAYER").addChatMessage(message);
   };
+};
+
+/**
+ * Sends system message
+ * @param {JSPlayer} player - Entity recieving message
+ * @param {string} message - Message content
+ **/
+function systemMessage(player, message) {
+  chatMessage(player, "<System> " + message);
+};
+
+/**
+ * Sends message in group format
+ * @param {JSPlayer} player - Entity recieving message
+ * @param {string} groupName - Name of group
+ * @param {string} sender - Name of entity sending message
+ * @param {string} message - Message content
+ **/
+function groupMessage(player, groupName, sender, message) {
+  chatMessage(player, "<" + sender + " (" + groupName + ")> " + message);
+};
+
+/**
+ * Sends message in normal format
+ * @param {JSPlayer} player - Entity recieving message
+ * @param {JSDataManager} sender - Entity sending message
+ * @param {string} message - Messsage content
+ **/
+function playerMessage(player, sender, message) {
+  chatMessage(player, "<" + sender + "> " + message);
 };
 
 var suits = [
@@ -39,32 +69,86 @@ var suits = [
   {suit: "skyhighheroes:geo_stelar/subaru"}
 ];
 
+//The point of BrotherBand is to allow communication and to give buffs when you are near each other
+/**
+ * Forms brotherband
+ * @param {JSPlayer} player - Player forming brotherband
+ * @param {JSDataManager} manager - Required
+ **/
+function formBrotherBand(player, manager) {
+  if (brotherband.tagCount() > 5) {
+    chatMessage(player, "You have reached the maximum amount of BrotherBands!")
+  } else {
+    var name = player.getData("skyhighheroes:dyn/entry");
+    var uuid = "";
+    systemMessage(player, "Scanning for " + name + " to form BrotherBand with!")
+    var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
+    entities.forEach(entity => {
+      if (entity.is("PLAYER") && entity.getName() == name && isWearingTranser(entity) && player.canSee(entity)) {
+        uuid = entity.getUUID();
+      };
+    });
+    if (uuid != "") {
+      if (!player.getWornChestplate().nbt().hasKey("brotherband")) {
+        var brotherband = manager.newTagList();
+        manager.appendString(brotherband, uuid);
+        manager.setTagList(player.getWornChestplate().nbt(), "brotherband", brotherband);
+      } else {
+        var brotherband = player.getWornChestplate().nbt().getTagList("brotherband");
+        manager.appendString(brotherband, uuid);
+      };
+      systemMessage(player, "Successfully established BrotherBand with name: " + name + " (" + uuid + ")");
+    } else {
+      systemMessage(player, "Unable to find player with name " + name + "close by!")
+    };
+  };
+  return true;
+};
+
+function cutBrotherBand(player, manager) {
+  var id = player.getData("skyhighheroes:dyn/entry");
+  if (id != "") {
+    var brotherband = player.getWornChestplate().nbt().getTagList("brotherband");
+    systemMessage(player, "Cut BrotherBand with " + brotherband.getString(id) + "!");
+    manager.removeTag(brotherband, id);
+  } else {
+    chatMessage(player, "Please enter in an id!")
+  };
+  return true;
+};
+
+//This will be part of the finishing up of adding a contact
 /**
  * Adds contact
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
  **/
-
-/*
-
- * @param {string} uuid - Contact uuid
- * @param {string} name - Contact name
-*/
 function addContact(player, manager) {
-  var name = "bonk";
-  var uuid = "sdfjksdljkf";
-  var contact = manager.newCompoundTag();
-  manager.setString(contact, "name", name);
-  manager.setString(contact, "uuid", uuid);
-  if (!player.getWornChestplate().nbt().hasKey("contacts")) {
-    var contacts = manager.newTagList();
-    manager.appendTag(contacts, contact);
-    manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
+  var name = player.getData("skyhighheroes:dyn/entry");
+  var uuid = "";
+  systemMessage(player, "Searching for " + name + " to form connection with!")
+  var entities = player.world().getEntitiesInRangeOf(player.pos(), 10);
+  entities.forEach(entity => {
+    if (entity.is("PLAYER") && entity.getName() == name && isWearingTranser(entity)) {
+      uuid = entity.getUUID();
+    };
+  });
+  if (uuid != "") {
+    var contact = manager.newCompoundTag();
+    manager.setString(contact, "name", name);
+    manager.setString(contact, "uuid", uuid);
+    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
+      var contacts = manager.newTagList();
+      manager.appendTag(contacts, contact);
+      manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
+    } else {
+      var contacts = player.getWornChestplate().nbt().getTagList("contacts");
+      manager.appendTag(contacts, contact);
+    };
+    systemMessage(player, "Successfully added " + name + " (" + uuid + ") as a contact");
   } else {
-    var contacts = player.getWornChestplate().nbt().getTagList("contacts");
-    manager.appendTag(contacts, contact);
-  }
-  chatMessage(player, "Added contact with name: " + name + " (" + uuid + ")");
+    systemMessage(player, "Unable to find player with name " + name + "close by!")
+  };
   return true;
 };
 
@@ -72,24 +156,24 @@ function addContact(player, manager) {
  * Body beam like how Anit-Monitor has it
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param contactID - Index of contact
- * @param name - Name to update contact with
+ * @param {integer} contactIndex - Index of contact
  **/
-function editContact(player, manager, contactID, name) {
-  var contact = player.getWornChestplate().nbt().getTagList("contacts").getCompoundTag(contactID);
+function editContact(player, manager, contactIndex) {
+  var name = player.getData("skyhighheroes:dyn/entry");
+  var contact = player.getWornChestplate().nbt().getTagList("contacts").getCompoundTag(contactIndex);
   manager.setString(contact, "name", name);
   return true;
 };
 
 /**
- * Body beam like how Anit-Monitor has it
+ * Remove contact by index
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param contactID - Index of contact
+ * @param {integer} contactIndex - Index of contact
  **/
-function removeContact(player, manager, contactID) {
+function removeContact(player, manager, contactIndex) {
   var contacts = player.getWornChestplate().nbt().getTagList("contacts");
-  manager.removeTag(contacts, contactID);
+  manager.removeTag(contacts, contactIndex);
   return true;
 };
 
@@ -108,7 +192,7 @@ function listContacts(entity) {
 };
 
 /**
- * Body beam like how Anit-Monitor has it
+ * Checks
  * @param renderer - This is required or it will not work
  * @param color - Color to set the beam to
  * @returns The beam with the color set
@@ -125,19 +209,6 @@ function hasContact(self, other) {
   };
 };
 
-/**
- * Creates chat
- * @param {JSPlayer} player - Required
- * @param {JSDataManager} manager - Required
- * @param uuid - Name of group
- **/
-function createChat(player, manager, uuid) {
-  var chats = player.getWornChestplate().nbt().getTagList("chats");
-  var chat = manager.newCompoundTag();
-  manager.setString(chat, "uuid", uuid);
-  manager.appendTag(chats, chat);
-}
-
 //Group stuff
 /**
  * Creates group
@@ -145,32 +216,49 @@ function createChat(player, manager, uuid) {
  * @param {JSDataManager} manager - Required
  * @param groupName - Name of group
  **/
-function createGroup(player, manager, groupName) {
-  var chats = player.getWornChestplate().nbt().getTagList("chats");
+function createGroup(player, manager) {
   var group = manager.newCompoundTag();
   manager.setString(group, "groupName", groupName);
-  manager.appendTag(chats, group);
+  if (!player.getWornChestplate().nbt().hasKey("chats")) {
+    var chats = manager.newTagList();
+    manager.appendTag(chats, group);
+    manager.setTagList(player.getWornChestplate().nbt(), "chats", chats);
+  } else {
+    var chats = player.getWornChestplate().nbt().getTagList("chats");
+    manager.appendTag(chats, group);
+  };
+  systemMessage(player, "Group created with name: " + groupName);
+  return true;
 };
 /**
  * Adds member to group
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param groupID - Index of group to add member to
+ * @param groupIndex - Index of group to add member to
  * @param uuid - UUID to add to group
  **/
-function addGroupMemeber(player, manager, groupID, uuid) {
-  var group = player.getWornChestplate().nbt().getTagList("chats").getCompoundTag(groupID);
-  var members = group.getStringList("members");
+function addGroupMemeber(player, manager, groupIndex, uuid) {
+  var group = player.getWornChestplate().nbt().getTagList("chats").getCompoundTag(groupIndex);
+  manager.setString(group, "groupName", groupName);
+  manager.appendTag(chats, group);
+  if (!player.getWornChestplate().nbt().hasKey("chats")) {
+    var chats = manager.newTagList();
+    manager.appendTag(chats, group);
+    manager.setTagList(player.getWornChestplate().nbt(), "chats", chats);
+  } else {
+    var chats = player.getWornChestplate().nbt().getTagList("chats");
+    manager.appendTag(chats, group);
+  };
+  var members = manager.getStringList("members");
   manager.appendString(members, uuid);
 };
 /**
- * Adds member to group
+ * Lists members of group
  * @param {JSPlayer} player - Required
- * @param groupID - Index of group to add member to
- * @param uuid - UUID to add to group
+ * @param {integer} groupIndex - Index of group to add member to
  **/
-function listGroupMembers(player, groupID) {
-  var group = player.getWornChestplate().nbt().getTagList("chats").getCompoundTag(groupID);
+function listGroupMembers(player, groupIndex) {
+  var group = player.getWornChestplate().nbt().getTagList("groups").getCompoundTag(groupIndex);
   var members = group.getStringList("members");
   var count = members.tagCount();
   chatMessage(player, "Group name: " + group.getString("groupName"))
@@ -193,14 +281,14 @@ function cycleChats(player, manager) {/*
   if (chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).hasKey("uuid")) {
     chatMessage(player, chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).getstring("uuid"));
   }; */
-  var chats = player.getWornChestplate().nbt().getTagList("contacts");
+  var chats = player.getWornChestplate().nbt().getTagList("chats");
   player.addChatMessage(player.getData("skyhighheroes:dyn/active_chat"));
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
   if (player.getData("skyhighheroes:dyn/active_chat") > chats.tagCount()) {
     manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
   };
   if (chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).hasKey("groupName")) {
-    listGroupMembers(player, player.getData("skyhighheroes:dyn/active_chat"));
+    chatMessage(player, "Now messaging " + chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).getString("groupName"));
   };
   if (chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).hasKey("uuid")) {
     chatMessage(player, "Now messaging " + chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).getString("name"));
@@ -208,52 +296,72 @@ function cycleChats(player, manager) {/*
   return true;
 };
 
+//Used for keybinds
 function editing(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/editing_mode", !player.getData("skyhighheroes:dyn/editing_mode"));
   return true;
 };
 
-function showChatInfo(player, manager){
-  var chats = player.getWornChestplate().nbt().getTagList("chats");
-  if (chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).hasKey("groupName")) {
-    listGroupMembers(player, player.getData("skyhighheroes:dyn/active_chat"));
-  };
-  if (chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).hasKey("uuid")) {
-    chatMessage(player, chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).getstring("uuid"));
+function options(player, manager) {
+  manager.setData(player, "skyhighheroes:dyn/edit_type", player.getData("skyhighheroes:dyn/edit_type") + 1);
+  if (player.getData("skyhighheroes:dyn/edit_type") > 3) {
+    manager.setData(player, "skyhighheroes:dyn/edit_type", 0);
   };
   return true;
-};
+}
 
 //Make group message function and related stuff
 
 //Add something that will check other players contact list so that message appears under the name the receiving player has set for that uuid
 
+
+/*
+Edit types
+Add contact - 0
+Nickname contact - 1
+Remove contact - 2
+Create group - 3
+Edit group name - 4
+Add member to group - 5
+Remove member from group - 6
+Remove group - 7
+Form BrotherBand - 8
+Cut BrotherBand - 9
+*/
 function keyBinds(hero) {
   //All of the ones where you need to enter a value will have the same key number
   hero.addKeyBindFunc("EDITING_MODE", (player, manager) => editing(player, manager), "Enter editing mode", 3);
-  //hero.addKeyBind("SHAPE_SHIFT", "Enter value", 4);
-  hero.addKeyBindFunc("SHOW_INFO", (player, manager) => showChatInfo(player, manager), "Show current chat info", 4);
-  hero.addKeyBindFunc("ADD_CONTACT", (player, manager) => this.addContact(player, manager), "Add contact", 4);
-  //hero.addKeyBind("ADDING_CONTACT_NAME", "Enter contact name", 4);
-  //hero.addKeyBind("ADDING_CONTACT_UUID", "Enter contact UUID", 4);
-  //hero.addKeyBind("EDITING_CONTACT_NAME", "Edit name", 4);
+  hero.addKeyBind("SHAPE_SHIFT", "Enter value", 4);
+  //hero.addKeyBindFunc("SHOW_INFO", (player, manager) => showChatInfo(player, manager), "Show current chat info", 4);
+  hero.addKeyBind("ADD_CONTACT", "Add contact", 4);
+  hero.addKeyBindFunc("FINISH_ADD_CONTACT", (player, manager) => addContact(player, manager), "Done", 2);
+  //hero.addKeyBind("EDITING_GROUP_NAME", "Edit group name", 1);
+  //hero.addKeyBind("FORM_BROTHERBAND", "Form BrotherBand", 4);
+  //hero.addKeyBind("CONTACT_NICKNAME", "Contact Nickanme", 4);
+  hero.addKeyBind("CREATE_GROUP", "Create chat group", 4);
+  hero.addKeyBindFunc("FINISH_CREATE_GROUP", (player, manager) => addContact(player, manager), "Done", 2);
+  hero.addKeyBindFunc("FINISH_EDIT_GROUP_NAME", (player, manager) => addContact(player, manager), "Done", 2);
   hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
+  hero.addKeyBindFunc("CYCLE_CHAT_TYPES", (player, manager) => cycleChatTypes(player, manager), "Cycle chat types", 4);
   //hero.addKeyBindFunc("CYCLE_CONTACTS", (player, manager) => cycleContacts(player, manager), "Cycle contacts", 3);
   //hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
-  //hero.addKeyBind("EDITING_GROUP_NAME", "Edit group name", 1);
 };
 
-function keyBindEnabled(entity, keyBind) {
-  if (keyBind == "SHOW_INFO" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-    return true;
-  }
-  if (keyBind == "CYCLE_CHATS" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-    return true;
-  }/* 
-  switch (keyBind) {
-    case "SHOW_INFO":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
-    case "CYCLE_CHATS":
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
-  }; */
+function tickHandler(entity, manager) {
+  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && typeof entity.getData("fiskheroes:disguise") === "string") {
+    manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+    manager.setData(entity, "fiskheroes:disguise", null);
+    manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+    manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+    manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+    if (entity.getData("skyhighheroes:dyn/edit_type")) {
+      chatMessage(entity, "");
+    };
+    if (entity.getData("skyhighheroes:dyn/edit_type")) {
+      chatMessage(entity, "");
+    };
+    if (entity.getData("skyhighheroes:dyn/edit_type")) {
+      chatMessage(entity, "");
+    };
+  };
 };
