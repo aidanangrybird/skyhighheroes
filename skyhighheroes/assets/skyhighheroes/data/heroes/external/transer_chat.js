@@ -101,12 +101,12 @@ function formBrotherBand(player, manager) {
   if (brotherband.tagCount() > 5) {
     chatMessage(player, "You have reached the maximum amount of BrotherBands!")
   } else {
-    var name = player.getData("skyhighheroes:dyn/entry");
+    var username = player.getData("skyhighheroes:dyn/entry");
     var uuid = "";
-    systemMessage(player, "Scanning for " + name + " to form BrotherBand with!")
+    systemMessage(player, "Scanning for " + username + " to form BrotherBand with!")
     var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
     entities.forEach(entity => {
-      if (entity.is("PLAYER") && entity.getName() == name && isWearingTranser(entity) && player.canSee(entity)) {
+      if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity) && player.canSee(entity)) {
         uuid = entity.getUUID();
       };
     });
@@ -119,9 +119,9 @@ function formBrotherBand(player, manager) {
         var brotherband = player.getWornChestplate().nbt().getTagList("brotherband");
         manager.appendString(brotherband, uuid);
       };
-      systemMessage(player, "Successfully established BrotherBand with name: " + name + " (" + uuid + ")");
+      systemMessage(player, "Successfully established BrotherBand with username: " + username + " (" + uuid + ")");
     } else {
-      systemMessage(player, "Unable to find player with name " + name + "close by!")
+      systemMessage(player, "Unable to find player with username " + username + "close by!")
     };
   };
   return true;
@@ -146,18 +146,18 @@ function cutBrotherBand(player, manager) {
  * @param {JSDataManager} manager - Required
  **/
 function addContact(player, manager) {
-  var name = player.getData("skyhighheroes:dyn/entry");
+  var username = player.getData("skyhighheroes:dyn/entry");
   var uuid = "";
-  systemMessage(player, "Searching for " + name + " to form connection with!")
+  systemMessage(player, "Searching for " + username + " to form connection with!")
   var entities = player.world().getEntitiesInRangeOf(player.pos(), 10);
   entities.forEach(entity => {
-    if (entity.is("PLAYER") && entity.getName() == name && isWearingTranser(entity)) {
+    if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity)) {
       uuid = entity.getUUID();
     };
   });
   if (uuid != "") {
     var contact = manager.newCompoundTag();
-    manager.setString(contact, "name", name);
+    manager.setString(contact, "username", username);
     manager.setString(contact, "uuid", uuid);
     if (!player.getWornChestplate().nbt().hasKey("contacts")) {
       var contacts = manager.newTagList();
@@ -167,23 +167,25 @@ function addContact(player, manager) {
       var contacts = player.getWornChestplate().nbt().getTagList("contacts");
       manager.appendTag(contacts, contact);
     };
-    systemMessage(player, "Successfully added " + name + " (" + uuid + ") as a contact");
+    systemMessage(player, "Successfully added " + username + " (" + uuid + ") as a contact");
   } else {
-    systemMessage(player, "Unable to find player with name " + name + "close by!")
+    systemMessage(player, "Unable to find player with username " + username + " close by!")
   };
   return true;
 };
 
 /**
- * Body beam like how Anit-Monitor has it
+ * Updates contact name
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
  * @param {integer} contactIndex - Index of contact
  **/
 function editContact(player, manager, contactIndex) {
-  var name = player.getData("skyhighheroes:dyn/entry");
+  var username = player.getData("skyhighheroes:dyn/entry");
   var contact = player.getWornChestplate().nbt().getTagList("contacts").getCompoundTag(contactIndex);
-  manager.setString(contact, "name", name);
+  if (username == "") {
+    manager.setString(contact, "username", username);
+  }
   return true;
 };
 
@@ -206,29 +208,29 @@ function removeContact(player, manager, contactIndex) {
 function listContacts(entity) {
   var contacts = entity.getWornChestplate().nbt().getTagList("contacts");
   var contactNum = contacts.tagCount();
-  player.addChatMessage("Your saved contacts:");
+  systemMessage(entity.as("PLAYER"),"Your saved contacts:");
   for (i = 0; i < contactNum; i++) {
     var contact = contacts.getCompoundTag(i);
-    player.addChatMessage("Username: " + contact.getString("username") + "; UUID: " + contact.getString("uuid"));
+    systemMessage(entity.as("PLAYER"),"Username: " + contact.getString("username") + "; UUID: " + contact.getString("uuid"));
   };
 };
 
 /**
- * Checks
- * @param renderer - This is required or it will not work
- * @param color - Color to set the beam to
- * @returns The beam with the color set
+ * Checks if a player has another player as a contact
+ * @param {JSEntity} sender - Player getting checked
+ * @param {JSEntity} receiver - Player whose contact list is being checked
+ * @returns If sender is in receiver's contacts
  **/
-function hasContact(self, other) {
-  var contacts = listContacts(other);
+function hasContact(sender, receiver) {
+  var contacts = listContacts(receiver);
+  var result = false;
   for (i=0;i<contacts.length;i++) {
-    if (contacts[i].uuid == self.getUUID()) {
+    if (contacts[i].uuid == sender.getUUID()) {
       i=contacts.length;
-      return true;
-    } else {
-      return false;
+      result = true;
     };
   };
+  return result;
 };
 
 //Group stuff
@@ -236,7 +238,7 @@ function hasContact(self, other) {
  * Creates group
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param groupName - Name of group
+ * @param {string} groupName - Name of group
  **/
 function createGroup(player, manager) {
   var group = manager.newCompoundTag();
@@ -332,6 +334,10 @@ function options(player, manager) {
   return true;
 }
 
+function parseEntry(entity) {
+  splitstr = strinput.split(" ");
+}
+
 //Make group message function and related stuff
 
 //Add something that will check other players contact list so that message appears under the name the receiving player has set for that uuid
@@ -356,13 +362,10 @@ function keyBinds(hero) {
   hero.addKeyBind("SHAPE_SHIFT", "Enter value", 4);
   //hero.addKeyBindFunc("SHOW_INFO", (player, manager) => showChatInfo(player, manager), "Show current chat info", 4);
   hero.addKeyBind("ADD_CONTACT", "Add contact", 4);
-  hero.addKeyBindFunc("FINISH_ADD_CONTACT", (player, manager) => addContact(player, manager), "Done", 2);
   //hero.addKeyBind("EDITING_GROUP_NAME", "Edit group name", 1);
   //hero.addKeyBind("FORM_BROTHERBAND", "Form BrotherBand", 4);
   //hero.addKeyBind("CONTACT_NICKNAME", "Contact Nickanme", 4);
   hero.addKeyBind("CREATE_GROUP", "Create chat group", 4);
-  hero.addKeyBindFunc("FINISH_CREATE_GROUP", (player, manager) => addContact(player, manager), "Done", 2);
-  hero.addKeyBindFunc("FINISH_EDIT_GROUP_NAME", (player, manager) => addContact(player, manager), "Done", 2);
   hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
   hero.addKeyBindFunc("CYCLE_CHAT_TYPES", (player, manager) => cycleChatTypes(player, manager), "Cycle chat types", 4);
   //hero.addKeyBindFunc("CYCLE_CONTACTS", (player, manager) => cycleContacts(player, manager), "Cycle contacts", 3);
@@ -376,14 +379,26 @@ function tickHandler(entity, manager) {
     manager.setData(entity, "fiskheroes:shape_shifting_to", null);
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-    if (entity.getData("skyhighheroes:dyn/edit_type")) {
-      chatMessage(entity, "");
-    };
-    if (entity.getData("skyhighheroes:dyn/edit_type")) {
-      chatMessage(entity, "");
-    };
-    if (entity.getData("skyhighheroes:dyn/edit_type")) {
-      chatMessage(entity, "");
-    };
+    var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+    switch(args.length) {
+      case 0:
+        systemMessage(entity, "No arguments input!");
+        break;
+      case 1:
+        systemMessage(entity, "Not enough arguments!");
+        break;
+      case 2:
+        systemMessage(entity, "Not enough arguments!");
+        break;
+      case 3:
+        systemMessage(entity, "Not enough arguments!");
+        break;
+      case 4:
+        systemMessage(entity, "Not enough arguments!");
+        break;
+      case 5:
+        systemMessage(entity, "Not enough arguments!");
+        break;
+    }
   };
 };
