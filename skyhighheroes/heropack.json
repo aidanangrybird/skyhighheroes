@@ -95,8 +95,7 @@
     "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "active_chat": { "type": "INTEGER", "resetWithoutSuit": true },
-    "editing_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "edit_type": { "type": "BYTE", "resetWithoutSuit": true },
+    "command_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "entry": { "type": "STRING", "resetWithoutSuit": true }
   },
   "sounds": {

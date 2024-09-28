@@ -18,16 +18,18 @@ var suits = [
 /**
  * Checks if an entity is wearing a transer
  * @param {JSEntity} entity - Entity getting checked
+ * @param {JSPlayer} player - Entity getting checked
  * @returns If the entity is wearing a transer
  **/
-function isWearingTranser(entity) {/* 
+function isWearingTranser(entity, player) {
   var wearingTranser = false
   suits.forEach(entry => {
     if (entity.getWornChestplate().nbt().getString("HeroType") == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
+      //wearingTranser = (entity.getUUID() == player.getUUID());
       wearingTranser = true;
     };
   });
-  return wearingTranser; */
+  return wearingTranser; /*
   switch (entity.getWornChestplate().nbt().getString("HeroType")) {
     case "skyhighheros:aegon_stelar":
       return (entity.getUUID() == "411ed8b9-b246-449c-b941-02790d0971dd") ? true : false;
@@ -49,7 +51,53 @@ function isWearingTranser(entity) {/*
       return true;
     default:
       return false;
+  };*/
+};
+
+/**
+ * Turns NBT String List into an array for easier use in code
+ * @param {JSNBTList} nbtList - NBTList
+ **/
+function getStringArray(nbtList) {
+  var count = nbtList.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    result.push(nbtList.getString(i));
   };
+  return result;
+};
+
+/**
+ * Turns NBT String List into an array for easier use in code
+ * @param {JSEntity} entity - Entity to create group array from
+ **/
+function getGroupArray(entity) {
+  var groupList = entity.getWornChestplate().nbt().getTagList("groups");
+  var count = groupList.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    result.push(groupList.getCompoundTag(i).getString("groupName"));
+  };
+  return result;
+};
+
+/**
+ * Turns NBT String List into an array for easier use in code
+ * @param {JSEntity} entity - Entity to create group array from
+ **/
+function getGroupArrayMembers(entity) {
+  var groupList = entity.getWornChestplate().nbt().getTagList("groups");
+  var count = groupList.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    var group = groupList.getCompoundTag(i);
+    var entry = {
+      "groupName": group.getString("groupName"),
+      "memberCount": group.getStringList("members").tagCount(),
+    }
+    result.push(entry);
+  };
+  return result;
 };
 
 /**
@@ -93,68 +141,6 @@ function playerMessage(player, sender, message) {
   chatMessage(player, "<" + sender + "> " + message);
 };
 
-/**
- * Gets index of contact from name
- * @param {JSPlayer} player - Player to get contact info from
- * @param {string} name - Username of player to check index of
- **/
-function getContactIndex(player, name) {
-  var nbt = player.getWornChestplate().nbt();
-  if (player.getWornChestplate().nbt().hasKey("contact")) {
-    var count = player.getWornChestplate().nbt().getTagList("contact").tagCount();
-    for (index=0;index<count;index++) {
-      if (nbt.getTagList("contact").getCompoundTag(index).getString("username") == name) {
-        return index;
-      };
-    };
-  } else {
-    systemMessage(player, "You have not set up any contacts yet!");
-    return false;
-  };
-};
-
-/**
- * Gets index of group from name
- * @param {JSPlayer} player - Player to get group info from
- * @param {string} name - Name of group to check index of
- * @returns Index of contact
- **/
-function getGroupIndex(player, name) {
-  var nbt = player.getWornChestplate().nbt();
-  if (player.getWornChestplate().nbt().hasKey("groups")) {
-    var count = player.getWornChestplate().nbt().getTagList("groups").tagCount();
-    for (index=0;index<count;index++) {
-      if (nbt.getTagList("groups").getCompoundTag(index).getString("groupName") == name) {
-        return index;
-      };
-    };
-  } else {
-    systemMessage(player, "You have not set up any groups yet!");
-    return -1;
-  };
-};
-
-/**
- * Gets index of BrotherBand name
- * @param {JSPlayer} player - Player to get BrotherBand info from
- * @param {string} username - Username of BrotherBand to check index of
- * @returns Index of contact
- **/
-function getBrotherBandIndex(player, username) {
-  var nbt = player.getWornChestplate().nbt();
-  if (player.getWornChestplate().nbt().hasKey("brotherband")) {
-    var count = player.getWornChestplate().nbt().getTagList("brotherband").tagCount();
-    for (index=0;index<count;index++) {
-      if (nbt.getStringList("brotherband").getCompoundTag(index).getString("username") == username) {
-        return index;
-      };
-    };
-  } else {
-    systemMessage(player, "You have not set up any BrotherBands yet!");
-    return -1;
-  };
-};
-
 //The point of BrotherBand is to allow communication and to give buffs when you are near each other
 /**
  * Forms brotherband
@@ -166,30 +152,24 @@ function formBrotherBand(player, manager, username) {
   if (brotherband.tagCount() > 5) {
     chatMessage(player, "You have reached the maximum amount of BrotherBands!")
   } else {
-    var uuid = "";
+    var foundPlayer = false;
     systemMessage(player, "Scanning for " + username + " to form BrotherBand with!")
     var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
     entities.forEach(entity => {
-      if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity) && player.canSee(entity)) {
-        uuid = entity.getUUID();
+      if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity, player) && player.canSee(entity)) {
+        foundPlayer = true;
       };
     });
-    if (uuid != "") {
+    if (foundPlayer) {
       if (!player.getWornChestplate().nbt().hasKey("brotherband")) {
         var brotherband = manager.newTagList();
-        var connection = manager.newCompoundTag();
-        manager.setString(contact, "username", username);
-        manager.setString(contact, "uuid", uuid);
-        manager.appendTag(brotherband, connection);
+        manager.appendString(brotherband, username);
         manager.setTagList(player.getWornChestplate().nbt(), "brotherband", brotherband);
       } else {
-        var brotherband = player.getWornChestplate().nbt().getTagList("brotherband");
-        var connection = manager.newCompoundTag();
-        manager.setString(contact, "username", username);
-        manager.setString(contact, "uuid", uuid);
-        manager.appendTag(brotherband, connection);
+        var brotherband = player.getWornChestplate().nbt().getStringList("brotherband");
+        manager.appendString(brotherband, username);
       };
-      systemMessage(player, "Successfully established BrotherBand with username: " + username + " (" + uuid + ")");
+      systemMessage(player, "Successfully established BrotherBand with username: " + username);
     } else {
       systemMessage(player, "Unable to find player with username " + username + " close by!")
     };
@@ -204,7 +184,8 @@ function formBrotherBand(player, manager, username) {
  **/
 function cutBrotherBand(player, manager, username) {
   if (username != "") {
-    var brotherband = player.getWornChestplate().nbt().getTagList("brotherband");
+    var brotherband = player.getWornChestplate().nbt().getStringList("brotherband");
+
     var index = getBrotherBandIndex(player, username);
     if (index) {
       manager.removeTag(brotherband, index);
@@ -218,60 +199,57 @@ function cutBrotherBand(player, manager, username) {
 //This will be part of the finishing up of adding a contact
 /**
  * Adds contact
- * @param {JSPlayer} player - Required
+ * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
  * @param {string} username - Username to add as contact
  **/
-function addContact(player, manager, username) {
-  var uuid = "";
-  systemMessage(player, "Searching for " + username + " to form connection with!")
-  var entities = player.world().getEntitiesInRangeOf(player.pos(), 10);
-  entities.forEach(entity => {
-    if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity)) {
-      uuid = entity.getUUID();
-    };
-  });
-  if (uuid != "") {
-    var contact = manager.newCompoundTag();
-    manager.setString(contact, "username", username);
-    manager.setString(contact, "uuid", uuid);
-    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
-      var contacts = manager.newTagList();
-      manager.appendTag(contacts, contact);
-      manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
-    } else {
-      var contacts = player.getWornChestplate().nbt().getTagList("contacts");
-      manager.appendTag(contacts, contact);
-    };
-    systemMessage(player, "Successfully added " + username + " (" + uuid + ") as a contact");
+function addContact(entity, manager, username) {
+  if (!entity.getWornChestplate().nbt().hasKey("contacts")) {
+    var contacts = manager.newTagList();
+    manager.appendString(contacts, username);
+    manager.setTagList(entity.getWornChestplate().nbt(), "contacts", contacts);
   } else {
-    systemMessage(player, "Unable to find player with username " + username + " close by!")
+    var contacts = entity.getWornChestplate().nbt().getStringList("contacts");
+    manager.appendString(contacts, username);
   };
+  systemMessage(entity, "Successfully added " + username + " as a contact");
 };
 
 /**
  * Updates contact name
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param {integer} contactIndex - Index of contact
+ * @param {string} username - username of contact
  * @param {string} nickname - Nickname to give contact
  **/
-function editContact(player, manager, username, nickname) {
-  var contact = player.getWornChestplate().nbt().getTagList("contacts").getCompoundTag(contactIndex);
-  if (username == "") {
-    manager.setString(contact, "username", username);
-  }
+function editContact(player) {
+  var contactList = player.getWornChestplate().nbt().getStringList("contacts");
+  var contacts = getStringArray(contactList);
+  systemMessage(player, contacts);/* 
+  if (username != "") {
+    var index = getContactIndex(player, username);
+    if (index < 0) {
+      var contact = contacts.getCompoundTag(index);
+      manager.setString(contact, "nickname", nickname);
+    };
+  }; */
 };
 
 /**
  * Remove contact by index
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param {integer} contactIndex - Index of contact
+ * @param {string} username - username of contact
  **/
-function removeContact(player, manager, contactIndex) {
-  var contacts = player.getWornChestplate().nbt().getTagList("contacts");
-  manager.removeTag(contacts, contactIndex);
+function removeContact(player, manager, username) {
+  var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+  var index = getStringArray(contacts).indexOf(username);
+  if (index < 0) {
+    systemMessage(player, "Unable to find contact with username " + username + " to remove!");
+  } else {
+    systemMessage(player, "Removed contact with username " + username + "!");
+    manager.removeTag(contacts, index);
+  };
 };
 
 /**
@@ -279,13 +257,11 @@ function removeContact(player, manager, contactIndex) {
  * @param {JSEntity} entity - Required
  **/
 function listContacts(entity) {
-  var contacts = entity.getWornChestplate().nbt().getTagList("contacts");
-  var contactNum = contacts.tagCount();
-  systemMessage(entity.as("PLAYER"),"Your saved contacts:");
-  for (i = 0; i < contactNum; i++) {
-    var contact = contacts.getCompoundTag(i);
-    systemMessage(entity.as("PLAYER"),"Username: " + contact.getString("username") + "; UUID: " + contact.getString("uuid"));
-  };
+  var contacts = getStringArray(entity.getWornChestplate().nbt().getStringList("contacts"));
+  systemMessage(entity,"Your saved contacts:");
+  contacts.forEach(entry => {
+    systemMessage(entity, entry);
+  });
 };
 
 /**
@@ -297,110 +273,140 @@ function listContacts(entity) {
 function hasContact(sender, receiver) {
   var contacts = listContacts(receiver);
   var result = false;
-  for (i=0;i<contacts.length;i++) {
-    if (contacts[i].uuid == sender.getUUID()) {
-      i=contacts.length;
+  contacts.forEach(entry => {
+    if (entry == sender.getName()) {
       result = true;
-    };
-  };
+    }
+  })
   return result;
 };
 
 //Group stuff
 /**
- * Creates group
+ * Adds group
+ * @param {JSEntity} player - Required
+ * @param {JSDataManager} manager - Required
+ * @param {string} groupName - Name of group
+ **/
+function addGroup(entity, manager, groupName) {
+  var group = manager.newCompoundTag();
+  var members = manager.newTagList();
+  manager.appendString(members, player.getName());
+  manager.setString(group, "groupName", groupName);
+  manager.setTagList(group, "members", members);
+  if (!entity.getWornChestplate().nbt().hasKey("groups")) {
+    var groups = manager.newTagList();
+    manager.appendTag(groups, group);
+    manager.setTagList(entity.getWornChestplate().nbt(), "groups", groups);
+  } else {
+    var groups = entity.getWornChestplate().nbt().getTagList("groups");
+    var groupIndex = getGroupArray(groups).indexOf(groupName);
+    if (groupIndex < 0) {
+      systemMessage(entity, "Duplicate group name " + groupName + "!");
+    } else {
+      systemMessage(entity, "Group created with name: " + groupName);
+      manager.appendTag(groups, group);
+    };
+  };
+};
+
+/**
+ * Remove group by index
+ * @param {JSEntity} player - Required
+ **/
+function listGroups(player) {
+  systemMessage(player, "Groups you are in:")
+  var groups = getGroupArrayMembers(player);
+  groups.forEach(entry => {
+    systemMessage(player, entry.groupName + " (" + entry.memberCount + ((entry.memberCount > 1)?" members)": " member)"))
+  });
+};
+
+/**
+ * Remove group by group name
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
  * @param {string} groupName - Name of group
  **/
-function createGroup(player, manager, groupName) {
-  var group = manager.newCompoundTag();
-  manager.setString(group, "groupName", groupName);
-  if (!player.getWornChestplate().nbt().hasKey("groups")) {
-    var groups = manager.newTagList();
-    manager.appendTag(groups, group);
-    manager.setTagList(player.getWornChestplate().nbt(), "groups", groups);
-  } else {
-    var chats = player.getWornChestplate().nbt().getTagList("groups");
-    manager.appendTag(groups, group);
-  };
-  systemMessage(player, "Group created with name: " + groupName);
-  return true;
-};
-/**
- * Updates group name
- * @param {JSPlayer} player - Required
- * @param {JSDataManager} manager - Required
- * @param {integer} groupIndex - Index of contact
- * @param {string} name - Name to update group to
- **/
-function editGroup(player, manager, groupIndex, name) {
-  var group = player.getWornChestplate().nbt().getTagList("groups").getCompoundTag(groupIndex);
-  if (name == "") {
-    manager.setString(group, "groupName", name);
-  };
-};
-/**
- * Remove group by index
- * @param {JSPlayer} player - Required
- * @param {JSDataManager} manager - Required
- * @param {integer} groupIndex - Index of group
- **/
-function removeGroup(player, manager, groupIndex) {
+function removeGroup(player, manager, groupName) {
   var groups = player.getWornChestplate().nbt().getTagList("groups");
-  manager.removeTag(groups, groupIndex);
-};
-/**
- * Adds member to group
- * @param {JSPlayer} player - Required
- * @param {JSDataManager} manager - Required
- * @param groupIndex - Index of group to add member to
- * @param uuid - UUID to add to group
- **/
-function addGroupMemeber(player, manager, groupIndex, uuid) {
-  var group = player.getWornChestplate().nbt().getTagList("chats").getCompoundTag(groupIndex);
-  manager.setString(group, "groupName", groupName);
-  manager.appendTag(chats, group);
-  if (!player.getWornChestplate().nbt().hasKey("chats")) {
-    var chats = manager.newTagList();
-    manager.appendTag(chats, group);
-    manager.setTagList(player.getWornChestplate().nbt(), "chats", chats);
+  var groupIndex = getGroupArray(groups).indexOf(groupName);
+  if (groupIndex < 0) {
+    systemMessage(player, "Unable to find group with name " + groupName + " to remove!");
   } else {
-    var chats = player.getWornChestplate().nbt().getTagList("chats");
-    manager.appendTag(chats, group);
+    systemMessage(player, "Removed group " + groupName + "!");
+    manager.removeTag(groups, groupIndex);
   };
-  var members = manager.getStringList("members");
-  manager.appendString(members, uuid);
 };
 /**
  * Adds member to group
  * @param {JSPlayer} player - Required
  * @param {JSDataManager} manager - Required
- * @param groupIndex - Index of group to add member to
- * @param uuid - UUID to add to group
+ * @param {string} groupName - Name of group to add member to
+ * @param {string} username - Username to add to group
  **/
-function removeGroupMemeber(player, manager, groupIndex, uuid) {
-  var members = player.getWornChestplate().nbt().getTagList("groups").getCompoundTag(groupIndex).getStringlist("members");
-  manager.removeTag(members, uuid);
+function addGroupMember(player, manager, groupName, username) {
+  var groups = player.getWornChestplate().nbt().getTagList("groups");
+  var groupIndex = getGroupArray(player).indexOf(groupName);
+  var members = groups.getCompoundTag(groupIndex).getStringList("members");
+  var memberIndex = getStringArray(members).indexOf(username);
+  if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    systemMessage(player, "You have not set up any groups yet!");
+  } else if (groupIndex < 0) {
+    systemMessage(player, "Group " + groupName + " does not exist!");
+  } else if (memberIndex < 0) {
+    systemMessage(player, "Member " + username + " is already in group " + groupName + "!");
+  } else {
+    systemMessage(player, "Successfully added " + username  + " to group " + groupName);
+    manager.appendString(members, username);
+  };
+};
+/**
+ * Adds member to group
+ * @param {JSPlayer} player - Required
+ * @param {JSDataManager} manager - Required
+ * @param {string} groupName - Name of group to add member to
+ * @param {string} username - Username to add to group
+ **/
+function removeGroupMember(player, manager, groupName, username) {
+  var groups = player.getWornChestplate().nbt().getTagList("groups");
+  var groupIndex = getGroupArray(player).indexOf(groupName);
+  var members = groups.getCompoundTag(groupIndex).getStringList("members");
+  var memberIndex = getStringArray(members).indexOf(username);
+  if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    systemMessage(player, "You have not set up any groups yet!");
+  } else if (groupIndex < 0) {
+    systemMessage(player, "Group " + groupName + " does not exist!");
+  } else if (memberIndex < 0) {
+    systemMessage(player, username + " is not in group " + groupName + "!");
+  } else {
+    systemMessage(player, "Successfully removed " + username  + " from group " + groupName + "!");
+    manager.removeTag(members, memberIndex);
+  };
 };
 /**
  * Lists members of group
  * @param {JSPlayer} player - Required
- * @param {integer} groupIndex - Index of group to add member to
+ * @param {integer} groupName - Name of group to add member to
  **/
-function listGroupMembers(player, groupIndex) {
-  var group = player.getWornChestplate().nbt().getTagList("groups").getCompoundTag(groupIndex);
-  var members = group.getStringList("members");
-  var count = members.tagCount();
-  chatMessage(player, "Group name: " + group.getString("groupName"))
-  chatMessage(player, "Members: ")
-  for (i=0;i<count;i++) {
-    chatMessage(player, "" + members.getString(i));
+function listGroupMembers(player, groupName) {
+  var groups = player.getWornChestplate().nbt().getTagList("groups");
+  var groupIndex = getGroupArray(player).indexOf(groupName);
+  var members = getStringArray(groups.getCompoundTag(groupIndex).getStringList("members"));
+  if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    systemMessage(player, "You have not set up any groups yet!");
+  } else if (groupIndex < 0) {
+    systemMessage(player, "Group " + groupName + " does not exist!");
+  } else {
+    systemMessage(player, "Members in " + groupName + ":")
+    members.forEach(entry => {
+      systemMessage(player, entry);
+    })
   };
 };
 
 function cycleChats(player, manager) {/* 
-  var chats = player.getWornChestplate().nbt().getTagList("chats");
+  var chats = player.getWornChestplate().nbt().getStringList("chats");
   player.addChatMessage(player.getData("skyhighheroes:dyn/active_chat"));
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
   if (player.getData("skyhighheroes:dyn/active_chat") > chats.tagCount()) {
@@ -412,7 +418,7 @@ function cycleChats(player, manager) {/*
   if (chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).hasKey("uuid")) {
     chatMessage(player, chats.getCompoundTag(player.getData("skyhighheroes:dyn/active_chat")).getstring("uuid"));
   }; */
-  var chats = player.getWornChestplate().nbt().getTagList("chats");
+  var chats = player.getWornChestplate().nbt().getStringList("chats");
   player.addChatMessage(player.getData("skyhighheroes:dyn/active_chat"));
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
   if (player.getData("skyhighheroes:dyn/active_chat") > chats.tagCount()) {
@@ -429,7 +435,7 @@ function cycleChats(player, manager) {/*
 
 //Used for keybinds
 function editing(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/editing_mode", !player.getData("skyhighheroes:dyn/editing_mode"));
+  manager.setData(player, "skyhighheroes:dyn/command_mode", !player.getData("skyhighheroes:dyn/command_mode"));
   return true;
 };
 
@@ -453,18 +459,11 @@ Cut BrotherBand - 9
 */
 function keyBinds(hero) {
   //All of the ones where you need to enter a value will have the same key number
-  hero.addKeyBindFunc("EDITING_MODE", (player, manager) => editing(player, manager), "Enter editing mode", 3);
+  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => editing(player, manager), "Toggle command mode", 4);
   hero.addKeyBind("SHAPE_SHIFT", "Enter value", 4);
-  //hero.addKeyBindFunc("SHOW_INFO", (player, manager) => showChatInfo(player, manager), "Show current chat info", 4);
-  hero.addKeyBind("ADD_CONTACT", "Add contact", 4);
-  //hero.addKeyBind("EDITING_GROUP_NAME", "Edit group name", 1);
-  //hero.addKeyBind("FORM_BROTHERBAND", "Form BrotherBand", 4);
-  //hero.addKeyBind("CONTACT_NICKNAME", "Contact Nickanme", 4);
-  hero.addKeyBind("CREATE_GROUP", "Create chat group", 4);
-  hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
-  hero.addKeyBindFunc("CYCLE_CHAT_TYPES", (player, manager) => cycleChatTypes(player, manager), "Cycle chat types", 4);
-  //hero.addKeyBindFunc("CYCLE_CONTACTS", (player, manager) => cycleContacts(player, manager), "Cycle contacts", 3);
-  //hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
+  hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
+  //hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
+  hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
 };
 
 /*
@@ -482,138 +481,131 @@ brotherBand cut index
 brotherBand list
 */
 
-function tickHandler(entity, manager) {
-  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && typeof entity.getData("fiskheroes:disguise") === "string") {
+/**
+ * Lists members of group
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Required
+ * @param {string} transformed - Transformed name if needed
+ **/
+function tickHandler(entity, manager, transformed) {
+  if (typeof entity.getData("fiskheroes:disguise") === "string" && ((typeof transformed === "string") ? entity.getData("fiskheroes:disguise") != transformed : true)) {
     manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-    manager.setData(entity, "fiskheroes:disguise", null);
+    (typeof transformed === "string") ? manager.setData(entity, "fiskheroes:disguise", transformed) : manager.setData(entity, "fiskheroes:disguise", null);
+    //manager.setData(entity, "fiskheroes:disguise", null);
     manager.setData(entity, "fiskheroes:shape_shifting_to", null);
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+    commandHandler(entity, manager);
+  };
+};
+
+/**
+ * Actually handles the commands
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Required
+ **/
+function commandHandler(entity, manager) {
+  if (entity.getData("skyhighheroes:dyn/command_mode")) {
     var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+    systemMessage(entity, args);
     if (args.length == 0) {
       systemMessage(entity, "Available commands:");
       systemMessage(entity, "contact");
       systemMessage(entity, "group");
       systemMessage(entity, "brotherBand");
-    };
-    if (args[0] == "contact") {
-      if (args.length == 1) {
-        systemMessage(entity, "contact add <name>");
-        systemMessage(entity, "contact remove <index>");
-        systemMessage(entity, "contact <contactIndex> setName <newName>");
-      };
-      if (args.length == 2) {
-        switch(args[1]) {
-          case "add":
-            systemMessage(entity, "contact add <name>");
-            break;
-          case "remove":
-            systemMessage(entity, "contact remove <index>");
-            break;
-          default:
-            systemMessage(entity, "contact add <name>");
-            systemMessage(entity, "contact remove <index>");
-            systemMessage(entity, "contact <contactIndex> setName <newName>");
-            break;
+    } else {
+      if (args[0] == "contact") {
+        if (args.length == 1) {
+          systemMessage(entity, "contact add <name>");
+          systemMessage(entity, "contact remove <name>");
+          systemMessage(entity, "contact list");
+        } else if (args.length > 1) {
+          switch(args[1]) {
+            case "add":
+              (args.length == 3) ? addContact(entity, manager, args[2]) : systemMessage(entity, "contact add <name>");
+              break;
+            case "remove":
+              (args.length == 3) ? removeContact(entity, manager, args[2]) : systemMessage(entity, "contact remove <name>");
+              break;
+            case "list":
+              listContacts(entity);
+              break;
+            case "edit":
+              systemMessage(entity, "bonk")
+              editContact(entity);
+              break;
+            default:
+              systemMessage(entity, "contact add <name>");
+              systemMessage(entity, "contact remove <name>");
+              systemMessage(entity, "contact list");
+              break;
+          };
         };
-      };
-      if (args.length == 3) {
-        switch(args[1]) {
-          case "add":
-            addContact(entity, manager, args[2]);
-            break;
-          case "remove":
-            removeContact(entity, manager, args[2]);
-            break;
-          default:
-            systemMessage(entity, "contact add <name>");
-            systemMessage(entity, "contact remove <index>");
-            systemMessage(entity, "contact <contactIndex> setName <newName>");
-            break;
+      } else if (args[0] == "group") {
+        if (args.length == 1) {
+          systemMessage(entity, "group add <groupName>");
+          systemMessage(entity, "group <groupName> addMember <name>");
+          systemMessage(entity, "group <groupName> removeMember <name>");
+          systemMessage(entity, "group remove <groupName>");
+          systemMessage(entity, "group list");
+          systemMessage(entity, "group <groupName> listMembers");
+        } else if (args.length > 1) {
+          switch (args[1]) {
+            case "add":
+              (args.length == 3) ? addGroup(entity, manager, args[2]) : systemMessage(entity, "group add <groupName>");
+              break;
+            case "remove":
+              (args.length == 3) ? removeGroup(entity, manager, args[2]) : systemMessage(entity, "group remove <groupName>");
+              break;
+            case "list":
+              listGroups(entity, manager);
+              break;
+            default:
+              if (args.length > 2) {
+                switch(args[2]) {
+                  case "addMember":
+                    addGroupMember(entity, manager, args[1]);
+                    break;
+                  case "removeMember":
+                    removeGroupMember(entity, manager, args[1]);
+                    break;
+                  case "listMembers":
+                    listGroupMembers(entity, args[1]);
+                    break;
+                  default:
+                    systemMessage(entity, "group add <groupName>");
+                    systemMessage(entity, "group remove <groupName>");
+                    systemMessage(entity, "group <groupName> addMember <name>");
+                    systemMessage(entity, "group <groupName> removeMember <name>");
+                    break;
+                };
+              };
+              systemMessage(entity, "group <groupName> addMember <name>");
+              systemMessage(entity, "group <groupName> removeMember <name>");
+              systemMessage(entity, "group <groupName> listMembers");
+              break;
+          };
         };
-      };
-      if (args.length == 4) {
-        if (args[2] == "setName") {
-          editContact(entity, manager, args[1]);
-        } else {
-          systemMessage(entity, "contact <contactIndex> setName <newName>");
-        };
-      };
-    };
-    if (args[0] == "groups") {
-      if (args.length == 1) {
-        systemMessage(entity, "group add <groupName>");
-        systemMessage(entity, "group <groupIndex> addMember <name>");
-        systemMessage(entity, "group <groupIndex> removeMember <index>");
-        systemMessage(entity, "group remove <groupIndex>");
-      };
-      if (args.length == 2) {
-        switch (args[1]) {
-          case "add":
-            systemMessage(entity, "group add <groupName>");
-            break;
-          case "remove":
-            systemMessage(entity, "group remove <groupIndex>");
-            break;
-          default:
-            systemMessage(entity, "group <groupIndex> addMember <name>");
-            systemMessage(entity, "group <groupIndex> removeMember <index>");
-            break;
-        };
-      };
-      if (args.length == 3) {
-        switch(args[1]) {
-          case "add":
-            createGroup(entity, manager, args[2]);
-            break;
-          case "remove":
-            removeGroup(entity, manager, args[2]);
-            break;
-          default:
-            systemMessage(entity, "group add <groupName>");
-            systemMessage(entity, "group remove <groupIndex>");
-            systemMessage(entity, "group <groupIndex> addMember <name>");
-            systemMessage(entity, "group <groupIndex> removeMember <index>");
-            break;
-        };
-      };
-      if (args.length == 4) {
-        if (args[2] == "setName") {
-          editContact(entity, manager, args[1]);
-        } else {
-          systemMessage(entity, "contact <contactIndex> setName <newName>");
-        };
-      };
-    };
-    if (args[0] == "brotherBand") {
-      if (args.length == 1) {
-        systemMessage(entity, "brotherBand form <name>");
-        systemMessage(entity, "brotherBand cut <index>");
-      };
-      if (args.length == 2) {
-        switch (args[1]) {
-          case "form":
-            systemMessage(entity, "brotherBand form <name>");
-            break;
-          case "cut":
-            systemMessage(entity, "brotherBand cut <index>");
-            break;
-          default:
-            systemMessage(entity, "Invalid argument for brotherBand!");
-            break;
-        };
-      };
-      if (args.length == 3) {
-        switch (args[1]) {
-          case "form":
-            formBrotherBand(entity, manager, args[2]);
-            break;
-          case "cut":
-            cutBrotherBand(entity, manager, args[2]);
-            break;
-          default:
-            systemMessage(entity, "Invalid argument for brotherBand!");
-            break;
+      } else if (args[0] == "brotherBand") {
+        if (args.length == 1) {
+          systemMessage(entity, "brotherBand form <name>");
+          systemMessage(entity, "brotherBand cut <name>");
+        } else if (args.length > 1) {
+          switch (args[1]) {
+            case "form":
+              (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : systemMessage(entity, "brotherBand form <name>");
+              break;
+            case "cut":
+              (args.length == 3) ? cutBrotherBand(entity, manager, args[2]) : systemMessage(entity, "brotherBand cut <name>");
+              systemMessage(entity, "brotherBand cut <name>");
+              break;
+              case "list":
+                listBrotherBands(entity);
+                break;
+            default:
+              systemMessage(entity, "Invalid argument for brotherBand!");
+              break;
+          };
         };
       };
     };
