@@ -259,61 +259,22 @@ function init(hero) {
   hero.setTierOverride(entity => stelar.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
+      case "CYCLE_CHATS_EM":
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
+      case "CYCLE_CHAT_MODES_EM":
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
+      case "CYCLE_CHATS":
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "CYCLE_CHAT_MODES":
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "SHAPE_SHIFT":
-        if (entity.getUUID() == uuid && !entity.isSneaking()) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-            return true;
-          };
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1) {
-            return true;
-          } else {
-            return false;
-          };
-        } else {
-          return false;
-        };
+        return entity.getUUID() == uuid && !entity.isSneaking() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
       case "COMMAND_MODE":
-        if (entity.getUUID() == uuid && entity.isSneaking()) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-            return true;
-          };
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1) {
-            return true;
-          } else {
-            return false;
-          };
-        } else {
-          return false;
-        };
         return entity.getUUID() == uuid && entity.isSneaking() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
       case "ENTER_COMMAND":
-        if (entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode")) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-            return true;
-          };
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1) {
-            return true;
-          } else {
-            return false;
-          };
-        } else {
-          return false;
-        };
-        //return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1));
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
       case "SEND_MESSAGE":
-        if (entity.getUUID() == uuid && !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode")) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-            return true;
-          };
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1) {
-            return true;
-          } else {
-            return false;
-          };
-        } else {
-          return false;
-        };
-        //return entity.getUUID() == uuid && !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) || ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1));
+        return entity.getUUID() == uuid && !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
       case "DESYNCHRONIZE_WAVES":
         return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       case "WAVE_CHANGE":
