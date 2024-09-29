@@ -9,6 +9,8 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
+
+  transerChat.keyBinds(hero); 
   
   stelar.initEquipment(hero, "Pryetak Nebula", "\u00A72")
 
@@ -257,6 +259,22 @@ function init(hero) {
   hero.setTierOverride(entity => stelar.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
+      case "CYCLE_CHATS_EM":
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/pryetak_timer") == 1;
+      case "CYCLE_CHAT_MODES_EM":
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/pryetak_timer") == 1;
+      case "CYCLE_CHATS":
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "CYCLE_CHAT_MODES":
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      case "SHAPE_SHIFT":
+        return entity.getUUID() == uuid && !entity.isSneaking() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+      case "COMMAND_MODE":
+        return entity.getUUID() == uuid && entity.isSneaking() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+      case "ENTER_COMMAND":
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+      case "SEND_MESSAGE":
+        return entity.getUUID() == uuid && !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
       case "DESYNCHRONIZE_WAVES":
         return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       case "WAVE_CHANGE":
@@ -289,6 +307,8 @@ function init(hero) {
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation");
       case "CYCLE_DOWN_CARD":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation");
+      case "PREDATION":
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/pryetak_timer") < 1;
       case "BATTLE_CARD_RESET_PREDATION":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0);
       case "BATTLE_CARD_RESET":
@@ -314,7 +334,7 @@ function init(hero) {
       case "FORTUNE_SWITCH":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/tool_enchant") == 1 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
       case "AIM":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/pryetak_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
       case "RIFLE_AIM":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:chronos_rifle";
       case "TELEKINESIS":
@@ -335,6 +355,10 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
+    transerChat.tickHandler(entity, manager, "Pryetak Nebula");
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+      manager.setData(entity, "fiskheroes:disguise", null);
+    };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
       manager.setData(entity, "fiskheroes:disguise", "Pryetak Nebula");
     };
