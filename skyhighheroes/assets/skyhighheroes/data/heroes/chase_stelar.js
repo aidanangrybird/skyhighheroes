@@ -360,7 +360,7 @@ function init(hero) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      manager.setData(entity, "fiskheroes:disguise", "Pryetak Nebula");
+      manager.setData(entity, "fiskheroes:disguise", "Pryetak Nebula", "Chase Stelar", "\u00A72");
     };
     var x = entity.posX();
     var y = entity.posY();

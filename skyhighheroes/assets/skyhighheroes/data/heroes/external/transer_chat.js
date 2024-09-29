@@ -545,7 +545,7 @@ function keyBindsOC(hero) {
   hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
 };
 /**
- * Adds keybinds for transer chat for normal transers
+ * Adds keybinds for transer chat for basic transers
  * @param {JSHero} hero - Required
  **/
 function keyBinds(hero) {
@@ -600,9 +600,11 @@ brotherBand list
  * Tick handler for OCs
  * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
- * @param {string} transformed - Transformed name
+ * @param {string} transformed - EM Wave Being OC name
+ * @param {string} untransformed - Human OC name
+ * @param {string} color - Color
  **/
-function tickHandlerOC(entity, manager, transformed, color) {
+function tickHandlerOC(entity, manager, transformed, untransformed, color) {
   if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != transformed) {
     manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
     manager.setData(entity, "fiskheroes:disguise", transformed);
@@ -611,7 +613,7 @@ function tickHandlerOC(entity, manager, transformed, color) {
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
     commandHandler(entity, manager);
-    messageHandler(entity);
+    messageHandlerOC(entity, transformed, untransformed, color);
   };
 };
 
@@ -632,6 +634,11 @@ function tickHandler(entity, manager) {
   };
 };
 
+/**
+ * Message handler for normal transers
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Required
+ **/
 function messageHandler(entity) {
   if (!entity.getData("skyhighheroes:dyn/command_mode")) {
     var message = entity.getData("skyhighheroes:dyn/entry");
@@ -702,7 +709,14 @@ function messageHandler(entity) {
   };
 };
 
-function messageHandlerOC(entity, transformed, color) {
+/**
+ * Message handler for OCs
+ * @param {JSEntity} entity - Required
+ * @param {string} transformed - EM Wave Being OC name
+ * @param {string} untransformed - Human OC name
+ * @param {string} color - Color
+ **/
+function messageHandlerOC(entity, transformed, untransformed, color) {
   if (!entity.getData("skyhighheroes:dyn/command_mode")) {
     var message = entity.getData("skyhighheroes:dyn/entry");
     var chat = entity.getData("skyhighheroes:dyn/active_chat");
@@ -723,12 +737,12 @@ function messageHandlerOC(entity, transformed, color) {
         if (foundPlayer != null) {
           if (isWearingTranser(foundPlayer)) {
             if (hasContact(entity, foundPlayer)) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, entity.getName(), message);
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
                 playerMessage(entity, color+transformed+"\u00A7r", message);
               } else {
-                playerMessage(foundPlayer, entity.getName(), message);
-                playerMessage(entity, entity.getName(), message);
+                playerMessage(foundPlayer, untransformed, message);
+                playerMessage(entity, untransformed, message);
               };
             };
           };
@@ -749,10 +763,19 @@ function messageHandlerOC(entity, transformed, color) {
           foundPlayers.forEach(player => {
             if (isWearingTranser(player)) {
               if (hasContact(entity, player)) {
-                groupMessage(player, groupName, entity.getName(), message);
+                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                  groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+                } else {
+                  groupMessage(player, groupName, untransformed, message);
+                };
               };
             };
-          })
+          });
+          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+            groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
+          } else {
+            groupMessage(entity, groupName, untransformed, message);
+          };
         };
         break;
       case 2:
@@ -767,8 +790,13 @@ function messageHandlerOC(entity, transformed, color) {
         if (foundPlayer != null) {
           if (isWearingTranser(foundPlayer)) {
             if (hasBrother(entity, foundPlayer)) {
-              brotherBandMessage(entity, entity.getName(), message);
-              brotherBandMessage(foundPlayer, entity.getName(), message);
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                brotherBandMessage(foundPlayer, color+transformed+"\u00A7r", message);
+                brotherBandMessage(entity, color+transformed+"\u00A7r", message);
+              } else {
+                brotherBandMessage(foundPlayer, untransformed, message);
+                brotherBandMessage(entity, untransformed, message);
+              };
             };
           };
         };
@@ -876,7 +904,12 @@ function commandHandler(entity, manager) {
               break;
           };
         };
-      };
+      } else {
+        systemMessage(entity, "Available commands:");
+        systemMessage(entity, "contact");
+        systemMessage(entity, "group");
+        systemMessage(entity, "bBand");
+      }
     };
   };
 };
