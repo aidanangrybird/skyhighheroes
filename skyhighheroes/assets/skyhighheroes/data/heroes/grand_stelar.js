@@ -1,6 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "d699ffcd-8177-4325-91ac-3e815e87bb95";
+var transerChat = implement("skyhighheroes:external/transer_chat");
 function init(hero) {
   hero.setAliases("grand_stelar");
   hero.setName("\u00A74Blazing Singularity");

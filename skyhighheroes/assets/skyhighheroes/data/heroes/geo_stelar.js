@@ -1,4 +1,5 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
+var transerChat = implement("skyhighheroes:external/transer_chat");
 function init(hero) {
   hero.setName("\u00A7bMega Man");
   hero.setTier(10);

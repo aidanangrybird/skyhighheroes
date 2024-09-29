@@ -1,6 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "2389f9cd-351e-4d96-a277-847a24fd9048";
+var transerChat = implement("skyhighheroes:external/transer_chat");
 function init(hero) {
   hero.setAliases("cash_stelar");
   hero.setName("\u00A75Amethyst Galaxy");

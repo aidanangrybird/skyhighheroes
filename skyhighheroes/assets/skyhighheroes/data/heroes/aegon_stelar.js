@@ -1,6 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "411ed8b9-b246-449c-b941-02790d0971dd";
+var transerChat = implement("skyhighheroes:external/transer_chat");
 function init(hero) {
   hero.setAliases("aegon_stelar");
   hero.setName("\u00A7dRose Supernova");
