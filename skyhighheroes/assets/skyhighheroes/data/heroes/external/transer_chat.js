@@ -554,26 +554,13 @@ function commandMode(player, manager) {
     systemMessage(player, "Now in command mode!");
     switch (player.getData("skyhighheroes:dyn/chat_mode")) {
       case 0:
-        systemMessage(player, "Contact commands:");
-        systemMessage(player, "add <name> - Adds contact by name");
-        systemMessage(player, "remove <name> - Removes contact by name");
-        systemMessage(player, "list - Lists contacts");
+        systemMessage(player, "Do help to show available commands");
         break;
       case 1:
-        systemMessage(player, "Group commands:")
-        systemMessage(player, "add <groupName> - Creates group by name");
-        systemMessage(player, "rem <groupName> - Removes group by name");
-        systemMessage(player, "list - Lists groups");
-        systemMessage(player, "Below commands apply to the currently selected group!")
-        systemMessage(player, "addMem <name> - Adds member to currently selected group");
-        systemMessage(player, "remMem <name> - Removes member from currently selected group");
-        systemMessage(player, "listMem - Lists members in currently selected group");
+        systemMessage(player, "Do help to show available commands");
         break;
       case 2:
-        systemMessage(player, "BrotherBand commands:")
-        systemMessage(player, "form <name> - Adds Brother to your BrotherBand by name");
-        systemMessage(player, "cut <name> - Removes Brother from your BrotherBand by name");
-        systemMessage(player, "list - Lists Brothers");
+        systemMessage(player, "Do help to show available commands");
         break;
     };
   };
@@ -960,12 +947,15 @@ function commandHandler(entity, manager) {
           case "list":
             listContacts(entity);
             break;
-          default:
-            systemMessage(entity, "Invalid contact command!");
+          case "help":
             systemMessage(entity, "Contact commands:");
             systemMessage(entity, "add <name> - Adds contact by name");
             systemMessage(entity, "remove <name> - Removes contact by name");
             systemMessage(entity, "list - Lists contacts");
+            systemMessage(entity, "help - Shows contact commands");
+            break;
+          default:
+            systemMessage(entity, "Unknown contact command! Try help for a list of commands!");
             break;
         };
       } else {
@@ -981,6 +971,7 @@ function commandHandler(entity, manager) {
         systemMessage(entity, "addMem <name> - Adds member to currently selected group");
         systemMessage(entity, "remMem <name> - Removes member from currently selected group");
         systemMessage(entity, "listMem - Lists members in currently selected group");
+        systemMessage(entity, "help - Shows group commands");
       } else if (args.length < 3) {
         switch (args[0]) {
           case "add":
@@ -1001,8 +992,7 @@ function commandHandler(entity, manager) {
           case "listMem":
             listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
             break;
-          default:
-            systemMessage(entity, "Invalid group command!");
+          case "help":
             systemMessage(entity, "Group commands:")
             systemMessage(entity, "add <groupName> - Creates group by name");
             systemMessage(entity, "rem <groupName> - Removes group by name");
@@ -1011,6 +1001,10 @@ function commandHandler(entity, manager) {
             systemMessage(entity, "addMem <name> - Adds member to currently selected group");
             systemMessage(entity, "remMem <name> - Removes member from currently selected group");
             systemMessage(entity, "listMem - Lists members in currently selected group");
+            systemMessage(entity, "help - Shows group commands");
+            break;
+          default:
+            systemMessage(entity, "Unknown group command! Try help for a list of commands!");
             break;
         };
       } else {
@@ -1022,6 +1016,7 @@ function commandHandler(entity, manager) {
         systemMessage(entity, "form <name> - Adds Brother to your BrotherBand by name");
         systemMessage(entity, "cut <name> - Removes Brother from your BrotherBand by name");
         systemMessage(entity, "list - Lists Brothers");
+        systemMessage(entity, "help - Shows BrotherBand commands");
       } else if (args.length < 3) {
         switch (args[0]) {
           case "form":
@@ -1033,12 +1028,15 @@ function commandHandler(entity, manager) {
           case "list":
             listBrotherBands(entity);
             break;
-          default:
-            systemMessage(entity, "Invalid BrotherBand command!");
+          case "help":
             systemMessage(entity, "BrotherBand commands:")
             systemMessage(entity, "form <name> - Adds Brother to your BrotherBand by name");
             systemMessage(entity, "cut <name> - Removes Brother from your BrotherBand by name");
             systemMessage(entity, "list - Lists Brothers");
+            systemMessage(entity, "help - Shows BrotherBand commands");
+            break;
+          default:
+            systemMessage(entity, "Unknown BrotherBand command! Try help for a list of commands!");
             break;
         };
       } else {
