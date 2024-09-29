@@ -260,21 +260,21 @@ function init(hero) {
   hero.setKeyBindEnabled((entity, keyBind) => {
     switch (keyBind) {
       case "CYCLE_CHATS_EM":
-        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/pryetak_timer") == 1;
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/pryetak_timer") == 1;
       case "CYCLE_CHAT_MODES_EM":
-        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/pryetak_timer") == 1;
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/pryetak_timer") == 1;
       case "CYCLE_CHATS":
-        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "CYCLE_CHAT_MODES":
-        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
       case "SHAPE_SHIFT":
-        return entity.getUUID() == uuid && !entity.isSneaking() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
       case "COMMAND_MODE":
-        return entity.getUUID() == uuid && entity.isSneaking() && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+        return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
       case "ENTER_COMMAND":
-        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
       case "SEND_MESSAGE":
-        return entity.getUUID() == uuid && !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
+        return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && !entity.getData("skyhighheroes:dyn/command_mode") && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/pryetak_timer") == 1);
       case "DESYNCHRONIZE_WAVES":
         return entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       case "WAVE_CHANGE":
@@ -308,7 +308,7 @@ function init(hero) {
       case "CYCLE_DOWN_CARD":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation");
       case "PREDATION":
-        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/pryetak_timer") < 1;
+        return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") > 0 || entity.getData("skyhighheroes:dyn/pryetak_timer") < 1);
       case "BATTLE_CARD_RESET_PREDATION":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0);
       case "BATTLE_CARD_RESET":
