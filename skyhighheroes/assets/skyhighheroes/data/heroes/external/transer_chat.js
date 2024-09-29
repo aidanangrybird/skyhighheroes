@@ -2,56 +2,56 @@
 //So please don't steal this, it will look very bad on you
 
 var suits = [
-  {"suit": "skyhighheros:aegon_stelar", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
-  {"suit": "skyhighheros:aidan_stelar", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {"suit": "skyhighheros:cash_stelar", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
-  {"suit": "skyhighheros:chase_stelar", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {"suit": "skyhighheros:ace_stelar", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {"suit": "skyhighheros:grand_stelar", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
-  {"suit": "skyhighheros:lucas_stelar", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
+  {"suit": "skyhighheroes:aegon_stelar", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
+  {"suit": "skyhighheroes:aidan_stelar", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
+  {"suit": "skyhighheroes:cash_stelar", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
+  {"suit": "skyhighheroes:chase_stelar", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
+  {"suit": "skyhighheroes:ace_stelar", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
+  {"suit": "skyhighheroes:grand_stelar", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
+  {"suit": "skyhighheroes:lucas_stelar", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
   {"suit": "skyhighheroes:geo_stelar"},
   {"suit": "skyhighheroes:geo_stelar/subaru"},
   {"suit": "skyhighheroes:pegasus_transer"},
   {"suit": "skyhighheroes:leo_transer"},
   {"suit": "skyhighheroes:dragon_transer"}
 ];
+
+var ocs = [
+  {"suit": "skyhighheroes:aegon_stelar", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
+  {"suit": "skyhighheroes:aidan_stelar", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
+  {"suit": "skyhighheroes:cash_stelar", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
+  {"suit": "skyhighheroes:chase_stelar", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
+  {"suit": "skyhighheroes:ace_stelar", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
+  {"suit": "skyhighheroes:grand_stelar", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
+  {"suit": "skyhighheroes:lucas_stelar", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
+]
 /**
  * Checks if an entity is wearing a transer
  * @param {JSEntity} entity - Entity getting checked
- * @param {JSPlayer} player - Entity getting checked
  * @returns If the entity is wearing a transer
  **/
-function isWearingTranser(entity, player) {
+function isWearingTranser(entity) {
   var wearingTranser = false
   suits.forEach(entry => {
-    if (entity.getWornChestplate().nbt().getString("HeroType") == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
-      //wearingTranser = (entity.getUUID() == player.getUUID());
+    if (entity.isWearingFullSuit() && entity.is().nbt().getString("HeroType") == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
       wearingTranser = true;
     };
   });
-  return wearingTranser; /*
-  switch (entity.getWornChestplate().nbt().getString("HeroType")) {
-    case "skyhighheros:aegon_stelar":
-      return (entity.getUUID() == "411ed8b9-b246-449c-b941-02790d0971dd") ? true : false;
-    case "skyhighheros:aidan_stelar":
-      return (entity.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") ? true : false;
-    case "skyhighheros:cash_stelar":
-      return (entity.getUUID() == "2389f9cd-351e-4d96-a277-847a24fd9048") ? true : false;
-    case "skyhighheros:chase_stelar":
-      return (entity.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c") ? true : false;
-    case "skyhighheros:ace_stelar":
-      return (entity.getUUID() == "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0") ? true : false;
-    case "skyhighheros:grand_stelar":
-      return (entity.getUUID() == "d699ffcd-8177-4325-91ac-3e815e87bb95") ? true : false;
-    case "skyhighheros:lucas_stelar":
-      return (entity.getUUID() == "c4bc5db6-3cf6-44fe-8427-304a7b211bc4") ? true : false;
-    case "skyhighheros:geo_stelar":
-      return true;
-    case "skyhighheros:geo_stelar/subaru":
-      return true;
-    default:
-      return false;
-  };*/
+  return wearingTranser;
+};
+/**
+ * Checks if an entity is wearing an OC
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns If the entity is wearing OC
+ **/
+function isWearingOC(entity) {
+  var wearingOC = false
+  ocs.forEach(entry => {
+    if (entity.isWearingFullSuit() && entity.is().nbt().getString("HeroType") == entry.suit && entity.getUUID() == entry.id) {
+      wearingOC = true;
+    };
+  });
+  return wearingOC;
 };
 
 /**
@@ -133,15 +133,23 @@ function systemMessage(player, message) {
 function groupMessage(player, groupName, sender, message) {
   chatMessage(player, "<" + sender + " (" + groupName + ")> " + message);
 };
-
 /**
  * Sends message in normal format
  * @param {JSPlayer} player - Entity recieving message
- * @param {JSDataManager} sender - Entity sending message
+ * @param {string} sender - Entity sending message
  * @param {string} message - Messsage content
  **/
 function playerMessage(player, sender, message) {
   chatMessage(player, "<" + sender + "> " + message);
+};
+/**
+ * Sends message in BrotherBand format
+ * @param {JSPlayer} player - Entity recieving message
+ * @param {string} sender - Entity sending message
+ * @param {string} message - Messsage content
+ **/
+function brotherBandMessage(player, sender, message) {
+  chatMessage(player, "(BrotherBand) " + sender + "> " + message);
 };
 
 //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
@@ -152,14 +160,14 @@ function playerMessage(player, sender, message) {
  * @param {string} username - Username of player to form BrotherBand with
  **/
 function formBrotherBand(player, manager, username) {
-  var foundPlayer = true;
+  var foundPlayer = false;
   systemMessage(player, "Scanning for " + username + " to form BrotherBand with!");
   var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
-  /* entities.forEach(entity => {
+  entities.forEach(entity => {
     if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity, player) && player.canSee(entity)) {
       foundPlayer = true;
     };
-  }); */
+  });
   if (foundPlayer) {
     if (!player.getWornChestplate().nbt().hasKey("brotherBand")) {
       var brotherBand = manager.newTagList();
@@ -511,24 +519,6 @@ function editing(player, manager) {
   return true;
 };
 
-//Make group message function and related stuff
-
-//Add something that will check other players contact list so that message appears under the name the receiving player has set for that uuid
-
-
-/*
-Edit types
-Add contact - 0
-Nickname contact - 1
-Remove contact - 2
-Create group - 3
-Edit group name - 4
-Add member to group - 5
-Remove member from group - 6
-Remove group - 7
-Form BrotherBand - 8
-Cut BrotherBand - 9
-*/
 function keyBinds(hero) {
   //All of the ones where you need to enter a value will have the same key number
   hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => editing(player, manager), "Toggle command mode", 4);
@@ -571,17 +561,75 @@ function tickHandler(entity, manager, transformed) {
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
     commandHandler(entity, manager);
+    messageHandler(entity);
   };
 };
 
-function messageHandler(entity, manager) {
-  switch(entity.getData("")) {
-    case 0:
-      break;
-    case 1:
-      break;
-    case 2:
-      break;
+function messageHandler(entity) {
+  if (!entity.getData("skyhighheroes:dyn/command_mode")) {
+    var message = entity.getData("skyhighheroes:dyn/entry");
+    var chat = entity.getData("skyhighheroes:dyn/active_chat");
+    //Check if inputed username matches
+    //Then check if entity is wearing transer
+    //Then check if contacts/brotherband/groups are same
+    //Finally send message
+    switch (entity.getData("skyhighheroes:dyn/chat_mode")) {
+      case 0:
+        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(chat);
+        var foundPlayer = null;
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+        });
+        if (foundPlayer != null) {
+          if (isWearingTranser(foundPlayer)) {
+            if (hasContact(entity, foundPlayer)) {
+              playerMessage(foundPlayer, entity.getName(), message);
+            };
+          };
+        };
+        break;
+      case 1:
+        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(chat);
+        var groupName = group.getString("groupName");
+        var members = getStringArray(group.getStringList("members"));
+        var foundPlayers = [];
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
+            foundPlayers.push(player);
+          };
+        });
+        if (foundPlayer != null) {
+          foundPlayers.forEach(player => {
+            if (isWearingTranser(player)) {
+              if (hasContact(entity, player)) {
+                groupMessage(player, groupName, entity.getName(), message);
+              };
+            };
+          })
+        };
+        break;
+      case 2:
+        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(chat);
+        var foundPlayer = null;
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+        });
+        if (foundPlayer != null) {
+          if (isWearingTranser(foundPlayer)) {
+            if (hasBrother(entity, foundPlayer)) {
+              brotherBandMessage(foundPlayer, entity.getName(), message);
+            };
+          };
+        };
+        break;
+    };
   };
 };
 
