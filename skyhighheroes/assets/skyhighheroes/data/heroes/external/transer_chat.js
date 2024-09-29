@@ -33,7 +33,7 @@ var ocs = [
 function isWearingTranser(entity) {
   var wearingTranser = false
   suits.forEach(entry => {
-    if (entity.isWearingFullSuit() && entity.is().nbt().getString("HeroType") == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
+    if (entity.isWearingFullSuit() && entity.getWornChestplate().nbt().getString("HeroType") == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
       wearingTranser = true;
     };
   });
@@ -47,7 +47,7 @@ function isWearingTranser(entity) {
 function isWearingOC(entity) {
   var wearingOC = false
   ocs.forEach(entry => {
-    if (entity.isWearingFullSuit() && entity.is().nbt().getString("HeroType") == entry.suit && entity.getUUID() == entry.id) {
+    if (entity.isWearingFullSuit() && entity.getWornChestplate().nbt().getString("HeroType") == entry.suit && entity.getUUID() == entry.id) {
       wearingOC = true;
     };
   });
@@ -204,7 +204,7 @@ function cutBrotherBand(player, manager, username) {
     if (brotherBand.tagCount() == 0) {
       systemMessage(player, "You have no BrotherBands to cut!");
     } else {
-      var index = getStringArray(contacts).indexOf(username);
+      var index = getStringArray(brotherBand).indexOf(username);
       if (index < 0) {
         systemMessage(player, "Unable to find BrotherBand with username " + username + " to cut!");
       } else {
@@ -251,20 +251,24 @@ function hasBrother(sender, receiver) {
  * @param {string} username - Username to add as contact
  **/
 function addContact(player, manager, username) {
-  if (!player.getWornChestplate().nbt().hasKey("contacts")) {
-    var contacts = manager.newTagList();
-    manager.appendString(player, username);
-    manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
-    systemMessage(entity, "Successfully added " + username + " as a contact");
-  } else {
-    var contacts = player.getWornChestplate().nbt().getStringList("contacts");
-    var index = getStringArray(contacts).indexOf(username);
-    if (index > -1) {
-      systemMessage(player, username + " is already a contact!");
-    } else {
-      systemMessage(player, "Successfully added " + username + " as a contact");
+  if (player.getName() != username) {
+    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
+      var contacts = manager.newTagList();
       manager.appendString(contacts, username);
+      manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
+      systemMessage(player, "Successfully added " + username + " as a contact");
+    } else {
+      var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+      var index = getStringArray(contacts).indexOf(username);
+      if (index > -1) {
+        systemMessage(player, username + " is already a contact!");
+      } else {
+        systemMessage(player, "Successfully added " + username + " as a contact");
+        manager.appendString(contacts, username);
+      };
     };
+  } else {
+    systemMessage(player, "You can not add yourself as a contact!");
   };
 };
 /**
@@ -598,7 +602,7 @@ brotherBand list
  * @param {JSDataManager} manager - Required
  * @param {string} transformed - Transformed name
  **/
-function tickHandlerOC(entity, manager, transformed) {
+function tickHandlerOC(entity, manager, transformed, color) {
   if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != transformed) {
     manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
     manager.setData(entity, "fiskheroes:disguise", transformed);
@@ -650,6 +654,7 @@ function messageHandler(entity) {
           if (isWearingTranser(foundPlayer)) {
             if (hasContact(entity, foundPlayer)) {
               playerMessage(foundPlayer, entity.getName(), message);
+              playerMessage(entity, entity.getName(), message);
             };
           };
         };
@@ -687,6 +692,82 @@ function messageHandler(entity) {
         if (foundPlayer != null) {
           if (isWearingTranser(foundPlayer)) {
             if (hasBrother(entity, foundPlayer)) {
+              brotherBandMessage(entity, entity.getName(), message);
+              brotherBandMessage(foundPlayer, entity.getName(), message);
+            };
+          };
+        };
+        break;
+    };
+  };
+};
+
+function messageHandlerOC(entity, transformed, color) {
+  if (!entity.getData("skyhighheroes:dyn/command_mode")) {
+    var message = entity.getData("skyhighheroes:dyn/entry");
+    var chat = entity.getData("skyhighheroes:dyn/active_chat");
+    //Check if inputed username matches
+    //Then check if entity is wearing transer
+    //Then check if contacts/brotherband/groups are same
+    //Finally send message
+    switch (entity.getData("skyhighheroes:dyn/chat_mode")) {
+      case 0:
+        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(chat);
+        var foundPlayer = null;
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+        });
+        if (foundPlayer != null) {
+          if (isWearingTranser(foundPlayer)) {
+            if (hasContact(entity, foundPlayer)) {
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                playerMessage(foundPlayer, entity.getName(), message);
+                playerMessage(entity, color+transformed+"\u00A7r", message);
+              } else {
+                playerMessage(foundPlayer, entity.getName(), message);
+                playerMessage(entity, entity.getName(), message);
+              };
+            };
+          };
+        };
+        break;
+      case 1:
+        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(chat);
+        var groupName = group.getString("groupName");
+        var members = getStringArray(group.getStringList("members"));
+        var foundPlayers = [];
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
+            foundPlayers.push(player);
+          };
+        });
+        if (foundPlayer != null) {
+          foundPlayers.forEach(player => {
+            if (isWearingTranser(player)) {
+              if (hasContact(entity, player)) {
+                groupMessage(player, groupName, entity.getName(), message);
+              };
+            };
+          })
+        };
+        break;
+      case 2:
+        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(chat);
+        var foundPlayer = null;
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+        });
+        if (foundPlayer != null) {
+          if (isWearingTranser(foundPlayer)) {
+            if (hasBrother(entity, foundPlayer)) {
+              brotherBandMessage(entity, entity.getName(), message);
               brotherBandMessage(foundPlayer, entity.getName(), message);
             };
           };
@@ -704,12 +785,11 @@ function messageHandler(entity) {
 function commandHandler(entity, manager) {
   if (entity.getData("skyhighheroes:dyn/command_mode")) {
     var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-    systemMessage(entity, args);
     if (args.length == 0) {
       systemMessage(entity, "Available commands:");
       systemMessage(entity, "contact");
       systemMessage(entity, "group");
-      systemMessage(entity, "brotherBand");
+      systemMessage(entity, "bBand");
     } else {
       if (args[0] == "contact") {
         if (args.length == 1) {
@@ -726,10 +806,6 @@ function commandHandler(entity, manager) {
               break;
             case "list":
               listContacts(entity);
-              break;
-            case "edit":
-              systemMessage(entity, "bonk")
-              editContact(entity);
               break;
             default:
               systemMessage(entity, "contact add <name>");
@@ -779,24 +855,24 @@ function commandHandler(entity, manager) {
               break;
           };
         };
-      } else if (args[0] == "brotherBand") {
+      } else if (args[0] == "bBand") {
         if (args.length == 1) {
-          systemMessage(entity, "brotherBand form <name>");
-          systemMessage(entity, "brotherBand cut <name>");
+          systemMessage(entity, "bBand form <name>");
+          systemMessage(entity, "bBand cut <name>");
         } else if (args.length > 1) {
           switch (args[1]) {
             case "form":
-              (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : systemMessage(entity, "brotherBand form <name>");
+              (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : systemMessage(entity, "bBand form <name>");
               break;
             case "cut":
-              (args.length == 3) ? cutBrotherBand(entity, manager, args[2]) : systemMessage(entity, "brotherBand cut <name>");
-              systemMessage(entity, "brotherBand cut <name>");
+              (args.length == 3) ? cutBrotherBand(entity, manager, args[2]) : systemMessage(entity, "bBand cut <name>");
+              systemMessage(entity, "bBand cut <name>");
               break;
               case "list":
                 listBrotherBands(entity);
                 break;
             default:
-              systemMessage(entity, "Invalid argument for brotherBand!");
+              systemMessage(entity, "Invalid argument for bBand!");
               break;
           };
         };
