@@ -1,6 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "c4bc5db6-3cf6-44fe-8427-304a7b211bc4";
+var transerChat = implement("skyhighheroes:external/transer_chat");
 function init(hero) {
   hero.setAliases("lucas_stelar");
   hero.setName("\u00A74Crimson Asteroid");
@@ -9,11 +10,11 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
 
-  transerChat.keyBinds(hero);
+  transerChat.keyBindsOC(hero);
   
   stelar.initEquipment(hero, "Crimson Asteroid", "\u00A74")
 
-  hero.addPowers("skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_lucas", "skyhighheroes:em_crimson_buster");
+  hero.addPowers("skyhighheroes:transer_chat", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_lucas", "skyhighheroes:em_crimson_buster");
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => stelar.cycleClothes(player, manager), "Change Clothes", 1);

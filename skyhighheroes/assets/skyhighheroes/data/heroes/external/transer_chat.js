@@ -471,27 +471,28 @@ function hasGroup(sender, receiver, groupName) {
 //For keybinds
 function cycleChats(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
+  var active_chat = player.getData("skyhighheroes:dyn/active_chat");
   switch (player.getData("skyhighheroes:dyn/chat_mode")) {
     case 0:
       var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-      if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+      if (active_chat > (contactsList.length-1)) {
         manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
       };
-      systemMessage(player, "You are now messaging " + contactsList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+      systemMessage(player, "You are now messaging " + contactsList[active_chat] + "!");
       break;
     case 1:
       var groupList = getGroupArray(player);
-      if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
+      if (active_chat > (groupList.length-1)) {
         manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
       };
-      systemMessage(player, "You are now messaging " + groupList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+      systemMessage(player, "You are now messaging " + groupList[active_chat] + "!");
       break;
     case 2:
       var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brotherBand"));
-      if (player.getData("skyhighheroes:dyn/active_chat") > (brotherBandList.length-1)) {
+      if (active_chat > (brotherBandList.length-1)) {
         manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
       };
-      systemMessage(player, "You are now messaging " + brotherBandList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+      systemMessage(player, "You are now messaging " + brotherBandList[active_chat] + "!");
       break;
   };
   return true;
@@ -514,21 +515,66 @@ function cycleChatModes(player, manager) {
   };
   return true;
 };
-function editing(player, manager) {
+function commandMode(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/command_mode", !player.getData("skyhighheroes:dyn/command_mode"));
+  if (player.getData("skyhighheroes:dyn/command_mode")) {
+    systemMessage(player, "Now in command mode!");
+  };
+  if (!player.getData("skyhighheroes:dyn/command_mode")) {
+    systemMessage(player, "Now in messaging mode!");
+  };
   return true;
 };
 
-function keyBinds(hero) {
-  //All of the ones where you need to enter a value will have the same key number
-  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => editing(player, manager), "Toggle command mode", 4);
-  hero.addKeyBind("SHAPE_SHIFT", "Enter value", 4);
+/**
+ * Adds keybinds for transer chat for OCs
+ * @param {JSHero} hero - Required
+ **/
+function keyBindsOC(hero) {
+  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
+  hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
   hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
   hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
   hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
   hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
   hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
   hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
+};
+/**
+ * Adds keybinds for transer chat for normal transers
+ * @param {JSHero} hero - Required
+ **/
+function keyBinds(hero) {
+  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
+  hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
+  hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
+  hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
+  hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
+  hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+};
+
+/**
+ * Is the setKeyBind stuff for basic transers
+ * @param {JSEntity} entity - Required
+ * @param {keyBind} keyBind - Required
+ **/
+function setKeyBind(entity, keyBind) {
+  switch (keyBind) {
+    case "CYCLE_CHATS":
+      return !entity.isSneaking();
+    case "CYCLE_CHAT_MODES":
+      return entity.isSneaking();
+    case "SHAPE_SHIFT":
+      return !entity.isSneaking();
+    case "COMMAND_MODE":
+      return entity.isSneaking();
+    case "ENTER_COMMAND":
+      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode");
+    case "SEND_MESSAGE":
+      return !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode");
+    default:
+      return true;
+  };
 };
 
 /*
@@ -547,16 +593,33 @@ brotherBand list
 */
 
 /**
- * Lists members of group
+ * Tick handler for OCs
  * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
- * @param {string} transformed - Transformed name if needed
+ * @param {string} transformed - Transformed name
  **/
-function tickHandler(entity, manager, transformed) {
-  if (typeof entity.getData("fiskheroes:disguise") === "string" && ((typeof transformed === "string") ? entity.getData("fiskheroes:disguise") != transformed : true)) {
+function tickHandlerOC(entity, manager, transformed) {
+  if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != transformed) {
     manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-    (typeof transformed === "string") ? manager.setData(entity, "fiskheroes:disguise", transformed) : manager.setData(entity, "fiskheroes:disguise", null);
+    manager.setData(entity, "fiskheroes:disguise", transformed);
     //manager.setData(entity, "fiskheroes:disguise", null);
+    manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+    manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+    manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+    commandHandler(entity, manager);
+    messageHandler(entity);
+  };
+};
+
+/**
+ * Tick handler for normal transers
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Required
+ **/
+function tickHandler(entity, manager) {
+  if (typeof entity.getData("fiskheroes:disguise") === "string") {
+    manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+    manager.setData(entity, "fiskheroes:disguise", null);
     manager.setData(entity, "fiskheroes:shape_shifting_to", null);
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
