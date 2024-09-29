@@ -97,7 +97,8 @@
     "active_chat": { "type": "INTEGER", "resetWithoutSuit": true },
     "chat_mode": { "type": "INTEGER", "resetWithoutSuit": true },
     "command_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "entry": { "type": "STRING", "resetWithoutSuit": true }
+    "entry": { "type": "STRING", "resetWithoutSuit": true },
+    "group_name": { "type": "STRING", "resetWithoutSuit": true }
   },
   "sounds": {
     "download": {

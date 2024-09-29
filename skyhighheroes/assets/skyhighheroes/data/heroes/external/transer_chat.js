@@ -475,28 +475,57 @@ function hasGroup(sender, receiver, groupName) {
 //For keybinds
 function cycleChats(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
-  var active_chat = player.getData("skyhighheroes:dyn/active_chat");
   switch (player.getData("skyhighheroes:dyn/chat_mode")) {
     case 0:
-      var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-      if (active_chat > (contactsList.length-1)) {
-        manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+      if (player.getWornChestplate().nbt().hasKey("contacts")) {
+        if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+          var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+          if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+          };
+          var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
+          systemMessage(player, "You are now messaging " + contact + "!");
+        } else {
+          systemMessage(player, "You have not set up any contacts yet!");
+        };
+      } else {
+        systemMessage(player, "You have not set up any contacts yet!");
       };
-      systemMessage(player, "You are now messaging " + contactsList[active_chat] + "!");
       break;
     case 1:
-      var groupList = getGroupArray(player);
-      if (active_chat > (groupList.length-1)) {
-        manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+      if (player.getWornChestplate().nbt().hasKey("groups")) {
+        if (player.getWornChestplate().nbt().getTagList().tagCount() > 0) {
+          var groupList = getGroupArray(player);
+          if (player.getData("skyhighheroes:dyn/active_chat") > groupList.length) {
+            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+          };
+          systemMessage(player, player.getData("skyhighheroes:dyn/active_chat"));
+          systemMessage(player, "You are now messaging " + groupList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+          if (typeof groupList[player.getData("skyhighheroes:dyn/active_chat")] === "string") {
+            manager.setData(player, "skyhighheroes:dyn/group_name", groupList[player.getData("skyhighheroes:dyn/active_chat")]);
+          };
+        } else {
+        systemMessage(player, "You have not set up any groups yet!");
+        };
+      } else {
+        systemMessage(player, "You have not set up any groups yet!");
       };
-      systemMessage(player, "You are now messaging " + groupList[active_chat] + "!");
       break;
     case 2:
-      var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brotherBand"));
-      if (active_chat > (brotherBandList.length-1)) {
-        manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+      if (player.getWornChestplate().nbt().hasKey("brotherBand")) {
+        if (player.getWornChestplate().nbt().getStringList("brotherBand").tagCount() > 0) {
+          var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brotherBand"));
+          if (player.getData("skyhighheroes:dyn/active_chat") > brotherBandList.length) {
+            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+          };
+          systemMessage(player, player.getData("skyhighheroes:dyn/active_chat"));
+          systemMessage(player, "You are now messaging " + brotherBandList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+        } else {
+          systemMessage(player, "You have not set up any Brothers yet!");
+        };
+      } else {
+        systemMessage(player, "You have not set up any Brothers yet!");
       };
-      systemMessage(player, "You are now messaging " + brotherBandList[active_chat] + "!");
       break;
   };
   return true;
@@ -523,8 +552,85 @@ function commandMode(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/command_mode", !player.getData("skyhighheroes:dyn/command_mode"));
   if (player.getData("skyhighheroes:dyn/command_mode")) {
     systemMessage(player, "Now in command mode!");
+    switch (player.getData("skyhighheroes:dyn/chat_mode")) {
+      case 0:
+        systemMessage(player, "Contact commands:");
+        systemMessage(player, "add <name> - Adds contact by name");
+        systemMessage(player, "remove <name> - Removes contact by name");
+        systemMessage(player, "list - Lists contacts");
+        break;
+      case 1:
+        systemMessage(player, "Group commands:")
+        systemMessage(player, "add <groupName> - Creates group by name");
+        systemMessage(player, "rem <groupName> - Removes group by name");
+        systemMessage(player, "list - Lists groups");
+        systemMessage(player, "Below commands apply to the currently selected group!")
+        systemMessage(player, "addMem <name> - Adds member to currently selected group");
+        systemMessage(player, "remMem <name> - Removes member from currently selected group");
+        systemMessage(player, "listMem - Lists members in currently selected group");
+        break;
+      case 2:
+        systemMessage(player, "BrotherBand commands:")
+        systemMessage(player, "form <name> - Adds Brother to your BrotherBand by name");
+        systemMessage(player, "cut <name> - Removes Brother from your BrotherBand by name");
+        systemMessage(player, "list - Lists Brothers");
+        break;
+    };
   };
   if (!player.getData("skyhighheroes:dyn/command_mode")) {
+    switch (player.getData("skyhighheroes:dyn/chat_mode")) {
+      case 0:
+        if (player.getWornChestplate().nbt().hasKey("contacts")) {
+          if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+            var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+            if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
+            var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
+            systemMessage(player, "You are now messaging " + contact + "!");
+          } else {
+            systemMessage(player, "You have not set up any contacts yet!");
+          };
+        } else {
+          systemMessage(player, "You have not set up any contacts yet!");
+        };
+        break;
+      case 1:
+        if (player.getWornChestplate().nbt().hasKey("groups")) {
+          if (player.getWornChestplate().nbt().getTagList().tagCount() > 0) {
+            var groupList = getGroupArray(player);
+            if (player.getData("skyhighheroes:dyn/active_chat") > groupList.length) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
+            systemMessage(player, player.getData("skyhighheroes:dyn/active_chat"));
+            systemMessage(player, "You are now messaging " + groupList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+            if (typeof groupList[player.getData("skyhighheroes:dyn/active_chat")] === "string") {
+              manager.setData(player, "skyhighheroes:dyn/group_name", groupList[player.getData("skyhighheroes:dyn/active_chat")]);
+            };
+          } else {
+          systemMessage(player, "You have not set up any groups yet!");
+          };
+        } else {
+          systemMessage(player, "You have not set up any groups yet!");
+        };
+        break;
+      case 2:
+        if (player.getWornChestplate().nbt().hasKey("brotherBand")) {
+          if (player.getWornChestplate().nbt().getStringList("brotherBand").tagCount() > 0) {
+            var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brotherBand"));
+            if (player.getData("skyhighheroes:dyn/active_chat") > brotherBandList.length) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
+            systemMessage(player, player.getData("skyhighheroes:dyn/active_chat"));
+            systemMessage(player, "You are now messaging " + brotherBandList[player.getData("skyhighheroes:dyn/active_chat")] + "!");
+          } else {
+            systemMessage(player, "You have not set up any Brothers yet!");
+          };
+        } else {
+          systemMessage(player, "You have not set up any Brothers yet!");
+        };
+        break;
+    };
     systemMessage(player, "Now in messaging mode!");
   };
   return true;
@@ -594,21 +700,6 @@ function setKeyBind(entity, keyBind) {
       return true;
   };
 };
-
-/*
-contact add name
-contact remove index
-contact list
-contact edit index newName
-group groupName add member name
-group groupName remove member index
-group list
-group add groupName
-group remove groupName
-brotherBand form name
-brotherBand cut index
-brotherBand list
-*/
 
 /**
  * Tick handler for OCs
@@ -680,14 +771,14 @@ function tickHandler(entity, manager) {
 function messageHandler(entity) {
   if (!entity.getData("skyhighheroes:dyn/command_mode")) {
     var message = entity.getData("skyhighheroes:dyn/entry");
-    var chat = entity.getData("skyhighheroes:dyn/active_chat");
+    var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
     //Check if inputed username matches
     //Then check if entity is wearing transer
     //Then check if contacts/brotherband/groups are same
     //Finally send message
     switch (entity.getData("skyhighheroes:dyn/chat_mode")) {
       case 0:
-        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(chat);
+        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
         var foundPlayer = null;
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
         entities.forEach(player => {
@@ -705,7 +796,7 @@ function messageHandler(entity) {
         };
         break;
       case 1:
-        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(chat);
+        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
         var groupName = group.getString("groupName");
         var members = getStringArray(group.getStringList("members"));
         var foundPlayers = [];
@@ -726,7 +817,7 @@ function messageHandler(entity) {
         };
         break;
       case 2:
-        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(chat);
+        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(activeChat);
         var foundPlayer = null;
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
         entities.forEach(player => {
@@ -757,14 +848,14 @@ function messageHandler(entity) {
 function messageHandlerOC(entity, transformed, untransformed, color) {
   if (!entity.getData("skyhighheroes:dyn/command_mode")) {
     var message = entity.getData("skyhighheroes:dyn/entry");
-    var chat = entity.getData("skyhighheroes:dyn/active_chat");
+    var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
     //Check if inputed username matches
     //Then check if entity is wearing transer
     //Then check if contacts/brotherband/groups are same
     //Finally send message
     switch (entity.getData("skyhighheroes:dyn/chat_mode")) {
       case 0:
-        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(chat);
+        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
         var foundPlayer = null;
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
         entities.forEach(player => {
@@ -787,7 +878,7 @@ function messageHandlerOC(entity, transformed, untransformed, color) {
         };
         break;
       case 1:
-        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(chat);
+        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
         var groupName = group.getString("groupName");
         var members = getStringArray(group.getStringList("members"));
         var foundPlayers = [];
@@ -817,7 +908,7 @@ function messageHandlerOC(entity, transformed, untransformed, color) {
         };
         break;
       case 2:
-        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(chat);
+        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(activeChat);
         var foundPlayer = null;
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
         entities.forEach(player => {
@@ -850,104 +941,109 @@ function messageHandlerOC(entity, transformed, untransformed, color) {
  **/
 function commandHandler(entity, manager) {
   if (entity.getData("skyhighheroes:dyn/command_mode")) {
+    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
     var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-    if (args.length == 0) {
-      systemMessage(entity, "Available commands:");
-      systemMessage(entity, "contact");
-      systemMessage(entity, "group");
-      systemMessage(entity, "bBand");
-    } else {
-      if (args[0] == "contact") {
-        if (args.length == 1) {
-          systemMessage(entity, "contact add <name>");
-          systemMessage(entity, "contact remove <name>");
-          systemMessage(entity, "contact list");
-        } else if (args.length > 1) {
-          switch(args[1]) {
-            case "add":
-              (args.length == 3) ? addContact(entity, manager, args[2]) : systemMessage(entity, "contact add <name>");
-              break;
-            case "remove":
-              (args.length == 3) ? removeContact(entity, manager, args[2]) : systemMessage(entity, "contact remove <name>");
-              break;
-            case "list":
-              listContacts(entity);
-              break;
-            default:
-              systemMessage(entity, "contact add <name>");
-              systemMessage(entity, "contact remove <name>");
-              systemMessage(entity, "contact list");
-              break;
-          };
-        };
-      } else if (args[0] == "group") {
-        if (args.length == 1) {
-          systemMessage(entity, "group add <groupName>");
-          systemMessage(entity, "group <groupName> add <name>");
-          systemMessage(entity, "group <groupName> remove <name>");
-          systemMessage(entity, "group remove <groupName>");
-          systemMessage(entity, "group list");
-          systemMessage(entity, "group <groupName> listMembers");
-        } else if (args.length > 1) {
-          switch (args[1]) {
-            case "add":
-              (args.length == 3) ? addGroup(entity, manager, args[2]) : systemMessage(entity, "group add <groupName>");
-              break;
-            case "remove":
-              (args.length == 3) ? removeGroup(entity, manager, args[2]) : systemMessage(entity, "group remove <groupName>");
-              break;
-            case "list":
-              listGroups(entity, manager);
-              break;
-            default:
-              if (args.length > 2) {
-                switch(args[2]) {
-                  case "add":
-                    addGroupMember(entity, manager, args[1], args[3]);
-                    break;
-                  case "remove":
-                    removeGroupMember(entity, manager, args[1], args[3]);
-                    break;
-                  case "list":
-                    listGroupMembers(entity, args[1]);
-                    break;
-                  default:
-                    systemMessage(entity, "group <groupName> add <name>");
-                    systemMessage(entity, "group <groupName> remove <name>");
-                    systemMessage(entity, "group <groupName> list");
-                    break;
-                };
-              };
-              break;
-          };
-        };
-      } else if (args[0] == "bBand") {
-        if (args.length == 1) {
-          systemMessage(entity, "bBand form <name>");
-          systemMessage(entity, "bBand cut <name>");
-        } else if (args.length > 1) {
-          switch (args[1]) {
-            case "form":
-              (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : systemMessage(entity, "bBand form <name>");
-              break;
-            case "cut":
-              (args.length == 3) ? cutBrotherBand(entity, manager, args[2]) : systemMessage(entity, "bBand cut <name>");
-              systemMessage(entity, "bBand cut <name>");
-              break;
-              case "list":
-                listBrotherBands(entity);
-                break;
-            default:
-              systemMessage(entity, "Invalid argument for bBand!");
-              break;
-          };
+    if (chatMode == 0) {
+      if (args.length == 0) {
+        systemMessage(entity, "Contact commands:");
+        systemMessage(entity, "add <name> - Adds contact by name");
+        systemMessage(entity, "rem <name> - Removes contact by name");
+        systemMessage(entity, "list - Lists contacts");
+      } else if (args.length < 3) {
+        switch(args[0]) {
+          case "add":
+            (args.length == 2) ? addContact(entity, manager, args[1]) : systemMessage(entity, "add <name>");
+            break;
+          case "rem":
+            (args.length == 2) ? removeContact(entity, manager, args[1]) : systemMessage(entity, "rem <name>");
+            break;
+          case "list":
+            listContacts(entity);
+            break;
+          default:
+            systemMessage(entity, "Invalid contact command!");
+            systemMessage(entity, "Contact commands:");
+            systemMessage(entity, "add <name> - Adds contact by name");
+            systemMessage(entity, "remove <name> - Removes contact by name");
+            systemMessage(entity, "list - Lists contacts");
+            break;
         };
       } else {
-        systemMessage(entity, "Available commands:");
-        systemMessage(entity, "contact");
-        systemMessage(entity, "group");
-        systemMessage(entity, "bBand");
-      }
+        systemMessage(entity, "Too many arguemnts!");
+      };
+    } else if (chatMode == 1) {
+      if (args.length == 0) {
+        systemMessage(entity, "Group commands:")
+        systemMessage(entity, "add <groupName> - Creates group by name");
+        systemMessage(entity, "rem <groupName> - Removes group by name");
+        systemMessage(entity, "list - Lists groups");
+        systemMessage(entity, "Below commands apply to the currently selected group!")
+        systemMessage(entity, "addMem <name> - Adds member to currently selected group");
+        systemMessage(entity, "remMem <name> - Removes member from currently selected group");
+        systemMessage(entity, "listMem - Lists members in currently selected group");
+      } else if (args.length < 3) {
+        switch (args[0]) {
+          case "add":
+            (args.length == 2) ? addGroup(entity, manager, args[1]) : systemMessage(entity, "add <groupName>");
+            break;
+          case "rem":
+            (args.length == 2) ? removeGroup(entity, manager, args[1]) : systemMessage(entity, "rem <groupName>");
+            break;
+          case "list":
+            listGroups(entity, manager);
+            break;
+          case "addMem":
+            (args.length == 2) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : systemMessage(entity, "addMem <name>");
+            break;
+          case "remMem":
+            (args.length == 2) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : systemMessage(entity, "remMem <name>");
+            break;
+          case "listMem":
+            listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
+            break;
+          default:
+            systemMessage(entity, "Invalid group command!");
+            systemMessage(entity, "Group commands:")
+            systemMessage(entity, "add <groupName> - Creates group by name");
+            systemMessage(entity, "rem <groupName> - Removes group by name");
+            systemMessage(entity, "list - Lists groups");
+            systemMessage(entity, "Below commands apply to the currently selected group!")
+            systemMessage(entity, "addMem <name> - Adds member to currently selected group");
+            systemMessage(entity, "remMem <name> - Removes member from currently selected group");
+            systemMessage(entity, "listMem - Lists members in currently selected group");
+            break;
+        };
+      } else {
+        systemMessage(entity, "Too many arguemnts!");
+      };
+    } else if (chatMode == 2) {
+      if (args.length == 0) {
+        systemMessage(entity, "BrotherBand commands:")
+        systemMessage(entity, "form <name> - Adds Brother to your BrotherBand by name");
+        systemMessage(entity, "cut <name> - Removes Brother from your BrotherBand by name");
+        systemMessage(entity, "list - Lists Brothers");
+      } else if (args.length < 3) {
+        switch (args[0]) {
+          case "form":
+            (args.length == 2) ? formBrotherBand(entity, manager, args[1]) : systemMessage(entity, "form <name>");
+            break;
+          case "cut":
+            (args.length == 2) ? cutBrotherBand(entity, manager, args[1]) : systemMessage(entity, "cut <name>");
+            break;
+          case "list":
+            listBrotherBands(entity);
+            break;
+          default:
+            systemMessage(entity, "Invalid BrotherBand command!");
+            systemMessage(entity, "BrotherBand commands:")
+            systemMessage(entity, "form <name> - Adds Brother to your BrotherBand by name");
+            systemMessage(entity, "cut <name> - Removes Brother from your BrotherBand by name");
+            systemMessage(entity, "list - Lists Brothers");
+            break;
+        };
+      } else {
+        systemMessage(entity, "Too many arguemnts!");
+      };
     };
   };
 };
