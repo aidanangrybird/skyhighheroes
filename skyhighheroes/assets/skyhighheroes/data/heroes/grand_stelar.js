@@ -248,6 +248,8 @@ function init(hero) {
           case "sword":
             return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
+      case "fiskheroes:shape_shifting":
+        return true;
       case "fiskheroes:energy_bolt":
         return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
       default:
