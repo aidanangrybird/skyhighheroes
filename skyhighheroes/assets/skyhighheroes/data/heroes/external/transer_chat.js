@@ -120,7 +120,7 @@ function chatMessage(player, message) {
  * @param {string} message - Message content
  **/
 function systemMessage(player, message) {
-  chatMessage(player, "<System> " + message);
+  chatMessage(player, "TC> System> " + message);
 };
 
 /**
@@ -131,7 +131,7 @@ function systemMessage(player, message) {
  * @param {string} message - Message content
  **/
 function groupMessage(player, groupName, sender, message) {
-  chatMessage(player, "<" + sender + " (" + groupName + ")> " + message);
+  chatMessage(player, "TC [" + groupName + "]>" + sender + "> " + message);
 };
 /**
  * Sends message in normal format
@@ -140,7 +140,7 @@ function groupMessage(player, groupName, sender, message) {
  * @param {string} message - Messsage content
  **/
 function playerMessage(player, sender, message) {
-  chatMessage(player, "<" + sender + "> " + message);
+  chatMessage(player, "TC> " + sender + "> " + message);
 };
 /**
  * Sends message in BrotherBand format
@@ -149,7 +149,7 @@ function playerMessage(player, sender, message) {
  * @param {string} message - Messsage content
  **/
 function brotherBandMessage(player, sender, message) {
-  chatMessage(player, "(BrotherBand) " + sender + "> " + message);
+  chatMessage(player, "TC [BrotherBand]> " + sender + "> " + message);
 };
 
 //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
@@ -545,6 +545,20 @@ function keyBindsOC(hero) {
   hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
 };
 /**
+ * Adds keybinds for transer chat for characters
+ * @param {JSHero} hero - Required
+ **/
+function keyBindsMM(hero) {
+  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
+  hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
+  hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
+  hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
+  hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+  hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
+  hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
+  hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
+};
+/**
  * Adds keybinds for transer chat for basic transers
  * @param {JSHero} hero - Required
  **/
@@ -607,13 +621,37 @@ brotherBand list
 function tickHandlerOC(entity, manager, transformed, untransformed, color) {
   if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != transformed) {
     manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-    manager.setData(entity, "fiskheroes:disguise", transformed);
-    //manager.setData(entity, "fiskheroes:disguise", null);
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+      manager.setData(entity, "fiskheroes:disguise", transformed);
+    } else {
+      manager.setData(entity, "fiskheroes:disguise", null);
+    };
     manager.setData(entity, "fiskheroes:shape_shifting_to", null);
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
     commandHandler(entity, manager);
     messageHandlerOC(entity, transformed, untransformed, color);
+  };
+};
+
+/**
+ * Tick handler for characters
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Required
+ **/
+function tickHandlerMM(entity, manager) {
+  if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != "Mega Man") {
+    manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+      manager.setData(entity, "fiskheroes:disguise", "Mega Man");
+    } else {
+      manager.setData(entity, "fiskheroes:disguise", null);
+    };
+    manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+    manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+    manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+    commandHandler(entity, manager);
+    messageHandler(entity);
   };
 };
 
