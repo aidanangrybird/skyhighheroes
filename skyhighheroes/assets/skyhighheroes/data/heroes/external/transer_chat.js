@@ -718,7 +718,7 @@ function keyBinds(hero, transformable) {
 /**
  * Is the setKeyBind stuff for basic transers
  * @param {JSEntity} entity - Required
- * @param {keyBind} keyBind - Required
+ * @param {string} keyBind - Required
  **/
 function setKeyBind(entity, keyBind) {
   switch (keyBind) {
