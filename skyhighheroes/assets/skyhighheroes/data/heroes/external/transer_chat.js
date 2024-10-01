@@ -324,14 +324,14 @@ function addContact(player, manager, username) {
       var contacts = manager.newTagList();
       manager.appendString(contacts, username);
       manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
-      systemMessage(player, "Successfully added " + username + " as a contact!");
+      systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
     } else {
       var contacts = player.getWornChestplate().nbt().getStringList("contacts");
       var index = getStringArray(contacts).indexOf(username);
       if (index > -1) {
-        systemMessage(player, username + " is already a contact!");
+        systemMessage(player, "<eh>" + username + "<e> is already a contact!");
       } else {
-        systemMessage(player, "Successfully added " + username + " as a contact!");
+        systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
         manager.appendString(contacts, username);
       };
     };
@@ -462,13 +462,13 @@ function addGroupMember(player, manager, groupName, username) {
   var contacts = player.getWornChestplate().nbt().getTagList("contacts");
   var contactIndex = getStringArray(contacts).indexOf(username);
   if (!player.getWornChestplate().nbt().hasKey("groups")) {
-    systemMessage(player, "You have not set up any groups yet!");
+    systemMessage(player, "<e>You have not set up any groups yet!");
   } else if (groupIndex < 0) {
-    systemMessage(player, "Group " + groupName + " does not exist!");
+    systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
   } else if (contactIndex < 0) {
     systemMessage(player, "<eh>" + username + "<e> is not added as a contact!")
   } else if (memberIndex > -1) {
-    systemMessage(player, "<e>Member " + username + "<e> is already in group <eh>" + groupName + "<e>!");
+    systemMessage(player, "<e>Member <eh>" + username + "<e> is already in group <eh>" + groupName + "<e>!");
   } else {
     systemMessage(player, "<s>Successfully added <sh>" + username  + "<s> to group <sh>" + groupName + "<s>!");
     manager.appendString(members, username);
@@ -487,13 +487,13 @@ function removeGroupMember(player, manager, groupName, username) {
   var members = groups.getCompoundTag(groupIndex).getStringList("members");
   var memberIndex = getStringArray(members).indexOf(username);
   if (!player.getWornChestplate().nbt().hasKey("groups")) {
-    systemMessage(player, "You have not set up any groups yet!");
+    systemMessage(player, "<e>You have not set up any groups yet!");
   } else if (groupIndex < 0) {
-    systemMessage(player, "Group " + groupName + " does not exist!");
+    systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
   } else if (memberIndex < 0) {
-    systemMessage(player, username + " is not in group " + groupName + "!");
+    systemMessage(player, "<eh>" + username + "<e> is not in group <eh>" + groupName + "<e>!");
   } else {
-    systemMessage(player, "Successfully removed " + username  + " from group " + groupName + "!");
+    systemMessage(player, "<s>Successfully removed <sh>" + username  + "<s> from group <sh>" + groupName + "<s>!");
     manager.removeTag(members, memberIndex);
   };
 };
