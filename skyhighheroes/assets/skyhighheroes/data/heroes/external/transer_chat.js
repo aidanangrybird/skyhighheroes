@@ -395,7 +395,7 @@ function hasContact(sender, receiver) {
 //Group stuff
 /**
  * Adds group
- * @param {JSEntity} player - Required
+ * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
  * @param {string} groupName - Name of group
  **/
@@ -692,44 +692,21 @@ function commandMode(player, manager) {
 };
 
 /**
- * Adds keybinds for transer chat for OCs
+ * Adds keybinds for transer chat
  * @param {JSHero} hero - Required
+ * @param {boolean} transformable - If this transer can transform or not
  **/
-function keyBindsOC(hero) {
-  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
-  hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
-  hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
-  hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
-  hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
-  hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
-  hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
-  hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
-};
-/**
- * Adds keybinds for transer chat for characters
- * @param {JSHero} hero - Required
- **/
-function keyBindsMM(hero) {
-  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
-  hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
-  hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
-  hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
-  hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
-  hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
-  hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
-  hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
-};
-/**
- * Adds keybinds for transer chat for basic transers
- * @param {JSHero} hero - Required
- **/
-function keyBinds(hero) {
+function keyBinds(hero, transformable) {
   hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
   hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
   hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
   hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
   hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
   hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+  if (typeof transformable === "boolean" && transformable) {
+    hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
+    hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
+  };
 };
 
 /**
