@@ -1,39 +1,14 @@
 //If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
 //So please don't steal this, it will look very bad on you
 
-var suits = [
-  {"suit": "skyhighheroes:aegon_stelar", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
-  {"suit": "skyhighheroes:aidan_stelar", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {"suit": "skyhighheroes:cash_stelar", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
-  {"suit": "skyhighheroes:chase_stelar", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {"suit": "skyhighheroes:ace_stelar", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {"suit": "skyhighheroes:grand_stelar", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
-  {"suit": "skyhighheroes:lucas_stelar", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
-  {"suit": "skyhighheroes:geo_stelar"},
-  {"suit": "skyhighheroes:geo_stelar/subaru"},
-  {"suit": "skyhighheroes:pegasus_transer"},
-  {"suit": "skyhighheroes:leo_transer"},
-  {"suit": "skyhighheroes:dragon_transer"}
-];
-
-var ocs = [
-  {"suit": "skyhighheroes:aegon_stelar", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
-  {"suit": "skyhighheroes:aidan_stelar", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {"suit": "skyhighheroes:cash_stelar", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
-  {"suit": "skyhighheroes:chase_stelar", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {"suit": "skyhighheroes:ace_stelar", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {"suit": "skyhighheroes:grand_stelar", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
-  {"suit": "skyhighheroes:lucas_stelar", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
-];
-
 var transers = [
-  {"suit": "skyhighheroes:aegon_stelar", "satellite": "dragon"},
-  {"suit": "skyhighheroes:aidan_stelar", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:cash_stelar", "satellite": "dragon"},
-  {"suit": "skyhighheroes:chase_stelar", "satellite": "leo"},
-  {"suit": "skyhighheroes:ace_stelar", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:grand_stelar", "satellite": "leo"},
-  {"suit": "skyhighheroes:lucas_stelar", "satellite": "dragon"},
+  {"suit": "skyhighheroes:aegon_stelar", "satellite": "dragon", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
+  {"suit": "skyhighheroes:aidan_stelar", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
+  {"suit": "skyhighheroes:cash_stelar", "satellite": "dragon", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
+  {"suit": "skyhighheroes:chase_stelar", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
+  {"suit": "skyhighheroes:ace_stelar", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
+  {"suit": "skyhighheroes:grand_stelar", "satellite": "leo", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
+  {"suit": "skyhighheroes:lucas_stelar", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
   {"suit": "skyhighheroes:geo_stelar", "satellite": "pegasus"},
   {"suit": "skyhighheroes:geo_stelar/subaru", "satellite": "pegasus"},
   {"suit": "skyhighheroes:pegasus_transer", "satellite": "pegasus"},
@@ -68,7 +43,7 @@ var formatting = {
  **/
 function isWearingTranser(entity) {
   var wearingTranser = false
-  suits.forEach(entry => {
+  transers.forEach(entry => {
     if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
       wearingTranser = true;
     };
@@ -82,8 +57,8 @@ function isWearingTranser(entity) {
  **/
 function isWearingOC(entity) {
   var wearingOC = false
-  ocs.forEach(entry => {
-    if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit && entity.getUUID() == entry.id) {
+  transers.forEach(entry => {
+    if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : false) {
       wearingOC = true;
     };
   });
