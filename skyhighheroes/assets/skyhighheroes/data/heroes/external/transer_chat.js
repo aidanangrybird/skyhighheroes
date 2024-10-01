@@ -243,13 +243,13 @@ function formBrotherBand(player, manager, username) {
     };
   });
   if (foundPlayer) {
-    if (!player.getWornChestplate().nbt().hasKey("brotherBand")) {
+    if (!player.getWornChestplate().nbt().hasKey("brothers")) {
       var brotherBand = manager.newTagList();
       manager.appendString(brotherBand, username);
-      manager.setTagList(player.getWornChestplate().nbt(), "brotherBand", brotherBand);
+      manager.setTagList(player.getWornChestplate().nbt(), "brothers", brotherBand);
       systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
     } else {
-      var brotherBand = player.getWornChestplate().nbt().getStringList("brotherBand");
+      var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
       var brotherBandIndex = getStringArray(brotherBand).indexOf(username);
       if (brotherBand.tagCount() > 5) {
         systemMessage(player, "<e>You have reached the maximum amount of BrotherBands!");
@@ -271,10 +271,10 @@ function formBrotherBand(player, manager, username) {
  * @param {integer} username - Username of player cutting BrotherBand with
  **/
 function cutBrotherBand(player, manager, username) {
-  if (!player.getWornChestplate().nbt().hasKey("brotherBand")) {
+  if (!player.getWornChestplate().nbt().hasKey("brothers")) {
     systemMessage(player, "<e>You have no BrotherBands to cut!");
   } else {
-    var brotherBand = player.getWornChestplate().nbt().getStringList("brotherBand");
+    var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
     if (brotherBand.tagCount() == 0) {
       systemMessage(player, "<e>You have no BrotherBands to cut!");
     } else {
@@ -293,7 +293,7 @@ function cutBrotherBand(player, manager, username) {
  * @param {JSEntity} entity - Required
  **/
 function listBrotherBands(entity) {
-  var brotherBand = getStringArray(entity.getWornChestplate().nbt().getStringList("brotherBand"));
+  var brotherBand = getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
   systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length > 1)?"<n> Brothers!": "<n> Brother!"));
   brotherBand.forEach(entry => {
     systemMessage(entity, entry);
@@ -306,7 +306,7 @@ function listBrotherBands(entity) {
  * @returns If sender is in receiver's BrotherBands
  **/
 function hasBrother(sender, receiver) {
-  var brotherBands = receiver.getWornChestplate().nbt().getStringList("brotherBand");
+  var brotherBands = receiver.getWornChestplate().nbt().getStringList("brothers");
   var brothers = getStringArray(brotherBands);
   var result = false;
   brothers.forEach(entry => {
@@ -586,9 +586,9 @@ function cycleChats(player, manager) {
       };
       break;
     case 2:
-      if (player.getWornChestplate().nbt().hasKey("brotherBand")) {
-        if (player.getWornChestplate().nbt().getStringList("brotherBand").tagCount() > 0) {
-          var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brotherBand"));
+      if (player.getWornChestplate().nbt().hasKey("brothers")) {
+        if (player.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
+          var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
           if (player.getData("skyhighheroes:dyn/active_chat") > brotherBandList.length) {
             manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
           };
@@ -677,9 +677,9 @@ function commandMode(player, manager) {
         };
         break;
       case 2:
-        if (player.getWornChestplate().nbt().hasKey("brotherBand")) {
-          if (player.getWornChestplate().nbt().getStringList("brotherBand").tagCount() > 0) {
-            var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brotherBand"));
+        if (player.getWornChestplate().nbt().hasKey("brothers")) {
+          if (player.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
+            var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
             if (player.getData("skyhighheroes:dyn/active_chat") > brotherBandList.length) {
               manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
             };
@@ -852,7 +852,7 @@ function messageHandler(entity, transformed, untransformed, color) {
         };
         break;
       case 2:
-        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(activeChat);
+        var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
         var foundPlayer = null;
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
         entities.forEach(player => {
