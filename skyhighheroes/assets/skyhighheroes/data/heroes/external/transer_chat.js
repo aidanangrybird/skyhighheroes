@@ -757,150 +757,43 @@ function setKeyBind(entity, keyBind) {
 };
 
 /**
- * Tick handler for OCs
+ * Tick handler for normal transers
  * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
  * @param {string} transformed - EM Wave Being OC name
  * @param {string} untransformed - Human OC name
  * @param {string} color - Color
  **/
-function tickHandlerOC(entity, manager, transformed, untransformed, color) {
-  if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != transformed) {
-    manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      manager.setData(entity, "fiskheroes:disguise", transformed);
-    } else {
-      manager.setData(entity, "fiskheroes:disguise", null);
-    };
-    manager.setData(entity, "fiskheroes:shape_shifting_to", null);
-    manager.setData(entity, "fiskheroes:shape_shifting_from", null);
-    manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-    commandHandler(entity, manager);
-    messageHandlerOC(entity, transformed, untransformed, color);
-  };
-};
-
-/**
- * Tick handler for characters
- * @param {JSEntity} entity - Required
- * @param {JSDataManager} manager - Required
- **/
-function tickHandlerMM(entity, manager) {
-  if (typeof entity.getData("fiskheroes:disguise") === "string" && entity.getData("fiskheroes:disguise") != "Mega Man") {
-    manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      manager.setData(entity, "fiskheroes:disguise", "Mega Man");
-    } else {
-      manager.setData(entity, "fiskheroes:disguise", null);
-    };
-    manager.setData(entity, "fiskheroes:shape_shifting_to", null);
-    manager.setData(entity, "fiskheroes:shape_shifting_from", null);
-    manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-    commandHandler(entity, manager);
-    messageHandler(entity);
-  };
-};
-
-/**
- * Tick handler for normal transers
- * @param {JSEntity} entity - Required
- * @param {JSDataManager} manager - Required
- **/
-function tickHandler(entity, manager) {
+function tickHandler(entity, manager, transformed, untransformed, color) {
   if (typeof entity.getData("fiskheroes:disguise") === "string") {
-    manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-    manager.setData(entity, "fiskheroes:disguise", null);
+    if (typeof transformed === "string") {
+      if (entity.getData("fiskheroes:disguise") != transformed) {
+        manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+        manager.setData(entity, "fiskheroes:disguise", transformed);
+      } else {
+        manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+        manager.setData(entity, "fiskheroes:disguise", null);
+      }
+    } else {
+      manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+      manager.setData(entity, "fiskheroes:disguise", null);
+    };
     manager.setData(entity, "fiskheroes:shape_shifting_to", null);
     manager.setData(entity, "fiskheroes:shape_shifting_from", null);
     manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
     commandHandler(entity, manager);
-    messageHandler(entity);
+    messageHandler(entity, transformed, untransformed, color);
   };
 };
 
 /**
  * Message handler for normal transers
  * @param {JSEntity} entity - Required
- * @param {JSDataManager} manager - Required
- **/
-function messageHandler(entity) {
-  if (!entity.getData("skyhighheroes:dyn/command_mode")) {
-    var message = entity.getData("skyhighheroes:dyn/entry");
-    var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
-    //Check if inputed username matches
-    //Then check if entity is wearing transer
-    //Then check if contacts/brotherband/groups are same
-    //Finally send message
-    switch (entity.getData("skyhighheroes:dyn/chat_mode")) {
-      case 0:
-        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
-        var foundPlayer = null;
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-        entities.forEach(player => {
-          if (player.is("PLAYER") && player.getName() == reciever) {
-            foundPlayer = player;
-          };
-        });
-        if (foundPlayer != null) {
-          if (isWearingTranser(foundPlayer)) {
-            if (hasContact(entity, foundPlayer)) {
-              playerMessage(foundPlayer, entity.getName(), message);
-              playerMessage(entity, entity.getName(), message);
-            };
-          };
-        };
-        break;
-      case 1:
-        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
-        var groupName = group.getString("groupName");
-        var members = getStringArray(group.getStringList("members"));
-        var foundPlayers = [];
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-        entities.forEach(player => {
-          if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
-            foundPlayers.push(player);
-          };
-        });
-        if (foundPlayer != null) {
-          foundPlayers.forEach(player => {
-            if (isWearingTranser(player)) {
-              if (hasContact(entity, player)) {
-                groupMessage(player, groupName, entity.getName(), message);
-              };
-            };
-          })
-        };
-        break;
-      case 2:
-        var reciever = entity.getWornChestplate().nbt().getStringList("brotherBand").getString(activeChat);
-        var foundPlayer = null;
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
-        entities.forEach(player => {
-          if (player.is("PLAYER") && player.getName() == reciever) {
-            foundPlayer = player;
-          };
-        });
-        if (foundPlayer != null) {
-          if (isWearingTranser(foundPlayer)) {
-            if (hasBrother(entity, foundPlayer)) {
-              brotherBandMessage(entity, entity.getName(), message);
-              brotherBandMessage(foundPlayer, entity.getName(), message);
-            };
-          };
-        };
-        break;
-    };
-  };
-};
-
-/**
- * Message handler for OCs
- * @param {JSEntity} entity - Required
  * @param {string} transformed - EM Wave Being OC name
  * @param {string} untransformed - Human OC name
  * @param {string} color - Color
  **/
-function messageHandlerOC(entity, transformed, untransformed, color) {
+function messageHandler(entity, transformed, untransformed, color) {
   if (!entity.getData("skyhighheroes:dyn/command_mode")) {
     var message = entity.getData("skyhighheroes:dyn/entry");
     var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
@@ -921,12 +814,17 @@ function messageHandlerOC(entity, transformed, untransformed, color) {
         if (foundPlayer != null) {
           if (isWearingTranser(foundPlayer)) {
             if (hasContact(entity, foundPlayer)) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
-                playerMessage(entity, color+transformed+"\u00A7r", message);
+              if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                  playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
+                  playerMessage(entity, color+transformed+"\u00A7r", message);
+                } else {
+                  playerMessage(foundPlayer, untransformed, message);
+                  playerMessage(entity, untransformed, message);
+                };
               } else {
-                playerMessage(foundPlayer, untransformed, message);
-                playerMessage(entity, untransformed, message);
+                playerMessage(foundPlayer, entity.getName(), message);
+                playerMessage(entity, entity.getName(), message);
               };
             };
           };
@@ -947,18 +845,26 @@ function messageHandlerOC(entity, transformed, untransformed, color) {
           foundPlayers.forEach(player => {
             if (isWearingTranser(player)) {
               if (hasContact(entity, player)) {
-                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                  groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+                if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+                  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                    groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+                  } else {
+                    groupMessage(player, groupName, untransformed, message);
+                  };
                 } else {
-                  groupMessage(player, groupName, untransformed, message);
+                  groupMessage(player, groupName, entity.getName(), message);
                 };
               };
             };
           });
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-            groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
+          if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+            if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+              groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
+            } else {
+              groupMessage(entity, groupName, untransformed, message);
+            };
           } else {
-            groupMessage(entity, groupName, untransformed, message);
+            groupMessage(entity, groupName, entity.getName(), message);
           };
         };
         break;
@@ -974,12 +880,14 @@ function messageHandlerOC(entity, transformed, untransformed, color) {
         if (foundPlayer != null) {
           if (isWearingTranser(foundPlayer)) {
             if (hasBrother(entity, foundPlayer)) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                brotherBandMessage(foundPlayer, color+transformed+"\u00A7r", message);
-                brotherBandMessage(entity, color+transformed+"\u00A7r", message);
+              if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                  brotherBandMessage(entity, color+transformed+"\u00A7r", message);
+                } else {
+                  brotherBandMessage(entity, untransformed, message);
+                };
               } else {
-                brotherBandMessage(foundPlayer, untransformed, message);
-                brotherBandMessage(entity, untransformed, message);
+                brotherBandMessage(entity, entity.getName(), message);
               };
             };
           };
