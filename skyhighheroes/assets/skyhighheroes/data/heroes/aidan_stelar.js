@@ -1,7 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
-var transerChat = implement("skyhighheroes:external/transer_chat");
+var transerSystem = implement("skyhighheroes:external/transer_system");
 function init(hero) {
   hero.setAliases("aidan_stelar");
   hero.setName("\u00A76Squall Vortex");
@@ -10,11 +10,11 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
 
-  transerChat.keyBinds(hero, true);
+  transerSystem.keyBinds(hero, true);
 
   stelar.initEquipment(hero, "Squall Vortex", "\u00A76")
 
-  hero.addPowers("skyhighheroes:transer_chat", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_aidan", "skyhighheroes:em_vortex_buster");
+  hero.addPowers("skyhighheroes:transer_system", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_aidan", "skyhighheroes:em_vortex_buster");
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => stelar.cycleClothes(player, manager), "Change Clothes", 1);
@@ -63,7 +63,7 @@ function init(hero) {
   }, "Battle Card! Derecho!", 2);
   hero.addKeyBindFunc("BATTLE_CARD_6", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
-    transerChat.systemMessage(player, thing.getTime());
+    transerSystem.systemMessage(player, thing.getTime());
     if (PackLoader.getSide() == "CLIENT") {
       PackLoader.printChat("\u00A7r<\u00A76Squall Vortex\u00A7r> Battle Card Predation! \u00A76Hail Cannon\u00A7r!");
     };
@@ -350,7 +350,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerChat.tickHandler(entity, manager, "Squall Vortex", "Aidan Stelar", "\u00A76");
+    transerSystem.tickHandler(entity, manager, "Squall Vortex", "Aidan Stelar", "\u00A76");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

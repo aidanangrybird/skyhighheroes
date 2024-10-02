@@ -1,7 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
-var transerChat = implement("skyhighheroes:external/transer_chat");
+var transerSystem = implement("skyhighheroes:external/transer_system");
 function init(hero) {
   hero.setAliases("chase_stelar");
   hero.setName("\u00A72Pryetak Nebula");
@@ -10,11 +10,11 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
 
-  transerChat.keyBinds(hero, true); 
+  transerSystem.keyBinds(hero, true); 
   
   stelar.initEquipment(hero, "Pryetak Nebula", "\u00A72")
 
-  hero.addPowers("skyhighheroes:transer_chat", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_chase", "skyhighheroes:em_nebula_buster");
+  hero.addPowers("skyhighheroes:transer_system", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_battle_cards_chase", "skyhighheroes:em_nebula_buster");
 
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => stelar.cycleClothes(player, manager), "Change Clothes", 1);
@@ -357,7 +357,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerChat.tickHandler(entity, manager, "Pryetak Nebula");
+    transerSystem.tickHandler(entity, manager, "Pryetak Nebula");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

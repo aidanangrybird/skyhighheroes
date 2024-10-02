@@ -1,5 +1,5 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
-var transerChat = implement("skyhighheroes:external/transer_chat");
+var transerSystem = implement("skyhighheroes:external/transer_system");
 function init(hero) {
   hero.setName("\u00A7bMega Man");
   hero.setTier(10);
@@ -13,7 +13,7 @@ function init(hero) {
   hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A7bMega Man's Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Pickaxe"));
   hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A7bMega Man's Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Shovel"));
   
-  hero.addPowers("skyhighheroes:transer_chat", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_mega_buster");
+  hero.addPowers("skyhighheroes:transer_system", "skyhighheroes:em_wave_change", "skyhighheroes:em_wave_being", "skyhighheroes:em_battle_card_predation", "skyhighheroes:em_battle_cards", "skyhighheroes:em_mega_buster");
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
@@ -22,7 +22,7 @@ function init(hero) {
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
   
-  transerChat.keyBinds(hero, true);
+  transerSystem.keyBinds(hero, true);
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
@@ -129,7 +129,7 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
-    transerChat.tickHandler(entity, manager);
+    transerSystem.tickHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };
