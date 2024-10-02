@@ -926,7 +926,7 @@ function commandHandler(entity, manager) {
         systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Creates group by name");
         systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes group by name");
         systemMessage(entity, "<n>list <nh>-<n> Lists groups");
-        systemMessage(entity, "Below commands apply to the currently selected group!")
+        systemMessage(entity, "<n>Below commands apply to the currently selected group!")
         systemMessage(entity, "<n>addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
         systemMessage(entity, "<n>remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
         systemMessage(entity, "<n>listMem <nh>-<n> Lists members in currently selected group");

@@ -10,7 +10,7 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
   
-  transerChat.keyBindsOC(hero);
+  transerChat.keyBinds(hero, true);
   
   stelar.initEquipment(hero, "Amethyst Galaxy", "\u00A75")
 
@@ -355,7 +355,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerChat.tickHandlerOC(entity, manager, "Amethyst Galaxy", "Cash Stelar", "\u00A75");
+    transerChat.tickHandler(entity, manager, "Amethyst Galaxy", "Cash Stelar", "\u00A75");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

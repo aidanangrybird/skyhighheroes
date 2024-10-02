@@ -10,7 +10,7 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
 
-  transerChat.keyBindsOC(hero);
+  transerChat.keyBinds(hero, true);
 
   stelar.initEquipment(hero, "Squall Vortex", "\u00A76")
 
@@ -63,6 +63,7 @@ function init(hero) {
   }, "Battle Card! Derecho!", 2);
   hero.addKeyBindFunc("BATTLE_CARD_6", (player, manager) => {
     manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
+    transerChat.systemMessage(player, thing.getTime());
     if (PackLoader.getSide() == "CLIENT") {
       PackLoader.printChat("\u00A7r<\u00A76Squall Vortex\u00A7r> Battle Card Predation! \u00A76Hail Cannon\u00A7r!");
     };
@@ -349,7 +350,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerChat.tickHandlerOC(entity, manager, "Squall Vortex", "Aidan Stelar", "\u00A76");
+    transerChat.tickHandler(entity, manager, "Squall Vortex", "Aidan Stelar", "\u00A76");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

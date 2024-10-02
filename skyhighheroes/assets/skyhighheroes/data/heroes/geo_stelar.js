@@ -22,7 +22,7 @@ function init(hero) {
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
   
-  transerChat.keyBindsMM(hero);
+  transerChat.keyBinds(hero, true);
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
@@ -129,7 +129,7 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
-    transerChat.tickHandlerMM(entity, manager);
+    transerChat.tickHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };
