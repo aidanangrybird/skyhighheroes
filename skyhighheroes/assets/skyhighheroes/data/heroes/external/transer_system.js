@@ -890,12 +890,7 @@ function commandHandler(entity, manager) {
     var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
     var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
     if (chatMode == 0) {
-      if (args.length == 0) {
-        systemMessage(entity, "<n>Contact commands:");
-        systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Adds contact by name");
-        systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes contact by name");
-        systemMessage(entity, "<n>list <nh>-<n> Lists contacts");
-      } else if (args.length < 3) {
+      if (args.length > 0 && args.length < 3) {
         switch(args[0]) {
           case "add":
             (args.length == 2) ? addContact(entity, manager, args[1]) : systemMessage(entity, "<n>add <name>");
@@ -921,17 +916,7 @@ function commandHandler(entity, manager) {
         systemMessage(entity, "<e>Too many arguemnts!");
       };
     } else if (chatMode == 1) {
-      if (args.length == 0) {
-        systemMessage(entity, "<n>Group commands:")
-        systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Creates group by name");
-        systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes group by name");
-        systemMessage(entity, "<n>list <nh>-<n> Lists groups");
-        systemMessage(entity, "<n>Below commands apply to the currently selected group!")
-        systemMessage(entity, "<n>addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
-        systemMessage(entity, "<n>remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
-        systemMessage(entity, "<n>listMem <nh>-<n> Lists members in currently selected group");
-        systemMessage(entity, "<n>help <nh>-<n> Shows group commands");
-      } else if (args.length < 3) {
+      if (args.length > 0 && args.length < 3) {
         switch (args[0]) {
           case "add":
             (args.length == 2) ? addGroup(entity, manager, args[1]) : systemMessage(entity, "<n>add <name>");
@@ -970,13 +955,7 @@ function commandHandler(entity, manager) {
         systemMessage(entity, "Too many arguemnts!");
       };
     } else if (chatMode == 2) {
-      if (args.length == 0) {
-        systemMessage(entity, "<n>BrotherBand commands:")
-        systemMessage(entity, "<n>form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
-        systemMessage(entity, "<n>cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
-        systemMessage(entity, "<n>list <nh>-<n> Lists Brothers");
-        systemMessage(entity, "<n>help <nh>-<n> Shows BrotherBand commands");
-      } else if (args.length < 3) {
+      if (args.length > 0 && args.length < 3) {
         switch (args[0]) {
           case "form":
             (args.length == 2) ? formBrotherBand(entity, manager, args[1]) : systemMessage(entity, "<n>form <nh><name>");
