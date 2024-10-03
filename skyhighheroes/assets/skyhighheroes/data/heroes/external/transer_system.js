@@ -804,3 +804,13 @@ function commandHandler(entity, manager) {
     };
   };
 };
+
+function initTranser(modules) {
+  return {
+    keyBinds: (hero) => {
+      modules.forEach(module => {
+        module.addKeyBinds(hero);
+      })
+    }
+  }
+}

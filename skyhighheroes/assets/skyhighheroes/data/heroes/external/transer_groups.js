@@ -144,3 +144,42 @@ function hasGroup(sender, receiver, groupName) {
   };
   return result;
 };
+
+function messageHandler (entity, transformed, untransformed, color) {
+  var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
+  var groupName = group.getString("groupName");
+  var members = getStringArray(group.getStringList("members"));
+  var foundPlayers = [];
+  var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+  entities.forEach(player => {
+    if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
+      foundPlayers.push(player);
+    };
+  });
+  if (foundPlayer != null) {
+    foundPlayers.forEach(player => {
+      if (isWearingTranser(player)) {
+        if (hasContact(entity, player)) {
+          if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+            if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+              groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+            } else {
+              groupMessage(player, groupName, untransformed, message);
+            };
+          } else {
+            groupMessage(player, groupName, entity.getName(), message);
+          };
+        };
+      };
+    });
+    if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
+      } else {
+        groupMessage(entity, groupName, untransformed, message);
+      };
+    } else {
+      groupMessage(entity, groupName, entity.getName(), message);
+    };
+  };
+};
