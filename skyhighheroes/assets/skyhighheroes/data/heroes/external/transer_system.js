@@ -36,6 +36,21 @@ var formatting = {
   }
 };
 
+var months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
 /**
  * Checks if an entity is wearing a transer
  * @param {JSEntity} entity - Entity getting checked
@@ -516,7 +531,7 @@ function hasGroup(sender, receiver, groupName) {
 };
 
 //For keybinds
-function cycleChats(player, manager) {
+/* function cycleChats(player, manager, modules) {
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
   switch (player.getData("skyhighheroes:dyn/chat_mode")) {
     case 0:
@@ -572,8 +587,8 @@ function cycleChats(player, manager) {
       break;
   };
   return true;
-};
-function cycleChatModes(player, manager) {
+}; */
+function cycleChatModes(player, manager, modules) {
   manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
   if (player.getData("skyhighheroes:dyn/chat_mode") > 2) {
     manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
@@ -591,23 +606,13 @@ function cycleChatModes(player, manager) {
   };
   return true;
 };
-function commandMode(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/command_mode", !player.getData("skyhighheroes:dyn/command_mode"));
-  if (player.getData("skyhighheroes:dyn/command_mode")) {
+function commandModeToggle(player, manager, modules) {
+  manager.setData(player, "skyhighheroes:dyn/command", !player.getData("skyhighheroes:dyn/command"));
+  if (player.getData("skyhighheroes:dyn/command")) {
     systemMessage(player, "Now in command mode!");
-    switch (player.getData("skyhighheroes:dyn/chat_mode")) {
-      case 0:
-        systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
-        break;
-      case 1:
-        systemMessage(player, "<n>Do <nh>help<n> to show available <nh>group<n> commands");
-        break;
-      case 2:
-        systemMessage(player, "<n>Do <nh>help<n> to show available <nh>BrotherBand<n> commands");
-        break;
-    };
+    modules[player.getData("skyhighheroes:dyn/command_mode")].commandModeInfo(player);
   };
-  if (!player.getData("skyhighheroes:dyn/command_mode")) {
+  if (!player.getData("skyhighheroes:dyn/command")) {
     systemMessage(player, "Now in messaging mode!");
     switch (player.getData("skyhighheroes:dyn/chat_mode")) {
       case 0:
@@ -672,7 +677,7 @@ function commandMode(player, manager) {
  * @param {boolean} transformable - If this transer can transform or not
  **/
 function keyBinds(hero, transformable) {
-  hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
+  hero.addKeyBindFunc("COMMAND_TOGGLE", (player, manager) => commandModeToggle(player, manager), "Toggle command mode", 4);
   hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
   hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
   hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
@@ -697,12 +702,12 @@ function setKeyBind(entity, keyBind) {
       return entity.isSneaking();
     case "SHAPE_SHIFT":
       return !entity.isSneaking();
-    case "COMMAND_MODE":
+    case "COMMAND_TOGGLE":
       return entity.isSneaking();
     case "ENTER_COMMAND":
-      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command_mode");
+      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/command");
     case "SEND_MESSAGE":
-      return !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command_mode");
+      return !entity.isSneaking() && !entity.getData("skyhighheroes:dyn/command");
     default:
       return true;
   };
@@ -718,7 +723,7 @@ function setKeyBind(entity, keyBind) {
  * @param {string} untransformed - Human OC name
  * @param {string} color - Color
  **/
-function tickHandler(entity, manager, transformed, untransformed, color) {
+/* function tickHandler(entity, manager, transformed, untransformed, color) {
   if (typeof entity.getData("fiskheroes:disguise") === "string") {
     if (typeof transformed === "string") {
       if (entity.getData("fiskheroes:disguise") != transformed) {
@@ -738,7 +743,7 @@ function tickHandler(entity, manager, transformed, untransformed, color) {
     commandHandler(entity, manager);
     messageHandler(entity, transformed, untransformed, color);
   };
-};
+}; */
 
 /**
  * Message handler for normal transers
@@ -747,8 +752,8 @@ function tickHandler(entity, manager, transformed, untransformed, color) {
  * @param {string} untransformed - Human OC name
  * @param {string} color - Color
  **/
-function messageHandler(entity, transformed, untransformed, color) {
-  if (!entity.getData("skyhighheroes:dyn/command_mode")) {
+/* function messageHandler(entity, transformed, untransformed, color) {
+  if (!entity.getData("skyhighheroes:dyn/command")) {
     var message = entity.getData("skyhighheroes:dyn/entry");
     var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
     //Check if inputed username matches
@@ -849,15 +854,15 @@ function messageHandler(entity, transformed, untransformed, color) {
         break;
     };
   };
-};
+}; */
 
 /**
  * Actually handles the commands
  * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
  **/
-function commandHandler(entity, manager) {
-  if (entity.getData("skyhighheroes:dyn/command_mode")) {
+/* function commandHandler(entity, manager) {
+  if (entity.getData("skyhighheroes:dyn/command")) {
     var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
     var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
     if (chatMode == 0) {
@@ -953,23 +958,38 @@ function commandHandler(entity, manager) {
       };
     };
   };
-};
+}; */
 
+/**
+ * Initializes transer system
+ * @param {object} modules - Transer system modules
+ **/
 function initTranser(modules) {
   return {
     keyBinds: (hero, transformable) => {
-      hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
+      hero.addKeyBindFunc("COMMAND_TOGGLE", (player, manager) => commandModeToggle(player, manager, modules), "Toggle command mode", 4);
       hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
       hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
       hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+      hero.addKeyBindFunc("CYCLE_COMMAND_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
       if (typeof transformable === "boolean" && transformable) {
         hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
         hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
       };
     },
     tickHandler: (entity, manager, transformed, untransformed, color) => {
+      if (!entity.getData("skyhighheroes:dyn/system_init")) {
+        systemMessage(entity, "<n>Loaded modules:");
+        modules.forEach(module => {
+          systemMessage(entity, "<nh>" + module.moduleName());
+        });
+        var date = new Date();
+        systemMessage(entity, "<n>It is <nh>" + date.getDay() + " " + months[date.getMonth()] + " " + date.getFullYear());
+        systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + date.getMinutes());
+        manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+      };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (typeof transformed === "string") {
           if (entity.getData("fiskheroes:disguise") != transformed) {
@@ -978,7 +998,7 @@ function initTranser(modules) {
           } else {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", null);
-          }
+          };
         } else {
           manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
           manager.setData(entity, "fiskheroes:disguise", null);
@@ -986,14 +1006,21 @@ function initTranser(modules) {
         manager.setData(entity, "fiskheroes:shape_shifting_to", null);
         manager.setData(entity, "fiskheroes:shape_shifting_from", null);
         manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        modules.forEach(module => {
-          if (module.hasOwnProperty(messageHandler) && !entity.getData("skyhighheroes:dyn/command_mode")) {
-            module.messageHandler(entity, transformed, untransformed, color);
-          };
-          if (module.hasOwnProperty(commandHandler) && entity.getData("skyhighheroes:dyn/command_mode")) {
-            module.commandHandler(entity, manager);
-          };
-        });
+        if (entity.getData("skyhighheroes:dyn/entry").startsWith("!")) {
+          var oldEntry = entity.getData("skyhighheroes:dyn/entry");
+          manager.setData(entity, "skyhighheroes:dyn/entry", oldEntry.substring(1))
+          modules.forEach(module => {
+            if (module.hasOwnProperty(commandHandler) && entity.getData("skyhighheroes:dyn/command")) {
+              module.commandHandler(entity, manager);
+            };
+          });
+        } else {
+          modules.forEach(module => {
+            if (module.hasOwnProperty(messageHandler) && !entity.getData("skyhighheroes:dyn/command")) {
+              module.messageHandler(entity, transformed, untransformed, color);
+            };
+          });
+        };
       };
     }
   };

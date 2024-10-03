@@ -1,4 +1,6 @@
-//Contacts stuff
+function moduleName() {
+  return "contacts";
+};
 /**
  * Adds contact
  * @param {JSEntity} player - Required
@@ -110,9 +112,9 @@ function messageHandler(entity, transformed, untransformed, color) {
   };
 };
 
-function commandHandler(entity, manager) {
-  var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
-  var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+function commandHandler(entity, manager, entry) {
+  var chatMode = entity.getData("skyhighheroes:dyn/command_mode");
+  var args = entry.split(" ");
   if (chatMode == 0) {
     if (args.length > 0 && args.length < 3) {
       switch(args[0]) {
@@ -139,5 +141,26 @@ function commandHandler(entity, manager) {
     } else {
       systemMessage(entity, "<e>Too many arguemnts!");
     };
+  };
+};
+
+function commandModeInfo(player) {
+  systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
+};
+
+function chatModeInfo(player, manager) {
+  if (player.getWornChestplate().nbt().hasKey("contacts")) {
+    if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+      var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+      if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+        manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+      };
+      var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
+      systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+    } else {
+      systemMessage(player, "<e>You do not have any contacts!");
+    };
+  } else {
+    systemMessage(player, "<e>You do not have any contacts!");
   };
 };

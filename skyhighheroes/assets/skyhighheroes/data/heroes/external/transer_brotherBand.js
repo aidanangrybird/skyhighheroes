@@ -1,4 +1,7 @@
 //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
+function moduleName() {
+  return "BrotherBand";
+};
 /**
  * Forms BrotherBand
  * @param {JSPlayer} player - Player forming BrotherBand
@@ -144,5 +147,26 @@ function commandHandler(entity, manager) {
     } else {
       systemMessage(entity, "<e>Too many arguemnts!");
     };
+  };
+};
+
+function commandModeInfo(player) {
+  systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
+};
+
+function chatModeInfo(player, manager) {
+  if (player.getWornChestplate().nbt().hasKey("contacts")) {
+    if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+      var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+      if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+        manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+      };
+      var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
+      systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+    } else {
+      systemMessage(player, "<e>You do not have any contacts!");
+    };
+  } else {
+    systemMessage(player, "<e>You do not have any contacts!");
   };
 };
