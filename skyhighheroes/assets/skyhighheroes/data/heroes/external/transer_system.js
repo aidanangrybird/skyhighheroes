@@ -957,17 +957,44 @@ function commandHandler(entity, manager) {
 
 function initTranser(modules) {
   return {
-    commandHandler: (entity, manager) => {
-      modules.forEach(module => {
-        module.cmdHandler(entity, manager);
-      });
+    keyBinds: (hero, transformable) => {
+      hero.addKeyBindFunc("COMMAND_MODE", (player, manager) => commandMode(player, manager), "Toggle command mode", 4);
+      hero.addKeyBind("SEND_MESSAGE", "Send message", 4);
+      hero.addKeyBind("ENTER_COMMAND", "Enter command", 4);
+      hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
+      hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
+      hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+      if (typeof transformable === "boolean" && transformable) {
+        hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
+        hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
+      };
     },
-    messageHandler: (entity, transformed, untransformed, color) => {
-      modules.forEach(module => {
-        if (module.hasOwnProperty(msgHandler)) {
-          module.msgHandler(entity, transformed, untransformed, color);
-        }
-      });
+    tickHandler: (entity, manager, transformed, untransformed, color) => {
+      if (typeof entity.getData("fiskheroes:disguise") === "string") {
+        if (typeof transformed === "string") {
+          if (entity.getData("fiskheroes:disguise") != transformed) {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", transformed);
+          } else {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", null);
+          }
+        } else {
+          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+          manager.setData(entity, "fiskheroes:disguise", null);
+        };
+        manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+        manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+        manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+        modules.forEach(module => {
+          if (module.hasOwnProperty(messageHandler) && !entity.getData("skyhighheroes:dyn/command_mode")) {
+            module.messageHandler(entity, transformed, untransformed, color);
+          };
+          if (module.hasOwnProperty(commandHandler) && entity.getData("skyhighheroes:dyn/command_mode")) {
+            module.commandHandler(entity, manager);
+          };
+        });
+      };
     }
-  }
-}
+  };
+};

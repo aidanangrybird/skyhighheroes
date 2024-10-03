@@ -145,7 +145,7 @@ function hasGroup(sender, receiver, groupName) {
   return result;
 };
 
-function msgHandler (entity, transformed, untransformed, color) {
+function messageHandler (entity, transformed, untransformed, color) {
   var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
   var groupName = group.getString("groupName");
   var members = getStringArray(group.getStringList("members"));
@@ -184,7 +184,7 @@ function msgHandler (entity, transformed, untransformed, color) {
   };
 };
 
-function cmdHandler(entity, manager) {
+function commandHandler(entity, manager) {
   if (entity.getData("skyhighheroes:dyn/chat_mode") == 1) {
     if (args.length > 0 && args.length < 3) {
       switch (args[0]) {
