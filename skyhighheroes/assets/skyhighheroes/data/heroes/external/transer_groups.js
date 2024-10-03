@@ -145,7 +145,7 @@ function hasGroup(sender, receiver, groupName) {
   return result;
 };
 
-function messageHandler (entity, transformed, untransformed, color) {
+function msgHandler (entity, transformed, untransformed, color) {
   var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
   var groupName = group.getString("groupName");
   var members = getStringArray(group.getStringList("members"));
@@ -156,7 +156,7 @@ function messageHandler (entity, transformed, untransformed, color) {
       foundPlayers.push(player);
     };
   });
-  if (foundPlayer != null) {
+  if (foundPlayers != null) {
     foundPlayers.forEach(player => {
       if (isWearingTranser(player)) {
         if (hasContact(entity, player)) {
@@ -180,6 +180,49 @@ function messageHandler (entity, transformed, untransformed, color) {
       };
     } else {
       groupMessage(entity, groupName, entity.getName(), message);
+    };
+  };
+};
+
+function cmdHandler(entity, manager) {
+  if (entity.getData("skyhighheroes:dyn/chat_mode") == 1) {
+    if (args.length > 0 && args.length < 3) {
+      switch (args[0]) {
+        case "add":
+          (args.length == 2) ? addGroup(entity, manager, args[1]) : systemMessage(entity, "<n>add <name>");
+          break;
+        case "rem":
+          (args.length == 2) ? removeGroup(entity, manager, args[1]) : systemMessage(entity, "<n>rem <name>");
+          break;
+        case "list":
+          listGroups(entity, manager);
+          break;
+        case "addMem":
+          (args.length == 2) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : systemMessage(entity, "<n>addMem <name>");
+          break;
+        case "remMem":
+          (args.length == 2) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : systemMessage(entity, "<n>remMem <name>");
+          break;
+        case "listMem":
+          listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
+          break;
+        case "help":
+          systemMessage(entity, "Group commands:")
+          systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Creates group by name");
+          systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes group by name");
+          systemMessage(entity, "<n>list <nh>-<n> Lists groups");
+          systemMessage(entity, "Below commands apply to the currently selected group!")
+          systemMessage(entity, "<n>addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
+          systemMessage(entity, "<n>remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
+          systemMessage(entity, "<n>listMem <nh>-<n> Lists members in currently selected group");
+          systemMessage(entity, "<n>help <nh>-<n> Shows group commands");
+          break;
+        default:
+          systemMessage(entity, "Unknown group command! Try help for a list of commands!");
+          break;
+      };
+    } else {
+      systemMessage(entity, "Too many arguemnts!");
     };
   };
 };
