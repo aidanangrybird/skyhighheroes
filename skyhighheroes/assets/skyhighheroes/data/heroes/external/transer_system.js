@@ -33,30 +33,6 @@ var formatting = {
     "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r",
     "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r",
     "<r>": "\u00A7r"
-  },
-  "chat": {
-    "&0": "\u00A70",
-    "&1": "\u00A71",
-    "&2": "\u00A72",
-    "&3": "\u00A73",
-    "&4": "\u00A74",
-    "&5": "\u00A75",
-    "&6": "\u00A76",
-    "&7": "\u00A77",
-    "&8": "\u00A78",
-    "&9": "\u00A79",
-    "&a": "\u00A7a",
-    "&b": "\u00A7b",
-    "&c": "\u00A7c",
-    "&d": "\u00A7d",
-    "&e": "\u00A7e",
-    "&f": "\u00A7f",
-    "&k": "\u00A7k",
-    "&l": "\u00A7l",
-    "&m": "\u00A7m",
-    "&n": "\u00A7n",
-    "&o": "\u00A7o",
-    "&r": "\u00A7r"
   }
 };
 
@@ -107,13 +83,6 @@ function getAssignedSatellite(entity) {
 function formatSystem(input) {
   output = input.replace(regex, function(thing) {
     return formatting.system[thing];
-  });
-  return output;
-};
-
-function formatNormal(input) {
-  output = input.replace(regex, function(thing) {
-    return formatting.chat[thing];
   });
   return output;
 };
@@ -214,7 +183,7 @@ function groupMessage(player, groupName, sender, message) {
  * @param {string} message - Messsage content
  **/
 function playerMessage(player, sender, message) {
-  chatMessage(player, formatNormal(sender + "> " + message));
+  chatMessage(player, sender + "> " + message);
 };
 /**
  * Sends message in BrotherBand format
