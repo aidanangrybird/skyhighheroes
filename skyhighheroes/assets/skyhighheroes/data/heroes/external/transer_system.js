@@ -309,7 +309,14 @@ function setKeyBind(entity, keyBind) {
  * Initializes transer system
  * @param {object} modules - Transer system modules
  **/
-function initTranser(modules) {
+function initTranser(modulesList) {
+  var self = this;
+  var initModules = [];
+  modulesList.forEach(module => {
+    var init = module.init(self);
+    initModules.push(init);
+  });
+  var modules = initModules;
   var modulelist = "<n>Loaded modules: ";
   var numModules = modules.length;
   modules.forEach(module => {
