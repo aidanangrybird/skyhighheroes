@@ -2,10 +2,10 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "2389f9cd-351e-4d96-a277-847a24fd9048";
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("cash_stelar");
   hero.setName("\u00A75Amethyst Galaxy");

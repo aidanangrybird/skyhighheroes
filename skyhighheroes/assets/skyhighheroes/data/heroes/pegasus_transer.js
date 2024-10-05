@@ -1,9 +1,8 @@
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerBlocks = implement("skyhighheroes:external/transer_info");
-var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts, transerBlocks]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("pegasus_transer");
   hero.setName("Pegasus Magic");

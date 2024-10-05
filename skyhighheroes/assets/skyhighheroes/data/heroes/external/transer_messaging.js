@@ -3,6 +3,23 @@ function name() {
 };
 function init(transer) {
   /**
+   * Checks if a player has another player as a contact
+   * @param {JSEntity} sender - Player getting checked
+   * @param {JSEntity} receiver - Player whose contact list is being checked
+   * @returns If sender is in receiver's contacts
+   **/
+  function hasContact(sender, receiver) {
+    var contacts = receiver.getWornChestplate().nbt().getStringList("contacts");
+    var contactsList = transer.getStringArray(contacts);
+    var result = false;
+    contactsList.forEach(entry => {
+      if (entry == sender.getName()) {
+        result = true;
+      };
+    });
+    return result;
+  };
+  /**
    * Adds group
    * @param {JSEntity} entity - Required
    * @param {JSDataManager} manager - Required
@@ -182,6 +199,7 @@ function init(transer) {
       };
       if (entity.getData("skyhighheroes:dyn/chat_mode") == 1) {
         var message = entity.getData("skyhighheroes:dyn/entry");
+        var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
         var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
         var groupName = group.getString("groupName");
         var members = transer.getStringArray(group.getStringList("members"));
@@ -266,22 +284,45 @@ function init(transer) {
       };
     },
     chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>You are now in <nh>group<n> mode!");
+      if (player.getData("skyhighheroes:dyn/chat_mode") == 0) {
+        transer.systemMessage(player, "<n>You are now in <nh>normal<n> mode!");
+      };
+      if (player.getData("skyhighheroes:dyn/chat_mode") == 1) {
+        transer.systemMessage(player, "<n>You are now in <nh>group<n> mode!");
+      };
     },
     chatInfo: function (player, manager) {
-      if (player.getWornChestplate().nbt().hasKey("contacts")) {
-        if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-          if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+      if (player.getData("skyhighheroes:dyn/chat_mode") == 0) {
+        if (player.getWornChestplate().nbt().hasKey("contacts")) {
+          if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+            var contactsList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+            if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
+            var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
+            transer.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+          } else {
+            transer.systemMessage(player, "<e>You do not have any contacts!");
           };
-          var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          transer.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
         } else {
           transer.systemMessage(player, "<e>You do not have any contacts!");
         };
-      } else {
-        transer.systemMessage(player, "<e>You do not have any contacts!");
+      };
+      if (player.getData("skyhighheroes:dyn/chat_mode") == 1) {
+        if (player.getWornChestplate().nbt().hasKey("groups")) {
+          if (player.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
+            var groupList = transer.getGroupArray(player);
+            if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
+            var group = groupList[player.getData("skyhighheroes:dyn/active_chat")];
+            transer.systemMessage(player, "<n>You are now messaging <nh>" + group + "<n>!");
+          } else {
+            transer.systemMessage(player, "<e>You do not have any groups!");
+          };
+        } else {
+          transer.systemMessage(player, "<e>You do not have any groups!");
+        };
       };
     }
   };

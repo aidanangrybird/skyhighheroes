@@ -237,11 +237,19 @@ function initTranser(moduleList) {
   var modules = [];
   var messageHandlers = 0;
   var commandHandlers = 0;
+  var messagingIndex = 0;
+  var brotherBandIndex = 0;
   moduleList.forEach(module => {
     if (moduleList.indexOf(module) == 0) {
-      loadedModules = loadedModules + "<nh>" + module.moduleName();
+      loadedModules = loadedModules + "<nh>" + module.name();
     } else {
-      loadedModules = loadedModules + "<n>, <nh>" + module.moduleName();
+      loadedModules = loadedModules + "<n>, <nh>" + module.name();
+    };
+    if (module.name() == "messaging") {
+      messagingIndex = moduleList.indexOf(module);
+    };
+    if (module.name() == "BrotherBand") {
+      brotherBandIndex = moduleList.indexOf(module);
     };
     var init = module.init(instance);
     modules.push(init);
@@ -260,11 +268,21 @@ function initTranser(moduleList) {
     if (player.getData("skyhighheroes:dyn/chat_mode") > (messageHandlers-1)) {
       manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
     };
-    modules[player.getData("skyhighheroes:dyn/chat_mode")].chatModeInfo(player, manager);
+    if (player.getData("skyhighheroes:dyn/chat_mode") < 2) {
+      modules[messagingIndex].chatModeInfo(player, manager);
+      modules[messagingIndex].chatInfo(player, manager);
+    } else {
+      modules[brotherBandIndex].chatModeInfo(player, manager);
+      modules[brotherBandIndex].chatInfo(player, manager);
+    };
     return true;
   };
   function cycleChats(player, manager) {
-    modules[player.getData("skyhighheroes:dyn/chat_mode")].chatInfo(player, manager);
+    if (player.getData("skyhighheroes:dyn/chat_mode") < 2) {
+      modules[messagingIndex].chatInfo(player, manager);
+    } else {
+      modules[brotherBandIndex].chatInfo(player, manager);
+    };
     return true;
   };
   function systemInfo(entity) {
@@ -317,7 +335,11 @@ function initTranser(moduleList) {
             });
           };
         } else {
-          modules[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity, transformed, untransformed, color);
+          if (entity.getData("skyhighheroes:dyn/chat_mode") < 2) {
+            modules[1].messageHandler(entity, transformed, untransformed, color);
+          } else {
+            modules[2].messageHandler(entity, transformed, untransformed, color);
+          };
         };
       };
     }

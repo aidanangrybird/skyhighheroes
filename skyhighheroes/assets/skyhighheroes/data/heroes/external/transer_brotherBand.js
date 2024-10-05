@@ -94,6 +94,7 @@ function init(transer) {
   };
   return {
     messageHandler: function (entity, transformed, untransformed, color) {
+      var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
       var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
       var foundPlayer = null;
@@ -157,19 +158,19 @@ function init(transer) {
       transer.systemMessage(player, "<n>You are now in <nh>BrotherBand<n> mode!");
     },
     chatInfo: function (player, manager) {
-      if (player.getWornChestplate().nbt().hasKey("contacts")) {
-        if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-          if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+      if (player.getWornChestplate().nbt().hasKey("brotherBand")) {
+        if (player.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
+          var brothersList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
+          if (player.getData("skyhighheroes:dyn/active_chat") > (brothersList.length-1)) {
             manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
           };
-          var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          transer.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+          var brother = brothersList[player.getData("skyhighheroes:dyn/active_chat")];
+          transer.systemMessage(player, "<n>You are now messaging <nh>" + brother + "<n>!");
         } else {
-          transer.systemMessage(player, "<e>You do not have any contacts!");
+          transer.systemMessage(player, "<e>You do not have any Brothers!");
         };
       } else {
-        transer.systemMessage(player, "<e>You do not have any contacts!");
+        transer.systemMessage(player, "<e>You do not have any Brothers!");
       };
     },
   };

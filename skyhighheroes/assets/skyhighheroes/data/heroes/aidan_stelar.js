@@ -2,10 +2,10 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("aidan_stelar");
   hero.setName("\u00A76Squall Vortex");

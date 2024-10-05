@@ -2,10 +2,10 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "d699ffcd-8177-4325-91ac-3e815e87bb95";
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("grand_stelar");
   hero.setName("\u00A74Blazing Singularity");

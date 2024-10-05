@@ -64,23 +64,6 @@ function init(transer) {
       transer.systemMessage(entity, "<nh>" + entry);
     });
   };
-  /**
-   * Checks if a player has another player as a contact
-   * @param {JSEntity} sender - Player getting checked
-   * @param {JSEntity} receiver - Player whose contact list is being checked
-   * @returns If sender is in receiver's contacts
-   **/
-  function hasContact(sender, receiver) {
-    var contacts = receiver.getWornChestplate().nbt().getStringList("contacts");
-    var contactsList = transer.getStringArray(contacts);
-    var result = false;
-    contactsList.forEach(entry => {
-      if (entry == sender.getName()) {
-        result = true;
-      };
-    });
-    return result;
-  };
   return {
     commandHandler: function (entity, manager) {
       var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
