@@ -1,7 +1,7 @@
 function moduleName() {
   return "messageBrotherBand";
 };
-function init(system) {
+function init(transer) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
   /**
    * Forms BrotherBand
@@ -11,7 +11,7 @@ function init(system) {
    **/
   function formBrotherBand(player, manager, username) {
     var foundPlayer = false;
-    system.systemMessage(player, "<n>Scanning for <nh>" + username + "<n> to form BrotherBand with!");
+    transer.systemMessage(player, "<n>Scanning for <nh>" + username + "<n> to form BrotherBand with!");
     var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
     entities.forEach(entity => {
       if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity, player) && player.canSee(entity)) {
@@ -23,21 +23,21 @@ function init(system) {
         var brotherBand = manager.newTagList();
         manager.appendString(brotherBand, username);
         manager.setTagList(player.getWornChestplate().nbt(), "brothers", brotherBand);
-        system.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
+        transer.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
       } else {
         var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
-        var brotherBandIndex = system.getStringArray(brotherBand).indexOf(username);
+        var brotherBandIndex = transer.getStringArray(brotherBand).indexOf(username);
         if (brotherBand.tagCount() > 5) {
-          system.systemMessage(player, "<e>You have reached the maximum amount of BrotherBands!");
+          transer.systemMessage(player, "<e>You have reached the maximum amount of BrotherBands!");
         } else if (brotherBandIndex > -1) {
-          system.systemMessage(player, "<e>You have already established a BrotherBand with <eh>" + username + "<e>!");
+          transer.systemMessage(player, "<e>You have already established a BrotherBand with <eh>" + username + "<e>!");
         } else {
-          system.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
+          transer.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
           manager.appendString(brotherBand, username);
         };
       };
     } else {
-      system.systemMessage(player, "<e>Unable to find player with username <eh>" + username + "<e> close by!")
+      transer.systemMessage(player, "<e>Unable to find player with username <eh>" + username + "<e> close by!")
     };
   };
   /**
@@ -48,17 +48,17 @@ function init(system) {
    **/
   function cutBrotherBand(player, manager, username) {
     if (!player.getWornChestplate().nbt().hasKey("brothers")) {
-      system.systemMessage(player, "<e>You have no BrotherBands to cut!");
+      transer.systemMessage(player, "<e>You have no BrotherBands to cut!");
     } else {
       var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
       if (brotherBand.tagCount() == 0) {
-        system.systemMessage(player, "<e>You have no BrotherBands to cut!");
+        transer.systemMessage(player, "<e>You have no BrotherBands to cut!");
       } else {
-        var index = system.getStringArray(brotherBand).indexOf(username);
+        var index = transer.getStringArray(brotherBand).indexOf(username);
         if (index < 0) {
-          system.systemMessage(player, "<e>Unable to find BrotherBand with username <eh>" + username + "<e> to cut!");
+          transer.systemMessage(player, "<e>Unable to find BrotherBand with username <eh>" + username + "<e> to cut!");
         } else {
-          system.systemMessage(player, "<s>Cut BrotherBand with <sh>" + username + "<s>!");
+          transer.systemMessage(player, "<s>Cut BrotherBand with <sh>" + username + "<s>!");
           manager.removeTag(brotherBand, index);
         };
       };
@@ -69,10 +69,10 @@ function init(system) {
    * @param {JSEntity} entity - Required
    **/
   function listBrotherBands(entity) {
-    var brotherBand = system.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
-    system.systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length > 1)?"<n> Brothers!": "<n> Brother!"));
+    var brotherBand = transer.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
+    transer.systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length > 1)?"<n> Brothers!": "<n> Brother!"));
     brotherBand.forEach(entry => {
-      system.systemMessage(entity, entry);
+      transer.systemMessage(entity, entry);
     });
   };
   /**
@@ -83,7 +83,7 @@ function init(system) {
    **/
   function hasBrother(sender, receiver) {
     var brotherBands = receiver.getWornChestplate().nbt().getStringList("brothers");
-    var brothers = system.getStringArray(brotherBands);
+    var brothers = transer.getStringArray(brotherBands);
     var result = false;
     brothers.forEach(entry => {
       if (entry == sender.getName()) {
@@ -103,16 +103,16 @@ function init(system) {
         };
       });
       if (foundPlayer != null) {
-        if (system.isWearingTranser(foundPlayer)) {
+        if (transer.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
             if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                system.brotherBandMessage(entity, color+transformed+"\u00A7r", message);
+                transer.brotherBandMessage(entity, color+transformed+"\u00A7r", message);
               } else {
-                system.brotherBandMessage(entity, untransformed, message);
+                transer.brotherBandMessage(entity, untransformed, message);
               };
             } else {
-              system.brotherBandMessage(entity, entity.getName(), message);
+              transer.brotherBandMessage(entity, entity.getName(), message);
             };
           };
         };
@@ -125,47 +125,47 @@ function init(system) {
         if (args.length > 0 && args.length < 3) {
           switch (args[0]) {
             case "form":
-              (args.length == 2) ? formBrotherBand(entity, manager, args[1]) : system.systemMessage(entity, "<n>form <nh><name>");
+              (args.length == 2) ? formBrotherBand(entity, manager, args[1]) : transer.systemMessage(entity, "<n>form <nh><name>");
               break;
             case "cut":
-              (args.length == 2) ? cutBrotherBand(entity, manager, args[1]) : system.systemMessage(entity, "<n>cut <nh><name>");
+              (args.length == 2) ? cutBrotherBand(entity, manager, args[1]) : transer.systemMessage(entity, "<n>cut <nh><name>");
               break;
             case "list":
               listBrotherBands(entity);
               break;
             case "help":
-              system.systemMessage(entity, "<n>BrotherBand commands:")
-              system.systemMessage(entity, "<n>form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
-              system.systemMessage(entity, "<n>cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
-              system.systemMessage(entity, "<n>list <nh>-<n> Lists Brothers");
-              system.systemMessage(entity, "<n>help <nh>-<n> Shows BrotherBand commands");
+              transer.systemMessage(entity, "<n>BrotherBand commands:")
+              transer.systemMessage(entity, "<n>form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
+              transer.systemMessage(entity, "<n>cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
+              transer.systemMessage(entity, "<n>list <nh>-<n> Lists Brothers");
+              transer.systemMessage(entity, "<n>help <nh>-<n> Shows BrotherBand commands");
               break;
             default:
-              system.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>help<e> for a list of commands!");
+              transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>help<e> for a list of commands!");
               break;
           };
         } else {
-          system.systemMessage(entity, "<e>Too many arguemnts!");
+          transer.systemMessage(entity, "<e>Too many arguemnts!");
         };
       };
     },
     chatModeInfo: function (player) {
-      system.systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
+      transer.systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
     },
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {
         if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = system.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+          var contactsList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
           if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
             manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
           };
           var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          system.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+          transer.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
         } else {
-          system.systemMessage(player, "<e>You do not have any contacts!");
+          transer.systemMessage(player, "<e>You do not have any contacts!");
         };
       } else {
-        system.systemMessage(player, "<e>You do not have any contacts!");
+        transer.systemMessage(player, "<e>You do not have any contacts!");
       };
     },
   };

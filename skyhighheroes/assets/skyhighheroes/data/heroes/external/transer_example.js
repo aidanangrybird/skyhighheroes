@@ -3,9 +3,9 @@ function moduleName(e) {
 };
 /**
  * You put all of the required functions in here
- * @param system - Required
+ * @param transer - Required
  **/
-function init(system) {
+function init(transer) {
   //All of the required functions and stuff go here
   return {
     messageHandler: function (entity, transformed, untransformed, color) {

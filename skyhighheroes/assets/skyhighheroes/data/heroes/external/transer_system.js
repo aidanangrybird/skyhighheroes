@@ -310,7 +310,7 @@ function setKeyBind(entity, keyBind) {
  * @param {object} moduleList - Transer system modules
  **/
 function initTranser(moduleList) {
-  var self = this;
+  var instance = this;
   var loadedModules = "<n>Loaded modules: ";
   var numModules = moduleList.length;
   var modules = [];
@@ -321,7 +321,7 @@ function initTranser(moduleList) {
     if (modules.indexOf(module) < (numModules-1)) {
       loadedModules = loadedModules + "<n>, ";
     };
-    var init = module.init(self);
+    var init = module.init(instance);
     if (init.hasOwnProperty("messageHandler")) {
       messageHandlers = messageHandlers + 1;
     };
