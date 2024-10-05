@@ -1,5 +1,5 @@
 function moduleName() {
-  return "contactMsg";
+  return "messageContact";
 };
 function init(system) {
   /**

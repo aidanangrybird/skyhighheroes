@@ -1,5 +1,5 @@
 function moduleName() {
-  return "groupChat";
+  return "chatGroup";
 };
 function init(system) {
   /**
