@@ -121,26 +121,26 @@ function init(transer) {
             case "add":
               (args.length == 2) ? addContact(entity, manager, args[1]) : transer.systemMessage(entity, "<n>add <name>");
               return true;
-              break;
             case "rem":
               (args.length == 2) ? removeContact(entity, manager, args[1]) : transer.systemMessage(entity, "<n>rem <name>");
-              break;
+              return true;
             case "list":
               listContacts(entity);
-              break;
+              return true;
             case "help":
               transer.systemMessage(entity, "<n>Contact commands:");
               transer.systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Adds contact by name");
               transer.systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes contact by name");
               transer.systemMessage(entity, "<n>list <nh>-<n> Lists contacts");
               transer.systemMessage(entity, "<n>help <nh>-<n> Shows contact commands");
-              break;
+              return true;
             default:
               transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>help<e> for a list of commands!");
-              break;
+              return true;
           };
         } else {
           transer.systemMessage(entity, "<e>Too many arguemnts!");
+          return true;
         };
       } else {
         return false;

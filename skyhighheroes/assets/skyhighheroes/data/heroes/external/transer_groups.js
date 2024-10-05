@@ -194,22 +194,22 @@ function init(transer) {
           switch (args[0]) {
             case "add":
               (args.length == 2) ? addGroup(entity, manager, args[1]) : transer.systemMessage(entity, "<n>add <name>");
-              break;
+              return true;
             case "rem":
               (args.length == 2) ? removeGroup(entity, manager, args[1]) : transer.systemMessage(entity, "<n>rem <name>");
-              break;
+              return true;
             case "list":
               listGroups(entity, manager);
-              break;
+              return true;
             case "addMem":
               (args.length == 2) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : transer.systemMessage(entity, "<n>addMem <name>");
-              break;
+              return true;
             case "remMem":
               (args.length == 2) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : transer.systemMessage(entity, "<n>remMem <name>");
-              break;
+              return true;
             case "listMem":
               listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
-              break;
+              return true;
             case "help":
               transer.systemMessage(entity, "Group commands:")
               transer.systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Creates group by name");
@@ -220,13 +220,14 @@ function init(transer) {
               transer.systemMessage(entity, "<n>remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
               transer.systemMessage(entity, "<n>listMem <nh>-<n> Lists members in currently selected group");
               transer.systemMessage(entity, "<n>help <nh>-<n> Shows group commands");
-              break;
+              return true;
             default:
               transer.systemMessage(entity, "Unknown group command! Try help for a list of commands!");
-              break;
+              return true;
           };
         } else {
           transer.systemMessage(entity, "Too many arguemnts!");
+          return true;
         };
       } else {
         return false;

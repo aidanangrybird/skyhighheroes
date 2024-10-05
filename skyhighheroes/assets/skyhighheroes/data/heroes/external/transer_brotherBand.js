@@ -127,26 +127,27 @@ function init(transer) {
           switch (args[0]) {
             case "form":
               (args.length == 2) ? formBrotherBand(entity, manager, args[1]) : transer.systemMessage(entity, "<n>form <nh><name>");
-              break;
+              return true;
             case "cut":
               (args.length == 2) ? cutBrotherBand(entity, manager, args[1]) : transer.systemMessage(entity, "<n>cut <nh><name>");
-              break;
+              return true;
             case "list":
               listBrotherBands(entity);
-              break;
+              return true;
             case "help":
               transer.systemMessage(entity, "<n>BrotherBand commands:")
               transer.systemMessage(entity, "<n>form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
               transer.systemMessage(entity, "<n>cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
               transer.systemMessage(entity, "<n>list <nh>-<n> Lists Brothers");
               transer.systemMessage(entity, "<n>help <nh>-<n> Shows BrotherBand commands");
-              break;
+              return true;
             default:
               transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>help<e> for a list of commands!");
-              break;
+              return true;
           };
         } else {
           transer.systemMessage(entity, "<e>Too many arguemnts!");
+          return true;
         };
       } else {
         return false;

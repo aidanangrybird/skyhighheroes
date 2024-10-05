@@ -209,67 +209,6 @@ function playerMessage(player, sender, message) {
 function brotherBandMessage(player, sender, message) {
   chatMessage(player, "[BrotherBand]> " + sender + "> " + message);
 };
-
-//For keybinds
-/* 
-function cycleChats(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
-  switch (player.getData("skyhighheroes:dyn/chat_mode")) {
-    case 0:
-      if (player.getWornChestplate().nbt().hasKey("contacts")) {
-        if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-          if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
-          };
-          var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
-        } else {
-          systemMessage(player, "<e>You do not have any contacts!");
-        };
-      } else {
-        systemMessage(player, "<e>You do not have any contacts!");
-      };
-      break;
-    case 1:
-      if (player.getWornChestplate().nbt().hasKey("groups")) {
-        if (player.getWornChestplate().nbt().getTagList().tagCount() > 0) {
-          var groupList = getGroupArray(player);
-          if (player.getData("skyhighheroes:dyn/active_chat") > groupList.length) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
-          };
-          systemMessage(player, player.getData("skyhighheroes:dyn/active_chat"));
-          systemMessage(player, "<n>You are now messaging <nh>" + groupList[player.getData("skyhighheroes:dyn/active_chat")] + "<n>!");
-          if (typeof groupList[player.getData("skyhighheroes:dyn/active_chat")] === "string") {
-            manager.setData(player, "skyhighheroes:dyn/group_name", groupList[player.getData("skyhighheroes:dyn/active_chat")]);
-          };
-        } else {
-        systemMessage(player, "<e>You do not have any groups!");
-        };
-      } else {
-        systemMessage(player, "<e>You do not have any groups!");
-      };
-      break;
-    case 2:
-      if (player.getWornChestplate().nbt().hasKey("brothers")) {
-        if (player.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
-          var brotherBandList = getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
-          if (player.getData("skyhighheroes:dyn/active_chat") > brotherBandList.length) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
-          };
-          systemMessage(player, player.getData("skyhighheroes:dyn/active_chat"));
-          systemMessage(player, "<n>You are now messaging <nh>" + brotherBandList[player.getData("skyhighheroes:dyn/active_chat")] + "<n>!");
-        } else {
-          systemMessage(player, "<e>You do not have any <eh>Brothers<e>!");
-        };
-      } else {
-        systemMessage(player, "<e>You do not have any <eh>Brothers<e>!");
-      };
-      break;
-  };
-  return true;
-}; */
-
 /**
  * Is the setKeyBind stuff for basic transers
  * @param {JSEntity} entity - Required
@@ -294,15 +233,15 @@ function setKeyBind(entity, keyBind) {
  **/
 function initTranser(moduleList) {
   var instance = this;
-  var loadedModules = "<n>Loaded modules: ";
-  var numModules = moduleList.length;
+  var loadedModules = (moduleList.length > 1) ? "<n>Loaded " + moduleList.length + " modules: " : "<n>Loaded " + moduleList.length + " module: ";
   var modules = [];
   var messageHandlers = 0;
   var commandHandlers = 0;
   moduleList.forEach(module => {
-    loadedModules = loadedModules + "<nh>" + module.moduleName();
-    if (modules.indexOf(module) < (numModules-1)) {
-      loadedModules = loadedModules + "<n>, ";
+    if (moduleList.indexOf(module) == 0) {
+      loadedModules = loadedModules + "<nh>" + module.moduleName();
+    } else {
+      loadedModules = loadedModules + "<n>, <nh>" + module.moduleName();
     };
     var init = module.init(instance);
     modules.push(init);
@@ -325,6 +264,13 @@ function initTranser(moduleList) {
     modules[player.getData("skyhighheroes:dyn/chat_mode")].chatInfo(player, manager);
     return true;
   };
+  function systemInfo(entity) {
+    systemMessage(entity, "<n>TranserOS");
+    systemMessage(entity, loadedModules);
+    var date = new Date();
+    systemMessage(entity, "<n>It is <nh>" + date.getDay() + " " + months[date.getMonth()] + " " + date.getFullYear());
+    systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
+  };
   return {
     keyBinds: (hero, transformable) => {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
@@ -337,11 +283,7 @@ function initTranser(moduleList) {
     },
     tickHandler: (entity, manager, transformed, untransformed, color) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
-        systemMessage(entity, "<n>TranserOS");
-        systemMessage(entity, loadedModules);
-        var date = new Date();
-        systemMessage(entity, "<n>It is <nh>" + date.getDay() + " " + months[date.getMonth()] + " " + date.getFullYear());
-        systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
+        systemInfo(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
@@ -360,12 +302,17 @@ function initTranser(moduleList) {
         manager.setData(entity, "fiskheroes:shape_shifting_to", null);
         manager.setData(entity, "fiskheroes:shape_shifting_from", null);
         manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+        var entry = entity.getData("skyhighheroes:dyn/entry");
         if (entry.startsWith("!")) {
           manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-          modules.some((module) => {
-            var result = module.commandHandler(entity, manager);
-            return result;
-          });
+          if (entity.getData("skyhighheroes:dyn/entry") == "systemInfo") {
+            systemInfo(entity);
+          } else {
+            modules.some((module) => {
+              var result = module.commandHandler(entity, manager);
+              return result;
+            });
+          };
         } else {
           modules[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity, transformed, untransformed, color);
         };
