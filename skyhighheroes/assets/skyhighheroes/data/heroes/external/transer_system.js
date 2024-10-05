@@ -211,6 +211,7 @@ function brotherBandMessage(player, sender, message) {
 };
 
 //For keybinds
+/* 
 function cycleChats(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/active_chat", player.getData("skyhighheroes:dyn/active_chat") + 1);
   switch (player.getData("skyhighheroes:dyn/chat_mode")) {
@@ -267,25 +268,7 @@ function cycleChats(player, manager) {
       break;
   };
   return true;
-};
-function cycleChatModes(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
-  if (player.getData("skyhighheroes:dyn/chat_mode") > 2) {
-    manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
-  };
-  switch (player.getData("skyhighheroes:dyn/chat_mode")) {
-    case 0:
-      systemMessage(player, "<n>You are now in <nh>normal<n> mode!");
-      break;
-    case 1:
-      systemMessage(player, "<n>You are now in <nh>group<n> mode!");
-      break;
-    case 2:
-      systemMessage(player, "<n>You are now in <nh>BrotherBand<n> mode!");
-      break;
-  };
-  return true;
-};
+}; */
 
 /**
  * Is the setKeyBind stuff for basic transers
@@ -322,14 +305,26 @@ function initTranser(moduleList) {
       loadedModules = loadedModules + "<n>, ";
     };
     var init = module.init(instance);
+    modules.push(init);
     if (init.hasOwnProperty("messageHandler")) {
       messageHandlers = messageHandlers + 1;
     };
     if (init.hasOwnProperty("commandHandler")) {
       commandHandlers = commandHandlers + 1;
     };
-    modules.push(init);
   });
+  function cycleChatModes(player, manager) {
+    manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
+    if (player.getData("skyhighheroes:dyn/chat_mode") > (messageHandlers-1)) {
+      manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
+    };
+    modules[player.getData("skyhighheroes:dyn/chat_mode")].chatModeInfo(player, manager);
+    return true;
+  };
+  function cycleChats(player, manager) {
+    modules[player.getData("skyhighheroes:dyn/chat_mode")].chatInfo(player, manager);
+    return true;
+  };
   return {
     keyBinds: (hero, transformable) => {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
@@ -365,20 +360,14 @@ function initTranser(moduleList) {
         manager.setData(entity, "fiskheroes:shape_shifting_to", null);
         manager.setData(entity, "fiskheroes:shape_shifting_from", null);
         manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        systemMessage(entity, entry);
         if (entry.startsWith("!")) {
           manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-          modules.forEach(module => {
-            if (module.hasOwnProperty("commandHandler")) {
-              module.commandHandler(entity, manager);
-            };
+          modules.some((module) => {
+            var result = module.commandHandler(entity, manager);
+            return result;
           });
         } else {
-          modules.forEach(module => {
-            if (module.hasOwnProperty("messageHandler") && !entity.getData("skyhighheroes:dyn/command")) {
-              module.messageHandler(entity, transformed, untransformed, color);
-            };
-          });
+          modules[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity, transformed, untransformed, color);
         };
       };
     }

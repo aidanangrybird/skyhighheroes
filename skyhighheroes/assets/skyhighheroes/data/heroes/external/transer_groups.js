@@ -150,6 +150,7 @@ function init(transer) {
   };
   return {
     messageHandler: function (entity, transformed, untransformed, color) {
+      var message = entity.getData("skyhighheroes:dyn/entry");
       var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
       var groupName = group.getString("groupName");
       var members = transer.getStringArray(group.getStringList("members"));
@@ -227,10 +228,12 @@ function init(transer) {
         } else {
           transer.systemMessage(entity, "Too many arguemnts!");
         };
+      } else {
+        return false;
       };
     },
     chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
+      transer.systemMessage(player, "<n>You are now in <nh>group<n> mode!");
     },
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {

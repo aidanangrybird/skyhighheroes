@@ -120,6 +120,7 @@ function init(transer) {
           switch(args[0]) {
             case "add":
               (args.length == 2) ? addContact(entity, manager, args[1]) : transer.systemMessage(entity, "<n>add <name>");
+              return true;
               break;
             case "rem":
               (args.length == 2) ? removeContact(entity, manager, args[1]) : transer.systemMessage(entity, "<n>rem <name>");
@@ -141,10 +142,12 @@ function init(transer) {
         } else {
           transer.systemMessage(entity, "<e>Too many arguemnts!");
         };
+      } else {
+        return false;
       };
     },
     chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
+      transer.systemMessage(player, "<n>You are now in <nh>normal<n> mode!");
     },
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {
