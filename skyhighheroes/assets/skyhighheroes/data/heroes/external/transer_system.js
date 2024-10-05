@@ -246,6 +246,9 @@ function initTranser(moduleList) {
     var init = module.init(instance);
     modules.push(init);
     if (init.hasOwnProperty("messageHandler")) {
+      if (module.name() == "messaging") {
+        messageHandlers = messageHandlers + 1;
+      };
       messageHandlers = messageHandlers + 1;
     };
     if (init.hasOwnProperty("commandHandler")) {

@@ -1,5 +1,5 @@
-function moduleName() {
-  return "messageBrotherBand";
+function name() {
+  return "BrotherBand";
 };
 function init(transer) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other

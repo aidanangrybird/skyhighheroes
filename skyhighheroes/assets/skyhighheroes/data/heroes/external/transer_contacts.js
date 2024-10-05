@@ -1,5 +1,5 @@
-function moduleName() {
-  return "messageContact";
+function name() {
+  return "contacts";
 };
 function init(transer) {
   /**
@@ -82,36 +82,6 @@ function init(transer) {
     return result;
   };
   return {
-    messageHandler: function (entity, transformed, untransformed, color) {
-      var message = entity.getData("skyhighheroes:dyn/entry");
-      var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
-      var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
-      var foundPlayer = null;
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-      entities.forEach(player => {
-        if (player.is("PLAYER") && player.getName() == reciever) {
-          foundPlayer = player;
-        };
-      });
-      if (foundPlayer != null) {
-        if (transer.isWearingTranser(foundPlayer)) {
-          if (hasContact(entity, foundPlayer)) {
-            if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
-                playerMessage(entity, color+transformed+"\u00A7r", message);
-              } else {
-                playerMessage(foundPlayer, untransformed, message);
-                playerMessage(entity, untransformed, message);
-              };
-            } else {
-              playerMessage(foundPlayer, entity.getName(), message);
-              playerMessage(entity, entity.getName(), message);
-            };
-          };
-        };
-      };
-    },
     commandHandler: function (entity, manager) {
       var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");

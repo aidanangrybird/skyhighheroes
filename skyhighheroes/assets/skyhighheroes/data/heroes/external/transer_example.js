@@ -1,4 +1,4 @@
-function moduleName() {
+function name() {
   return "moduleName";
 };
 /**

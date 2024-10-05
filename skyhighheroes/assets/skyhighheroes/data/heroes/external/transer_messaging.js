@@ -1,5 +1,5 @@
-function moduleName() {
-  return "chatGroup";
+function name() {
+  return "messaging";
 };
 function init(transer) {
   /**
@@ -150,41 +150,73 @@ function init(transer) {
   };
   return {
     messageHandler: function (entity, transformed, untransformed, color) {
-      var message = entity.getData("skyhighheroes:dyn/entry");
-      var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
-      var groupName = group.getString("groupName");
-      var members = transer.getStringArray(group.getStringList("members"));
-      var foundPlayers = [];
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-      entities.forEach(player => {
-        if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
-          foundPlayers.push(player);
-        };
-      });
-      if (foundPlayers != null) {
-        foundPlayers.forEach(player => {
-          if (transer.isWearingTranser(player)) {
-            if (hasGroup(entity, player, groupName)) {
+      if (entity.getData("skyhighheroes:dyn/chat_mode") == 0) {
+        var message = entity.getData("skyhighheroes:dyn/entry");
+        var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
+        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
+        var foundPlayer = null;
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+        });
+        if (foundPlayer != null) {
+          if (transer.isWearingTranser(foundPlayer)) {
+            if (hasContact(entity, foundPlayer)) {
               if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
-                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                  transer.groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                  playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
+                  playerMessage(entity, color+transformed+"\u00A7r", message);
                 } else {
-                  transer.groupMessage(player, groupName, untransformed, message);
+                  playerMessage(foundPlayer, untransformed, message);
+                  playerMessage(entity, untransformed, message);
                 };
               } else {
-                transer.groupMessage(player, groupName, entity.getName(), message);
+                playerMessage(foundPlayer, entity.getName(), message);
+                playerMessage(entity, entity.getName(), message);
               };
             };
           };
-        });
-        if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-            transer.groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
-          } else {
-            transer.groupMessage(entity, groupName, untransformed, message);
+        };
+      };
+      if (entity.getData("skyhighheroes:dyn/chat_mode") == 1) {
+        var message = entity.getData("skyhighheroes:dyn/entry");
+        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
+        var groupName = group.getString("groupName");
+        var members = transer.getStringArray(group.getStringList("members"));
+        var foundPlayers = [];
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
+            foundPlayers.push(player);
           };
-        } else {
-          transer.groupMessage(entity, groupName, entity.getName(), message);
+        });
+        if (foundPlayers != null) {
+          foundPlayers.forEach(player => {
+            if (transer.isWearingTranser(player)) {
+              if (hasGroup(entity, player, groupName)) {
+                if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+                  if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                    transer.groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+                  } else {
+                    transer.groupMessage(player, groupName, untransformed, message);
+                  };
+                } else {
+                  transer.groupMessage(player, groupName, entity.getName(), message);
+                };
+              };
+            };
+          });
+          if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+            if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+              transer.groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
+            } else {
+              transer.groupMessage(entity, groupName, untransformed, message);
+            };
+          } else {
+            transer.groupMessage(entity, groupName, entity.getName(), message);
+          };
         };
       };
     },
