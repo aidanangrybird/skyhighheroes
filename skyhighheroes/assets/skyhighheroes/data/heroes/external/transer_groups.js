@@ -229,10 +229,10 @@ function init(system) {
         };
       };
     },
-    commandModeInfo: function (player) {
+    chatModeInfo: function (player) {
       system.systemMessage(player, "<n>Do <nh>help<n> to show available <nh>contact<n> commands");
     },
-    chatModeInfo: function (player, manager) {
+    chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {
         if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
           var contactsList = system.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));

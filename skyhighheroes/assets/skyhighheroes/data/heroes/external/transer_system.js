@@ -314,12 +314,20 @@ function initTranser(moduleList) {
   var loadedModules = "<n>Loaded modules: ";
   var numModules = moduleList.length;
   var modules = [];
+  var messageHandlers = 0;
+  var commandHandlers = 0;
   moduleList.forEach(module => {
     loadedModules = loadedModules + "<nh>" + module.moduleName();
     if (modules.indexOf(module) < (numModules-1)) {
       loadedModules = loadedModules + "<n>, ";
     };
     var init = module.init(self);
+    if (init.hasOwnProperty("messageHandler")) {
+      messageHandlers = messageHandlers + 1;
+    };
+    if (init.hasOwnProperty("commandHandler")) {
+      commandHandlers = commandHandlers + 1;
+    };
     modules.push(init);
   });
   return {
@@ -357,11 +365,9 @@ function initTranser(moduleList) {
         manager.setData(entity, "fiskheroes:shape_shifting_to", null);
         manager.setData(entity, "fiskheroes:shape_shifting_from", null);
         manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        var entry = entity.getData("skyhighheroes:dyn/entry");
         systemMessage(entity, entry);
         if (entry.startsWith("!")) {
           manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-          systemMessage(entity, entity.getData("skyhighheroes:dyn/entry"));
           modules.forEach(module => {
             if (module.hasOwnProperty("commandHandler")) {
               module.commandHandler(entity, manager);
