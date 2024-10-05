@@ -1,98 +1,98 @@
+function moduleName() {
+  return "BrotherBand";
+};
 function init(system) {
-  return {
-    //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
-    moduleName: function () {
-      return "BrotherBand";
-    },
-    /**
-     * Forms BrotherBand
-     * @param {JSPlayer} player - Player forming BrotherBand
-     * @param {JSDataManager} manager - Required
-     * @param {string} username - Username of player to form BrotherBand with
-     **/
-    formBrotherBand: function (player, manager, username) {
-      var foundPlayer = false;
-      system.systemMessage(player, "<n>Scanning for <nh>" + username + "<n> to form BrotherBand with!");
-      var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
-      entities.forEach(entity => {
-        if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity, player) && player.canSee(entity)) {
-          foundPlayer = true;
-        };
-      });
-      if (foundPlayer) {
-        if (!player.getWornChestplate().nbt().hasKey("brothers")) {
-          var brotherBand = manager.newTagList();
-          manager.appendString(brotherBand, username);
-          manager.setTagList(player.getWornChestplate().nbt(), "brothers", brotherBand);
-          system.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
-        } else {
-          var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
-          var brotherBandIndex = system.getStringArray(brotherBand).indexOf(username);
-          if (brotherBand.tagCount() > 5) {
-            system.systemMessage(player, "<e>You have reached the maximum amount of BrotherBands!");
-          } else if (brotherBandIndex > -1) {
-            system.systemMessage(player, "<e>You have already established a BrotherBand with <eh>" + username + "<e>!");
-          } else {
-            system.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
-            manager.appendString(brotherBand, username);
-          };
-        };
-      } else {
-        system.systemMessage(player, "<e>Unable to find player with username <eh>" + username + "<e> close by!")
+  //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
+  /**
+   * Forms BrotherBand
+   * @param {JSPlayer} player - Player forming BrotherBand
+   * @param {JSDataManager} manager - Required
+   * @param {string} username - Username of player to form BrotherBand with
+   **/
+  function formBrotherBand(player, manager, username) {
+    var foundPlayer = false;
+    system.systemMessage(player, "<n>Scanning for <nh>" + username + "<n> to form BrotherBand with!");
+    var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
+    entities.forEach(entity => {
+      if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity, player) && player.canSee(entity)) {
+        foundPlayer = true;
       };
-    },
-    /**
-     * Cuts BrotherBand
-     * @param {JSPlayer} player - Player cutting BrotherBand
-     * @param {JSDataManager} manager - Required
-     * @param {integer} username - Username of player cutting BrotherBand with
-     **/
-    cutBrotherBand: function (player, manager, username) {
+    });
+    if (foundPlayer) {
       if (!player.getWornChestplate().nbt().hasKey("brothers")) {
-        system.systemMessage(player, "<e>You have no BrotherBands to cut!");
+        var brotherBand = manager.newTagList();
+        manager.appendString(brotherBand, username);
+        manager.setTagList(player.getWornChestplate().nbt(), "brothers", brotherBand);
+        system.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
       } else {
         var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
-        if (brotherBand.tagCount() == 0) {
-          system.systemMessage(player, "<e>You have no BrotherBands to cut!");
+        var brotherBandIndex = system.getStringArray(brotherBand).indexOf(username);
+        if (brotherBand.tagCount() > 5) {
+          system.systemMessage(player, "<e>You have reached the maximum amount of BrotherBands!");
+        } else if (brotherBandIndex > -1) {
+          system.systemMessage(player, "<e>You have already established a BrotherBand with <eh>" + username + "<e>!");
         } else {
-          var index = system.getStringArray(brotherBand).indexOf(username);
-          if (index < 0) {
-            system.systemMessage(player, "<e>Unable to find BrotherBand with username <eh>" + username + "<e> to cut!");
-          } else {
-            system.systemMessage(player, "<s>Cut BrotherBand with <sh>" + username + "<s>!");
-            manager.removeTag(brotherBand, index);
-          };
+          system.systemMessage(player, "<s>Successfully formed BrotherBand connection to <sh>" + username + "<s>!");
+          manager.appendString(brotherBand, username);
         };
       };
-    },
-    /**
-     * Lists player's BrotherBands
-     * @param {JSEntity} entity - Required
-     **/
-    listBrotherBands: function (entity) {
-      var brotherBand = system.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
-      system.systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length > 1)?"<n> Brothers!": "<n> Brother!"));
-      brotherBand.forEach(entry => {
-        system.systemMessage(entity, entry);
-      });
-    },
-    /**
-     * Checks if a player has another player as a Brother
-     * @param {JSEntity} sender - Player getting checked
-     * @param {JSEntity} receiver - Player whose BrotherBand list is being checked
-     * @returns If sender is in receiver's BrotherBands
-     **/
-    hasBrother: function (sender, receiver) {
-      var brotherBands = receiver.getWornChestplate().nbt().getStringList("brothers");
-      var brothers = system.getStringArray(brotherBands);
-      var result = false;
-      brothers.forEach(entry => {
-        if (entry == sender.getName()) {
-          result = true;
+    } else {
+      system.systemMessage(player, "<e>Unable to find player with username <eh>" + username + "<e> close by!")
+    };
+  };
+  /**
+   * Cuts BrotherBand
+   * @param {JSPlayer} player - Player cutting BrotherBand
+   * @param {JSDataManager} manager - Required
+   * @param {integer} username - Username of player cutting BrotherBand with
+   **/
+  function cutBrotherBand(player, manager, username) {
+    if (!player.getWornChestplate().nbt().hasKey("brothers")) {
+      system.systemMessage(player, "<e>You have no BrotherBands to cut!");
+    } else {
+      var brotherBand = player.getWornChestplate().nbt().getStringList("brothers");
+      if (brotherBand.tagCount() == 0) {
+        system.systemMessage(player, "<e>You have no BrotherBands to cut!");
+      } else {
+        var index = system.getStringArray(brotherBand).indexOf(username);
+        if (index < 0) {
+          system.systemMessage(player, "<e>Unable to find BrotherBand with username <eh>" + username + "<e> to cut!");
+        } else {
+          system.systemMessage(player, "<s>Cut BrotherBand with <sh>" + username + "<s>!");
+          manager.removeTag(brotherBand, index);
         };
-      });
-      return result;
-    },
+      };
+    };
+  };
+  /**
+   * Lists player's BrotherBands
+   * @param {JSEntity} entity - Required
+   **/
+  function listBrotherBands(entity) {
+    var brotherBand = system.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
+    system.systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length > 1)?"<n> Brothers!": "<n> Brother!"));
+    brotherBand.forEach(entry => {
+      system.systemMessage(entity, entry);
+    });
+  };
+  /**
+   * Checks if a player has another player as a Brother
+   * @param {JSEntity} sender - Player getting checked
+   * @param {JSEntity} receiver - Player whose BrotherBand list is being checked
+   * @returns If sender is in receiver's BrotherBands
+   **/
+  function hasBrother(sender, receiver) {
+    var brotherBands = receiver.getWornChestplate().nbt().getStringList("brothers");
+    var brothers = system.getStringArray(brotherBands);
+    var result = false;
+    brothers.forEach(entry => {
+      if (entry == sender.getName()) {
+        result = true;
+      };
+    });
+    return result;
+  };
+  return {
     messageHandler: function (entity, transformed, untransformed, color) {
       var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
       var foundPlayer = null;

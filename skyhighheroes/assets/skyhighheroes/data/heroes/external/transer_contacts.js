@@ -1,87 +1,87 @@
+function moduleName() {
+  return "contactMsg";
+};
 function init(system) {
-  return {
-    moduleName: function () {
-      return "contacts";
-    },
-    /**
-     * Adds contact
-     * @param {JSEntity} player - Required
-     * @param {JSDataManager} manager - Required
-     * @param {string} username - Username to add as contact
-     **/
-    addContact: function (player, manager, username) {
-      if (player.getName() != username) {
-        if (!player.getWornChestplate().nbt().hasKey("contacts")) {
-          var contacts = manager.newTagList();
-          manager.appendString(contacts, username);
-          manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
-          system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
-        } else {
-          var contacts = player.getWornChestplate().nbt().getStringList("contacts");
-          var index = system.getStringArray(contacts).indexOf(username);
-          if (index > -1) {
-            system.systemMessage(player, "<eh>" + username + "<e> is already a contact!");
-          } else {
-            system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
-            manager.appendString(contacts, username);
-          };
-        };
-      } else {
-        system.systemMessage(player, "<e>You can not add yourself as a contact!");
-      };
-    },
-    /**
-     * Remove contact by username
-     * @param {JSPlayer} player - Required
-     * @param {JSDataManager} manager - Required
-     * @param {string} username - username of contact
-     **/
-    removeContact: function (player, manager, username) {
+  /**
+   * Adds contact
+   * @param {JSEntity} player - Required
+   * @param {JSDataManager} manager - Required
+   * @param {string} username - Username to add as contact
+   **/
+  function addContact(player, manager, username) {
+    if (player.getName() != username) {
       if (!player.getWornChestplate().nbt().hasKey("contacts")) {
-        system.systemMessage(player, "<e>You have no contacts to remove!");
+        var contacts = manager.newTagList();
+        manager.appendString(contacts, username);
+        manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
+        system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
       } else {
         var contacts = player.getWornChestplate().nbt().getStringList("contacts");
-        if (contacts.tagCount() == 0) {
-          system.systemMessage(player, "<e>You have no contacts to remove!");
+        var index = system.getStringArray(contacts).indexOf(username);
+        if (index > -1) {
+          system.systemMessage(player, "<eh>" + username + "<e> is already a contact!");
         } else {
-          var index = system.getStringArray(contacts).indexOf(username);
-          if (index < 0) {
-            system.systemMessage(player, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
-          } else {
-            system.systemMessage(player, "<s>Removed contact with username <sh>" + username + "<s>!");
-            manager.removeTag(contacts, index);
-          };
+          system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+          manager.appendString(contacts, username);
         };
       };
-    },
-    /**
-     * Lists player's contacts
-     * @param {JSEntity} entity - Required
-     **/
-    listContacts: function (entity) {
-      var contacts = system.getStringArray(entity.getWornChestplate().nbt().getStringList("contacts"));
-      system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length > 1)?"<n> contacts:": "<n> contact:"));
-      contacts.forEach(entry => {
-        system.systemMessage(entity, "<nh>" + entry);
-      });
-    },
-    /**
-     * Checks if a player has another player as a contact
-     * @param {JSEntity} sender - Player getting checked
-     * @param {JSEntity} receiver - Player whose contact list is being checked
-     * @returns If sender is in receiver's contacts
-     **/
-    hasContact: function (sender, receiver) {
-      var contacts = receiver.getWornChestplate().nbt().getStringList("contacts");
-      var contactsList = system.getStringArray(contacts);
-      var result = false;
-      contactsList.forEach(entry => {
-        if (entry == sender.getName()) {
-          result = true;
+    } else {
+      system.systemMessage(player, "<e>You can not add yourself as a contact!");
+    };
+  };
+  /**
+   * Remove contact by username
+   * @param {JSPlayer} player - Required
+   * @param {JSDataManager} manager - Required
+   * @param {string} username - username of contact
+   **/
+  function removeContact(player, manager, username) {
+    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
+      system.systemMessage(player, "<e>You have no contacts to remove!");
+    } else {
+      var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+      if (contacts.tagCount() == 0) {
+        system.systemMessage(player, "<e>You have no contacts to remove!");
+      } else {
+        var index = system.getStringArray(contacts).indexOf(username);
+        if (index < 0) {
+          system.systemMessage(player, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
+        } else {
+          system.systemMessage(player, "<s>Removed contact with username <sh>" + username + "<s>!");
+          manager.removeTag(contacts, index);
         };
-      });
-      return result;
-    },
+      };
+    };
+  };
+  /**
+   * Lists player's contacts
+   * @param {JSEntity} entity - Required
+   **/
+  function listContacts(entity) {
+    var contacts = system.getStringArray(entity.getWornChestplate().nbt().getStringList("contacts"));
+    system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length > 1)?"<n> contacts:": "<n> contact:"));
+    contacts.forEach(entry => {
+      system.systemMessage(entity, "<nh>" + entry);
+    });
+  };
+  /**
+   * Checks if a player has another player as a contact
+   * @param {JSEntity} sender - Player getting checked
+   * @param {JSEntity} receiver - Player whose contact list is being checked
+   * @returns If sender is in receiver's contacts
+   **/
+  function hasContact(sender, receiver) {
+    var contacts = receiver.getWornChestplate().nbt().getStringList("contacts");
+    var contactsList = system.getStringArray(contacts);
+    var result = false;
+    contactsList.forEach(entry => {
+      if (entry == sender.getName()) {
+        result = true;
+      };
+    });
+    return result;
+  };
+  return {
     messageHandler: function (entity, transformed, untransformed, color) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");

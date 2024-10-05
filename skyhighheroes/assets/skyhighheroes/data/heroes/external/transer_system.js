@@ -307,23 +307,20 @@ function setKeyBind(entity, keyBind) {
 
 /**
  * Initializes transer system
- * @param {object} modules - Transer system modules
+ * @param {object} moduleList - Transer system modules
  **/
-function initTranser(modulesList) {
+function initTranser(moduleList) {
   var self = this;
-  var initModules = [];
-  modulesList.forEach(module => {
-    var init = module.init(self);
-    initModules.push(init);
-  });
-  var modules = initModules;
-  var modulelist = "<n>Loaded modules: ";
-  var numModules = modules.length;
-  modules.forEach(module => {
-    modulelist = modulelist + "<nh>" + module.moduleName();
+  var loadedModules = "<n>Loaded modules: ";
+  var numModules = moduleList.length;
+  var modules = [];
+  moduleList.forEach(module => {
+    loadedModules = loadedModules + "<nh>" + module.moduleName();
     if (modules.indexOf(module) < (numModules-1)) {
-      modulelist = modulelist + "<n>, ";
+      loadedModules = loadedModules + "<n>, ";
     };
+    var init = module.init(self);
+    modules.push(init);
   });
   return {
     keyBinds: (hero, transformable) => {
@@ -338,7 +335,7 @@ function initTranser(modulesList) {
     tickHandler: (entity, manager, transformed, untransformed, color) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
         systemMessage(entity, "<n>TranserOS");
-        systemMessage(entity, modulelist);
+        systemMessage(entity, loadedModules);
         var date = new Date();
         systemMessage(entity, "<n>It is <nh>" + date.getDay() + " " + months[date.getMonth()] + " " + date.getFullYear());
         systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
