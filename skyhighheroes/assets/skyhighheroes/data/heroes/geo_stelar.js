@@ -1,5 +1,9 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var transerSystem = implement("skyhighheroes:external/transer_system");
+var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var transerContacts = implement("skyhighheroes:external/transer_contacts");
+var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setName("\u00A7bMega Man");
   hero.setTier(10);
@@ -22,7 +26,7 @@ function init(hero) {
   hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
   hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
   
-  transerSystem.keyBinds(hero, true);
+  transerOS.keyBinds(hero, true);
   hero.addKeyBind("TELEPORT", "Transmit", 1);
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
@@ -129,7 +133,7 @@ function init(hero) {
   hero.setKeyBindEnabled(isKeyBindEnabled);
   hero.setDamageProfile(getDamageProfile);
   hero.setTickHandler((entity, manager) => {
-    transerSystem.tickHandler(entity, manager);
+    transerOS.tickHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

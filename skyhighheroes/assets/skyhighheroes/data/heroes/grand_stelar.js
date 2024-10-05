@@ -2,6 +2,10 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "d699ffcd-8177-4325-91ac-3e815e87bb95";
 var transerSystem = implement("skyhighheroes:external/transer_system");
+var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var transerContacts = implement("skyhighheroes:external/transer_contacts");
+var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("grand_stelar");
   hero.setName("\u00A74Blazing Singularity");
@@ -10,7 +14,7 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
   
-  transerSystem.keyBinds(hero, true);
+  transerOS.keyBinds(hero, true);
   
   stelar.initEquipment(hero, "Blazing Singularity", "\u00A74")
 
@@ -352,7 +356,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerSystem.tickHandler(entity, manager, "Blazing Singularity", "Grand Stelar", "\u00A74");
+    transerOS.tickHandler(entity, manager, "Blazing Singularity", "Grand Stelar", "\u00A74");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

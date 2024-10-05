@@ -2,6 +2,10 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
 var transerSystem = implement("skyhighheroes:external/transer_system");
+var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var transerContacts = implement("skyhighheroes:external/transer_contacts");
+var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("chase_stelar");
   hero.setName("\u00A72Pryetak Nebula");
@@ -10,7 +14,7 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
 
-  transerSystem.keyBinds(hero, true); 
+  transerOS.keyBinds(hero, true); 
   
   stelar.initEquipment(hero, "Pryetak Nebula", "\u00A72")
 
@@ -357,7 +361,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerSystem.tickHandler(entity, manager, "Pryetak Nebula");
+    transerOS.tickHandler(entity, manager, "Pryetak Nebula");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

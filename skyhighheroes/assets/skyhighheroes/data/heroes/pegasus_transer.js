@@ -1,14 +1,18 @@
 var transerSystem = implement("skyhighheroes:external/transer_system");
+var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var transerContacts = implement("skyhighheroes:external/transer_contacts");
+var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("pegasus_transer");
   hero.setName("Pegasus Magic");
   hero.setTier(1);
   hero.setChestplate("Transer");
   hero.setTierOverride(entity => 0);
-  transerSystem.keyBinds(hero);
+  transerOS.keyBinds(hero);
   hero.addPowers("skyhighheroes:transer_system");
   hero.setTickHandler((entity, manager) => {
-    transerSystem.tickHandler(entity, manager);
+    transerOS.tickHandler(entity, manager);
   });
   hero.setKeyBindEnabled((entity, keyBind) => transerSystem.setKeyBind(entity, keyBind));
 };

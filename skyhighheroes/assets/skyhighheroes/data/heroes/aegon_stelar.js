@@ -2,6 +2,10 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var uuid = "411ed8b9-b246-449c-b941-02790d0971dd";
 var transerSystem = implement("skyhighheroes:external/transer_system");
+var transerGroups = implement("skyhighheroes:external/transer_groups");
+var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
+var transerContacts = implement("skyhighheroes:external/transer_contacts");
+var transerOS = transerSystem.initTranser([transerGroups, transerBrotherBand, transerContacts]);
 function init(hero) {
   hero.setAliases("aegon_stelar");
   hero.setName("\u00A7dRose Supernova");
@@ -10,7 +14,7 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force (OC)");
   hero.hide();
 
-  transerSystem.keyBinds(hero, true);
+  transerOS.keyBinds(hero, true);
   
   stelar.initEquipment(hero, "Rose Supernova", "\u00A7d")
 
@@ -355,7 +359,7 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerSystem.tickHandler(entity, manager, "Rose Supernova", "Aegon Stelar", "\u00A7d");
+    transerOS.tickHandler(entity, manager, "Rose Supernova", "Aegon Stelar", "\u00A7d");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

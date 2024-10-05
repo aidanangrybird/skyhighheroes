@@ -112,9 +112,9 @@ function messageHandler(entity, transformed, untransformed, color) {
   };
 };
 
-function commandHandler(entity, manager, entry) {
-  var chatMode = entity.getData("skyhighheroes:dyn/command_mode");
-  var args = entry.split(" ");
+function commandHandler(entity, manager) {
+  var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+  var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
   if (chatMode == 0) {
     if (args.length > 0 && args.length < 3) {
       switch(args[0]) {
