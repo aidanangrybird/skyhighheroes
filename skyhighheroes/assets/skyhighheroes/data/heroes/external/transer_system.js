@@ -309,50 +309,51 @@ function initTranser(moduleList) {
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
-      if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (typeof transformed === "string") {
-          if (entity.getData("fiskheroes:disguise") != transformed) {
+      if (typeof entity.getData("fiskheroes:disguise") === "string") { 
+        if (!(entity.getData("fiskheroes:disguise") == transformed)) {
+          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && typeof transformed === "string") {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", transformed);
           } else {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", null);
           };
-        } else {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-          manager.setData(entity, "fiskheroes:disguise", null);
-        };
-        manager.setData(entity, "fiskheroes:shape_shifting_to", null);
-        manager.setData(entity, "fiskheroes:shape_shifting_from", null);
-        manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-        var entry = entity.getData("skyhighheroes:dyn/entry");
-        if (entry.startsWith("!")) {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-          if (entity.getData("skyhighheroes:dyn/entry") == "systemInfo") {
-            systemInfo(entity);
-          } if (entity.getData("skyhighheroes:dyn/entry") == "status") {
-            status(entity);
-          } if (entity.getData("skyhighheroes:dyn/entry") == "help") {
-            systemMessage(entity, "<n>Available commands:");
-            modules.forEach(module => {
-              if (module.hasOwnProperty("helpMessage")) {
-                module.helpMessage(entity);
-              };
-            });
+          manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+          manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+          manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+          var entry = entity.getData("skyhighheroes:dyn/entry");
+          if (entry.startsWith("!")) {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
+            if (entity.getData("skyhighheroes:dyn/entry") == "systemInfo") {
+              systemInfo(entity);
+            } if (entity.getData("skyhighheroes:dyn/entry") == "status") {
+              status(entity);
+            } if (entity.getData("skyhighheroes:dyn/entry") == "help") {
+              systemMessage(entity, "<n>Available commands:");
+              modules.forEach(module => {
+                if (module.hasOwnProperty("helpMessage")) {
+                  module.helpMessage(entity);
+                };
+              });
+            } else {
+              modules.some((module) => {
+                var result = module.commandHandler(entity, manager);
+                return result;
+              });
+            };
           } else {
-            modules.some((module) => {
-              var result = module.commandHandler(entity, manager);
-              return result;
-            });
-          };
-        } else {
-          if (entity.getData("skyhighheroes:dyn/chat_mode") < 2) {
-            modules[1].messageHandler(entity, transformed, untransformed, color);
-          } else {
-            modules[2].messageHandler(entity, transformed, untransformed, color);
+            if (entity.getData("skyhighheroes:dyn/chat_mode") < 2) {
+              modules[1].messageHandler(entity, transformed, untransformed, color);
+            } else {
+              modules[2].messageHandler(entity, transformed, untransformed, color);
+            };
           };
         };
       };
     }
   };
 };
+
+
+/*
+*/
