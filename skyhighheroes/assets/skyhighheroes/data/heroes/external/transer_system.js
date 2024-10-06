@@ -291,7 +291,7 @@ function initTranser(moduleList) {
   };
   function status(entity) {
     var date = new Date();
-    systemMessage(entity, "<n>It is <nh>" + date.getDay() + " " + months[date.getMonth()] + " " + date.getFullYear());
+    systemMessage(entity, "<n>It is <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
     systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
   };
   return {
