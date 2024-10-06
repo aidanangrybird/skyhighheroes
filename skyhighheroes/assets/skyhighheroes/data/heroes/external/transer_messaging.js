@@ -239,44 +239,45 @@ function init(transer) {
       };
     },
     commandHandler: function (entity, manager) {
-      if (entity.getData("skyhighheroes:dyn/chat_mode") == 1) {
-        if (args.length > 0 && args.length < 3) {
-          switch (args[0]) {
+      var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+      if (args[0] == "g") {
+        if (args.length > 1 && args.length < 3) {
+          switch (args[1]) {
             case "add":
-              (args.length == 2) ? addGroup(entity, manager, args[1]) : transer.systemMessage(entity, "<n>add <name>");
+              (args.length == 3) ? addGroup(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!g add <nh><name>");
               return true;
             case "rem":
-              (args.length == 2) ? removeGroup(entity, manager, args[1]) : transer.systemMessage(entity, "<n>rem <name>");
+              (args.length == 3) ? removeGroup(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!g rem <nh><name>");
               return true;
             case "list":
               listGroups(entity, manager);
               return true;
             case "addMem":
-              (args.length == 2) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : transer.systemMessage(entity, "<n>addMem <name>");
+              (args.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[2]) : transer.systemMessage(entity, "<n>!g addMem <nh><name>");
               return true;
             case "remMem":
-              (args.length == 2) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[1]) : transer.systemMessage(entity, "<n>remMem <name>");
+              (args.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[2]) : transer.systemMessage(entity, "<n>!g remMem <nh><name>");
               return true;
             case "listMem":
               listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
               return true;
             case "help":
               transer.systemMessage(entity, "Group commands:")
-              transer.systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Creates group by name");
-              transer.systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes group by name");
-              transer.systemMessage(entity, "<n>list <nh>-<n> Lists groups");
+              transer.systemMessage(entity, "<n>!g add <nh><name><n> <nh>-<n> Creates group by name");
+              transer.systemMessage(entity, "<n>!g rem <nh><name><n> <nh>-<n> Removes group by name");
+              transer.systemMessage(entity, "<n>!g list <nh>-<n> Lists groups");
               transer.systemMessage(entity, "Below commands apply to the currently selected group!")
-              transer.systemMessage(entity, "<n>addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
-              transer.systemMessage(entity, "<n>remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
-              transer.systemMessage(entity, "<n>listMem <nh>-<n> Lists members in currently selected group");
-              transer.systemMessage(entity, "<n>help <nh>-<n> Shows group commands");
+              transer.systemMessage(entity, "<n>!g addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
+              transer.systemMessage(entity, "<n>!g remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
+              transer.systemMessage(entity, "<n>!g listMem <nh>-<n> Lists members in currently selected group");
+              transer.systemMessage(entity, "<n>!g help <nh>-<n> Shows group commands");
               return true;
             default:
-              transer.systemMessage(entity, "Unknown group command! Try help for a list of commands!");
+              transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
               return true;
           };
         } else {
-          transer.systemMessage(entity, "Too many arguemnts!");
+          transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
           return true;
         };
       } else {

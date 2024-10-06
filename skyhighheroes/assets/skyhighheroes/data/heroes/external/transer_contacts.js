@@ -66,33 +66,32 @@ function init(transer) {
   };
   return {
     commandHandler: function (entity, manager) {
-      var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-      if (chatMode == 0) {
-        if (args.length > 0 && args.length < 3) {
-          switch(args[0]) {
+      if (args[0] == "c") {
+        if (args.length > 1 && args.length < 4) {
+          switch(args[1]) {
             case "add":
-              (args.length == 2) ? addContact(entity, manager, args[1]) : transer.systemMessage(entity, "<n>add <name>");
+              (args.length == 3) ? addContact(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!c add <nh><name>");
               return true;
             case "rem":
-              (args.length == 2) ? removeContact(entity, manager, args[1]) : transer.systemMessage(entity, "<n>rem <name>");
+              (args.length == 3) ? removeContact(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!c rem <nh><name>");
               return true;
             case "list":
               listContacts(entity);
               return true;
             case "help":
               transer.systemMessage(entity, "<n>Contact commands:");
-              transer.systemMessage(entity, "<n>add <nh><name><n> <nh>-<n> Adds contact by name");
-              transer.systemMessage(entity, "<n>rem <nh><name><n> <nh>-<n> Removes contact by name");
-              transer.systemMessage(entity, "<n>list <nh>-<n> Lists contacts");
-              transer.systemMessage(entity, "<n>help <nh>-<n> Shows contact commands");
+              transer.systemMessage(entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
+              transer.systemMessage(entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
+              transer.systemMessage(entity, "<n>!c list <nh>-<n> Lists contacts");
+              transer.systemMessage(entity, "<n>!c help <nh>-<n> Shows contact commands");
               return true;
             default:
-              transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>help<e> for a list of commands!");
+              transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
               return true;
           };
         } else {
-          transer.systemMessage(entity, "<e>Too many arguemnts!");
+          transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
           return true;
         };
       } else {
