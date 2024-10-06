@@ -70,7 +70,7 @@ function init(transer) {
    **/
   function listBrotherBands(entity) {
     var brotherBand = transer.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
-    transer.systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length > 1)?"<n> Brothers!": "<n> Brother!"));
+    transer.systemMessage(entity,"<nh>You have <nh>" + brotherBand.length + ((brotherBand.length == 1)?"<n> Brothers!": "<n> Brother!"));
     brotherBand.forEach(entry => {
       transer.systemMessage(entity, entry);
     });
@@ -124,7 +124,7 @@ function init(transer) {
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
       if (args[0] == "bb") {
         if (args.length > 1 && args.length < 4) {
-          switch (args[0]) {
+          switch (args[1]) {
             case "form":
               (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!bb form <nh><name>");
               return true;

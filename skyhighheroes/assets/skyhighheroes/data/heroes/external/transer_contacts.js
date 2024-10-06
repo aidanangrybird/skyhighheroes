@@ -59,7 +59,7 @@ function init(transer) {
    **/
   function listContacts(entity) {
     var contacts = transer.getStringArray(entity.getWornChestplate().nbt().getStringList("contacts"));
-    transer.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length > 1)?"<n> contacts:": "<n> contact:"));
+    transer.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contacts:": "<n> contact:"));
     contacts.forEach(entry => {
       transer.systemMessage(entity, "<nh>" + entry);
     });

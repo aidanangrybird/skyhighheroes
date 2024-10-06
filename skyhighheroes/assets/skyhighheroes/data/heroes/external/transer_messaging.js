@@ -52,7 +52,7 @@ function init(transer) {
    **/
   function listGroups(player) {
     var groups = transer.getGroupArrayMembers(player);
-    transer.systemMessage(player, "<n>You are in <nh>" + groups.length + ((groups.length > 1)?"<n> groups!": "<n> group!"));
+    transer.systemMessage(player, "<n>You are in <nh>" + groups.length + ((groups.length == 1)?"<n> groups!": "<n> group!"));
     groups.forEach(entry => {
       transer.systemMessage(player, "<nh>" + entry.groupName + "<n> (<nh>" + entry.memberCount + ((entry.memberCount > 1)?"<n> members)": "<n> member)"))
     });
