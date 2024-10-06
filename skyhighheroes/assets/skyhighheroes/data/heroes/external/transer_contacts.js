@@ -1,6 +1,3 @@
-function name() {
-  return "contacts";
-};
 function init(transer) {
   /**
    * Adds contact
@@ -65,6 +62,9 @@ function init(transer) {
     });
   };
   return {
+    name: function () {
+      return "contacts";
+    },
     commandHandler: function (entity, manager) {
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
       if (args[0] == "c") {

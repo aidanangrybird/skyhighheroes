@@ -240,24 +240,24 @@ function initTranser(moduleList) {
   var messagingIndex = 0;
   var brotherBandIndex = 0;
   moduleList.forEach(module => {
-    if (moduleList.indexOf(module) == 0) {
-      loadedModules = loadedModules + "<nh>" + module.name();
-    } else {
-      loadedModules = loadedModules + "<n>, <nh>" + module.name();
-    };
-    if (module.name() == "messaging") {
-      messagingIndex = moduleList.indexOf(module);
-    };
-    if (module.name() == "BrotherBand") {
-      brotherBandIndex = moduleList.indexOf(module);
-    };
     var init = module.init(instance);
     modules.push(init);
     if (init.hasOwnProperty("messageHandler")) {
-      if (module.name() == "messaging") {
+      if (init.name() == "messaging") {
         messageHandlers = messageHandlers + 1;
       };
       messageHandlers = messageHandlers + 1;
+    };
+    if (moduleList.indexOf(module) == 0) {
+      loadedModules = loadedModules + "<nh>" + init.name();
+    } else {
+      loadedModules = loadedModules + "<n>, <nh>" + init.name();
+    };
+    if (init.name() == "messaging") {
+      messagingIndex = moduleList.indexOf(module);
+    };
+    if (init.name() == "BrotherBand") {
+      brotherBandIndex = moduleList.indexOf(module);
     };
     if (init.hasOwnProperty("commandHandler")) {
       commandHandlers = commandHandlers + 1;
@@ -353,7 +353,3 @@ function initTranser(moduleList) {
     }
   };
 };
-
-
-/*
-*/

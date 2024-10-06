@@ -1,6 +1,3 @@
-function name() {
-  return "BrotherBand";
-};
 function init(transer) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
   /**
@@ -93,6 +90,9 @@ function init(transer) {
     return result;
   };
   return {
+    name: function () {
+      return "BrotherBand";
+    },
     messageHandler: function (entity, transformed, untransformed, color) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");

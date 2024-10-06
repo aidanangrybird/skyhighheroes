@@ -1,6 +1,3 @@
-function name() {
-  return "messaging";
-};
 function init(transer) {
   /**
    * Checks if a player has another player as a contact
@@ -166,6 +163,9 @@ function init(transer) {
     return result;
   };
   return {
+    name: function () {
+      return "messaging";
+    },
     messageHandler: function (entity, transformed, untransformed, color) {
       if (entity.getData("skyhighheroes:dyn/chat_mode") == 0) {
         var message = entity.getData("skyhighheroes:dyn/entry");

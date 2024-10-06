@@ -1,6 +1,3 @@
-function name() {
-  return "scanner";
-};
 /**
  * You put all of the required functions in here
  * @param transer - Required
@@ -21,6 +18,9 @@ function init(transer) {
     });
   };
   return {
+    name: function () {
+      return "scanner";
+    },
     commandHandler: function (entity, manager) {
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
       if (args[0] == "sc") {
