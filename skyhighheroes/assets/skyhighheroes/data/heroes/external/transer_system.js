@@ -293,6 +293,8 @@ function initTranser(moduleList) {
     var date = new Date();
     systemMessage(entity, "<n>It is <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
     systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
+    systemMessage(entity, "<n>Your current location is<nh> " + entity.posX().toFixed(2) + "<n>, <nh>" + entity.posY().toFixed(2) + "<n>, <nh>" + entity.posZ().toFixed(2));
+    systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
   };
   return {
     keyBinds: (hero, transformable) => {
