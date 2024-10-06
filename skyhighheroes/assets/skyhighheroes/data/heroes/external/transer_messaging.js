@@ -325,6 +325,9 @@ function init(transer) {
           transer.systemMessage(player, "<e>You do not have any groups!");
         };
       };
+    },
+    helpMessage: function (entity) {
+      transer.systemMessage(entity, "<n>!g <nh>-<n> Groups")
     }
   };
 };

@@ -116,6 +116,9 @@ function init(transer) {
       } else {
         transer.systemMessage(player, "<e>You do not have any contacts!");
       };
+    },
+    helpMessage: function (entity) {
+      transer.systemMessage(entity, "<n>!c <nh>-<n> Contacts")
     }
   };
 };

@@ -172,5 +172,8 @@ function init(transer) {
         transer.systemMessage(player, "<e>You do not have any Brothers!");
       };
     },
+    helpMessage: function (entity) {
+      transer.systemMessage(entity, "<n>!bb <nh>-<n> BrotherBand")
+    }
   };
 };

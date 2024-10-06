@@ -288,6 +288,8 @@ function initTranser(moduleList) {
   function systemInfo(entity) {
     systemMessage(entity, "<n>TranserOS");
     systemMessage(entity, loadedModules);
+  };
+  function status(entity) {
     var date = new Date();
     systemMessage(entity, "<n>It is <nh>" + date.getDay() + " " + months[date.getMonth()] + " " + date.getFullYear());
     systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
@@ -304,7 +306,7 @@ function initTranser(moduleList) {
     },
     tickHandler: (entity, manager, transformed, untransformed, color) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
-        systemInfo(entity);
+        status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
@@ -328,6 +330,15 @@ function initTranser(moduleList) {
           manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
           if (entity.getData("skyhighheroes:dyn/entry") == "systemInfo") {
             systemInfo(entity);
+          } if (entity.getData("skyhighheroes:dyn/entry") == "status") {
+            status(entity);
+          } if (entity.getData("skyhighheroes:dyn/entry") == "help") {
+            systemMessage(entity, "<n>Available commands:");
+            modules.forEach(module => {
+              if (module.hasOwnProperty("helpMessage")) {
+                module.helpMessage(entity);
+              };
+            });
           } else {
             modules.some((module) => {
               var result = module.commandHandler(entity, manager);
