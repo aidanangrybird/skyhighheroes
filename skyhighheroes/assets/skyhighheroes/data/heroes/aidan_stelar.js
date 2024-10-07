@@ -37,11 +37,22 @@ function init(hero) {
     if (modifier.name() == "fiskheroes:shape_shifting") {
       return true;
     };
-    return true;
-    //return transerOS.isModifierEnabled(entity, modifier);
+    return transerOS.isModifierEnabled(entity, modifier);
   });
   hero.setTierOverride(entity => stelar.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
+    if (keyBind == "VISUALIZER_TOGGLE") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+    };
+    if (keyBind == "CYCLE_CLOTHES") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
+    };
+    if (keyBind == "SHIMMER_TOGGLE") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
+    };
+    if (keyBind == "HOOD_TOGGLE") {
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+    };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
   hero.setDamageProfile(entity => stelar.getDamageProfile(entity));

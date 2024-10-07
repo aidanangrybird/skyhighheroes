@@ -239,6 +239,8 @@ function initTranser(moduleList) {
   var commandHandlers = 0;
   var messagingIndex = 0;
   var brotherBandIndex = 0;
+  var modifierIndexes = [];
+  var keyBindIndexes = [];
   moduleList.forEach(module => {
     var init = module.init(instance);
     modules.push(init);
@@ -261,6 +263,12 @@ function initTranser(moduleList) {
     };
     if (init.hasOwnProperty("commandHandler")) {
       commandHandlers = commandHandlers + 1;
+    };
+    if (init.hasOwnProperty("isModifierEnabled")) {
+      modifierIndexes.push(moduleList.indexOf(module));
+    };
+    if (init.hasOwnProperty("isKeyBindEnabled")) {
+      keyBindIndexes.push(moduleList.indexOf(module));
     };
   });
   function cycleChatModes(player, manager) {
@@ -308,29 +316,26 @@ function initTranser(moduleList) {
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => instance.cycleChatModes(player, manager), "Cycle chat modes", 3);
     },
     isKeyBindEnabled: function (entity, keyBind) {
-      var keyBinds = [];
-      var variables = [];
-      modules.forEach(module => {
-        if (module.hasOwnProperty("keyBindEnabled")) {
-          var vars = module.keyBindEnabled(entity, keyBind).triggers;
-          var keybindings = module.keyBindEnabled(entity, keyBind).keybinds;
-          vars.forEach(variable => {
-            variables.push(variable);
-          });
-          keybindings.forEach(key => {
-            keyBinds.push(key);
-          });
-        };
-      });
-      return (keyBinds.indexOf(keyBind) > -1) ? variables[keyBinds.indexOf(keyBind)] : false;
+      if (keyBindIndexes.length == 1) {
+        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind);
+      };
+      if (keyBindIndexes.length == 2) {
+        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind);
+      };
+      if (keyBindIndexes.length == 3) {
+        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].keyBindEnabled(entity, keyBind);
+      };
     },
     isModifierEnabled: function (entity, modifier) {
-      modules.forEach(module => {
-        if (module.hasOwnProperty("isModifierEnabled")) {
-          thing = module.isModifierEnabled(entity, modifier);
-        };
-      });
-      return false;
+      if (modifierIndexes.length == 1) {
+        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier);
+      };
+      if (modifierIndexes.length == 2) {
+        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier);
+      };
+      if (modifierIndexes.length == 3) {
+        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier);
+      };
     },
     tickHandler: (entity, manager, transformed, untransformed, color) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
