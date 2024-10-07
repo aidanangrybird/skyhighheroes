@@ -370,7 +370,9 @@ function initTranser(moduleList) {
               });
             } else {
               modules.some((module) => {
-                var result = module.commandHandler(entity, manager);
+                if (module.hasOwnProperty("commandHandler")) {
+                  var result = module.commandHandler(entity, manager);
+                };
                 return result;
               });
             };
@@ -383,6 +385,11 @@ function initTranser(moduleList) {
           };
         };
       };
+      modules.forEach(module => {
+        if (module.hasOwnProperty("tickHandler")) {
+          module.tickHandler(entity, manager);
+        };
+      });
     }
   };
 };

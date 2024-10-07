@@ -144,6 +144,53 @@ function init(transer) {
       };
       return result;
     },
+    tickHandler: function (entity, manager) {
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && ((entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0 && entity.getData("skyhighheroes:dyn/predation_timer") < 1))) {
+        manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
+        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(entity, "skyhighheroes:dyn/sword", false);
+        manager.setData(entity, "skyhighheroes:dyn/jet_streak", false);
+      };
+      if (entity.getWornChestplate().getEnchantmentLevel(35) == -1) {
+        manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
+      };
+      if (entity.getWornChestplate().getEnchantmentLevel(35) == 0) {
+        manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
+      };
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
+      };
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
+      };
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
+      };
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
+        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
+      };
+      var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
+      manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);
+      var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
+      if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
+        manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
+      };
+      if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
+        manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
+      };
+      if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
+        manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
+      };
+      if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
+        manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
+      };
+      if (equipment.getCompoundTag(4).getCompoundTag("Item").getShort("Damage") > 0) {
+        manager.setShort(equipment.getCompoundTag(4).getCompoundTag("Item"), "Damage", 0)
+      };
+      if (equipment.getCompoundTag(5).getCompoundTag("Item").getShort("Damage") > 0) {
+        manager.setShort(equipment.getCompoundTag(5).getCompoundTag("Item"), "Damage", 0)
+      };
+    },
     name: function () {
       return "jetStreakSquallVortex";
     }
