@@ -297,14 +297,40 @@ function initTranser(moduleList) {
     systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
   };
   return {
-    keyBinds: (hero, transformable) => {
+    keyBinds: (hero) => {
+      modules.forEach(module => {
+        if (module.hasOwnProperty("keyBinds")) {
+          module.keyBinds(hero);
+        };
+      });
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
-      hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
-      hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
-      if (typeof transformable === "boolean" && transformable) {
-        hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
-        hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
-      };
+      hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => instance.cycleChats(player, manager), "Cycle chats", 3);
+      hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => instance.cycleChatModes(player, manager), "Cycle chat modes", 3);
+    },
+    isKeyBindEnabled: function (entity, keyBind) {
+      var keyBinds = [];
+      var variables = [];
+      modules.forEach(module => {
+        if (module.hasOwnProperty("keyBindEnabled")) {
+          var vars = module.keyBindEnabled(entity, keyBind).triggers;
+          var keybindings = module.keyBindEnabled(entity, keyBind).keybinds;
+          vars.forEach(variable => {
+            variables.push(variable);
+          });
+          keybindings.forEach(key => {
+            keyBinds.push(key);
+          });
+        };
+      });
+      return (keyBinds.indexOf(keyBind) > -1) ? variables[keyBinds.indexOf(keyBind)] : false;
+    },
+    isModifierEnabled: function (entity, modifier) {
+      modules.forEach(module => {
+        if (module.hasOwnProperty("isModifierEnabled")) {
+          thing = module.isModifierEnabled(entity, modifier);
+        };
+      });
+      return false;
     },
     tickHandler: (entity, manager, transformed, untransformed, color) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
