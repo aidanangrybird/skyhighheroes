@@ -3,21 +3,12 @@
  * @param transer - Required
  **/
 function init(transer) {
-  function toolSwitchEnchant(player, manager) {
-    //Silk Touch
-    if (player.getData("skyhighheroes:dyn/tool_enchant") == 0) {
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "id", 33);
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "lvl", 1);
-    };
-    //Fortune
-    if (player.getData("skyhighheroes:dyn/tool_enchant") == 1) {
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "id", 35);
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "lvl", 4);
-    };
+  //All of the required functions and stuff go here
+  function resetBattleCard(player, manager) {
+    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+    manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
     return true;
   };
-  //All of the required functions and stuff go here
-  var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
   return {
     powers: function () {
       return [
@@ -26,6 +17,41 @@ function init(transer) {
       ]
     },
     keyBinds: function (hero) {
+      hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Vortex Buster", 2);
+      hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
+      hero.addKeyBind("AIM", "Aim Vortex Buster", 4);
+      hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
+        manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+        manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
+        manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
+        manager.setData(player, "skyhighheroes:dyn/predation", false);
+        manager.setData(player, "skyhighheroes:dyn/jet_streak_timer", 0);
+        manager.setData(player, "skyhighheroes:dyn/jet_streak", false);
+        if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
+          manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
+        };
+        if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
+          manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
+        };
+        return true;
+      }, "EM Wave Change!", 5);
+      hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
+        if (PackLoader.getSide() == "CLIENT") {
+          PackLoader.printChat("<Aidan Stelar> EM Wave Change! \u00A76Aidan Stelar\u00A7r, On-Air!");
+        };
+        manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+        manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+        manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
+        manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
+        manager.setData(player, "skyhighheroes:dyn/predation", false);
+        manager.setData(player, "skyhighheroes:dyn/jet_streak_timer", 0);
+        manager.setData(player, "skyhighheroes:dyn/jet_streak", false);
+        manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
+        return true;
+      }, "EM Wave Change!", 5);
+      hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
+      hero.addKeyBind("JET_STREAK_TOGGLE", "Toggle Vortex Buster", 5);
       hero.addKeyBind("JET_STREAK_TOGGLE", "Toggle Vortex Buster", 5);
       hero.addKeyBind("AIM", "Aim Vortex Buster", 4);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
@@ -40,10 +66,20 @@ function init(transer) {
         };
         return true;
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
+      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Vortex Buster", 5);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
       var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
+      if (keyBind == "PREDATION") {
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getData("skyhighheroes:dyn/battle_card") > 0 || entity.getData("skyhighheroes:dyn/jet_streak_timer") < 1);
+      };
+      if (keyBind == "BATTLE_CARD_RESET_PREDATION") {
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0);
+      };
+      if (keyBind == "BATTLE_CARD_RESET") {
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") > 0;
+      };
       if (keyBind == "SYNCHRONIZE_WAVES") {
         result = entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
       };
@@ -70,8 +106,13 @@ function init(transer) {
     isModifierEnabled: function (entity, modifier) {
       var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
       var result = false;
-      if (modifier.name() == "fiskheroes:transformation" && modifier.id() == "wave_change") {
-        result = entity.getUUID() == uuid;
+      if (modifier.name() == "fiskheroes:transformation") {
+        if (modifier.id() == "predation" || modifier.id() == "jet_streak") {
+          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        };
+        if (modifier.id() == "wave_change") {
+          result = entity.getUUID() == uuid;
+        }
       };
       if (modifier.name() == "fiskheroes:energy_bolt") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
@@ -84,45 +125,6 @@ function init(transer) {
         manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(entity, "skyhighheroes:dyn/sword", false);
         manager.setData(entity, "skyhighheroes:dyn/jet_streak", false);
-      };
-      if (entity.getWornChestplate().getEnchantmentLevel(35) == -1) {
-        manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
-      };
-      if (entity.getWornChestplate().getEnchantmentLevel(35) == 0) {
-        manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
-      };
-      var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
-      manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);
-      var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
-      if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(4).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(4).getCompoundTag("Item"), "Damage", 0)
-      };
-      if (equipment.getCompoundTag(5).getCompoundTag("Item").getShort("Damage") > 0) {
-        manager.setShort(equipment.getCompoundTag(5).getCompoundTag("Item"), "Damage", 0)
       };
     },
     name: function () {

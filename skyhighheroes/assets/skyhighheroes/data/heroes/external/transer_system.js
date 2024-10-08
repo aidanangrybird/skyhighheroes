@@ -305,15 +305,19 @@ function initTranser(moduleList) {
     systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
   };
   return {
-    keyBinds: (hero) => {
+    keyBinds: (hero, EM) => {
       modules.forEach(module => {
         if (module.hasOwnProperty("keyBinds")) {
           module.keyBinds(hero);
         };
       });
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
-      hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => instance.cycleChats(player, manager), "Cycle chats", 3);
-      hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => instance.cycleChatModes(player, manager), "Cycle chat modes", 3);
+      hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
+      hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+      if (typeof EM === "boolean" && EM) {
+        hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
+        hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
+      };
     },
     isKeyBindEnabled: function (entity, keyBind) {
       if (keyBindIndexes.length == 1) {

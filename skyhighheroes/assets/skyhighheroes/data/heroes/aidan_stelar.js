@@ -6,9 +6,9 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var jetStreakSquallVortex = implement("skyhighheroes:external/jet_streak_squall_vortex");
-var jetStreakBattleCards = implement("skyhighheroes:external/jet_streak_battle_cards");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, jetStreakSquallVortex, jetStreakBattleCards]);
+var squallVortex = implement("skyhighheroes:external/squall_vortex");
+var jetStreak = implement("skyhighheroes:external/jet_streak");
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, squallVortex, jetStreak]);
 function init(hero) {
   hero.setAliases("aidan_stelar");
   hero.setName("\u00A76Squall Vortex");
@@ -60,7 +60,7 @@ function init(hero) {
       return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "SHAPE_SHIFT") {
-      return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
+      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
