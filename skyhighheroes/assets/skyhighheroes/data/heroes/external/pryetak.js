@@ -58,8 +58,8 @@ function init(transer) {
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
-      hero.addKeyBind("PRYETAK_TOGGLE", "Toggle Vortex Buster", 5);
-      hero.addKeyBind("AIM", "Aim Vortex Buster", 4);
+      hero.addKeyBind("PRYETAK_TOGGLE", "Toggle Nebula Buster", 5);
+      hero.addKeyBind("AIM", "Aim Nebula Buster", 4);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
         if (player.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c") {
           if (PackLoader.getSide() == "CLIENT") {
@@ -84,7 +84,7 @@ function init(transer) {
         };
         return true;
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
-      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Vortex Buster", 5);
+      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Nebula Buster", 5);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
