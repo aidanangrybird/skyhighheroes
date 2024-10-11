@@ -41,7 +41,7 @@ function init(transer) {
     },
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
-      hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager, 6), "Next Battle Card", 1);
+      hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager), "Next Battle Card", 1);
       hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         return true;
@@ -89,7 +89,7 @@ function init(transer) {
         return true;
       }, "Battle Card! Hail Cannon!", 2);
       hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
-      hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager, 6), "Previous Battle Card", 3);
+      hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
       hero.addKeyBind("ENERGY_PROJECTION", "Derecho", 4);
       hero.addKeyBindFunc("FORTUNE_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Silk Touch", 4);
       hero.addKeyBindFunc("SILK_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Fortune", 4);
