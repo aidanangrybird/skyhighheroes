@@ -40,9 +40,10 @@ function init(transer) {
   return {
     powers: function () {
       return [
-        "skyhighheroes:em_wave_change",
-        "skyhighheroes:em_wave_being"
-      ]
+        "skyhighheroes:em_wave_being",
+        "skyhighheroes:em_battle_cards",
+        "skyhighheroes:em_battle_cards_aidan"
+      ];
     },
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);

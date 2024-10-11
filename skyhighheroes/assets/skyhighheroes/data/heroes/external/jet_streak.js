@@ -13,8 +13,9 @@ function init(transer) {
     powers: function () {
       return [
         "skyhighheroes:em_wave_change",
-        "skyhighheroes:em_wave_being"
-      ]
+        "skyhighheroes:em_battle_card_predation",
+        "skyhighheroes:em_vortex_buster"
+      ];
     },
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Vortex Buster", 2);

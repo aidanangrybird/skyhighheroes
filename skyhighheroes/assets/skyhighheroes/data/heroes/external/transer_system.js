@@ -245,42 +245,49 @@ function initTranser(moduleList) {
   var transformed = null;
   var untransformed = null;
   var color = null;
+  var powerArray = ["skyhighheroes:transer_system"];
   moduleList.forEach(module => {
-    var init = module.init(instance);
-    modules.push(init);
-    if (init.hasOwnProperty("messageHandler")) {
-      if (init.name() == "messaging") {
+    var moduleInit = module.init(instance);
+    modules.push(moduleInit);
+    if (moduleInit.hasOwnProperty("messageHandler")) {
+      if (moduleInit.name() == "messaging") {
         messageHandlers = messageHandlers + 1;
       };
       messageHandlers = messageHandlers + 1;
     };
     if (moduleList.indexOf(module) == 0) {
-      loadedModules = loadedModules + "<nh>" + init.name();
+      loadedModules = loadedModules + "<nh>" + moduleInit.name();
     } else {
-      loadedModules = loadedModules + "<n>, <nh>" + init.name();
+      loadedModules = loadedModules + "<n>, <nh>" + moduleInit.name();
     };
-    if (init.name() == "messaging") {
+    if (moduleInit.name() == "messaging") {
       messagingIndex = moduleList.indexOf(module);
     };
-    if (init.name() == "BrotherBand") {
+    if (moduleInit.name() == "BrotherBand") {
       brotherBandIndex = moduleList.indexOf(module);
     };
-    if (init.hasOwnProperty("commandHandler")) {
+    if (moduleInit.hasOwnProperty("commandHandler")) {
       commandHandlers = commandHandlers + 1;
     };
-    if (init.hasOwnProperty("isModifierEnabled")) {
+    if (moduleInit.hasOwnProperty("isModifierEnabled")) {
       modifierIndexes.push(moduleList.indexOf(module));
     };
-    if (init.hasOwnProperty("isKeyBindEnabled")) {
+    if (moduleInit.hasOwnProperty("isKeyBindEnabled")) {
       keyBindIndexes.push(moduleList.indexOf(module));
     };
-    if (init.hasOwnProperty("waveChangeInfo")) {
+    if (moduleInit.hasOwnProperty("waveChangeInfo")) {
       if (!hasEMWaveChange) {
-        transformed = init.waveChangeInfo().name;
-        untransformed = init.waveChangeInfo().human;
-        color = init.waveChangeInfo().color;
+        transformed = moduleInit.waveChangeInfo().name;
+        untransformed = moduleInit.waveChangeInfo().human;
+        color = moduleInit.waveChangeInfo().color;
         hasEMWaveChange = true;
       };
+    };
+    if (moduleInit.hasOwnProperty("powers")) {
+      var modulePowers = moduleInit.powers();
+      modulePowers.forEach(power => {
+        powerArray.push(power);
+      });
     };
   });
   function cycleChatModes(player, manager) {
@@ -322,6 +329,38 @@ function initTranser(moduleList) {
     systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
   };
   return {
+    addPowers: (hero) => {
+      if (powerArray.length == 1) {
+        hero.addPowers(powerArray[0]);
+      };
+      if (powerArray.length == 2) {
+        hero.addPowers(powerArray[0], powerArray[1]);
+      };
+      if (powerArray.length == 3) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2]);
+      };
+      if (powerArray.length == 4) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
+      };
+      if (powerArray.length == 5) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
+      };
+      if (powerArray.length == 6) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
+      };
+      if (powerArray.length == 7) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
+      };
+      if (powerArray.length == 8) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
+      };
+      if (powerArray.length == 9) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
+      };
+      if (powerArray.length == 10) {
+        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
+      };
+    },
     keyBinds: (hero) => {
       modules.forEach(module => {
         if (module.hasOwnProperty("keyBinds")) {
