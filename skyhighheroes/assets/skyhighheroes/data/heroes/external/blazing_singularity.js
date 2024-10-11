@@ -36,7 +36,7 @@ function init(transer) {
       return [
         "skyhighheroes:em_wave_being",
         "skyhighheroes:em_battle_cards",
-        "skyhighheroes:em_battle_cards_chase",
+        "skyhighheroes:em_battle_cards_grand",
       ]
     },
     keyBinds: function (hero) {
@@ -45,54 +45,53 @@ function init(transer) {
       hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         return true;
-      }, "Return To Nebula Buster", 2);
+      }, "Return To Blaze Buster", 2);
       hero.addKeyBindFunc("BATTLE_CARD_1", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Barrier\u00A7r!");
+          PackLoader.printChat("\u00A7r<\u00A74Blazing Singularity\u00A7r> Battle Card Predation! \u00A74Barrier\u00A7r!");
         };
         return true;
       }, "Battle Card! Barrier!", 2);
       hero.addKeyBindFunc("BATTLE_CARD_2", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Sword\u00A7r!");
+          PackLoader.printChat("\u00A7r<\u00A74Blazing Singularity\u00A7r> Battle Card Predation! \u00A74Sword\u00A7r!");
         };
         return true;
       }, "Battle Card! Sword!", 2);
       hero.addKeyBindFunc("BATTLE_CARD_3", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Shurikens\u00A7r!");
+          PackLoader.printChat("\u00A7r<\u00A74Blazing Singularity\u00A7r> Battle Card Predation! \u00A74Shurikens\u00A7r!");
         };
         return true;
       }, "Battle Card! Shurikens!", 2);
       hero.addKeyBindFunc("BATTLE_CARD_4", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Void's Grasp\u00A7r!");
+          PackLoader.printChat("\u00A7r<\u00A74Blazing Singularity\u00A7r> Battle Card Predation! \u00A74Ember Ray\u00A7r!");
         };
         return true;
-      }, "Battle Card! Void's Grasp!", 2);
+      }, "Battle Card! Ember Ray!", 2);
       hero.addKeyBindFunc("BATTLE_CARD_5", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Galaxy's Weight\u00A7r!");
+          PackLoader.printChat("\u00A7r<\u00A74Blazing Singularity\u00A7r> Battle Card Predation! \u00A74Meteor Strike\u00A7r!");
         };
         return true;
-      }, "Battle Card! Galaxy's Weight!", 2);
+      }, "Battle Card! Meteor Strike!", 2);
       hero.addKeyBindFunc("BATTLE_CARD_6", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A72Pryetak Nebula\u00A7r> Battle Card Predation! \u00A72Nebula Burst\u00A7r!");
+          PackLoader.printChat("\u00A7r<\u00A74Blazing Singularity\u00A7r> Battle Card Predation! \u00A74Gravity Strike\u00A7r!");
         };
         return true;
-      }, "Battle Card! Nebula Burst!", 2);
+      }, "Battle Card! Gravity Strike!", 2);
       hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
       hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
-      hero.addKeyBind("TELEKINESIS", "Void's Grasp", 4);
-      hero.addKeyBind("GRAVITY_MANIPULATION", "Galaxy's Weight", 4);
-      hero.addKeyBind("CHARGED_BEAM", "Nebula Burst", 4);
+      hero.addKeyBind("TELEKINESIS", "Gravity Strike", 4);
+      hero.addKeyBind("ENERGY_PROJECTION", "Ember Ray", 4);
       hero.addKeyBindFunc("FORTUNE_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Silk Touch", 4);
       hero.addKeyBindFunc("SILK_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Fortune", 4);
       hero.addKeyBind("RIFLE_AIM", "Aim Rifle", 4);
@@ -102,7 +101,7 @@ function init(transer) {
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
-      var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
+      var uuid = "d699ffcd-8177-4325-91ac-3e815e87bb95";
       if (keyBind == "CYCLE_CHATS_EM") {
         result = !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
       };
@@ -157,19 +156,16 @@ function init(transer) {
       if (keyBind == "AIM") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
       };
-      if (keyBind == "TELEKINESIS") {
+      if (keyBind == "ENERGY_PROJECTION") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 4;
       };
-      if (keyBind == "GRAVITY_MANIPULATION") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 5;
-      };
-      if (keyBind == "CHARGED_BEAM") {
+      if (keyBind == "TELEKINESIS") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 6;
       };
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
+      var uuid = "d699ffcd-8177-4325-91ac-3e815e87bb95";
       var result = false;
       if (modifier.name() == "fiskheroes:damage_immunity") {
         var invis = ["explosion", "magic", "shuriken", "sharp", "bullet", "blunt", "saitama"];
@@ -202,13 +198,13 @@ function init(transer) {
           result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getPunchTimer() == 0;
         };
       };
-      if (modifier.name() == "fiskheroes:icicles") {
+      if (modifier.name() == "fiskheroes:telekinesis") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 6 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
-      if (modifier.name() == "fiskheroes:energy_projection") {
+      if (modifier.name() == "fiskheroes:fireball") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
-      if (modifier.name() == "fiskheroes:lightning_cast") {
+      if (modifier.name() == "fiskheroes:energy_projection") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
       if (modifier.name() == "fiskheroes:equipment") {
@@ -272,15 +268,15 @@ function init(transer) {
       manager.incrementData(entity, "skyhighheroes:dyn/sword_timer", 10, 10, entity.getData("skyhighheroes:dyn/sword"));
       var sword_on = entity.getData("skyhighheroes:dyn/sword_timer") == 1 && entity.getData("skyhighheroes:dyn/item_holding_timer") == 0;
       manager.incrementData(entity, "skyhighheroes:dyn/sword_blade_timer", 5, sword_on);
-      var voids_grasp = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
-      manager.setData(entity, "skyhighheroes:dyn/voids_grasp", voids_grasp);
-      manager.incrementData(entity, "skyhighheroes:dyn/voids_grasp_timer", 10, 10, entity.getData("skyhighheroes:dyn/voids_grasp"));
-      var galaxys_weight = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
-      manager.setData(entity, "skyhighheroes:dyn/galaxys_weight", galaxys_weight);
-      manager.incrementData(entity, "skyhighheroes:dyn/galaxys_weight_timer", 10, 10, entity.getData("skyhighheroes:dyn/galaxys_weight"));
-      var nebula_burst = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 6 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
-      manager.setData(entity, "skyhighheroes:dyn/nebula_burst", nebula_burst);
-      manager.incrementData(entity, "skyhighheroes:dyn/nebula_burst_timer", 10, 10, entity.getData("skyhighheroes:dyn/nebula_burst"));
+      var ember_ray = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      manager.setData(entity, "skyhighheroes:dyn/ember_ray", ember_ray);
+      manager.incrementData(entity, "skyhighheroes:dyn/ember_ray_timer", 10, 10, entity.getData("skyhighheroes:dyn/ember_ray"));
+      var meteor_strike = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      manager.setData(entity, "skyhighheroes:dyn/meteor_strike", meteor_strike);
+      manager.incrementData(entity, "skyhighheroes:dyn/meteor_strike_timer", 10, 10, entity.getData("skyhighheroes:dyn/meteor_strike"));
+      var gravity_strike = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 6 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      manager.setData(entity, "skyhighheroes:dyn/gravity_strike", gravity_strike);
+      manager.incrementData(entity, "skyhighheroes:dyn/gravity_strike_timer", 10, 10, entity.getData("skyhighheroes:dyn/gravity_strike"));
       if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0.45 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.55) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
@@ -351,13 +347,13 @@ function init(transer) {
       };
     },
     name: function () {
-      return "pryetakNebula";
+      return "blazingSingularity";
     },
     waveChangeInfo: function () {
       return {
-        name: "Pryetak Nebula",
-        human: "Chase Stelar",
-        color: "\u00A72"
+        name: "Blazing Singularity",
+        human: "Grand Stelar",
+        color: "\u00A74"
       };
     }
   };

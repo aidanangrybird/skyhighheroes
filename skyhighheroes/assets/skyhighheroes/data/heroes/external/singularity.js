@@ -14,13 +14,13 @@ function init(transer) {
       return [
         "skyhighheroes:em_wave_change",
         "skyhighheroes:em_battle_card_predation",
-        "skyhighheroes:em_nebula_buster"
+        "skyhighheroes:em_blaze_buster"
       ];
     },
     keyBinds: function (hero) {
-      hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Nebula Buster", 2);
+      hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Blaze Buster", 2);
       hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
-      hero.addKeyBind("AIM", "Aim Nebula Buster", 4);
+      hero.addKeyBind("AIM", "Aim Blaze Buster", 4);
       hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -38,9 +38,9 @@ function init(transer) {
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
-        if (player.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c") {
+        if (player.getUUID() == "d699ffcd-8177-4325-91ac-3e815e87bb95") {
           if (PackLoader.getSide() == "CLIENT") {
-            PackLoader.printChat("<Chase Stelar> EM Wave Change! \u00A72Chase Stelar\u00A7r, On-Air!");
+            PackLoader.printChat("<Grand Stelar> EM Wave Change! \u00A74Grand Stelar\u00A7r, On-Air!");
           };
           manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
           manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -52,39 +52,39 @@ function init(transer) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         } else {
           if (PackLoader.getSide() == "CLIENT") {
-            PackLoader.printChat("<\u00A72Singularity\u00A7r> Who are you?");
+            PackLoader.printChat("<\u00A74Singularity\u00A7r> Who are you?");
           };
         };
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
-      hero.addKeyBind("SINGULARITY_TOGGLE", "Toggle Vortex Buster", 5);
-      hero.addKeyBind("AIM", "Aim Vortex Buster", 4);
+      hero.addKeyBind("SINGULARITY_TOGGLE", "Toggle Blaze Buster", 5);
+      hero.addKeyBind("AIM", "Aim Blaze Buster", 4);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
-        if (player.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c") {
+        if (player.getUUID() == "d699ffcd-8177-4325-91ac-3e815e87bb95") {
           if (PackLoader.getSide() == "CLIENT") {
-            PackLoader.printChat("\u00A7r<\u00A72Singularity\u00A7r> You are too cold for us to EM Wave Change.");
+            PackLoader.printChat("\u00A7r<\u00A74Singularity\u00A7r> You are too cold for us to EM Wave Change.");
           };
         } else {
           if (PackLoader.getSide() == "CLIENT") {
-            PackLoader.printChat("<\u00A72Singularity\u00A7r> Who are you?");
+            PackLoader.printChat("<\u00A74Singularity\u00A7r> Who are you?");
           };
         };
         return true;
       }, "\u00A7mEM Wave Change!\u00A7r You are too cold", 5);
       hero.addKeyBindFunc("HOT_TEMPERATURE", (player, manager) => {
-        if (player.getUUID() == "4da600b8-582a-4fc3-ac2e-ada03d3e478c") {
+        if (player.getUUID() == "d699ffcd-8177-4325-91ac-3e815e87bb95") {
           if (PackLoader.getSide() == "CLIENT") {
-            PackLoader.printChat("\u00A7r<\u00A72Singularity\u00A7r> You are too hot for us to EM Wave Change.");
+            PackLoader.printChat("\u00A7r<\u00A74Singularity\u00A7r> You are too hot for us to EM Wave Change.");
           };
         } else {
           if (PackLoader.getSide() == "CLIENT") {
-            PackLoader.printChat("<\u00A72Singularity\u00A7r> Who are you?");
+            PackLoader.printChat("<\u00A74Singularity\u00A7r> Who are you?");
           };
         };
         return true;
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
-      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Vortex Buster", 5);
+      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Blaze Buster", 5);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
@@ -121,7 +121,7 @@ function init(transer) {
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "4da600b8-582a-4fc3-ac2e-ada03d3e478c";
+      var uuid = "d699ffcd-8177-4325-91ac-3e815e87bb95";
       var result = false;
       if (modifier.name() == "fiskheroes:transformation") {
         if (modifier.id() == "predation" || modifier.id() == "singularity") {
