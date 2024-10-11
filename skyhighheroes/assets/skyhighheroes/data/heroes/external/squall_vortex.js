@@ -16,23 +16,17 @@ function init(transer) {
     };
     return true;
   };
-  function cycleUpCard(player, manager, battleCardAmount) {
-    if (typeof battleCardAmount === "undefined") {
-      battleCardAmount = 3;
-    };
+  function cycleUpCard(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
-    if (player.getData("skyhighheroes:dyn/selected_battle_card") > battleCardAmount) {
+    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 6) {
       manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
     };
     return true;
   };
-  function cycleDownCard(player, manager, battleCardAmount) {
-    if (typeof battleCardAmount === "undefined") {
-      battleCardAmount = 3;
-    };
+  function cycleDownCard(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
     if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
-      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", battleCardAmount);
+      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 6);
     };
     return true;
   };
