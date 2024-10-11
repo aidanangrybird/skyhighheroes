@@ -102,10 +102,10 @@ function init(transer) {
       var result = false;
       var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
       if (keyBind == "CYCLE_CHATS_EM") {
-        result = entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
+        result = !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
       };
       if (keyBind == "CYCLE_CHAT_MODES_EM") {
-        result = entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
+        result = entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1;
       };
       if (keyBind == "INTANGIBILITY") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") > 0;
