@@ -815,7 +815,7 @@ function tempProfiles() {
   return obj
 };
 
-function initProfiles(hero, uuid) {
+function initProfiles(hero) {
   hero.addAttribute("SPRINT_SPEED", 0.2, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
   hero.addAttribute("JUMP_HEIGHT", 3.0, 0);

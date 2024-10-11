@@ -31,7 +31,7 @@ function init(hero) {
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
   hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
-  stelar.initProfiles(hero, uuid);
+  stelar.initProfiles(hero);
   hero.supplyFunction("canAim", entity => stelar.canAim(entity, "pryetak"));
   hero.setModifierEnabled((entity, modifier) => {
     if (modifier.name() == "fiskheroes:shape_shifting") {
