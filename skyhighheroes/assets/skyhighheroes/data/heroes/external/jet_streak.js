@@ -118,7 +118,7 @@ function init(transer) {
         };
         if (modifier.id() == "wave_change") {
           result = entity.getUUID() == uuid;
-        }
+        };
       };
       if (modifier.name() == "fiskheroes:energy_bolt") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty();
