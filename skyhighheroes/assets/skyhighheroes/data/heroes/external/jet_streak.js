@@ -38,17 +38,23 @@ function init(transer) {
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("<Aidan Stelar> EM Wave Change! \u00A76Aidan Stelar\u00A7r, On-Air!");
+        if (player.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84") {
+          if (PackLoader.getSide() == "CLIENT") {
+            PackLoader.printChat("<Aidan Stelar> EM Wave Change! \u00A76Aidan Stelar\u00A7r, On-Air!");
+          };
+          manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+          manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+          manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
+          manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
+          manager.setData(player, "skyhighheroes:dyn/predation", false);
+          manager.setData(player, "skyhighheroes:dyn/pryetak_timer", 0);
+          manager.setData(player, "skyhighheroes:dyn/pryetak", false);
+          manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
+        } else {
+          if (PackLoader.getSide() == "CLIENT") {
+            PackLoader.printChat("<\u00A76Jet-Streak\u00A7r> Who are you?");
+          };
         };
-        manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
-        manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
-        manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
-        manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
-        manager.setData(player, "skyhighheroes:dyn/predation", false);
-        manager.setData(player, "skyhighheroes:dyn/jet_streak_timer", 0);
-        manager.setData(player, "skyhighheroes:dyn/jet_streak", false);
-        manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
@@ -81,10 +87,10 @@ function init(transer) {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") > 0;
       };
       if (keyBind == "SYNCHRONIZE_WAVES") {
-        result = entity.getUUID() == uuid && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
+        result = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
       };
       if (keyBind == "DESYNCHRONIZE_WAVES") {
-        result = entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
+        result = entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       };
       if (keyBind == "WAVE_CHANGE") {
         result = entity.getUUID() == uuid && entity.getData("fiskheroes:flight_timer") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking()) || (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25));
@@ -93,10 +99,10 @@ function init(transer) {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/jet_streak_timer") < 1 && !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 0;
       };
       if (keyBind == "COLD_TEMPERATURE") {
-        result = entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") <= -0.25;
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") <= -0.25;
       };
       if (keyBind == "HOT_TEMPERATURE") {
-        result = entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") >= 0.25;
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") >= 0.25;
       };
       if (keyBind == "JET_STREAK_TOGGLE") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getHeldItem().isEmpty();

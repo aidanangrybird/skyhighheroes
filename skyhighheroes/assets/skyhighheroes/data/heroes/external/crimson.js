@@ -38,17 +38,23 @@ function init(transer) {
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("<Lucas Stelar> EM Wave Change! \u00A74Lucas Stelar\u00A7r, On-Air!");
+        if (player.getUUID() == "c4bc5db6-3cf6-44fe-8427-304a7b211bc4") {
+          if (PackLoader.getSide() == "CLIENT") {
+            PackLoader.printChat("<Lucas Stelar> EM Wave Change! \u00A74Lucas Stelar\u00A7r, On-Air!");
+          };
+          manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+          manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+          manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
+          manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
+          manager.setData(player, "skyhighheroes:dyn/predation", false);
+          manager.setData(player, "skyhighheroes:dyn/pryetak_timer", 0);
+          manager.setData(player, "skyhighheroes:dyn/pryetak", false);
+          manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
+        } else {
+          if (PackLoader.getSide() == "CLIENT") {
+            PackLoader.printChat("<\u00A74Crimson\u00A7r> Who are you?");
+          };
         };
-        manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
-        manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
-        manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
-        manager.setData(player, "skyhighheroes:dyn/predation_timer", 0);
-        manager.setData(player, "skyhighheroes:dyn/predation", false);
-        manager.setData(player, "skyhighheroes:dyn/crimson_timer", 0);
-        manager.setData(player, "skyhighheroes:dyn/crimson", false);
-        manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
