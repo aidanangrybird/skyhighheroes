@@ -135,7 +135,7 @@ function init(hero) {
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
   hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
-  stelar.initProfiles(hero);
+  stelar.initProfiles(hero, uuid);
   hero.supplyFunction("canAim", entity => stelar.canAim(entity, "singularity"));
   hero.setModifierEnabled((entity, modifier) => {
     switch (modifier.name()) {
