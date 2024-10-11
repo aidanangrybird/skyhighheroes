@@ -6,9 +6,9 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var pyretakNebula = implement("skyhighheroes:external/pyretak_nebula");
-var pyretak = implement("skyhighheroes:external/pyretak");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, pyretakNebula, pyretak]);
+var pryetakNebula = implement("skyhighheroes:external/pryetak_nebula");
+var pryetak = implement("skyhighheroes:external/pryetak");
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, pryetakNebula, pryetak]);
 function init(hero) {
   hero.setAliases("chase_stelar");
   hero.setName("\u00A72Pryetak Nebula");
@@ -42,7 +42,7 @@ function init(hero) {
   hero.setTierOverride(entity => stelar.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && !entity.isSneaking() && entity.getUUID() == uuid;
@@ -51,16 +51,16 @@ function init(hero) {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getUUID() == uuid;
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
-      return entity.getUUID() == uuid && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "CYCLE_CHAT_MODES") {
-      return entity.getUUID() == uuid && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "SHAPE_SHIFT") {
-      return entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
+      return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
@@ -70,12 +70,12 @@ function init(hero) {
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
   hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
-    transerOS.tickHandler(entity, manager, "Pyretak Nebula", "Chase Stelar", "\u00A72");
+    transerOS.tickHandler(entity, manager, "Pryetak Nebula", "Chase Stelar", "\u00A72");
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      manager.setData(entity, "fiskheroes:disguise", "Pyretak Nebula");
+      manager.setData(entity, "fiskheroes:disguise", "Pryetak Nebula");
     };
     var x = entity.posX();
     var y = entity.posY();

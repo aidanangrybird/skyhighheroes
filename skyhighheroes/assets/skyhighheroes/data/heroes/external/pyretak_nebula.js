@@ -350,7 +350,7 @@ function init(transer) {
       };
     },
     name: function () {
-      return "pyretakNebula";
+      return "pryetakNebula";
     }
   };
 };
