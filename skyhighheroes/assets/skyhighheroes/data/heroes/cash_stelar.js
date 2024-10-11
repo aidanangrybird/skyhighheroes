@@ -81,7 +81,7 @@ function init(hero) {
   hero.addKeyBindFunc("SILK_SWITCH", (player, manager) => stelar.toolSwitchEnchant(player, manager), "Active Enchant: Fortune", 4);
   hero.addKeyBind("AIM", "Aim Galaxy Buster", 4);
   hero.addKeyBind("RIFLE_AIM", "Aim Rifle", 4);
-  hero.addKeyBind("ENERGY_PROJECTION", "Asteroid Blast", 4);
+  hero.addKeyBind("ENERGY_PROJECTION", "Planetary Blast", 4);
   hero.addKeyBind("CHARGED_BEAM", "Star Cutter", 4);
   hero.addKeyBind("GRAVITY_MANIPULATION", "Galaxy Pulse", 4);
   hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
