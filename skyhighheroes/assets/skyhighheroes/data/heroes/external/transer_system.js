@@ -241,6 +241,10 @@ function initTranser(moduleList) {
   var brotherBandIndex = 0;
   var modifierIndexes = [];
   var keyBindIndexes = [];
+  var hasEMWaveChange = false;
+  var transformed = null;
+  var untransformed = null;
+  var color = null;
   moduleList.forEach(module => {
     var init = module.init(instance);
     modules.push(init);
@@ -269,6 +273,14 @@ function initTranser(moduleList) {
     };
     if (init.hasOwnProperty("isKeyBindEnabled")) {
       keyBindIndexes.push(moduleList.indexOf(module));
+    };
+    if (init.hasOwnProperty("waveChangeInfo")) {
+      if (!hasEMWaveChange) {
+        transformed = init.waveChangeInfo().name;
+        untransformed = init.waveChangeInfo().human;
+        color = init.waveChangeInfo().color;
+        hasEMWaveChange = true;
+      };
     };
   });
   function cycleChatModes(player, manager) {
@@ -299,13 +311,18 @@ function initTranser(moduleList) {
   };
   function status(entity) {
     var date = new Date();
+    if (hasEMWaveChange) {
+      systemMessage(entity, "<n>Hello <nh>" + untransformed + "<n>!");
+    } else {
+      systemMessage(entity, "<n>Hello <nh>" + entity.getName() + "<n>!");
+    };
     systemMessage(entity, "<n>It is <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
     systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
     systemMessage(entity, "<n>Your current location is<nh> " + entity.posX().toFixed(2) + "<n>, <nh>" + entity.posY().toFixed(2) + "<n>, <nh>" + entity.posZ().toFixed(2));
     systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
   };
   return {
-    keyBinds: (hero, EM) => {
+    keyBinds: (hero) => {
       modules.forEach(module => {
         if (module.hasOwnProperty("keyBinds")) {
           module.keyBinds(hero);
@@ -314,7 +331,7 @@ function initTranser(moduleList) {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
       hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
-      if (typeof EM === "boolean" && EM) {
+      if (hasEMWaveChange) {
         hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
         hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
       };
@@ -341,7 +358,7 @@ function initTranser(moduleList) {
         return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier);
       };
     },
-    tickHandler: (entity, manager, transformed, untransformed, color) => {
+    tickHandler: (entity, manager) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);

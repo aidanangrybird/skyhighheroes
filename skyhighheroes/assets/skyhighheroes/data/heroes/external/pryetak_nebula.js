@@ -351,6 +351,13 @@ function init(transer) {
     },
     name: function () {
       return "pryetakNebula";
+    },
+    waveChangeInfo: function () {
+      return {
+        name: "Pryetak Nebula",
+        human: "Chase Stelar",
+        color: "\u00A72"
+      };
     }
   };
 };

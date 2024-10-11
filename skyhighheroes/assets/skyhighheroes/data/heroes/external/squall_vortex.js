@@ -349,6 +349,13 @@ function init(transer) {
     },
     name: function () {
       return "squallVortex";
+    },
+    waveChangeInfo: function () {
+      return {
+        name: "Squall Vortex",
+        human: "Aidan Stelar",
+        color: "\u00A76"
+      };
     }
   };
 };
