@@ -41,7 +41,7 @@
     "fiskheroes:blade": {
       "isToggle": true
     },
-    "fiskheroes:transformation|sword": {
+    "fiskheroes:transformation|sword_base": {
       "transformation": {
         "toggleData": "skyhighheroes:dyn/sword",
         "timerData": "skyhighheroes:dyn/sword_timer",

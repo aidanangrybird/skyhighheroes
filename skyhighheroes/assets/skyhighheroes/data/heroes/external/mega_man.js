@@ -18,8 +18,8 @@ function init(transer) {
   };
   function cycleUpCard(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
-    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 6) {
-      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 3);
+    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 3) {
+      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
     };
     return true;
   };
@@ -158,10 +158,10 @@ function init(transer) {
         };
       };
       if (modifier.name() == "fiskheroes:shield") {
-        if (modifier.name() == "barrier") {
+        if (modifier.id() == "barrier") {
           result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
-        if (modifier.name() == "sword") {
+        if (modifier.id() == "sword") {
           result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
       };

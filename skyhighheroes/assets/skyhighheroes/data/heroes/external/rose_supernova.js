@@ -202,10 +202,10 @@ function init(transer) {
         };
       };
       if (modifier.name() == "fiskheroes:shield") {
-        if (modifier.name() == "barrier") {
+        if (modifier.id() == "barrier") {
           result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
-        if (modifier.name() == "sword") {
+        if (modifier.id() == "sword") {
           result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
       };
