@@ -2,46 +2,13 @@
   "name": "Solar Flame's Battle Cards",
   "value": 1,
   "modifiers": {
-    "fiskheroes:energy_projection": {
-      "damageProfile": {
-        "damage": 15.0,
-        "types": {
-          "WAVE_FIRE": 1.0,
-          "WAVE_LIGHT": 1.0,
-          "WAVE_EXPLOSION": 1.0,
-          "WAVE_SHOCKWAVE": 1.0
-        },
-        "properties": {
-          "LIGHTNING_STRIKE": 0.01,
-          "ADD_KNOCKBACK": 5.0,
-          "HIT_COOLDOWN": 10
-        }
+    "fiskheroes:transformation|solar_flare": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/solar_flare",
+        "timerData": "skyhighheroes:dyn/solar_flare_timer",
+        "time": 10
       },
-      "range": 64.0,
-      "radius": 0.5,
-      "soundEvents": {
-      }
-    },
-    "fiskheroes:charged_beam": {
-      "damageProfile": {
-        "damage": 15.0,
-        "types": {
-          "WAVE_FIRE": 1.0,
-          "WAVE_LIGHT": 1.0,
-          "WAVE_EXPLOSION": 1.0,
-          "WAVE_SHOCKWAVE": 1.0
-        },
-        "properties": {
-          "COOK_ENTITY": true,
-          "HIT_COOLDOWN": 5,
-          "HEAT_TRANSFER": 80
-        }
-      },
-      "chargeTime": 10,
-      "duration": 240,
-      "cooldownTime": 20,
-      "range": 48.0,
-      "radius": 1.0
+      "isToggle": true
     },
     "fiskheroes:lightning_cast": {
       "damageProfile": {
@@ -63,6 +30,63 @@
       "soundEvents": {
         "SHOOT": "fiskheroes:lightning_cast"
       }
+    },
+    "fiskheroes:transformation|solar_wind": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/solar_wind",
+        "timerData": "skyhighheroes:dyn/solar_wind_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_FIRE": 1.0,
+          "WAVE_LIGHT": 1.0,
+          "WAVE_EXPLOSION": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "LIGHTNING_STRIKE": 0.01,
+          "ADD_KNOCKBACK": 5.0,
+          "HIT_COOLDOWN": 10
+        }
+      },
+      "range": 64.0,
+      "radius": 0.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:transformation|solar_blast": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/solar_blast",
+        "timerData": "skyhighheroes:dyn/solar_blast_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:charged_beam": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_FIRE": 1.0,
+          "WAVE_LIGHT": 1.0,
+          "WAVE_EXPLOSION": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "COOK_ENTITY": true,
+          "HIT_COOLDOWN": 5,
+          "HEAT_TRANSFER": 80
+        }
+      },
+      "chargeTime": 10,
+      "duration": 240,
+      "cooldownTime": 20,
+      "range": 48.0,
+      "radius": 1.0
     }
   }
 }

@@ -2,21 +2,13 @@
   "name": "Blazing Singularity's Battle Cards",
   "value": 1,
   "modifiers": {
-    "fiskheroes:telekinesis": {
-      "telekinesis": {
-        "crushMelons": true,
-        "crushThrowables": true,
-        "squeezeChickens": true,
-        "explodeCreepers": true,
-        "destroyInanimates": true
+    "fiskheroes:transformation|ember_ray": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/ember_ray",
+        "timerData": "skyhighheroes:dyn/ember_ray_timer",
+        "time": 10
       },
-      "canGrab": {
-        "mobs": true,
-        "items": true,
-        "projectiles": true,
-        "inanimates": true
-      },
-      "range": 30.0
+      "isToggle": true
     },
     "fiskheroes:energy_projection": {
       "damageProfile": {
@@ -37,6 +29,14 @@
       "soundEvents": {
       }
     },
+    "fiskheroes:transformation|meteor_strike": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/meteor_strike",
+        "timerData": "skyhighheroes:dyn/meteor_strike_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
     "fiskheroes:fireball": {
       "damageProfile": {
         "damage": 15.0,
@@ -56,6 +56,30 @@
       "soundEvents": {
         "SHOOT": "fiskheroes:fireball"
       }
+    },
+    "fiskheroes:transformation|gravity_strike": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/gravity_strike",
+        "timerData": "skyhighheroes:dyn/gravity_strike_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:telekinesis": {
+      "telekinesis": {
+        "crushMelons": true,
+        "crushThrowables": true,
+        "squeezeChickens": true,
+        "explodeCreepers": true,
+        "destroyInanimates": true
+      },
+      "canGrab": {
+        "mobs": true,
+        "items": true,
+        "projectiles": true,
+        "inanimates": true
+      },
+      "range": 30.0
     }
   }
 }

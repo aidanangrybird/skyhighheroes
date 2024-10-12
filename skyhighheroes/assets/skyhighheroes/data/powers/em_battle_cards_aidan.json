@@ -2,56 +2,6 @@
   "name": "Squall Vortex's Battle Cards",
   "value": 1,
   "modifiers": {
-    "fiskheroes:transformation|hail_cannon": {
-      "transformation": {
-        "toggleData": "skyhighheroes:dyn/hail_cannon",
-        "timerData": "skyhighheroes:dyn/hail_cannon_timer",
-        "time": 10
-      },
-      "isToggle": true
-    },
-    "fiskheroes:icicles": {
-      "damageProfile": {
-        "damage": 15.0,
-        "types": {
-          "WAVE_ICE": 1.0,
-          "WAVE_COLD": 1.0,
-          "WAVE_BLUNT": 1.0
-        },
-        "properties": {
-          "DAMAGE_DROPOFF": 0.0,
-          "REDUCE_KNOCKBACK": 0.5
-        }
-      },
-      "quantity": 50,
-      "spread": 10,
-      "cooldownTime": 5
-    },
-    "fiskheroes:transformation|derecho": {
-      "transformation": {
-        "toggleData": "skyhighheroes:dyn/derecho",
-        "timerData": "skyhighheroes:dyn/derecho_timer",
-        "time": 10
-      },
-      "isToggle": true
-    },
-    "fiskheroes:energy_projection": {
-      "damageProfile": {
-        "damage": 15.0,
-        "types": {
-          "WAVE_WIND": 1.0
-        },
-        "properties": {
-          "LIGHTNING_STRIKE": 0.01,
-          "ADD_KNOCKBACK": 5.0,
-          "HIT_COOLDOWN": 10
-        }
-      },
-      "range": 128.0,
-      "radius": 2.5,
-      "soundEvents": {
-      }
-    },
     "fiskheroes:transformation|lightning": {
       "transformation": {
         "toggleData": "skyhighheroes:dyn/lightning",
@@ -78,6 +28,56 @@
       "soundEvents": {
         "SHOOT": "fiskheroes:lightning_cast"
       }
+    },
+    "fiskheroes:transformation|derecho": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/derecho",
+        "timerData": "skyhighheroes:dyn/derecho_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_WIND": 1.0
+        },
+        "properties": {
+          "LIGHTNING_STRIKE": 0.01,
+          "ADD_KNOCKBACK": 5.0,
+          "HIT_COOLDOWN": 10
+        }
+      },
+      "range": 128.0,
+      "radius": 2.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:transformation|hail_cannon": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/hail_cannon",
+        "timerData": "skyhighheroes:dyn/hail_cannon_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:icicles": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_ICE": 1.0,
+          "WAVE_COLD": 1.0,
+          "WAVE_BLUNT": 1.0
+        },
+        "properties": {
+          "DAMAGE_DROPOFF": 0.0,
+          "REDUCE_KNOCKBACK": 0.5
+        }
+      },
+      "quantity": 50,
+      "spread": 10,
+      "cooldownTime": 5
     }
   }
 }

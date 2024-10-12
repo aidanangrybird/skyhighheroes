@@ -274,13 +274,10 @@ function init(transer) {
       manager.incrementData(entity, "skyhighheroes:dyn/sword_blade_timer", 5, sword_on);
       var voids_grasp = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/voids_grasp", voids_grasp);
-      manager.incrementData(entity, "skyhighheroes:dyn/voids_grasp_timer", 10, 10, entity.getData("skyhighheroes:dyn/voids_grasp"));
       var galaxys_weight = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/galaxys_weight", galaxys_weight);
-      manager.incrementData(entity, "skyhighheroes:dyn/galaxys_weight_timer", 10, 10, entity.getData("skyhighheroes:dyn/galaxys_weight"));
       var nebula_burst = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 6 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/nebula_burst", nebula_burst);
-      manager.incrementData(entity, "skyhighheroes:dyn/nebula_burst_timer", 10, 10, entity.getData("skyhighheroes:dyn/nebula_burst"));
       if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0.45 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.55) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);

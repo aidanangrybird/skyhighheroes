@@ -2,6 +2,33 @@
   "name": "Amethyst Galaxy's Battle Cards",
   "value": 1,
   "modifiers": {
+    "fiskheroes:transformation|gravity_pulse": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/gravity_pulse",
+        "timerData": "skyhighheroes:dyn/gravity_pulse_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:gravity_manipulation": {
+      "affectsUser": false,
+      "minGravity": 0.1,
+      "maxGravity": 16.0,
+      "range": 48.0,
+      "radius": 32.0,
+      "soundEvents": {
+        "SWITCH": "fiskheroes:gravity_manip_switch",
+        "WAVE": "fiskheroes:gravity_manip_wave"
+      }
+    },
+    "fiskheroes:transformation|planetary_blast": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/planetary_blast",
+        "timerData": "skyhighheroes:dyn/planetary_blast_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
     "fiskheroes:energy_projection": {
       "damageProfile": {
         "damage": 15.0,
@@ -20,6 +47,14 @@
       "radius": 0.5,
       "soundEvents": {
       }
+    },
+    "fiskheroes:transformation|star_cutter": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/star_cutter",
+        "timerData": "skyhighheroes:dyn/star_cutter_timer",
+        "time": 10
+      },
+      "isToggle": true
     },
     "fiskheroes:charged_beam": {
       "damageProfile": {
@@ -40,17 +75,6 @@
       "cooldownTime": 20,
       "range": 48.0,
       "radius": 1.0
-    },
-    "fiskheroes:gravity_manipulation": {
-      "affectsUser": false,
-      "minGravity": 0.1,
-      "maxGravity": 16.0,
-      "range": 48.0,
-      "radius": 32.0,
-      "soundEvents": {
-        "SWITCH": "fiskheroes:gravity_manip_switch",
-        "WAVE": "fiskheroes:gravity_manip_wave"
-      }
     }
   }
 }

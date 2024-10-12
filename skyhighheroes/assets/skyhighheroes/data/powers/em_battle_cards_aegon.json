@@ -2,21 +2,13 @@
   "name": "Rose Supernova's Battle Cards",
   "value": 1,
   "modifiers": {
-    "fiskheroes:telekinesis": {
-      "telekinesis": {
-        "crushMelons": true,
-        "crushThrowables": true,
-        "squeezeChickens": true,
-        "explodeCreepers": true,
-        "destroyInanimates": true
+    "fiskheroes:transformation|cosmic_intervention": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/cosmic_intervention",
+        "timerData": "skyhighheroes:dyn/cosmic_intervention_timer",
+        "time": 10
       },
-      "canGrab": {
-        "mobs": true,
-        "items": true,
-        "projectiles": true,
-        "inanimates": true
-      },
-      "range": 30.0
+      "isToggle": true
     },
     "fiskheroes:energy_projection": {
       "damageProfile": {
@@ -37,6 +29,14 @@
       "soundEvents": {
       }
     },
+    "fiskheroes:transformation|star_collapse": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/star_collapse",
+        "timerData": "skyhighheroes:dyn/star_collapse_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
     "fiskheroes:earthquake": {
       "damageProfile": {
         "damage": 15.0,
@@ -49,6 +49,30 @@
       "knockback": 5.0,
       "duration": 200,
       "cooldownTime": 160
+    },
+    "fiskheroes:transformation|dark_matter_grip": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/dark_matter_grip",
+        "timerData": "skyhighheroes:dyn/dark_matter_grip_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:telekinesis": {
+      "telekinesis": {
+        "crushMelons": true,
+        "crushThrowables": true,
+        "squeezeChickens": true,
+        "explodeCreepers": true,
+        "destroyInanimates": true
+      },
+      "canGrab": {
+        "mobs": true,
+        "items": true,
+        "projectiles": true,
+        "inanimates": true
+      },
+      "range": 30.0
     }
   }
 }

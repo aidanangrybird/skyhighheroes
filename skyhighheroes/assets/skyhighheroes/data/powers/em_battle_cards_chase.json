@@ -2,6 +2,14 @@
   "name": "Pryetak Nebula's Battle Cards",
   "value": 1,
   "modifiers": {
+    "fiskheroes:transformation|voids_grasp": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/voids_grasp",
+        "timerData": "skyhighheroes:dyn/voids_grasp_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
     "fiskheroes:telekinesis": {
       "telekinesis": {
         "crushMelons": true,
@@ -17,6 +25,33 @@
         "inanimates": true
       },
       "range": 30.0
+    },
+    "fiskheroes:transformation|galaxys_weight": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/galaxys_weight",
+        "timerData": "skyhighheroes:dyn/galaxys_weight_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:gravity_manipulation": {
+      "affectsUser": false,
+      "minGravity": 0.1,
+      "maxGravity": 16.0,
+      "range": 48.0,
+      "radius": 32.0,
+      "soundEvents": {
+        "SWITCH": "fiskheroes:gravity_manip_switch",
+        "WAVE": "fiskheroes:gravity_manip_wave"
+      }
+    },
+    "fiskheroes:transformation|nebula_burst": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/nebula_burst",
+        "timerData": "skyhighheroes:dyn/nebula_burst_timer",
+        "time": 10
+      },
+      "isToggle": true
     },
     "fiskheroes:charged_beam": {
       "damageProfile": {
@@ -37,17 +72,6 @@
       "cooldownTime": 20,
       "range": 48.0,
       "radius": 1.0
-    },
-    "fiskheroes:gravity_manipulation": {
-      "affectsUser": false,
-      "minGravity": 0.1,
-      "maxGravity": 16.0,
-      "range": 48.0,
-      "radius": 32.0,
-      "soundEvents": {
-        "SWITCH": "fiskheroes:gravity_manip_switch",
-        "WAVE": "fiskheroes:gravity_manip_wave"
-      }
     }
   }
 }
