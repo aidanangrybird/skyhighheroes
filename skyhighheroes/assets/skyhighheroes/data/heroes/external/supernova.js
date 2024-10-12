@@ -13,8 +13,8 @@ function init(transer) {
     powers: function () {
       return [
         "skyhighheroes:em_wave_change",
-        "skyhighheroes:em_battle_card_predation",
-        "skyhighheroes:em_supernova_buster"
+        "skyhighheroes:battle_card_predation",
+        "skyhighheroes:supernova_buster"
       ];
     },
     keyBinds: function (hero) {

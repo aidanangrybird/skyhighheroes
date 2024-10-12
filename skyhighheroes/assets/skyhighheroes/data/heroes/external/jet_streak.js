@@ -13,8 +13,8 @@ function init(transer) {
     powers: function () {
       return [
         "skyhighheroes:em_wave_change",
-        "skyhighheroes:em_battle_card_predation",
-        "skyhighheroes:em_vortex_buster"
+        "skyhighheroes:battle_card_predation",
+        "skyhighheroes:vortex_buster"
       ];
     },
     keyBinds: function (hero) {
