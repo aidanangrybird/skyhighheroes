@@ -16,10 +16,17 @@ var transers = [
   {"suit": "skyhighheroes:dragon_transer", "satellite": "dragon"}
 ];
 
-regex = /(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)|(<d>)|(<l>)|(<p>)|(<dragon>)|(<leo>)|(<pegasus>)/gm;
+var basic = [
+  {"suit": "skyhighheroes:pegasus_transer", "satellite": "pegasus"},
+  {"suit": "skyhighheroes:leo_transer", "satellite": "leo"},
+  {"suit": "skyhighheroes:dragon_transer", "satellite": "dragon"}
+];
+
+regex = /((<ob>))|(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)|(<d>)|(<l>)|(<p>)|(<dragon>)|(<leo>)|(<pegasus>)/gm;
 
 var formatting = {
   "system": {
+    "<ob>": "\u00A7k",
     "<n>": "\u00A7b",
     "<nh>": "\u00A7a",
     "<s>": "\u00A7a",
@@ -78,6 +85,20 @@ function isWearingOC(entity) {
     };
   });
   return wearingOC;
+};
+/**
+ * Checks if an entity is wearing a normal transer
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns If the entity is wearing normal transer
+ **/
+function isWearingNormal(entity) {
+  var wearingNormal = false
+  transers.forEach(entry => {
+    if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit) {
+      wearingNormal = true;
+    };
+  });
+  return wearingNormal;
 };
 
 /**
@@ -233,7 +254,6 @@ function setKeyBind(entity, keyBind) {
  **/
 function initTranser(moduleList) {
   var instance = this;
-  var loadedModules = (moduleList.length > 1) ? "<n>Loaded " + moduleList.length + " modules: " : "<n>Loaded " + moduleList.length + " module: ";
   var modules = [];
   var messageHandlers = 0;
   var commandHandlers = 0;
@@ -254,11 +274,6 @@ function initTranser(moduleList) {
         messageHandlers = messageHandlers + 1;
       };
       messageHandlers = messageHandlers + 1;
-    };
-    if (moduleList.indexOf(module) == 0) {
-      loadedModules = loadedModules + "<nh>" + moduleInit.name();
-    } else {
-      loadedModules = loadedModules + "<n>, <nh>" + moduleInit.name();
     };
     if (moduleInit.name() == "messaging") {
       messagingIndex = moduleList.indexOf(module);
@@ -313,8 +328,25 @@ function initTranser(moduleList) {
     return true;
   };
   function systemInfo(entity) {
+    var loadedModules = [];
+    modules.forEach(module => {
+      if (isWearingNormal(entity) && !module.hasOwnProperty("isModifierEnabled")) {
+        loadedModules.push(module);
+      };
+      if (!isWearingNormal(entity)) {
+        loadedModules.push(module);
+      };
+    });
+    var loadedModulesMessage = (loadedModules.length > 1) ? "<n>Loaded " + loadedModules.length + " modules: " : "<n>Loaded " + loadedModules.length + " module: ";
+    loadedModules.forEach(module => {
+      if (modules.indexOf(module) == 0) {
+        loadedModulesMessage = loadedModulesMessage + "<nh>" + module.name();
+      } else {
+        loadedModulesMessage = loadedModulesMessage + "<n>, <nh>" + module.name();
+      };
+    });
     systemMessage(entity, "<n>TranserOS");
-    systemMessage(entity, loadedModules);
+    systemMessage(entity, loadedModulesMessage);
   };
   function status(entity) {
     var date = new Date();
@@ -448,6 +480,11 @@ function initTranser(moduleList) {
       modules.forEach(module => {
         if (module.hasOwnProperty("tickHandler")) {
           module.tickHandler(entity, manager);
+        };
+      });
+      modules.forEach(module => {
+        if (module.hasOwnProperty("waveHandler")) {
+          module.waveHandler(entity, manager);
         };
       });
     }

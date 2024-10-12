@@ -3,7 +3,9 @@ var transerMessaging = implement("skyhighheroes:external/transer_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner]);
+var pryetak = implement("skyhighheroes:external/pryetak");
+var singularity = implement("skyhighheroes:external/singularity");
+var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, pryetak, singularity]);
 function init(hero) {
   hero.setAliases("leo_transer");
   hero.setName("Leo Kindgom");

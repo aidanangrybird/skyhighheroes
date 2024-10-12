@@ -4,7 +4,7 @@
   "modifiers": {
     "fiskheroes:shape_shifting": {
     },
-    "fiskheroes:transformation": {
+    "fiskheroes:transformation|calling": {
       "transformation": {
         "toggleData": "skyhighheroes:dyn/calling",
         "timerData": "skyhighheroes:dyn/calling_timer",
