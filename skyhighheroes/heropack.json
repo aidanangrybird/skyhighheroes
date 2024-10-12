@@ -34,6 +34,7 @@
     "selected_battle_card": { "type": "BYTE", "resetWithoutSuit": true },
     "sword": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "sword_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "sword_blade": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "sword_blade_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "lightning": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "lightning_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
