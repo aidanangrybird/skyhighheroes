@@ -97,7 +97,7 @@
     "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "am_ian": { "type": "STRING", "resetWithoutSuit": true },
+    "em_being": { "type": "STRING", "resetWithoutSuit": true },
     "active_chat": "INTEGER",
     "chat_mode": "INTEGER",
     "entry": { "type": "STRING", "resetWithoutSuit": true },

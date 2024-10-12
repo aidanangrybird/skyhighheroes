@@ -135,6 +135,20 @@ function init(transer) {
     },
     name: function () {
       return "jetStreak";
+    },
+    waveHandler: function (entity, manager) {
+      if (entity.getUUID() == "a3d071d4-c912-41e1-a6b2-c0de99ea4a84" && entity.world().isUnobstructed(entity.pos(), entity.pos().add(0,1000,0)) && entity.world().isRaining() && entity.world().isThundering() && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
+        var value = Math.random();
+        if (value < 0.01) {
+          manager.setData(entity, "skyhighheroes:dyn/em_being", "Jet-Streak");
+          if (!entity.getData("skyhighheroes:dyn/calling")) {
+            manager.setData(entity, "skyhighheroes:dyn/calling", true);
+          };
+        };
+      };
+      if (entity.getData("skyhighheroes:dyn/calling_timer")==0.75) {
+        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:aidan_stelar");
+      };
     }
   };
 };

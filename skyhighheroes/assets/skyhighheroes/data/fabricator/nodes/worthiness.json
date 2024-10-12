@@ -18,9 +18,9 @@
       },
       "condition": {
         "variables": {
-          "player": "PLAYER_STRUCK"
+          "entity": "PLAYER_STRUCK"
           },
-        "check": "(player.world().getLocation(player.pos().add(6, 0, 0)).biome().startsWith('Beach') || player.world().getLocation(player.pos().add(-6, 0, 0)).biome().startsWith('Beach') || player.world().getLocation(player.pos().add(0, 0, -6)).biome().startsWith('Beach')) && player.world().getLocation(player.pos() ||  player.world().getLocation(player.pos().add(-10, 0, 0)).biome().startsWith('Beach') || player.world().getLocation(player.pos().add(0, 0, 6)).biome().startsWith('Beach')) && player.world().getLocation(player.pos()).biome().startsWith('Plains') && player.rotPitch() > 60 && player.getUUID() == 'a3d071d4-c912-41e1-a6b2-c0de99ea4a84'"
+        "check": "(entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith('Beach') || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith('Beach') || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith('Beach') ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith('Beach')) && entity.world().getLocation(entity.pos()).biome().startsWith('Plains')"
       }
     }
   }

@@ -482,11 +482,13 @@ function initTranser(moduleList) {
           module.tickHandler(entity, manager);
         };
       });
-      modules.forEach(module => {
-        if (module.hasOwnProperty("waveHandler")) {
-          module.waveHandler(entity, manager);
-        };
-      });
+      if (!hasEMWaveChange) {
+        modules.forEach(module => {
+          if (module.hasOwnProperty("waveHandler")) {
+            module.waveHandler(entity, manager);
+          };
+        });
+      };
     }
   };
 };

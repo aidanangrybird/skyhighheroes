@@ -103,7 +103,6 @@ function init(transer) {
       return result;
     },
     isModifierEnabled: function (entity, modifier) {
-      var uuid = "a3d071d4-c912-41e1-a6b2-c0de99ea4a84";
       var result = false;
       if (modifier.name() == "fiskheroes:transformation") {
         if (modifier.id() == "predation" || modifier.id() == "omega_xis") {
@@ -128,6 +127,17 @@ function init(transer) {
     },
     name: function () {
       return "omegaXis";
+    },
+    waveHandler: function (entity, manager) {
+      if (entity.world().isUnobstructed(entity.pos(), entity.pos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
+        var value = Math.random();
+        if (value < 0.01) {
+          manager.setData(entity, "skyhighheroes:dyn/em_being", "Omega-Xis");
+          if (!entity.getData("skyhighheroes:dyn/calling")) {
+            manager.setData(entity, "skyhighheroes:dyn/calling", true);
+          };
+        };
+      };
     }
   };
 };
