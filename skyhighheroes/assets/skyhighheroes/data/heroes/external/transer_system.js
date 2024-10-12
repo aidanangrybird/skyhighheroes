@@ -362,17 +362,17 @@ function initTranser(moduleList) {
       };
     },
     keyBinds: (hero) => {
-      modules.forEach(module => {
-        if (module.hasOwnProperty("keyBinds")) {
-          module.keyBinds(hero);
-        };
-      });
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
       hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
       if (hasEMWaveChange) {
         hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
         hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
+        modules.forEach(module => {
+          if (module.hasOwnProperty("keyBinds")) {
+            module.keyBinds(hero);
+          };
+        });
       };
     },
     isKeyBindEnabled: function (entity, keyBind) {
