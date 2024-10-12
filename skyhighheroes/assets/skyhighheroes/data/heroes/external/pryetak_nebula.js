@@ -299,7 +299,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Void's Grasp<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/pryetak", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -308,7 +308,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Galaxy's Weight<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Void's Grasp<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/pryetak", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -316,7 +316,7 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
           if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
-            transer.systemMessage(entity, "<n>Inserted <nh>Nebula Burst<n> battle card!");
+            transer.systemMessage(entity, "<n>Inserted <nh>Galaxy's Weight<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/pryetak", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
