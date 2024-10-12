@@ -145,6 +145,28 @@
       "cooldownTime": 20,
       "range": 48.0,
       "radius": 1.0
+    },
+    "fiskheroes:transformation|telekinesis": {
+      "transformation": {
+        "toggleData": "fiskheroes:telekinesis",
+        "timerData": "skyhighheroes:dyn/telekinesis_timer",
+        "time": 10
+      }
+    },
+    "fiskheroes:transformation|gravity_manipulation": {
+      "transformation": {
+        "toggleData": "fiskheroes:gravity_manip",
+        "timerData": "skyhighheroes:dyn/gravity_manip_timer",
+        "time": 10
+      }
     }
-  }
+  },
+  "hud": [
+    {
+      "type": "DIAL",
+      "color": "fiskheroes:gravity_manipulation",
+      "data": "fiskheroes:gravity_amount",
+      "condition": "fiskheroes:gravity_manip"
+    }
+  ]
 }

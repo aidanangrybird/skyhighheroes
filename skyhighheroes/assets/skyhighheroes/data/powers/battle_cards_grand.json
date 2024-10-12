@@ -153,6 +153,13 @@
         "inanimates": true
       },
       "range": 30.0
+    },
+    "fiskheroes:transformation|telekinesis": {
+      "transformation": {
+        "toggleData": "fiskheroes:telekinesis",
+        "timerData": "skyhighheroes:dyn/telekinesis_timer",
+        "time": 10
+      }
     }
   }
 }

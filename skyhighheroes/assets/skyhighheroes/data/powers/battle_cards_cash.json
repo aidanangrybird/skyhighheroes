@@ -148,6 +148,13 @@
       "cooldownTime": 20,
       "range": 48.0,
       "radius": 1.0
+    },
+    "fiskheroes:transformation|gravity_manipulation": {
+      "transformation": {
+        "toggleData": "fiskheroes:gravity_manip",
+        "timerData": "skyhighheroes:dyn/gravity_manip_timer",
+        "time": 10
+      }
     }
   }
 }
