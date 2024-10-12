@@ -280,12 +280,18 @@ function init(transer) {
       if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0.45 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.55) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+            transer.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
+          };
           manager.setData(entity, "skyhighheroes:dyn/crimson", false);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+            transer.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
+          };
           manager.setData(entity, "skyhighheroes:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:shield", true);
@@ -293,22 +299,34 @@ function init(transer) {
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Crash<n> battle card!");
+          };
           manager.setData(entity, "skyhighheroes:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:utility_belt_type", 1);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Pull<n> battle card!");
+          };
           manager.setData(entity, "skyhighheroes:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+            transer.systemMessage(entity, "<n>Inserted <nh>Asteroid Blast<n> battle card!");
+          };
           manager.setData(entity, "skyhighheroes:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 6) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+            transer.systemMessage(entity, "<n>Inserted <nh>Shurikens<n> battle card!");
+          };
           manager.setData(entity, "skyhighheroes:dyn/crimson", true);
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
         };
