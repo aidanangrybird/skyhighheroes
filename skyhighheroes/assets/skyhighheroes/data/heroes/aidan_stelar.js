@@ -19,7 +19,7 @@ function init(hero) {
 
   transerOS.keyBinds(hero, true);
 
-  stelar.initEquipment(hero, "Squall Vortex", "\u00A76")
+  stelar.initEquipment(hero, "Squall Vortex", "\u00A76");
 
   transerOS.addPowers(hero);
 
