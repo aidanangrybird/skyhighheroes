@@ -3,6 +3,14 @@
   "value": 1,
   "modifiers": {
     "fiskheroes:shape_shifting": {
+    },
+    "fiskheroes:transformation": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/calling",
+        "timerData": "skyhighheroes:dyn/calling_timer",
+        "time": 600
+      },
+      "isToggle": true
     }
   }
 }
