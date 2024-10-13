@@ -12,12 +12,5 @@
       },
       "isToggle": true
     }
-  },
-  "hud": [
-    {
-      "type": "CHARGE",
-      "texture": "skyhighheroes:textures/gui/bars/predation.png",
-      "data": "skyhighheroes:dyn/calling_timer"
-    }
-  ]
+  }
 }

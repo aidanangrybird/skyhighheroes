@@ -1,7 +1,7 @@
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
         var result = getBase(entity)
         return result;
       } else {
@@ -11,7 +11,7 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
         var result = getLights(entity)
         return result;
       } else {
