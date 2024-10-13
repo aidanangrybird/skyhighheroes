@@ -66,12 +66,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
 };
 
 var beings = [
-  {"emBeing": "Supernova", "color": 0xFF0090, "baseTexture": "rose_supernova", "lightsTexture": "rose_supernova_lights"},
   {"emBeing": "Jet-Streak", "color": 0xFF8900, "baseTexture": "squall_vortex", "lightsTexture": "squall_vortex_lights"},
-  {"emBeing": "Amethyst", "color": 0xD000FF, "baseTexture": "amethyst_galaxy", "lightsTexture": "amethyst_galaxy_lights"},
   {"emBeing": "Pryetak", "color": 0x44FF00, "baseTexture": "pryetak_nebula", "lightsTexture": "pryetak_nebula_lights"},
   {"emBeing": "Solar", "color": 0xFF0000, "baseTexture": "solar_flame", "lightsTexture": "solar_flame_lights"},
-  {"emBeing": "Singularity", "color": 0xFF0000, "baseTexture": "blazing_singularity", "lightsTexture": "blazing_singularity_lights"},
   {"emBeing": "Crimson", "color": 0xFF0000, "baseTexture": "crimson_asteroid", "lightsTexture": "crimson_asteroid_lights"},
   {"emBeing": "Omega-Xis", "color": 0x00FF00, "baseTexture": "mega_man", "lightsTexture": "mega_man_lights"}
 ];
