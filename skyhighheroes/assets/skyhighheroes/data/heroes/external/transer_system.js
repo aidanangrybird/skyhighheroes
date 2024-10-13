@@ -482,6 +482,7 @@ function initTranser(moduleList) {
           module.tickHandler(entity, manager);
         };
       });
+      //Move this to the top of the tick handler
       if (!hasEMWaveChange) {
         modules.forEach(module => {
           if (module.hasOwnProperty("waveHandler")) {

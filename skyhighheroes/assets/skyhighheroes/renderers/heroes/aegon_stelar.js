@@ -83,7 +83,7 @@ function init(renderer) {
 function initEffects(renderer) {
   parent.initEffects(renderer);
   stelar.bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:energy_projection", "rightArm", 0xFF0090, [
-      { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [3.0, 3.0] }
+    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindCloud(renderer, "fiskheroes:telekinesis", "skyhighheroes:wave_dark_matter_grip_aegon");
   var chain = stuff.bindCloud(renderer, "fiskheroes:telekinesis_chain", "skyhighheroes:wave_dark_matter_grip_aegon");

@@ -92,7 +92,7 @@ function initEffects(renderer) {
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [6.0, 6.0] }
   ]);
   stelar.bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:wave_solar_blast_ace", "rightArm", 0xFF0000, [
-      { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [3.0, 3.0] }
+    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-1.0, 9.0, -0.5], "size": [3.0, 3.0] }
   ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   stuff.bindFlightTrail(renderer, "skyhighheroes:ace_stelar_flight");
   //Battle card predation wave changing
