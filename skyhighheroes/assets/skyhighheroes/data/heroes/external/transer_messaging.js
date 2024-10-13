@@ -183,15 +183,15 @@ function init(transer) {
             if (hasContact(entity, foundPlayer)) {
               if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
                 if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                  playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
-                  playerMessage(entity, color+transformed+"\u00A7r", message);
+                  transer.playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
+                  transer.playerMessage(entity, color+transformed+"\u00A7r", message);
                 } else {
-                  playerMessage(foundPlayer, untransformed, message);
-                  playerMessage(entity, untransformed, message);
+                  transer.playerMessage(foundPlayer, untransformed, message);
+                  transer.playerMessage(entity, untransformed, message);
                 };
               } else {
-                playerMessage(foundPlayer, entity.getName(), message);
-                playerMessage(entity, entity.getName(), message);
+                transer.playerMessage(foundPlayer, entity.getName(), message);
+                transer.playerMessage(entity, entity.getName(), message);
               };
             };
           };
