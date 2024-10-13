@@ -1,7 +1,7 @@
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5 && entity.getData("skyhighheroes:dyn/em_being") != "") {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
         var result = getBase(entity)
         return result;
       } else {
@@ -11,7 +11,7 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5 && entity.getData("skyhighheroes:dyn/em_being") != "") {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
         var result = getLights(entity)
         return result;
       } else {
@@ -34,16 +34,12 @@ function initEffects(renderer) {
   var callingShape = renderer.createResource("SHAPE", null);
   callingLine = callingShape.bindLine({ "start": [0.0, -300.0, 0.0], "end": [0.0, -300.0, 0.0], "size": [20.0, 20.0] });
   callingBeam = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(callingShape).setOffset(0.0, 0.0, 0.0);
-  callingBeam.anchor.set("body");
   callingBeam.mirror = false;
   callingBeam.setScale(16.0);
-
+  callingBeam.anchor.set("body");
   forcefield = renderer.bindProperty("fiskheroes:forcefield");
   forcefield.setShape(36, 36).setOffset(0.0, 26.0, 0.0).setScale(0.1);
-  forcefield.setCondition(entity => {/* 
-    if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.5) {
-      renderer.fixHatLayer("CHESTPLATE");
-    }; */
+  forcefield.setCondition(entity => {
     return entity.getData("skyhighheroes:dyn/calling");
   });
 };
@@ -58,13 +54,13 @@ function render(entity, renderLayer, isFirstPersonArm) {
   forcefield.color.set(result);
   callingBeam.color.set(result);
   //callingBeam.progress = timerAnimate2(callingTimer, 1.0, 0.0, 0.1, 0.0);
-  callingLine.size.x = callingLine.size.y = timerAnimate2(callingTimer, 0.6, 0.40, 0.1, 0.0)*40+20;
-  callingLine.end.y = timerAnimate2(callingTimer, 0.75, 0.25, 0.1, 0.0)*302-300;
-  callingLine.start.y = timerAnimate2(callingTimer, 0.45, 0.55, 0.2, 0.0)*302-300;
-  forcefield.opacity = timerAnimate2(callingTimer, 0.65, 0.35, 0.05, 0.0);
-  var ffScale = timerAnimate2(callingTimer, 0.65, 0.35, 0.05, 0.0)*1 + timerAnimate2(callingTimer, 0.6, 0.4, 0.1, 0.0)*3;
+  callingLine.size.x = callingLine.size.y = timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
+  callingLine.end.y = timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
+  callingLine.start.y = timerAnimate2(callingTimer, 0.55, 0.45, 0.05, 0.0)*302-300;
+  forcefield.opacity = timerAnimate2(callingTimer, 0.4, 0.25, 0.05, 0.05);
+  var ffScale = timerAnimate2(callingTimer, 0.75, 0.25, 0.05, 0.0)*1 + timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*3;
   forcefield.setScale(ffScale);
-  if (callingTimer > 0 && entity.getData("skyhighheroes:dyn/calling") && timerAnimate2(callingTimer, 0.5, 0.5, 0.1, 0.0) < 1) {
+  if (callingTimer > 0 && entity.getData("skyhighheroes:dyn/calling") && callingTimer < 0.5) {
     callingBeam.render();
   };
 };

@@ -145,9 +145,9 @@ function init(transer) {
             manager.setData(entity, "skyhighheroes:dyn/calling", true);
           };
         };
-      };
-      if (entity.getData("skyhighheroes:dyn/calling_timer")==0.75) {
-        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:aidan_stelar");
+        if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
+          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:aidan_stelar");
+        };
       };
     }
   };
