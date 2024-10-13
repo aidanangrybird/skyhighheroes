@@ -330,10 +330,10 @@ function initTranser(moduleList) {
   function systemInfo(entity) {
     var loadedModules = [];
     modules.forEach(module => {
-      if (isWearingNormal(entity) && !module.hasOwnProperty("isModifierEnabled")) {
+      if (!hasEMWaveChange && !module.hasOwnProperty("isModifierEnabled")) {
         loadedModules.push(module);
       };
-      if (!isWearingNormal(entity)) {
+      if (hasEMWaveChange) {
         loadedModules.push(module);
       };
     });
