@@ -407,6 +407,16 @@ function initTranser(moduleList) {
         });
       };
     },
+    profileWave: (hero) => {
+      hero.addAttributeProfile("INACTIVE", (profile) => {
+        profile.addAttribute("BASE_SPEED", -1.0, 1);
+        profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+        profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
+        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+        profile.addAttribute("MAX_HEALTH", -19.0, 0);
+      });
+    },
     isKeyBindEnabled: function (entity, keyBind) {
       if (keyBindIndexes.length == 1) {
         return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind);
