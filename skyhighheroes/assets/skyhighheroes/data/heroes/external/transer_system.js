@@ -480,9 +480,9 @@ function initTranser(moduleList) {
             };
           } else {
             if (entity.getData("skyhighheroes:dyn/chat_mode") < 2) {
-              modules[1].messageHandler(entity, transformed, untransformed, color);
+              modules[messagingIndex].messageHandler(entity, transformed, untransformed, color);
             } else {
-              modules[2].messageHandler(entity, transformed, untransformed, color);
+              modules[brotherBandIndex].messageHandler(entity, transformed, untransformed, color);
             };
           };
         };
