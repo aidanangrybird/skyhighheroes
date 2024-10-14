@@ -172,6 +172,93 @@ function getGroupArrayMembers(entity) {
   return result;
 };
 
+
+/**
+ * Disables a module
+ * @param {JSEntity} entity - Required
+ * @param {JSDataManager} manager - Required
+ * @param {Array} moduleList - List of available module names
+ * @param {string} moduleName - Module name to disable
+ **/
+function disableModule(player, manager, moduleList, moduleName) {
+  if (moduleList.indexOf(moduleName) > -1) {
+    if (!player.getWornChestplate().nbt().hasKey("disabledModules")) {
+      var disabledModules = manager.newTagList();
+      manager.appendString(disabledModules, moduleName);
+      manager.setTagList(player.getWornChestplate().nbt(), "disabledModules", disabledModules);
+      systemMessage(player, "<s>Successfully disabled module <sh>" + moduleName + "<s>!");
+    } else {
+      var disabledModules = player.getWornChestplate().nbt().getStringList("disabledModules");
+      var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
+      if (disabledModulesIndex > -1) {
+        systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
+      } else {
+        systemMessage(player, "<s>Successfully disabled module <sh>" + moduleName + "<s>!");
+        manager.appendString(disabledModules, moduleName);
+      };
+    };
+  } else {
+    systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+  };
+};
+/**
+ * Enables module
+ * @param {JSPlayer} player - Player cutting BrotherBand
+ * @param {JSDataManager} manager - Required
+ * @param {Array} moduleList - List of available module names
+ * @param {integer} moduleName - Username of player cutting BrotherBand with
+ **/
+function enableModule(player, manager, moduleList, moduleName) {
+  if (moduleList.indexOf(moduleName) > -1) {
+    if (!player.getWornChestplate().nbt().hasKey("disabledModules")) {
+      systemMessage(player, "<e>You have no disabled modules to enable!");
+    } else {
+      var disabledModules = player.getWornChestplate().nbt().getStringList("disabledModules");
+      if (disabledModules.tagCount() == 0) {
+        systemMessage(player, "<e>You have no disabled modules to enable!");
+      } else {
+        var index = getStringArray(disabledModules).indexOf(moduleName);
+        if (index < 0) {
+          systemMessage(player, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
+        } else {
+          systemMessage(player, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
+          manager.removeTag(disabledModules, index);
+        };
+      };
+    };
+  } else {
+    systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+  };
+};
+/**
+ * Checks if a module is disabled
+ * @param {JSEntity} entity - Player getting checked
+ * @param {string} moduleName - Module being checked if disabled
+ * @returns If sender is in receiver's BrotherBands
+ **/
+function isModuleDisabled(entity, moduleName) {
+  var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
+  var modulesDisabled = getStringArray(disabledModules);
+  var result = false;
+  modulesDisabled.forEach(entry => {
+    if (entry == moduleName) {
+      result = true;
+    };
+  });
+  return result;
+};
+/**
+ * Lists disabled modules
+ * @param {JSEntity} entity - Required
+ **/
+function listDisabledModules(entity) {
+  var disabledModules = getStringArray(entity.getWornChestplate().nbt().getStringList("disabledModules"));
+  systemMessage(entity,"<n>You have <nh>" + disabledModules.length + ((disabledModules.length == 1) ? "<n> disabled module!" : "<n> disabled modules!"));
+  disabledModules.forEach(entry => {
+    systemMessage(entity, "<nh>" + entry);
+  });
+};
+
 /**
  * Prints message to player's chat
  * @param {JSPlayer} player - Required
@@ -255,6 +342,7 @@ function setKeyBind(entity, keyBind) {
 function initTranser(moduleList) {
   var instance = this;
   var modules = [];
+  var moduleNames = [];
   var messageHandlers = 0;
   var commandHandlers = 0;
   var messagingIndex = 0;
@@ -269,6 +357,7 @@ function initTranser(moduleList) {
   moduleList.forEach(module => {
     var moduleInit = module.init(instance);
     modules.push(moduleInit);
+    moduleNames.push(moduleInit.name());
     if (moduleInit.hasOwnProperty("messageHandler")) {
       if (moduleInit.name() == "messaging") {
         messageHandlers = messageHandlers + 1;
@@ -328,25 +417,29 @@ function initTranser(moduleList) {
     return true;
   };
   function systemInfo(entity) {
-    var loadedModules = [];
+    var enableModules = [];
     modules.forEach(module => {
       if (!hasEMWaveChange && !module.hasOwnProperty("isModifierEnabled")) {
-        loadedModules.push(module);
+        if (!isModuleDisabled(entity, module.name())) {
+          enableModules.push(module);
+        };
       };
       if (hasEMWaveChange) {
-        loadedModules.push(module);
+        if (!isModuleDisabled(entity, module.name())) {
+          enableModules.push(module);
+        };
       };
     });
-    var loadedModulesMessage = (loadedModules.length > 1) ? "<n>Loaded " + loadedModules.length + " modules: " : "<n>Loaded " + loadedModules.length + " module: ";
-    loadedModules.forEach(module => {
+    var enabledModulesMessage = (enableModules.length > 1) ? "<n>Loaded " + enableModules.length + " modules: " : "<n>Loaded " + enableModules.length + " module: ";
+    enableModules.forEach(module => {
       if (modules.indexOf(module) == 0) {
-        loadedModulesMessage = loadedModulesMessage + "<nh>" + module.name();
+        enabledModulesMessage = enabledModulesMessage + "<nh>" + module.name();
       } else {
-        loadedModulesMessage = loadedModulesMessage + "<n>, <nh>" + module.name();
+        enabledModulesMessage = enabledModulesMessage + "<n>, <nh>" + module.name();
       };
     });
     systemMessage(entity, "<n>TranserOS");
-    systemMessage(entity, loadedModulesMessage);
+    systemMessage(entity, enabledModulesMessage);
   };
   function status(entity) {
     var date = new Date();
@@ -419,24 +512,24 @@ function initTranser(moduleList) {
     },
     isKeyBindEnabled: function (entity, keyBind) {
       if (keyBindIndexes.length == 1) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind);
+        return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind));
       };
       if (keyBindIndexes.length == 2) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind);
+        return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[keyBindIndexes[1]].name())) ? false : modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind));
       };
       if (keyBindIndexes.length == 3) {
-        return modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind) || modules[keyBindIndexes[2]].keyBindEnabled(entity, keyBind);
+        return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[keyBindIndexes[1]].name())) ? false : modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[keyBindIndexes[2]].name())) ? false : modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind));
       };
     },
     isModifierEnabled: function (entity, modifier) {
       if (modifierIndexes.length == 1) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier);
+        return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name())) ? false : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier));
       };
       if (modifierIndexes.length == 2) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier);
+        return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name())) ? false : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[modifierIndexes[1]].name())) ? false : modules[modifierIndexes[1]].isModifierEnabled(entity, modifier));
       };
       if (modifierIndexes.length == 3) {
-        return modules[modifierIndexes[0]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[1]].isModifierEnabled(entity, modifier) || modules[modifierIndexes[2]].isModifierEnabled(entity, modifier);
+        return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name())) ? false : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[modifierIndexes[1]].name())) ? false : modules[modifierIndexes[1]].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[modifierIndexes[2]].name())) ? false : modules[modifierIndexes[2]].isModifierEnabled(entity, modifier));
       };
     },
     tickHandler: (entity, manager) => {
@@ -461,19 +554,28 @@ function initTranser(moduleList) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
             if (entity.getData("skyhighheroes:dyn/entry") == "systemInfo") {
               systemInfo(entity);
-            } if (entity.getData("skyhighheroes:dyn/entry") == "status") {
+            } else if (entity.getData("skyhighheroes:dyn/entry") == "status") {
               status(entity);
-            } if (entity.getData("skyhighheroes:dyn/entry") == "help") {
+            } else if (entity.getData("skyhighheroes:dyn/entry") == "help") {
               systemMessage(entity, "<n>Available commands:");
               modules.forEach(module => {
-                if (module.hasOwnProperty("helpMessage")) {
+                if (module.hasOwnProperty("helpMessage") && !isModuleDisabled(entity, module.name())) {
                   module.helpMessage(entity);
                 };
               });
+            } if (entity.getData("skyhighheroes:dyn/entry") == "disabledList") {
+              listDisabledModules(entity);
+            } else if (entity.getData("skyhighheroes:dyn/entry").startsWith("disable ")) {
+              var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+              disableModule(entity, manager, moduleNames, args[1]);
+            } else if (entity.getData("skyhighheroes:dyn/entry").startsWith("enable ")) {
+              var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+              enableModule(entity, manager, moduleNames, args[1]);
             } else {
               modules.some((module) => {
+                var result = false;
                 if (module.hasOwnProperty("commandHandler")) {
-                  var result = module.commandHandler(entity, manager);
+                  result = module.commandHandler(entity, manager);
                 };
                 return result;
               });
@@ -488,14 +590,14 @@ function initTranser(moduleList) {
         };
       };
       modules.forEach(module => {
-        if (module.hasOwnProperty("tickHandler")) {
+        if (module.hasOwnProperty("tickHandler") && !isModuleDisabled(entity, module.name())) {
           module.tickHandler(entity, manager);
         };
       });
       //Move this to the top of the tick handler
       if (!hasEMWaveChange) {
         modules.forEach(module => {
-          if (module.hasOwnProperty("waveHandler")) {
+          if (module.hasOwnProperty("waveHandler") && !isModuleDisabled(entity, module.name())) {
             module.waveHandler(entity, manager);
           };
         });

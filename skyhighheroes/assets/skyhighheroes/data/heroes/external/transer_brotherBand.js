@@ -123,7 +123,7 @@ function init(transer) {
     commandHandler: function (entity, manager) {
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
       if (args[0] == "bb") {
-        if (args.length > 1 && args.length < 4) {
+        if (args.length > 1 && args.length < 4 && !transer.isModuleDisabled(entity, this.name())) {
           switch (args[1]) {
             case "form":
               (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!bb form <nh><name>");
@@ -146,7 +146,11 @@ function init(transer) {
               return true;
           };
         } else {
-          transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
+          if (!transer.isModuleDisabled(entity, this.name())) {
+            transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
+          } else {
+            transer.systemMessage(entity, "<e>Module <eh>BrotherBand<e> is disabled!");
+          };
           return true;
         };
       } else {

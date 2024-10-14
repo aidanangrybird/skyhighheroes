@@ -241,7 +241,7 @@ function init(transer) {
     commandHandler: function (entity, manager) {
       var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
       if (args[0] == "g") {
-        if (args.length > 1 && args.length < 3) {
+        if (args.length > 1 && args.length < 3 && !transer.isModuleDisabled(entity, this.name())) {
           switch (args[1]) {
             case "add":
               (args.length == 3) ? addGroup(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!g add <nh><name>");
@@ -277,7 +277,11 @@ function init(transer) {
               return true;
           };
         } else {
-          transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
+          if (!transer.isModuleDisabled(entity, this.name())) {
+            transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
+          } else {
+            transer.systemMessage(entity, "<e>Module <eh>messaging<e> is disabled!");
+          };
           return true;
         };
       } else {
