@@ -14,20 +14,6 @@
     "calling": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "omega_xis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "omega_xis": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "jet_streak_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "jet_streak": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "pryetak_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "pryetak": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "supernova_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "supernova": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "singularity_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "singularity": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "solar_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "solar": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "amethyst_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "amethyst": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "crimson_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "crimson": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "predation_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "predation_cooldown": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "predation": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -38,48 +24,6 @@
     "sword_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "sword_blade": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "sword_blade_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "lightning": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "lightning_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "derecho": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "derecho_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "hail_cannon": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "hail_cannon_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "voids_grasp": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "voids_grasp_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "galaxys_weight": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "galaxys_weight_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "nebula_burst": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "nebula_burst_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "cosmic_intervention": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "cosmic_intervention_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "star_collapse": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "star_collapse_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "dark_matter_grip": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "dark_matter_grip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "ember_ray": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "ember_ray_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "meteor_strike": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "meteor_strike_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "gravity_strike": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "gravity_strike_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "solar_flare": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "solar_flare_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "solar_wind": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "solar_wind_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "solar_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "solar_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "gravity_pulse": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "gravity_pulse_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "planetary_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "planetary_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "star_cutter": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "star_cutter_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "asteroid_crash": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_crash_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "asteroid_pull": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_pull_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "asteroid_blast": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "asteroid_blast_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "visualizer_toggle": { "type": "BYTE", "resetWithoutSuit": true },
     "stelar_clothes": "BYTE",
     "hood_toggle": "BYTE",
@@ -95,8 +39,6 @@
     "superhero_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "superhero_boosting_landing_ticks": "BYTE",
     "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "telekinesis_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "gravity_manip_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "em_being": { "type": "STRING", "resetWithoutSuit": true },
     "active_chat": "INTEGER",
     "chat_mode": "INTEGER",
@@ -177,21 +119,6 @@
       "1" : "Guyver I",
       "2" : "Guyver II",
       "3" : "Guyver III"
-    },
-    "skyhighheroes:aidan_stelar": {
-      "$DEFAULT": {
-        "maskToggleTicks": 10
-      }
-    },
-    "skyhighheroes:chase_stelar": {
-      "$DEFAULT": {
-        "maskToggleTicks": 10
-      }
-    },
-    "skyhighheroes:lucas_stelar": {
-      "$DEFAULT": {
-        "maskToggleTicks": 10
-      }
     }
   }
 }
