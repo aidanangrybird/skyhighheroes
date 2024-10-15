@@ -2,13 +2,13 @@
 //So please don't steal this, it will look very bad on you
 
 var transers = [
-  {"suit": "skyhighheroes:aegon_stelar", "satellite": "dragon", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
-  {"suit": "skyhighheroes:aidan_stelar", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {"suit": "skyhighheroes:cash_stelar", "satellite": "dragon", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
-  {"suit": "skyhighheroes:chase_stelar", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {"suit": "skyhighheroes:ace_stelar", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {"suit": "skyhighheroes:grand_stelar", "satellite": "leo", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
-  {"suit": "skyhighheroes:lucas_stelar", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
+  {"suit": "skyhighocs:aegon_stelar", "satellite": "dragon", "id": "411ed8b9-b246-449c-b941-02790d0971dd"},
+  {"suit": "skyhighocs:aidan_stelar", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
+  {"suit": "skyhighocs:cash_stelar", "satellite": "dragon", "id": "2389f9cd-351e-4d96-a277-847a24fd9048"},
+  {"suit": "skyhighocs:chase_stelar", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
+  {"suit": "skyhighocs:ace_stelar", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
+  {"suit": "skyhighocs:grand_stelar", "satellite": "leo", "id": "d699ffcd-8177-4325-91ac-3e815e87bb95"},
+  {"suit": "skyhighocs:lucas_stelar", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
   {"suit": "skyhighheroes:geo_stelar", "satellite": "pegasus"},
   {"suit": "skyhighheroes:geo_stelar/subaru", "satellite": "pegasus"},
   {"suit": "skyhighheroes:pegasus_transer", "satellite": "pegasus"},
