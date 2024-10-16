@@ -500,6 +500,13 @@ function initTranser(moduleList) {
         });
       };
     },
+    canAim: (hero) => {
+      modules.forEach(module => {
+        if (module.hasOwnProperty("canAim")) {
+          hero.supplyFunction("canAim", entity => module.canAim(entity));
+        };
+      });
+    },
     profileWave: (hero) => {
       hero.addAttributeProfile("INACTIVE", (profile) => {
         profile.addAttribute("BASE_SPEED", -1.0, 1);

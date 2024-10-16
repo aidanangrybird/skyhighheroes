@@ -29,7 +29,7 @@ function init(hero) {
   hero.setHasProperty(hasProperty);
   hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
   stelar.initProfiles(hero);
-  hero.supplyFunction("canAim", entity => stelar.canAim(entity, "omega_xis"));
+  transerOS.canAim(hero);
   hero.setModifierEnabled((entity, modifier) => {
     if (modifier.name() == "fiskheroes:shape_shifting") {
       return true;
