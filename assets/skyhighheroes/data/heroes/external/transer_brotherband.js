@@ -1,19 +1,5 @@
 function init(transer) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
-  function getEntityID(entity, uuid) {
-    var notFoundPlayer = true;
-    var playerID = 0;
-    for (id = 0;notFoundPlayer;id++) {
-      var other = entity.world().getEntityById(id);
-      if (other != null) {
-        if (other.is("PLAYER") && other.getUUID() == uuid) {
-          playerID = id;
-          notFoundPlayer = false;
-        };
-      };
-    };
-    return playerID;
-  };
   /**
    * Forms BrotherBand
    * @param {JSPlayer} player - Player forming BrotherBand
@@ -25,7 +11,7 @@ function init(transer) {
     transer.systemMessage(player, "<n>Scanning for <nh>" + username + "<n> to form BrotherBand with!");
     var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);
     entities.forEach(entity => {
-      if (entity.is("PLAYER") && entity.getName() == username && isWearingTranser(entity, player) && player.canSee(entity)) {
+      if (entity.is("PLAYER") && entity.getName() == username && transer.isWearingTranser(entity) && player.canSee(entity)) {
         foundPlayer = true;
       };
     });
@@ -110,9 +96,10 @@ function init(transer) {
     messageHandler: function (entity, transformed, untransformed, color) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
-      var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
+      var brothers = transer.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
+      var reciever = brothers[activeChat];
       var foundPlayer = null;
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 60);
+      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 120);
       entities.forEach(player => {
         if (player.is("PLAYER") && player.getName() == reciever) {
           foundPlayer = player;
@@ -122,7 +109,7 @@ function init(transer) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
             if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                 transer.brotherBandMessage(entity, color+transformed+"\u00A7r", message);
               } else {
                 transer.brotherBandMessage(entity, untransformed, message);
@@ -175,9 +162,9 @@ function init(transer) {
       transer.systemMessage(player, "<n>You are now in <nh>BrotherBand<n> mode!");
     },
     chatInfo: function (player, manager) {
-      if (player.getWornChestplate().nbt().hasKey("brotherBand")) {
-        if (player.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
-          var brothersList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
+      if (player.getWornChestplate().nbt().hasKey("brothers")) {
+        var brothersList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
+        if (brothersList.length > 0) {
           if (player.getData("skyhighheroes:dyn/active_chat") > (brothersList.length-1)) {
             manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
           };

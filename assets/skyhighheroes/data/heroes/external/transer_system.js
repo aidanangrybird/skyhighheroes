@@ -64,7 +64,7 @@ var months = [
  * @returns If the entity is wearing a transer
  **/
 function isWearingTranser(entity) {
-  var wearingTranser = false
+  var wearingTranser = false;
   transers.forEach(entry => {
     if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
       wearingTranser = true;
@@ -350,6 +350,7 @@ function initTranser(moduleList) {
   var modifierIndexes = [];
   var keyBindIndexes = [];
   var hasEMWaveChange = false;
+  var hasEMBeing = false;
   var transformed = null;
   var untransformed = null;
   var color = null;
@@ -382,9 +383,14 @@ function initTranser(moduleList) {
     if (moduleInit.hasOwnProperty("waveChangeInfo")) {
       if (!hasEMWaveChange) {
         transformed = moduleInit.waveChangeInfo().name;
-        untransformed = moduleInit.waveChangeInfo().human;
         color = moduleInit.waveChangeInfo().color;
         hasEMWaveChange = true;
+      };
+    };
+    if (moduleInit.hasOwnProperty("emBeingInfo")) {
+      if (!hasEMBeing) {
+        untransformed = moduleInit.emBeingInfo().human;
+        hasEMBeing = true;
       };
     };
     if (moduleInit.hasOwnProperty("powers")) {
@@ -440,11 +446,10 @@ function initTranser(moduleList) {
     });
     systemMessage(entity, "<n>TranserOS");
     systemMessage(entity, enabledModulesMessage);
-    systemMessage(entity, entity.world().getEntityID());
   };
   function status(entity) {
     var date = new Date();
-    if (hasEMWaveChange) {
+    if (hasEMBeing) {
       systemMessage(entity, "<n>Hello <nh>" + untransformed + "<n>!");
     } else {
       systemMessage(entity, "<n>Hello <nh>" + entity.getName() + "<n>!");
@@ -603,7 +608,7 @@ function initTranser(moduleList) {
         };
       });
       //Move this to the top of the tick handler
-      if (!hasEMWaveChange) {
+      if (hasEMBeing && !hasEMWaveChange) {
         modules.forEach(module => {
           if (module.hasOwnProperty("waveHandler") && !isModuleDisabled(entity, module.name())) {
             module.waveHandler(entity, manager);
