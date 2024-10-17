@@ -1,0 +1,15 @@
+{
+  "name": "Omega-Xis",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|omega_xis": {
+      "key": "OMEGA_XIS_TOGGLE",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/omega_xis",
+        "timerData": "skyhighheroes:dyn/omega_xis_timer",
+        "time": 10
+      },
+      "isToggle": true
+    }
+  }
+}

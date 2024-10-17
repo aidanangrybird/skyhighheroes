@@ -32,7 +32,7 @@ function init(transer) {
   };
   //All of the required functions and stuff go here
   return {
-    powers: function () {
+    emPowers: function () {
       return [
         "skyhighheroes:em_wave_being",
         "skyhighheroes:battle_cards_geo"

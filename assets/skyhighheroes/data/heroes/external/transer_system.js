@@ -393,11 +393,21 @@ function initTranser(moduleList) {
         hasEMBeing = true;
       };
     };
-    if (moduleInit.hasOwnProperty("powers")) {
-      var modulePowers = moduleInit.powers();
-      modulePowers.forEach(power => {
-        powerArray.push(power);
-      });
+  });
+  modules.forEach(module => {
+    if (hasEMBeing) {
+      if (module.hasOwnProperty("powers")) {
+        var modulePowers = module.powers();
+        modulePowers.forEach(power => {
+          powerArray.push(power);
+        });
+      };
+      if (hasEMWaveChange && module.hasOwnProperty("emPowers")) {
+        var modulePowers = module.emPowers();
+        modulePowers.forEach(power => {
+          powerArray.push(power);
+        });
+      };
     };
   });
   function cycleChatModes(player, manager) {

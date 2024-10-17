@@ -10,11 +10,16 @@ function init(transer) {
     return true;
   };
   return {
-    powers: function () {
+    emPowers: function () {
       return [
         "skyhighheroes:em_wave_change",
         "skyhighheroes:battle_card_predation",
         "skyhighheroes:mega_buster"
+      ];
+    },
+    powers: function () {
+      return [
+        "skyhighheroes:omega_xis"
       ];
     },
     keyBinds: function (hero) {
