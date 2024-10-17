@@ -259,21 +259,6 @@ function listDisabledModules(entity) {
   });
 };
 
-function getEntityID(entity, otherName) {
-  var notFoundPlayer = true;
-  var playerID = 0;
-  for (id = 0;notFoundPlayer;id++) {
-    var other = entity.world().getEntityById(id);
-    if (other != null) {
-      if (other.is("PLAYER") && other.getName() == otherName) {
-        playerID = id;
-        notFoundPlayer = false;
-      };
-    };
-  };
-  return playerID;
-};
-
 /**
  * Prints message to player's chat
  * @param {JSPlayer} player - Required

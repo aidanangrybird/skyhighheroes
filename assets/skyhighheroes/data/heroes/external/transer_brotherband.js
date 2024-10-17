@@ -1,5 +1,19 @@
 function init(transer) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
+  function getEntityID(entity, uuid) {
+    var notFoundPlayer = true;
+    var playerID = 0;
+    for (id = 0;notFoundPlayer;id++) {
+      var other = entity.world().getEntityById(id);
+      if (other != null) {
+        if (other.is("PLAYER") && other.getUUID() == uuid) {
+          playerID = id;
+          notFoundPlayer = false;
+        };
+      };
+    };
+    return playerID;
+  };
   /**
    * Forms BrotherBand
    * @param {JSPlayer} player - Player forming BrotherBand
