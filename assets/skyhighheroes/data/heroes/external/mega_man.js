@@ -140,6 +140,12 @@ function init(transer) {
           result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
         };
       };
+      if (modifier.name() == "fiskheroes:shield_throwing") {
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+      };
+      if (modifier.name() == "fiskheroes:energy_manipulation") {
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+      };
       if (modifier.name() == "fiskheroes:controlled_flight") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
       };
