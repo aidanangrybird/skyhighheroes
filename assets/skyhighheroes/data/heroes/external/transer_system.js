@@ -530,8 +530,23 @@ function initTranser(moduleList) {
         profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
         profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-        profile.addAttribute("MAX_HEALTH", -19.0, 0);
       });
+    },
+    initDamageProfiles: function (hero) {
+      modules.forEach(module => {
+        if (module.hasOwnProperty("initDamageProfiles")) {
+          module.initDamageProfiles(hero);
+        };
+      });
+    },
+    getDamageProfile: function (entity) {
+      var profile = null;
+      modules.forEach(module => {
+        if (module.hasOwnProperty("getDamageProfile")) {
+          profile = module.getDamageProfile(entity);
+        };
+      });
+      return profile;
     },
     initProfiles: function (hero) {
       modules.forEach(module => {
@@ -541,12 +556,13 @@ function initTranser(moduleList) {
       });
     },
     getAttributeProfile: function (entity) {
-      profile = null;
+      var profile = null;
       modules.forEach(module => {
         if (module.hasOwnProperty("getAttributeProfile")) {
           profile = module.getAttributeProfile(entity);
         };
       });
+      return profile;
     },
     isKeyBindEnabled: function (entity, keyBind) {
       if (keyBindIndexes.length == 1) {

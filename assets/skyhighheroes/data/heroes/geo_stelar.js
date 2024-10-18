@@ -27,6 +27,7 @@ function init(hero) {
   
   bodyTemp.initProfiles(hero);
   transerOS.initProfiles(hero);
+  transerOS.initDamageProfiles(hero);
 
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
@@ -67,7 +68,7 @@ function init(hero) {
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
-  hero.setDamageProfile(entity => stelar.getDamageProfile(entity));
+  hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
   hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
   hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
   //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");

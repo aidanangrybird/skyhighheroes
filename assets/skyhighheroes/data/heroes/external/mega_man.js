@@ -75,6 +75,36 @@ function init(transer) {
       hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
       hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     },
+    initDamageProfiles: function (hero) {
+      hero.addDamageProfile("SWORD", {
+        "types": {
+          "WAVE_SHARP": 1.0
+        }
+      });
+      hero.addDamageProfile("MAIN", {
+        "types": {
+          "WAVE_BLUNT": 1.0
+        }
+      });
+    },
+    getDamageProfile: function (entity) {
+      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        return "SWORD";
+      };
+      if (entity.getHeldItem().name() == "fiskheroes:katana" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        return "SWORD";
+      };
+      if (entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        return "SWORD";
+      };
+      if (entity.getHeldItem().name() == "fiskheroes:chronos_rifle" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        return "MAIN";
+      };
+      if (entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        return "MAIN";
+      };
+      return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? "MAIN" : null;
+    },
     initProfiles: function (hero) {
       hero.addAttribute("SPRINT_SPEED", 0.2, 1);
       hero.addAttribute("STEP_HEIGHT", 0.5, 0);
