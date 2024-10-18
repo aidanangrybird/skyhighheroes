@@ -865,15 +865,18 @@ function initProfiles(hero) {
       };
     };
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-      if (entity.getData("fiskheroes:shield_blocking")) {
-        return "SHIELD";
-      };
-      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 ) {
-        return "SWORD";
-      };
-      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
-        return null;
-      };
     };
   });
+};
+
+function getAttributeProfile(entity) {
+  if (entity.getData("fiskheroes:shield_blocking")) {
+    return "SHIELD";
+  };
+  if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 ) {
+    return "SWORD";
+  };
+  if (entity.getData("skyhighheroes:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
+    return null;
+  };
 };

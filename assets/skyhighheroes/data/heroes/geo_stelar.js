@@ -25,10 +25,19 @@ function init(hero) {
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", (player, manager) => stelar.visualizerToggle(player, manager), "Toggle Visualizer", 2);
   hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 2);
   
+  bodyTemp.initProfiles(hero);
+  transerOS.initProfiles(hero);
+
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
   hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
-  stelar.initProfiles(hero);
+  hero.setAttributeProfile(entity => {
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+      return bodyTemp.getAttributeProfile(entity);
+    } else {
+      return transerOS.getAttributeProfile(entity)
+    };
+  });
   transerOS.canAim(hero);
   hero.setModifierEnabled((entity, modifier) => {
     if (modifier.name() == "fiskheroes:shape_shifting") {

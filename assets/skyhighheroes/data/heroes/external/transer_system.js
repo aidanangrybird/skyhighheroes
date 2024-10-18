@@ -533,6 +533,21 @@ function initTranser(moduleList) {
         profile.addAttribute("MAX_HEALTH", -19.0, 0);
       });
     },
+    initProfiles: function (hero) {
+      modules.forEach(module => {
+        if (module.hasOwnProperty("initProfiles")) {
+          module.initProfiles(hero);
+        };
+      });
+    },
+    getAttributeProfile: function (entity) {
+      profile = null;
+      modules.forEach(module => {
+        if (module.hasOwnProperty("getAttributeProfile")) {
+          profile = module.getAttributeProfile(entity);
+        };
+      });
+    },
     isKeyBindEnabled: function (entity, keyBind) {
       if (keyBindIndexes.length == 1) {
         return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind));

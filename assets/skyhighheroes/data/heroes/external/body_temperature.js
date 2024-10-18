@@ -60,3 +60,98 @@ function change(entity, manager, map, tempVar, stableRate, clothingVar) {
     };
   };
 };
+
+
+function initProfiles(hero) {
+  hero.addAttributeProfile("INACTIVE", (profile) => {
+  });
+  hero.addAttributeProfile("FROZEN",  (profile) => {
+    profile.addAttribute("BASE_SPEED", -1.0, 1);
+    profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+    profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
+    profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    profile.addAttribute("MAX_HEALTH", -19.0, 0);
+  });
+  hero.addAttributeProfile("COLD3", (profile) => {
+    profile.addAttribute("BASE_SPEED", -1.0, 1);
+    profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+    profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
+    profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    profile.addAttribute("MAX_HEALTH", -19.0, 0);
+  });
+  hero.addAttributeProfile("COLD2", (profile) => {
+    profile.addAttribute("BASE_SPEED", -1.0, 1);
+    profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+    profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
+    profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    profile.addAttribute("MAX_HEALTH", -19.0, 0);
+  });
+  hero.addAttributeProfile("COLD1", (profile) => {
+    profile.addAttribute("BASE_SPEED", -0.05, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
+    profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
+    profile.addAttribute("MAX_HEALTH", -2.0, 0);
+  });
+  hero.addAttributeProfile("HOT1", (profile) => {
+    profile.addAttribute("BASE_SPEED", -0.1, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -0.05, 1);
+    profile.addAttribute("PUNCH_DAMAGE", -0.05, 1);
+    profile.addAttribute("MAX_HEALTH", -2.0, 0);
+  });
+  hero.addAttributeProfile("HOT2", (profile) => {
+    profile.addAttribute("BASE_SPEED", -0.35, 1);
+    profile.addAttribute("SPRINT_SPEED", -0.35, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -0.6, 1);
+    profile.addAttribute("JUMP_HEIGHT", -0.5, 0);
+    profile.addAttribute("MAX_HEALTH", -7.0, 0);
+  });
+  hero.addAttributeProfile("HOT3", (profile) => {
+    profile.addAttribute("BASE_SPEED", -0.7, 1);
+    profile.addAttribute("SPRINT_SPEED", -0.7, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -0.95, 1);
+    profile.addAttribute("JUMP_HEIGHT", -1.0, 0);
+    profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    profile.addAttribute("MAX_HEALTH", -14.0, 0);
+  });
+  hero.addAttributeProfile("FIRE", (profile) => {
+    profile.addAttribute("BASE_SPEED", -1.0, 1);
+    profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+    profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+    profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
+    profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+    profile.addAttribute("MAX_HEALTH", -19.0, 0);
+  });
+};
+
+function getAttributeProfile(entity) {
+  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "FROZEN";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "COLD3";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.85 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.5 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "COLD2";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "COLD1";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") == 0 || (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.01 && entity.getData("skyhighheroes:dyn/body_temperature") <= 0.01) || (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "INACTIVE";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "HOT1";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.9 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.55 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "HOT2";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "HOT3";
+  };
+  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.4 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+    return "FIRE";
+  };
+};

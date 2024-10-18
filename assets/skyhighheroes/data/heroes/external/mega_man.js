@@ -75,6 +75,40 @@ function init(transer) {
       hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
       hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     },
+    initProfiles: function (hero) {
+      hero.addAttribute("SPRINT_SPEED", 0.2, 1);
+      hero.addAttribute("STEP_HEIGHT", 0.5, 0);
+      hero.addAttribute("JUMP_HEIGHT", 3.0, 0);
+      hero.addAttribute("PUNCH_DAMAGE", 5.0, 0);
+      hero.addAttribute("KNOCKBACK", 2.5, 0);
+      hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
+      hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
+      hero.addAttributeProfile("SWORD", (profile) => {
+        profile.inheritDefaults();
+        profile.addAttribute("SPRINT_SPEED", 0.5, 1);
+        profile.addAttribute("KNOCKBACK", 5.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
+      });
+      hero.addAttributeProfile("SHIELD", (profile) => {
+        profile.inheritDefaults();
+        profile.addAttribute("BASE_SPEED", -0.75, 1);
+        profile.addAttribute("SPRINT_SPEED", 0.0, 0);
+        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+        profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+        profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+        profile.addAttribute("KNOCKBACK", 0.0, 0);
+        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+      });
+    },
+    getAttributeProfile: function (entity) {
+      if (entity.getData("fiskheroes:shield_blocking")) {
+        return "SHIELD";
+      } else if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 ) {
+        return "SWORD";
+      } else if (entity.getData("skyhighheroes:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
+        return null;
+      };
+    },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
       if (keyBind == "CYCLE_CHATS_EM") {
