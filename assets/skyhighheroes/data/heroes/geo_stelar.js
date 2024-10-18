@@ -16,8 +16,7 @@ function init(hero) {
   hero.setVersion("Mega Man Star Force");
   
   transerOS.keyBinds(hero);
-
-  stelar.initEquipment(hero, "Mega Man", "\u00A7b");
+  transerOS.initEMWaveChange(hero);
   
   transerOS.addPowers(hero);
 
@@ -26,27 +25,24 @@ function init(hero) {
   hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 2);
   
   bodyTemp.initProfiles(hero);
-  transerOS.initProfiles(hero);
-  transerOS.initDamageProfiles(hero);
 
   hero.setDefaultScale(1.0);
-  hero.setHasProperty(hasProperty);
-  hero.setHasPermission((entity, permission) => stelar.hasPermission(entity, permission));
+  hero.setHasProperty((entity, property) => transerOS.getProperty(entity, property));
+  hero.setHasPermission((entity, permission) => transerOS.getPermission(entity, permission));
   hero.setAttributeProfile(entity => {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       return bodyTemp.getAttributeProfile(entity);
-    } else {
-      return transerOS.getAttributeProfile(entity)
+    } if (transerOS.isModuleDisabled()) {
+      return transerOS.getAttributeProfile(entity);
     };
   });
-  transerOS.canAim(hero);
   hero.setModifierEnabled((entity, modifier) => {
     if (modifier.name() == "fiskheroes:shape_shifting") {
       return true;
     };
     return transerOS.isModifierEnabled(entity, modifier);
   });
-  hero.setTierOverride(entity => stelar.getTierOverride(entity));
+  hero.setTierOverride(entity => transerOS.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
@@ -69,10 +65,6 @@ function init(hero) {
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
   hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
-  hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
-  hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
-  //hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
-  hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
   hero.setTickHandler((entity, manager) => {
     transerOS.tickHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
@@ -103,8 +95,4 @@ function init(hero) {
     manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
-};
-
-function hasProperty(entity, property) {
-  return (property == "BREATHE_SPACE") && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1);
 };

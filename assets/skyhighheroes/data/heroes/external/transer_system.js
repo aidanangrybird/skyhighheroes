@@ -506,6 +506,8 @@ function initTranser(moduleList) {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
       hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+    },
+    initEMWaveChange: (hero) => {
       if (hasEMWaveChange) {
         hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
         hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
@@ -513,15 +515,23 @@ function initTranser(moduleList) {
           if (module.hasOwnProperty("keyBinds")) {
             module.keyBinds(hero);
           };
+          if (module.hasOwnProperty("canAim")) {
+            hero.supplyFunction("canAim", entity => module.canAim(entity));
+          };
+          if (module.hasOwnProperty("initDamageProfiles")) {
+            module.initDamageProfiles(hero);
+          };
+          if (module.hasOwnProperty("initProfiles")) {
+            module.initProfiles(hero);
+          };
+          if (module.hasOwnProperty("initEquipment")) {
+            module.initEquipment(hero);
+          };
+          if (module.hasOwnProperty("initSounds")) {
+            module.initSounds(hero);
+          };
         });
       };
-    },
-    canAim: (hero) => {
-      modules.forEach(module => {
-        if (module.hasOwnProperty("canAim")) {
-          hero.supplyFunction("canAim", entity => module.canAim(entity));
-        };
-      });
     },
     profileWave: (hero) => {
       hero.addAttributeProfile("INACTIVE", (profile) => {
@@ -531,38 +541,6 @@ function initTranser(moduleList) {
         profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
-    },
-    initDamageProfiles: function (hero) {
-      modules.forEach(module => {
-        if (module.hasOwnProperty("initDamageProfiles")) {
-          module.initDamageProfiles(hero);
-        };
-      });
-    },
-    getDamageProfile: function (entity) {
-      var profile = null;
-      modules.forEach(module => {
-        if (module.hasOwnProperty("getDamageProfile")) {
-          profile = module.getDamageProfile(entity);
-        };
-      });
-      return profile;
-    },
-    initProfiles: function (hero) {
-      modules.forEach(module => {
-        if (module.hasOwnProperty("initProfiles")) {
-          module.initProfiles(hero);
-        };
-      });
-    },
-    getAttributeProfile: function (entity) {
-      var profile = null;
-      modules.forEach(module => {
-        if (module.hasOwnProperty("getAttributeProfile")) {
-          profile = module.getAttributeProfile(entity);
-        };
-      });
-      return profile;
     },
     isKeyBindEnabled: function (entity, keyBind) {
       if (keyBindIndexes.length == 1) {
