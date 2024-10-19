@@ -344,7 +344,6 @@ function initTranser(moduleList) {
   var modules = [];
   var moduleNames = [];
   var messageHandlers = 0;
-  var commandHandlers = 0;
   var messagingIndex = 0;
   var brotherBandIndex = 0;
   var modifierIndexes = [];
@@ -353,6 +352,10 @@ function initTranser(moduleList) {
   var damageProfileIndexes = [];
   var propertyIndexes = [];
   var permisssionIndexes = [];
+  var helpIndexes = [];
+  var commandIndexes = [];
+  var tickIndexes = [];
+  var waveIndexes = [];
   var hasEMWaveChange = false;
   var hasEMBeing = false;
   var transformed = null;
@@ -376,7 +379,10 @@ function initTranser(moduleList) {
       brotherBandIndex = moduleList.indexOf(module);
     };
     if (moduleInit.hasOwnProperty("commandHandler")) {
-      commandHandlers = commandHandlers + 1;
+      commandIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("helpMessage")) {
+      helpIndexes.push(moduleList.indexOf(module));
     };
     if (moduleInit.hasOwnProperty("isModifierEnabled")) {
       modifierIndexes.push(moduleList.indexOf(module));
@@ -395,6 +401,12 @@ function initTranser(moduleList) {
     };
     if (moduleInit.hasOwnProperty("permissions")) {
       permisssionIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("tickHandler")) {
+      tickIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("waveHandler")) {
+      waveIndexes.push(moduleList.indexOf(module));
     };
     if (moduleInit.hasOwnProperty("waveChangeInfo")) {
       if (!hasEMWaveChange) {
@@ -651,8 +663,9 @@ function initTranser(moduleList) {
               status(entity);
             } else if (entity.getData("skyhighheroes:dyn/entry") == "help") {
               systemMessage(entity, "<n>Available commands:");
-              modules.forEach(module => {
-                if (module.hasOwnProperty("helpMessage") && !isModuleDisabled(entity, module.name())) {
+              helpIndexes.forEach(index => {
+                var module = modules[index];
+                if (!isModuleDisabled(entity, module.name())) {
                   module.helpMessage(entity);
                 };
               });
@@ -665,9 +678,10 @@ function initTranser(moduleList) {
               var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
               enableModule(entity, manager, moduleNames, args[1]);
             } else {
-              modules.some((module) => {
+              commandIndexes.some(index => {
                 var result = false;
-                if (module.hasOwnProperty("commandHandler")) {
+                var module = modules[index];
+                if (!isModuleDisabled(entity, module.name())) {
                   result = module.commandHandler(entity, manager);
                 };
                 return result;
@@ -682,15 +696,17 @@ function initTranser(moduleList) {
           };
         };
       };
-      modules.forEach(module => {
-        if (module.hasOwnProperty("tickHandler") && !isModuleDisabled(entity, module.name())) {
+      tickIndexes.forEach(index => {
+        var module = modules[index];
+        if (!isModuleDisabled(entity, module.name())) {
           module.tickHandler(entity, manager);
         };
       });
       //Move this to the top of the tick handler
       if (hasEMBeing && !hasEMWaveChange) {
-        modules.forEach(module => {
-          if (module.hasOwnProperty("waveHandler") && !isModuleDisabled(entity, module.name())) {
+        waveIndexes.forEach(index => {
+          var module = modules[index];
+          if (!isModuleDisabled(entity, module.name())) {
             module.waveHandler(entity, manager);
           };
         });
