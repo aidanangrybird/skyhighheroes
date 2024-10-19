@@ -75,16 +75,16 @@ function init(transer) {
       hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
       hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     },
-    setTierOverride: function (entity) {
+    tierOverride: function (entity) {
       if ((entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) && (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1)) {
         return 1;
       };
       return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1.0) ? 10 : 0;
     },
-    getProperty: function (entity, property) {
+    properties: function (entity, property) {
       return property == "BREATHE_SPACE" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     },
-    getPermission: function (entity, permission) {
+    permissions: function (entity, permission) {
       return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     },
     initSounds: function (hero) {
@@ -113,7 +113,7 @@ function init(transer) {
         }
       });
     },
-    getDamageProfile: function (entity) {
+    damageProfiles: function (entity) {
       var result = null;
       if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
         result = "SWORD";
@@ -156,6 +156,17 @@ function init(transer) {
         profile.addAttribute("KNOCKBACK", 0.0, 0);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
+    },
+    attributeProfiles: function (entity) {
+      if (entity.getData("fiskheroes:shield_blocking")) {
+        return "SHIELD";
+      };
+      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1) {
+        return "SWORD";
+      };
+      if (entity.getData("skyhighheroes:dyn/sword_blade_timer") < 1 && !entity.getData("fiskheroes:shield_blocking")) {
+        return null;
+      };
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;

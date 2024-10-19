@@ -349,6 +349,10 @@ function initTranser(moduleList) {
   var brotherBandIndex = 0;
   var modifierIndexes = [];
   var keyBindIndexes = [];
+  var attributeProfileIndexes = [];
+  var damageProfileIndexes = [];
+  var propertyIndexes = [];
+  var permisssionIndexes = [];
   var hasEMWaveChange = false;
   var hasEMBeing = false;
   var transformed = null;
@@ -379,6 +383,18 @@ function initTranser(moduleList) {
     };
     if (moduleInit.hasOwnProperty("isKeyBindEnabled")) {
       keyBindIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("attributeProfiles")) {
+      attributeProfileIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("damageProfiles")) {
+      damageProfileIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("properties")) {
+      propertyIndexes.push(moduleList.indexOf(module));
+    };
+    if (moduleInit.hasOwnProperty("permissions")) {
+      permisssionIndexes.push(moduleList.indexOf(module));
     };
     if (moduleInit.hasOwnProperty("waveChangeInfo")) {
       if (!hasEMWaveChange) {
@@ -533,7 +549,52 @@ function initTranser(moduleList) {
         });
       };
     },
-    profileWave: (hero) => {
+    getProperty: function (entity, property) {
+      var result = null;
+      propertyIndexes.forEach(index => {
+        if (!isModuleDisabled(entity, modules[index].name())) {
+          result = modules[index].permissions(entity, property);
+        };
+      });
+      return result;
+    },
+    getPermission: function (entity, permission) {
+      var result = null;
+      permisssionIndexes.forEach(index => {
+        if (!isModuleDisabled(entity, modules[index].name())) {
+          result = modules[index].permissions(entity, permission);
+        };
+      });
+      return result;
+    },
+    getTierOverride: function (entity) {
+      var result = null;
+      modules.forEach(module => {
+        if (module.hasOwnProperty("tierOverride")) {
+          result = module.tierOverride(entity);
+        };
+      });
+      return result;
+    },
+    getAttributeProfile: function (entity) {
+      var result = null;
+      attributeProfileIndexes.forEach(index => {
+        if (!isModuleDisabled(entity, modules[index].name())) {
+          result = modules[index].attributeProfiles(entity);
+        };
+      });
+      return result;
+    },
+    getDamageProfile: function (entity) {
+      var result = null;
+      damageProfileIndexes.forEach(index => {
+        if (!isModuleDisabled(entity, modules[index].name())) {
+          result = modules[index].damageProfiles(entity);
+        };
+      });
+      return result;
+    },
+    profileWave: function (hero) {
       hero.addAttributeProfile("INACTIVE", (profile) => {
         profile.addAttribute("BASE_SPEED", -1.0, 1);
         profile.addAttribute("SPRINT_SPEED", -1.0, 1);

@@ -31,8 +31,8 @@ function init(hero) {
   hero.setHasPermission((entity, permission) => transerOS.getPermission(entity, permission));
   hero.setAttributeProfile(entity => {
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
-      return bodyTemp.getAttributeProfile(entity);
-    } if (transerOS.isModuleDisabled()) {
+      return bodyTemp.getAttributeProfile(entity); 
+    } else {
       return transerOS.getAttributeProfile(entity);
     };
   });
