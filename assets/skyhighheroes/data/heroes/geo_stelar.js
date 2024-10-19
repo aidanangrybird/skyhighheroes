@@ -17,14 +17,13 @@ function init(hero) {
   
   transerOS.keyBinds(hero);
   transerOS.initEMWaveChange(hero);
-  
   transerOS.addPowers(hero);
+
+  bodyTemp.initProfiles(hero);
 
   hero.addKeyBindFunc("CYCLE_CLOTHES", (player, manager) => stelar.cycleClothes(player, manager), "Change Clothes", 1);
   hero.addKeyBindFunc("VISUALIZER_TOGGLE", (player, manager) => stelar.visualizerToggle(player, manager), "Toggle Visualizer", 2);
   hero.addKeyBindFunc("HOOD_TOGGLE", (player, manager) => stelar.hoodToggle(player, manager), "Toggle Hood", 2);
-  
-  bodyTemp.initProfiles(hero);
 
   hero.setDefaultScale(1.0);
   hero.setHasProperty((entity, property) => transerOS.getProperty(entity, property));

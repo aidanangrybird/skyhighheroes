@@ -40,7 +40,7 @@ function init(transer) {
     },
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
-      hero.addKeyBindFunc("CYCLE_UP_CARD", (player, manager) => cycleUpCard(player, manager), "Next Battle Card", 1);
+      hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
       hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         return true;
@@ -67,9 +67,9 @@ function init(transer) {
         return true;
       }, "Battle Card! Shurikens!", 2);
       hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
-      hero.addKeyBindFunc("CYCLE_DOWN_CARD", (player, manager) => cycleDownCard(player, manager), "Previous Battle Card", 3);
-      hero.addKeyBindFunc("FORTUNE_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Silk Touch", 4);
-      hero.addKeyBindFunc("SILK_SWITCH", (player, manager) => toolSwitchEnchant(player, manager), "Active Enchant: Fortune", 4);
+      hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
+      hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
+      hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
       hero.addKeyBind("RIFLE_AIM", "Aim Rifle", 4);
       hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
       hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
@@ -79,7 +79,7 @@ function init(transer) {
       if ((entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0) && (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1)) {
         return 1;
       };
-      return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1.0) ? 10 : 0;
+      return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? 10 : 0;
     },
     properties: function (entity, property) {
       return property == "BREATHE_SPACE" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
@@ -94,12 +94,12 @@ function init(transer) {
       hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
     },
     initEquipment: function (hero) {
-      hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bGeo Stelar's Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Katanas"));
-      hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bGeo Stelar's Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Scythe"));
-      hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bGeo Stelar's Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Rifle"));
-      hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7bGeo Stelar's Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Shield"));
-      hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A7bGeo Stelar's Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Pickaxe"));
-      hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A7bGeo Stelar's Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Shovel"));
+      hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bMega Man's Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Katanas"));
+      hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bMega Man's Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Scythe"));
+      hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bMega Man's Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Rifle"));
+      hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7bMega Man's Shield},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Shield"));
+      hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A7bMega Man's Pickaxe},ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Pickaxe"));
+      hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A7bMega Man's Shovel},ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bGeo Stelar's Shovel"));
     },
     initDamageProfiles: function (hero) {
       hero.addDamageProfile("SWORD", {
@@ -140,13 +140,13 @@ function init(transer) {
       hero.addAttribute("KNOCKBACK", 2.5, 0);
       hero.addAttribute("IMPACT_DAMAGE", 50.0, 0);
       hero.addAttribute("FALL_RESISTANCE", 1.0, 1);
-      hero.addAttributeProfile("SWORD", (profile) => {
+      hero.addAttributeProfile("SWORD", function (profile) {
         profile.inheritDefaults();
         profile.addAttribute("SPRINT_SPEED", 0.5, 1);
         profile.addAttribute("KNOCKBACK", 5.0, 0);
         profile.addAttribute("PUNCH_DAMAGE", 14.5, 0);
       });
-      hero.addAttributeProfile("SHIELD", (profile) => {
+      hero.addAttributeProfile("SHIELD", function (profile) {
         profile.inheritDefaults();
         profile.addAttribute("BASE_SPEED", -0.75, 1);
         profile.addAttribute("SPRINT_SPEED", 0.0, 0);
