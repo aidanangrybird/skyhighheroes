@@ -1,14 +1,6 @@
 function visualizerToggle(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", player.getData("skyhighheroes:dyn/visualizer_toggle") + 1);
-  if (player.getData("skyhighheroes:dyn/visualizer_toggle") > 1) {
-    manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", 0);
-  };
-  if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
-    manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
-  };
-  if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
-    manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
-  };
+  manager.setData(player, "skyhighheroes:dyn/visualizer_toggle", !player.getData("skyhighheroes:dyn/visualizer_toggle"));
+  manager.setData(player, "fiskheroes:penetrate_martian_invis", player.getData("skyhighheroes:dyn/visualizer_toggle"));
   return true;
 };
 
@@ -21,22 +13,18 @@ function cycleClothes(player, manager) {
 };
 
 function hoodToggle(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/hood_toggle", player.getData("skyhighheroes:dyn/hood_toggle") + 1);
-  if (player.getData("skyhighheroes:dyn/hood_toggle") > 1) {
-    manager.setData(player, "skyhighheroes:dyn/hood_toggle", 0);
-  };
+  manager.setData(player, "skyhighheroes:dyn/hood_toggle", !player.getData("skyhighheroes:dyn/hood_toggle"));
   return true;
 };
 
 function shimmerToggle(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", player.getData("skyhighheroes:dyn/shimmer_toggle") + 1);
-  if (player.getData("skyhighheroes:dyn/shimmer_toggle") == 1) {
+  manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", !player.getData("skyhighheroes:dyn/shimmer_toggle"));
+  if (player.getData("skyhighheroes:dyn/shimmer_toggle")) {
     player.getWornChestplate().nbt().getTagList("ench");
     manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
   };
-  if (player.getData("skyhighheroes:dyn/shimmer_toggle") > 1) {
+  if (!player.getData("skyhighheroes:dyn/shimmer_toggle")) {
     manager.removeTag(player.getWornChestplate().nbt(), "ench");
-    manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", 0);
   };
   return true;
 };
