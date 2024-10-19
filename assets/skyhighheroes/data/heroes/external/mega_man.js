@@ -273,12 +273,6 @@ function init(transer) {
       return result;
     },
     tickHandler: function (entity, manager) {
-      if (entity.getWornChestplate().getEnchantmentLevel(35) == -1) {
-        manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 1);
-      };
-      if (entity.getWornChestplate().getEnchantmentLevel(35) == 0) {
-        manager.setData(entity, "skyhighheroes:dyn/shimmer_toggle", 0);
-      };
       if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
         manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
       };
