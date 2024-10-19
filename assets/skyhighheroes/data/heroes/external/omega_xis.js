@@ -137,7 +137,7 @@ function init(transer) {
       return "omegaXis";
     },
     waveHandler: function (entity, manager) {
-      if (entity.world().isUnobstructed(entity.pos(), entity.pos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
+      if (entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
         var value = Math.random();
         if (value < 0.01) {
           manager.setData(entity, "skyhighheroes:dyn/em_being", "Omega-Xis");
