@@ -146,7 +146,7 @@ function init(transer) {
           };
         };
         if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:geo_stelar");
+          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:star_force_mega_man");
         };
       };
     },
