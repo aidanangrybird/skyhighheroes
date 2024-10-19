@@ -66,7 +66,7 @@ function init(transer) {
         };
         return true;
       }, "Battle Card! Shurikens!", 2);
-      hero.addKeyBind("INVISIBILITY", "Become Wave", 3);
+      hero.addKeyBind("INVISIBILITY", "Wave World", 3);
       hero.addKeyBindFunc("CYCLE_DOWN_CARD", cycleDownCard, "Previous Battle Card", 3);
       hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
       hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
