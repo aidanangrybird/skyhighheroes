@@ -487,7 +487,7 @@ function initTranser(moduleList) {
   };
   function status(entity) {
     var date = new Date();
-    if (hasEMBeing) {
+    if (hasEMBeing && !isWearingNormal(entity)) {
       systemMessage(entity, "<n>Hello <nh>" + untransformed + "<n>!");
     } else {
       systemMessage(entity, "<n>Hello <nh>" + entity.getName() + "<n>!");
