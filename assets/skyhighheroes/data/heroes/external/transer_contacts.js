@@ -62,44 +62,39 @@ function init(transer) {
     });
   };
   return {
-    name: function () {
-      return "contacts";
-    },
-    commandHandler: function (entity, manager) {
-      var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-      if (args[0] == "c") {
-        if (args.length > 1 && args.length < 4 && !transer.isModuleDisabled(entity, this.name())) {
-          switch(args[1]) {
-            case "add":
-              (args.length == 3) ? addContact(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!c add <nh><name>");
-              return true;
-            case "rem":
-              (args.length == 3) ? removeContact(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!c rem <nh><name>");
-              return true;
-            case "list":
-              listContacts(entity);
-              return true;
-            case "help":
-              transer.systemMessage(entity, "<n>Contact commands:");
-              transer.systemMessage(entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
-              transer.systemMessage(entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
-              transer.systemMessage(entity, "<n>!c list <nh>-<n> Lists contacts");
-              transer.systemMessage(entity, "<n>!c help <nh>-<n> Shows contact commands");
-              return true;
-            default:
-              transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
-              return true;
-          };
-        } else {
-          if (!transer.isModuleDisabled(entity, this.name())) {
+    name: "contacts",
+    type: 2,
+    command: "c",
+    commandHandler: function (entity, manager, arguments) {
+      if (arguments.length > 1 && arguments.length < 4 && !transer.isModuleDisabled(entity, this.name)) {
+        switch(arguments[1]) {
+          case "add":
+            (arguments.length == 3) ? addContact(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!c add <nh><name>");
+            return true;
+          case "rem":
+            (arguments.length == 3) ? removeContact(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!c rem <nh><name>");
+            return true;
+          case "list":
+            listContacts(entity);
+            return true;
+          case "help":
+            transer.systemMessage(entity, "<n>Contact commands:");
+            transer.systemMessage(entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
+            transer.systemMessage(entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
+            transer.systemMessage(entity, "<n>!c list <nh>-<n> Lists contacts");
+            transer.systemMessage(entity, "<n>!c help <nh>-<n> Shows contact commands");
+            return true;
+          default:
             transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
-          } else {
-            transer.systemMessage(entity, "<e>Module <eh>" + this.name() + "<e> is disabled!");
-          };
-          return true;
+            return true;
         };
       } else {
-        return false;
+        if (!transer.isModuleDisabled(entity, this.name())) {
+          transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
+        } else {
+          transer.systemMessage(entity, "<e>Module <eh>" + this.name() + "<e> is disabled!");
+        };
+        return true;
       };
     },
     chatModeInfo: function (player) {

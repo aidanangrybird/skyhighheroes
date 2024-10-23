@@ -90,9 +90,9 @@ function init(transer) {
     return result;
   };
   return {
-    name: function () {
-      return "BrotherBand";
-    },
+    name: "BrotherBand",
+    type: 3,
+    command: "bb",
     messageHandler: function (entity, transformed, untransformed, color) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
@@ -121,41 +121,36 @@ function init(transer) {
         };
       };
     },
-    commandHandler: function (entity, manager) {
-      var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-      if (args[0] == "bb") {
-        if (args.length > 1 && args.length < 4 && !transer.isModuleDisabled(entity, this.name())) {
-          switch (args[1]) {
-            case "form":
-              (args.length == 3) ? formBrotherBand(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!bb form <nh><name>");
-              return true;
-            case "cut":
-              (args.length == 3) ? cutBrotherBand(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!bb cut <nh><name>");
-              return true;
-            case "list":
-              listBrotherBands(entity);
-              return true;
-            case "help":
-              transer.systemMessage(entity, "<n>BrotherBand commands:")
-              transer.systemMessage(entity, "<n>!bb form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
-              transer.systemMessage(entity, "<n>!bb cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
-              transer.systemMessage(entity, "<n>!bb list <nh>-<n> Lists Brothers");
-              transer.systemMessage(entity, "<n>!bb help <nh>-<n> Shows BrotherBand commands");
-              return true;
-            default:
-              transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
-              return true;
-          };
-        } else {
-          if (!transer.isModuleDisabled(entity, this.name())) {
+    commandHandler: function (entity, manager, arguments) {
+      if (arguments.length > 1 && arguments.length < 4 && !transer.isModuleDisabled(entity, this.name)) {
+        switch (arguments[1]) {
+          case "form":
+            (arguments.length == 3) ? formBrotherBand(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!bb form <nh><name>");
+            return true;
+          case "cut":
+            (arguments.length == 3) ? cutBrotherBand(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!bb cut <nh><name>");
+            return true;
+          case "list":
+            listBrotherBands(entity);
+            return true;
+          case "help":
+            transer.systemMessage(entity, "<n>BrotherBand commands:")
+            transer.systemMessage(entity, "<n>!bb form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
+            transer.systemMessage(entity, "<n>!bb cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
+            transer.systemMessage(entity, "<n>!bb list <nh>-<n> Lists Brothers");
+            transer.systemMessage(entity, "<n>!bb help <nh>-<n> Shows BrotherBand commands");
+            return true;
+          default:
             transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
-          } else {
-            transer.systemMessage(entity, "<e>Module <eh>BrotherBand<e> is disabled!");
-          };
-          return true;
+            return true;
         };
       } else {
-        return false;
+        if (!transer.isModuleDisabled(entity, this.name())) {
+          transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
+        } else {
+          transer.systemMessage(entity, "<e>Module <eh>BrotherBand<e> is disabled!");
+        };
+        return true;
       };
     },
     chatModeInfo: function (player) {

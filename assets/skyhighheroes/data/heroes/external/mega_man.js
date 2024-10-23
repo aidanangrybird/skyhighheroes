@@ -3,6 +3,7 @@
  * @param transer - Required
  **/
 function init(transer) {
+  //All of the required functions and stuff go here
   function toolSwitchEnchant(player, manager) {
     //Silk Touch
     if (player.getData("skyhighheroes:dyn/tool_enchant") == 0) {
@@ -30,14 +31,16 @@ function init(transer) {
     };
     return true;
   };
-  //All of the required functions and stuff go here
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_being",
-        "skyhighheroes:battle_cards_geo"
-      ];
-    },
+    name: "megaMan",
+    type: 9,
+    waveChangeName: "Mega Man",
+    color: "\u00A7b",
+    human: "Geo Stelar",
+    powers: [
+      "skyhighheroes:em_wave_being",
+      "skyhighheroes:battle_cards_geo"
+    ],
     keyBinds: function (hero) {
       hero.addKeyBind("TELEPORT", "Transmit", 1);
       hero.addKeyBindFunc("CYCLE_UP_CARD", cycleUpCard, "Next Battle Card", 1);
@@ -359,16 +362,6 @@ function init(transer) {
           manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
           manager.setData(entity, "fiskheroes:utility_belt_type", 1);
         };
-      };
-    },
-    name: function () {
-      return "megaMan";
-    },
-    waveChangeInfo: function () {
-      return {
-        name: "Mega Man",
-        human: "Geo Stelar",
-        color: "\u00A7b"
       };
     }
   };

@@ -10,18 +10,15 @@ function init(transer) {
     return true;
   };
   return {
-    emPowers: function () {
-      return [
-        "skyhighheroes:em_wave_change",
-        "skyhighheroes:battle_card_predation",
-        "skyhighheroes:mega_buster"
-      ];
-    },
-    powers: function () {
-      return [
-        "skyhighheroes:omega_xis"
-      ];
-    },
+    name: "omegaXis",
+    type: 8,
+    human: "Geo Stelar",
+    powers: [
+      "skyhighheroes:omega_xis",
+      "skyhighheroes:em_wave_change",
+      "skyhighheroes:battle_card_predation",
+      "skyhighheroes:mega_buster"
+    ],
     keyBinds: function (hero) {
       hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Mega Buster", 2);
       hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
@@ -133,9 +130,6 @@ function init(transer) {
         manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
       };
     },
-    name: function () {
-      return "omegaXis";
-    },
     waveHandler: function (entity, manager) {
       if (entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
         var value = Math.random();
@@ -148,11 +142,6 @@ function init(transer) {
         if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
           manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:mega_man");
         };
-      };
-    },
-    emBeingInfo: function () {
-      return {
-        human: "Geo Stelar"
       };
     }
   };

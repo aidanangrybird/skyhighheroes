@@ -163,9 +163,9 @@ function init(transer) {
     return result;
   };
   return {
-    name: function () {
-      return "messaging";
-    },
+    name: "messaging",
+    type: 3,
+    command: "g",
     messageHandler: function (entity, transformed, untransformed, color) {
       if (entity.getData("skyhighheroes:dyn/chat_mode") == 0) {
         var message = entity.getData("skyhighheroes:dyn/entry");
@@ -238,54 +238,49 @@ function init(transer) {
         };
       };
     },
-    commandHandler: function (entity, manager) {
-      var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-      if (args[0] == "g") {
-        if (args.length > 1 && args.length < 3 && !transer.isModuleDisabled(entity, this.name())) {
-          switch (args[1]) {
-            case "add":
-              (args.length == 3) ? addGroup(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!g add <nh><name>");
-              return true;
-            case "rem":
-              (args.length == 3) ? removeGroup(entity, manager, args[2]) : transer.systemMessage(entity, "<n>!g rem <nh><name>");
-              return true;
-            case "list":
-              listGroups(entity, manager);
-              return true;
-            case "addMem":
-              (args.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[2]) : transer.systemMessage(entity, "<n>!g addMem <nh><name>");
-              return true;
-            case "remMem":
-              (args.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), args[2]) : transer.systemMessage(entity, "<n>!g remMem <nh><name>");
-              return true;
-            case "listMem":
-              listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
-              return true;
-            case "help":
-              transer.systemMessage(entity, "Group commands:")
-              transer.systemMessage(entity, "<n>!g add <nh><name><n> <nh>-<n> Creates group by name");
-              transer.systemMessage(entity, "<n>!g rem <nh><name><n> <nh>-<n> Removes group by name");
-              transer.systemMessage(entity, "<n>!g list <nh>-<n> Lists groups");
-              transer.systemMessage(entity, "Below commands apply to the currently selected group!")
-              transer.systemMessage(entity, "<n>!g addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
-              transer.systemMessage(entity, "<n>!g remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
-              transer.systemMessage(entity, "<n>!g listMem <nh>-<n> Lists members in currently selected group");
-              transer.systemMessage(entity, "<n>!g help <nh>-<n> Shows group commands");
-              return true;
-            default:
-              transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
-              return true;
-          };
-        } else {
-          if (!transer.isModuleDisabled(entity, this.name())) {
+    commandHandler: function (entity, manager, arguments) {
+      if (arguments.length > 1 && arguments.length < 3 && !transer.isModuleDisabled(entity, this.name)) {
+        switch (arguments[1]) {
+          case "add":
+            (arguments.length == 3) ? addGroup(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!g add <nh><name>");
+            return true;
+          case "rem":
+            (arguments.length == 3) ? removeGroup(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!g rem <nh><name>");
+            return true;
+          case "list":
+            listGroups(entity, manager);
+            return true;
+          case "addMem":
+            (arguments.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : transer.systemMessage(entity, "<n>!g addMem <nh><name>");
+            return true;
+          case "remMem":
+            (arguments.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : transer.systemMessage(entity, "<n>!g remMem <nh><name>");
+            return true;
+          case "listMem":
+            listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
+            return true;
+          case "help":
+            transer.systemMessage(entity, "Group commands:")
+            transer.systemMessage(entity, "<n>!g add <nh><name><n> <nh>-<n> Creates group by name");
+            transer.systemMessage(entity, "<n>!g rem <nh><name><n> <nh>-<n> Removes group by name");
+            transer.systemMessage(entity, "<n>!g list <nh>-<n> Lists groups");
+            transer.systemMessage(entity, "Below commands apply to the currently selected group!")
+            transer.systemMessage(entity, "<n>!g addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
+            transer.systemMessage(entity, "<n>!g remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
+            transer.systemMessage(entity, "<n>!g listMem <nh>-<n> Lists members in currently selected group");
+            transer.systemMessage(entity, "<n>!g help <nh>-<n> Shows group commands");
+            return true;
+          default:
             transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
-          } else {
-            transer.systemMessage(entity, "<e>Module <eh>messaging<e> is disabled!");
-          };
-          return true;
+            return true;
         };
       } else {
-        return false;
+        if (!transer.isModuleDisabled(entity, this.name())) {
+          transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
+        } else {
+          transer.systemMessage(entity, "<e>Module <eh>messaging<e> is disabled!");
+        };
+        return true;
       };
     },
     chatModeInfo: function (player) {

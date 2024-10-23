@@ -18,36 +18,31 @@ function init(transer) {
     });
   };
   return {
-    name: function () {
-      return "scanner";
-    },
-    commandHandler: function (entity, manager) {
-      var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-      if (args[0] == "sc") {
-        if (args.length > 1 && args.length < 3 && !transer.isModuleDisabled(entity, this.name())) {
-          switch(args[1]) {
-            case "entity":
-              entityScan(entity);
-              return true;
-            case "help":
-              transer.systemMessage(entity, "<n>Scanner commands:");
-              transer.systemMessage(entity, "<n>!sc <nh>entity<n> <nh>-<n> Entity scan");
-              transer.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
-              return true;
-            default:
-              transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
-              return true;
-          };
-        } else {
-          if (!transer.isModuleDisabled(entity, this.name())) {
+    name: "scanner",
+    type: 1,
+    command: "sc",
+    commandHandler: function (entity, manager, arguments) {
+      if (arguments.length > 1 && arguments.length < 3 && !transer.isModuleDisabled(entity, this.name)) {
+        switch(arguments[1]) {
+          case "entity":
+            entityScan(entity);
+            return true;
+          case "help":
+            transer.systemMessage(entity, "<n>Scanner commands:");
+            transer.systemMessage(entity, "<n>!sc <nh>entity<n> <nh>-<n> Entity scan");
+            transer.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
+            return true;
+          default:
             transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
-          } else {
-            transer.systemMessage(entity, "<e>Module <eh>scanner<e> is disabled!");
-          };
-          return true;
+            return true;
         };
       } else {
-        return false;
+        if (!transer.isModuleDisabled(entity, this.name())) {
+          transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
+        } else {
+          transer.systemMessage(entity, "<e>Module <eh>scanner<e> is disabled!");
+        };
+        return true;
       };
     },
     helpMessage: function (entity) {
