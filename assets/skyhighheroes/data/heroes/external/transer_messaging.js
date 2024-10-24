@@ -1,3 +1,7 @@
+/**
+ * You put all of the required functions in here
+ * @param transer - Required
+ **/
 function init(transer) {
   /**
    * Checks if a player has another player as a contact
@@ -31,7 +35,7 @@ function init(transer) {
     name: "messaging",
     type: 1,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
-    messageHandler: function (entity, transformed, untransformed, color) {
+    messageHandler: function (entity) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
@@ -45,13 +49,13 @@ function init(transer) {
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+            if (typeof transer.transformed === "string" && typeof transer.color === "string" && typeof transer.untransformed === "string") {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, color+transformed+"\u00A7r", message);
-                playerMessage(entity, color+transformed+"\u00A7r", message);
+                playerMessage(foundPlayer, transer.color+transer.transformed+"\u00A7r", message);
+                playerMessage(entity, transer.color+transer.transformed+"\u00A7r", message);
               } else {
-                playerMessage(foundPlayer, untransformed, message);
-                playerMessage(entity, untransformed, message);
+                playerMessage(foundPlayer, transer.untransformed, message);
+                playerMessage(entity, transer.untransformed, message);
               };
             } else {
               playerMessage(foundPlayer, entity.getName(), message);

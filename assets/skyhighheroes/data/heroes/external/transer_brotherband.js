@@ -1,3 +1,7 @@
+/**
+ * You put all of the required functions in here
+ * @param transer - Required
+ **/
 function init(transer) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
   /**
@@ -106,7 +110,7 @@ function init(transer) {
     command: "bb",
     helpMessage: "<n>!bb <nh>-<n> BrotherBand",
     chatModeInfo: "<n>You are now in <nh>BrotherBand<n> mode!",
-    messageHandler: function (entity, transformed, untransformed, color) {
+    messageHandler: function (entity) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
       var brothers = transer.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
@@ -121,11 +125,11 @@ function init(transer) {
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
-            if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+            if (typeof transer.transformed === "string" && typeof transer.color === "string" && typeof transer.untransformed === "string") {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                brotherBandMessage(entity, color+transformed+"\u00A7r", message);
+                brotherBandMessage(entity, transer.color+transer.transformed+"\u00A7r", message);
               } else {
-                brotherBandMessage(entity, untransformed, message);
+                brotherBandMessage(entity, transer.untransformed, message);
               };
             } else {
               brotherBandMessage(entity, entity.getName(), message);

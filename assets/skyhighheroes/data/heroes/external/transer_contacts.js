@@ -1,3 +1,7 @@
+/**
+ * You put all of the required functions in here
+ * @param transer - Required
+ **/
 function init(transer) {
   /**
    * Adds contact

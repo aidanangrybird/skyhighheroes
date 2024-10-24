@@ -120,7 +120,7 @@ function init(transer) {
       transer.systemMessage(player, "<s>Members in <sh>" + groupName + "<s>:")
       members.forEach(entry => {
         transer.systemMessage(player, "<sh>" + entry);
-      })
+      });
     };
   };
   /**

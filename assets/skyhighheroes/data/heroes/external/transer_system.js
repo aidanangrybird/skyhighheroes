@@ -330,8 +330,14 @@ function initTranser(moduleList) {
   var emBeingIndex = -1;
   /** @var waveChangeIndex - Index of EM Wave Change */
   var waveChangeIndex = -1;
-  /** @var powerArray - Command prefixes */
+  /** @var powerArray - Array of powers to add */
   var powerArray = ["skyhighheroes:transer_system"];
+  /** @var human - Untransformed name */
+  var human = null;
+  /** @var waveChange - Transformed name */
+  var waveChange = null;
+  /** @var waveColor - Transformd color */
+  var waveColor = null;
   moduleList.forEach(module => {
     if (module.hasOwnProperty("init")) {
       var moduleInit = module.init(instance);
@@ -387,6 +393,9 @@ function initTranser(moduleList) {
       logMessage("Module at poisition " + moduleList.indexOf(module) + " cannot be initialized!");
     };
   });
+  waveColor = modules[waveChangeIndex].color;
+  waveChange = modules[waveChangeIndex].waveChangeName;
+  human = modules[waveChangeIndex].human;
   function cycleChatModes(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
     if (player.getData("skyhighheroes:dyn/chat_mode") > (messageHandlers-1)) {
@@ -403,27 +412,21 @@ function initTranser(moduleList) {
     return true;
   };
   function systemInfo(entity) {
-    var enableModules = [];
-    modules.forEach(module => {
-      if (!isModuleDisabled(entity, module.name)) {
-        enableModules.push(module);
-      };
-    });
-    var enabledModulesMessage = (enableModules.length > 1) ? "<n>Loaded " + enableModules.length + " modules: " : "<n>Loaded " + enableModules.length + " module: ";
-    enableModules.forEach(module => {
-      if (modules.indexOf(module) == 0) {
-        enabledModulesMessage = enabledModulesMessage + "<nh>" + module.name;
+    var modulesMessage = (moduleNames.length > 1) ? "<n>Loaded " + moduleNames.length + " modules: " : "<n>Loaded " + moduleNames.length + " module: ";
+    moduleNames.forEach(moduleName => {
+      if (moduleNames.indexOf(moduleName) == 0) {
+        modulesMessage = modulesMessage + (isModuleDisabled(entity, moduleName))?"<eh>":"<nh>" + moduleName;
       } else {
-        enabledModulesMessage = enabledModulesMessage + "<n>, <nh>" + module.name;
+        modulesMessage = modulesMessage + (isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>" + moduleName;
       };
     });
     systemMessage(entity, "<n>TranserOS");
-    systemMessage(entity, enabledModulesMessage);
+    systemMessage(entity, modulesMessage);
   };
   function status(entity) {
     var date = new Date();
     if (hasEMBeing && !isWearingNormal(entity)) {
-      systemMessage(entity, "<n>Hello <nh>" + untransformed + "<n>!");
+      systemMessage(entity, "<n>Hello <nh>" + human + "<n>!");
     } else {
       systemMessage(entity, "<n>Hello <nh>" + entity.getName() + "<n>!");
     };
@@ -569,7 +572,7 @@ function initTranser(moduleList) {
               };
             };
           } else {
-            messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity, transformed, untransformed, color);
+            messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity);
           };
         };
       };
