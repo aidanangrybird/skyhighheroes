@@ -161,6 +161,8 @@ function init(transer) {
     name: "groupMessaging",
     type: 3,
     command: "g",
+    helpMessage: "<n>!g <nh>-<n> Groups",
+    chatModeInfo: "<n>You are now in <nh>group<n> mode!",
     messageHandler: function (entity, transformed, untransformed, color) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
@@ -246,9 +248,6 @@ function init(transer) {
         return true;
       };
     },
-    chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>You are now in <nh>group<n> mode!");
-    },
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("groups")) {
         if (player.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
@@ -265,8 +264,5 @@ function init(transer) {
         transer.systemMessage(player, "<e>You do not have any groups!");
       };
     },
-    helpMessage: function (entity) {
-      transer.systemMessage(entity, "<n>!g <nh>-<n> Groups")
-    }
   };
 };

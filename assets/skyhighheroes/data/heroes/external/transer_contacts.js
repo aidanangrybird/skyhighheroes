@@ -65,6 +65,7 @@ function init(transer) {
     name: "contacts",
     type: 2,
     command: "c",
+    helpMessage: "<n>!c <nh>-<n> Contacts",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4 && !transer.isModuleDisabled(entity, this.name)) {
         switch(arguments[1]) {
@@ -97,8 +98,5 @@ function init(transer) {
         return true;
       };
     },
-    helpMessage: function (entity) {
-      transer.systemMessage(entity, "<n>!c <nh>-<n> Contacts")
-    }
   };
 };

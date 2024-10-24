@@ -26,11 +26,11 @@ function init(transer) {
     if (PackLoader.getSide() == "SERVER") {
       player.as("PLAYER").addChatMessage("[BrotherBand]> " + sender + "> " + message);
     };
-    chatMessage(player, sender + "> " + message);
   };
   return {
     name: "messaging",
     type: 1,
+    chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity, transformed, untransformed, color) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
@@ -60,9 +60,6 @@ function init(transer) {
           };
         };
       };
-    },
-    chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>You are now in <nh>normal<n> mode!");
     },
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {

@@ -104,6 +104,8 @@ function init(transer) {
     name: "BrotherBand",
     type: 3,
     command: "bb",
+    helpMessage: "<n>!bb <nh>-<n> BrotherBand",
+    chatModeInfo: "<n>You are now in <nh>BrotherBand<n> mode!",
     messageHandler: function (entity, transformed, untransformed, color) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
@@ -164,9 +166,6 @@ function init(transer) {
         return true;
       };
     },
-    chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>You are now in <nh>BrotherBand<n> mode!");
-    },
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("brothers")) {
         var brothersList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
@@ -183,8 +182,5 @@ function init(transer) {
         transer.systemMessage(player, "<e>You do not have any Brothers!");
       };
     },
-    helpMessage: function (entity) {
-      transer.systemMessage(entity, "<n>!bb <nh>-<n> BrotherBand")
-    }
   };
 };

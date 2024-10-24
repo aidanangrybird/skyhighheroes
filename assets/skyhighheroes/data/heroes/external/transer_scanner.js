@@ -21,6 +21,7 @@ function init(transer) {
     name: "scanner",
     type: 0,
     command: "sc",
+    helpMessage: "<n>!sc <nh>-<n> Scanner",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3 && !transer.isModuleDisabled(entity, this.name)) {
         switch(arguments[1]) {
@@ -45,8 +46,5 @@ function init(transer) {
         return true;
       };
     },
-    helpMessage: function (entity) {
-      transer.systemMessage(entity, "<n>!sc <nh>-<n> Scanner")
-    }
   };
 };

@@ -25,22 +25,20 @@ var basic = [
 regex = /((<ob>))|(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)|(<d>)|(<l>)|(<p>)|(<dragon>)|(<leo>)|(<pegasus>)/gm;
 
 var formatting = {
-  "system": {
-    "<ob>": "\u00A7k",
-    "<n>": "\u00A7b",
-    "<nh>": "\u00A7a",
-    "<s>": "\u00A7a",
-    "<sh>": "\u00A7e",
-    "<e>": "\u00A7c",
-    "<eh>": "\u00A76",
-    "<d>": "\u00A72SYSTEM\u00A7r",
-    "<l>": "\u00A74SYSTEM\u00A7r",
-    "<p>": "\u00A71SYSTEM\u00A7r",
-    "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r",
-    "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r",
-    "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r",
-    "<r>": "\u00A7r"
-  }
+  "<ob>": "\u00A7k",
+  "<n>": "\u00A7b",
+  "<nh>": "\u00A7a",
+  "<s>": "\u00A7a",
+  "<sh>": "\u00A7e",
+  "<e>": "\u00A7c",
+  "<eh>": "\u00A76",
+  "<d>": "\u00A72SYSTEM\u00A7r",
+  "<l>": "\u00A74SYSTEM\u00A7r",
+  "<p>": "\u00A71SYSTEM\u00A7r",
+  "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r",
+  "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r",
+  "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r",
+  "<r>": "\u00A7r"
 };
 
 var months = [
@@ -123,7 +121,7 @@ function getAssignedSatellite(entity) {
  **/
 function formatSystem(input) {
   output = input.replace(regex, function(thing) {
-    return formatting.system[thing];
+    return formatting[thing];
   });
   return output;
 };
@@ -141,7 +139,6 @@ function getStringArray(nbtList) {
   };
   return result;
 };
-
 /**
  * Turns NBT String List into an array for easier use in code
  * @param {JSEntity} entity - Entity to create group array from
@@ -156,7 +153,6 @@ function getGroupArray(entity) {
   };
   return result;
 };
-
 /**
  * Turns NBT String List into an array for easier use in code
  * @param {JSEntity} entity - Entity to create group array from
@@ -176,8 +172,6 @@ function getGroupArrayMembers(entity) {
   };
   return result;
 };
-
-
 /**
  * Disables a module
  * @param {JSEntity} entity - Required
@@ -263,7 +257,6 @@ function listDisabledModules(entity) {
     systemMessage(entity, "<nh>" + entry);
   });
 };
-
 /**
  * Prints message to player's chat
  * @param {JSPlayer} player - Required
@@ -274,7 +267,6 @@ function chatMessage(player, message) {
     player.as("PLAYER").addChatMessage(message);
   };
 };
-
 /**
  * Sends system message
  * @param {JSPlayer} player - Entity recieving message
@@ -293,8 +285,6 @@ function systemMessage(player, message) {
       break;
   };
 };
-
-
 /**
  * Sends message in group format
  * @param {string} message - Entity recieving message
@@ -323,23 +313,24 @@ function setKeyBind(entity, keyBind) {
  * @param {object} moduleList - Transer system modules
  **/
 function initTranser(moduleList) {
-  /** @param {object} instance - Transer system modules */
-  /** @param {Array} modules - Modules */
-  /** @param {Array} moduleNames - Module names */
-  /** @param {Array} commands - Command prefixes */
-
   var instance = this;
+  /** @var modules - Array of modules */
   var modules = [];
+  /** @var moduleNames - Module names */
   var moduleNames = [];
+  /** @var commands - Command prefixes */
   var commands = [];
+  /** @var commandIndexes - Indexes of command handlers */
   var commandIndexes = [];
+  /** @var messagingIndexes - Indexes of messaging handlers */
   var messagingIndexes = [];
+  /** @var waveIndexes - Wave calling indexes */
   var waveIndexes = [];
+  /** @var emBeingIndex - Index of EM Being */
   var emBeingIndex = -1;
+  /** @var waveChangeIndex - Index of EM Wave Change */
   var waveChangeIndex = -1;
-  var transformed = null;
-  var untransformed = null;
-  var color = null;
+  /** @var powerArray - Command prefixes */
   var powerArray = ["skyhighheroes:transer_system"];
   moduleList.forEach(module => {
     if (module.hasOwnProperty("init")) {
@@ -401,21 +392,14 @@ function initTranser(moduleList) {
     if (player.getData("skyhighheroes:dyn/chat_mode") > (messageHandlers-1)) {
       manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
     };
-    if (player.getData("skyhighheroes:dyn/chat_mode") < 2) {
-      modules[messagingIndex].chatModeInfo(player, manager);
-      modules[messagingIndex].chatInfo(player, manager);
-    } else {
-      modules[brotherBandIndex].chatModeInfo(player, manager);
-      modules[brotherBandIndex].chatInfo(player, manager);
-    };
+    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
+    messagingIndexes[chatMode].chatModeInfo(player, manager);
+    systemMessage(player, messagingIndexes[chatMode].chatInfo(player, manager));
     return true;
   };
   function cycleChats(player, manager) {
-    if (player.getData("skyhighheroes:dyn/chat_mode") < 2) {
-      modules[messagingIndex].chatInfo(player, manager);
-    } else {
-      modules[brotherBandIndex].chatInfo(player, manager);
-    };
+    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
+    systemMessage(player, messagingIndexes[chatMode].chatInfo(player, manager));
     return true;
   };
   function systemInfo(entity) {
@@ -578,40 +562,29 @@ function initTranser(moduleList) {
             } else if (entity.getData("skyhighheroes:dyn/entry").startsWith("enable ")) {
               enableModule(entity, manager, moduleNames, args[1]);
             } else {
-              commandIndexes.some(index => {
-                var result = false;
-                var module = modules[index];
-                if (!isModuleDisabled(entity, module.name)) {
-                  result = module.commandHandler(entity, manager);
-                };
-                return result;
-              });
+              var index = commands.indexOf(args[0]);
+              var module = modules[commandIndexes[index]];
+              if (!isModuleDisabled(entity, module.name)) {
+                module.commandHandler(entity, manager);
+              };
             };
           } else {
-            if (entity.getData("skyhighheroes:dyn/chat_mode") < 2) {
-              modules[messagingIndex].messageHandler(entity, transformed, untransformed, color);
-            } else {
-              modules[brotherBandIndex].messageHandler(entity, transformed, untransformed, color);
-            };
+            messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity, transformed, untransformed, color);
           };
         };
       };
-      
       if (!isModuleDisabled(entity, modules[waveChangeIndex].name)) {
         modules[waveChangeIndex].tickHandler(entity, manager);
       };
       if (!isModuleDisabled(entity, modules[emBeingIndex].name)) {
         modules[emBeingIndex].tickHandler(entity, manager);
       };
-      //Move this to the top of the tick handler
-      if (hasEMBeing && !hasEMWaveChange) {
-        waveIndexes.forEach(index => {
-          var module = modules[index];
-          if (!isModuleDisabled(entity, module.name)) {
-            module.waveHandler(entity, manager);
-          };
-        });
-      };
+      waveIndexes.forEach(index => {
+        var module = modules[index];
+        if (!isModuleDisabled(entity, module.name)) {
+          module.waveHandler(entity, manager);
+        };
+      });
     }
   };
 };
