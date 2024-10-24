@@ -19,7 +19,7 @@ function init(transer) {
   };
   return {
     name: "scanner",
-    type: 1,
+    type: 0,
     command: "sc",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3 && !transer.isModuleDisabled(entity, this.name)) {

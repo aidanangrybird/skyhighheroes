@@ -11,12 +11,11 @@ function init(transer) {
   return {
     //Required
     name: "example",
-    //Required
-    //Type 0 - System reserved
-    //Type 1 - commands only
-    //Type 2 - commands and data management
+    //Type 1 - commands (can have data management)
+    //Type 2 - messaging only
     //Type 3 - commands messaging and data management
-    //Types 4-7 - Not used (Might be used in future)
+    //Types 4-6 - Not used (Might be used in future)
+    //Type 7 - EM Being calling signal
     //Type 8 - EM Being
     //Type 9 - EM Wave Change
     type: 0,

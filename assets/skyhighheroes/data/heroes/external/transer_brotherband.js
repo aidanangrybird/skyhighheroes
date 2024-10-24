@@ -89,6 +89,17 @@ function init(transer) {
     });
     return result;
   };
+  /**
+   * Sends message in BrotherBand format
+   * @param {JSPlayer} player - Entity recieving message
+   * @param {string} sender - Entity sending message
+   * @param {string} message - Messsage content
+   **/
+  function brotherBandMessage(player, sender, message) {
+    if (PackLoader.getSide() == "SERVER") {
+      player.as("PLAYER").addChatMessage("[BrotherBand]> " + sender + "> " + message);
+    };
+  };
   return {
     name: "BrotherBand",
     type: 3,
@@ -110,12 +121,12 @@ function init(transer) {
           if (hasBrother(entity, foundPlayer)) {
             if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                transer.brotherBandMessage(entity, color+transformed+"\u00A7r", message);
+                brotherBandMessage(entity, color+transformed+"\u00A7r", message);
               } else {
-                transer.brotherBandMessage(entity, untransformed, message);
+                brotherBandMessage(entity, untransformed, message);
               };
             } else {
-              transer.brotherBandMessage(entity, entity.getName(), message);
+              brotherBandMessage(entity, entity.getName(), message);
             };
           };
         };

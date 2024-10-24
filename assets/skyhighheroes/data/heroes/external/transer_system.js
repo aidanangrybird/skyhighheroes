@@ -116,6 +116,11 @@ function getAssignedSatellite(entity) {
   return satellite;
 };
 
+/**
+ * Applies formatting to system messages
+ * @param {string} input - Message to format
+ * @returns Formatted message
+ **/
 function formatSystem(input) {
   output = input.replace(regex, function(thing) {
     return formatting.system[thing];
@@ -298,34 +303,6 @@ function logMessage(message) {
   PackLoader.print(message);
 };
 /**
- * Sends message in group format
- * @param {JSPlayer} player - Entity recieving message
- * @param {string} groupName - Name of group
- * @param {string} sender - Name of entity sending message
- * @param {string} message - Message content
- **/
-function groupMessage(player, groupName, sender, message) {
-  chatMessage(player, "[" + groupName + "]>" + sender + "> " + message);
-};
-/**
- * Sends message in normal format
- * @param {JSPlayer} player - Entity recieving message
- * @param {string} sender - Entity sending message
- * @param {string} message - Messsage content
- **/
-function playerMessage(player, sender, message) {
-  chatMessage(player, sender + "> " + message);
-};
-/**
- * Sends message in BrotherBand format
- * @param {JSPlayer} player - Entity recieving message
- * @param {string} sender - Entity sending message
- * @param {string} message - Messsage content
- **/
-function brotherBandMessage(player, sender, message) {
-  chatMessage(player, "[BrotherBand]> " + sender + "> " + message);
-};
-/**
  * Is the setKeyBind stuff for basic transers
  * @param {JSEntity} entity - Required
  * @param {string} keyBind - Required
@@ -346,22 +323,20 @@ function setKeyBind(entity, keyBind) {
  * @param {object} moduleList - Transer system modules
  **/
 function initTranser(moduleList) {
+  /** @param {object} instance - Transer system modules */
+  /** @param {Array} modules - Modules */
+  /** @param {Array} moduleNames - Module names */
+  /** @param {Array} commands - Command prefixes */
+
   var instance = this;
   var modules = [];
   var moduleNames = [];
-  var messageHandlers = 0;
-  var messagingIndex = 0;
-  var brotherBandIndex = 0;
-  var modifierIndexes = [];
-  var keyBindIndexes = [];
-  var attributeProfileIndexes = [];
-  var damageProfileIndexes = [];
-  var propertyIndexes = [];
-  var permisssionIndexes = [];
-  var helpIndexes = [];
+  var commands = [];
   var commandIndexes = [];
-  var tickIndexes = [];
+  var messagingIndexes = [];
   var waveIndexes = [];
+  var emBeingIndex = -1;
+  var waveChangeIndex = -1;
   var transformed = null;
   var untransformed = null;
   var color = null;
@@ -372,104 +347,47 @@ function initTranser(moduleList) {
       modules.push(moduleInit);
       if (moduleInit.hasOwnProperty("type")) {
         switch (moduleInit.type) {
-          //Type 0 - System reserved
-          //Type 1 - commands only
-          //Type 2 - commands and data management
+          //Type 1 - commands (can have data management)
+          //Type 2 - messaging only
           //Type 3 - commands messaging and data management
           //Types 4-6 - Not used (Might be used in future)
           //Type 7 - EM Being calling signal
           //Type 8 - EM Being
           //Type 9 - EM Wave Change
-          case 0:
-            logMessage("Reserved for system!");
-            break;
           case 1:
             moduleNames.push(moduleInit.name);
-            if (moduleInit.hasOwnProperty("commandHandler")) {
-              commandIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("helpMessage")) {
-              helpIndexes.push(moduleList.indexOf(module));
-            };
+            commands.push(moduleInit.command);
+            commandIndexes.push(moduleList.indexOf(module));
             break;
           case 2:
             moduleNames.push(moduleInit.name);
-            if (moduleInit.hasOwnProperty("commandHandler")) {
-              commandIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("helpMessage")) {
-              helpIndexes.push(moduleList.indexOf(module));
-            };
+            messagingIndexes.push(moduleList.indexOf(module));
             break;
           case 3:
             moduleNames.push(moduleInit.name);
-            if (moduleInit.name() == "messaging") {
-              messagingIndex = moduleList.indexOf(module);
-            };
-            if (moduleInit.name() == "BrotherBand") {
-              brotherBandIndex = moduleList.indexOf(module);
-            };
-            if (moduleInit.name() == "messaging") {
-              messageHandlers = messageHandlers + 1;
-            };
-            messageHandlers = messageHandlers + 1;
+            commands.push(moduleList.indexOf(module));
+            commandIndexes.push(moduleList.indexOf(module));
+            messagingIndexes.push(moduleList.indexOf(module));
             break;
           case 7:
-            if (moduleInit.hasOwnProperty("waveHandler")) {
-              waveIndexes.push(moduleList.indexOf(module));
-            };
+            waveIndexes.push(moduleList.indexOf(module));
             break;
           case 8:
             moduleNames.push(moduleInit.name);
-            if (moduleInit.hasOwnProperty("isModifierEnabled")) {
-              modifierIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("isKeyBindEnabled")) {
-              keyBindIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("tickHandler")) {
-              tickIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("waveHandler")) {
-              waveIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("powers")) {
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
-            };
+            var modulePowers = moduleInit.powers;
+            modulePowers.forEach(power => {
+              powerArray.push(power);
+            });
             break;
           case 9:
             moduleNames.push(moduleInit.name);
-            if (module.hasOwnProperty("powers")) {
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
-            };
-            if (moduleInit.hasOwnProperty("isModifierEnabled")) {
-              modifierIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("isKeyBindEnabled")) {
-              keyBindIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("attributeProfiles")) {
-              attributeProfileIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("damageProfiles")) {
-              damageProfileIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("properties")) {
-              propertyIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("permissions")) {
-              permisssionIndexes.push(moduleList.indexOf(module));
-            };
-            if (moduleInit.hasOwnProperty("tickHandler")) {
-              tickIndexes.push(moduleList.indexOf(module));
-            };
+            var modulePowers = moduleInit.powers;
+            modulePowers.forEach(power => {
+              powerArray.push(power);
+            });
             break;
+          default:
+            logMessage("Module at poisition " + moduleList.indexOf(module) + " does not have valid type value!");
         };
       } else {
         logMessage("Module at poisition " + moduleList.indexOf(module) + " does not have a type value!");
@@ -503,15 +421,8 @@ function initTranser(moduleList) {
   function systemInfo(entity) {
     var enableModules = [];
     modules.forEach(module => {
-      if (!hasEMWaveChange && !module.hasOwnProperty("isModifierEnabled")) {
-        if (!isModuleDisabled(entity, module.name)) {
-          enableModules.push(module);
-        };
-      };
-      if (hasEMWaveChange) {
-        if (!isModuleDisabled(entity, module.name)) {
-          enableModules.push(module);
-        };
+      if (!isModuleDisabled(entity, module.name)) {
+        enableModules.push(module);
       };
     });
     var enabledModulesMessage = (enableModules.length > 1) ? "<n>Loaded " + enableModules.length + " modules: " : "<n>Loaded " + enableModules.length + " module: ";
@@ -576,75 +487,41 @@ function initTranser(moduleList) {
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
     },
     initEMWaveChange: (hero) => {
-      if (hasEMWaveChange) {
-        hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
-        hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
-        modules.forEach(module => {
-          if (module.hasOwnProperty("keyBinds")) {
-            module.keyBinds(hero);
-          };
-          if (module.hasOwnProperty("canAim")) {
-            hero.supplyFunction("canAim", entity => module.canAim(entity));
-          };
-          if (module.hasOwnProperty("initDamageProfiles")) {
-            module.initDamageProfiles(hero);
-          };
-          if (module.hasOwnProperty("initProfiles")) {
-            module.initProfiles(hero);
-          };
-          if (module.hasOwnProperty("initEquipment")) {
-            module.initEquipment(hero);
-          };
-          if (module.hasOwnProperty("initSounds")) {
-            module.initSounds(hero);
-          };
-        });
+      hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
+      hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
+      if (modules[waveChangeIndex].hasOwnProperty("keyBinds")) {
+        modules[waveChangeIndex].keyBinds(hero);
+      };
+      if (modules[waveChangeIndex].hasOwnProperty("canAim")) {
+        modules[waveChangeIndex].supplyFunction("canAim", entity => module.canAim(entity));
+      };
+      if (modules[waveChangeIndex].hasOwnProperty("initDamageProfiles")) {
+        modules[waveChangeIndex].initDamageProfiles(hero);
+      };
+      if (modules[waveChangeIndex].hasOwnProperty("initProfiles")) {
+        modules[waveChangeIndex].initProfiles(hero);
+      };
+      if (modules[waveChangeIndex].hasOwnProperty("initEquipment")) {
+        modules[waveChangeIndex].initEquipment(hero);
+      };
+      if (modules[waveChangeIndex].hasOwnProperty("initSounds")) {
+        modules[waveChangeIndex].initSounds(hero);
       };
     },
     getProperty: function (entity, property) {
-      var result = null;
-      propertyIndexes.forEach(index => {
-        if (!isModuleDisabled(entity, modules[index].name())) {
-          result = modules[index].permissions(entity, property);
-        };
-      });
-      return result;
+      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].properties(entity, property));
     },
     getPermission: function (entity, permission) {
-      var result = null;
-      permisssionIndexes.forEach(index => {
-        if (!isModuleDisabled(entity, modules[index].name())) {
-          result = modules[index].permissions(entity, permission);
-        };
-      });
-      return result;
+      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].permissions(entity, permission));
     },
     getTierOverride: function (entity) {
-      var result = null;
-      modules.forEach(module => {
-        if (module.hasOwnProperty("tierOverride")) {
-          result = module.tierOverride(entity);
-        };
-      });
-      return result;
+      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].tierOverride(entity));
     },
     getAttributeProfile: function (entity) {
-      var result = null;
-      attributeProfileIndexes.forEach(index => {
-        if (!isModuleDisabled(entity, modules[index].name())) {
-          result = modules[index].attributeProfiles(entity);
-        };
-      });
-      return result;
+      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].attributeProfiles(entity));
     },
     getDamageProfile: function (entity) {
-      var result = null;
-      damageProfileIndexes.forEach(index => {
-        if (!isModuleDisabled(entity, modules[index].name())) {
-          result = modules[index].damageProfiles(entity);
-        };
-      });
-      return result;
+      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].damageProfiles(entity));
     },
     profileWave: function (hero) {
       hero.addAttributeProfile("INACTIVE", (profile) => {
@@ -656,26 +533,10 @@ function initTranser(moduleList) {
       });
     },
     isKeyBindEnabled: function (entity, keyBind) {
-      if (keyBindIndexes.length == 1) {
-        return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind));
-      };
-      if (keyBindIndexes.length == 2) {
-        return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[keyBindIndexes[1]].name())) ? false : modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind));
-      };
-      if (keyBindIndexes.length == 3) {
-        return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name())) ? false : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[keyBindIndexes[1]].name())) ? false : modules[keyBindIndexes[1]].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[keyBindIndexes[2]].name())) ? false : modules[keyBindIndexes[2]].isKeyBindEnabled(entity, keyBind));
-      };
+      return ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind));
     },
     isModifierEnabled: function (entity, modifier) {
-      if (modifierIndexes.length == 1) {
-        return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name())) ? false : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier));
-      };
-      if (modifierIndexes.length == 2) {
-        return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name())) ? false : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[modifierIndexes[1]].name())) ? false : modules[modifierIndexes[1]].isModifierEnabled(entity, modifier));
-      };
-      if (modifierIndexes.length == 3) {
-        return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name())) ? false : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[modifierIndexes[1]].name())) ? false : modules[modifierIndexes[1]].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[modifierIndexes[2]].name())) ? false : modules[modifierIndexes[2]].isModifierEnabled(entity, modifier));
-      };
+      return ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier));
     },
     tickHandler: (entity, manager) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
@@ -735,12 +596,13 @@ function initTranser(moduleList) {
           };
         };
       };
-      tickIndexes.forEach(index => {
-        var module = modules[index];
-        if (!isModuleDisabled(entity, module.name)) {
-          module.tickHandler(entity, manager);
-        };
-      });
+      
+      if (!isModuleDisabled(entity, modules[waveChangeIndex].name)) {
+        modules[waveChangeIndex].tickHandler(entity, manager);
+      };
+      if (!isModuleDisabled(entity, modules[emBeingIndex].name)) {
+        modules[emBeingIndex].tickHandler(entity, manager);
+      };
       //Move this to the top of the tick handler
       if (hasEMBeing && !hasEMWaveChange) {
         waveIndexes.forEach(index => {

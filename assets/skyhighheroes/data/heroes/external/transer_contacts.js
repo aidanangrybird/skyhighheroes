@@ -97,25 +97,6 @@ function init(transer) {
         return true;
       };
     },
-    chatModeInfo: function (player) {
-      transer.systemMessage(player, "<n>You are now in <nh>normal<n> mode!");
-    },
-    chatInfo: function (player, manager) {
-      if (player.getWornChestplate().nbt().hasKey("contacts")) {
-        if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-          if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
-          };
-          var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          transer.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
-        } else {
-          transer.systemMessage(player, "<e>You do not have any contacts!");
-        };
-      } else {
-        transer.systemMessage(player, "<e>You do not have any contacts!");
-      };
-    },
     helpMessage: function (entity) {
       transer.systemMessage(entity, "<n>!c <nh>-<n> Contacts")
     }
