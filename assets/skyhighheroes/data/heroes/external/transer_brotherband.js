@@ -117,19 +117,20 @@ function init(transer) {
       var reciever = brothers[activeChat];
       var foundPlayer = null;
       var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 120);
-      entities.forEach(player => {
+      entities.some(player => {
         if (player.is("PLAYER") && player.getName() == reciever) {
           foundPlayer = player;
         };
+        return (foundPlayer != null);
       });
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
-            if (typeof transer.transformed === "string" && typeof transer.color === "string" && typeof transer.untransformed === "string") {
+            if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                brotherBandMessage(entity, transer.color+transer.transformed+"\u00A7r", message);
+                brotherBandMessage(entity, transer.color+transer.waveChange+"\u00A7r", message);
               } else {
-                brotherBandMessage(entity, transer.untransformed, message);
+                brotherBandMessage(entity, transer.human, message);
               };
             } else {
               brotherBandMessage(entity, entity.getName(), message);

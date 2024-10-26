@@ -19,7 +19,7 @@ function init(transer) {
   };
   return {
     name: "scanner",
-    type: 0,
+    type: 1,
     command: "sc",
     helpMessage: "<n>!sc <nh>-<n> Scanner",
     commandHandler: function (entity, manager, arguments) {

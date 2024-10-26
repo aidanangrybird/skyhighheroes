@@ -34,7 +34,7 @@ function init(transer) {
   return {
     name: "megaMan",
     type: 9,
-    waveChangeName: "Mega Man",
+    waveChange: "Mega Man",
     color: "\u00A7b",
     human: "Geo Stelar",
     powers: [

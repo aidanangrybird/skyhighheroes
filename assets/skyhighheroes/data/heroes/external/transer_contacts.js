@@ -67,7 +67,7 @@ function init(transer) {
   };
   return {
     name: "contacts",
-    type: 2,
+    type: 1,
     command: "c",
     helpMessage: "<n>!c <nh>-<n> Contacts",
     commandHandler: function (entity, manager, arguments) {

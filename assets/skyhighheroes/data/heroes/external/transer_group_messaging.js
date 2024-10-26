@@ -163,7 +163,7 @@ function init(transer) {
     command: "g",
     helpMessage: "<n>!g <nh>-<n> Groups",
     chatModeInfo: "<n>You are now in <nh>group<n> mode!",
-    messageHandler: function (entity, transformed, untransformed, color) {
+    messageHandler: function (entity) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
@@ -180,11 +180,11 @@ function init(transer) {
         foundPlayers.forEach(player => {
           if (transer.isWearingTranser(player)) {
             if (hasGroup(entity, player, groupName)) {
-              if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+              if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
                 if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                  groupMessage(player, groupName, color+transformed+"\u00A7r", message);
+                  groupMessage(player, groupName, transer.color+transer.waveChange+"\u00A7r", message);
                 } else {
-                  groupMessage(player, groupName, untransformed, message);
+                  groupMessage(player, groupName, transer.human, message);
                 };
               } else {
                 groupMessage(player, groupName, entity.getName(), message);
@@ -192,11 +192,11 @@ function init(transer) {
             };
           };
         });
-        if (typeof transformed === "string" && typeof color === "string" && typeof untransformed === "string") {
+        if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
           if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-            groupMessage(entity, groupName, color+transformed+"\u00A7r", message);
+            groupMessage(entity, groupName, transer.color+transer.waveChange+"\u00A7r", message);
           } else {
-            groupMessage(entity, groupName, untransformed, message);
+            groupMessage(entity, groupName, transer.human, message);
           };
         } else {
           groupMessage(entity, groupName, entity.getName(), message);

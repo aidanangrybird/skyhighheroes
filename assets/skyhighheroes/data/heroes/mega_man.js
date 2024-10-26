@@ -2,12 +2,13 @@ var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var transerSystem = implement("skyhighheroes:external/transer_system");
 var transerMessaging = implement("skyhighheroes:external/transer_messaging");
+var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var megaMan = implement("skyhighheroes:external/mega_man");
 var omegaXis = implement("skyhighheroes:external/omega_xis");
-var transerOS = transerSystem.initTranser([transerMessaging, transerBrotherBand, transerContacts, transerScanner, megaMan, omegaXis]);
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, megaMan, omegaXis], "geo");
 function init(hero) {
   hero.setName("\u00A7bMega Man");
   hero.setTier(10);
@@ -65,7 +66,8 @@ function init(hero) {
   });
   hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
-    transerOS.tickHandler(entity, manager);
+    transerOS.transerHandler(entity, manager);
+    transerOS.emWaveHandler(entity, manager);
     if (entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
       manager.setData(entity, "fiskheroes:disguise", null);
     };

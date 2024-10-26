@@ -33,7 +33,7 @@ function init(transer) {
   };
   return {
     name: "messaging",
-    type: 1,
+    type: 2,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity) {
       var message = entity.getData("skyhighheroes:dyn/entry");
@@ -41,21 +41,22 @@ function init(transer) {
       var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
       var foundPlayer = null;
       var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-      entities.forEach(player => {
+      entities.some(player => {
         if (player.is("PLAYER") && player.getName() == reciever) {
           foundPlayer = player;
         };
+        return (foundPlayer != null);
       });
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            if (typeof transer.transformed === "string" && typeof transer.color === "string" && typeof transer.untransformed === "string") {
+            if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, transer.color+transer.transformed+"\u00A7r", message);
-                playerMessage(entity, transer.color+transer.transformed+"\u00A7r", message);
+                playerMessage(foundPlayer, transer.color+transer.waveChange+"\u00A7r", message);
+                playerMessage(entity, transer.color+transer.waveChange+"\u00A7r", message);
               } else {
-                playerMessage(foundPlayer, transer.untransformed, message);
-                playerMessage(entity, transer.untransformed, message);
+                playerMessage(foundPlayer, transer.human, message);
+                playerMessage(entity, transer.human, message);
               };
             } else {
               playerMessage(foundPlayer, entity.getName(), message);
