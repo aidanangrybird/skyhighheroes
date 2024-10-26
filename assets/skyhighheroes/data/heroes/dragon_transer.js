@@ -5,7 +5,7 @@ var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband")
 var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var theFugitive = implement("skyhighheroes:external/the_fugitive");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, theFugitive], "dragon");
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, theFugitive], "dragonSky");
 function init(hero) {
   hero.setAliases("dragon_transer");
   hero.setName("Dragon Sky");

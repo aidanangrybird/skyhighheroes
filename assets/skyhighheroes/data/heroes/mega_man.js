@@ -8,7 +8,7 @@ var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var megaMan = implement("skyhighheroes:external/mega_man");
 var omegaXis = implement("skyhighheroes:external/omega_xis");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, megaMan, omegaXis], "geo");
+var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, megaMan, omegaXis], "geoStelar");
 function init(hero) {
   hero.setName("\u00A7bMega Man");
   hero.setTier(10);

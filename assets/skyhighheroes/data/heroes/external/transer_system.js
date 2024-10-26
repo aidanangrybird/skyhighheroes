@@ -297,9 +297,9 @@ function setKeyBind(entity, keyBind) {
 /**
  * Initializes transer system
  * @param {object} moduleList - Transer system modules
- * @param {string} suitID - Required, you'll be happy that is a thing or else debugging is painful
+ * @param {string} transerName - Required, you'll be happy that is a thing or else debugging is painful
  **/
-function initTranser(moduleList, suitID) {
+function initTranser(moduleList, transerName) {
   var type1Specs = ["command", "commandHandler", "helpMessage"];
   var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo"];
   var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
@@ -333,6 +333,7 @@ function initTranser(moduleList, suitID) {
   var waveColor = null;
   /** @var emBeing - EM Being name */
   var emBeing = null;
+  logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
   moduleList.forEach(module => {
     if (module.hasOwnProperty("init")) {
       var moduleInit = module.init(instance);
@@ -356,15 +357,16 @@ function initTranser(moduleList, suitID) {
               };
             });
             if (hasError) {
-              logMessage("TranserOS> Module \"" + moduleInit.name + "\" in transer \"" + suitID + "\" cannot be initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
               errors.forEach(error => {
-                logMessage("TranserOS> The module is missing \"" + error + "\" part of the specifcation!");
+                logMessage("Module is missing the \"" + error + "\" specification!");
               });
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 2:
@@ -377,14 +379,15 @@ function initTranser(moduleList, suitID) {
               };
             });
             if (hasError) {
-              logMessage("TranserOS> Module \"" + moduleInit.name + "\" in transer \"" + suitID + "\" cannot be initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
               errors.forEach(error => {
-                logMessage("TranserOS> The module is missing \"" + error + "\" part of the specifcation!");
+                logMessage("Module is missing the \"" + error + "\" specification!");
               });
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
               messagingIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 3:
@@ -397,9 +400,9 @@ function initTranser(moduleList, suitID) {
               };
             });
             if (hasError) {
-              logMessage("TranserOS> Module \"" + moduleInit.name + "\" in transer \"" + suitID + "\" cannot be initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
               errors.forEach(error => {
-                logMessage("TranserOS> The module is missing \"" + error + "\" part of the specifcation!");
+                logMessage("Module is missing the \"" + error + "\" specification!");
               });
             } else {
               modules.push(moduleInit);
@@ -407,6 +410,7 @@ function initTranser(moduleList, suitID) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               messagingIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 7:
@@ -419,13 +423,14 @@ function initTranser(moduleList, suitID) {
               };
             });
             if (hasError) {
-              logMessage("TranserOS> Module at position " + moduleList.indexOf(module) + " cannot be initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
               errors.forEach(error => {
-                logMessage("TranserOS> Module at position " + moduleList.indexOf(module) + " is missing " + error + " part of the specifcation!");
+                logMessage("Module is missing the \"" + error + "\" specification!");
               });
             } else {
               modules.push(moduleInit);
               waveIndexes.push(modules.length-1);
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 8:
@@ -438,9 +443,9 @@ function initTranser(moduleList, suitID) {
               };
             });
             if (hasError) {
-              logMessage("TranserOS> Module \"" + moduleInit.name + "\" in transer \"" + suitID + "\" cannot be initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized!");
               errors.forEach(error => {
-                logMessage("TranserOS> The module is missing \"" + error + "\" part of the specifcation!");
+                logMessage("Module is missing the \"" + error + "\" specification!");
               });
             } else {
               modules.push(moduleInit);
@@ -452,6 +457,7 @@ function initTranser(moduleList, suitID) {
               emBeingIndex = modules.length-1;
               emBeing = moduleInit.emBeing;
               human = (moduleInit.hasOwnProperty("human"))?moduleInit.human:null;
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 9:
@@ -464,9 +470,9 @@ function initTranser(moduleList, suitID) {
               };
             });
             if (hasError) {
-              logMessage("TranserOS> Module \"" + moduleInit.name + "\" in transer \"" + suitID + "\" cannot be initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" cannot be initialized on transer " + transerName + "!");
               errors.forEach(error => {
-                logMessage("TranserOS> Module " + moduleInit.name + "\" is missing \"" + error + "\" part of the specifcation!");
+                logMessage("Module is missing the \"" + error + "\" specification!");
               });
             } else {
               modules.push(moduleInit);
@@ -479,7 +485,7 @@ function initTranser(moduleList, suitID) {
               waveColor = moduleInit.color;
               waveChange = moduleInit.waveChange;
               human = moduleInit.human;
-              //logMessage("TranserOS> Module " + moduleInit.name + " initialized!");
+              logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           default:
@@ -492,12 +498,7 @@ function initTranser(moduleList, suitID) {
       logMessage("TranserOS> Module at position " + moduleList.indexOf(module) + " cannot be initialized!");
     };
   });
-  commands.forEach(command => {
-    logMessage(command);
-  });
-  commandIndexes.forEach(command => {
-    logMessage(command);
-  });
+  logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
   function cycleChatModes(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
     if (player.getData("skyhighheroes:dyn/chat_mode") > (messagingIndexes.length-1)) {
@@ -657,8 +658,6 @@ function initTranser(moduleList, suitID) {
               enableModule(entity, manager, moduleNames, args[1]);
             } else {
               var index = commands.indexOf(args[0]);
-              logMessage(index);
-              logMessage(commandIndexes[index]);
               var module = modules[commandIndexes[index]];
               if (!isModuleDisabled(entity, module.name)) {
                 module.commandHandler(entity, manager, args);
