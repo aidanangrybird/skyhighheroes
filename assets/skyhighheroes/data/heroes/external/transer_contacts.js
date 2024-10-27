@@ -71,35 +71,30 @@ function init(transer) {
     command: "c",
     helpMessage: "<n>!c <nh>-<n> Contacts",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4 && !transer.isModuleDisabled(entity, this.name)) {
+      if (arguments.length > 1 && arguments.length < 4) {
         switch(arguments[1]) {
           case "add":
             (arguments.length == 3) ? addContact(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!c add <nh><name>");
-            return true;
+            break;
           case "rem":
             (arguments.length == 3) ? removeContact(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!c rem <nh><name>");
-            return true;
+            break;
           case "list":
             listContacts(entity);
-            return true;
+            break;
           case "help":
             transer.systemMessage(entity, "<n>Contact commands:");
             transer.systemMessage(entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
             transer.systemMessage(entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
             transer.systemMessage(entity, "<n>!c list <nh>-<n> Lists contacts");
             transer.systemMessage(entity, "<n>!c help <nh>-<n> Shows contact commands");
-            return true;
+            break;
           default:
             transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
-            return true;
+            break;
         };
       } else {
-        if (!transer.isModuleDisabled(entity, this.name())) {
-          transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
-        } else {
-          transer.systemMessage(entity, "<e>Module <eh>" + this.name() + "<e> is disabled!");
-        };
-        return true;
+        transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
       };
     },
   };

@@ -204,26 +204,26 @@ function init(transer) {
       };
     },
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3 && !transer.isModuleDisabled(entity, this.name)) {
+      if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
           case "add":
             (arguments.length == 3) ? addGroup(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!g add <nh><name>");
-            return true;
+            break;
           case "rem":
             (arguments.length == 3) ? removeGroup(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!g rem <nh><name>");
-            return true;
+            break;
           case "list":
             listGroups(entity, manager);
-            return true;
+            break;
           case "addMem":
             (arguments.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : transer.systemMessage(entity, "<n>!g addMem <nh><name>");
-            return true;
+            break;
           case "remMem":
             (arguments.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : transer.systemMessage(entity, "<n>!g remMem <nh><name>");
-            return true;
+            break;
           case "listMem":
             listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
-            return true;
+            break;
           case "help":
             transer.systemMessage(entity, "Group commands:")
             transer.systemMessage(entity, "<n>!g add <nh><name><n> <nh>-<n> Creates group by name");
@@ -234,18 +234,13 @@ function init(transer) {
             transer.systemMessage(entity, "<n>!g remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
             transer.systemMessage(entity, "<n>!g listMem <nh>-<n> Lists members in currently selected group");
             transer.systemMessage(entity, "<n>!g help <nh>-<n> Shows group commands");
-            return true;
+            break;
           default:
             transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
-            return true;
+            break;
         };
       } else {
-        if (!transer.isModuleDisabled(entity, this.name)) {
-          transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
-        } else {
-          transer.systemMessage(entity, "<e>Module <eh>groupMessaging<e> is disabled!");
-        };
-        return true;
+        transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
       };
     },
     chatInfo: function (player, manager) {

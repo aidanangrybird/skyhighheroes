@@ -140,35 +140,30 @@ function init(transer) {
       };
     },
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4 && !transer.isModuleDisabled(entity, this.name)) {
+      if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
           case "form":
             (arguments.length == 3) ? formBrotherBand(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!bb form <nh><name>");
-            return true;
+            break;
           case "cut":
             (arguments.length == 3) ? cutBrotherBand(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!bb cut <nh><name>");
-            return true;
+            break;
           case "list":
             listBrotherBands(entity);
-            return true;
+            break;
           case "help":
             transer.systemMessage(entity, "<n>BrotherBand commands:")
             transer.systemMessage(entity, "<n>!bb form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
             transer.systemMessage(entity, "<n>!bb cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
             transer.systemMessage(entity, "<n>!bb list <nh>-<n> Lists Brothers");
             transer.systemMessage(entity, "<n>!bb help <nh>-<n> Shows BrotherBand commands");
-            return true;
+            break;
           default:
             transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
-            return true;
+            break;
         };
       } else {
-        if (!transer.isModuleDisabled(entity, this.name())) {
-          transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
-        } else {
-          transer.systemMessage(entity, "<e>Module <eh>BrotherBand<e> is disabled!");
-        };
-        return true;
+        transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
       };
     },
     chatInfo: function (player, manager) {

@@ -22,28 +22,24 @@ function init(transer) {
     type: 1,
     command: "sc",
     helpMessage: "<n>!sc <nh>-<n> Scanner",
+    disabledMessage: "<e>Module <eh>scanner<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3 && !transer.isModuleDisabled(entity, this.name)) {
+      if (arguments.length > 1 && arguments.length < 3) {
         switch(arguments[1]) {
           case "entity":
             entityScan(entity);
-            return true;
+            break;
           case "help":
             transer.systemMessage(entity, "<n>Scanner commands:");
             transer.systemMessage(entity, "<n>!sc <nh>entity<n> <nh>-<n> Entity scan");
             transer.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
-            return true;
+            break;
           default:
             transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
-            return true;
+            break;
         };
       } else {
-        if (!transer.isModuleDisabled(entity, this.name())) {
-          transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
-        } else {
-          transer.systemMessage(entity, "<e>Module <eh>scanner<e> is disabled!");
-        };
-        return true;
+        transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
       };
     },
   };

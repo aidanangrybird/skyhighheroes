@@ -42,7 +42,7 @@ function init(hero) {
     };
     return transerOS.isModifierEnabled(entity, modifier);
   });
-  hero.setTierOverride(entity => transerOS.getTierOverride(entity));
+  hero.setTierOverride((entity) => transerOS.getTierOverride(entity));
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
@@ -64,7 +64,7 @@ function init(hero) {
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
-  hero.setDamageProfile(entity => transerOS.getDamageProfile(entity));
+  hero.setDamageProfile((entity) => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
     transerOS.transerHandler(entity, manager);
     transerOS.emWaveHandler(entity, manager);

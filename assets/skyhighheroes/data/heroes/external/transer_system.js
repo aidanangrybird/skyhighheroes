@@ -3,11 +3,15 @@
 
 var transers = [
   {"suit": "skyhighocs:ace_stelar", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
+  {"suit": "skyhighocs:solar_flame", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
   {"suit": "skyhighocs:aidan_stelar", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
+  {"suit": "skyhighocs:squall_vortex", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
   {"suit": "skyhighocs:chase_stelar", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
+  {"suit": "skyhighocs:pryetak_nebula", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
   {"suit": "skyhighocs:lucas_stelar", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
-  {"suit": "skyhighheroes:geo_stelar", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:geo_stelar/subaru", "satellite": "pegasus"},
+  {"suit": "skyhighocs:crimson_asteroid", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
+  {"suit": "skyhighheroes:mega_man", "satellite": "pegasus"},
+  {"suit": "skyhighheroes:mega_man/subaru", "satellite": "pegasus"},
   {"suit": "skyhighheroes:pegasus_transer", "satellite": "pegasus"},
   {"suit": "skyhighheroes:leo_transer", "satellite": "leo"},
   {"suit": "skyhighheroes:dragon_transer", "satellite": "dragon"}
@@ -269,6 +273,9 @@ function systemMessage(player, message) {
     case "pegasus":
       chatMessage(player, formatSystem("<p>> " + message));
       break;
+    default:
+      chatMessage(player, formatSystem("<e>Transer is not assigned to a satellite!"));
+      break;
   };
 };
 /**
@@ -294,19 +301,29 @@ function setKeyBind(entity, keyBind) {
   };
 };
 
+function basicTierOverride(entity) {
+  return 0;
+};
+
 /**
  * Initializes transer system
  * @param {object} moduleList - Transer system modules
  * @param {string} transerName - Required, you'll be happy that is a thing or else debugging is painful
  **/
 function initTranser(moduleList, transerName) {
+  var transerInstance = this;
+  //Type 1 - commands (can have data management)
   var type1Specs = ["command", "commandHandler", "helpMessage"];
+  //Type 2 - messaging only
   var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo"];
+  //Type 3 - commands messaging and data management
   var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
+  //Type 7 - EM Being calling signal
   var type7Specs = ["waveHandler"];
+  //Type 8 - EM Being
   var type8Specs = ["emBeing", "powers", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "tickHandler"];
+  //Type 9 - EM Wave Change
   var type9Specs = ["waveChange", "powers", "keyBinds", "tierOverride", "properties", "initDamageProfiles", "damageProfiles", "initProfiles", "attributeProfiles", "isKeyBindEnabled", "isModifierEnabled", "tickHandler"];
-  var instance = this;
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
@@ -320,9 +337,9 @@ function initTranser(moduleList, transerName) {
   /** @var waveIndexes - Wave calling indexes */
   var waveIndexes = [];
   /** @var emBeingIndex - Index of EM Being */
-  var emBeingIndex = 0;
+  var emBeingIndex = -1;
   /** @var waveChangeIndex - Index of EM Wave Change */
-  var waveChangeIndex = 0;
+  var waveChangeIndex = -1;
   /** @var powerArray - Array of powers to add */
   var powerArray = ["skyhighheroes:transer_system"];
   /** @var human - Untransformed name */
@@ -333,23 +350,15 @@ function initTranser(moduleList, transerName) {
   var waveColor = null;
   /** @var emBeing - EM Being name */
   var emBeing = null;
+  var hasError = false;
+  var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
   moduleList.forEach(module => {
     if (module.hasOwnProperty("init")) {
-      var moduleInit = module.init(instance);
+      var moduleInit = module.init(transerInstance);
       if (moduleInit.hasOwnProperty("type")) {
         switch (moduleInit.type) {
-          //Type 0 - System reserved
-          //Type 1 - commands (can have data management)
-          //Type 2 - messaging only
-          //Type 3 - commands messaging and data management
-          //Types 4-6 - Not used (Might be used in future)
-          //Type 7 - EM Being calling signal
-          //Type 8 - EM Being
-          //Type 9 - EM Wave Change
           case 1:
-            var hasError = false;
-            var errors = [];
             type1Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
@@ -361,6 +370,7 @@ function initTranser(moduleList, transerName) {
               errors.forEach(error => {
                 logMessage("Module is missing the \"" + error + "\" specification!");
               });
+              errors = [];
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
@@ -370,8 +380,6 @@ function initTranser(moduleList, transerName) {
             };
             break;
           case 2:
-            var hasError = false;
-            var errors = [];
             type2Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
@@ -383,6 +391,7 @@ function initTranser(moduleList, transerName) {
               errors.forEach(error => {
                 logMessage("Module is missing the \"" + error + "\" specification!");
               });
+              errors = [];
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
@@ -391,8 +400,6 @@ function initTranser(moduleList, transerName) {
             };
             break;
           case 3:
-            var hasError = false;
-            var errors = [];
             type3Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
@@ -404,6 +411,7 @@ function initTranser(moduleList, transerName) {
               errors.forEach(error => {
                 logMessage("Module is missing the \"" + error + "\" specification!");
               });
+              errors = [];
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
@@ -414,8 +422,6 @@ function initTranser(moduleList, transerName) {
             };
             break;
           case 7:
-            var hasError = false;
-            var errors = [];
             type7Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
@@ -427,15 +433,15 @@ function initTranser(moduleList, transerName) {
               errors.forEach(error => {
                 logMessage("Module is missing the \"" + error + "\" specification!");
               });
+              errors = [];
             } else {
               modules.push(moduleInit);
               waveIndexes.push(modules.length-1);
+              human = (moduleInit.hasOwnProperty("human")) ? moduleInit.human : null;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 8:
-            var hasError = false;
-            var errors = [];
             type8Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
@@ -447,6 +453,7 @@ function initTranser(moduleList, transerName) {
               errors.forEach(error => {
                 logMessage("Module is missing the \"" + error + "\" specification!");
               });
+              errors = [];
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
@@ -456,13 +463,11 @@ function initTranser(moduleList, transerName) {
               });
               emBeingIndex = modules.length-1;
               emBeing = moduleInit.emBeing;
-              human = (moduleInit.hasOwnProperty("human"))?moduleInit.human:null;
+              human = (moduleInit.hasOwnProperty("human")) ? moduleInit.human : null;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
           case 9:
-            var hasError = false;
-            var errors = [];
             type9Specs.forEach(spec => {
               if (!moduleInit.hasOwnProperty(spec)) {
                 errors.push(spec);
@@ -474,6 +479,7 @@ function initTranser(moduleList, transerName) {
               errors.forEach(error => {
                 logMessage("Module is missing the \"" + error + "\" specification!");
               });
+              errors = [];
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
@@ -489,13 +495,13 @@ function initTranser(moduleList, transerName) {
             };
             break;
           default:
-            logMessage("TranserOS> Module at position " + moduleList.indexOf(module) + " does not have valid type value!");
+            logMessage("Module at position " + moduleList.indexOf(module) + " does not have valid type value!");
         };
       } else {
-        logMessage("TranserOS> Module at position " + moduleList.indexOf(module) + " does not have a type value!");
+        logMessage("Module at position " + moduleList.indexOf(module) + " does not have a type value!");
       };
     } else {
-      logMessage("TranserOS> Module at position " + moduleList.indexOf(module) + " cannot be initialized!");
+      logMessage("Module at position " + moduleList.indexOf(module) + " cannot be initialized!");
     };
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
@@ -579,30 +585,38 @@ function initTranser(moduleList, transerName) {
     initEMWaveChange: (hero) => {
       hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
-      if (modules[waveChangeIndex].hasOwnProperty("canAim")) {
+      if (emBeingIndex > -1) {
+        modules[emBeingIndex].keyBinds(hero);
+      };
+      if (waveChangeIndex > -1) {
+        modules[waveChangeIndex].keyBinds(hero);
+        modules[waveChangeIndex].initDamageProfiles(hero);
+        modules[waveChangeIndex].initProfiles(hero);
+      };
+      if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("canAim")) {
         hero.supplyFunction("canAim", entity => modules[waveChangeIndex].canAim(entity));
       };
-      if (modules[waveChangeIndex].hasOwnProperty("initEquipment")) {
+      if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("initEquipment")) {
         modules[waveChangeIndex].initEquipment(hero);
       };
-      if (modules[waveChangeIndex].hasOwnProperty("initSounds")) {
+      if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("initSounds")) {
         modules[waveChangeIndex].initSounds(hero);
       };
     },
     getProperty: function (entity, property) {
-      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].properties(entity, property));
+      return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].properties(entity, property)));
     },
     getPermission: function (entity, permission) {
-      return ((modules[waveChangeIndex].hasOwnProperty("permissions") && isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].permissions(entity, permission));
+      return ((waveChangeIndex == -1) ? null : ((!modules[waveChangeIndex].hasOwnProperty("permissions") && isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].permissions(entity, permission)));
     },
     getTierOverride: function (entity) {
-      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].tierOverride(entity));
+      return ((waveChangeIndex == -1) ? basicTierOverride(entity) : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? basicTierOverride(entity) : modules[waveChangeIndex].tierOverride(entity)));
     },
     getAttributeProfile: function (entity) {
-      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].attributeProfiles(entity));
+      return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].attributeProfiles(entity)));
     },
     getDamageProfile: function (entity) {
-      return ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].damageProfiles(entity));
+      return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].damageProfiles(entity)));
     },
     profileWave: function (hero) {
       hero.addAttributeProfile("WAVE_CALLING", (profile) => {
@@ -614,10 +628,10 @@ function initTranser(moduleList, transerName) {
       });
     },
     isKeyBindEnabled: function (entity, keyBind) {
-      return ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind)) || ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind));
+      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind))) || ((waveChangeIndex == -1) ? false : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind)));
     },
     isModifierEnabled: function (entity, modifier) {
-      return ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier)) || ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier));
+      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier))) || ((waveChangeIndex == -1) ? false : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier)));
     },
     transerHandler: (entity, manager) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
@@ -640,11 +654,11 @@ function initTranser(moduleList, transerName) {
           if (entry.startsWith("!")) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
             var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-            if (entity.getData("skyhighheroes:dyn/entry") == "systemInfo") {
+            if (args[0] == "systemInfo") {
               systemInfo(entity);
-            } else if (entity.getData("skyhighheroes:dyn/entry") == "status") {
+            } else if (args[0] == "status") {
               status(entity);
-            } else if (entity.getData("skyhighheroes:dyn/entry") == "help") {
+            } else if (args[0] == "help") {
               systemMessage(entity, "<n>Available commands:");
               commandIndexes.forEach(index => {
                 var module = modules[index];
@@ -652,35 +666,37 @@ function initTranser(moduleList, transerName) {
                   systemMessage(entity, module.helpMessage);
                 };
               });
-            } else if (entity.getData("skyhighheroes:dyn/entry").startsWith("disable ")) {
+            } else if (args[0] == "disable") {
               disableModule(entity, manager, moduleNames, args[1]);
-            } else if (entity.getData("skyhighheroes:dyn/entry").startsWith("enable ")) {
+            } else if (args[0] == "enable") {
               enableModule(entity, manager, moduleNames, args[1]);
             } else {
               var index = commands.indexOf(args[0]);
               var module = modules[commandIndexes[index]];
               if (!isModuleDisabled(entity, module.name)) {
                 module.commandHandler(entity, manager, args);
+              } else {
+                systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
               };
             };
           } else {
             messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity);
           };
         };
-      };
+      };/* 
       if (waveIndexes.length > 0) {
         waveIndexes.forEach(index => {
           modules[index].waveHandler(entity, manager);
         });
-      };
+      }; */
     },
-    emWaveHandler: (entity, manager) =>{
-      if (!isModuleDisabled(entity, modules[waveChangeIndex].name)) {
+    emWaveHandler: (entity, manager) => {
+      if (waveChangeIndex > -1 && !isModuleDisabled(entity, modules[waveChangeIndex].name)) {
         modules[waveChangeIndex].tickHandler(entity, manager);
       };
-      if (!isModuleDisabled(entity, modules[emBeingIndex].name)) {
+      if (emBeingIndex > -1 && !isModuleDisabled(entity, modules[emBeingIndex].name)) {
         modules[emBeingIndex].tickHandler(entity, manager);
       };
-    },
+    }
   };
 };
