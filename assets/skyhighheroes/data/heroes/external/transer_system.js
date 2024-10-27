@@ -683,12 +683,12 @@ function initTranser(moduleList, transerName) {
             messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity);
           };
         };
-      };/* 
+      };
       if (waveIndexes.length > 0) {
         waveIndexes.forEach(index => {
           modules[index].waveHandler(entity, manager);
         });
-      }; */
+      };
     },
     emWaveHandler: (entity, manager) => {
       if (waveChangeIndex > -1 && !isModuleDisabled(entity, modules[waveChangeIndex].name)) {
