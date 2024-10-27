@@ -15,6 +15,7 @@ function init(transer) {
       var groups = manager.newTagList();
       manager.appendTag(groups, group);
       manager.setTagList(entity.getWornChestplate().nbt(), "groups", groups);
+      transer.systemMessage(entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
     } else {
       var groups = entity.getWornChestplate().nbt().getTagList("groups");
       var groupIndex = transer.getGroupArray(entity).indexOf(groupName);
@@ -32,7 +33,7 @@ function init(transer) {
    **/
   function listGroups(player) {
     var groups = transer.getGroupArrayMembers(player);
-    transer.systemMessage(player, "<n>You are in <nh>" + groups.length + ((groups.length == 1)?"<n> groups!": "<n> group!"));
+    transer.systemMessage(player, "<n>You are in <nh>" + groups.length + ((groups.length == 1)?"<n> group!": "<n> groups!"));
     groups.forEach(entry => {
       transer.systemMessage(player, "<nh>" + entry.groupName + "<n> (<nh>" + entry.memberCount + ((entry.memberCount > 1)?"<n> members)": "<n> member)"))
     });
@@ -204,7 +205,7 @@ function init(transer) {
       };
     },
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
+      if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
           case "add":
             (arguments.length == 3) ? addGroup(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!g add <nh><name>");
@@ -213,7 +214,7 @@ function init(transer) {
             (arguments.length == 3) ? removeGroup(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!g rem <nh><name>");
             break;
           case "list":
-            listGroups(entity, manager);
+            listGroups(entity);
             break;
           case "addMem":
             (arguments.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : transer.systemMessage(entity, "<n>!g addMem <nh><name>");
