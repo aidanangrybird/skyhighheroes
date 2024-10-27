@@ -463,7 +463,6 @@ function initTranser(moduleList, transerName) {
               });
               emBeingIndex = modules.length-1;
               emBeing = moduleInit.emBeing;
-              human = (moduleInit.hasOwnProperty("human")) ? moduleInit.human : null;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
             break;
