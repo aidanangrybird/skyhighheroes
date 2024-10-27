@@ -275,6 +275,7 @@ function systemMessage(player, message) {
       break;
     default:
       chatMessage(player, formatSystem("<e>Transer is not assigned to a satellite!"));
+      chatMessage(player, formatSystem("<e>Check transer list in <eh>transer_system.js<e>!"));
       break;
   };
 };
