@@ -588,13 +588,13 @@ function initTranser(moduleList, transerName) {
       if (emBeingIndex > -1) {
         modules[emBeingIndex].keyBinds(hero);
       };
+      if (emBeingIndex > -1 && modules[emBeingIndex].hasOwnProperty("canAim")) {
+        hero.supplyFunction("canAim", entity => modules[emBeingIndex].canAim(entity));
+      };
       if (waveChangeIndex > -1) {
         modules[waveChangeIndex].keyBinds(hero);
         modules[waveChangeIndex].initDamageProfiles(hero);
         modules[waveChangeIndex].initProfiles(hero);
-      };
-      if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("canAim")) {
-        hero.supplyFunction("canAim", entity => modules[waveChangeIndex].canAim(entity));
       };
       if (waveChangeIndex > -1 && modules[waveChangeIndex].hasOwnProperty("initEquipment")) {
         modules[waveChangeIndex].initEquipment(hero);
