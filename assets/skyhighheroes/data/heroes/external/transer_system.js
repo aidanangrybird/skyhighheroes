@@ -672,11 +672,15 @@ function initTranser(moduleList, transerName) {
               enableModule(entity, manager, moduleNames, args[1]);
             } else {
               var index = commands.indexOf(args[0]);
-              var module = modules[commandIndexes[index]];
-              if (!isModuleDisabled(entity, module.name)) {
-                module.commandHandler(entity, manager, args);
+              if (index > -1) {
+                var module = modules[commandIndexes[index]];
+                if (!isModuleDisabled(entity, module.name)) {
+                  module.commandHandler(entity, manager, args);
+                } else {
+                  systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                };
               } else {
-                systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
               };
             };
           } else {
