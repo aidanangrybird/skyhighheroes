@@ -545,6 +545,10 @@ function initTranser(moduleList, transerName) {
     systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
   };
   return {
+    /**
+     * Power stuff (I hate that I had to do it this way)
+     * @param {JSHero} hero - Required
+     **/
     addPowers: (hero) => {
       if (powerArray.length == 1) {
         hero.addPowers(powerArray[0]);
@@ -577,11 +581,19 @@ function initTranser(moduleList, transerName) {
         hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
       };
     },
+    /**
+     * Basic keybinds
+     * @param {JSHero} hero - Required
+     **/
     keyBinds: (hero) => {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
       hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
     },
+    /**
+     * EM wave change stuff
+     * @param {JSHero} hero - Required
+     **/
     initEMWaveChange: (hero) => {
       hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
@@ -603,21 +615,52 @@ function initTranser(moduleList, transerName) {
         modules[waveChangeIndex].initSounds(hero);
       };
     },
+    /**
+     * Property stuff
+     * @param {JSEntity} entity - Required
+     * @param {string} property - Required
+     * @returns property
+     **/
     getProperty: function (entity, property) {
       return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].properties(entity, property)));
     },
+    /**
+     * Property stuff
+     * @param {JSEntity} entity - Required
+     * @param {string} permission - Required
+     * @returns permission
+     **/
     getPermission: function (entity, permission) {
       return ((waveChangeIndex == -1) ? null : ((!modules[waveChangeIndex].hasOwnProperty("permissions") && isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].permissions(entity, permission)));
     },
+    /**
+     * Tier override stuff
+     * @param {JSEntity} entity - Required
+     * @returns tier
+     **/
     getTierOverride: function (entity) {
       return ((waveChangeIndex == -1) ? basicTierOverride(entity) : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? basicTierOverride(entity) : modules[waveChangeIndex].tierOverride(entity)));
     },
+    /**
+     * Attribute profile stuff
+     * @param {JSEntity} entity - Required
+     * @returns attribute profile
+     **/
     getAttributeProfile: function (entity) {
       return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].attributeProfiles(entity)));
     },
+    /**
+     * Damage profile stuff
+     * @param {JSEntity} entity - Required
+     * @returns damage profile
+     **/
     getDamageProfile: function (entity) {
       return ((waveChangeIndex == -1) ? null : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? null : modules[waveChangeIndex].damageProfiles(entity)));
     },
+    /**
+     * Wave calling profile
+     * @param {JSHero} hero - Required
+     **/
     profileWave: function (hero) {
       hero.addAttributeProfile("WAVE_CALLING", (profile) => {
         profile.addAttribute("BASE_SPEED", -1.0, 1);
@@ -627,12 +670,35 @@ function initTranser(moduleList, transerName) {
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
     },
+    /**
+     * Sets wave calling profile
+     * @param {JSEntity} entity - Required
+     * @returns Profile for wave calling
+     **/
+    getWaveProfile: function (entity) {
+      return ((entity.getData("skyhighheroes:dyn/wave_calling_timer") > 0) ? "WAVE_CALLING" : null);
+    },
+    /**
+     * Keybind enabled stuff for em
+     * @param {JSEntity} entity - Required
+     * @param {string} keyBind - Required
+     **/
     isKeyBindEnabled: function (entity, keyBind) {
       return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind))) || ((waveChangeIndex == -1) ? false : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind)));
     },
+    /**
+     * Modifier enabled stuff for em
+     * @param {JSEntity} entity - Required
+     * @param {string} modifier - Required
+     **/
     isModifierEnabled: function (entity, modifier) {
       return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier))) || ((waveChangeIndex == -1) ? false : ((isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier)));
     },
+    /**
+     * Handles all transer stuff
+     * @param {JSEntity} entity - Required
+     * @param {JSDataManager} manager - Required
+     **/
     transerHandler: (entity, manager) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
         status(entity);
@@ -694,6 +760,11 @@ function initTranser(moduleList, transerName) {
         });
       };
     },
+    /**
+     * Handles all em stuff
+     * @param {JSEntity} entity - Required
+     * @param {JSDataManager} manager - Required
+     **/
     emWaveHandler: (entity, manager) => {
       if (waveChangeIndex > -1 && !isModuleDisabled(entity, modules[waveChangeIndex].name)) {
         modules[waveChangeIndex].tickHandler(entity, manager);
