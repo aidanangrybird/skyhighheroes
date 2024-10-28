@@ -93,7 +93,7 @@ function init(transer) {
       transer.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to teleport to!");
     } else {
       var waypoint = player.getWornChestplate().nbt().getTagList("waypoints").getCompoundTag(waypointIndex);
-      transer.systemMessage(player, "<s>Teleporting to waypoint <sh>" + waypoint.getString("waypointName") + "<s>!");
+      transer.systemMessage(player, "<s>Selected waypoint <sh>" + waypoint.getString("waypointName") + "<s>!");
       manager.setData(player, "fiskheroes:teleport_dest", manager.newCoords(waypoint.getInteger("xCoord"), waypoint.getInteger("yCoord"), waypoint.getInteger("zCoord"), waypoint.getInteger("dim")));
       manager.setData(player, "fiskheroes:teleport_delay", 6);
     };
