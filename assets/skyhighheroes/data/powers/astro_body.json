@@ -71,20 +71,6 @@
     },
     "fiskheroes:projectile_immunity": {
     },
-    "fiskheroes:energy_manipulation": {
-      "damageProfile": {
-        "damage": 10.0,
-        "types": {
-          "ENERGY": 1.0
-        },
-        "properties": {
-          "LIGHTNING_STRIKE": 0.0,
-          "HIT_COOLDOWN": 0
-        }
-      },
-      "chargeTime": 10,
-      "range": 64.0
-    },
     "fiskheroes:metal_skin": {
     }
   },
