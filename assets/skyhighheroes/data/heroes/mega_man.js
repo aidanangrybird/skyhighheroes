@@ -15,7 +15,7 @@ function init(hero) {
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setAliases("mega_man");
-  hero.setVersion("Mega Man Star Force");
+  hero.setVersion("Star Force");
   
   transerOS.keyBinds(hero);
   transerOS.initEMWaveChange(hero);
