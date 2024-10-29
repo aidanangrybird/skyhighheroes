@@ -144,17 +144,17 @@ function initBeams(renderer, color) {
 
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
     { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
     { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
 
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
     { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
 };
 function initDualBeams(renderer, colorLeft, colorRight) {
   renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorRight);
@@ -166,17 +166,17 @@ function initDualBeams(renderer, colorLeft, colorRight) {
 
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", colorRight, [
     { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", colorLeft, [
     { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") != 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
 
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", colorRight, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
   bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", colorLeft, [
     { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/tenma_clothes") == 3);
+  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
 };
 //Cannon
 function initCannon(renderer) {
@@ -185,7 +185,7 @@ function initCannon(renderer) {
   var obj = {
     light_thing: light_thing,
     render: (entity, renderLayer) => {
-      if (entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+      if (entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         light_thing.opacity = entity.getInterpolatedData("fiskheroes:aiming_timer");
         light_thing.render();
       };
@@ -253,31 +253,31 @@ function initCustomEquipment(renderer, uuid) {
   katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.45475, "offset": [-3.05, 0.52, 2.5], "rotation": [-148.0, 90.0, 0.0] },
     { "anchor": "body", "scale": 0.45475, "offset": [3.05, 0.52, 2.5], "rotation": [-148.0, -90.0, 0.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))).slotIndex = 0;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))).slotIndex = 0;
   //Scythe
   scythe_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 2.5], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
   scythe_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 3.5], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
   //Rifle
   rifle_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 2.5], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
   rifle_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 3.5], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
   //Shield
   shield_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 2.5], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 3).slotIndex = 3;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 3).slotIndex = 3;
   shield_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 3.5], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3)).slotIndex = 3;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3)).slotIndex = 3;
   shield_2 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 4.5], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
+  ]).setCondition(entity => ((entity.getUUID() == uuid && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
 };
 
 function initEquipment(renderer) {
@@ -297,31 +297,31 @@ function initEquipment(renderer) {
   katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.45475, "offset": [-3.05, 0.52, 2.5], "rotation": [-148.0, 90.0, 0.0] },
     { "anchor": "body", "scale": 0.45475, "offset": [3.05, 0.52, 2.5], "rotation": [-148.0, -90.0, 0.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))).slotIndex = 0;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW"))).slotIndex = 0;
   //Scythe
   scythe_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 2.5], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
   scythe_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.4675, "offset": [0.5, 4.5, 3.5], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
   //Rifle
   rifle_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 2.5], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
   rifle_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.595, "offset": [-3.5, 2.0, 3.5], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
   //Shield
   shield_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 2.5], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 3).slotIndex = 3;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 3).slotIndex = 3;
   shield_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 3.5], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3)).slotIndex = 3;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3)).slotIndex = 3;
   shield_2 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
     { "anchor": "body", "scale": 0.85, "offset": [0.0, 5.0, 4.5], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/tenma_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
+  ]).setCondition(entity => ((entity.isAlive() && entity.getData("skyhighheroes:dyn/astro_clothes") < 3) || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW")) && ((entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornLeggings().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
 };
 
 function initCustomBoosters(renderer, color) {
@@ -453,7 +453,7 @@ function initCustomBoosters(renderer, color) {
     bloomArmRightMiddle: bloomArmRightMiddle,
     bloomArmRightInner: bloomArmRightInner,
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
         boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
@@ -471,7 +471,7 @@ function initCustomBoosters(renderer, color) {
         bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
         bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
       };
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
         boosterLegRight.setOffset(0.0, 12.0, 0.0);
         boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
@@ -491,8 +491,8 @@ function initCustomBoosters(renderer, color) {
       };
       //Boots
       //Equations
-      var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-      var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -732,7 +732,7 @@ function initNormalBoosters(renderer) {
     bloomArmRightMiddle: bloomArmRightMiddle,
     bloomArmRightInner: bloomArmRightInner,
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
         boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
@@ -750,7 +750,7 @@ function initNormalBoosters(renderer) {
         bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
         bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
       };
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
         boosterLegRight.setOffset(0.0, 12.0, 0.0);
         boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
@@ -770,8 +770,8 @@ function initNormalBoosters(renderer) {
       };
       //Boots
       //Equations
-      var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-      var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -1011,7 +1011,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
     bloomArmRightMiddle: bloomArmRightMiddle,
     bloomArmRightInner: bloomArmRightInner,
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
         boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
@@ -1029,7 +1029,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
         bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
         bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
       };
-      if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
         boosterLegRight.setOffset(0.0, 12.0, 0.0);
         boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
@@ -1049,8 +1049,8 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
       };
       //Boots
       //Equations
-      var data_0 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-      var data_1 = entity.getData("skyhighheroes:dyn/tenma_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);

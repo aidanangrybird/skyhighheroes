@@ -1,4 +1,4 @@
-var tenma = implement("skyhighheroes:external/tenma");
+var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var metal_heat;
@@ -31,27 +31,27 @@ var rocket_normal_opening_right_leg_model;
 
 loadTextures({
   "null": "skyhighheroes:null",
-  "base": "skyhighheroes:tobio/tobio_tenma.tx.json",
-  "rocket_legs": "skyhighheroes:tobio/tobio_tenma_rocket_legs.tx.json",
-  "rocket_arms_lights": "skyhighheroes:tobio/tobio_tenma_rocket_arms_lights.tx.json",
-  "rocket_legs_lights": "skyhighheroes:tobio/tobio_tenma_rocket_legs_lights.tx.json",
-  "cannon_arm": "skyhighheroes:tobio/tobio_tenma_cannon_arm.tx.json",
-  "cannon_arm_lights": "skyhighheroes:tobio/tobio_tenma_cannon_arm_lights.tx.json",
-  "eyes": "skyhighheroes:tobio/tobio_tenma_eyes",
-  "boots_lights": "skyhighheroes:tobio/tobio_tenma_boots_lights",
+  "base": "skyhighheroes:tobio/astro.tx.json",
+  "rocket_legs": "skyhighheroes:tobio/astro_rocket_legs.tx.json",
+  "rocket_arms_lights": "skyhighheroes:tobio/astro_rocket_arms_lights.tx.json",
+  "rocket_legs_lights": "skyhighheroes:tobio/astro_rocket_legs_lights.tx.json",
+  "cannon_arm": "skyhighheroes:tobio/astro_cannon_arm.tx.json",
+  "cannon_arm_lights": "skyhighheroes:tobio/astro_cannon_arm_lights.tx.json",
+  "eyes": "skyhighheroes:tobio/astro_eyes",
+  "boots_lights": "skyhighheroes:tobio/astro_boots_lights",
   "boots_opening": "skyhighheroes:tobio/boots_normal",
-  "arms_lights": "skyhighheroes:tobio/tobio_tenma_arms_lights",
-  "boots": "skyhighheroes:tobio/tobio_tenma_boots",
-  "shorts": "skyhighheroes:tobio/tobio_tenma_shorts",
+  "arms_lights": "skyhighheroes:tobio/astro_arms_lights",
+  "boots": "skyhighheroes:tobio/astro_boots",
+  "shorts": "skyhighheroes:tobio/astro_shorts",
   "cannon": "skyhighheroes:cannon",
-  "cannon_lights": "skyhighheroes:tobio/tobio_tenma_cannon_lights",
-  "shield": "skyhighheroes:tobio/tobio_tenma_shield",
-  "katana": "skyhighheroes:tobio/tobio_tenma_katana",
-  "katana_lights": "skyhighheroes:tobio/tobio_tenma_katana_lights",
-  "scythe": "skyhighheroes:tobio/tobio_tenma_scythe",
-  "scythe_lights": "skyhighheroes:tobio/tobio_tenma_scythe_lights",
-  "rifle": "skyhighheroes:tobio/tobio_tenma_rifle",
-  "rifle_lights": "skyhighheroes:tobio/tobio_tenma_rifle_lights"
+  "cannon_lights": "skyhighheroes:tobio/astro_cannon_lights",
+  "shield": "skyhighheroes:tobio/astro_shield",
+  "katana": "skyhighheroes:tobio/astro_katana",
+  "katana_lights": "skyhighheroes:tobio/astro_katana_lights",
+  "scythe": "skyhighheroes:tobio/astro_scythe",
+  "scythe_lights": "skyhighheroes:tobio/astro_scythe_lights",
+  "rifle": "skyhighheroes:tobio/astro_rifle",
+  "rifle_lights": "skyhighheroes:tobio/astro_rifle_lights"
 });
 
 function init(renderer) {
@@ -255,10 +255,10 @@ function initEffects(renderer) {
   nv = renderer.bindProperty("fiskheroes:night_vision");
   nv.fogStrength = 0.0;
   nv.factor = 1.0;
-  tenma.initEquipment(renderer);
-  rockets = tenma.initNormalBoosters(renderer);
-  tenma.initBeams(renderer, 0xFFFFFF);
-  stuff.bindSpeedTrail(renderer, "skyhighheroes:tobio_tenma_speed");
+  astro.initEquipment(renderer);
+  rockets = astro.initNormalBoosters(renderer);
+  astro.initBeams(renderer, 0xFFFFFF);
+  stuff.bindSpeedTrail(renderer, "skyhighheroes:astro_speed");
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
   metal_heat.includeEffects(cannon_normal_left_arm_model, cannon_normal_right_arm_model, rocket_normal_lights_left_arm_model, rocket_normal_lights_right_arm_model, rocket_normal_lights_left_leg_model, rocket_normal_lights_right_leg_model, rocket_normal_opening_left_leg_model, rocket_normal_opening_right_leg_model, eyes_model, head_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, cannon_right_arm_model, cannon_right_arm_lights_model, cannon_left_arm_model, cannon_left_arm_lights_model, rocket_left_arm_lights_model, rocket_right_arm_lights_model, rocket_left_leg_model, rocket_left_leg_lights_model, rocket_right_leg_model, rocket_right_leg_lights_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
@@ -268,7 +268,7 @@ function initEffects(renderer) {
 
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
-  tenma.initAstroAnimations(renderer);
+  astro.initAstroAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
@@ -278,17 +278,17 @@ function render(entity, renderLayer, isFirstPersonArm) {
     body_model.render();
     eyes_model.opacity = entity.getInterpolatedData("fiskheroes:energy_projection_timer") + entity.getInterpolatedData("fiskheroes:aimed_timer") + entity.getInterpolatedData("fiskheroes:energy_charge") + entity.getInterpolatedData("fiskheroes:flight_timer") + entity.getInterpolatedData("fiskheroes:beam_charge") + entity.getData("fiskheroes:speeding") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
     eyes_model.render();
-    if (!isFirstPersonArm && ((entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0 && entity.getInterpolatedData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) || entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) || (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) {
+    if (!isFirstPersonArm && ((entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0 && entity.getInterpolatedData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/astro_clothes") != 3) || entity.getData("skyhighheroes:dyn/astro_clothes") == 3) || (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) {
       left_arm_model.render();
     };
-    if (((entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0 && entity.getInterpolatedData("fiskheroes:flight_boost_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") == 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) || entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) || !entity.getHeldItem().isEmpty() || (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) {
+    if (((entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") == 0 && entity.getInterpolatedData("fiskheroes:flight_boost_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") == 0 && entity.getData("skyhighheroes:dyn/astro_clothes") != 3) || entity.getData("skyhighheroes:dyn/astro_clothes") == 3) || !entity.getHeldItem().isEmpty() || (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) {
       right_arm_model.render();
     };
-    if (!isFirstPersonArm && ((entity.getInterpolatedData("fiskheroes:flight_timer") == 0 && entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) || entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) && !(entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) {
+    if (!isFirstPersonArm && ((entity.getInterpolatedData("fiskheroes:flight_timer") == 0 && entity.getData("skyhighheroes:dyn/astro_clothes") != 3) || entity.getData("skyhighheroes:dyn/astro_clothes") == 3) && !(entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) {
       left_leg_model.render();
       right_leg_model.render();
     };
-    if (entity.getData("skyhighheroes:dyn/tenma_clothes") != 3) {
+    if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
       if (entity.getHeldItem().isEmpty()) {
         if ((entity.getInterpolatedData("fiskheroes:flight_boost_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") > 0)) {
           cannon_right_arm_model.render();
@@ -324,7 +324,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         rocket_right_leg_lights_model.render();
       };
     }
-    if (entity.getData("skyhighheroes:dyn/tenma_clothes") == 3) {
+    if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
       cannon_normal_left_arm_model.opacity = entity.getInterpolatedData("fiskheroes:energy_projection_timer");
       cannon_normal_left_arm_model.render();
       rocket_normal_lights_left_arm_model.opacity = entity.getInterpolatedData("fiskheroes:flight_boost_timer")*(1-entity.getInterpolatedData("fiskheroes:energy_projection_timer"));

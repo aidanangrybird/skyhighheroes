@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighheroes:tobio/tobio_tenma_cannon_lights",
+    "in": "skyhighheroes:tobio/astro_cannon_lights",
     "transform": [
       {
         "operation": "STITCH",
         "supply": "skyhighheroes:astro_boy_cannon_arms_lights"
       }
     ],
-    "out": "skyhighheroes:generated/tobio_tenma_cannon_arms_lights"
+    "out": "skyhighheroes:generated/astro_cannon_arms_lights"
   },
   "isDynamic": true
 }

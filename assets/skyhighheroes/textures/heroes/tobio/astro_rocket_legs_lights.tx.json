@@ -1,17 +1,17 @@
 {
   "texture": {
-    "in": "skyhighheroes:tobio/tobio_tenma_arms_lights",
+    "in": "skyhighheroes:tobio/astro_boots_lights",
     "transform": [
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:astro_boy_rocket_arms"
+        "supply": "skyhighheroes:astro_boy_rocket_legs"
       },
       {
         "operation": "XOR",
         "supply": "skyhighheroes:tenma_rockets_xor"
       }
     ],
-    "out": "skyhighheroes:generated/tobio_tenma_rocket_arms_lights"
+    "out": "skyhighheroes:generated/astro_rocket_legs_lights"
   },
   "isDynamic": true
 }

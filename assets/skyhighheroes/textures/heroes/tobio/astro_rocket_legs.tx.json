@@ -1,6 +1,6 @@
 {
   "texture": {
-    "in": "skyhighheroes:tobio/tobio_tenma_<CLOTHING><FLYING>",
+    "in": "skyhighheroes:tobio/astro_<CLOTHING><FLYING>",
     "transform": [
       {
         "operation": "STITCH",
@@ -11,11 +11,11 @@
         "supply": "skyhighheroes:tenma_rockets"
       }
     ],
-    "out": "skyhighheroes:generated/tobio_tenma_<CLOTHING><FLYING>_rocket_legs"
+    "out": "skyhighheroes:generated/astro_<CLOTHING><FLYING>_rocket_legs"
   },
   "getters": {
     "CLOTHING": {
-      "key": "entity.getData('skyhighheroes:dyn/tenma_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/tenma_clothes') == 2 ? 'short' : 'normal'",
+      "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
       "values": ["base", "long", "short", "normal"]
     },
     "FLYING": {
