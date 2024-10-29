@@ -1,11 +1,5 @@
 {
-  "display": {
-    "name": "Death",
-    "hideUntilAvailable": true,
-    "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/star_force.png"
-    }
-  },
+  "suit" : "skyhighheroes:tobio_tenma",
   "requirements": [
     "skyhighheroes:robot",
     "fiskheroes:tier8_9"

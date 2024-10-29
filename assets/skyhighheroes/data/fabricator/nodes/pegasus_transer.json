@@ -1,0 +1,11 @@
+{
+  "suit": "skyhighheroes:pegasus_transer",
+  "display": {
+    "description": {
+      "translate": "Basic transer assigned to the Ice Pegasus satellite."
+    }
+  },
+  "requirements": [
+    "skyhighheroes:transers"
+  ]
+}

@@ -1,20 +1,14 @@
 {
-  "display": {
-    "name": "Omega-Xis: The Fugitive",
-    "hideUntilAvailable": true,
-    "icon": {
-      "texture":  "skyhighheroes:textures/gui/nodes/star_force.png"
-    }
-  },
+  "suit": "skyhighheroes:mega_man",
   "requirements": [
-    "skyhighheroes:wave_beings",
+    "skyhighheroes:wave_change",
     "fiskheroes:tier10"
   ],
   "criteria": {
     "chance": {
       "trigger": "fiskheroes:player_struck_by_lightning",
       "description": {
-        "translate": "Fate has choosen you"
+        "translate": "Omega-Xis: The Fugutive"
       },
       "condition": {
         "variables": {

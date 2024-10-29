@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "Transers"
+    },
+    "description": {
+      "translate": "Basic transers. Communication devices that are extremely useful."
+    },
+    "icon": {
+      "texture": "skyhighheroes:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ]
+}

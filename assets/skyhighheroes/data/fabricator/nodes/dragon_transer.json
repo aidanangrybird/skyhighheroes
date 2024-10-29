@@ -1,0 +1,11 @@
+{
+  "suit": "skyhighheroes:dragon_transer",
+  "display": {
+    "description": {
+      "translate": "Basic transer assigned to the Dragon Sky satellite."
+    }
+  },
+  "requirements": [
+    "skyhighheroes:transers"
+  ]
+}

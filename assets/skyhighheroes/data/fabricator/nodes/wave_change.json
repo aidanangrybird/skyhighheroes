@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "EM Wave Change"
+    },
+    "description": {
+      "translate": "EM Wave Change! On Air!"
+    },
+    "icon": {
+      "texture": "skyhighheroes:textures/gui/nodes/star_force.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ]
+}

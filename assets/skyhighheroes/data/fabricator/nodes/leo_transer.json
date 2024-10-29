@@ -1,0 +1,11 @@
+{
+  "suit": "skyhighheroes:leo_transer",
+  "display": {
+    "description": {
+      "translate": "Basic transer assigned to the Leo Kingdom satellite."
+    }
+  },
+  "requirements": [
+    "skyhighheroes:transers"
+  ]
+}

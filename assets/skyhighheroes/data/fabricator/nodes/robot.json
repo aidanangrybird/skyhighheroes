@@ -3,17 +3,11 @@
     "name": {
       "translate": "Robots"
     },
-    "hideUntilAvailable": true,
     "icon": {
       "item": "fiskheroes:suit_data_drive"
     }
   },
   "requirements": [
       "skyhighheroes:base"
-  ],
-  "price": {
-    "TUTRIDIUM": 2048,
-    "IRID_GOLD": 2048,
-    "XP_LEVELS": 2048
-  }
+  ]
 }
