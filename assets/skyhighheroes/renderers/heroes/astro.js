@@ -45,13 +45,6 @@ loadTextures({
   "shorts": "skyhighheroes:tobio/astro_shorts",
   "cannon": "skyhighheroes:cannon",
   "cannon_lights": "skyhighheroes:tobio/astro_cannon_lights",
-  "shield": "skyhighheroes:tobio/astro_shield",
-  "katana": "skyhighheroes:tobio/astro_katana",
-  "katana_lights": "skyhighheroes:tobio/astro_katana_lights",
-  "scythe": "skyhighheroes:tobio/astro_scythe",
-  "scythe_lights": "skyhighheroes:tobio/astro_scythe_lights",
-  "rifle": "skyhighheroes:tobio/astro_rifle",
-  "rifle_lights": "skyhighheroes:tobio/astro_rifle_lights"
 });
 
 function init(renderer) {
@@ -255,7 +248,6 @@ function initEffects(renderer) {
   nv = renderer.bindProperty("fiskheroes:night_vision");
   nv.fogStrength = 0.0;
   nv.factor = 1.0;
-  astro.initEquipment(renderer);
   rockets = astro.initNormalBoosters(renderer);
   astro.initBeams(renderer, 0xFFFFFF);
   stuff.bindSpeedTrail(renderer, "skyhighheroes:astro_speed");

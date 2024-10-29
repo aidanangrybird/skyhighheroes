@@ -4,10 +4,6 @@ function init(hero) {
   hero.setLeggings("Shorts");
   hero.setBoots("Boots");
   hero.setAliases("astro");
-  hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A74Astro's Katanas},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Astro's Katanas"));
-  hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A74Astro's Scythe},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Astro's Scythe"));
-  hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A74Astro's Rifle},ench:[{id:34,lvl:4}]}", true, item => (item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Astro's Rifle"));
-  hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A74Astro's Shield},ench:[{id:16,lvl:5},{id:19,lvl:2},{id:20,lvl:2},{id:21,lvl:3},{id:34,lvl:4}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 5 && item.getEnchantmentLevel(19) == 2 && item.getEnchantmentLevel(20) == 2 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 4 && item.displayName() == "\u00A74Astro's Shield"));
   
   hero.addPowers("skyhighheroes:astro_blaster", "skyhighheroes:astro_engine", "skyhighheroes:astro_flight", "skyhighheroes:astro_body", "skyhighheroes:astro_brain", "skyhighheroes:astro_machine_guns");
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);
@@ -26,14 +22,11 @@ function init(hero) {
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("ARM_CANNON", "Aim", 4);
   hero.addKeyBind("AIM", "Aim", 4);
-  hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
-  hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
   hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 5);
 
   
   hero.setDefaultScale(1.0);
   hero.setHasProperty(hasProperty);
-  hero.setHasPermission(hasPermission);
   hero.setModifierEnabled(isModifierEnabled);
   hero.supplyFunction("canAim", canAim);
   hero.setKeyBindEnabled(isKeyBindEnabled);
@@ -61,19 +54,6 @@ function getTickHandler(entity, manager) {
   manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
   var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
   manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
-  var equipment = entity.getWornChestplate().nbt().getTagList("Equipment");
-  if (equipment.getCompoundTag(0).getCompoundTag("Item").getShort("Damage") > 0) {
-    manager.setShort(equipment.getCompoundTag(0).getCompoundTag("Item"), "Damage", 0)
-  };
-  if (equipment.getCompoundTag(1).getCompoundTag("Item").getShort("Damage") > 0) {
-    manager.setShort(equipment.getCompoundTag(1).getCompoundTag("Item"), "Damage", 0)
-  };
-  if (equipment.getCompoundTag(2).getCompoundTag("Item").getShort("Damage") > 0) {
-    manager.setShort(equipment.getCompoundTag(2).getCompoundTag("Item"), "Damage", 0)
-  };
-  if (equipment.getCompoundTag(3).getCompoundTag("Item").getShort("Damage") > 0) {
-    manager.setShort(equipment.getCompoundTag(3).getCompoundTag("Item"), "Damage", 0)
-  };
 };
 
 function cycleClothes(player, manager) {
@@ -107,15 +87,7 @@ function isKeyBindEnabled(entity, keyBind) {
   switch (keyBind) {
     case "ARM_CANNON":
       return entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
-    case "SHIELD_THROW":
-      return entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
     case "AIM":
-      if (entity.getHeldItem().name() == "fiskheroes:chronos_rifle") {
-        return true;
-      };
-      if ((entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe")) {
-        return false;
-      };
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3 && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1) {
         return true;
       };
@@ -144,10 +116,6 @@ function hasProperty(entity, property) {
   return property == "BREATHE_SPACE";
 };
 
-function hasPermission(entity, permission) {
-  return permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD";
-};
-
 function offlineProfile(profile) {
   profile.addAttribute("BASE_SPEED", -1.0, 1);
   profile.addAttribute("SPRINT_SPEED", -1.0, 1);
@@ -157,5 +125,5 @@ function offlineProfile(profile) {
 };
 
 function canAim(entity) {
-  return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
+  return entity.getHeldItem().isEmpty() && entity.getData("fiskheroes:beam_charge") == 0 && entity.getData("fiskheroes:energy_projection_timer") == 0;
 };
