@@ -34,6 +34,7 @@ function init(hero) {
 };
 
 function getTickHandler(entity, manager) {
+  manager.setData(entity, "fiskheroes:disguise", "Astro");
   var x = entity.posX();
   var y = entity.posY();
   var z = entity.posZ();
