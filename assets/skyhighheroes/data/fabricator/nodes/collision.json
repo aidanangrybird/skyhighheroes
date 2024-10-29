@@ -21,7 +21,7 @@
           "player": "PLAYER_KILLED",
           "other_player": "DAMAGE_SOURCE"
           },
-        "check": "player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && (player.getWornChestplate() == 'fiskheroes:falcon' || player.getWornChestplate() == 'fiskheroes:captain_america_sam') && (other_player.getEntity().as('PLAYER').getWornChestplate() == 'fiskheroes:falcon' || other_player.getEntity().as('PLAYER').getWornChestplate() == 'fiskheroes:captain_america_sam') && player.getData('fiskheroes:flight_boost_timer') == 1 && other_player.getEntity().as('PLAYER').getData('fiskheroes:flight_boost_timer') == 1 && other_player.hasDamageType('COLLISION')"
+        "check": "player.isWearingFullSuit() && other_player.getEntity().as('PLAYER').isWearingFullSuit() && (player.getWornChestplate().suitType() == 'fiskheroes:falcon' || player.getWornChestplate().suitType() == 'fiskheroes:captain_america_sam') && (other_player.getEntity().as('PLAYER').getWornChestplate().suitType() == 'fiskheroes:falcon' || other_player.getEntity().as('PLAYER').getWornChestplate().suitType() == 'fiskheroes:captain_america_sam') && player.getData('fiskheroes:flight_boost_timer') == 1 && other_player.getEntity().as('PLAYER').getData('fiskheroes:flight_boost_timer') == 1 && other_player.hasDamageType('COLLISION')"
       }
     }
   }

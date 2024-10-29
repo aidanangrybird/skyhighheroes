@@ -320,7 +320,7 @@ function initTranser(moduleList, transerName) {
   //Type 3 - commands messaging and data management
   var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
   //Type 7 - EM Being calling signal
-  var type7Specs = ["waveHandler"];
+  var type7Specs = ["waveHandler", "waveCalling", "selfProfile", "otherProfile"];
   //Type 8 - EM Being
   var type8Specs = ["emBeing", "powers", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "tickHandler"];
   //Type 9 - EM Wave Change
@@ -335,8 +335,8 @@ function initTranser(moduleList, transerName) {
   var commandIndexes = [];
   /** @var messagingIndexes - Indexes of messaging handlers */
   var messagingIndexes = [];
-  /** @var waveIndexes - Wave calling indexes */
-  var waveIndexes = [];
+  /** @var waveIndex - Wave calling index */
+  var waveIndex = -1;
   /** @var emBeingIndex - Index of EM Being */
   var emBeingIndex = -1;
   /** @var waveChangeIndex - Index of EM Wave Change */
@@ -437,7 +437,7 @@ function initTranser(moduleList, transerName) {
               errors = [];
             } else {
               modules.push(moduleInit);
-              waveIndexes.push(modules.length-1);
+              waveIndex = modules.length-1;
               human = (moduleInit.hasOwnProperty("human")) ? moduleInit.human : null;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
@@ -669,6 +669,10 @@ function initTranser(moduleList, transerName) {
         profile.addAttribute("JUMP_HEIGHT", -2.0, 1);
         profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
       });
+      if (waveIndex > -1) {
+        modules[waveIndex].otherProfile(hero);
+        modules[waveIndex].selfProfile(hero);
+      };
     },
     /**
      * Sets wave calling profile
@@ -676,7 +680,7 @@ function initTranser(moduleList, transerName) {
      * @returns Profile for wave calling
      **/
     getWaveProfile: function (entity) {
-      return ((entity.getData("skyhighheroes:dyn/wave_calling_timer") > 0) ? "WAVE_CALLING" : null);
+      return ((entity.getData("skyhighheroes:dyn/calling_timer") > 0) ? "WAVE_CALLING" : null);
     },
     /**
      * Keybind enabled stuff for em
@@ -754,10 +758,13 @@ function initTranser(moduleList, transerName) {
           };
         };
       };
-      if (waveIndexes.length > 0) {
-        waveIndexes.forEach(index => {
-          modules[index].waveHandler(entity, manager);
-        });
+      if (waveIndex > -1) {
+        modules[waveIndex].waveCalling(entity, manager);
+      };
+    },
+    callingHandler: function (entity, hero) {
+      if (waveIndex > -1) {
+        modules[waveIndex].waveHandler(entity, hero);
       };
     },
     /**
