@@ -1,7 +1,13 @@
 {
   "suit": "skyhighheroes:mega_man",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Geo Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighheroes:wave_change",
+    "skyhighheroes:transers",
     "fiskheroes:tier10"
   ],
   "criteria": {

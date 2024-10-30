@@ -6,6 +6,7 @@
     }
   },
   "requirements": [
+    "fiskheroes:tier1",
     "skyhighheroes:transers"
   ]
 }
