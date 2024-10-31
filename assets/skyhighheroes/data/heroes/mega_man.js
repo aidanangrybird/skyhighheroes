@@ -55,10 +55,10 @@ function init(hero) {
       return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
-      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "CYCLE_CHAT_MODES") {
-      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "SHAPE_SHIFT") {
       return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/omega_xis_timer") == 1);
