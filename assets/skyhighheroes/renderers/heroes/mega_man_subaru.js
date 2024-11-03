@@ -40,6 +40,7 @@ loadTextures({
   "head_front": "skyhighheroes:geo/omega_xis_subaru_front.tx.json",
   "head_front_wave_change": "skyhighheroes:geo/omega_xis_subaru_front_wave_change.tx.json",
   "head_front_wave_changing_lights": "skyhighheroes:geo/omega_xis_subaru_front_wave_changing_lights.tx.json",
+  "hair_wave_changing_lights": "skyhighheroes:geo/mega_man_subaru_hair_wave_changing_lights.tx.json",
   "shield": "skyhighheroes:geo/mega_man_subaru_shield",
   "shield_lights": "skyhighheroes:geo/mega_man_subaru_shield_lights",
   "katana": "skyhighheroes:geo/mega_man_subaru_katana",
@@ -56,15 +57,24 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  hair = renderer.createEffect("fiskheroes:shield");
+  hair.texture.set("hair");
+  hair.anchor.set("head");
+  hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
+  hair.large = true;
+  hairWaveChange = renderer.createEffect("fiskheroes:shield");
+  hairWaveChange.texture.set(null, "hair_wave_changing_lights");
+  hairWaveChange.anchor.set("head");
+  hairWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
+  hairWaveChange.large = true;
   stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stelar.initForceField(renderer, 0x39D6BD);
   omega_xis = stelar.initHead(renderer);
   stelar.initMegaBuster(renderer, 0x39D6BD, 0x39D6BD);
   stelar.initLiveries(renderer);
-  //stelar.initEquipment(renderer);
-  wave_change_lights = renderer.createEffect("fiskheroes:overlay");
-  wave_change_lights.texture.set(null, "wave_changing_lights");
+  waveChangeLights = renderer.createEffect("fiskheroes:overlay");
+  waveChangeLights.texture.set(null, "wave_changing_lights");
   ears = renderer.createEffect("fiskheroes:ears");
   ears.anchor.set("head");
   ears.angle = 0;
@@ -81,7 +91,19 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   omega_xis.render(entity, renderLayer);
   ears.render();
+  if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
+    hair.render();
+    hairWaveChange.render();
+  };
+  if (entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (65/81)) {
+      hair.render();
+    };
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (25/81)) {
+      hairWaveChange.render();
+    };
+  };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
-    wave_change_lights.render();
+    waveChangeLights.render();
   };
 };

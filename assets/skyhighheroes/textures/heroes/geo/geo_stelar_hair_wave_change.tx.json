@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:geo/geo_stelar_hair",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/geo_stelar_hair_wave_change_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/geo_stelar_hair_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "(Math.min(Math.max(Math.ceil(81 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 25), 0), 13) + Math.min(Math.max(Math.ceil(81 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 65), 0), 13)) | 0",
+      "values": {
+        "min": 0,
+        "max": 26
+      }
+    }
+  },
+  "isDynamic": true
+}

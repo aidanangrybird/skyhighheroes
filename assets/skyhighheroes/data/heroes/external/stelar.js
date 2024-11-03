@@ -6,7 +6,7 @@ function visualizerToggle(player, manager) {
 
 function cycleClothes(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/stelar_clothes", player.getData("skyhighheroes:dyn/stelar_clothes") + 1);
-  if (player.getData("skyhighheroes:dyn/stelar_clothes") > 4) {
+  if (player.getData("skyhighheroes:dyn/stelar_clothes") > 3) {
     manager.setData(player, "skyhighheroes:dyn/stelar_clothes", 0);
   };
   return true;
@@ -14,18 +14,6 @@ function cycleClothes(player, manager) {
 
 function hoodToggle(player, manager) {
   manager.setData(player, "skyhighheroes:dyn/hood_toggle", !player.getData("skyhighheroes:dyn/hood_toggle"));
-  return true;
-};
-
-function shimmerToggle(player, manager) {
-  manager.setData(player, "skyhighheroes:dyn/shimmer_toggle", !player.getData("skyhighheroes:dyn/shimmer_toggle"));
-  if (player.getData("skyhighheroes:dyn/shimmer_toggle")) {
-    player.getWornChestplate().nbt().getTagList("ench");
-    manager.setTagList(player.getWornChestplate().nbt(), "ench", manager.newTagList("[{id: 35,lvl: -1}]"));
-  };
-  if (!player.getData("skyhighheroes:dyn/shimmer_toggle")) {
-    manager.removeTag(player.getWornChestplate().nbt(), "ench");
-  };
   return true;
 };
 
