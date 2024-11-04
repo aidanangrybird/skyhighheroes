@@ -4,10 +4,10 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/stelar_wave_change_lights_<TIMER>"
+        "supply": "skyhighheroes:xor/wave_changing_lights_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/mega_man_wave_change_lights_<TIMER>"
+    "out": "skyhighheroes:generated/mega_man_wave_changing_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {
