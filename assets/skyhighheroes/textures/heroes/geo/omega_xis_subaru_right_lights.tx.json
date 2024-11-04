@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/omega_xis_right_wave_change_<TIMER>"
+        "supply": "skyhighheroes:xor/em_being_right_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighheroes:generated/omega_xis_subaru_right_lights_<TIMER>"

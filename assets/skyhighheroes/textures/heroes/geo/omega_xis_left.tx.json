@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/omega_xis_left_wave_change_<TIMER>"
+        "supply": "skyhighheroes:xor/em_being_left_wave_change_<TIMER>"
       }
     ],
     "out": "skyhighheroes:generated/omega_xis_left_<TIMER>"
