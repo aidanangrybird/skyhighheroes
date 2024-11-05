@@ -12,15 +12,16 @@
   ],
   "criteria": {
     "chance": {
-      "trigger": "fiskheroes:player_struck_by_lightning",
+      "trigger": "fiskheroes:player_hurt",
       "description": {
-        "translate": "Omega-Xis: The Fugutive"
+        "translate": "Omega-Xis: The Fugitive"
       },
       "condition": {
         "variables": {
-          "entity": "PLAYER_STRUCK"
-          },
-        "check": "(entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith('Beach') || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith('Beach') || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith('Beach') ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith('Beach')) && entity.world().getLocation(entity.pos()).biome().startsWith('Plains')"
+          "player": "PLAYER_HURT",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('WAVE_ENERGY') && !player.world().isRaining() && !player.world().isThundering() && player.world().getLocation(player.pos()).biome().startsWith('Plains') && (player.getWornChestplate().suitType() == 'skyhighocs:leo_transer' || player.getWornChestplate().suitType() == 'skyhighocs:pegasus_transer' || player.getWornChestplate().suitType() == 'skyhighocs:dragon_transer')"
       }
     }
   }
