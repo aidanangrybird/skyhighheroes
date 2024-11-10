@@ -17,7 +17,7 @@ function init(transer) {
       });
     },
     waveCalling: function (entity, manager) {
-      if (!entity.getData("skyhighheroes:dyn/calling") && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && (entity.world().getLocation(entity.pos()).biome().startsWith("Plains") || entity.world().getLocation(entity.pos()).biome().startsWith("Sunflower Plains"))) {
+      if (!entity.getData("skyhighheroes:dyn/calling") && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && (entity.world().getLocation(entity.pos()).biome().startsWith("Plains") || entity.world().getLocation(entity.pos()).biome().startsWith("Sunflower Plains"))) {
         var value = Math.random();
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling_value", value);
         if (entity.getData("skyhighheroes:dyn/calling_value") < 0.001) {
