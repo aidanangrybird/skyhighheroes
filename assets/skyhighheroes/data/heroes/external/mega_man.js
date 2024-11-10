@@ -78,7 +78,7 @@ function init(transer) {
       return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? 10 : 0;
     },
     properties: function (entity, property) {
-      return property == "BREATHE_SPACE" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+      return property == "BREATHE_SPACE" && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 || entity.is("DISPLAY"));
     },
     permissions: function (entity, permission) {
       return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
