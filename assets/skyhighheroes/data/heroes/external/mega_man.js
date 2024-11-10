@@ -224,19 +224,19 @@ function init(transer) {
         };
       };
       if (modifier.name() == "fiskheroes:shield_throwing") {
-        result = true
+        result = true;
       };
       if (modifier.name() == "fiskheroes:energy_manipulation") {
-        result = true
+        result = true;
       };
       if (modifier.name() == "fiskheroes:controlled_flight") {
-        result = true
+        result = true;
       };
       if (modifier.name() == "fiskheroes:invisibility") {
-        result = true
+        result = true;
       };
       if (modifier.name() == "fiskheroes:teleportation") {
-        result = true
+        result = true;
       };
       if (modifier.name() == "fiskheroes:intangibility") {
         if (modifier.id() == "not_absolute") {
