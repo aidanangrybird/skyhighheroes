@@ -200,12 +200,12 @@ function initNV(renderer) {
   nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
   nv_wave_change.fogStrength = 0.0;
   nv_wave_change.factor = 1.0;
-  nv_wave_change.setCondition(entity => entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0.75);
+  nv_wave_change.setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0.75);
   nv_visualizer = renderer.bindProperty("fiskheroes:night_vision");
   nv_visualizer.fogStrength = 0.0;
   nv_visualizer.factor = 1.0;
   nv_visualizer.firstPersonOnly = true;
-  nv_visualizer.setCondition(entity => entity.getData("skyhighheroes:dyn/visualizer_toggle") == 1);
+  nv_visualizer.setCondition(entity => entity.getData("skyhighheroes:dyn/visualizer_toggle"));
 };
 
 //Equipment
@@ -222,43 +222,6 @@ function initLiveries(renderer) {
   var livery_rifle = renderer.bindProperty("fiskheroes:livery");
   livery_rifle.texture.set("rifle", "rifle_lights");
   livery_rifle.weaponType = "CHRONOS_RIFLE";
-}
-function initEquipment(renderer) {
-  //Katana
-  katana = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 0.535, "offset": [-3.05, 0.52, 2.75], "rotation": [-148.0, 90.0, 0.0] },
-    { "anchor": "body", "scale": 0.535, "offset": [3.05, 0.52, 2.75], "rotation": [-148.0, -90.0, 0.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1)).slotIndex = 0;
-  //Scythe
-  scythe_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 2.75], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2)).slotIndex = 1;
-  scythe_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 0.55, "offset": [0.5, 4.5, 3.75], "rotation": [0.0, -90.0, 35.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 1;
-  //Rifle
-  rifle_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 0.7, "offset": [-3.5, 2.0, 2.75], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1)).slotIndex = 2;
-  rifle_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 0.7, "offset": [-3.5, 2.0, 3.75], "rotation": [0.0, -90.0, 60.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0).slotIndex = 2;
-  //Shield
-  shield_base = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 2.75], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 3).slotIndex = 3;
-  shield_1 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 3.75], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && (((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3) || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 2) || (entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(3).getInteger("Index") != 3 && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") != 3))).slotIndex = 3;
-  shield_2 = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 1.0, "offset": [0.0, 5.0, 4.75], "rotation": [90.0, -180.0, 0.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) && ((entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(2).getInteger("Index") == 2 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 1 || entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(1).getInteger("Index") == 2) && entity.getWornChestplate().nbt().getTagList("Equipment").getCompoundTag(0).getInteger("Index") == 0)).slotIndex = 3;
-  pickaxe = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 1.0, "offset": [-3.6, 5.0, 12.75], "rotation": [0.0, 90.0, 0.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1)).slotIndex = 4;
-  shovel = renderer.bindProperty("fiskheroes:equipped_item").setItems([
-    { "anchor": "body", "scale": 1.0, "offset": [4.6, 5.0, 12.75], "rotation": [0.0, 90.0, 0.0] }
-  ]).setCondition(entity => ((entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW") || entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1)).slotIndex = 5;
 };
 
 //Omega-Xis

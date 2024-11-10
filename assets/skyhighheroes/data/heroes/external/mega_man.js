@@ -173,37 +173,37 @@ function init(transer) {
         result = entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/omega_xis_timer") == 1;
       };
       if (keyBind == "INTANGIBILITY") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:flight_timer") > 0;
+        result = entity.getData("fiskheroes:flight_timer") > 0;
       };
       if (keyBind == "SHIELD_THROW") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
+        result = entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
       };
       if (keyBind == "CHARGE_ENERGY") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+        result = entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
       };
       if (keyBind == "TELEPORT" || keyBind == "INVISIBILITY") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation");
+        result = !entity.getData("skyhighheroes:dyn/predation");
       };
       if (keyBind == "SILK_SWITCH") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/tool_enchant") == 0 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
+        result = entity.getData("skyhighheroes:dyn/tool_enchant") == 0 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
       };
       if (keyBind == "FORTUNE_SWITCH") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/tool_enchant") == 1 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
+        result = entity.getData("skyhighheroes:dyn/tool_enchant") == 1 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
       };
       if (keyBind == "RIFLE_AIM") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:chronos_rifle";
+        result = entity.getHeldItem().name() == "fiskheroes:chronos_rifle";
       };
       if (keyBind == "CYCLE_UP_CARD" || keyBind == "CYCLE_DOWN_CARD") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation");
+        result = entity.getData("skyhighheroes:dyn/predation");
       };
       if (keyBind == "BATTLE_CARD_0") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;
+        result = entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;
       };
       if (keyBind == "BATTLE_CARD_1") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 1;
+        result = entity.getData("skyhighheroes:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 1;
       };
       if (keyBind == "BATTLE_CARD_2") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 2;
+        result = entity.getData("skyhighheroes:dyn/predation") && !entity.isSneaking() && entity.getData("skyhighheroes:dyn/selected_battle_card") == 2;
       };
       return result;
     },
@@ -217,45 +217,45 @@ function init(transer) {
           "ice", "positive", "cursed", "cancel"
         ];
         if (normal.indexOf(modifier.id()) > -1) {
-          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+          result = true;
         };
         if (invis.indexOf(modifier.id()) > -1) {
-          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("fiskheroes:invisible");
+          result = entity.getData("fiskheroes:invisible");
         };
       };
       if (modifier.name() == "fiskheroes:shield_throwing") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+        result = true
       };
       if (modifier.name() == "fiskheroes:energy_manipulation") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+        result = true
       };
       if (modifier.name() == "fiskheroes:controlled_flight") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+        result = true
       };
       if (modifier.name() == "fiskheroes:invisibility") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+        result = true
       };
       if (modifier.name() == "fiskheroes:teleportation") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1
+        result = true
       };
       if (modifier.name() == "fiskheroes:intangibility") {
         if (modifier.id() == "not_absolute") {
-          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getPunchTimer() > 0;
+          result = entity.getPunchTimer() > 0;
         };
         if (modifier.id() == "absolute") {
-          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getPunchTimer() == 0;
+          result = entity.getPunchTimer() == 0;
         };
       };
       if (modifier.name() == "fiskheroes:shield") {
         if (modifier.id() == "barrier") {
-          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
+          result = entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
         if (modifier.id() == "sword") {
-          result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
+          result = entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
         };
       };
       if (modifier.name() == "fiskheroes:blade") {
-        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
+        result = entity.getData("skyhighheroes:dyn/battle_card") == 2 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
       };
       return result;
     },
