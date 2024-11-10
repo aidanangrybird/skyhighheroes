@@ -17,16 +17,15 @@ function init(transer) {
       });
     },
     waveCalling: function (entity, manager) {
-      if (entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && entity.world().getLocation(entity.pos()).biome().startsWith("Plains")) {
+      if (!entity.getData("skyhighheroes:dyn/calling") && entity.world().isUnobstructed(entity.eyePos(), entity.eyePos().add(0,1000,0)) && (entity.world().getLocation(entity.pos().add(6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(-6, 0, 0)).biome().startsWith("Beach") || entity.world().getLocation(entity.pos().add(0, 0, -6)).biome().startsWith("Beach") ||  entity.world().getLocation(entity.pos().add(0, 0, 6)).biome().startsWith("Beach")) && (entity.world().getLocation(entity.pos()).biome().startsWith("Plains") || entity.world().getLocation(entity.pos()).biome().startsWith("Sunflower Plains"))) {
         var value = Math.random();
-        if (value < 0.001) {
-          if (!entity.getData("skyhighheroes:dyn/calling")) {
-            manager.setData(entity, "skyhighheroes:dyn/calling", true);
-          };
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling_value", value);
+        if (entity.getData("skyhighheroes:dyn/calling_value") < 0.1) {
+          manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
         };
-        if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
-          manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:mega_man");
-        };
+      };
+      if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
+        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:mega_man");
       };
     },
     waveHandler: function (entity, hero) {

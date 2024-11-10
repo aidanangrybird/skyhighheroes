@@ -1,9 +1,8 @@
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
-        var result = getBase(entity)
-        return result;
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
+        return "mega_man";
       } else {
         return "transer";
       };
@@ -11,9 +10,8 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6 && entity.getData("skyhighheroes:dyn/em_being") != "") {
-        var result = getLights(entity)
-        return result;
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
+        return "mega_man_lights";
       } else {
         return null;
       };
@@ -49,10 +47,9 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  var result = getColor(entity);
   var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");
-  forcefield.color.set(result);
-  callingBeam.color.set(result);
+  forcefield.color.set(0x00FF00);
+  callingBeam.color.set(0x00FF00);
   //callingBeam.progress = timerAnimate2(callingTimer, 1.0, 0.0, 0.1, 0.0);
   callingLine.size.x = callingLine.size.y = timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
   callingLine.end.y = timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
@@ -65,37 +62,6 @@ function render(entity, renderLayer, isFirstPersonArm) {
   };
 };
 
-var beings = [
-  {"emBeing": "Omega-Xis", "color": 0x00FF00, "baseTexture": "mega_man", "lightsTexture": "mega_man_lights"}
-];
-
-function getColor(entity) {
-  var color = 0x00FF00;
-  beings.forEach(entry => {
-    if (entity.getData("skyhighheroes:dyn/em_being") == entry.emBeing) {
-      color = entry.color;
-    };
-  });
-  return color;
-};
-function getBase(entity) {
-  var base = "null";
-  beings.forEach(entry => {
-    if (entity.getData("skyhighheroes:dyn/em_being") == entry.emBeing) {
-      base = entry.baseTexture;
-    };
-  });
-  return base;
-};
-function getLights(entity) {
-  var lights = "null";
-  beings.forEach(entry => {
-    if (entity.getData("skyhighheroes:dyn/em_being") == entry.emBeing) {
-      lights = entry.lightsTexture;
-    };
-  });
-  return lights;
-};
 /**
  * clamp as in FSK
  * @param timer - input timer

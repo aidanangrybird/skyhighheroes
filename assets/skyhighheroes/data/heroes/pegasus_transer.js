@@ -14,9 +14,14 @@ function init(hero) {
   hero.setChestplate("Transer");
   hero.setTierOverride(entity => 0);
   transerOS.keyBinds(hero);
+  transerOS.profileWave(hero);
+  hero.setAttributeProfile(entity => {
+    return transerOS.getWaveProfile(entity);
+  });
   hero.addPowers("skyhighheroes:transer_system");
   hero.setKeyBindEnabled((entity, keyBind) => transerSystem.setKeyBind(entity, keyBind));
   hero.setTickHandler((entity, manager) => {
+    transerOS.waveHandler(entity, hero);
     transerOS.transerHandler(entity, manager);
   });
 };

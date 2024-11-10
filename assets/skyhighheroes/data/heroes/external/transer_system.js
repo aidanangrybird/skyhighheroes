@@ -759,12 +759,16 @@ function initTranser(moduleList, transerName) {
         };
       };
       if (waveIndex > -1) {
-        modules[waveIndex].waveCalling(entity, manager);
+        if (PackLoader.getSide() == "SERVER") {
+          modules[waveIndex].waveCalling(entity, manager);
+        };
       };
     },
-    callingHandler: function (entity, hero) {
+    waveHandler: function (entity, hero) {
       if (waveIndex > -1) {
-        modules[waveIndex].waveHandler(entity, hero);
+        if (PackLoader.getSide() == "SERVER") {
+          modules[waveIndex].waveHandler(entity, hero);
+        };
       };
     },
     /**
