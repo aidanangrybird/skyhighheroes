@@ -688,7 +688,7 @@ function initTranser(moduleList, transerName) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
-      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind))) || ((waveChangeIndex == -1) ? false : ((entity.getDataOrDefault("skyhighheroes:dyn/wave_changing_timer", 0.0) == 1 && isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind)));
+      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isKeyBindEnabled(entity, keyBind))) || ((waveChangeIndex == -1) ? false : (((entity.getDataOrDefault("skyhighheroes:dyn/wave_changing_timer", 0.0) < 1) || isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isKeyBindEnabled(entity, keyBind)));
     },
     /**
      * Modifier enabled stuff for em
@@ -696,7 +696,7 @@ function initTranser(moduleList, transerName) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
-      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier))) || ((waveChangeIndex == -1) ? false : ((entity.getDataOrDefault("skyhighheroes:dyn/wave_changing_timer", 0.0) == 1 && isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier)));
+      return ((emBeingIndex == -1) ? false : ((isModuleDisabled(entity, modules[emBeingIndex].name)) ? false : modules[emBeingIndex].isModifierEnabled(entity, modifier))) || ((waveChangeIndex == -1) ? false : (((entity.getDataOrDefault("skyhighheroes:dyn/wave_changing_timer", 0.0) < 1) || isModuleDisabled(entity, modules[waveChangeIndex].name)) ? false : modules[waveChangeIndex].isModifierEnabled(entity, modifier)));
     },
     /**
      * Handles all transer stuff
