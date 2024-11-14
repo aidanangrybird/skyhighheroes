@@ -7,7 +7,7 @@
         "supply": "skyhighheroes:xor/em_being_bottom_wave_changing_lights_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/mega_man_predation_bottom_wave_changing_lights_<TIMER>"
+    "out": "skyhighheroes:generated/mega_man_predation_sides_wave_changing_lights_<TIMER>"
   },
   "getters": {
     "TIMER": {

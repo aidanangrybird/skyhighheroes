@@ -1,0 +1,8 @@
+{
+  "aspects": [
+    {
+      "type": "LASER",
+      "opacity": 1.0
+    }
+  ]
+}

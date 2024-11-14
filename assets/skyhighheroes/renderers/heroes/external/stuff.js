@@ -87,3 +87,21 @@ function initHoloFlightAnim(renderer, name, value) {
   renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
   return anim;
 };
+
+function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
+  var prop = renderer.bindProperty(propertyName).setAnchor(anchor);
+  var constln = renderer.createResource("BEAM_CONSTELLATION", null);
+
+  for (var i = 0; i < entries.length; ++i) {
+      constln.bindBeam(entries[i]);
+  }
+
+  if (typeof beam === "string") {
+      beam = renderer.createResource("BEAM_RENDERER", beam);
+  }
+
+  prop.setConstellation(constln);
+  prop.setRenderer(beam);
+  prop.color.set(color);
+  return prop;
+}

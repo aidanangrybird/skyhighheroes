@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighheroes:geo/mega_man_cannon_right_left",
+    "in": "skyhighheroes:geo/mega_man_cannon_sides",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighheroes:xor/em_being_bottom_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/mega_man_cannon_right_left_<TIMER>"
+    "out": "skyhighheroes:generated/mega_man_cannon_sides_<TIMER>"
   },
   "getters": {
     "TIMER": {

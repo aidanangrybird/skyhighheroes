@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighheroes:geo/mega_man_knuckle_sides",
+    "in": "skyhighheroes:geo/mega_man_knuckle_right",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighheroes:xor/em_being_bottom_wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/mega_man_knuckle_sides_<TIMER>"
+    "out": "skyhighheroes:generated/mega_man_knuckle_right_<TIMER>"
   },
   "getters": {
     "TIMER": {

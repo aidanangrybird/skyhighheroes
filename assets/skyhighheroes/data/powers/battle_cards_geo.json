@@ -56,6 +56,67 @@
         "time": 5
       },
       "isToggle": true
+    },
+    "fiskheroes:transformation|cannon": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/cannon",
+        "timerData": "skyhighheroes:dyn/cannon_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:repulsor_blast": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_ENERGY": 1.0
+        },
+        "properties": {
+          "ADD_KNOCKBACK": 1.0,
+          "HIT_COOLDOWN": 0.0
+        }
+      },
+      "range": 48.0,
+      "speed": 20.0,
+      "spread": 0.0,
+      "radius": 0.1,
+      "cooldownTime": 10,
+      "soundEvents": {
+        "SHOOT": "skyhighheroes:wave_shooting"
+      }
+    },
+    "fiskheroes:transformation|jet_attack": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/jet_attack",
+        "timerData": "skyhighheroes:dyn/jet_attack_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 15.0,
+        "types": {
+          "WAVE_SHARP": 1.0,
+          "WAVE_SHOCKWAVE": 1.0
+        },
+        "properties": {
+          "ADD_KNOCKBACK": 5.0,
+          "HIT_COOLDOWN": 10
+        }
+      },
+      "range": 2.0,
+      "radius": 0.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:transformation|knuckle": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/knuckle",
+        "timerData": "skyhighheroes:dyn/knuckle_timer",
+        "time": 10
+      },
+      "isToggle": true
     }
   }
 }
