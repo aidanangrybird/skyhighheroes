@@ -19,10 +19,10 @@
       "values": ["up", "down"]
     },
     "TIMER": {
-      "key": "Math.ceil(81 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) | 0",
+      "key": "Math.ceil(80 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) | 0",
       "values": {
-        "min": 1,
-        "max": 41
+        "min": 0,
+        "max": 40
       }
     }
   },

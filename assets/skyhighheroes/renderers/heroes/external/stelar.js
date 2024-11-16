@@ -230,7 +230,7 @@ function initHead(renderer) {
   var swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword", "sword_lights");
   swordMain.anchor.set("rightArm");
-  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordMain.large = true;
   var swordBlade = renderer.createEffect("fiskheroes:shield");
   swordBlade.texture.set(null, "sword_blade");
@@ -240,7 +240,7 @@ function initHead(renderer) {
   var swordWaveChanging = renderer.createEffect("fiskheroes:shield");
   swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
   swordWaveChanging.anchor.set("rightArm");
-  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   //Right
   var swordRight = renderer.createEffect("fiskheroes:shield");
