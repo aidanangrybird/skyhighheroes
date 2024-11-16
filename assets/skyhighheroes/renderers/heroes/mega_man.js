@@ -218,7 +218,7 @@ function initEffects(renderer) {
   cannonFront.anchor.set("rightArm");
   cannonFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5, 0.0);
   cannonFront.large = true;
-  //Hail cannon
+  //Jet Attack
   //Right
   jetAttackRight = renderer.createEffect("fiskheroes:shield");
   jetAttackRight.texture.set("jet_attack_sides");
@@ -253,12 +253,12 @@ function initEffects(renderer) {
   jetAttackWings = renderer.createEffect("fiskheroes:shield");
   jetAttackWings.texture.set("jet_attack_wings");
   jetAttackWings.anchor.set("rightArm");
-  jetAttackWings.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  jetAttackWings.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   jetAttackWings.large = true;
   jetAttackWingsWaveChanging = renderer.createEffect("fiskheroes:shield");
   jetAttackWingsWaveChanging.texture.set(null, "jet_attack_wings_wave_changing_lights");
   jetAttackWingsWaveChanging.anchor.set("rightArm");
-  jetAttackWingsWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
+  jetAttackWingsWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   jetAttackWingsWaveChanging.large = true;
   //Knuckle
   //Right
