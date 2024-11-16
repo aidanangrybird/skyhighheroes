@@ -390,7 +390,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
     waveChangeLights.render();
   };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
       headRightWaveChange.render();
       headLeftWaveChange.render();
       headTopWaveChange.render();
@@ -404,7 +404,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
       headBottom.render();
       headFront.render();
     }
-    if ((entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/cannon_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/jet_attack_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/knuckle_timer") < 1)) {
+    if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/cannon_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/jet_attack_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/knuckle_timer") < 1)) {
       headRightWaveChanging.render();
       headLeftWaveChanging.render();
       headTopWaveChanging.render();

@@ -50,6 +50,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
   var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");
   forcefield.color.set(0x00FF00);
   callingBeam.color.set(0x00FF00);
+  callingBeam.anchor.ignoreAnchor(isFirstPersonArm);
   //callingBeam.progress = timerAnimate2(callingTimer, 1.0, 0.0, 0.1, 0.0);
   callingLine.size.x = callingLine.size.y = timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
   callingLine.end.y = timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;

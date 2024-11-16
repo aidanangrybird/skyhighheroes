@@ -1,3 +1,4 @@
+{orig_data} = {data}
 {inverse} = -1*animate2({data}, 1.0, 0.0, 0.35, 0.2)+1
 {data} = -1*animate2({data}, 0.5, 0.5, 0.05, 0.2)+1
 ;animate2(data, length, start, ramp up, ramp down)
@@ -9,7 +10,7 @@
 {part4} = if({data} != 1, animate2({data}, 1.0, 0.55, 0.15, 0.0), 1)
 {part5} = if({data} != 1, animate2({data}, 1.0, 0.7, 0.25, 0.0), 1)
 
-{head_rotX} = -5'{part1}+5'-80'{part2}+40'{part3}+40'{part5}
+{head_rotX} = -5'{part1}+5'-80'{part2}+40'{part3}+40'{part5}-60'if({orig_data} != 1, animate2({orig_data}, 0.2, 0.2, 0.05, 0.01), 1)
 {head_rotY} = -65'{part1}+65'
 {head_posY} += 2{part2}-2{part5}
 {head_posZ} += 8{part2}-8{part5}

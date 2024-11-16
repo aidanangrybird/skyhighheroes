@@ -342,20 +342,20 @@ function init(transer) {
       if (equipment.getCompoundTag(5).getCompoundTag("Item").getShort("Damage") > 0) {
         manager.setShort(equipment.getCompoundTag(5).getCompoundTag("Item"), "Damage", 0)
       };
-      var sword = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var sword = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.2 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/sword", sword);
       var sword_blade = entity.getData("skyhighheroes:dyn/sword_timer") == 1 && entity.getData("skyhighheroes:dyn/item_holding_timer") == 0;
       manager.setData(entity, "skyhighheroes:dyn/sword_blade", sword_blade);
-      var cannon = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var cannon = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.2 && entity.getData("skyhighheroes:dyn/battle_card") == 3 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/cannon", cannon);
-      var jet_attack = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var jet_attack = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.2 && entity.getData("skyhighheroes:dyn/battle_card") == 4 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/jet_attack", jet_attack);
-      var knuckle = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.35 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
+      var knuckle = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") < 0.2 && entity.getData("skyhighheroes:dyn/battle_card") == 5 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
       manager.setData(entity, "skyhighheroes:dyn/knuckle", knuckle);
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0.45 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.55) {
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && !entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0.3 && entity.getData("skyhighheroes:dyn/predation_timer") < 0.4) {
         if (entity.getData("skyhighheroes:dyn/battle_card") == 1) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
             transer.systemMessage(entity, "<n>Inserted <nh>Barrier<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
@@ -364,7 +364,7 @@ function init(transer) {
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 2) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
             transer.systemMessage(entity, "<n>Inserted <nh>Sword<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
@@ -374,7 +374,7 @@ function init(transer) {
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 3) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
             transer.systemMessage(entity, "<n>Inserted <nh>Cannon<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
@@ -382,7 +382,7 @@ function init(transer) {
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 4) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
             transer.systemMessage(entity, "<n>Inserted <nh>Jet Attack<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
@@ -390,7 +390,7 @@ function init(transer) {
         };
         if (entity.getData("skyhighheroes:dyn/battle_card") == 5) {
           entity.playSound("skyhighheroes:wave.equip", 1, 1);
-          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.5) {
+          if (entity.getData("skyhighheroes:dyn/predation_timer") > 0.35) {
             transer.systemMessage(entity, "<n>Inserted <nh>Knuckle<n> battle card!");
           };
           manager.setData(entity, "skyhighheroes:dyn/omega_xis", true);
