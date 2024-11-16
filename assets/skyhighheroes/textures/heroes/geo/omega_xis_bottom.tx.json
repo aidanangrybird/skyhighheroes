@@ -11,7 +11,7 @@
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighheroes:dyn/omega_xis') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer') + (entity.getData('skyhighheroes:dyn/omega_xis') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), (entity.getData('skyhighheroes:dyn/omega_xis') || !entity.getHeldItem().isEmpty() ? 2 : 16)), (entity.getData('skyhighheroes:dyn/omega_xis') || !entity.getHeldItem().isEmpty() ? 16 : 28)) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 11 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 11 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 11 : 0) | 0",
+      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighheroes:dyn/omega_xis') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer') + (entity.getData('skyhighheroes:dyn/omega_xis') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), (entity.getData('skyhighheroes:dyn/omega_xis') || !entity.getHeldItem().isEmpty() ? 2 : 16)), (entity.getData('skyhighheroes:dyn/omega_xis') || !entity.getHeldItem().isEmpty() ? 16 : 28)) + (entity.as('DISPLAY').getDisplayType() == 'DISPLAY_STAND' ? 12 : 0) + (entity.as('DISPLAY').getDisplayType() == 'HOLOGRAM' ? 12 : 0) + (entity.as('DISPLAY').getDisplayType() == 'ITERATOR_PREVIEW' ? 12 : 0) | 0",
       "values": {
         "min": 2,
         "max": 28
