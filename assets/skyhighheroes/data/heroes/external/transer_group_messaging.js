@@ -181,9 +181,9 @@ function init(transer) {
         foundPlayers.forEach(player => {
           if (transer.isWearingTranser(player)) {
             if (hasGroup(entity, player, groupName)) {
-              if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
+              if (transer.waveChangeIndex > -1) {
                 if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                  groupMessage(player, groupName, transer.color+transer.waveChange+"\u00A7r", message);
+                  groupMessage(player, groupName, transer.waveColor+transer.waveChange+"\u00A7r", message);
                 } else {
                   groupMessage(player, groupName, transer.human, message);
                 };
@@ -193,9 +193,9 @@ function init(transer) {
             };
           };
         });
-        if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
+        if (transer.waveChangeIndex > -1) {
           if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-            groupMessage(entity, groupName, transer.color+transer.waveChange+"\u00A7r", message);
+            groupMessage(entity, groupName, transer.waveColor+transer.waveChange+"\u00A7r", message);
           } else {
             groupMessage(entity, groupName, transer.human, message);
           };
@@ -234,7 +234,7 @@ function init(transer) {
             transer.systemMessage(entity, "<n>!g addMem <nh><name><n> <nh>-<n> Adds member to currently selected group");
             transer.systemMessage(entity, "<n>!g remMem <nh><name><n> <nh>-<n> Removes member from currently selected group");
             transer.systemMessage(entity, "<n>!g listMem <nh>-<n> Lists members in currently selected group");
-            transer.systemMessage(entity, "<n>!g help <nh>-<n> Shows group commands");
+            transer.systemMessage(entity, "<n>!g help <nh>-<n> Shows this list");
             break;
           default:
             transer.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");

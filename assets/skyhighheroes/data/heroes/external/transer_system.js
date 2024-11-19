@@ -543,6 +543,7 @@ function initTranser(moduleList, transerName) {
     systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
     systemMessage(entity, "<n>Your current location is<nh> " + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
     systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
+    systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
   };
   return {
     /**
@@ -736,6 +737,8 @@ function initTranser(moduleList, transerName) {
                   systemMessage(entity, module.helpMessage);
                 };
               });
+              systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
+              systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
             } else if (args[0] == "disable") {
               disableModule(entity, manager, moduleNames, args[1]);
             } else if (args[0] == "enable") {

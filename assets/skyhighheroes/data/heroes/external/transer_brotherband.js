@@ -126,9 +126,9 @@ function init(transer) {
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
-            if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
+            if (transer.waveChangeIndex > -1) {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                brotherBandMessage(entity, transer.color+transer.waveChange+"\u00A7r", message);
+                brotherBandMessage(entity, transer.waveColor+transer.waveChange+"\u00A7r", message);
               } else {
                 brotherBandMessage(entity, transer.human, message);
               };
@@ -156,7 +156,7 @@ function init(transer) {
             transer.systemMessage(entity, "<n>!bb form <nh><name><n> <nh>-<n> Adds Brother to your BrotherBand by name");
             transer.systemMessage(entity, "<n>!bb cut <nh><name><n> <nh>-<n> Removes Brother from your BrotherBand by name");
             transer.systemMessage(entity, "<n>!bb list <nh>-<n> Lists Brothers");
-            transer.systemMessage(entity, "<n>!bb help <nh>-<n> Shows BrotherBand commands");
+            transer.systemMessage(entity, "<n>!bb help <nh>-<n> Shows this list");
             break;
           default:
             transer.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");

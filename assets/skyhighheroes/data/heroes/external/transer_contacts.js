@@ -87,7 +87,7 @@ function init(transer) {
             transer.systemMessage(entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
             transer.systemMessage(entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
             transer.systemMessage(entity, "<n>!c list <nh>-<n> Lists contacts");
-            transer.systemMessage(entity, "<n>!c help <nh>-<n> Shows contact commands");
+            transer.systemMessage(entity, "<n>!c help <nh>-<n> Shows this list");
             break;
           default:
             transer.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");

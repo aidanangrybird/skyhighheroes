@@ -50,10 +50,10 @@ function init(transer) {
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            if (typeof transer.waveChange === "string" && typeof transer.color === "string" && typeof transer.human === "string") {
+            if (transer.waveChangeIndex > -1) {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, transer.color+transer.waveChange+"\u00A7r", message);
-                playerMessage(entity, transer.color+transer.waveChange+"\u00A7r", message);
+                playerMessage(foundPlayer, transer.waveColor+transer.waveChange+"\u00A7r", message);
+                playerMessage(entity, transer.waveColor+transer.waveChange+"\u00A7r", message);
               } else {
                 playerMessage(foundPlayer, transer.human, message);
                 playerMessage(entity, transer.human, message);
