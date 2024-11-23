@@ -202,7 +202,23 @@ function chatMessage(player, message) {
   };
 };
 /**
- * Sends system message
+ * Sends system message, formatting tags are below
+ * ```
+ * "<ob>": "\u00A7k"
+ * "<n>": "\u00A7b"
+ * "<nh>": "\u00A7a"
+ * "<s>": "\u00A7a"
+ * "<sh>": "\u00A7e"
+ * "<e>": "\u00A7c"
+ * "<eh>": "\u00A76"
+ * "<d>": "\u00A72SYSTEM\u00A7r"
+ * "<l>": "\u00A74SYSTEM\u00A7r"
+ * "<p>": "\u00A71SYSTEM\u00A7r"
+ * "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r"
+ * "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r"
+ * "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r"
+ * "<r>": "\u00A7r"
+ * ```
  * @param {JSPlayer} player - Entity recieving message
  * @param {string} message - Message content
  **/
@@ -708,7 +724,7 @@ function initTranser(moduleList, transerName, satellite) {
               };
             };
           } else {
-            messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")].messageHandler(entity);
+            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity);
           };
         };
       };

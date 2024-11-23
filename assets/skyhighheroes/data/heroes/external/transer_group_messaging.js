@@ -167,17 +167,22 @@ function init(transer) {
     messageHandler: function (entity) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
-      var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
-      var groupName = group.getString("groupName");
-      var members = transer.getStringArray(group.getStringList("members"));
       var foundPlayers = [];
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-      entities.forEach(player => {
-        if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
-          foundPlayers.push(player);
-        };
-      });
-      if (foundPlayers != null) {
+      var groupName = "";
+      if (entity.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
+        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
+        groupName = group.getString("groupName");
+        var members = transer.getStringArray(group.getStringList("members"));
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        entities.forEach(player => {
+          if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
+            foundPlayers.push(player);
+          };
+        });
+      } else {
+        transer.systemMessage(entity, "<e>You have no groups to message!")
+      };
+      if (foundPlayers.length > 0) {
         foundPlayers.forEach(player => {
           if (transer.isWearingTranser(player)) {
             if (hasGroup(entity, player, groupName)) {

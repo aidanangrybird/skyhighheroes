@@ -113,16 +113,19 @@ function init(transer) {
     messageHandler: function (entity) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
-      var brothers = transer.getStringArray(entity.getWornChestplate().nbt().getStringList("brothers"));
-      var reciever = brothers[activeChat];
       var foundPlayer = null;
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 120);
-      entities.some(player => {
-        if (player.is("PLAYER") && player.getName() == reciever) {
-          foundPlayer = player;
-        };
-        return (foundPlayer != null);
-      });
+      if (entity.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
+        var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 120);
+        entities.some(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+          return (foundPlayer != null);
+        });
+      } else {
+        transer.systemMessage(entity, "<e>You do not have any Brothers to message!");
+      };
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {

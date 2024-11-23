@@ -38,15 +38,19 @@ function init(transer) {
     messageHandler: function (entity) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
-      var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
       var foundPlayer = null;
-      var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-      entities.some(player => {
-        if (player.is("PLAYER") && player.getName() == reciever) {
-          foundPlayer = player;
-        };
-        return (foundPlayer != null);
-      });
+      if (entity.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
+        entities.some(player => {
+          if (player.is("PLAYER") && player.getName() == reciever) {
+            foundPlayer = player;
+          };
+          return (foundPlayer != null);
+        });
+      } else {
+        transer.systemMessage(entity, "<e>You do not have any contacts to message!")
+      };
       if (foundPlayer != null) {
         if (transer.isWearingTranser(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
