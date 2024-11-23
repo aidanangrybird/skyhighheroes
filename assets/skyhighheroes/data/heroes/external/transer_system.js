@@ -1,28 +1,6 @@
 //If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
 //So please don't steal this, it will look very bad on you
 
-var transers = [
-  {"suit": "skyhighocs:ace_stelar", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {"suit": "skyhighocs:solar_flame", "satellite": "pegasus", "id": "87fa6187-4fa6-4dc6-8742-19a2b67c4cc0"},
-  {"suit": "skyhighocs:aidan_stelar", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {"suit": "skyhighocs:squall_vortex", "satellite": "pegasus", "id": "a3d071d4-c912-41e1-a6b2-c0de99ea4a84"},
-  {"suit": "skyhighocs:chase_stelar", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {"suit": "skyhighocs:pryetak_nebula", "satellite": "leo", "id": "4da600b8-582a-4fc3-ac2e-ada03d3e478c"},
-  {"suit": "skyhighocs:lucas_stelar", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
-  {"suit": "skyhighocs:crimson_asteroid", "satellite": "dragon", "id": "c4bc5db6-3cf6-44fe-8427-304a7b211bc4"},
-  {"suit": "skyhighheroes:mega_man", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:mega_man/subaru", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:pegasus_transer", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:leo_transer", "satellite": "leo"},
-  {"suit": "skyhighheroes:dragon_transer", "satellite": "dragon"}
-];
-
-var basic = [
-  {"suit": "skyhighheroes:pegasus_transer", "satellite": "pegasus"},
-  {"suit": "skyhighheroes:leo_transer", "satellite": "leo"},
-  {"suit": "skyhighheroes:dragon_transer", "satellite": "dragon"}
-];
-
 regex = /((<ob>))|(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)|(<d>)|(<l>)|(<p>)|(<dragon>)|(<leo>)|(<pegasus>)/gm;
 
 var formatting = {
@@ -57,47 +35,19 @@ var months = [
   "December"
 ];
 
+function asssignTranser(entity, manager, satellite) {
+  if (!entity.getWornChestplate().nbt().hasKey("satellite")) {
+    manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
+  };
+};
+
 /**
  * Checks if an entity is wearing a transer
  * @param {JSEntity} entity - Entity getting checked
  * @returns If the entity is wearing a transer
  **/
 function isWearingTranser(entity) {
-  var wearingTranser = false;
-  transers.forEach(entry => {
-    if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : true) {
-      wearingTranser = true;
-    };
-  });
-  return wearingTranser;
-};
-/**
- * Checks if an entity is wearing an OC
- * @param {JSEntity} entity - Entity getting checked
- * @returns If the entity is wearing OC
- **/
-function isWearingOC(entity) {
-  var wearingOC = false
-  transers.forEach(entry => {
-    if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit && (typeof entry.id !== "undefined") ? entity.getUUID() == entry.id : false) {
-      wearingOC = true;
-    };
-  });
-  return wearingOC;
-};
-/**
- * Checks if an entity is wearing a normal transer
- * @param {JSEntity} entity - Entity getting checked
- * @returns If the entity is wearing normal transer
- **/
-function isWearingNormal(entity) {
-  var wearingNormal = false
-  transers.forEach(entry => {
-    if (entity.isWearingFullSuit() && entity.getWornChestplate().suitType() == entry.suit) {
-      wearingNormal = true;
-    };
-  });
-  return wearingNormal;
+  return entity.getWornChestplate().nbt().hasKey("satellite");
 };
 
 /**
@@ -106,13 +56,7 @@ function isWearingNormal(entity) {
  * @returns The satellite a transer is assigned to
  **/
 function getAssignedSatellite(entity) {
-  var satellite = null;
-  transers.forEach(entry => {
-    if (entity.getWornChestplate().suitType() == entry.suit) {
-      satellite = entry.satellite;
-    };
-  });
-  return satellite;
+  return entity.getWornChestplate().nbt().getString("satellite");
 };
 
 /**
@@ -274,8 +218,7 @@ function systemMessage(player, message) {
       chatMessage(player, formatSystem("<p>> " + message));
       break;
     default:
-      chatMessage(player, formatSystem("<e>Transer is not assigned to a satellite!"));
-      chatMessage(player, formatSystem("<e>Check transer list in <eh>transer_system.js<e>!"));
+      chatMessage(player, formatSystem("<e>Transer is not assigned to a valid satellite!"));
       break;
   };
 };
@@ -310,9 +253,16 @@ function basicTierOverride(entity) {
  * Initializes transer system
  * @param {object} moduleList - Transer system modules
  * @param {string} transerName - Required, you'll be happy that is a thing or else debugging is painful
+ * @param {string} satellite - Required, or other transers will not recognize this transer as a transer
  **/
-function initTranser(moduleList, transerName) {
+function initTranser(moduleList, transerName, satellite) {
   var transerInstance = this;
+  var assignedSatellite;
+  if (typeof satellite === "string") {
+    assignedSatellite = satellite;
+  } else {
+    assignedSatellite = "";
+  };
   //Type 1 - commands (can have data management)
   var type1Specs = ["command", "commandHandler", "helpMessage"];
   //Type 2 - messaging only
@@ -705,6 +655,7 @@ function initTranser(moduleList, transerName) {
      * @param {JSDataManager} manager - Required
      **/
     transerHandler: (entity, manager) => {
+      asssignTranser(entity, manager, assignedSatellite);
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);

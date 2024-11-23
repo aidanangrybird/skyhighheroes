@@ -6,7 +6,13 @@ var transerContacts = implement("skyhighheroes:external/transer_contacts");
 var transerScanner = implement("skyhighheroes:external/transer_scanner");
 var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
 var theFugitive = implement("skyhighheroes:external/the_fugitive");
-var transerOS = transerSystem.initTranser([transerMessaging, transerGroupMessaging, transerBrotherBand, transerContacts, transerScanner, transerWaypoints, theFugitive], "leoKingdom");
+var transerOS = transerSystem.initTranser([transerMessaging,
+  transerGroupMessaging,
+  transerBrotherBand,
+  transerContacts,
+  transerScanner,
+  transerWaypoints,
+  theFugitive], "leoKingdom", "leo");
 function init(hero) {
   hero.setAliases("leo_transer");
   hero.setName("Leo Kindgom");
