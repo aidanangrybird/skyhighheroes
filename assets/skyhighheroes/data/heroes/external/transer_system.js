@@ -677,13 +677,16 @@ function initTranser(moduleList, transerName, satellite) {
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!(entity.getData("fiskheroes:disguise") == waveChange)) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && typeof waveChange === "string") {
+        if (!(entity.getData("fiskheroes:disguise") == waveChange || entity.getData("fiskheroes:disguise") == human)) {
+          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", waveChange);
           } else {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", null);
+            if (typeof human === "string") {
+              manager.setData(entity, "fiskheroes:disguise", human);
+            };
           };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
@@ -732,6 +735,12 @@ function initTranser(moduleList, transerName, satellite) {
         if (PackLoader.getSide() == "SERVER") {
           modules[waveIndex].waveCalling(entity, manager);
         };
+      };
+      if (typeof human === "string" && entity.getData("skyhighheroes:dyn/wave_changing_timer") < 1) {
+        manager.setData(entity, "fiskheroes:disguise", human);
+      };
+      if (typeof waveChange === "string" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", waveChange);
       };
     },
     waveHandler: function (entity, hero) {

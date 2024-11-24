@@ -1,20 +1,88 @@
+var tmfAliens = [
+  "Heatblast",
+  "Wildmutt",
+  "Diamondhead",
+  "XLR8",
+  "Grey Matter",
+  "Four Arms",
+  "Stinkfly",
+  "Ripjaws",
+  "Upgrade",
+  "Ghostfreak",
+  "Heatjaws",
+  "Stinkarms",
+  "Diamondmatter",
+  "Cannonbolt",
+  "Wildvine",
+  "Blitzwolfer",
+  "Snare-oh",
+  "Frankenstrike",
+  "Zs'S`kayr",
+  "Upchuck",
+  "Ditto",
+  "Eyeguy",
+  "Waybig"
+];
+
+var transformedVars = [
+  "fiskheroes:dyn/nanite_timer",
+];
+
+function isTransformed(entity) {
+  var transformed = false;
+  transformedVars.forEach(variable => {
+    transformed = entity.getDataOrDefault(variable, 0) == 1;
+  });
+  return transformed;
+};
+
 /**
  * You put all of the required functions in here
  * @param transer - Required
  **/
 function init(transer) {
   /**
-   * Checks if a player has another player as a contact
-   * @param {JSEntity} entity - Player getting checked
-   * @param {string} groupName - Group name being checked
-   * @returns If sender is in receiver's contacts
+   * Scans for nearby entities
+   * @param {JSEntity} entity - Player initiating the scan
    **/
   function entityScan(entity) {
-    var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+    var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 90);
     transer.systemMessage(entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:")
     entities.forEach(being => {
-      var beingStatus = "<nh>" + being.getName() + " <n>(<nh>" + entity.getHealth() + "<n>)"
-      transer.systemMessage(entity, beingStatus);
+      var beingName = being.getName();
+      if (being.isWearingFullSuit()) {
+        if (!being.getWornHelmet().isEmpty()) {
+          var itemName = being.getWornHelmet().displayName().split("'s");
+          beingName = itemName[0];
+        };
+        if (!being.getWornChestplate().isEmpty()) {
+          var itemName = being.getWornChestplate().displayName().split("'s");
+          beingName = itemName[0];
+        };
+        if (!being.getWornLeggings().isEmpty()) {
+          var itemName = being.getWornLeggings().displayName().split("'s");
+          beingName = itemName[0];
+        };
+        if (!being.getWornBoots().isEmpty()) {
+          var itemName = being.getWornBoots().displayName().split("'s");
+          beingName = itemName[0];
+        };
+        if (!isTransformed(being)) {
+          beingName = being.getName();
+        };
+        if (isTransformed(being) && (entity.getData("fiskheroes:mask_open_timer2") == 1 || entity.getData("fiskheroes:mask_open_timer") == 5)) {
+          beingName = being.getName();
+        };
+        if (being.getWornChestplate().suitType() == "tmf:omintrix" && being.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
+          beingName = tmfAliens[being.getData("tmf:dyn/transformed")];
+        };
+        if (being.getData("fiskheroes:disguise") != null) {
+          beingName = being.getData("fiskheroes:disguise");
+        };
+      };
+      transer.systemMessage(entity, "<nh>" + beingName + " <n>(<nh>" + entity.getHealth() + "<n>)");
+      if (entity.getName() != being.getName()) {
+      };
     });
   };
   return {
