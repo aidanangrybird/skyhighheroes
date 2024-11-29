@@ -12,8 +12,7 @@ loadTextures({
   "predation_sides_wave_changing_lights": "skyhighheroes:geo/mega_man_subaru_predation_sides_wave_changing_lights.tx.json",
   "predation_front_wave_changing_lights": "skyhighheroes:geo/mega_man_subaru_predation_front_wave_changing_lights.tx.json",
   "sword_blade": "skyhighheroes:geo/mega_man_sword_blade.tx.json",
-  "sword": "skyhighheroes:geo/mega_man_sword.tx.json",
-  "sword_lights": "skyhighheroes:null",
+  "sword": "skyhighheroes:geo/mega_man_subaru_sword.tx.json",
   "sword_wave_changing_lights": "skyhighheroes:geo/mega_man_subaru_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighheroes:geo/mega_man_subaru_sword_sides.tx.json",
   "sword_front": "skyhighheroes:geo/mega_man_subaru_sword_front.tx.json",
@@ -237,7 +236,7 @@ function initEffects(renderer) {
   knuckleFront.large = true;
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword", "sword_lights");
+  swordMain.texture.set("sword");
   swordMain.anchor.set("rightArm");
   swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordMain.large = true;

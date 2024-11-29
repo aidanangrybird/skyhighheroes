@@ -17,7 +17,7 @@ var tmfAliens = [
   "Blitzwolfer",
   "Snare-oh",
   "Frankenstrike",
-  "Zs'S`kayr",
+  "Zs'Skayr",
   "Upchuck",
   "Ditto",
   "Eyeguy",
@@ -26,12 +26,33 @@ var tmfAliens = [
 
 var transformedVars = [
   "fiskheroes:dyn/nanite_timer",
+  "dhhp:dyn/helmet_timer",
+  "nameless:dyn/backpack_timer",
+  "nameless:dyn/symbiote_timer",
+  "sabri:dyn/vibranium_nanite_timer",
+  "secretheroes:dyn/hulk_timer",
+  "stellar:dyn/danny_phantom_transform_timer",
+  "tmf:dyn/transform_timer",
+  "jmctheroes:dyn/fate_timer",
+  "jmctheroes:dyn/beetle_timer",
+  "jmctheroes:dyn/suit_timer",
+  "stellar:dyn/suit_timer",
+  "pwt:dyn/symbiot_timer",
+  "jmctheroes:dyn/symbiote_timer",
+  "skarredheroes:dyn/scarab_timer",
+  "sind:dyn/b_timer_model",
+  "sind:dyn/b_timer",
+  "ironmaniac:dyn/mk5_timer",
+  "secretheroes:dyn/moonknight_timer",
+  "secretheroes:dyn/mrknight_timer",
 ];
 
 function isTransformed(entity) {
   var transformed = false;
   transformedVars.forEach(variable => {
-    transformed = entity.getDataOrDefault(variable, 0) == 1;
+    if (!transformed) {
+      transformed = (entity.getDataOrDefault(variable, 0) == 1);
+    }
   });
   return transformed;
 };
@@ -45,45 +66,76 @@ function init(transer) {
    * Scans for nearby entities
    * @param {JSEntity} entity - Player initiating the scan
    **/
-  function entityScan(entity) {
-    var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 90);
-    transer.systemMessage(entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:")
-    entities.forEach(being => {
-      var beingName = being.getName();
-      if (being.isWearingFullSuit()) {
-        if (!being.getWornHelmet().isEmpty()) {
-          var itemName = being.getWornHelmet().displayName().split("'s");
-          beingName = itemName[0];
+  function entityScan(entity, range) {
+    var maxRange = 64;
+    var minRange = 1;
+    var defaultRange = 32;
+    var radius = 0;
+    if (typeof range === "undefined") {
+      radius = defaultRange;
+    } else {
+      radius = range;
+    };
+    if ((minRange <= radius) && (radius <= maxRange)) {
+      transer.systemMessage(entity, "<n>Scanning for entities at a range of <nh>" + radius + "<n>!");
+      var entityList = entity.world().getEntitiesInRangeOf(entity.pos(), radius);
+      var entities = [];
+      entityList.forEach(thing => {
+        if (!thing.getName().startsWith("item.") && !(thing.getName() == "Experience Orb")) {
+          entities.push(thing);
         };
-        if (!being.getWornChestplate().isEmpty()) {
-          var itemName = being.getWornChestplate().displayName().split("'s");
-          beingName = itemName[0];
+      });
+      transer.systemMessage(entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:");
+      entities.forEach(scannedEntity => {
+        var beingName = scannedEntity.getName();
+        if (scannedEntity.isWearingFullSuit()) {
+          if (!scannedEntity.getWornHelmet().isEmpty()) {
+            var itemName = scannedEntity.getWornHelmet().displayName().split("'s");
+            beingName = itemName[0];
+          };
+          if (!scannedEntity.getWornChestplate().isEmpty()) {
+            var itemName = scannedEntity.getWornChestplate().displayName().split("'s");
+            beingName = itemName[0];
+          };
+          if (!scannedEntity.getWornLeggings().isEmpty()) {
+            var itemName = scannedEntity.getWornLeggings().displayName().split("'s");
+            beingName = itemName[0];
+          };
+          if (!scannedEntity.getWornBoots().isEmpty()) {
+            var itemName = scannedEntity.getWornBoots().displayName().split("'s");
+            beingName = itemName[0];
+          };
+          if (!isTransformed(scannedEntity)) {
+            beingName = scannedEntity.getName();
+          };
+          if (entity.getDataOrDefault("secretheroes:dyn/moonknight_timer", 0) == 1) {
+            beingName = "Moon Knight";
+          };
+          if (entity.getDataOrDefault("secretheroes:dyn/mrknight_timer", 0) == 1) {
+            beingName = "Mr Knight";
+          };
+          if (scannedEntity.getWornChestplate().suitType() == "tmf:omnitrix" && scannedEntity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
+            var alien = scannedEntity.getData("tmf:dyn/transformed");
+            transer.systemMessage(entity, parseInt(alien, 2));
+            beingName = tmfAliens[parseInt(alien, 2)];
+          };
+          if (isTransformed(scannedEntity) && ((scannedEntity.getData("fiskheroes:mask_open_timer2") == 1) || (scannedEntity.getData("fiskheroes:mask_open_timer") == 5))) {
+            beingName = scannedEntity.getName();
+          };
+          if (scannedEntity.getData("fiskheroes:disguise") != null) {
+            beingName = scannedEntity.getData("fiskheroes:disguise");
+          };
         };
-        if (!being.getWornLeggings().isEmpty()) {
-          var itemName = being.getWornLeggings().displayName().split("'s");
-          beingName = itemName[0];
-        };
-        if (!being.getWornBoots().isEmpty()) {
-          var itemName = being.getWornBoots().displayName().split("'s");
-          beingName = itemName[0];
-        };
-        if (!isTransformed(being)) {
-          beingName = being.getName();
-        };
-        if (isTransformed(being) && (entity.getData("fiskheroes:mask_open_timer2") == 1 || entity.getData("fiskheroes:mask_open_timer") == 5)) {
-          beingName = being.getName();
-        };
-        if (being.getWornChestplate().suitType() == "tmf:omintrix" && being.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
-          beingName = tmfAliens[being.getData("tmf:dyn/transformed")];
-        };
-        if (being.getData("fiskheroes:disguise") != null) {
-          beingName = being.getData("fiskheroes:disguise");
-        };
+        transer.systemMessage(entity, "<nh>" + beingName + " <n>(<nh>" + scannedEntity.getHealth() + "<n>)");
+      });
+    } else {
+      if (radius > maxRange) {
+        transer.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too large! Must be at most <eh>64<e>!");
       };
-      transer.systemMessage(entity, "<nh>" + beingName + " <n>(<nh>" + entity.getHealth() + "<n>)");
-      if (entity.getName() != being.getName()) {
+      if (radius <= minRange) {
+        transer.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too small! Must be at least <eh>1<e>!");
       };
-    });
+    };
   };
   return {
     name: "scanner",
@@ -92,14 +144,14 @@ function init(transer) {
     helpMessage: "<n>!sc <nh>-<n> Scanner",
     disabledMessage: "<e>Module <eh>scanner<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
+      if (arguments.length > 1 && arguments.length < 4) {
         switch(arguments[1]) {
           case "entity":
-            entityScan(entity);
+            (arguments.length == 3) ? entityScan(entity, arguments[2]) : entityScan(entity);
             break;
           case "help":
             transer.systemMessage(entity, "<n>Scanner commands:");
-            transer.systemMessage(entity, "<n>!sc <nh>entity<n> <nh>-<n> Entity scan");
+            transer.systemMessage(entity, "<n>!sc entity <nh><range><n> <nh>-<n> Scans for entities around you");
             transer.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
             break;
           default:

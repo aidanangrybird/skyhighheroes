@@ -112,6 +112,7 @@ function init(transer) {
       hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
     },
     initEquipment: function (hero) {
+      //Fix stuff not going into thing
       hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bMega Man's Katanas},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Katanas"));
       hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bMega Man's Scythe},ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Scythe"));
       hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bMega Man's Rifle},ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.displayName() == "\u00A7bMega Man's Rifle"));
