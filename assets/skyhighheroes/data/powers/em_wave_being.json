@@ -167,6 +167,18 @@
     "fiskheroes:damage_immunity|cancel": {
       "damageType": "CANCEL"
     },
+    "fiskheroes:damage_immunity|chi": {
+      "damageType": "CHI"
+    },
+    "fiskheroes:damage_immunity|omega": {
+      "damageType": "OMEGA"
+    },
+    "fiskheroes:damage_immunity|blue_kryptonite": {
+      "damageType": "BLUE_KRYPTONITE"
+    },
+    "fiskheroes:damage_immunity|sound_blast": {
+      "damageType": "CANCEL"
+    },
     "fiskheroes:shield_throwing": {
       "cooldownTime": 0,
       "soundEvents": {
