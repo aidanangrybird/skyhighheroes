@@ -69,7 +69,7 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ENERGY": 1.0
+          "ELEMENT_NONE": 1.0
         },
         "properties": {
           "ADD_KNOCKBACK": 1.0,
@@ -97,8 +97,7 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_SHARP": 1.0,
-          "WAVE_SHOCKWAVE": 1.0
+          "ELEMENT_NONE": 1.0
         },
         "properties": {
           "ADD_KNOCKBACK": 5.0,

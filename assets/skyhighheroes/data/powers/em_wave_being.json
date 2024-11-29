@@ -177,8 +177,7 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ELECTRICITY": 1.0,
-          "WAVE_ENERGY": 1.0
+          "ELEMENT_ELEC": 1.0
         },
         "properties": {
           "LIGHTNING_STRIKE": 1.0,

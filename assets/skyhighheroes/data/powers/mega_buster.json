@@ -6,8 +6,7 @@
       "damageProfile": {
         "damage": 15.0,
         "types": {
-          "WAVE_ELECTRICITY": 1.0,
-          "WAVE_ENERGY": 1.0
+          "ELEMENT_NONE": 1.0
         },
         "properties": {
           "HIT_COOLDOWN": 0

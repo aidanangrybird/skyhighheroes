@@ -21,7 +21,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('WAVE_ENERGY') && !player.world().isRaining() && !player.world().isThundering() && (entity.world().getLocation(entity.pos()).biome().startsWith('Plains') || entity.world().getLocation(entity.pos()).biome().startsWith('Sunflower Plains')) && (player.getWornChestplate().suitType() == 'skyhighocs:leo_transer' || player.getWornChestplate().suitType() == 'skyhighocs:pegasus_transer' || player.getWornChestplate().suitType() == 'skyhighocs:dragon_transer')"
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_NONE') && !player.world().isRaining() && !player.world().isThundering() && (entity.world().getLocation(entity.pos()).biome().startsWith('Plains') || entity.world().getLocation(entity.pos()).biome().startsWith('Sunflower Plains')) && (player.getWornChestplate().suitType() == 'skyhighocs:leo_transer' || player.getWornChestplate().suitType() == 'skyhighocs:pegasus_transer' || player.getWornChestplate().suitType() == 'skyhighocs:dragon_transer')"
       }
     }
   }
