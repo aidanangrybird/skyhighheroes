@@ -12,6 +12,9 @@ var tmfAliens = [
   "Heatjaws",
   "Stinkarms",
   "Diamondmatter",
+  "13",
+  "14",
+  "15",
   "Cannonbolt",
   "Wildvine",
   "Blitzwolfer",
@@ -51,8 +54,8 @@ function isTransformed(entity) {
   var transformed = false;
   transformedVars.forEach(variable => {
     if (!transformed) {
-      transformed = (entity.getDataOrDefault(variable, 0) == 1);
-    }
+      transformed = (entity.getDataOrDefault(variable, 1) == 1);
+    };
   });
   return transformed;
 };
@@ -115,9 +118,9 @@ function init(transer) {
             beingName = "Mr Knight";
           };
           if (scannedEntity.getWornChestplate().suitType() == "tmf:omnitrix" && scannedEntity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
-            var alien = scannedEntity.getData("tmf:dyn/transformed");
-            transer.systemMessage(entity, parseInt(alien, 2));
-            beingName = tmfAliens[parseInt(alien, 2)];
+            var alien = scannedEntity.getData("tmf:dyn/transformed") + 0;
+            transer.systemMessage(entity, alien);
+            beingName = tmfAliens[alien];
           };
           if (isTransformed(scannedEntity) && ((scannedEntity.getData("fiskheroes:mask_open_timer2") == 1) || (scannedEntity.getData("fiskheroes:mask_open_timer") == 5))) {
             beingName = scannedEntity.getName();

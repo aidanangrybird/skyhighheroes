@@ -1,5 +1,5 @@
 function init(hero) {
-  hero.setName("\u00A74Astro");
+  hero.setName("Astro");
   hero.setTier(8);
   hero.setLeggings("Shorts");
   hero.setBoots("Boots");
@@ -18,7 +18,6 @@ function init(hero) {
   hero.addKeyBindFunc("CYCLE_CLOTHES", cycleClothes, "Change Clothes", 1);
   hero.addKeyBind("ENERGY_PROJECTION", "Charged Arm Cannons", 2);
   hero.addKeyBind("DUAL_ARM_CANNONS", "Charged Arm Cannons", 2);
-  hero.addKeyBind("DUAL_ARM_CANNON", "Charged Arm Cannons", 2);
   hero.addKeyBind("SUPER_SPEED", "Super Speed", 3);
   hero.addKeyBind("ARM_CANNON", "Aim", 4);
   hero.addKeyBind("AIM", "Aim", 4);
@@ -89,25 +88,11 @@ function isKeyBindEnabled(entity, keyBind) {
     case "ARM_CANNON":
       return entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
     case "AIM":
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3 && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1) {
-        return true;
-      };
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
-        return true;
-      };
+      return entity.getHeldItem().isEmpty() && (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) ? true : (entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1);
     case "ENERGY_PROJECTION":
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3 && entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1) {
-        return true;
-      };
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
-        return true;
-      };
-    case "CHARGE_ENERGY":
-      return entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
+      return entity.getHeldItem().isEmpty() && (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) ? true : (entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1);
     case "DUAL_ARM_CANNONS":
-      return entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
-    case "DUAL_ARM_CANNON":
-      return entity.getData("skyhighheroes:dyn/astro_clothes") == 3;
+      return entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
     default:
       return true;
   };
