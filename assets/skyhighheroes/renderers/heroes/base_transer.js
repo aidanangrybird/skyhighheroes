@@ -1,3 +1,11 @@
+loadTextures({
+  "santa_hat": "skyhighheroes:santa_hat",
+});
+
+var date = new Date();
+var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
+var santaHat;
+
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
@@ -28,6 +36,15 @@ var callingLine;
 var callingBeam;
 
 function initEffects(renderer) {
+  if (isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+  };
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:wave_calling");
   var callingShape = renderer.createResource("SHAPE", null);
   callingLine = callingShape.bindLine({ "start": [0.0, -300.0, 0.0], "end": [0.0, -300.0, 0.0], "size": [20.0, 20.0] });
@@ -47,6 +64,9 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  if (isChristmasSeason) {
+    santaHat.render();
+  };
   var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");
   forcefield.color.set(0x00FF00);
   callingBeam.color.set(0x00FF00);

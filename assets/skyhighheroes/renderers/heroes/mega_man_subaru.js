@@ -3,6 +3,10 @@ extend("skyhighheroes:mega_man");
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
+var date = new Date();
+var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
+var santaHat;
+
 loadTextures({
   "base": "skyhighheroes:geo/mega_man_subaru_base",
   "lights": "skyhighheroes:geo/mega_man_subaru_lights",
@@ -71,16 +75,27 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
-  hair = renderer.createEffect("fiskheroes:shield");
-  hair.texture.set("hair");
-  hair.anchor.set("head");
-  hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-  hair.large = true;
-  hairWaveChange = renderer.createEffect("fiskheroes:shield");
-  hairWaveChange.texture.set(null, "hair_wave_changing_lights");
-  hairWaveChange.anchor.set("head");
-  hairWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-  hairWaveChange.large = true;
+  if (isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+  };
+  if (!isChristmasSeason) {
+    hair = renderer.createEffect("fiskheroes:shield");
+    hair.texture.set("hair");
+    hair.anchor.set("head");
+    hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
+    hair.large = true;
+    hairWaveChange = renderer.createEffect("fiskheroes:shield");
+    hairWaveChange.texture.set(null, "hair_wave_changing_lights");
+    hairWaveChange.anchor.set("head");
+    hairWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
+    hairWaveChange.large = true;
+  };
   stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stelar.initForceField(renderer, 0x39D6BD);
@@ -372,19 +387,24 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  ears.render();
-  if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
-    hair.render();
-    hairWaveChange.render();
+  if (isChristmasSeason) {
+    santaHat.render();
   };
-  if (entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (65/81)) {
+  if (!isChristmasSeason) {
+    if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
       hair.render();
-    };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (25/81)) {
       hairWaveChange.render();
     };
+    if (entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (65/81)) {
+        hair.render();
+      };
+      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (25/81)) {
+        hairWaveChange.render();
+      };
+    };
   };
+  ears.render();
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     waveChangeLights.render();
   };

@@ -1,6 +1,9 @@
 var astro = implement("skyhighheroes:external/astro");
 var stuff = implement("skyhighheroes:external/stuff");
 
+var date = new Date();
+var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
+var santaHat;
 var metal_heat;
 var head_model;
 var eyes_model;
@@ -45,6 +48,7 @@ loadTextures({
   "shorts": "skyhighheroes:tobio/astro_shorts",
   "cannon": "skyhighheroes:cannon",
   "cannon_lights": "skyhighheroes:tobio/astro_cannon_lights",
+  "santa_hat": "skyhighheroes:santa_hat",
 });
 
 function init(renderer) {
@@ -73,6 +77,15 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  if (isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.0, 0.0);
+    santaHat.setRotation(0.0, 0.0, 0.0);
+  };
   //Head
   var head = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHead");
   head.texture.set("base");
@@ -266,6 +279,9 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
   if (entity.isWearingFullSuit()) {
+    if (isChristmasSeason) {
+      santaHat.render();
+    };
     head_model.render();
     body_model.render();
     eyes_model.opacity = entity.getInterpolatedData("fiskheroes:energy_projection_timer") + entity.getInterpolatedData("fiskheroes:aimed_timer") + entity.getInterpolatedData("fiskheroes:energy_charge") + entity.getInterpolatedData("fiskheroes:flight_timer") + entity.getInterpolatedData("fiskheroes:beam_charge") + entity.getData("fiskheroes:speeding") + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
