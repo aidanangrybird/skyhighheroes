@@ -227,3 +227,157 @@ function initLiveries(renderer) {
 function blockBelowStand(entity, block) {
   return (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && entity.world().getBlock(entity.pos().add(0, -1, 0)) == block;
 };
+
+/**
+ * Creates battle card rendering
+ * @param {JSHeroRenderer} renderer - Required
+ * @param {string} battleCard - Name of battle card
+ * @param {number} textureType - Texture format (0=null,1=Match,2=Sides are the same,3=Top and bottom are different)
+ * @param {number} lightType - Light format (0=null,1=Match,2=Sides are the same,3=Front only,4=Front no lights)
+ **/
+function initHandThing(renderer, battleCard, textureType, lightType, offset) {
+  if (typeof offset === "undefined") {
+    offset = 0;
+  };
+  var rightTexture;
+  var rightLights;
+  var leftTexture;
+  var leftLights;
+  var topTexture;
+  var topLights;
+  var bottomTexture;
+  var bottomLights;
+  var frontTexture;
+  var frontLights;
+
+  switch (textureType) {
+    //Just to null the base texture for wave change
+    case 0:
+      rightTexture = null;
+      leftTexture = null;
+      topTexture = null;
+      bottomTexture = null;
+      frontTexture = null;
+      break;
+    //Default where the side matches the texture name
+    case 1:
+      rightTexture = battleCard + "_right";
+      leftTexture = battleCard + "_left";
+      topTexture = battleCard + "_top";
+      bottomTexture = battleCard + "_bottom";
+      frontTexture = battleCard + "_front";
+      break;
+    //Most basic where all sides are the same
+    case 2:
+      rightTexture = battleCard + "_sides";
+      leftTexture = battleCard + "_sides";
+      topTexture = battleCard + "_sides";
+      bottomTexture = battleCard + "_sides";
+      frontTexture = battleCard + "_front";
+      break;
+    //Left and right are the same but top and bottom are different
+    case 3:
+      rightTexture = battleCard + "_sides";
+      leftTexture = battleCard + "_sides";
+      topTexture = battleCard + "_top";
+      bottomTexture = battleCard + "_bottom";
+      frontTexture = battleCard + "_front";
+      break;
+    default:
+      rightTexture = null;
+      leftTexture = null;
+      topTexture = null;
+      bottomTexture = null;
+      frontTexture = null;
+      break;
+  };
+  
+  switch (lightType) {
+    //No lights
+    case 0:
+      rightLights = null;
+      leftLights = null;
+      topLights = null;
+      bottomLights = null;
+      frontLights = null;
+      break;
+    //Default where there is no lights
+    case 1:
+      rightLights = battleCard + "_right_lights";
+      leftLights = battleCard + "_left_lights";
+      topLights = battleCard + "_top_lights";
+      bottomLights = battleCard + "_bottom_lights";
+      frontLights = battleCard + "_front_lights";
+      break;
+    //Most basic where all sides are the same
+    case 2:
+      rightLights = battleCard + "_sides_lights";
+      leftLights = battleCard + "_sides_lights";
+      topLights = battleCard + "_sides_lights";
+      bottomLights = battleCard + "_sides_lights";
+      frontLights = battleCard + "_front_lights";
+      break;
+    //Front only has lights
+    case 3:
+      rightLights = null;
+      leftLights = null;
+      topLights = null;
+      bottomLights = null;
+      frontLights = battleCard + "_front_lights";
+      break;
+    case 4:
+      rightLights = battleCard + "_right_lights";
+      leftLights = battleCard + "_left_lights";
+      topLights = battleCard + "_top_lights";
+      bottomLights = battleCard + "_bottom_lights";
+      frontLights = null;
+      break;
+    default:
+      rightLights = null;
+      leftLights = null;
+      topLights = null;
+      bottomLights = null;
+      frontLights = null;
+      break;
+  };
+
+  //Right
+  var battleCardRight = renderer.createEffect("fiskheroes:shield");
+  battleCardRight.texture.set(rightTexture, rightLights);
+  battleCardRight.anchor.set("rightArm");
+  battleCardRight.setRotation(0.0, 90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5 + offset, 3.0);
+  battleCardRight.large = true;
+  //Left
+  var battleCardLeft = renderer.createEffect("fiskheroes:shield");
+  battleCardLeft.texture.set(leftTexture, leftLights);
+  battleCardLeft.anchor.set("rightArm");
+  battleCardLeft.setRotation(0.0, -90.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 5.5 + offset, -3.0);
+  battleCardLeft.large = true;
+  //Top
+  var battleCardTop = renderer.createEffect("fiskheroes:shield");
+  battleCardTop.texture.set(topTexture, topLights);
+  battleCardTop.anchor.set("rightArm");
+  battleCardTop.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(4.0, 5.5 + offset, 0.0);
+  battleCardTop.large = true;
+  //Bottom
+  var battleCardBottom = renderer.createEffect("fiskheroes:shield");
+  battleCardBottom.texture.set(bottomTexture, bottomLights);
+  battleCardBottom.anchor.set("rightArm");
+  battleCardBottom.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(-2.0, 5.5 + offset, 0.0);
+  battleCardBottom.large = true;
+  //Front
+  var battleCardFront = renderer.createEffect("fiskheroes:shield");
+  battleCardFront.texture.set(frontTexture, frontLights);
+  battleCardFront.anchor.set("rightArm");
+  battleCardFront.setRotation(0.0, 0.0, -90.0).setCurve(0.0, 0.0).setOffset(3.0, 10.5 + offset, 0.0);
+  battleCardFront.large = true;
+  return {
+    render: () => {
+      battleCardRight.render();
+      battleCardLeft.render();
+      battleCardTop.render();
+      battleCardBottom.render();
+      battleCardFront.render();
+    }
+  }
+}

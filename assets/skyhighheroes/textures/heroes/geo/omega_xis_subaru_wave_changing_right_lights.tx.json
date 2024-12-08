@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:geo/omega_xis_subaru_wave_changing_right_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/em_being_wave_changing_right_lights_<TIMER>"
+      }
+    ],
+    "out": "skyhighheroes:generated/omega_xis_subaru_wave_changing_right_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil((87 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer') - 59) - ((entity.getData('skyhighheroes:dyn/omega_xis') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/omega_xis_timer') + (entity.getData('skyhighheroes:dyn/omega_xis') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 2), 28) | 0",
+      "values": {
+        "min": 2,
+        "max": 28
+      }
+    }
+  },
+  "isDynamic": true
+}

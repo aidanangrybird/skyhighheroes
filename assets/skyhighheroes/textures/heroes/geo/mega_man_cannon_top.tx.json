@@ -4,7 +4,7 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/predation_sides_wave_change_<TIMER>"
+        "supply": "skyhighheroes:xor/predation_wave_change_sides_<TIMER>"
       }
     ],
     "out": "skyhighheroes:generated/mega_man_cannon_top_<TIMER>"
