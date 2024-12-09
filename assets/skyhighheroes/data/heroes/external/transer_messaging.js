@@ -42,11 +42,10 @@ function init(transer) {
       if (entity.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
         var reciever = entity.getWornChestplate().nbt().getStringList("contacts").getString(activeChat);
-        entities.some(player => {
+        entities.forEach(player => {
           if (player.is("PLAYER") && player.getName() == reciever) {
             foundPlayer = player;
           };
-          return (foundPlayer != null);
         });
       } else {
         transer.systemMessage(entity, "<e>You do not have any contacts to message!")

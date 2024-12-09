@@ -117,11 +117,10 @@ function init(transer) {
       if (entity.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
         var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 120);
-        entities.some(player => {
+        entities.forEach(player => {
           if (player.is("PLAYER") && player.getName() == reciever) {
             foundPlayer = player;
           };
-          return (foundPlayer != null);
         });
       } else {
         transer.systemMessage(entity, "<e>You do not have any Brothers to message!");
