@@ -223,6 +223,15 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   if (isChristmasSeason) {
+    if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
+      santaHat.setOffset(0.0, -5.25, 1.25);
+      santaHat.setRotation(-45.0, 0.0, 0.0);
+      santaHat.setScale(1.05);
+    } else {
+      santaHat.setOffset(0.0, -6.5, 0);
+      santaHat.setRotation(0.0, 0.0, 0.0);
+      santaHat.setScale(1.08);
+    };
     santaHat.render();
   };
   if (!isChristmasSeason) {
