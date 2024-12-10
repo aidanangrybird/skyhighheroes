@@ -39,6 +39,20 @@ function asssignTranser(entity, manager, satellite) {
   if (!entity.getWornChestplate().nbt().hasKey("satellite")) {
     manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
   };
+  if (!entity.getWornChestplate().nbt().hasKey("worthy") && (entity.getWornChestplate().suitType() == "skyhighheroes:leo_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:pegasus_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:dragon_transer")) {
+    if (PackLoader.getSide() == "SERVER") {
+      var value = Math.random();
+      if (value < 0.005) {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", true);
+        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:geo_stelar");
+      } else {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", false);
+      };
+    };
+  };
+  if (entity.getWornChestplate().nbt().hasKey("worthy") && entity.getWornChestplate().suitType() == "skyhighheroes:geo_stelar") {
+    manager.removeTag(entity.getWornChestplate().nbt(), "worthy")
+  };
 };
 
 /**

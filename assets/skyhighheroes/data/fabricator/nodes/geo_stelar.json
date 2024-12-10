@@ -1,0 +1,21 @@
+{
+  "suit": "skyhighheroes:geo_stelar",
+  "requirements": [
+    "skyhighheroes:transers",
+    "fiskheroes:tier1"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:tick",
+      "description": {
+        "translate": "Are you worthy?"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_TICKING"
+        },
+        "check": "player.getWornChestplate().nbt().getBoolean('worthy') && player.getWornChestplate().suitType() == 'skyhighheroes:geo_stelar'"
+      }
+    }
+  }
+}

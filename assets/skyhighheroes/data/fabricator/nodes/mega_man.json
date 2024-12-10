@@ -8,7 +8,8 @@
   "requirements": [
     "skyhighheroes:wave_change",
     "skyhighheroes:transers",
-    "fiskheroes:tier10"
+    "fiskheroes:tier10",
+    "skyhighheroes:geo_stelar"
   ],
   "criteria": {
     "chance": {
@@ -21,7 +22,7 @@
           "player": "PLAYER_HURT",
           "damage": "DAMAGE_SOURCE"
         },
-        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_NONE') && !player.world().isRaining() && !player.world().isThundering() && (player.world().getLocation(player.pos()).biome().startsWith('Plains') || player.world().getLocation(player.pos()).biome().startsWith('Sunflower Plains')) && (player.getWornChestplate().suitType() == 'skyhighocs:leo_transer' || player.getWornChestplate().suitType() == 'skyhighocs:pegasus_transer' || player.getWornChestplate().suitType() == 'skyhighocs:dragon_transer')"
+        "check": "player.getData('skyhighheroes:dyn/calling_timer') > 0 && damage.hasDamageType('ELEMENT_NONE') && (player.world().getLocation(player.pos()).biome().startsWith('Plains') || player.world().getLocation(player.pos()).biome().startsWith('Sunflower Plains')) && player.getWornChestplate().suitType() == 'skyhighheroes:geo_stelar'"
       }
     }
   }

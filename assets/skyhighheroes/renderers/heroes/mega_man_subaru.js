@@ -66,7 +66,9 @@ loadTextures({
   "scythe": "skyhighheroes:geo/mega_man_subaru_scythe",
   "scythe_lights": "skyhighheroes:geo/mega_man_subaru_scythe_lights",
   "rifle": "skyhighheroes:geo/mega_man_subaru_rifle",
-  "rifle_lights": "skyhighheroes:geo/mega_man_subaru_rifle_lights"
+  "rifle_lights": "skyhighheroes:geo/mega_man_subaru_rifle_lights",
+  "santa_hat": "skyhighheroes:santa_hat",
+  "santa_hat_em": "skyhighheroes:geo/mega_man_subaru_santa_hat",
 });
 
 function init(renderer) {
@@ -83,6 +85,13 @@ function initEffects(renderer) {
     santaHat.setScale(1.05);
     santaHat.setOffset(0.0, -5.25, 1.25);
     santaHat.setRotation(-45.0, 0.0, 0.0);
+    var santa_hat_em_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_em_model.texture.set("santa_hat_em");
+    santaHatEM = renderer.createEffect("fiskheroes:model").setModel(santa_hat_em_model);
+    santaHatEM.anchor.set("head");
+    santaHatEM.setScale(1.05);
+    santaHatEM.setOffset(0.0, -5.25, 1.25);
+    santaHatEM.setRotation(-45.0, 0.0, 0.0);
   };
   if (!isChristmasSeason) {
     hair = renderer.createEffect("fiskheroes:shield");
@@ -165,7 +174,21 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   if (isChristmasSeason) {
-    santaHat.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+      if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
+        santaHat.setOffset(0.0, -5.25, 1.25);
+        santaHat.setRotation(-45.0, 0.0, 0.0);
+        santaHat.setScale(1.05);
+      } else {
+        santaHat.setOffset(0.0, -6.5, 0);
+        santaHat.setRotation(0.0, 0.0, 0.0);
+        santaHat.setScale(1.08);
+      };
+      santaHat.render();
+    };
+    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
+      santaHatEM.render();
+    };
   };
   if (!isChristmasSeason) {
     if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {

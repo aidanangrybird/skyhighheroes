@@ -47,7 +47,7 @@ function init(transer) {
       hero.addKeyBindFunc("BATTLE_CARD_0", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         return true;
-      }, "Return To Vortex Buster", 2);
+      }, "Return To Mega Buster", 2);
       hero.addKeyBindFunc("BATTLE_CARD_1", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", player.getData("skyhighheroes:dyn/selected_battle_card"));
         if (PackLoader.getSide() == "CLIENT") {
