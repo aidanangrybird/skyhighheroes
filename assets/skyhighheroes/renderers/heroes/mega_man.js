@@ -1,9 +1,10 @@
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
+var santaHat;
+var santaHatEM;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
-var santaHat;
 
 loadTextures({
   "base": "skyhighheroes:geo/mega_man_base",
@@ -140,15 +141,15 @@ function initEffects(renderer) {
     santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
     santaHat.anchor.set("head");
     santaHat.setScale(1.05);
-    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setOffset(0.0, -5.75, 1.25);
     santaHat.setRotation(-45.0, 0.0, 0.0);
     var santa_hat_em_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
     santa_hat_em_model.texture.set("santa_hat_em");
     santaHatEM = renderer.createEffect("fiskheroes:model").setModel(santa_hat_em_model);
     santaHatEM.anchor.set("head");
     santaHatEM.setScale(1.05);
-    santaHatEM.setOffset(0.0, -5.25, 1.25);
-    santaHatEM.setRotation(-45.0, 0.0, 0.0);
+    santaHatEM.setOffset(0.0, -7.25, -0.25);
+    santaHatEM.setRotation(-10.0, 0.0, 0.0);
   };
   if (!isChristmasSeason) {
     hair = renderer.createEffect("fiskheroes:shield");
@@ -231,12 +232,16 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   if (isChristmasSeason) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-      if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
-        santaHat.setOffset(0.0, -5.25, 1.25);
-        santaHat.setRotation(-45.0, 0.0, 0.0);
-        santaHat.setScale(1.05);
-      } else {
+    if (entity.isAlive() && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+      santaHat.setScale(1.05);
+      santaHat.setOffset(0.0, -5.75, 1.25);
+      santaHat.setRotation(-45.0, 0.0, 0.0);
+      if (entity.getData("skyhighheroes:dyn/visualizer_toggle")) {
+        santaHat.setScale(1.02);
+        santaHat.setOffset(0.0, -7.25, -0.25);
+        santaHat.setRotation(-10.0, 0.0, 0.0);
+      };
+      if (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
         santaHat.setOffset(0.0, -6.5, 0);
         santaHat.setRotation(0.0, 0.0, 0.0);
         santaHat.setScale(1.08);

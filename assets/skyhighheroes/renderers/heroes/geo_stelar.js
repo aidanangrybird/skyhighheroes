@@ -11,6 +11,8 @@ loadTextures({
   "santa_hat_em": "skyhighheroes:geo/mega_man_santa_hat",
 });
 
+var santaHat;
+var santaHatEM;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
@@ -57,7 +59,7 @@ function initEffects(renderer) {
     santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
     santaHat.anchor.set("head");
     santaHat.setScale(1.05);
-    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setOffset(0.0, -5.75, 1.25);
     santaHat.setRotation(-45.0, 0.0, 0.0);
     var santa_hat_em_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
     santa_hat_em_model.texture.set("santa_hat_em");
@@ -101,11 +103,15 @@ function render(entity, renderLayer, isFirstPersonArm) {
     if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
       santaHatEM.render();
     } else {
-      if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
-        santaHat.setOffset(0.0, -5.25, 1.25);
-        santaHat.setRotation(-45.0, 0.0, 0.0);
-        santaHat.setScale(1.05);
-      } else {
+      santaHat.setScale(1.05);
+      santaHat.setOffset(0.0, -5.75, 1.25);
+      santaHat.setRotation(-45.0, 0.0, 0.0);
+      if (entity.getData("skyhighheroes:dyn/visualizer_toggle")) {
+        santaHat.setScale(1.02);
+        santaHat.setOffset(0.0, -7.25, -0.25);
+        santaHat.setRotation(-10.0, 0.0, 0.0);
+      };
+      if (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
         santaHat.setOffset(0.0, -6.5, 0);
         santaHat.setRotation(0.0, 0.0, 0.0);
         santaHat.setScale(1.08);

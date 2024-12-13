@@ -3,9 +3,6 @@ extend("skyhighheroes:mega_man");
 var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
-var date = new Date();
-var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
-var santaHat;
 
 loadTextures({
   "base": "skyhighheroes:geo/mega_man_subaru_base",
@@ -77,168 +74,18 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
-  if (isChristmasSeason) {
-    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
-    santa_hat_model.texture.set("santa_hat");
-    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
-    santaHat.anchor.set("head");
-    santaHat.setScale(1.05);
-    santaHat.setOffset(0.0, -5.25, 1.25);
-    santaHat.setRotation(-45.0, 0.0, 0.0);
-    var santa_hat_em_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
-    santa_hat_em_model.texture.set("santa_hat_em");
-    santaHatEM = renderer.createEffect("fiskheroes:model").setModel(santa_hat_em_model);
-    santaHatEM.anchor.set("head");
-    santaHatEM.setScale(1.05);
-    santaHatEM.setOffset(0.0, -5.25, 1.25);
-    santaHatEM.setRotation(-45.0, 0.0, 0.0);
-  };
-  if (!isChristmasSeason) {
-    hair = renderer.createEffect("fiskheroes:shield");
-    hair.texture.set("hair");
-    hair.anchor.set("head");
-    hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-    hair.large = true;
-    hairWaveChange = renderer.createEffect("fiskheroes:shield");
-    hairWaveChange.texture.set(null, "hair_wave_changing_lights");
-    hairWaveChange.anchor.set("head");
-    hairWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
-    hairWaveChange.large = true;
-  };
-  stelar.initNV(renderer);
-  stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
+  parent.initEffects(renderer);
   stelar.initForceField(renderer, 0x39D6BD);
   stelar.initMegaBuster(renderer, 0x39D6BD, 0x39D6BD);
-  stelar.initLiveries(renderer);
   stuff.bindBeam(renderer, "fiskheroes:repulsor_blast", "fiskheroes:repulsor_blast", "rightArm", 0x39D6BD, [
       { "firstPerson": [-4.5, 3.75, -7.0], "offset": [-0.5, 9.0, 0.0], "size": [1.5, 1.5] }
   ]);
   stuff.bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:invisible", "rightArm", 0xFFFFFF, [
       { "firstPerson": [-4.5, 3.75, -7.0], "offset": [-0.5, 9.0, 0.0], "size": [1.5, 1.5] }
   ]);
-  waveChangeLights = renderer.createEffect("fiskheroes:overlay");
-  waveChangeLights.texture.set(null, "wave_changing_lights");
-  ears = renderer.createEffect("fiskheroes:ears");
-  ears.anchor.set("head");
-  ears.angle = 0;
-  ears.inset = -0.039;
   stuff.bindFlightTrail(renderer, "skyhighheroes:mega_man_subaru_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
-  //Cannon
-  cannon = stelar.initHandThing(renderer, "cannon", 3, 0);
-  //Jet Attack
-  jetAttack = stelar.initHandThing(renderer, "jet_attack", 3, 0);
-  jetAttackWings = renderer.createEffect("fiskheroes:shield");
-  jetAttackWings.texture.set("jet_attack_wings");
-  jetAttackWings.anchor.set("rightArm");
-  jetAttackWings.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  jetAttackWings.large = true;
-  jetAttackWingsWaveChanging = renderer.createEffect("fiskheroes:shield");
-  jetAttackWingsWaveChanging.texture.set(null, "jet_attack_wings_wave_changing_lights");
-  jetAttackWingsWaveChanging.anchor.set("rightArm");
-  jetAttackWingsWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  jetAttackWingsWaveChanging.large = true;
-  //Knuckle
-  knuckle = stelar.initHandThing(renderer, "knuckle", 1, 0);
-  //Sword
-  swordMain = renderer.createEffect("fiskheroes:shield");
-  swordMain.texture.set("sword", "sword_lights");
-  swordMain.anchor.set("rightArm");
-  swordMain.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordMain.large = true;
-  swordBlade = renderer.createEffect("fiskheroes:shield");
-  swordBlade.texture.set(null, "sword_blade");
-  swordBlade.anchor.set("rightArm");
-  swordBlade.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 14.5, 0.0);
-  swordBlade.large = true;
-  swordWaveChanging = renderer.createEffect("fiskheroes:shield");
-  swordWaveChanging.texture.set(null, "sword_wave_changing_lights");
-  swordWaveChanging.anchor.set("rightArm");
-  swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
-  swordWaveChanging.large = true;
-  sword = stelar.initHandThing(renderer, "sword", 2, 0);
-  //Head
-  head = stelar.initHandThing(renderer, "head", 1, 4, 3);
-  headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
-  headWaveChanging = stelar.initHandThing(renderer, "head_wave_changing", 0, 1, 3);
-};
-
-function initAnimations(renderer) {
-  stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:stelar_holo_flight");
-  stelar.addAnimationWithData(renderer, "stelar.JET_ATTACK_AIM", "skyhighheroes:stelar_aim", "fiskheroes:energy_projection_timer")
-  .priority = 10;
-  stuff.emCeilingAnimation(renderer);
-  stelar.initStelarAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  if (isChristmasSeason) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-      if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
-        santaHat.setOffset(0.0, -5.25, 1.25);
-        santaHat.setRotation(-45.0, 0.0, 0.0);
-        santaHat.setScale(1.05);
-      } else {
-        santaHat.setOffset(0.0, -6.5, 0);
-        santaHat.setRotation(0.0, 0.0, 0.0);
-        santaHat.setScale(1.08);
-      };
-      santaHat.render();
-    };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
-      santaHatEM.render();
-    };
-  };
-  if (!isChristmasSeason) {
-    if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
-      hair.render();
-      hairWaveChange.render();
-    };
-    if (entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (65/81)) {
-        hair.render();
-      };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > (25/81)) {
-        hairWaveChange.render();
-      };
-    };
-  };
-  ears.render();
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
-    waveChangeLights.render();
-  };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 || (entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW")) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) {
-      headWaveChange.render();
-    };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/cannon_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/jet_attack_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/knuckle_timer") < 1) || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
-      head.render();
-    }
-    if (((entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1 && entity.getHeldItem().isEmpty()) || entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) && (entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/cannon_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/jet_attack_timer") < 1) && (entity.getInterpolatedData("skyhighheroes:dyn/knuckle_timer") < 1)) {
-      headWaveChanging.render();
-    }
-  };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-    predation.render();
-  };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") > 0) {
-    swordWaveChanging.render();
-    swordMain.render();
-    sword.render();
-    if (entity.getData("skyhighheroes:dyn/sword") && entity.getHeldItem().isEmpty()) {
-      swordBlade.render();
-    };
-  };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/cannon_timer") > 0) {
-    cannon.render();
-  };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/jet_attack_timer") > 0) {
-    jetAttack.render();
-    jetAttackWings.render();
-    jetAttackWingsWaveChanging.render();
-  };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/knuckle_timer") > 0) {
-    knuckle.render();
-  };
+  parent.render(entity, renderLayer, isFirstPersonArm);
 };
