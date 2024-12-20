@@ -1,8 +1,8 @@
 /**
  * You put all of the required functions in here
- * @param transer - Required
+ * @param system - Required
  **/
-function init(transer) {
+function init(system) {
   /**
    * Checks if a player has another player as a contact
    * @param {JSEntity} sender - Player getting checked
@@ -11,7 +11,7 @@ function init(transer) {
    **/
   function hasContact(sender, receiver) {
     var contacts = receiver.getWornChestplate().nbt().getStringList("contacts");
-    var contactsList = transer.getStringArray(contacts);
+    var contactsList = system.getStringArray(contacts);
     var result = false;
     contactsList.forEach(entry => {
       if (entry == sender.getName()) {
@@ -48,18 +48,18 @@ function init(transer) {
           };
         });
       } else {
-        transer.systemMessage(entity, "<e>You do not have any contacts to message!")
+        system.systemMessage(entity, "<e>You do not have any contacts to message!")
       };
       if (foundPlayer != null) {
-        if (transer.isWearingTranser(foundPlayer)) {
+        if (system.isWearingTranser(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            if (transer.waveChangeIndex > -1) {
+            if (system.waveChangeIndex > -1) {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, transer.waveColor+transer.waveChange+"\u00A7r", message);
-                playerMessage(entity, transer.waveColor+transer.waveChange+"\u00A7r", message);
+                playerMessage(foundPlayer, system.waveColor+system.waveChange+"\u00A7r", message);
+                playerMessage(entity, system.waveColor+system.waveChange+"\u00A7r", message);
               } else {
-                playerMessage(foundPlayer, transer.human, message);
-                playerMessage(entity, transer.human, message);
+                playerMessage(foundPlayer, system.human, message);
+                playerMessage(entity, system.human, message);
               };
             } else {
               playerMessage(foundPlayer, entity.getName(), message);
@@ -72,17 +72,17 @@ function init(transer) {
     chatInfo: function (player, manager) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {
         if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = transer.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
+          var contactsList = system.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
           if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
             manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
           };
           var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          transer.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+          system.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
         } else {
-          transer.systemMessage(player, "<e>You do not have any contacts!");
+          system.systemMessage(player, "<e>You do not have any contacts!");
         };
       } else {
-        transer.systemMessage(player, "<e>You do not have any contacts!");
+        system.systemMessage(player, "<e>You do not have any contacts!");
       };
     }
   };

@@ -1,16 +1,16 @@
 var transerSystem = implement("skyhighheroes:external/transer_system");
-var transerMessaging = implement("skyhighheroes:external/transer_messaging");
-var transerGroupMessaging = implement("skyhighheroes:external/transer_group_messaging");
+var messaging = implement("skyhighheroes:external/messaging");
+var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
-var transerContacts = implement("skyhighheroes:external/transer_contacts");
-var transerScanner = implement("skyhighheroes:external/transer_scanner");
-var transerWaypoints = implement("skyhighheroes:external/transer_waypoint");
-var transerOS = transerSystem.initTranser([transerMessaging,
-  transerGroupMessaging,
+var contacts = implement("skyhighheroes:external/contacts");
+var scanner = implement("skyhighheroes:external/scanner");
+var waypoints = implement("skyhighheroes:external/waypoint");
+var transerOS = transerSystem.initTranser([messaging,
+  groupMessaging,
   transerBrotherBand,
-  transerContacts,
-  transerScanner,
-  transerWaypoints], "dragonSky", "dragon");
+  contacts,
+  scanner,
+  waypoints], "dragonSky", "dragon");
 function init(hero) {
   hero.setAliases("dragon_transer");
   hero.setName("Dragon Sky");

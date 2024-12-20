@@ -1,8 +1,8 @@
 /**
  * You put all of the required functions in here
- * @param transer - Required
+ * @param system - Required
  **/
-function init(transer) {
+function init(system) {
   //All of the required functions and stuff go here
   function example() {
     return "foosh";

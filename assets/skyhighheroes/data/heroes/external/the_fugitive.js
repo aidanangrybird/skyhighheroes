@@ -1,4 +1,4 @@
-function init(transer) {
+function init(system) {
   return {
     name: "Omega-Xis: The Fugitive",
     type: 7,

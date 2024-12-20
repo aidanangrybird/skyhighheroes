@@ -62,9 +62,9 @@ function isTransformed(entity) {
 
 /**
  * You put all of the required functions in here
- * @param transer - Required
+ * @param system - Required
  **/
-function init(transer) {
+function init(system) {
   /**
    * Scans for nearby entities
    * @param {JSEntity} entity - Player initiating the scan
@@ -80,7 +80,7 @@ function init(transer) {
       radius = range;
     };
     if ((minRange <= radius) && (radius <= maxRange)) {
-      transer.systemMessage(entity, "<n>Scanning for entities at a range of <nh>" + radius + "<n>!");
+      system.systemMessage(entity, "<n>Scanning for entities at a range of <nh>" + radius + "<n>!");
       var entityList = entity.world().getEntitiesInRangeOf(entity.pos(), radius);
       var entities = [];
       entityList.forEach(thing => {
@@ -88,7 +88,7 @@ function init(transer) {
           entities.push(thing);
         };
       });
-      transer.systemMessage(entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:");
+      system.systemMessage(entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:");
       entities.forEach(scannedEntity => {
         var beingName = scannedEntity.getName();
         if (scannedEntity.isWearingFullSuit()) {
@@ -119,7 +119,7 @@ function init(transer) {
           };
           if (scannedEntity.getWornChestplate().suitType() == "tmf:omnitrix" && scannedEntity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
             var alien = scannedEntity.getData("tmf:dyn/transformed") + 0;
-            transer.systemMessage(entity, alien);
+            system.systemMessage(entity, alien);
             beingName = tmfAliens[alien];
           };
           if (isTransformed(scannedEntity) && ((scannedEntity.getData("fiskheroes:mask_open_timer2") == 1) || (scannedEntity.getData("fiskheroes:mask_open_timer") == 5))) {
@@ -129,14 +129,14 @@ function init(transer) {
             beingName = scannedEntity.getData("fiskheroes:disguise");
           };
         };
-        transer.systemMessage(entity, "<nh>" + beingName + " <n>(<nh>" + scannedEntity.getHealth() + "<n>)");
+        system.systemMessage(entity, "<nh>" + beingName + " <n>(<nh>" + scannedEntity.getHealth() + "<n>)");
       });
     } else {
       if (radius > maxRange) {
-        transer.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too large! Must be at most <eh>64<e>!");
+        system.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too large! Must be at most <eh>64<e>!");
       };
       if (radius <= minRange) {
-        transer.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too small! Must be at least <eh>1<e>!");
+        system.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too small! Must be at least <eh>1<e>!");
       };
     };
   };
@@ -153,16 +153,16 @@ function init(transer) {
             (arguments.length == 3) ? entityScan(entity, arguments[2]) : entityScan(entity);
             break;
           case "help":
-            transer.systemMessage(entity, "<n>Scanner commands:");
-            transer.systemMessage(entity, "<n>!sc entity <nh><range><n> <nh>-<n> Scans for entities around you");
-            transer.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
+            system.systemMessage(entity, "<n>Scanner commands:");
+            system.systemMessage(entity, "<n>!sc entity <nh><range><n> <nh>-<n> Scans for entities around you");
+            system.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
             break;
           default:
-            transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
             break;
         };
       } else {
-        transer.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
       };
     },
   };

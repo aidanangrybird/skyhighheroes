@@ -1,4 +1,4 @@
-function init(transer) {
+function init(system) {
   /**
    * Turns NBT String List into an array for easier use in code
    * @param {JSEntity} entity - Entity to create waypoint array from
@@ -53,14 +53,14 @@ function init(transer) {
       var waypoints = manager.newTagList();
       manager.appendTag(waypoints, waypoint);
       manager.setTagList(entity.getWornChestplate().nbt(), "waypoints", waypoints);
-      transer.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
+      system.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
     } else {
       var waypoints = entity.getWornChestplate().nbt().getTagList("waypoints");
       var waypointIndex = getWaypointNameArray(entity).indexOf(waypointName);
       if (waypointIndex > -1) {
-        transer.systemMessage(entity, "<e>Duplicate waypoint name <eh>" + waypointName + "<e>!");
+        system.systemMessage(entity, "<e>Duplicate waypoint name <eh>" + waypointName + "<e>!");
       } else {
-        transer.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
+        system.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
         manager.appendTag(waypoints, waypoint);
       };
     };
@@ -75,9 +75,9 @@ function init(transer) {
     var waypoints = player.getWornChestplate().nbt().getTagList("waypoints");
     var waypointIndex = getWaypointNameArray(player).indexOf(waypointName);
     if (waypointIndex < 0) {
-      transer.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to remove!");
+      system.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to remove!");
     } else {
-      transer.systemMessage(player, "<e>Removed waypoint <eh>" + waypointName + "<e>!");
+      system.systemMessage(player, "<e>Removed waypoint <eh>" + waypointName + "<e>!");
       manager.removeTag(waypoints, waypointIndex);
     };
   };
@@ -90,10 +90,10 @@ function init(transer) {
   function teleportToWaypoint(player, manager, waypointName) {
     var waypointIndex = getWaypointNameArray(player).indexOf(waypointName);
     if (waypointIndex < 0) {
-      transer.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to teleport to!");
+      system.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to teleport to!");
     } else {
       var waypoint = player.getWornChestplate().nbt().getTagList("waypoints").getCompoundTag(waypointIndex);
-      transer.systemMessage(player, "<s>Selected waypoint <sh>" + waypoint.getString("waypointName") + "<s>!");
+      system.systemMessage(player, "<s>Selected waypoint <sh>" + waypoint.getString("waypointName") + "<s>!");
       manager.setData(player, "fiskheroes:teleport_dest", manager.newCoords(waypoint.getInteger("xCoord"), waypoint.getInteger("yCoord"), waypoint.getInteger("zCoord"), waypoint.getInteger("dim")));
       manager.setData(player, "fiskheroes:teleport_delay", 6);
     };
@@ -104,12 +104,12 @@ function init(transer) {
    **/
   function listWaypoints(entity) {
     if (!entity.getWornChestplate().nbt().hasKey("waypoints")) {
-      transer.systemMessage(entity, "<e>You do not have any waypoints!");
+      system.systemMessage(entity, "<e>You do not have any waypoints!");
     } else {
       var waypoints = getWaypointArray(entity);
-      transer.systemMessage(entity, "<n>You have <nh>" + waypoints.length + ((waypoints.length == 1) ? "<n> waypoint!" : "<n> waypoints!"));
+      system.systemMessage(entity, "<n>You have <nh>" + waypoints.length + ((waypoints.length == 1) ? "<n> waypoint!" : "<n> waypoints!"));
       waypoints.forEach(entry => {
-        transer.systemMessage(entity, "<nh>" + entry.name + "<n> (<nh>" + entry.coords[0] + "<n>, <nh>" + entry.coords[1] + "<n>, <nh>" + entry.coords[2] + "<n>) in dimension: <nh>" + entry.coords[3]);
+        system.systemMessage(entity, "<nh>" + entry.name + "<n> (<nh>" + entry.coords[0] + "<n>, <nh>" + entry.coords[1] + "<n>, <nh>" + entry.coords[2] + "<n>) in dimension: <nh>" + entry.coords[3]);
       });
     };
   };
@@ -123,37 +123,37 @@ function init(transer) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch (arguments[1]) {
           case "add":
-            (arguments.length == 3) ? addWaypoint(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!wp add <nh><waypointName>");
+            (arguments.length == 3) ? addWaypoint(entity, manager, arguments[2]) : system.systemMessage(entity, "<n>!wp add <nh><waypointName>");
             break;
           case "rem":
-            (arguments.length == 3) ? removeWaypoint(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!wp rem <nh><waypointName>");
+            (arguments.length == 3) ? removeWaypoint(entity, manager, arguments[2]) : system.systemMessage(entity, "<n>!wp rem <nh><waypointName>");
             break;
           case "tp":
             if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-              (arguments.length == 3) ? teleportToWaypoint(entity, manager, arguments[2]) : transer.systemMessage(entity, "<n>!wp tp <nh><waypointName>");
+              (arguments.length == 3) ? teleportToWaypoint(entity, manager, arguments[2]) : system.systemMessage(entity, "<n>!wp tp <nh><waypointName>");
             } else {
-              transer.systemMessage(entity, "<e>Unknown waypoint command! Try <eh>!wp help<e> for a list of commands!");
+              system.systemMessage(entity, "<e>Unknown waypoint command! Try <eh>!wp help<e> for a list of commands!");
             };
             break;
           case "list":
             listWaypoints(entity);
             break;
           case "help":
-            transer.systemMessage(entity, "Waypoint commands:")
-            transer.systemMessage(entity, "<n>!wp add <nh><name><n> <nh>-<n> Creates waypoint at current location by name");
-            transer.systemMessage(entity, "<n>!wp rem <nh><name><n> <nh>-<n> Removes waypoint by name");
+            system.systemMessage(entity, "Waypoint commands:")
+            system.systemMessage(entity, "<n>!wp add <nh><name><n> <nh>-<n> Creates waypoint at current location by name");
+            system.systemMessage(entity, "<n>!wp rem <nh><name><n> <nh>-<n> Removes waypoint by name");
             if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-              transer.systemMessage(entity, "<n>!wp tp <nh><name><n> <nh>-<n> TPs to waypoint by name");
+              system.systemMessage(entity, "<n>!wp tp <nh><name><n> <nh>-<n> TPs to waypoint by name");
             };
-            transer.systemMessage(entity, "<n>!wp list <nh>-<n> Lists waypoints");
-            transer.systemMessage(entity, "<n>!wp help <nh>-<n> Shows waypoint commands");
+            system.systemMessage(entity, "<n>!wp list <nh>-<n> Lists waypoints");
+            system.systemMessage(entity, "<n>!wp help <nh>-<n> Shows waypoint commands");
             break;
           default:
-            transer.systemMessage(entity, "<e>Unknown waypoint command! Try <eh>!wp help<e> for a list of commands!");
+            system.systemMessage(entity, "<e>Unknown waypoint command! Try <eh>!wp help<e> for a list of commands!");
             break;
         };
       } else {
-        transer.systemMessage(entity, "<e>Unknown <eh>waypoint<e> command! Try <eh>!wp help<e> for a list of commands!");
+        system.systemMessage(entity, "<e>Unknown <eh>waypoint<e> command! Try <eh>!wp help<e> for a list of commands!");
       };
     },
   };
