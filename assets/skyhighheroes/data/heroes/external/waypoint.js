@@ -1,4 +1,4 @@
-function init(system) {
+function initModule(system) {
   /**
    * Turns NBT String List into an array for easier use in code
    * @param {JSEntity} entity - Entity to create waypoint array from

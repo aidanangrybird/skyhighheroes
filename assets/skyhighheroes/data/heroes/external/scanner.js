@@ -64,7 +64,7 @@ function isTransformed(entity) {
  * You put all of the required functions in here
  * @param system - Required
  **/
-function init(system) {
+function initModule(system) {
   /**
    * Scans for nearby entities
    * @param {JSEntity} entity - Player initiating the scan

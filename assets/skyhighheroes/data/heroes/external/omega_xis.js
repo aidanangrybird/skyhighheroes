@@ -2,7 +2,7 @@
  * You put all of the required functions in here
  * @param system - Required
  **/
-function init(system) {
+function initModule(system) {
   //All of the required functions and stuff go here
   function resetBattleCard(player, manager) {
     manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);

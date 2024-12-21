@@ -2,7 +2,7 @@
  * You put all of the required functions in here
  * @param system - Required
  **/
-function init(system) {
+function initModule(system) {
   /**
    * Checks if a player has another player as a contact
    * @param {JSEntity} sender - Player getting checked
@@ -53,8 +53,8 @@ function init(system) {
       if (foundPlayer != null) {
         if (system.isWearingTranser(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            if (system.waveChangeIndex > -1) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+            if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                 playerMessage(foundPlayer, system.waveColor+system.waveChange+"\u00A7r", message);
                 playerMessage(entity, system.waveColor+system.waveChange+"\u00A7r", message);
               } else {
@@ -62,8 +62,8 @@ function init(system) {
                 playerMessage(entity, system.human, message);
               };
             } else {
-              playerMessage(foundPlayer, entity.getName(), message);
-              playerMessage(entity, entity.getName(), message);
+              playerMessage(foundPlayer, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
+              playerMessage(entity, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
             };
           };
         };

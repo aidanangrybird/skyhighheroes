@@ -75,12 +75,5 @@
     },
     "fiskheroes:shape_shifting": {
     }
-  },
-  "hud": [
-    {
-      "type": "CIRCLE",
-      "color": "fiskheroes:energy_projection",
-      "data": "skyhighheroes:dyn/system_test_progress"
-    }
-  ]
+  }
 }

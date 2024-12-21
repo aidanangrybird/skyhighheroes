@@ -74,7 +74,7 @@ function init(hero) {
   });
   hero.setDamageProfile((entity) => transerOS.getDamageProfile(entity));
   hero.setTickHandler((entity, manager) => {
-    transerOS.transerHandler(entity, manager);
+    transerOS.systemHandler(entity, manager);
     transerOS.emWaveHandler(entity, manager);
     var x = entity.posX();
     var y = entity.posY();

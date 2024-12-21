@@ -2,7 +2,7 @@
  * You put all of the required functions in here
  * @param system - Required
  **/
-function init(system) {
+function initModule(system) {
   //The point of BrotherBand is to allow communication at much farther ranges and to give buffs when you are near each other
   /**
    * Forms BrotherBand
@@ -129,7 +129,7 @@ function init(system) {
         if (system.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
             if (system.waveChangeIndex > -1) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && foundPlayer.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                 brotherBandMessage(entity, system.waveColor+system.waveChange+"\u00A7r", message);
               } else {
                 brotherBandMessage(entity, system.human, message);

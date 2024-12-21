@@ -65,6 +65,15 @@ function isWearingTranser(entity) {
 };
 
 /**
+ * Checks if an entity has a device that is a computer
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns If the entity has a device that is a computer
+ **/
+function hasComputer(entity) {
+  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornChestplate().nbt().hasKey("robotID");
+};
+
+/**
  * Gets the satellite a transer is assigned to
  * @param {JSEntity} entity - Entity getting checked
  * @returns The satellite a transer is assigned to
@@ -335,8 +344,8 @@ function initTranser(moduleList, transerName, satellite) {
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
   moduleList.forEach(module => {
-    if (module.hasOwnProperty("init")) {
-      var moduleInit = module.init(transerInstance);
+    if (module.hasOwnProperty("initModule")) {
+      var moduleInit = module.initModule(transerInstance);
       if (moduleInit.hasOwnProperty("type")) {
         switch (moduleInit.type) {
           case 1:
@@ -684,7 +693,7 @@ function initTranser(moduleList, transerName, satellite) {
      * @param {JSEntity} entity - Required
      * @param {JSDataManager} manager - Required
      **/
-    transerHandler: (entity, manager) => {
+    systemHandler: (entity, manager) => {
       asssignTranser(entity, manager, assignedSatellite);
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
         status(entity);

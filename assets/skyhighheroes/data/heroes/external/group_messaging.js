@@ -1,4 +1,4 @@
-function init(system) {
+function initModule(system) {
   /**
    * Adds group
    * @param {JSEntity} entity - Required
@@ -186,20 +186,20 @@ function init(system) {
         foundPlayers.forEach(player => {
           if (system.isWearingTranser(player)) {
             if (hasGroup(entity, player, groupName)) {
-              if (system.waveChangeIndex > -1) {
-                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+              if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
+                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
                   groupMessage(player, groupName, system.waveColor+system.waveChange+"\u00A7r", message);
                 } else {
                   groupMessage(player, groupName, system.human, message);
                 };
               } else {
-                groupMessage(player, groupName, entity.getName(), message);
+                groupMessage(player, groupName, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
               };
             };
           };
         });
-        if (system.waveChangeIndex > -1) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && player.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+        if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
+          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
             groupMessage(entity, groupName, system.waveColor+system.waveChange+"\u00A7r", message);
           } else {
             groupMessage(entity, groupName, system.human, message);

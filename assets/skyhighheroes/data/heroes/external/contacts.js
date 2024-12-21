@@ -2,7 +2,7 @@
  * You put all of the required functions in here
  * @param system - Required
  **/
-function init(system) {
+function initModule(system) {
   /**
    * Adds contact
    * @param {JSEntity} player - Required

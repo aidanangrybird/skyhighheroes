@@ -1,4 +1,4 @@
-function init(system) {
+function initModule(system) {
   return {
     name: "Omega-Xis: The Fugitive",
     type: 7,

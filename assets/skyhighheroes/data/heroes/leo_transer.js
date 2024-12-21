@@ -26,6 +26,6 @@ function init(hero) {
   hero.setKeyBindEnabled((entity, keyBind) => transerSystem.setKeyBind(entity, keyBind));
   hero.setTickHandler((entity, manager) => {
     transerOS.waveHandler(entity, hero);
-    transerOS.transerHandler(entity, manager);
+    transerOS.systemHandler(entity, manager);
   });
 };

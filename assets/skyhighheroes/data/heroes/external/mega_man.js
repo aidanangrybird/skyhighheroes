@@ -2,7 +2,7 @@
  * You put all of the required functions in here
  * @param system - Required
  **/
-function init(system) {
+function initModule(system) {
   //All of the required functions and stuff go here
   function toolSwitchEnchant(player, manager) {
     //Silk Touch
