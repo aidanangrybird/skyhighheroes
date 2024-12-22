@@ -30,8 +30,12 @@ var months = [
 ];
 
 function asssignID(entity, manager, robotName, color) {
-  if (!entity.getWornLeggings().nbt().hasKey("robotID")) {
-    manager.setString(entity.getWornLeggings().nbt(), "robotID", robotName+"-"+color);
+  manager.setString(entity.getWornLeggings().nbt(), "robotID", robotName+"-"+color);
+  if (!entity.getWornLeggings().nbt().hasKey("computerID")) {
+    if (PackLoader.getSide() == "SERVER") {
+      var computerID = Math.random().toFixed(8).toString().substring(2);
+      manager.setString(entity.getWornLeggings().nbt(), "computerID", computerID);
+    };
   };
 };
 
@@ -59,7 +63,7 @@ function getID(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornLeggings().nbt().hasKey("robotID");
+  return entity.getWornHelmet().nbt().hasKey("computerID") || entity.getWornChestplate().nbt().hasKey("computerID") || entity.getWornLeggings().nbt().hasKey("computerID") || entity.getWornBoots().nbt().hasKey("computerID");
 };
 
 /**
@@ -426,15 +430,16 @@ function initRobot(moduleList, robotName, color) {
         modulesMessage = modulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    systemMessage(entity, "<n>robotOS");
+    systemMessage(entity, "<n>astrOS");
     systemMessage(entity, modulesMessage);
+    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornLeggings().nbt().getString("computerID"));
   };
   function status(entity) {
     var date = new Date();
-    systemMessage(entity, "<n>It is <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
-    systemMessage(entity, "<n>The current time is <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
-    systemMessage(entity, "<n>Your current location is<nh> " + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
-    systemMessage(entity, "<n>You are in <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
+    systemMessage(entity, "<n>Date: <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
+    systemMessage(entity, "<n>Time: <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
+    systemMessage(entity, "<n>Current location: <nh> " + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
+    systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
     systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
   };
   return {
@@ -560,8 +565,8 @@ function initRobot(moduleList, robotName, color) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      asssignID(entity, manager, robotName, color);
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
+        asssignID(entity, manager, robotName, color);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };

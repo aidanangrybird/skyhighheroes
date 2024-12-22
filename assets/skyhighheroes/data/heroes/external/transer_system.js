@@ -36,9 +36,7 @@ var months = [
 ];
 
 function asssignTranser(entity, manager, satellite) {
-  if (!entity.getWornChestplate().nbt().hasKey("satellite")) {
-    manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
-  };
+  manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
   if (!entity.getWornChestplate().nbt().hasKey("worthy") && (entity.getWornChestplate().suitType() == "skyhighheroes:leo_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:pegasus_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:dragon_transer")) {
     if (PackLoader.getSide() == "SERVER") {
       var value = Math.random();
@@ -52,6 +50,12 @@ function asssignTranser(entity, manager, satellite) {
   };
   if (entity.getWornChestplate().nbt().hasKey("worthy") && entity.getWornChestplate().suitType() == "skyhighheroes:geo_stelar") {
     manager.removeTag(entity.getWornChestplate().nbt(), "worthy")
+  };
+  if (!entity.getWornChestplate().nbt().hasKey("computerID")) {
+    if (PackLoader.getSide() == "SERVER") {
+      var computerID = Math.random().toFixed(8).toString().substring(2);
+      manager.setString(entity.getWornChestplate().nbt(), "computerID", computerID);
+    };
   };
 };
 
@@ -70,7 +74,7 @@ function isWearingTranser(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornLeggings().nbt().hasKey("robotID");
+  return entity.getWornHelmet().nbt().hasKey("computerID") || entity.getWornChestplate().nbt().hasKey("computerID") || entity.getWornLeggings().nbt().hasKey("computerID") || entity.getWornBoots().nbt().hasKey("computerID");
 };
 
 /**
@@ -520,6 +524,7 @@ function initTranser(moduleList, transerName, satellite) {
     });
     systemMessage(entity, "<n>TranserOS");
     systemMessage(entity, modulesMessage);
+    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornChestplate().nbt().getString("computerID"));
   };
   function status(entity) {
     var date = new Date();
@@ -694,8 +699,8 @@ function initTranser(moduleList, transerName, satellite) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      asssignTranser(entity, manager, assignedSatellite);
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
+        asssignTranser(entity, manager, assignedSatellite);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
