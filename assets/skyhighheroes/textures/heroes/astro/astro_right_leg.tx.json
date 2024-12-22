@@ -1,0 +1,23 @@
+{
+  "texture": {
+    "in": "skyhighheroes:astro/astro_<CLOTHING>",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/astro_right_leg_<OPENINGS>"
+      }
+    ],
+    "out": "skyhighheroes:generated/astro_right_leg_<CLOTHING>_<OPENINGS>"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
+      "values": ["base", "long", "short", "normal"]
+    },
+    "OPENINGS": {
+      "key": "(entity.getData('skyhighheroes:dyn/right_leg_front_open_timer') > 0 || entity.getData('skyhighheroes:dyn/right_leg_back_open_timer') > 0) ? 'upper' : (entity.getData('skyhighheroes:dyn/right_leg_boot_front_open_timer') > 0 || entity.getData('skyhighheroes:dyn/right_leg_boot_back_open_timer') > 0) ? 'lower' : 'none'",
+      "values": ["upper", "lower", "none"]
+    }
+  },
+  "isDynamic": true
+}

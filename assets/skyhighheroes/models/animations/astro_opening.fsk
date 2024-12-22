@@ -1,0 +1,6 @@
+{data} = curve({data})
+
+{rightArm_rotZ} += 50'{data}
+{leftArm_rotZ} -= 50'{data}
+{rightLeg_rotZ} += 30'{data}
+{leftLeg_rotZ} -= 30'{data}

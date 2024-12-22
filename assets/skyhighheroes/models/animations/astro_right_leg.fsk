@@ -1,0 +1,83 @@
+{flight} = curve({data_0})
+{boost} = curve({data_1}){flight}
+{open_up_boot_front} = curve({data_2})
+{open_up_boot_back} = curve({data_3})
+{open_up_front} = curve({data_4})
+{open_up_back} = curve({data_5})
+{open_up_boot} = curve({data_6})
+
+{part0} = if({flight} != 1, animate2({flight}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1} = if({flight} != 1, animate2({flight}, 1.0, 0.15, 0.15, 0.0), 1)
+{part2} = if({flight} != 1, animate2({flight}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3} = if({flight} != 1, animate2({flight}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4} = if({flight} != 1, animate2({flight}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{right_leg_front_inner_foot_posY} -= 3.99{part2}
+{right_leg_front_inner_foot_posX} -= 0.01{part2}
+{right_leg_front_inner_foot_posZ} -= 1.48{part1} - 0.5{part1}
+{right_leg_front_inner_foot_rotX} += 90'{part1}
+
+{right_leg_front_outer_foot_posY} -= 3.99{part2}
+{right_leg_front_outer_foot_posX} += 0.01{part2}
+{right_leg_front_outer_foot_posZ} -= 1.48{part1} - 0.5{part1}
+{right_leg_front_outer_foot_rotX} += 90'{part1}
+
+{right_leg_back_outer_foot_posY} -= 3.99{part2}
+{right_leg_back_outer_foot_posX} += 0.01{part2}
+{right_leg_back_outer_foot_posZ} += 1.48{part1} - 0.5{part1}
+{right_leg_back_outer_foot_rotX} += -90'{part1}
+
+{right_leg_back_inner_foot_posY} -= 3.99{part2}
+{right_leg_back_inner_foot_posX} -= 0.01{part2}
+{right_leg_back_inner_foot_posZ} += 1.48{part1} - 0.5{part1}
+{right_leg_back_inner_foot_rotX} += -90'{part1}
+
+{right_leg_baffle_inner_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
+{right_leg_baffle_outer_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
+{right_leg_baffle_front_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
+{right_leg_baffle_back_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
+
+{right_leg_booster_base_posY} += 0.65{boost}
+
+{part1_boot_front} = if({open_up_boot_front} != 1, animate2({open_up_boot_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_boot_front} = if({open_up_boot_front} != 1, animate2({open_up_boot_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_boot_front} = if({open_up_boot_front} != 1, animate2({open_up_boot_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{right_leg_boot_front_outer_panel_rotY} -= 5'{part1_boot_front} + 75'{part3_boot_front}
+{right_leg_boot_front_inner_panel_rotY} += 5'{part1_boot_front} + 75'{part3_boot_front}
+{right_leg_boot_front_panel_rotX} += 80'{part2_boot_front}
+
+{part1_boot_back} = if({open_up_boot_back} != 1, animate2({open_up_boot_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_boot_back} = if({open_up_boot_back} != 1, animate2({open_up_boot_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_boot_back} = if({open_up_boot_back} != 1, animate2({open_up_boot_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{right_leg_boot_back_outer_panel_rotY} += 5'{part1_boot_back} + 75'{part3_boot_back}
+{right_leg_boot_back_inner_panel_rotY} -= 5'{part1_boot_back} + 75'{part3_boot_back}
+{right_leg_boot_back_panel_rotX} -= 80'{part2_boot_back}
+
+{part1_front} = if({open_up_front} != 1, animate2({open_up_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_front} = if({open_up_front} != 1, animate2({open_up_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_front} = if({open_up_front} != 1, animate2({open_up_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{right_leg_front_outer_panel_rotY} -= 5'{part1_front} + 75'{part3_front}
+{right_leg_front_inner_panel_rotY} += 5'{part1_front} + 75'{part3_front}
+{right_leg_front_panel_rotX} -= 80'{part2_front}
+
+{part1_back} = if({open_up_back} != 1, animate2({open_up_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_back} = if({open_up_back} != 1, animate2({open_up_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_back} = if({open_up_back} != 1, animate2({open_up_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{right_leg_back_outer_panel_rotY} += 5'{part1_back} + 75'{part3_back}
+{right_leg_back_inner_panel_rotY} -= 5'{part1_back} + 75'{part3_back}
+{right_leg_back_panel_rotX} += 80'{part2_back}
+
+{part1_boot} = if({open_up_boot} != 1, animate2({open_up_boot}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_boot} = if({open_up_boot} != 1, animate2({open_up_boot}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_boot} = if({open_up_boot} != 1, animate2({open_up_boot}, 0.3, 0.7, 0.3, 0.0), 1)
+{right_leg_front_outer_foot_posZ} -= 0.1{part1_boot} + 1.48{part2_boot}
+{right_leg_front_outer_foot_rotX} += 90'{part3_boot}
+
+{right_leg_front_inner_foot_posZ} -= 0.1{part1_boot} + 1.48{part2_boot}
+{right_leg_front_inner_foot_rotX} += 90'{part3_boot}
+
+{right_leg_back_inner_foot_posZ} += 0.1{part1_boot} + 1.48{part2_boot}
+{right_leg_back_inner_foot_rotX} += -90'{part3_boot}
+
+{right_leg_back_outer_foot_posZ} += 0.1{part1_boot} + 1.48{part2_boot}
+{right_leg_back_outer_foot_rotX} += -90'{part3_boot}

@@ -1,0 +1,63 @@
+{energy_proj} = curve({data_0})
+{open_up_outer} = curve({data_1})
+{open_up_cannon_outer} = curve({data_2})
+{open_up_cannon_inner} = curve({data_3})
+
+;left arm
+{part1} = if({energy_proj} != 1, animate2({energy_proj}, 1.0, 0.0, 0.1, 0.0), 1)
+{part2} = if({energy_proj} != 1, animate2({energy_proj}, 0.8, 0.2, 0.1, 0.0), 1)
+{part2_fast} = if({energy_proj} != 1, animate2({energy_proj}, 0.8, 0.3, 0.4, 0.0), 1)
+{part3} = if({energy_proj} != 1, animate2({energy_proj}, 0.8, 0.6, 0.4, 0.0), 1)
+
+{left_arm_hand_inner_back_posX} += 0.99{part2}
+{left_arm_hand_inner_back_posY} -= 5.99{part3}
+{left_arm_hand_inner_back_posZ} -= 0.99{part2}
+{left_arm_hand_inner_front_posX} += 0.99{part2}
+{left_arm_hand_inner_front_posY} -= 5.99{part3}
+{left_arm_hand_inner_front_posZ} += 0.99{part2}
+{left_arm_hand_outer_back_posX} -= 0.99{part2}
+{left_arm_hand_outer_back_posY} -= 5.99{part3}
+{left_arm_hand_outer_back_posZ} -= 0.99{part2}
+{left_arm_hand_outer_front_posX} -= 0.99{part2}
+{left_arm_hand_outer_front_posY} -= 5.99{part3}
+{left_arm_hand_outer_front_posZ} += 0.99{part2}
+{left_arm_cannon_inner_front_panel_rotY} += 90'{part1}
+{left_arm_cannon_outer_front_panel_rotY} -= 90'{part1}
+{left_arm_cannon_inner_back_panel_rotY} -= 90'{part1}
+{left_arm_cannon_outer_back_panel_rotY} += 90'{part1}
+{left_arm_cannon_outer_front_panel_posZ} += 2{part2}
+{left_arm_cannon_outer_back_panel_posZ} -= 2{part2}
+{left_arm_cannon_inner_front_panel_posZ} += 2{part2}
+{left_arm_cannon_inner_back_panel_posZ} -= 2{part2}
+{left_arm_cannon_outer_panel_posY} -= 4{part3}
+{left_arm_cannon_inner_panel_posY} -= 4{part3}
+{left_arm_cannon_outer_panel_posX} -= 0.1{part3}
+{left_arm_cannon_inner_panel_posX} += 0.1{part3}
+
+{left_arm_hand_posY} -= 5{part3}
+
+{left_arm_cannon_base_posY} -= 1.25{part3}
+{left_arm_cannon_middle_posY} -= 0.75{part3}
+{left_arm_cannon_tip_posY} -= 1.75{part3}
+
+{part1_outer} = if({open_up_outer} != 1, animate2({open_up_outer}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_outer} = if({open_up_outer} != 1, animate2({open_up_outer}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_outer} = if({open_up_outer} != 1, animate2({open_up_outer}, 0.3, 0.7, 0.3, 0.0), 1)
+{left_arm_outer_front_panel_rotX} -= 5'{part1_outer} + 75'{part3_outer}
+{left_arm_outer_back_panel_rotX} += 5'{part1_outer} + 75'{part3_outer}
+{left_arm_outer_panel_rotZ} -= 5'{part1_outer} + 75'{part3_outer}
+{left_arm_outer_top_panel_rotZ} -= 30'{part2_outer}
+
+{part1_cannon_outer} = if({open_up_cannon_outer} != 1, animate2({open_up_cannon_outer}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_cannon_outer} = if({open_up_cannon_outer} != 1, animate2({open_up_cannon_outer}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_cannon_outer} = if({open_up_cannon_outer} != 1, animate2({open_up_cannon_outer}, 0.3, 0.7, 0.3, 0.0), 1)
+{left_arm_cannon_outer_panel_rotZ} -= 80'{part2_cannon_outer}
+{left_arm_cannon_outer_front_panel_rotY} -= 5'{part1_cannon_outer} + 75'{part3_cannon_outer}
+{left_arm_cannon_outer_back_panel_rotY} += 5'{part1_cannon_outer} + 75'{part3_cannon_outer}
+
+{part1_cannon_inner} = if({open_up_cannon_inner} != 1, animate2({open_up_cannon_inner}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_cannon_inner} = if({open_up_cannon_inner} != 1, animate2({open_up_cannon_inner}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_cannon_inner} = if({open_up_cannon_inner} != 1, animate2({open_up_cannon_inner}, 0.3, 0.7, 0.3, 0.0), 1)
+{left_arm_cannon_inner_panel_rotZ} += 80'{part2_cannon_inner}
+{left_arm_cannon_inner_front_panel_rotY} += 5'{part1_cannon_inner} + 75'{part3_cannon_inner}
+{left_arm_cannon_inner_back_panel_rotY} -= 5'{part1_cannon_inner} + 75'{part3_cannon_inner}

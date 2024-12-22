@@ -247,7 +247,7 @@ function initCustomBoosters(renderer, color) {
   var boosterLegRight = renderer.createEffect("fiskheroes:booster");
   boosterLegRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
   boosterLegRight.anchor.set("rightLeg");
-  boosterLegRight.mirror = false;
+  boosterLegRight.mirror = false;/* 
 
   var boosterArmLeft = renderer.createEffect("fiskheroes:booster");
   boosterArmLeft.setIcon(icon).setOffset(-1.0, 10.0, 0.0).setSize(4.0, 2.0);
@@ -257,7 +257,7 @@ function initCustomBoosters(renderer, color) {
   var boosterArmRight = renderer.createEffect("fiskheroes:booster");
   boosterArmRight.setIcon(icon).setOffset(1.0, 10.0, 0.0).setSize(4.0, 2.0);
   boosterArmRight.anchor.set("rightArm");
-  boosterArmRight.mirror = false;
+  boosterArmRight.mirror = false; */
 
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
 
@@ -302,7 +302,7 @@ function initCustomBoosters(renderer, color) {
   bloomLegRightInner.color.set(color);
   bloomLegRightInner.mirror = false;
   bloomLegRightInner.setScale(16.0);
-  
+  /* 
   //Arms
   //Outer
   var shapeArmOuter = renderer.createResource("SHAPE", null);
@@ -344,61 +344,61 @@ function initCustomBoosters(renderer, color) {
   bloomArmRightMiddle.anchor.set("rightArm");
   bloomArmRightMiddle.color.set(color);
   bloomArmRightMiddle.mirror = false;
-  bloomArmRightMiddle.setScale(16.0);
+  bloomArmRightMiddle.setScale(16.0); */
 
   var obj = {
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
-    boosterArmLeft: boosterArmLeft,
-    boosterArmRight: boosterArmRight,
     bloomLegLeftOuter: bloomLegLeftOuter,
     bloomLegLeftMiddle: bloomLegLeftMiddle,
     bloomLegLeftInner: bloomLegLeftInner,
     bloomLegRightOuter: bloomLegRightOuter,
     bloomLegRightMiddle: bloomLegRightMiddle,
-    bloomLegRightInner: bloomLegRightInner,
+    bloomLegRightInner: bloomLegRightInner,/* 
+    boosterArmLeft: boosterArmLeft,
+    boosterArmRight: boosterArmRight,
     bloomArmLeftOuter: bloomArmLeftOuter,
     bloomArmLeftMiddle: bloomArmLeftMiddle,
     bloomArmLeftInner: bloomArmLeftInner,
     bloomArmRightOuter: bloomArmRightOuter,
     bloomArmRightMiddle: bloomArmRightMiddle,
-    bloomArmRightInner: bloomArmRightInner,
+    bloomArmRightInner: bloomArmRightInner, */
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
-        boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
         bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
         bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/* 
+        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
+        boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
         bloomArmLeftMiddle.setOffset(-1.0, 8.0, 0.0);
         bloomArmLeftInner.setOffset(-1.0, 8.0, 0.0);
         bloomArmRightOuter.setOffset(1.0, 8.0, 0.0);
         bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
-        bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 8.0, 0.0); */
       };
       if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
         boosterLegRight.setOffset(0.0, 12.0, 0.0);
-        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
-        boosterArmRight.setOffset(1.0, 10.0, 0.0);
         bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
         bloomLegRightOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);/* 
+        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
+        boosterArmRight.setOffset(1.0, 10.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 10.0, 0.0);
         bloomArmLeftMiddle.setOffset(-1.0, 10.0, 0.0);
         bloomArmLeftInner.setOffset(-1.0, 10.0, 0.0);
         bloomArmRightOuter.setOffset(1.0, 10.0, 0.0);
         bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
-        bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 10.0, 0.0); */
       };
       //Boots
       //Equations
@@ -455,7 +455,7 @@ function initCustomBoosters(renderer, color) {
         bloomLegRightMiddle.render();
         bloomLegRightInner.render();
       };
-      
+      /* 
       //Arms
       //Equations
       var boost = data_1;
@@ -508,7 +508,7 @@ function initCustomBoosters(renderer, color) {
         bloomArmRightOuter.render();
         bloomArmRightMiddle.render();
         bloomLegRightInner.render();
-      };
+      }; */
     }
   };
   return obj;
@@ -526,7 +526,7 @@ function initNormalBoosters(renderer) {
   var boosterLegRight = renderer.createEffect("fiskheroes:booster");
   boosterLegRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
   boosterLegRight.anchor.set("rightLeg");
-  boosterLegRight.mirror = false;
+  boosterLegRight.mirror = false;/* 
 
   var boosterArmLeft = renderer.createEffect("fiskheroes:booster");
   boosterArmLeft.setIcon(icon).setOffset(-1.0, 10.0, 0.0).setSize(4.0, 2.0);
@@ -536,7 +536,7 @@ function initNormalBoosters(renderer) {
   var boosterArmRight = renderer.createEffect("fiskheroes:booster");
   boosterArmRight.setIcon(icon).setOffset(1.0, 10.0, 0.0).setSize(4.0, 2.0);
   boosterArmRight.anchor.set("rightArm");
-  boosterArmRight.mirror = false;
+  boosterArmRight.mirror = false; */
 
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_normal_booster");
 
@@ -581,7 +581,7 @@ function initNormalBoosters(renderer) {
   bloomLegRightInner.color.set(0xFF0000);
   bloomLegRightInner.mirror = false;
   bloomLegRightInner.setScale(16.0);
-
+/* 
   //Arms
   //Outer
   var shapeArmOuter = renderer.createResource("SHAPE", null);
@@ -623,61 +623,61 @@ function initNormalBoosters(renderer) {
   bloomArmRightMiddle.anchor.set("rightArm");
   bloomArmRightMiddle.color.set(0xFF0000);
   bloomArmRightMiddle.mirror = false;
-  bloomArmRightMiddle.setScale(16.0);
+  bloomArmRightMiddle.setScale(16.0); */
 
   var obj = {
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
-    boosterArmLeft: boosterArmLeft,
-    boosterArmRight: boosterArmRight,
     bloomLegLeftOuter: bloomLegLeftOuter,
     bloomLegLeftMiddle: bloomLegLeftMiddle,
     bloomLegLeftInner: bloomLegLeftInner,
     bloomLegRightOuter: bloomLegRightOuter,
     bloomLegRightMiddle: bloomLegRightMiddle,
-    bloomLegRightInner: bloomLegRightInner,
+    bloomLegRightInner: bloomLegRightInner,/* 
+    boosterArmLeft: boosterArmLeft,
+    boosterArmRight: boosterArmRight,
     bloomArmLeftOuter: bloomArmLeftOuter,
     bloomArmLeftMiddle: bloomArmLeftMiddle,
     bloomArmLeftInner: bloomArmLeftInner,
     bloomArmRightOuter: bloomArmRightOuter,
     bloomArmRightMiddle: bloomArmRightMiddle,
-    bloomArmRightInner: bloomArmRightInner,
+    bloomArmRightInner: bloomArmRightInner, */
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
-        boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
         bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
         bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/*
+        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
+        boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
         bloomArmLeftMiddle.setOffset(-1.0, 8.0, 0.0);
         bloomArmLeftInner.setOffset(-1.0, 8.0, 0.0);
         bloomArmRightOuter.setOffset(1.0, 8.0, 0.0);
         bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
-        bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 8.0, 0.0); */
       };
       if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
-        boosterLegRight.setOffset(0.0, 12.0, 0.0);
-        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
-        boosterArmRight.setOffset(1.0, 10.0, 0.0);
+        boosterLegRight.setOffset(0.0, 12.0, 0.0); 
         bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
         bloomLegRightOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);/* 
+        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
+        boosterArmRight.setOffset(1.0, 10.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 10.0, 0.0);
         bloomArmLeftMiddle.setOffset(-1.0, 10.0, 0.0);
         bloomArmLeftInner.setOffset(-1.0, 10.0, 0.0);
         bloomArmRightOuter.setOffset(1.0, 10.0, 0.0);
         bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
-        bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 10.0, 0.0); */
       };
       //Boots
       //Equations
@@ -734,7 +734,7 @@ function initNormalBoosters(renderer) {
         bloomLegRightMiddle.render();
         bloomLegRightInner.render();
       };
-      
+      /* 
       //Arms
       //Equations
       var boost = data_1;
@@ -787,7 +787,7 @@ function initNormalBoosters(renderer) {
         bloomArmRightOuter.render();
         bloomArmRightMiddle.render();
         bloomLegRightInner.render();
-      };
+      }; */
     }
   };
   return obj;
@@ -805,7 +805,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   var boosterLegRight = renderer.createEffect("fiskheroes:booster");
   boosterLegRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
   boosterLegRight.anchor.set("rightLeg");
-  boosterLegRight.mirror = false;
+  boosterLegRight.mirror = false;/* 
 
   var boosterArmLeft = renderer.createEffect("fiskheroes:booster");
   boosterArmLeft.setIcon(icon).setOffset(-1.0, 10.0, 0.0).setSize(4.0, 2.0);
@@ -815,7 +815,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   var boosterArmRight = renderer.createEffect("fiskheroes:booster");
   boosterArmRight.setIcon(icon).setOffset(1.0, 10.0, 0.0).setSize(4.0, 2.0);
   boosterArmRight.anchor.set("rightArm");
-  boosterArmRight.mirror = false;
+  boosterArmRight.mirror = false; */
 
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
 
@@ -863,7 +863,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   
   //Arms
   //Outer
-  var shapeArmOuter = renderer.createResource("SHAPE", null);
+  /* var shapeArmOuter = renderer.createResource("SHAPE", null);
   var lineArmOuter = shapeArmOuter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
   var bloomArmLeftOuter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeArmOuter).setOffset(-1.0, 10.0, 0.0);
   var bloomArmRightOuter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeArmOuter).setOffset(1.0, 10.0, 0.0);
@@ -902,61 +902,61 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   bloomArmRightMiddle.anchor.set("rightArm");
   bloomArmRightMiddle.color.set(colorRight);
   bloomArmRightMiddle.mirror = false;
-  bloomArmRightMiddle.setScale(16.0);
+  bloomArmRightMiddle.setScale(16.0); */
 
   var obj = {
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
-    boosterArmLeft: boosterArmLeft,
-    boosterArmRight: boosterArmRight,
+    //boosterArmLeft: boosterArmLeft,
+    //boosterArmRight: boosterArmRight,
     bloomLegLeftOuter: bloomLegLeftOuter,
     bloomLegLeftMiddle: bloomLegLeftMiddle,
     bloomLegLeftInner: bloomLegLeftInner,
     bloomLegRightOuter: bloomLegRightOuter,
     bloomLegRightMiddle: bloomLegRightMiddle,
-    bloomLegRightInner: bloomLegRightInner,
+    bloomLegRightInner: bloomLegRightInner,/* 
     bloomArmLeftOuter: bloomArmLeftOuter,
     bloomArmLeftMiddle: bloomArmLeftMiddle,
     bloomArmLeftInner: bloomArmLeftInner,
     bloomArmRightOuter: bloomArmRightOuter,
     bloomArmRightMiddle: bloomArmRightMiddle,
-    bloomArmRightInner: bloomArmRightInner,
+    bloomArmRightInner: bloomArmRightInner, */
     renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
-        boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
         bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
         bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/* 
+        boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
+        boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
         bloomArmLeftMiddle.setOffset(-1.0, 8.0, 0.0);
         bloomArmLeftInner.setOffset(-1.0, 8.0, 0.0);
         bloomArmRightOuter.setOffset(1.0, 8.0, 0.0);
         bloomArmRightMiddle.setOffset(1.0, 8.0, 0.0);
-        bloomArmRightInner.setOffset(1.0, 8.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 8.0, 0.0); */
       };
       if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
         boosterLegRight.setOffset(0.0, 12.0, 0.0);
-        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
-        boosterArmRight.setOffset(1.0, 10.0, 0.0);
         bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
         bloomLegRightOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);
+        bloomLegRightInner.setOffset(0.0, 12.0, 0.0);/* 
+        boosterArmLeft.setOffset(-1.0, 10.0, 0.0);
+        boosterArmRight.setOffset(1.0, 10.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 10.0, 0.0);
         bloomArmLeftMiddle.setOffset(-1.0, 10.0, 0.0);
         bloomArmLeftInner.setOffset(-1.0, 10.0, 0.0);
         bloomArmRightOuter.setOffset(1.0, 10.0, 0.0);
         bloomArmRightMiddle.setOffset(1.0, 10.0, 0.0);
-        bloomArmRightInner.setOffset(1.0, 10.0, 0.0);
+        bloomArmRightInner.setOffset(1.0, 10.0, 0.0); */
       };
       //Boots
       //Equations
@@ -1016,7 +1016,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
       
       //Arms
       //Equations
-      var boost = data_1;
+      /* var boost = data_1;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
       b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
       var f = Math.PI * 2;
@@ -1066,7 +1066,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
         bloomArmRightOuter.render();
         bloomArmRightMiddle.render();
         bloomLegRightInner.render();
-      };
+      }; */
     }
   };
   return obj;

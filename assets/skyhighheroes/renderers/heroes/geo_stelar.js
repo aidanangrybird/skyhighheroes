@@ -6,7 +6,7 @@ loadTextures({
   "visualizer_lights": "skyhighheroes:geo/geo_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighheroes:geo/geo_stelar_transer",
   "transer_default_lights": "skyhighheroes:geo/geo_stelar_transer_lights",
-  "null": "skyhighocs:null",
+  "null": "skyhighheroes:null",
   "santa_hat": "skyhighheroes:santa_hat",
   "santa_hat_em": "skyhighheroes:geo/mega_man_santa_hat",
 });

@@ -1,0 +1,63 @@
+{machine_gun} = curve({data_0})
+{open_up_upper_front} = curve({data_1})
+{open_up_upper_back} = curve({data_2})
+{open_up_lower_front} = curve({data_3})
+{open_up_lower_back} = curve({data_4})
+{open_up_machine_gun} = curve({data_5})
+
+;body
+{part1} = if({machine_gun} != 1, animate2({machine_gun}, 1.0, 0.0, 0.1, 0.0), 1)
+{part2} = if({machine_gun} != 1, animate2({machine_gun}, 0.8, 0.2, 0.1, 0.0), 1)
+{part3} = if({machine_gun} != 1, animate2({machine_gun}, 0.8, 0.6, 0.4, 0.0), 1)
+{body_gun_cover_left_back_rotX} += 60'{part1}
+{body_gun_cover_right_back_rotX} += 60'{part1}
+{body_gun_cover_left_bottom_rotX} -= 60'{part1}
+{body_gun_cover_right_bottom_rotX} -= 60'{part1}
+{gun_barrel_left_base_posY} += 2{part3}
+{gun_barrel_left_middle_posY} += 3{part3}
+{gun_barrel_left_tip_posY} += 3{part3}
+{gun_barrel_right_base_posY} += 2{part3}
+{gun_barrel_right_middle_posY} += 3{part3}
+{gun_barrel_right_tip_posY} += 3{part3}
+
+{part1_upper_front} = if({open_up_upper_front} != 1, animate2({open_up_upper_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_upper_front} = if({open_up_upper_front} != 1, animate2({open_up_upper_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_upper_front} = if({open_up_upper_front} != 1, animate2({open_up_upper_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{body_front_upper_panel_rotX} -= 80'{part2_upper_front}
+{body_front_upper_side_left_rotY} += 5'{part1_upper_front} + 75'{part3_upper_front}
+{body_front_upper_side_right_rotY} -= 5'{part1_upper_front} + 75'{part3_upper_front}
+
+{part1_upper_back} = if({open_up_upper_back} != 1, animate2({open_up_upper_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_upper_back} = if({open_up_upper_back} != 1, animate2({open_up_upper_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_upper_back} = if({open_up_upper_back} != 1, animate2({open_up_upper_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{body_back_upper_panel_rotX} += 80'{part2_upper_back}
+{body_back_upper_side_left_rotY} -= 5'{part1_upper_back} + 75'{part3_upper_back}
+{body_back_upper_side_right_rotY} += 5'{part1_upper_back} + 75'{part3_upper_back}
+
+{part1_lower_front} = if({open_up_lower_front} != 1, animate2({open_up_lower_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_lower_front} = if({open_up_lower_front} != 1, animate2({open_up_lower_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_lower_front} = if({open_up_lower_front} != 1, animate2({open_up_lower_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{body_front_lower_panel_rotX} += 80'{part2_lower_front}
+{body_front_lower_side_left_rotY} += 5'{part1_lower_front} + 75'{part3_lower_front}
+{body_front_lower_side_right_rotY} -= 5'{part1_lower_front} + 75'{part3_lower_front}
+
+{part1_lower_back} = if({open_up_lower_back} != 1, animate2({open_up_lower_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_lower_back} = if({open_up_lower_back} != 1, animate2({open_up_lower_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_lower_back} = if({open_up_lower_back} != 1, animate2({open_up_lower_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{body_back_lower_panel_rotX} -= 80'{part2_lower_back}
+{body_back_lower_side_left_rotY} -= 5'{part1_lower_back} + 75'{part3_lower_back}
+{body_back_lower_side_right_rotY} += 5'{part1_lower_back} + 75'{part3_lower_back}
+
+{part1_machine_gun} = if({open_up_machine_gun} != 1, animate2({open_up_machine_gun}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_machine_gun} = if({open_up_machine_gun} != 1, animate2({open_up_machine_gun}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_machine_gun} = if({open_up_machine_gun} != 1, animate2({open_up_machine_gun}, 0.3, 0.7, 0.3, 0.0), 1)
+{body_gun_cover_left_back_rotX} += 5'{part1_machine_gun} + 55'{part2_machine_gun}
+{body_gun_cover_right_back_rotX} += 5'{part1_machine_gun} + 55'{part2_machine_gun}
+{body_gun_cover_left_bottom_rotX} -= 5'{part1_machine_gun} + 55'{part2_machine_gun}
+{body_gun_cover_right_bottom_rotX} -= 5'{part1_machine_gun} + 55'{part2_machine_gun}
+{gun_barrel_left_base_posY} += 2{part3_machine_gun}
+{gun_barrel_left_middle_posY} += 3{part3_machine_gun}
+{gun_barrel_left_tip_posY} += 3{part3_machine_gun}
+{gun_barrel_right_base_posY} += 2{part3_machine_gun}
+{gun_barrel_right_middle_posY} += 3{part3_machine_gun}
+{gun_barrel_right_tip_posY} += 3{part3_machine_gun}
