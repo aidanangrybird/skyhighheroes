@@ -10,7 +10,7 @@ function initModule(system) {
     helpMessage: "<n>!open <nh>-<n> Scanner",
     disabledMessage: "<e>Module <eh>bodyOpener<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+      if (arguments.length > 1 && arguments.length < 4 && entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         switch(arguments[1]) {
           case "head":
             switch (arguments[2]) {

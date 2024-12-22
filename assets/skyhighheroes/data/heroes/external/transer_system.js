@@ -70,7 +70,7 @@ function isWearingTranser(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornChestplate().nbt().hasKey("robotID");
+  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornLeggings().nbt().hasKey("robotID");
 };
 
 /**

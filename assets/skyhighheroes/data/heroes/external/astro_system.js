@@ -30,8 +30,8 @@ var months = [
 ];
 
 function asssignID(entity, manager, robotName, color) {
-  if (!entity.getWornChestplate().nbt().hasKey("robotID")) {
-    manager.setString(entity.getWornChestplate().nbt(), "robotID", robotName+"-"+color);
+  if (!entity.getWornLeggings().nbt().hasKey("robotID")) {
+    manager.setString(entity.getWornLeggings().nbt(), "robotID", robotName+"-"+color);
   };
 };
 
@@ -41,7 +41,7 @@ function asssignID(entity, manager, robotName, color) {
  * @returns If the entity is wearing a robot
  **/
 function isRobot(entity) {
-  return entity.getWornChestplate().nbt().hasKey("robotID");
+  return entity.getWornLeggings().nbt().hasKey("robotID");
 };
 
 /**
@@ -50,7 +50,7 @@ function isRobot(entity) {
  * @returns The satellite a robot is assigned to
  **/
 function getID(entity) {
-  return entity.getWornChestplate().nbt().getString("robotID");
+  return entity.getWornLeggings().nbt().getString("robotID");
 };
 
 /**
@@ -59,7 +59,7 @@ function getID(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornChestplate().nbt().hasKey("robotID");
+  return entity.getWornChestplate().nbt().hasKey("satellite") || entity.getWornLeggings().nbt().hasKey("robotID");
 };
 
 /**
@@ -93,7 +93,7 @@ function getStringArray(nbtList) {
  * @returns Array of group names
  **/
 function getGroupArray(entity) {
-  var groupList = entity.getWornChestplate().nbt().getTagList("groups");
+  var groupList = entity.getWornLeggings().nbt().getTagList("groups");
   var count = groupList.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -107,7 +107,7 @@ function getGroupArray(entity) {
  * @returns Array of group names and member counts
  **/
 function getGroupArrayMembers(entity) {
-  var groupList = entity.getWornChestplate().nbt().getTagList("groups");
+  var groupList = entity.getWornLeggings().nbt().getTagList("groups");
   var count = groupList.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -129,13 +129,13 @@ function getGroupArrayMembers(entity) {
  **/
 function disableModule(player, manager, moduleList, moduleName) {
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornChestplate().nbt().hasKey("disabledModules")) {
+    if (!player.getWornLeggings().nbt().hasKey("disabledModules")) {
       var disabledModules = manager.newTagList();
       manager.appendString(disabledModules, moduleName);
-      manager.setTagList(player.getWornChestplate().nbt(), "disabledModules", disabledModules);
+      manager.setTagList(player.getWornLeggings().nbt(), "disabledModules", disabledModules);
       systemMessage(player, "<s>Successfully disabled module <sh>" + moduleName + "<s>!");
     } else {
-      var disabledModules = player.getWornChestplate().nbt().getStringList("disabledModules");
+      var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
       var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
       if (disabledModulesIndex > -1) {
         systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
@@ -157,10 +157,10 @@ function disableModule(player, manager, moduleList, moduleName) {
  **/
 function enableModule(player, manager, moduleList, moduleName) {
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornChestplate().nbt().hasKey("disabledModules")) {
+    if (!player.getWornLeggings().nbt().hasKey("disabledModules")) {
       systemMessage(player, "<e>You have no disabled modules to enable!");
     } else {
-      var disabledModules = player.getWornChestplate().nbt().getStringList("disabledModules");
+      var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
       if (disabledModules.tagCount() == 0) {
         systemMessage(player, "<e>You have no disabled modules to enable!");
       } else {
@@ -184,7 +184,7 @@ function enableModule(player, manager, moduleList, moduleName) {
  * @returns If sender is in receiver's BrotherBands
  **/
 function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
+  var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
   var modulesDisabled = getStringArray(disabledModules);
   var result = false;
   modulesDisabled.forEach(entry => {
