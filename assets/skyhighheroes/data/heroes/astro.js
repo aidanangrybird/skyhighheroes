@@ -30,7 +30,6 @@ function init(hero) {
   hero.setTier(8);
   hero.setLeggings("Shorts");
   hero.setBoots("Boots");
-  hero.setVersion("OC");
 
   hero.addAttribute("SPRINT_SPEED", 0.5, 1);
   hero.addAttribute("STEP_HEIGHT", 0.5, 0);
