@@ -32,10 +32,10 @@
 {left_leg_back_outer_foot_posZ} += 1.48{part1} - 0.5{part1}
 {left_leg_back_outer_foot_rotX} += -90'{part1}
 
-{left_leg_baffle_outer_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
-{left_leg_baffle_inner_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
-{left_leg_baffle_front_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
-{left_leg_baffle_back_rotX} -= 87'{part1} - 30'{part3} - 30'{boost}
+{left_leg_baffle_outer_rotX} -= 32'{part1} - 30'{part3} - 30'{boost}
+{left_leg_baffle_inner_rotX} -= 32'{part1} - 30'{part3} - 30'{boost}
+{left_leg_baffle_front_rotX} -= 32'{part1} - 30'{part3} - 30'{boost}
+{left_leg_baffle_back_rotX} -= 32'{part1} - 30'{part3} - 30'{boost}
 
 {left_leg_booster_base_posY} += 0.65{boost}
 

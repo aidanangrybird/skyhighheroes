@@ -3,47 +3,47 @@
 {aim} = curve({data_2})
 {energy_proj} = curve({data_3})
 {machine_gun} = curve({data_4})
-{open_up_brain_front} = curve({data_5})
-{open_up_brain_back} = curve({data_6})
-{open_up_face} = curve({data_7})
-{open_up_spinner} = curve({data_8})
+{open_up_top_front} = curve({data_5})
+{open_up_top_back} = curve({data_6})
+{open_up_bottom_front} = curve({data_7})
+{open_up_bottom_back} = curve({data_8})
 {spinner} = {data_9}
 
 {head_thinking_spinner1_rotX} += 90'{spinner} + 270'{spinner}{flight} + 360'{spinner}{boost} + 270'{spinner}{energy_proj} + 270'{spinner}{aim} + 270'{spinner}{machine_gun}
 {head_thinking_spinner2_rotX} += 90'{spinner} + 270'{spinner}{flight} + 360'{spinner}{boost} + 270'{spinner}{energy_proj} + 270'{spinner}{aim} + 270'{spinner}{machine_gun}
 
-{part1_brain_front} = if({open_up_brain_front} != 1, animate2({open_up_brain_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_brain_front} = if({open_up_brain_front} != 1, animate2({open_up_brain_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_brain_front} = if({open_up_brain_front} != 1, animate2({open_up_brain_front}, 0.3, 0.7, 0.3, 0.0), 1)
-{head_top_right_panel_rotY} -= 5'{part1_brain_front} + 75'{part3_brain_front}
-{head_top_left_panel_rotY} += 5'{part1_brain_front} + 75'{part3_brain_front}
-{head_top_front_panel_rotX} += 5'{part1_brain_front} + 75'{part3_brain_front}
-{head_front_panel_rotX} += 80'{part2_brain_front}
+{part1_top_front} = if({open_up_top_front} != 1, animate2({open_up_top_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_top_front} = if({open_up_top_front} != 1, animate2({open_up_top_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_top_front} = if({open_up_top_front} != 1, animate2({open_up_top_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{head_top_right_panel_rotY} -= 5'{part1_top_front} + 75'{part3_top_front}
+{head_top_left_panel_rotY} += 5'{part1_top_front} + 75'{part3_top_front}
+{head_top_front_panel_rotX} += 5'{part1_top_front} + 75'{part3_top_front}
+{head_front_panel_rotX} += 80'{part2_top_front}
 
-{part1_brain_back} = if({open_up_brain_back} != 1, animate2({open_up_brain_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_brain_back} = if({open_up_brain_back} != 1, animate2({open_up_brain_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_brain_back} = if({open_up_brain_back} != 1, animate2({open_up_brain_back}, 0.3, 0.7, 0.3, 0.0), 1)
-{head_back_right_panel_rotY} += 5'{part1_brain_back} + 75'{part3_brain_back}
-{head_back_left_panel_rotY} -= 5'{part1_brain_back} + 75'{part3_brain_back}
-{head_top_back_panel_rotX} -= 5'{part1_brain_back} + 75'{part3_brain_back}
-{head_back_panel_rotX} -= 80'{part2_brain_back}
+{part1_top_back} = if({open_up_top_back} != 1, animate2({open_up_top_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_top_back} = if({open_up_top_back} != 1, animate2({open_up_top_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_top_back} = if({open_up_top_back} != 1, animate2({open_up_top_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{head_back_right_panel_rotY} += 5'{part1_top_back} + 75'{part3_top_back}
+{head_back_left_panel_rotY} -= 5'{part1_top_back} + 75'{part3_top_back}
+{head_top_back_panel_rotX} -= 5'{part1_top_back} + 75'{part3_top_back}
+{head_back_panel_rotX} -= 80'{part2_top_back}
 
-{part1_face} = if({open_up_face} != 1, animate2({open_up_face}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_face} = if({open_up_face} != 1, animate2({open_up_face}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_face} = if({open_up_face} != 1, animate2({open_up_face}, 0.3, 0.7, 0.3, 0.0), 1)
-{head_bottom_front_right_panel_rotX} -= 5'{part1_face} + 75'{part3_face}
-{head_bottom_front_left_panel_rotX} -= 5'{part1_face} + 75'{part3_face}
-{head_bottom_left_panel_rotY} += 5'{part1_face} + 75'{part3_face}
-{head_bottom_right_panel_rotY} -= 5'{part1_face} + 75'{part3_face}
-{head_eye_left_panel_rotX} -= 140'{part2_face} - 50'{part2_brain_front}{part2_face}
-{head_eye_right_panel_rotX} -= 140'{part2_face} - 50'{part2_brain_front}{part2_face}
+{part1_bottom_front} = if({open_up_bottom_front} != 1, animate2({open_up_bottom_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_bottom_front} = if({open_up_bottom_front} != 1, animate2({open_up_bottom_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_bottom_front} = if({open_up_bottom_front} != 1, animate2({open_up_bottom_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{head_bottom_front_right_panel_rotX} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
+{head_bottom_front_left_panel_rotX} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
+{head_bottom_left_panel_rotY} += 5'{part1_bottom_front} + 75'{part3_bottom_front}
+{head_bottom_right_panel_rotY} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
+{head_eye_left_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
+{head_eye_right_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
 
-{part1_spinner} = if({open_up_spinner} != 1, animate2({open_up_spinner}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_spinner} = if({open_up_spinner} != 1, animate2({open_up_spinner}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_spinner} = if({open_up_spinner} != 1, animate2({open_up_spinner}, 0.3, 0.7, 0.3, 0.0), 1)
-{head_right_bottom_back_panel_rotX} += 5'{part1_spinner} + 75'{part3_spinner}
-{head_left_bottom_back_panel_rotX} += 5'{part1_spinner} + 75'{part3_spinner}
-{head_bottom_back_left_panel_rotY} -= 5'{part1_spinner} + 75'{part3_spinner}
-{head_bottom_back_right_panel_rotY} += 5'{part1_spinner} + 75'{part3_spinner}
-{head_back_bottom_left_panel_rotX} += 140'{part2_spinner} - 50'{part2_brain_back}{part2_spinner}
-{head_back_bottom_right_panel_rotX} += 140'{part2_spinner} - 50'{part2_brain_back}{part2_spinner}
+{part1_bottom_back} = if({open_up_bottom_back} != 1, animate2({open_up_bottom_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_bottom_back} = if({open_up_bottom_back} != 1, animate2({open_up_bottom_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_bottom_back} = if({open_up_bottom_back} != 1, animate2({open_up_bottom_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{head_right_bottom_back_panel_rotX} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
+{head_left_bottom_back_panel_rotX} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
+{head_bottom_back_left_panel_rotY} -= 5'{part1_bottom_back} + 75'{part3_bottom_back}
+{head_bottom_back_right_panel_rotY} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
+{head_back_bottom_left_panel_rotX} += 140'{part2_bottom_back} - 50'{part2_top_back}{part2_bottom_back}
+{head_back_bottom_right_panel_rotX} += 140'{part2_bottom_back} - 50'{part2_top_back}{part2_bottom_back}
