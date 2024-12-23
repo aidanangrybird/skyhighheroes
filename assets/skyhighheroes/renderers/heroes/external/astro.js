@@ -367,11 +367,11 @@ function initCustomBoosters(renderer, color) {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 11.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 10.5, 0.0);
         bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 11.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 10.5, 0.0);
         bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/* 
         boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
         boosterArmRight.setOffset(1.0, 8.0, 0.0);
@@ -403,7 +403,7 @@ function initCustomBoosters(renderer, color) {
       //Boots
       //Equations
       var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-      var data_1 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -418,9 +418,9 @@ function initCustomBoosters(renderer, color) {
       boosterLegLeft.flutter = 1 + boost;
       boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
-      lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
-      lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
+      lineLegOuter.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.5 * 1.5 / 8);
+      lineLegMiddle.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.25 * 1.25 / 8);
+      lineLegInner.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1 * 1 / 8);
       //Outer
       bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
       //Middle
@@ -434,15 +434,25 @@ function initCustomBoosters(renderer, color) {
       boosterLegRight.flutter = 1 + boost;
       boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beam
-      lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
-      lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
-      lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
+      lineLegOuter.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.5 * 1.5 / 8);
+      lineLegMiddle.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.25 * 1.25 / 8);
+      lineLegInner.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1 * 1 / 8);
       //Outer
       bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
       //Middle
       bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
       //Inner
       bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
+
+      lineLegInner.size.x = 0.025 + boost*0.85;
+      lineLegInner.size.y = 0.025 + boost*0.85;
+      
+      lineLegMiddle.size.x = 0.05 + boost*1.7;
+      lineLegMiddle.size.y = 0.05 + boost*1.7;
+
+      lineLegOuter.size.x = 0.1 + boost*3.4;
+      lineLegOuter.size.y = 0.1 + boost*3.4;
+
       if (!isFirstPersonArm) {
         //Left
         boosterLegLeft.render();
@@ -646,12 +656,12 @@ function initNormalBoosters(renderer) {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 11.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 10.5, 0.0);
         bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/*
+        bloomLegRightOuter.setOffset(0.0, 11.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 10.5, 0.0);
+        bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/* 
         boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
         boosterArmRight.setOffset(1.0, 8.0, 0.0);
         bloomArmLeftOuter.setOffset(-1.0, 8.0, 0.0);
@@ -663,7 +673,7 @@ function initNormalBoosters(renderer) {
       };
       if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         boosterLegLeft.setOffset(0.0, 12.0, 0.0);
-        boosterLegRight.setOffset(0.0, 12.0, 0.0); 
+        boosterLegRight.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftOuter.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
         bloomLegLeftInner.setOffset(0.0, 12.0, 0.0);
@@ -682,7 +692,7 @@ function initNormalBoosters(renderer) {
       //Boots
       //Equations
       var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-      var data_1 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -697,9 +707,9 @@ function initNormalBoosters(renderer) {
       boosterLegLeft.flutter = 1 + boost;
       boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
-      lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
-      lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
+      lineLegOuter.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.5 * 1.5 / 8);
+      lineLegMiddle.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.25 * 1.25 / 8);
+      lineLegInner.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1 * 1 / 8);
       //Outer
       bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
       //Middle
@@ -713,15 +723,25 @@ function initNormalBoosters(renderer) {
       boosterLegRight.flutter = 1 + boost;
       boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beam
-      lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
-      lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
-      lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
+      lineLegOuter.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.5 * 1.5 / 8);
+      lineLegMiddle.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.25 * 1.25 / 8);
+      lineLegInner.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1 * 1 / 8);
       //Outer
       bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
       //Middle
       bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
       //Inner
       bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
+
+      lineLegInner.size.x = 0.025 + boost*0.85;
+      lineLegInner.size.y = 0.025 + boost*0.85;
+      
+      lineLegMiddle.size.x = 0.05 + boost*1.7;
+      lineLegMiddle.size.y = 0.05 + boost*1.7;
+
+      lineLegOuter.size.x = 0.1 + boost*3.4;
+      lineLegOuter.size.y = 0.1 + boost*3.4;
+
       if (!isFirstPersonArm) {
         //Left
         boosterLegLeft.render();
@@ -907,14 +927,14 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
   var obj = {
     boosterLegLeft: boosterLegLeft,
     boosterLegRight: boosterLegRight,
-    //boosterArmLeft: boosterArmLeft,
-    //boosterArmRight: boosterArmRight,
     bloomLegLeftOuter: bloomLegLeftOuter,
     bloomLegLeftMiddle: bloomLegLeftMiddle,
     bloomLegLeftInner: bloomLegLeftInner,
     bloomLegRightOuter: bloomLegRightOuter,
     bloomLegRightMiddle: bloomLegRightMiddle,
     bloomLegRightInner: bloomLegRightInner,/* 
+    boosterArmLeft: boosterArmLeft,
+    boosterArmRight: boosterArmRight,
     bloomArmLeftOuter: bloomArmLeftOuter,
     bloomArmLeftMiddle: bloomArmLeftMiddle,
     bloomArmLeftInner: bloomArmLeftInner,
@@ -925,11 +945,11 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
         boosterLegLeft.setOffset(0.0, 10.0, 0.0);
         boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftOuter.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegLeftOuter.setOffset(0.0, 11.0, 0.0);
+        bloomLegLeftMiddle.setOffset(0.0, 10.5, 0.0);
         bloomLegLeftInner.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightOuter.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 10.0, 0.0);
+        bloomLegRightOuter.setOffset(0.0, 11.0, 0.0);
+        bloomLegRightMiddle.setOffset(0.0, 10.5, 0.0);
         bloomLegRightInner.setOffset(0.0, 10.0, 0.0);/* 
         boosterArmLeft.setOffset(-1.0, 8.0, 0.0);
         boosterArmRight.setOffset(1.0, 8.0, 0.0);
@@ -961,7 +981,7 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
       //Boots
       //Equations
       var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
-      var data_1 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_boost_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -976,9 +996,9 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
       boosterLegLeft.flutter = 1 + boost;
       boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineLegOuter.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.5 * 3.5 / 8;
-      lineLegMiddle.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3.25 * 3.25 / 8;
-      lineLegInner.end.y = (1 + f * boosterLegLeft.flutter / 4) * 3 * 3 / 8;
+      lineLegOuter.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.5 * 1.5 / 8);
+      lineLegMiddle.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.25 * 1.25 / 8);
+      lineLegInner.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1 * 1 / 8);
       //Outer
       bloomLegLeftOuter.progress = bloomLegLeftOuter.opacity = flight;
       //Middle
@@ -992,15 +1012,25 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
       boosterLegRight.flutter = 1 + boost;
       boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beam
-      lineLegOuter.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.5 * 3.5 / 8;
-      lineLegMiddle.end.y = (1 + f * boosterLegRight.flutter / 4) * 3.25 * 3.25 / 8;
-      lineLegInner.end.y = (1 + f * boosterLegRight.flutter / 4) * 3 * 3 / 8;
+      lineLegOuter.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.5 * 1.5 / 8);
+      lineLegMiddle.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.25 * 1.25 / 8);
+      lineLegInner.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1 * 1 / 8);
       //Outer
       bloomLegRightOuter.progress = bloomLegRightOuter.opacity = flight;
       //Middle
       bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
       //Inner
       bloomLegRightInner.progress = bloomLegRightInner.opacity = flight;
+
+      lineLegInner.size.x = 0.025 + boost*0.85;
+      lineLegInner.size.y = 0.025 + boost*0.85;
+      
+      lineLegMiddle.size.x = 0.05 + boost*1.7;
+      lineLegMiddle.size.y = 0.05 + boost*1.7;
+
+      lineLegOuter.size.x = 0.1 + boost*3.4;
+      lineLegOuter.size.y = 0.1 + boost*3.4;
+
       if (!isFirstPersonArm) {
         //Left
         boosterLegLeft.render();
@@ -1013,10 +1043,10 @@ function initCustomDualBoosters(renderer, colorLeft, colorRight) {
         bloomLegRightMiddle.render();
         bloomLegRightInner.render();
       };
-      
+      /* 
       //Arms
       //Equations
-      /* var boost = data_1;
+      var boost = data_1;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
       b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
       var f = Math.PI * 2;
