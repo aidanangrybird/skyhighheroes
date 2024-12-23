@@ -9,7 +9,7 @@ var engine = implement("skyhighheroes:external/astro_engine");
 var blaster = implement("skyhighheroes:external/astro_blaster");
 var buttMachineGuns = implement("skyhighheroes:external/astro_butt_machine_guns");
 var flight = implement("skyhighheroes:external/astro_flight");
-var openner = implement("skyhighheroes:external/astro_openner");
+var opener = implement("skyhighheroes:external/astro_opener");
 var closer = implement("skyhighheroes:external/astro_closer");
 var astrOS = system.initRobot([messaging,
   groupMessaging,
@@ -21,7 +21,7 @@ var astrOS = system.initRobot([messaging,
   blaster,
   buttMachineGuns,
   flight,
-  openner,
+  opener,
   closer
 ], "Astro", "4");
 function init(hero) {
