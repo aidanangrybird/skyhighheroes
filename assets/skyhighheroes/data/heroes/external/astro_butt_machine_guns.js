@@ -14,7 +14,7 @@ function initModule(system) {
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (keyBind == "CHARGED_BEAM") {
-        result = true;
+        result = entity.isSneaking();
       };
       return result;
     },
@@ -28,7 +28,7 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (modifier.name() == "fiskheroes:charged_beam") {
-        result = true;
+        result = entity.isSneaking();
       };
       return result;
     },

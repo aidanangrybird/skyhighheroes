@@ -205,7 +205,7 @@ function enableModule(player, manager, moduleList, moduleName) {
  * Checks if a module is disabled
  * @param {JSEntity} entity - Player getting checked
  * @param {string} moduleName - Module being checked if disabled
- * @returns If sender is in receiver's BrotherBands
+ * @returns If module is disabled
  **/
 function isModuleDisabled(entity, moduleName) {
   var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");

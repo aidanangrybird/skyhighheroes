@@ -73,11 +73,19 @@
     },
     "fiskheroes:metal_skin": {
     },
+    "fiskheroes:transformation|night_vision": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/night_vision",
+        "timerData": "skyhighheroes:dyn/night_vision_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
     "fiskheroes:transformation|power": {
       "transformation": {
         "toggleData": "skyhighheroes:dyn/powered",
         "timerData": "skyhighheroes:dyn/power_timer",
-        "time": 100
+        "time": 200
       },
       "isToggle": true
     },

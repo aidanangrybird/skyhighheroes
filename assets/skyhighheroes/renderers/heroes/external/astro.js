@@ -106,11 +106,11 @@ function initAstroAnimations(renderer) {
   //Aiming
   addAnimationWithData(renderer, "astro.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
-    .priority = 10;
+    .priority = 5;
   //Dual Cannons
   addAnimationWithData(renderer, "astro.DUAL_CANNONS", "skyhighheroes:astro_dual_aim", "fiskheroes:energy_projection_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
-    .priority = 10;
+    .priority = 5;
   //Flight
   addFlightAnimationWithLanding(renderer, "astro.FLIGHT", "skyhighheroes:flight/astro_flight.anim.json");
   addAnimation(renderer, "astro.FLIGHT_FP", "skyhighheroes:flight/astro_fp")
@@ -123,6 +123,44 @@ function initAstroAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "astro.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
   addHoverAnimation(renderer, "astro.HOVER", "skyhighheroes:astro_hover");
+  addAnimationWithData(renderer, "astro.POWER", "skyhighheroes:astro_power_state", "skyhighheroes:dyn/power_timer")
+    .setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/power_timer") < 1)
+    .priority = 10;
+  addAnimation(renderer, "astro.POWERED_DOWN", "skyhighheroes:astro_powered_down")
+    .setData((entity, data) => data.load(1.0))
+    .setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/power_timer") == 0)
+    .priority = 10;
+};
+
+/**
+ * Turns NBT String List into an array for easier use in code
+ * @param {JSNBTList} nbtList - NBTList
+ * @returns Array of values from the NBTList
+ **/
+function getStringArray(nbtList) {
+  var count = nbtList.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    result.push(nbtList.getString(i));
+  };
+  return result;
+};
+/**
+ * Checks if a module is disabled
+ * @param {JSEntity} entity - Player getting checked
+ * @param {string} moduleName - Module being checked if disabled
+ * @returns If module is disabled
+ **/
+function isModuleDisabled(entity, moduleName) {
+  var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
+  var modulesDisabled = getStringArray(disabledModules);
+  var result = false;
+  modulesDisabled.forEach(entry => {
+    if (entry == moduleName) {
+      result = true;
+    };
+  });
+  return result;
 };
 
 function initNV(renderer, uuid) {

@@ -137,14 +137,14 @@ function disableModule(player, manager, moduleList, moduleName) {
       var disabledModules = manager.newTagList();
       manager.appendString(disabledModules, moduleName);
       manager.setTagList(player.getWornLeggings().nbt(), "disabledModules", disabledModules);
-      systemMessage(player, "<s>Successfully disabled module <sh>" + moduleName + "<s>!");
+      systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
     } else {
       var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
       var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
       if (disabledModulesIndex > -1) {
         systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
       } else {
-        systemMessage(player, "<s>Successfully disabled module <sh>" + moduleName + "<s>!");
+        systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
         manager.appendString(disabledModules, moduleName);
       };
     };
@@ -185,7 +185,7 @@ function enableModule(player, manager, moduleList, moduleName) {
  * Checks if a module is disabled
  * @param {JSEntity} entity - Player getting checked
  * @param {string} moduleName - Module being checked if disabled
- * @returns If sender is in receiver's BrotherBands
+ * @returns If module is disabled
  **/
 function isModuleDisabled(entity, moduleName) {
   var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
@@ -250,8 +250,6 @@ function initRobot(moduleList, robotName, color) {
   var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo"];
   //Type 3 - commands messaging and data management
   var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
-  //Type 6 - Robot module
-  var type5Specs = ["isModifierEnabled", "isModifierDisabled", "powers"];
   //Type 6 - Robot module
   var type6Specs = ["keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers"];
   /** @var modules - Array of modules */
@@ -438,7 +436,7 @@ function initRobot(moduleList, robotName, color) {
     var date = new Date();
     systemMessage(entity, "<n>Date: <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
     systemMessage(entity, "<n>Time: <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
-    systemMessage(entity, "<n>Current location: <nh> " + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
+    systemMessage(entity, "<n>Current location: <nh>" + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
     systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
     systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
   };
@@ -484,11 +482,25 @@ function initRobot(moduleList, robotName, color) {
      * @param {JSHero} hero - Required
      **/
     keyBinds: (hero) => {
-      hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 1);
+      hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 5);
       modules.forEach(module => {
         if (module.hasOwnProperty("keyBinds")) {
           module.keyBinds(hero);
         };
+      });
+    },
+    profiles: function (hero) {
+      hero.addAttributeProfile("SHUT_DOWN", function (profile) {
+        profile.addAttribute("BASE_SPEED", -1.0, 1);
+        profile.addAttribute("SPRINT_SPEED", -1.0, 1);
+        profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
+        profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
+        profile.addAttribute("STEP_HEIGHT", -1.0, 1);
+        profile.addAttribute("KNOCKBACK", -1.0, 1);
+        profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
+      });
+      hero.setAttributeProfile(entity => {
+        return entity.getData("skyhighheroes:dyn/power_timer") == 1 ? null : "SHUT_DOWN";
       });
     },
     /**
@@ -497,6 +509,9 @@ function initRobot(moduleList, robotName, color) {
      * @param {string} keyBind - Required
      **/
     isKeyBindEnabled: function (entity, keyBind) {
+      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+        return false;
+      };
       if (keyBindIndexes.length == 1) {
         return ((isModuleDisabled(entity, modules[keyBindIndexes[0]].name)) ? modules[keyBindIndexes[0]].isKeyBindDisabled(entity, keyBind) : modules[keyBindIndexes[0]].isKeyBindEnabled(entity, keyBind));
       };
@@ -531,6 +546,9 @@ function initRobot(moduleList, robotName, color) {
      * @param {string} modifier - Required
      **/
     isModifierEnabled: function (entity, modifier) {
+      if (entity.getData("skyhighheroes:dyn/power_timer") < 1) {
+        return false;
+      };
       if (modifierIndexes.length == 1) {
         return ((isModuleDisabled(entity, modules[modifierIndexes[0]].name)) ? modules[modifierIndexes[0]].isModifierDisabled(entity, modifier) : modules[modifierIndexes[0]].isModifierEnabled(entity, modifier));
       };
@@ -581,37 +599,52 @@ function initRobot(moduleList, robotName, color) {
           if (entry.startsWith("!")) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
             var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-            if (args[0] == "systemInfo") {
-              systemInfo(entity);
-            } else if (args[0] == "status") {
-              status(entity);
-            } else if (args[0] == "help") {
-              systemMessage(entity, "<n>Available commands:");
-              commandIndexes.forEach(index => {
-                var module = modules[index];
-                if (!isModuleDisabled(entity, module.name)) {
-                  systemMessage(entity, module.helpMessage);
-                };
-              });
-              systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
-              systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
-            } else if (args[0] == "disable") {
-              disableModule(entity, manager, moduleNames, args[1]);
-            } else if (args[0] == "enable") {
-              enableModule(entity, manager, moduleNames, args[1]);
-            } else {
-              var index = commands.indexOf(args[0]);
-              if (index > -1) {
-                var module = modules[commandIndexes[index]];
-                if (!isModuleDisabled(entity, module.name)) {
-                  module.commandHandler(entity, manager, args);
+            switch (args[0]) {
+              case "systemInfo":
+                systemInfo(entity);
+                break;
+              case "powerOff":
+                manager.setData(entity, "skyhighheroes:dyn/powered", false);
+                systemMessage(entity, "<n>Powering down!");
+                break;
+              case "powerOn":
+                manager.setData(entity, "skyhighheroes:dyn/powered", true);
+                systemMessage(entity, "<n>Powering on!");
+                break;
+              case "help":
+                systemMessage(entity, "<n>Available commands:");
+                commandIndexes.forEach(index => {
+                  var module = modules[index];
+                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighheroes:dyn/power_timer") == 1) {
+                    systemMessage(entity, module.helpMessage);
+                  };
+                });
+                systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
+                systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
+                systemMessage(entity, "<n>!powerDown <nh>-<n> Powers you down");
+                systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
+                break;
+              case "disable":
+                disableModule(entity, manager, moduleNames, args[1]);
+                break;
+              case "enable":
+                enableModule(entity, manager, moduleNames, args[1]);
+                break;
+              default:
+                var index = commands.indexOf(args[0]);
+                if (index > -1 && entity.getData("skyhighheroes:dyn/power_timer") == 1) {
+                  var module = modules[commandIndexes[index]];
+                  if (!isModuleDisabled(entity, module.name)) {
+                    module.commandHandler(entity, manager, args);
+                  } else {
+                    systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                  };
                 } else {
-                  systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                  systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                 };
-              } else {
-                systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
-              };
-            };
+                break;
+            }
           } else {
             modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity);
           };

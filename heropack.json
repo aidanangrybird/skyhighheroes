@@ -51,10 +51,10 @@
     "group_name": { "type": "STRING", "resetWithoutSuit": true },
     "system_init": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
-    "powered": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "power_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "opened_up": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "open_up_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "powered": { "type": "BOOLEAN", "resetOnDeath": true, "resetWithoutSuit": false },
+    "power_timer": { "type": "FLOAT_INTERP", "resetOnDeath": true, "resetWithoutSuit": false },
+    "night_vision": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "night_vision_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
 
     "head_top_front_open": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "head_top_front_open_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },

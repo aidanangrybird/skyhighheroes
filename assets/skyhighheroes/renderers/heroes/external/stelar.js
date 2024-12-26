@@ -381,3 +381,34 @@ function initHandThing(renderer, battleCard, textureType, lightType, offset) {
     }
   }
 }
+
+/**
+ * Turns NBT String List into an array for easier use in code
+ * @param {JSNBTList} nbtList - NBTList
+ * @returns Array of values from the NBTList
+ **/
+function getStringArray(nbtList) {
+  var count = nbtList.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    result.push(nbtList.getString(i));
+  };
+  return result;
+};
+/**
+ * Checks if a module is disabled
+ * @param {JSEntity} entity - Player getting checked
+ * @param {string} moduleName - Module being checked if disabled
+ * @returns If module is disabled
+ **/
+function isModuleDisabled(entity, moduleName) {
+  var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
+  var modulesDisabled = getStringArray(disabledModules);
+  var result = false;
+  modulesDisabled.forEach(entry => {
+    if (entry == moduleName) {
+      result = true;
+    };
+  });
+  return result;
+};
