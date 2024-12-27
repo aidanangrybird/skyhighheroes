@@ -250,6 +250,8 @@ function initRobot(moduleList, robotName, color) {
   var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo"];
   //Type 3 - commands messaging and data management
   var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
+  //Type 5 - Robot module
+  var type5Specs = ["isModifierEnabled", "isModifierDisabled", "powers"];
   //Type 6 - Robot module
   var type6Specs = ["keyBinds", "isKeyBindEnabled", "isKeyBindDisabled", "isModifierEnabled", "isModifierDisabled", "powers"];
   /** @var modules - Array of modules */

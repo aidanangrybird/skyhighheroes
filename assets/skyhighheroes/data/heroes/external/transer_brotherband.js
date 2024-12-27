@@ -11,7 +11,7 @@ function initModule(system) {
    * @param {string} username - Username of player to form BrotherBand with
    **/
   function formBrotherBand(player, manager, username) {
-    if (username.length < 17) {
+    if (username.length < 16) {
       system.systemMessage(player, "<e>Username is too long!");
       return;
     };

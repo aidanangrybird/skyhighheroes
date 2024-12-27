@@ -14,7 +14,7 @@ function initModule(system) {
       system.systemMessage(player, "<e>You can not add yourself as a contact!");
       return;
     };
-    if (username.length < 17) {
+    if (username.length > 16) {
       system.systemMessage(player, "<e>Username is too long!");
       return;
     };

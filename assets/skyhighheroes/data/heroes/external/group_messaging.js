@@ -205,7 +205,7 @@ function initModule(system) {
             groupMessage(entity, groupName, system.human, message);
           };
         } else {
-          groupMessage(entity, groupName, entity.getName(), message);
+          groupMessage(entity, groupName, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
         };
       };
     },
