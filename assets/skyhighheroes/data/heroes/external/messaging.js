@@ -28,7 +28,7 @@ function initModule(system) {
    **/
   function playerMessage(player, sender, message) {
     if (PackLoader.getSide() == "SERVER") {
-      player.as("PLAYER").addChatMessage("[BrotherBand]> " + sender + "> " + message);
+      player.as("PLAYER").addChatMessage(sender + "> " + message);
     };
   };
   return {
@@ -51,7 +51,7 @@ function initModule(system) {
         system.systemMessage(entity, "<e>You do not have any contacts to message!")
       };
       if (foundPlayer != null) {
-        if (system.isWearingTranser(foundPlayer)) {
+        if (system.hasComputer(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
             if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
               if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {

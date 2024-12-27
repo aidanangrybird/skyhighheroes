@@ -184,7 +184,7 @@ function initModule(system) {
       };
       if (foundPlayers.length > 0) {
         foundPlayers.forEach(player => {
-          if (system.isWearingTranser(player)) {
+          if (system.hasComputer(player)) {
             if (hasGroup(entity, player, groupName)) {
               if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
                 if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {

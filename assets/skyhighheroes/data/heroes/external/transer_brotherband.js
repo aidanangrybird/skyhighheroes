@@ -11,6 +11,10 @@ function initModule(system) {
    * @param {string} username - Username of player to form BrotherBand with
    **/
   function formBrotherBand(player, manager, username) {
+    if (username.length < 17) {
+      system.systemMessage(player, "<e>Username is too long!");
+      return;
+    };
     var foundPlayer = false;
     system.systemMessage(player, "<n>Scanning for <nh>" + username + "<n> to form BrotherBand with!");
     var entities = player.world().getEntitiesInRangeOf(player.pos(), 2);

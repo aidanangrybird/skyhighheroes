@@ -10,24 +10,28 @@ function initModule(system) {
    * @param {string} username - Username to add as contact
    **/
   function addContact(player, manager, username) {
-    if (player.getName() != username) {
-      if (!player.getWornChestplate().nbt().hasKey("contacts")) {
-        var contacts = manager.newTagList();
-        manager.appendString(contacts, username);
-        manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
-        system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
-      } else {
-        var contacts = player.getWornChestplate().nbt().getStringList("contacts");
-        var index = system.getStringArray(contacts).indexOf(username);
-        if (index > -1) {
-          system.systemMessage(player, "<eh>" + username + "<e> is already a contact!");
-        } else {
-          system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
-          manager.appendString(contacts, username);
-        };
-      };
-    } else {
+    if (player.getName() == username) {
       system.systemMessage(player, "<e>You can not add yourself as a contact!");
+      return;
+    };
+    if (username.length < 17) {
+      system.systemMessage(player, "<e>Username is too long!");
+      return;
+    };
+    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
+      var contacts = manager.newTagList();
+      manager.appendString(contacts, username);
+      manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
+      system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+    } else {
+      var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+      var index = system.getStringArray(contacts).indexOf(username);
+      if (index > -1) {
+        system.systemMessage(player, "<eh>" + username + "<e> is already a contact!");
+      } else {
+        system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+        manager.appendString(contacts, username);
+      };
     };
   };
   /**
@@ -39,19 +43,19 @@ function initModule(system) {
   function removeContact(player, manager, username) {
     if (!player.getWornChestplate().nbt().hasKey("contacts")) {
       system.systemMessage(player, "<e>You have no contacts to remove!");
+      return;
+    };
+    var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+    if (contacts.tagCount() == 0) {
+      system.systemMessage(player, "<e>You have no contacts to remove!");
+      return;
+    };
+    var index = system.getStringArray(contacts).indexOf(username);
+    if (index < 0) {
+      system.systemMessage(player, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
     } else {
-      var contacts = player.getWornChestplate().nbt().getStringList("contacts");
-      if (contacts.tagCount() == 0) {
-        system.systemMessage(player, "<e>You have no contacts to remove!");
-      } else {
-        var index = system.getStringArray(contacts).indexOf(username);
-        if (index < 0) {
-          system.systemMessage(player, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
-        } else {
-          system.systemMessage(player, "<s>Removed contact with username <sh>" + username + "<s>!");
-          manager.removeTag(contacts, index);
-        };
-      };
+      system.systemMessage(player, "<s>Removed contact with username <sh>" + username + "<s>!");
+      manager.removeTag(contacts, index);
     };
   };
   /**
