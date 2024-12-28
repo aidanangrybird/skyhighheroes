@@ -633,6 +633,12 @@ function initRobot(moduleList, robotName, color) {
               case "enable":
                 enableModule(entity, manager, moduleNames, args[1]);
                 break;
+              case "mode":
+                cycleChatModes(entity, manager);
+                break;
+              case "chat":
+                cycleChats(entity, manager);
+                break;
               default:
                 var index = commands.indexOf(args[0]);
                 if (index > -1 && entity.getData("skyhighheroes:dyn/power_timer") == 1) {
