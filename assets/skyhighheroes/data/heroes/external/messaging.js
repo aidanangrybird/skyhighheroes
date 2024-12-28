@@ -33,6 +33,7 @@ function initModule(system) {
   };
   return {
     name: "messaging",
+    modeID: "normal",
     type: 2,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity) {
@@ -69,12 +70,22 @@ function initModule(system) {
         };
       };
     },
-    chatInfo: function (player, manager) {
+    chatInfo: function (player, manager, chat) {
       if (player.getWornChestplate().nbt().hasKey("contacts")) {
         if (player.getWornChestplate().nbt().getStringList("contacts").tagCount() > 0) {
           var contactsList = system.getStringArray(player.getWornChestplate().nbt().getStringList("contacts"));
-          if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+          if (typeof chat === "string") {
+            var chatIndex = contactsList.indexOf(chat);
+            if (chatIndex > -1) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+            } else {
+              system.systemMessage(player, "<e>You do not have <eh>" + chat + "<e> as a contact!");
+              return;
+            };
+          } else {
+            if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
           };
           var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
           system.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");

@@ -162,6 +162,7 @@ function initModule(system) {
     name: "groupMessaging",
     type: 3,
     command: "g",
+    modeID: "group",
     helpMessage: "<n>!g <nh>-<n> Groups",
     chatModeInfo: "<n>You are now in <nh>group<n> mode!",
     messageHandler: function (entity) {
@@ -249,12 +250,22 @@ function initModule(system) {
         system.systemMessage(entity, "<e>Unknown group command! Try <eh>!g help<e> for a list of commands!");
       };
     },
-    chatInfo: function (player, manager) {
+    chatInfo: function (player, manager, chat) {
       if (player.getWornChestplate().nbt().hasKey("groups")) {
         if (player.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
           var groupList = system.getGroupArray(player);
-          if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+          if (typeof chat === "string") {
+            var chatIndex = groupList.indexOf(chat);
+            if (chatIndex > -1) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+            } else {
+              system.systemMessage(player, "<e>You do not have <eh>" + chat + "<e> as a group!");
+              return;
+            };
+          } else {
+            if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
           };
           var group = groupList[player.getData("skyhighheroes:dyn/active_chat")];
           system.systemMessage(player, "<n>You are now messaging <nh>" + group + "<n>!");

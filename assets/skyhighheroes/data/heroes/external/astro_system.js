@@ -247,9 +247,9 @@ function initRobot(moduleList, robotName, color) {
   //Type 1 - commands (can have data management)
   var type1Specs = ["command", "commandHandler", "helpMessage"];
   //Type 2 - messaging only
-  var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo"];
+  var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
   //Type 3 - commands messaging and data management
-  var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
+  var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
   //Type 5 - Robot module
   var type5Specs = ["isModifierEnabled", "isModifierDisabled", "powers"];
   //Type 6 - Robot module
@@ -264,6 +264,8 @@ function initRobot(moduleList, robotName, color) {
   var commandIndexes = [];
   /** @var messagingIndexes - Indexes of messaging handlers */
   var messagingIndexes = [];
+  /** @var chatModes - Chat modes */
+  var chatModes = [];
   /** @var modifierIndexes - Indexes of power modules */
   var modifierIndexes = [];
   /** @var keyBindIndexes - Indexes of power modules */
@@ -316,6 +318,7 @@ function initRobot(moduleList, robotName, color) {
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
+              chatModes.push(moduleInit.modeID);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
             };
@@ -338,6 +341,7 @@ function initRobot(moduleList, robotName, color) {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
+              chatModes.push(moduleInit.modeID);
               commandIndexes.push(modules.length-1);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on robot " + robotName + "!");
@@ -420,6 +424,19 @@ function initRobot(moduleList, robotName, color) {
     var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
     modules[messagingIndexes[chatMode]].chatInfo(player, manager);
     return true;
+  };
+  function switchChatModes(player, manager, mode) {
+    var modeIndex = chatModes.indexOf(mode);
+    if (modeIndex > -1) {
+      manager.setData(player, "skyhighheroes:dyn/chat_mode", modeIndex);
+      var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
+      systemMessage(player, modules[messagingIndexes[chatMode]].chatModeInfo);
+      modules[messagingIndexes[chatMode]].chatInfo(player, manager);
+    };
+  };
+  function switchChats(player, manager, chat) {
+    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
+    modules[messagingIndexes[chatMode]].chatInfo(player, manager, chat);
   };
   function systemInfo(entity) {
     var modulesMessage = (moduleNames.length > 1) ? "<n>Loaded " + moduleNames.length + " modules: " : "<n>Loaded " + moduleNames.length + " module: ";
@@ -605,6 +622,9 @@ function initRobot(moduleList, robotName, color) {
               case "systemInfo":
                 systemInfo(entity);
                 break;
+              case "status":
+                status(entity);
+                break;
               case "powerOff":
                 manager.setData(entity, "skyhighheroes:dyn/powered", false);
                 systemMessage(entity, "<n>Powering down!");
@@ -633,11 +653,11 @@ function initRobot(moduleList, robotName, color) {
               case "enable":
                 enableModule(entity, manager, moduleNames, args[1]);
                 break;
-              case "mode":
-                cycleChatModes(entity, manager);
+              case "chatMode":
+                switchChatModes(entity, manager, args[1]);
                 break;
-              case "chat":
-                cycleChats(entity, manager);
+              case "msg":
+                switchChats(entity, manager, args[1]);
                 break;
               default:
                 var index = commands.indexOf(args[0]);

@@ -309,9 +309,9 @@ function initTranser(moduleList, transerName, satellite) {
   //Type 1 - commands (can have data management)
   var type1Specs = ["command", "commandHandler", "helpMessage"];
   //Type 2 - messaging only
-  var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo"];
+  var type2Specs = ["messageHandler", "chatModeInfo", "chatInfo", "modeID"];
   //Type 3 - commands messaging and data management
-  var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage"];
+  var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
   //Type 7 - EM Being calling signal
   var type7Specs = ["waveHandler", "waveCalling", "selfProfile", "otherProfile"];
   //Type 8 - EM Being
@@ -328,6 +328,8 @@ function initTranser(moduleList, transerName, satellite) {
   var commandIndexes = [];
   /** @var messagingIndexes - Indexes of messaging handlers */
   var messagingIndexes = [];
+  /** @var chatModes - Chat modes */
+  var chatModes = [];
   /** @var waveIndex - Wave calling index */
   var waveIndex = -1;
   /** @var emBeingIndex - Index of EM Being */
@@ -389,6 +391,7 @@ function initTranser(moduleList, transerName, satellite) {
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
+              chatModes.push(moduleInit.modeID);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
             };
@@ -410,6 +413,7 @@ function initTranser(moduleList, transerName, satellite) {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
               commands.push(moduleInit.command);
+              chatModes.push(moduleInit.modeID);
               commandIndexes.push(modules.length-1);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
@@ -512,6 +516,19 @@ function initTranser(moduleList, transerName, satellite) {
     var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
     modules[messagingIndexes[chatMode]].chatInfo(player, manager);
     return true;
+  };
+  function switchChatModes(player, manager, mode) {
+    var modeIndex = chatModes.indexOf(mode);
+    if (modeIndex > -1) {
+      manager.setData(player, "skyhighheroes:dyn/chat_mode", modeIndex);
+      var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
+      systemMessage(player, modules[messagingIndexes[chatMode]].chatModeInfo);
+      modules[messagingIndexes[chatMode]].chatInfo(player, manager);
+    };
+  };
+  function switchChats(player, manager, chat) {
+    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
+    modules[messagingIndexes[chatMode]].chatInfo(player, manager, chat);
   };
   function systemInfo(entity) {
     var modulesMessage = (moduleNames.length > 1) ? "<n>Loaded " + moduleNames.length + " modules: " : "<n>Loaded " + moduleNames.length + " module: ";
@@ -723,36 +740,50 @@ function initTranser(moduleList, transerName, satellite) {
           if (entry.startsWith("!")) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
             var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-            if (args[0] == "systemInfo") {
-              systemInfo(entity);
-            } else if (args[0] == "status") {
-              status(entity);
-            } else if (args[0] == "help") {
-              systemMessage(entity, "<n>Available commands:");
-              commandIndexes.forEach(index => {
-                var module = modules[index];
-                if (!isModuleDisabled(entity, module.name)) {
-                  systemMessage(entity, module.helpMessage);
-                };
-              });
-              systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
-              systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
-            } else if (args[0] == "disable") {
-              disableModule(entity, manager, moduleNames, args[1]);
-            } else if (args[0] == "enable") {
-              enableModule(entity, manager, moduleNames, args[1]);
-            } else {
-              var index = commands.indexOf(args[0]);
-              if (index > -1) {
-                var module = modules[commandIndexes[index]];
-                if (!isModuleDisabled(entity, module.name)) {
-                  module.commandHandler(entity, manager, args);
+            switch (args[0]) {
+              case "systemInfo":
+                systemInfo(entity);
+                break;
+              case "status":
+                status(entity);
+                break;
+              case "help":
+                systemMessage(entity, "<n>Available commands:");
+                commandIndexes.forEach(index => {
+                  var module = modules[index];
+                  if (!isModuleDisabled(entity, module.name)) {
+                    systemMessage(entity, module.helpMessage);
+                  };
+                });
+                systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
+                systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
+                break;
+              case "disable":
+                disableModule(entity, manager, moduleNames, args[1]);
+                break;
+              case "enable":
+                enableModule(entity, manager, moduleNames, args[1]);
+                break;
+              case "chatMode":
+                switchChatModes(entity, manager, args[1]);
+                break;
+              case "msg":
+                switchChats(entity, manager, args[1]);
+                break;
+              default:
+                var index = commands.indexOf(args[0]);
+                if (index > -1) {
+                  var module = modules[commandIndexes[index]];
+                  if (!isModuleDisabled(entity, module.name)) {
+                    module.commandHandler(entity, manager, args);
+                  } else {
+                    systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                  };
                 } else {
-                  systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                  systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                 };
-              } else {
-                systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
-              };
+                break;
             };
           } else {
             modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity);

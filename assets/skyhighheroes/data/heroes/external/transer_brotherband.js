@@ -112,6 +112,7 @@ function initModule(system) {
     name: "BrotherBand",
     type: 3,
     command: "bb",
+    modeID: "BrotherBand",
     helpMessage: "<n>!bb <nh>-<n> BrotherBand",
     chatModeInfo: "<n>You are now in <nh>BrotherBand<n> mode!",
     messageHandler: function (entity) {
@@ -172,12 +173,22 @@ function initModule(system) {
         system.systemMessage(entity, "<e>Unknown <eh>BrotherBand<e> command! Try <eh>!bb help<e> for a list of commands!");
       };
     },
-    chatInfo: function (player, manager) {
+    chatInfo: function (player, manager, chat) {
       if (player.getWornChestplate().nbt().hasKey("brothers")) {
-        var brothersList = system.getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
-        if (brothersList.length > 0) {
-          if (player.getData("skyhighheroes:dyn/active_chat") > (brothersList.length-1)) {
-            manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+        if (player.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
+          var brothersList = system.getStringArray(player.getWornChestplate().nbt().getStringList("brothers"));
+          if (typeof chat === "string") {
+            var chatIndex = brothersList.indexOf(chat);
+            if (chatIndex > -1) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+            } else {
+              system.systemMessage(player, "<e>You do not have <eh>" + chat + "<e> as a Brother!");
+              return;
+            };
+          } else {
+            if (player.getData("skyhighheroes:dyn/active_chat") > (brothersList.length-1)) {
+              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+            };
           };
           var brother = brothersList[player.getData("skyhighheroes:dyn/active_chat")];
           system.systemMessage(player, "<n>You are now messaging <nh>" + brother + "<n>!");
