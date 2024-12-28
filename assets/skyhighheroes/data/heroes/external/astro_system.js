@@ -439,7 +439,7 @@ function initRobot(moduleList, robotName, color) {
     systemMessage(entity, "<n>Date: <nh>" + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear());
     systemMessage(entity, "<n>Time: <nh>" + date.getHours() + ":" + ((date.getMinutes() > 9) ? date.getMinutes() : "0"+date.getMinutes()));
     systemMessage(entity, "<n>Current location: <nh>" + entity.posX().toFixed(0) + "<n>, <nh>" + entity.posY().toFixed(0) + "<n>, <nh>" + entity.posZ().toFixed(0));
-    systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome() + " <n>biome");
+    systemMessage(entity, "<n>Biome: <nh>" + entity.world().getLocation(entity.pos()).biome());
     systemMessage(entity, "<n>Do <nh>!help<n> for available commands!");
   };
   return {
@@ -624,7 +624,7 @@ function initRobot(moduleList, robotName, color) {
                 systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
                 systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
                 systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
-                systemMessage(entity, "<n>!powerDown <nh>-<n> Powers you down");
+                systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
                 systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
                 break;
               case "disable":
