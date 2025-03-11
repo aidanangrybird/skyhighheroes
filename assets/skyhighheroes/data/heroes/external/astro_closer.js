@@ -10,6 +10,7 @@ function initModule(system) {
     helpMessage: "<n>!close <nh>-<n> Panel closer",
     disabledMessage: "<e>Module <eh>bodyCloser<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
+      //Add system messages to show that things are closing
       if (arguments.length > 1 && arguments.length < 4) {
         switch(arguments[1]) {
           case "head":

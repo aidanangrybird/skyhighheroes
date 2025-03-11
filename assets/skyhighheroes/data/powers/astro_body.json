@@ -77,7 +77,7 @@
       "transformation": {
         "toggleData": "skyhighheroes:dyn/night_vision",
         "timerData": "skyhighheroes:dyn/night_vision_timer",
-        "time": 10
+        "time": 20
       },
       "isToggle": true
     },

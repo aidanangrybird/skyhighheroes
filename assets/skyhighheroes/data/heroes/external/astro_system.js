@@ -258,6 +258,8 @@ function initRobot(moduleList, robotName, color) {
   var modules = [];
   /** @var moduleNames - Module names */
   var moduleNames = [];
+  /** @var robotModules - Robot module names */
+  var robotModules = [];
   /** @var commands - Command prefixes */
   var commands = [];
   /** @var commandIndexes - Indexes of command handlers */
@@ -364,6 +366,7 @@ function initRobot(moduleList, robotName, color) {
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
+              robotModules.push(moduleInit.name);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -389,6 +392,7 @@ function initRobot(moduleList, robotName, color) {
             } else {
               modules.push(moduleInit);
               moduleNames.push(moduleInit.name);
+              robotModules.push(moduleInit.name);
               var modulePowers = moduleInit.powers;
               modulePowers.forEach(power => {
                 powerArray.push(power);
@@ -699,6 +703,16 @@ function initRobot(moduleList, robotName, color) {
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_boosting_landing_timer", 2, 8, t > 0);
       var pain = (entity.rotPitch() > 12.5 && entity.motionY() < -0.075 && entity.motionY() > -1.25 && (entity.motionZ() > 0.125 || entity.motionZ() < -0.125 || entity.motionX() > 0.125 || entity.motionX() < -0.125)) && !entity.isSprinting() && !entity.isOnGround() && entity.getData("fiskheroes:flight_timer") > 0 && (entity.world().blockAt(entity.pos().add(0, -1, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -2, 0)).isSolid() || entity.world().blockAt(entity.pos().add(0, -3, 0)).isSolid()) && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.world().blockAt(entity.pos()).name() == "minecraft:air";
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
+      if (PackLoader.getSide() == "SERVER" && entity.getData("skyhighheroes:dyn/power_timer") < 1 && entity.getData("skyhighheroes:dyn/power_timer") > 0) {
+        var moduleTotal = robotModules.length;
+        var moduleTime = (200/moduleTotal).toFixed(0);
+        var currentTime = Math.ceil(entity.getData("skyhighheroes:dyn/power_timer")*200);
+        if (currentTime % moduleTime == 0) {
+          var moduleName = robotModules[(currentTime/moduleTime)-1];
+          var message = !entity.getData("skyhighheroes:dyn/powered") ? "<n>Shutting down <nh>" + moduleName + "<n>!" : "<n>Starting up <nh>" + moduleName + "<n>!";
+          systemMessage(entity, message);
+        };
+      };
     }
   };
 };

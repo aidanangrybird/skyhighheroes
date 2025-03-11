@@ -10,6 +10,7 @@ function initModule(system) {
     helpMessage: "<n>!open <nh>-<n> Panel opener",
     disabledMessage: "<e>Module <eh>bodyOpener<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
+      //Add system messages to show that things are opening
       if (arguments.length > 1 && arguments.length < 4) {
         switch(arguments[1]) {
           case "head":
@@ -98,6 +99,7 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/body_machine_gun_open", true);
                 break;
               case "*":
+                system.systemMessage(entity, "<n>Opening <nh>body<n>!");
                 manager.setData(entity, "skyhighheroes:dyn/body_upper_front_open", true);
                 manager.setData(entity, "skyhighheroes:dyn/body_upper_back_open", true);
                 manager.setData(entity, "skyhighheroes:dyn/body_lower_front_open", true);

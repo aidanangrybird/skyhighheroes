@@ -200,6 +200,7 @@ function initNV(renderer) {
   nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
   nv_wave_change.fogStrength = 0.0;
   nv_wave_change.factor = 1.0;
+  nv_wave_change.firstPersonOnly = true;
   nv_wave_change.setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0.75);
   nv_visualizer = renderer.bindProperty("fiskheroes:night_vision");
   nv_visualizer.fogStrength = 0.0;
