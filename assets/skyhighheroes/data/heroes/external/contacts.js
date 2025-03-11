@@ -18,13 +18,13 @@ function initModule(system) {
       system.systemMessage(player, "<e>Username is too long!");
       return;
     };
-    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
+    if (!player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("contacts")) {
       var contacts = manager.newTagList();
       manager.appendString(contacts, username);
-      manager.setTagList(player.getWornChestplate().nbt(), "contacts", contacts);
+      manager.setTagList(player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt(), "contacts", contacts);
       system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
     } else {
-      var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+      var contacts = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts");
       var index = system.getStringArray(contacts).indexOf(username);
       if (index > -1) {
         system.systemMessage(player, "<eh>" + username + "<e> is already a contact!");
@@ -41,11 +41,11 @@ function initModule(system) {
    * @param {string} username - username of contact
    **/
   function removeContact(player, manager, username) {
-    if (!player.getWornChestplate().nbt().hasKey("contacts")) {
+    if (!player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("contacts")) {
       system.systemMessage(player, "<e>You have no contacts to remove!");
       return;
     };
-    var contacts = player.getWornChestplate().nbt().getStringList("contacts");
+    var contacts = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts");
     if (contacts.tagCount() == 0) {
       system.systemMessage(player, "<e>You have no contacts to remove!");
       return;
@@ -63,7 +63,7 @@ function initModule(system) {
    * @param {JSEntity} entity - Required
    **/
   function listContacts(entity) {
-    var contacts = system.getStringArray(entity.getWornChestplate().nbt().getStringList("contacts"));
+    var contacts = system.getStringArray(entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts"));
     system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contacts:": "<n> contact:"));
     contacts.forEach(entry => {
       system.systemMessage(entity, "<nh>" + entry);

@@ -47,6 +47,7 @@
     "superhero_boosting_landing_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "active_chat": "INTEGER",
     "chat_mode": "INTEGER",
+    "primary_piece": "BYTE",
     "entry": { "type": "STRING", "resetWithoutSuit": true },
     "group_name": { "type": "STRING", "resetWithoutSuit": true },
     "system_init": { "type": "BOOLEAN", "resetWithoutSuit": true },

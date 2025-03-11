@@ -112,39 +112,6 @@ function getStringArray(nbtList) {
   return result;
 };
 /**
- * Turns NBT String List into an array for easier use in code
- * @param {JSEntity} entity - Entity to create group array from
- * @returns Array of group names
- **/
-function getGroupArray(entity) {
-  var groupList = entity.getWornChestplate().nbt().getTagList("groups");
-  var count = groupList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    result.push(groupList.getCompoundTag(i).getString("groupName"));
-  };
-  return result;
-};
-/**
- * Turns NBT String List into an array for easier use in code
- * @param {JSEntity} entity - Entity to create group array from
- * @returns Array of group names and member counts
- **/
-function getGroupArrayMembers(entity) {
-  var groupList = entity.getWornChestplate().nbt().getTagList("groups");
-  var count = groupList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    var group = groupList.getCompoundTag(i);
-    var entry = {
-      "groupName": group.getString("groupName"),
-      "memberCount": group.getStringList("members").tagCount(),
-    };
-    result.push(entry);
-  };
-  return result;
-};
-/**
  * Disables a module
  * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
@@ -300,6 +267,7 @@ function basicTierOverride(entity) {
  **/
 function initTranser(moduleList, transerName, satellite) {
   var transerInstance = this;
+  primaryPiece = 2;
   var assignedSatellite;
   if (typeof satellite === "string") {
     assignedSatellite = satellite;
@@ -720,6 +688,7 @@ function initTranser(moduleList, transerName, satellite) {
         asssignTranser(entity, manager, assignedSatellite);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+        manager.setData(entity, "skyhighheroes:dyn/primary_piece", primaryPiece);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == waveChange || entity.getData("fiskheroes:disguise") == human)) {

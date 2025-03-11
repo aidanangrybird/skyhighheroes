@@ -11,14 +11,14 @@ function initModule(system) {
     manager.appendString(members, player.getName());
     manager.setString(group, "groupName", groupName);
     manager.setTagList(group, "members", members);
-    if (!entity.getWornChestplate().nbt().hasKey("groups")) {
+    if (!entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("groups")) {
       var groups = manager.newTagList();
       manager.appendTag(groups, group);
-      manager.setTagList(entity.getWornChestplate().nbt(), "groups", groups);
+      manager.setTagList(entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt(), "groups", groups);
       system.systemMessage(entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
     } else {
-      var groups = entity.getWornChestplate().nbt().getTagList("groups");
-      var groupIndex = system.getGroupArray(entity).indexOf(groupName);
+      var groups = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+      var groupIndex = getGroupArray(entity).indexOf(groupName);
       if (groupIndex > -1) {
         system.systemMessage(entity, "<e>Duplicate group name <eh>" + groupName + "<e>!");
       } else {
@@ -32,7 +32,7 @@ function initModule(system) {
    * @param {JSEntity} player - Required
    **/
   function listGroups(player) {
-    var groups = system.getGroupArrayMembers(player);
+    var groups = getGroupArrayMembers(player);
     system.systemMessage(player, "<n>You are in <nh>" + groups.length + ((groups.length == 1)?"<n> group!": "<n> groups!"));
     groups.forEach(entry => {
       system.systemMessage(player, "<nh>" + entry.groupName + "<n> (<nh>" + entry.memberCount + ((entry.memberCount > 1)?"<n> members)": "<n> member)"))
@@ -45,8 +45,8 @@ function initModule(system) {
    * @param {string} groupName - Name of group
    **/
   function removeGroup(player, manager, groupName) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
-    var groupIndex = system.getGroupArray(player).indexOf(groupName);
+    var groups = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var groupIndex = getGroupArray(player).indexOf(groupName);
     if (groupIndex < 0) {
       system.systemMessage(player, "<e>Unable to find group with name <eh>" + groupName + "<e> to remove!");
     } else {
@@ -62,13 +62,13 @@ function initModule(system) {
    * @param {string} username - Username to add to group
    **/
   function addGroupMember(player, manager, groupName, username) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
-    var groupIndex = system.getGroupArray(player).indexOf(groupName);
+    var groups = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var groupIndex = getGroupArray(player).indexOf(groupName);
     var members = groups.getCompoundTag(groupIndex).getStringList("members");
     var memberIndex = system.getStringArray(members).indexOf(username);
-    var contacts = player.getWornChestplate().nbt().getTagList("contacts");
+    var contacts = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("contacts");
     var contactIndex = system.getStringArray(contacts).indexOf(username);
-    if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    if (!player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("groups")) {
       system.systemMessage(player, "<e>You have not set up any groups yet!");
     } else if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
@@ -89,11 +89,11 @@ function initModule(system) {
    * @param {string} username - Username to add to group
    **/
   function removeGroupMember(player, manager, groupName, username) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
-    var groupIndex = system.getGroupArray(player).indexOf(groupName);
+    var groups = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var groupIndex = getGroupArray(player).indexOf(groupName);
     var members = groups.getCompoundTag(groupIndex).getStringList("members");
     var memberIndex = system.getStringArray(members).indexOf(username);
-    if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    if (!player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("groups")) {
       system.systemMessage(player, "<e>You have not set up any groups yet!");
     } else if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
@@ -110,10 +110,10 @@ function initModule(system) {
    * @param {integer} groupName - Name of group to add member to
    **/
   function listGroupMembers(player, groupName) {
-    var groups = player.getWornChestplate().nbt().getTagList("groups");
-    var groupIndex = system.getGroupArray(player).indexOf(groupName);
+    var groups = player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var groupIndex = getGroupArray(player).indexOf(groupName);
     var members = system.getStringArray(groups.getCompoundTag(groupIndex).getStringList("members"));
-    if (!player.getWornChestplate().nbt().hasKey("groups")) {
+    if (!player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("groups")) {
       system.systemMessage(player, "<e>You do not have any groups!");
     } else if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
@@ -133,9 +133,9 @@ function initModule(system) {
    **/
   function hasGroup(sender, receiver, groupName) {
     var result = false;
-    var nbt = receiver.getWornChestplate().nbt();
+    var nbt = receiver.getEquipmentInSlot(receiver.getData("skyhighheroes:dyn/primary_piece")).nbt();
     if (nbt.hasKey("groups")) {
-      var groupIndex = system.getGroupArray(receiver).indexOf(groupName);
+      var groupIndex = getGroupArray(receiver).indexOf(groupName);
       if (groupIndex > -1) {
         var members = nbt.getTagList("groups").getCompoundTag(groupIndex).getStringList("members");
         var memberIndex = system.getStringArray(members).indexOf(sender.getName());
@@ -158,6 +158,39 @@ function initModule(system) {
       player.as("PLAYER").addChatMessage("[" + groupName + "]>" + sender + "> " + message);
     };
   };
+  /**
+   * Turns NBT String List into an array for easier use in code
+   * @param {JSEntity} entity - Entity to create group array from
+   * @returns Array of group names
+   **/
+  function getGroupArray(entity) {
+    var groupList = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var count = groupList.tagCount();
+    var result = [];
+    for (i=0;i<count;i++) {
+      result.push(groupList.getCompoundTag(i).getString("groupName"));
+    };
+    return result;
+  };
+  /**
+   * Turns NBT String List into an array for easier use in code
+   * @param {JSEntity} entity - Entity to create group array from
+   * @returns Array of group names and member counts
+   **/
+  function getGroupArrayMembers(entity) {
+    var groupList = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var count = groupList.tagCount();
+    var result = [];
+    for (i=0;i<count;i++) {
+      var group = groupList.getCompoundTag(i);
+      var entry = {
+        "groupName": group.getString("groupName"),
+        "memberCount": group.getStringList("members").tagCount(),
+      };
+      result.push(entry);
+    };
+    return result;
+  };
   return {
     name: "groupMessaging",
     type: 3,
@@ -170,8 +203,8 @@ function initModule(system) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayers = [];
       var groupName = "";
-      if (entity.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
-        var group = entity.getWornChestplate().nbt().getTagList("groups").getCompoundTag(activeChat);
+      if (entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups").tagCount() > 0) {
+        var group = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups").getCompoundTag(activeChat);
         groupName = group.getString("groupName");
         var members = system.getStringArray(group.getStringList("members"));
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
@@ -251,8 +284,8 @@ function initModule(system) {
       };
     },
     chatInfo: function (player, manager, chat) {
-      if (player.getWornChestplate().nbt().hasKey("groups")) {
-        if (player.getWornChestplate().nbt().getTagList("groups").tagCount() > 0) {
+      if (player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("groups")) {
+        if (player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups").tagCount() > 0) {
           var groupList = system.getGroupArray(player);
           if (typeof chat === "string") {
             var chatIndex = groupList.indexOf(chat);
