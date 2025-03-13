@@ -305,7 +305,7 @@ function initTranser(moduleList, transerName, satellite) {
   /** @var waveChangeIndex - Index of EM Wave Change */
   var waveChangeIndex = -1;
   /** @var powerArray - Array of powers to add */
-  var powerArray = ["skyhighheroes:transer_system"];
+  var powerArray = [];
   /** @var human - Untransformed name */
   var human = null;
   /** @var waveChange - Transformed name */
@@ -530,35 +530,38 @@ function initTranser(moduleList, transerName, satellite) {
      * @param {JSHero} hero - Required
      **/
     addPowers: (hero) => {
+      if (powerArray.length == 0) {
+        hero.addPowers("skyhighheroes:transer_system");
+      };
       if (powerArray.length == 1) {
-        hero.addPowers(powerArray[0]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0]);
       };
       if (powerArray.length == 2) {
-        hero.addPowers(powerArray[0], powerArray[1]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1]);
       };
       if (powerArray.length == 3) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2]);
       };
       if (powerArray.length == 4) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
       };
       if (powerArray.length == 5) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
       };
       if (powerArray.length == 6) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
       };
       if (powerArray.length == 7) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
       };
       if (powerArray.length == 8) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
       };
       if (powerArray.length == 9) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
       };
       if (powerArray.length == 10) {
-        hero.addPowers(powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
+        hero.addPowers("skyhighheroes:transer_system", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
       };
     },
     /**
