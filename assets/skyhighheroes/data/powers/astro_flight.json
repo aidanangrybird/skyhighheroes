@@ -4,7 +4,7 @@
   "modifiers": {
     "fiskheroes:controlled_flight": {
       "speed": 0.1,
-      "boostSpeed": 0.45,
+      "boostSpeed": 0.5,
       "canBoost": true,
       "canRoll": true,
       "collision": {
