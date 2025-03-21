@@ -1,6 +1,7 @@
-var system = implement("skyhighheroes:external/astro_system");
+var robot = implement("skyhighheroes:external/astro_system");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
+var groups = implement("skyhighheroes:external/groups");
 var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
@@ -11,8 +12,10 @@ var buttMachineGuns = implement("skyhighheroes:external/astro_butt_machine_guns"
 var flight = implement("skyhighheroes:external/astro_flight");
 var opener = implement("skyhighheroes:external/astro_opener");
 var closer = implement("skyhighheroes:external/astro_closer");
-var astrOS = system.initRobot([messaging,
+var astrOS = robot.initSystem([
+  messaging,
   groupMessaging,
+  groups,
   contacts,
   scanner,
   waypoints,

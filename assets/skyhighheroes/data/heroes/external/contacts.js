@@ -10,6 +10,8 @@ function initModule(system) {
    * @param {string} username - Username to add as contact
    **/
   function addContact(player, manager, username) {
+    var nbt = null;
+    
     if (player.getName() == username) {
       system.systemMessage(player, "<e>You can not add yourself as a contact!");
       return;
@@ -64,7 +66,7 @@ function initModule(system) {
    **/
   function listContacts(entity) {
     var contacts = system.getStringArray(entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts"));
-    system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contacts:": "<n> contact:"));
+    system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contact:": "<n> contacts:"));
     contacts.forEach(entry => {
       system.systemMessage(entity, "<nh>" + entry);
     });

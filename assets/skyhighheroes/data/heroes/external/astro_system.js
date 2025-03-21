@@ -209,7 +209,7 @@ function logMessage(message) {
  * @param {string} robotName - Required, you'll be happy that is a thing or else debugging is painful
  * @param {string} satellite - Required, or other robots will not recognize this robot as a robot
  **/
-function initRobot(moduleList, robotName, color) {
+function initSystem(moduleList, robotName, color) {
   var robotInstance = this;
   primaryPiece = 3;
   //Type 1 - commands (can have data management)

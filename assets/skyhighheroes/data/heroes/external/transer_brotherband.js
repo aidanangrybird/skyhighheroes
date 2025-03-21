@@ -11,6 +11,10 @@ function initModule(system) {
    * @param {string} username - Username of player to form BrotherBand with
    **/
   function formBrotherBand(player, manager, username) {
+    if (!player.getWornHelmet().nbt().hasKey("brothers")) {
+      var newBrotherBandList = manager.newTagList();
+      manager.setTagList(player.getWornHelmet().nbt(), "brothers", newBrotherBandList);
+    };
     if (username.length < 16) {
       system.systemMessage(player, "<e>Username is too long!");
       return;

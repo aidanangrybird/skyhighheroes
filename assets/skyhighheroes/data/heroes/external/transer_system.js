@@ -265,7 +265,7 @@ function basicTierOverride(entity) {
  * @param {string} transerName - Required, you'll be happy that is a thing or else debugging is painful
  * @param {string} satellite - Required, or other transers will not recognize this transer as a transer
  **/
-function initTranser(moduleList, transerName, satellite) {
+function initSystem(moduleList, transerName, satellite) {
   var transerInstance = this;
   primaryPiece = 2;
   var assignedSatellite;
