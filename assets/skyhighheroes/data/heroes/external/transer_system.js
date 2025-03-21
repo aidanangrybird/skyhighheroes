@@ -267,7 +267,6 @@ function basicTierOverride(entity) {
  **/
 function initSystem(moduleList, transerName, satellite) {
   var transerInstance = this;
-  primaryPiece = 2;
   var assignedSatellite;
   if (typeof satellite === "string") {
     assignedSatellite = satellite;
@@ -691,7 +690,6 @@ function initSystem(moduleList, transerName, satellite) {
         asssignTranser(entity, manager, assignedSatellite);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
-        manager.setData(entity, "skyhighheroes:dyn/primary_piece", primaryPiece);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == waveChange || entity.getData("fiskheroes:disguise") == human)) {

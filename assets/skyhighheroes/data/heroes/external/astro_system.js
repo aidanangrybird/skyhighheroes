@@ -211,7 +211,6 @@ function logMessage(message) {
  **/
 function initSystem(moduleList, robotName, color) {
   var robotInstance = this;
-  primaryPiece = 3;
   //Type 1 - commands (can have data management)
   var type1Specs = ["command", "commandHandler", "helpMessage"];
   //Type 2 - messaging only
@@ -581,7 +580,6 @@ function initSystem(moduleList, robotName, color) {
         asssignID(entity, manager, robotName, color);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
-        manager.setData(entity, "skyhighheroes:dyn/primary_piece", primaryPiece);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == robotName)) {

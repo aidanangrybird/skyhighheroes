@@ -7,8 +7,20 @@ function initModule(system) {
    * @returns If sender is in receiver's contacts
    **/
   function hasGroup(sender, receiver, groupName) {
+    var nbt = null;
+    if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornHelmet().nbt();
+    };
+    if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornChestplate().nbt();
+    };
+    if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornLeggings().nbt();
+    };
+    if (receiver.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornBoots().nbt();
+    };
     var result = false;
-    var nbt = receiver.getEquipmentInSlot(receiver.getData("skyhighheroes:dyn/primary_piece")).nbt();
     if (nbt.hasKey("groups")) {
       var groupIndex = getGroupArray(receiver).indexOf(groupName);
       if (groupIndex > -1) {
@@ -39,7 +51,20 @@ function initModule(system) {
    * @returns Array of group names
    **/
   function getGroupArray(entity) {
-    var groupList = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups");
+    var nbt = null;
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = entity.getWornBoots().nbt();
+    };
+    var groupList = nbt.getTagList("groups");
     var count = groupList.tagCount();
     var result = [];
     for (i=0;i<count;i++) {
@@ -57,8 +82,21 @@ function initModule(system) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayers = [];
       var groupName = "";
-      if (entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups").tagCount() > 0) {
-        var group = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups").getCompoundTag(activeChat);
+      var nbt = null;
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
+      if (nbt.getTagList("groups").tagCount() > 0) {
+        var group = nbt.getTagList("groups").getCompoundTag(activeChat);
         groupName = group.getString("groupName");
         var members = system.getStringArray(group.getStringList("members"));
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
@@ -98,8 +136,21 @@ function initModule(system) {
       };
     },
     chatInfo: function (player, manager, chat) {
-      if (player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("groups")) {
-        if (player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getTagList("groups").tagCount() > 0) {
+      var nbt = null;
+      if (player.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = player.getWornHelmet().nbt();
+      };
+      if (player.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = player.getWornChestplate().nbt();
+      };
+      if (player.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = player.getWornLeggings().nbt();
+      };
+      if (player.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = player.getWornBoots().nbt();
+      };
+      if (nbt.hasKey("groups")) {
+        if (nbt.getTagList("groups").tagCount() > 0) {
           var groupList = system.getGroupArray(player);
           if (typeof chat === "string") {
             var chatIndex = groupList.indexOf(chat);

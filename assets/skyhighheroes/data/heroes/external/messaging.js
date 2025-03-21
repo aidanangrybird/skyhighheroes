@@ -10,7 +10,20 @@ function initModule(system) {
    * @returns If sender is in receiver's contacts
    **/
   function hasContact(sender, receiver) {
-    var contacts = receiver.getEquipmentInSlot(receiver.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts");
+    var nbt = null;
+    if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornHelmet().nbt();
+    };
+    if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornChestplate().nbt();
+    };
+    if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornLeggings().nbt();
+    };
+    if (receiver.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = receiver.getWornBoots().nbt();
+    };
+    var contacts = nbt.getStringList("contacts");
     var contactsList = system.getStringArray(contacts);
     var result = false;
     contactsList.forEach(entry => {
@@ -37,12 +50,25 @@ function initModule(system) {
     type: 2,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity) {
+      var nbt = null;
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayer = null;
-      if (entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts").tagCount() > 0) {
+      if (nbt.getStringList("contacts").tagCount() > 0) {
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-        var reciever = entity.getEquipmentInSlot(entity.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts").getString(activeChat);
+        var reciever = nbt.getStringList("contacts").getString(activeChat);
         entities.forEach(player => {
           if (player.is("PLAYER") && player.getName() == reciever) {
             foundPlayer = player;
@@ -71,9 +97,22 @@ function initModule(system) {
       };
     },
     chatInfo: function (player, manager, chat) {
-      if (player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().hasKey("contacts")) {
-        if (player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts").tagCount() > 0) {
-          var contactsList = system.getStringArray(player.getEquipmentInSlot(player.getData("skyhighheroes:dyn/primary_piece")).nbt().getStringList("contacts"));
+      var nbt = null;
+      if (player.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = player.getWornHelmet().nbt();
+      };
+      if (player.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = player.getWornChestplate().nbt();
+      };
+      if (player.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = player.getWornLeggings().nbt();
+      };
+      if (player.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = player.getWornBoots().nbt();
+      };
+      if (nbt.hasKey("contacts")) {
+        if (nbt.getStringList("contacts").tagCount() > 0) {
+          var contactsList = system.getStringArray(nbt.getStringList("contacts"));
           if (typeof chat === "string") {
             var chatIndex = contactsList.indexOf(chat);
             if (chatIndex > -1) {
