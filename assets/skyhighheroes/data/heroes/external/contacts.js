@@ -68,8 +68,8 @@ function initModule(system) {
       nbt = player.getWornBoots().nbt();
     };
     if (!nbt.hasKey("contacts")) {
-      system.systemMessage(player, "<e>You have no contacts to remove!");
-      return;
+      var newContactsList = manager.newTagList();
+      manager.setTagList(nbt, "contacts", newContactsList);
     };
     var contacts = nbt.getStringList("contacts");
     if (contacts.tagCount() == 0) {
@@ -88,7 +88,7 @@ function initModule(system) {
    * Lists player's contacts
    * @param {JSEntity} entity - Required
    **/
-  function listContacts(entity) {
+  function listContacts(entity, manager) {
     var nbt = null;
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = entity.getWornHelmet().nbt();
@@ -101,6 +101,10 @@ function initModule(system) {
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("contacts")) {
+      var newContactsList = manager.newTagList();
+      manager.setTagList(nbt, "contacts", newContactsList);
     };
     var contacts = system.getStringArray(nbt.getStringList("contacts"));
     system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contact:": "<n> contacts:"));

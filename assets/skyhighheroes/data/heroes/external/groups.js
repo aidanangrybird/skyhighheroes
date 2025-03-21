@@ -19,33 +19,34 @@ function initModule(system) {
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
     };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
     var group = manager.newCompoundTag();
     var members = manager.newTagList();
     manager.appendString(members, entity.getName());
     manager.setString(group, "groupName", groupName);
     manager.setTagList(group, "members", members);
-    if (!nbt.hasKey("groups")) {
-      var groups = manager.newTagList();
-      manager.appendTag(groups, group);
-      manager.setTagList(nbt, "groups", groups);
-      system.systemMessage(entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
+    var groups = nbt.getTagList("groups");
+    var groupIndex = getGroupArray(entity, manager).indexOf(groupName);
+    if (groupIndex > -1) {
+      system.systemMessage(entity, "<e>Duplicate group name <eh>" + groupName + "<e>!");
     } else {
-      var groups = nbt.getTagList("groups");
-      var groupIndex = getGroupArray(entity).indexOf(groupName);
-      if (groupIndex > -1) {
-        system.systemMessage(entity, "<e>Duplicate group name <eh>" + groupName + "<e>!");
-      } else {
-        system.systemMessage(entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
-        manager.appendTag(groups, group);
-      };
+      system.systemMessage(entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
+      manager.appendTag(groups, group);
     };
   };
   /**
    * List groups
    * @param {JSEntity} player - Required
    **/
-  function listGroups(player) {
-    var groups = getGroupArrayMembers(player);
+  function listGroups(player, manager) {
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
+    var groups = getGroupArrayMembers(player, manager);
     system.systemMessage(player, "<n>You are in <nh>" + groups.length + ((groups.length == 1) ? "<n> group!" : "<n> groups!"));
     groups.forEach(entry => {
       system.systemMessage(player, "<nh>" + entry.groupName + "<n> (<nh>" + entry.memberCount + ((entry.memberCount > 1) ? "<n> members)" : "<n> member)"))
@@ -70,6 +71,10 @@ function initModule(system) {
     };
     if (player.getWornBoots().nbt().hasKey("computerID")) {
       nbt = player.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
     };
     var groups = nbt.getTagList("groups");
     var groupIndex = getGroupArray(player).indexOf(groupName);
@@ -141,13 +146,15 @@ function initModule(system) {
     if (player.getWornBoots().nbt().hasKey("computerID")) {
       nbt = player.getWornBoots().nbt();
     };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
     var groups = nbt.getTagList("groups");
     var groupIndex = getGroupArray(player).indexOf(groupName);
     var members = groups.getCompoundTag(groupIndex).getStringList("members");
     var memberIndex = system.getStringArray(members).indexOf(username);
-    if (!nbt.hasKey("groups")) {
-      system.systemMessage(player, "<e>You have not set up any groups yet!");
-    } else if (groupIndex < 0) {
+    if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
     } else if (memberIndex < 0) {
       system.systemMessage(player, "<eh>" + username + "<e> is not in group <eh>" + groupName + "<e>!");
@@ -161,7 +168,7 @@ function initModule(system) {
    * @param {JSPlayer} player - Required
    * @param {integer} groupName - Name of group to add member to
    **/
-  function listGroupMembers(player, groupName) {
+  function listGroupMembers(player, manager, groupName) {
     var nbt = null;
     if (player.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = player.getWornHelmet().nbt();
@@ -175,12 +182,14 @@ function initModule(system) {
     if (player.getWornBoots().nbt().hasKey("computerID")) {
       nbt = player.getWornBoots().nbt();
     };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
     var groups = nbt.getTagList("groups");
     var groupIndex = getGroupArray(player).indexOf(groupName);
     var members = system.getStringArray(groups.getCompoundTag(groupIndex).getStringList("members"));
-    if (!nbt.hasKey("groups")) {
-      system.systemMessage(player, "<e>You do not have any groups!");
-    } else if (groupIndex < 0) {
+    if (groupIndex < 0) {
       system.systemMessage(player, "<e>Group <eh>" + groupName + "<e> does not exist!");
     } else {
       system.systemMessage(player, "<s>Members in <sh>" + groupName + "<s>:")
@@ -194,7 +203,7 @@ function initModule(system) {
    * @param {JSEntity} entity - Entity to create group array from
    * @returns Array of group names
    **/
-  function getGroupArray(entity) {
+  function getGroupArray(entity, manager) {
     var nbt = null;
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = entity.getWornHelmet().nbt();
@@ -207,6 +216,10 @@ function initModule(system) {
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
     };
     var groupList = nbt.getTagList("groups");
     var count = groupList.tagCount();
@@ -221,7 +234,7 @@ function initModule(system) {
    * @param {JSEntity} entity - Entity to create group array from
    * @returns Array of group names and member counts
    **/
-  function getGroupArrayMembers(entity) {
+  function getGroupArrayMembers(entity, manager) {
     var nbt = null;
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = entity.getWornHelmet().nbt();
@@ -234,6 +247,10 @@ function initModule(system) {
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
     };
     var groupList = nbt.getTagList("groups");
     var count = groupList.tagCount();
@@ -263,7 +280,7 @@ function initModule(system) {
             (arguments.length == 3) ? removeGroup(entity, manager, arguments[2]) : system.systemMessage(entity, "<n>!g rem <nh><name>");
             break;
           case "list":
-            listGroups(entity);
+            listGroups(entity, manager);
             break;
           case "addMem":
             (arguments.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : system.systemMessage(entity, "<n>!g addMem <nh><name>");
@@ -272,7 +289,7 @@ function initModule(system) {
             (arguments.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : system.systemMessage(entity, "<n>!g remMem <nh><name>");
             break;
           case "listMem":
-            listGroupMembers(entity, entity.getData("skyhighheroes:dyn/group_name"));
+            listGroupMembers(entity, manager, entity.getData("skyhighheroes:dyn/group_name"));
             break;
           case "help":
             system.systemMessage(entity, "Group commands:")

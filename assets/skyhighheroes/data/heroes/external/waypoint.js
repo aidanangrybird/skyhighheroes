@@ -4,19 +4,23 @@ function initModule(system) {
    * @param {JSEntity} entity - Entity to create waypoint array from
    * @returns Array of waypoint names
    **/
-  function getWaypointNameArray(entity) {
+  function getWaypointNameArray(entity, manager) {
     var nbt = null;
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = player.getWornHelmet().nbt();
     };
     if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = nbt;
+      nbt = entity.getWornChestplate().nbt();
     };
     if (entity.getWornLeggings().nbt().hasKey("computerID")) {
       nbt = entity.getWornLeggings().nbt();
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("waypoints")) {
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
     };
     var waypointList = nbt.getTagList("waypoints");
     var count = waypointList.tagCount();
@@ -31,19 +35,23 @@ function initModule(system) {
    * @param {JSEntity} entity - Entity to create waypoint array from
    * @returns Array of waypoint names, coords and dimension
    **/
-  function getWaypointArray(entity) {
+  function getWaypointArray(entity, manager) {
     var nbt = null;
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = entity.getWornHelmet().nbt();
     };
     if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = nbt;
+      nbt = entity.getWornChestplate().nbt();
     };
     if (entity.getWornLeggings().nbt().hasKey("computerID")) {
       nbt = entity.getWornLeggings().nbt();
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = player.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("waypoints")) {
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
     };
     var waypointList = nbt.getTagList("waypoints");
     var count = waypointList.tagCount();
@@ -70,13 +78,17 @@ function initModule(system) {
       nbt = entity.getWornHelmet().nbt();
     };
     if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = nbt;
+      nbt = entity.getWornChestplate().nbt();
     };
     if (entity.getWornLeggings().nbt().hasKey("computerID")) {
       nbt = entity.getWornLeggings().nbt();
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("waypoints")) {
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
     };
     var waypoint = manager.newCompoundTag();
     var x = entity.posX();
@@ -88,20 +100,13 @@ function initModule(system) {
     manager.setInteger(waypoint, "yCoord", y);
     manager.setInteger(waypoint, "zCoord", z);
     manager.setInteger(waypoint, "dim", dim);
-    if (!nbt.hasKey("waypoints")) {
-      var waypoints = manager.newTagList();
-      manager.appendTag(waypoints, waypoint);
-      manager.setTagList(nbt, "waypoints", waypoints);
-      system.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
+    var waypoints = nbt.getTagList("waypoints");
+    var waypointIndex = getWaypointNameArray(entity, manager).indexOf(waypointName);
+    if (waypointIndex > -1) {
+      system.systemMessage(entity, "<e>Duplicate waypoint name <eh>" + waypointName + "<e>!");
     } else {
-      var waypoints = nbt.getTagList("waypoints");
-      var waypointIndex = getWaypointNameArray(entity).indexOf(waypointName);
-      if (waypointIndex > -1) {
-        system.systemMessage(entity, "<e>Duplicate waypoint name <eh>" + waypointName + "<e>!");
-      } else {
-        system.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
-        manager.appendTag(waypoints, waypoint);
-      };
+      system.systemMessage(entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
+      manager.appendTag(waypoints, waypoint);
     };
   };
   /**
@@ -116,7 +121,7 @@ function initModule(system) {
       nbt = player.getWornHelmet().nbt();
     };
     if (player.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = nbt;
+      nbt = player.getWornChestplate().nbt();
     };
     if (player.getWornLeggings().nbt().hasKey("computerID")) {
       nbt = player.getWornLeggings().nbt();
@@ -125,7 +130,7 @@ function initModule(system) {
       nbt = player.getWornBoots().nbt();
     };
     var waypoints = nbt.getTagList("waypoints");
-    var waypointIndex = getWaypointNameArray(player).indexOf(waypointName);
+    var waypointIndex = getWaypointNameArray(player, manager).indexOf(waypointName);
     if (waypointIndex < 0) {
       system.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to remove!");
     } else {
@@ -140,7 +145,24 @@ function initModule(system) {
    * @param {string} waypointName - Name of waypoint
    **/
   function teleportToWaypoint(player, manager, waypointName) {
-    var waypointIndex = getWaypointNameArray(player).indexOf(waypointName);
+    var nbt = null;
+    if (player.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = player.getWornHelmet().nbt();
+    };
+    if (player.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = player.getWornChestplate().nbt();
+    };
+    if (player.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = player.getWornLeggings().nbt();
+    };
+    if (player.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = player.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("waypoints")) {
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
+    };
+    var waypointIndex = getWaypointNameArray(player, manager).indexOf(waypointName);
     if (waypointIndex < 0) {
       system.systemMessage(player, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to teleport to!");
     } else {
@@ -154,29 +176,29 @@ function initModule(system) {
    * Lists waypoints
    * @param {JSEntity} entity - Required
    **/
-  function listWaypoints(entity) {
+  function listWaypoints(entity, manager) {
     var nbt = null;
-    if (player.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = player.getWornHelmet().nbt();
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = entity.getWornHelmet().nbt();
     };
-    if (player.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = nbt;
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = entity.getWornChestplate().nbt();
     };
-    if (player.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = player.getWornLeggings().nbt();
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = entity.getWornLeggings().nbt();
     };
-    if (player.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = player.getWornBoots().nbt();
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = entity.getWornBoots().nbt();
     };
     if (!nbt.hasKey("waypoints")) {
-      system.systemMessage(entity, "<e>You do not have any waypoints!");
-    } else {
-      var waypoints = getWaypointArray(entity);
-      system.systemMessage(entity, "<n>You have <nh>" + waypoints.length + ((waypoints.length == 1) ? "<n> waypoint!" : "<n> waypoints!"));
-      waypoints.forEach(entry => {
-        system.systemMessage(entity, "<nh>" + entry.name + "<n> (<nh>" + entry.coords[0] + "<n>, <nh>" + entry.coords[1] + "<n>, <nh>" + entry.coords[2] + "<n>) in dimension: <nh>" + entry.coords[3]);
-      });
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
     };
+    var waypoints = getWaypointArray(entity, manager);
+    system.systemMessage(entity, "<n>You have <nh>" + waypoints.length + ((waypoints.length == 1) ? "<n> waypoint!" : "<n> waypoints!"));
+    waypoints.forEach(entry => {
+      system.systemMessage(entity, "<nh>" + entry.name + "<n> (<nh>" + entry.coords[0] + "<n>, <nh>" + entry.coords[1] + "<n>, <nh>" + entry.coords[2] + "<n>) in dimension: <nh>" + entry.coords[3]);
+    });
   };
   return {
     name: "waypoints",
@@ -201,7 +223,7 @@ function initModule(system) {
             };
             break;
           case "list":
-            listWaypoints(entity);
+            listWaypoints(entity, manager);
             break;
           case "help":
             system.systemMessage(entity, "Waypoint commands:")
