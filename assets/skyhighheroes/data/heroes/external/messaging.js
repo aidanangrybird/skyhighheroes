@@ -49,7 +49,7 @@ function initModule(system) {
     modeID: "normal",
     type: 2,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
-    messageHandler: function (entity) {
+    messageHandler: function (entity, name, range) {
       var nbt = null;
       if (entity.getWornHelmet().nbt().hasKey("computerID")) {
         nbt = entity.getWornHelmet().nbt();
@@ -67,10 +67,10 @@ function initModule(system) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayer = null;
       if (nbt.getStringList("contacts").tagCount() > 0) {
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
-        var reciever = nbt.getStringList("contacts").getString(activeChat);
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
+        var sender = nbt.getStringList("contacts").getString(activeChat);
         entities.forEach(player => {
-          if (player.is("PLAYER") && player.getName() == reciever) {
+          if (player.is("PLAYER") && player.getName() == sender) {
             foundPlayer = player;
           };
         });
@@ -80,18 +80,8 @@ function initModule(system) {
       if (foundPlayer != null) {
         if (system.hasComputer(foundPlayer)) {
           if (hasContact(entity, foundPlayer)) {
-            if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                playerMessage(foundPlayer, system.waveColor+system.waveChange+"\u00A7r", message);
-                playerMessage(entity, system.waveColor+system.waveChange+"\u00A7r", message);
-              } else {
-                playerMessage(foundPlayer, system.human, message);
-                playerMessage(entity, system.human, message);
-              };
-            } else {
-              playerMessage(foundPlayer, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
-              playerMessage(entity, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
-            };
+            playerMessage(foundPlayer, name, message);
+            playerMessage(entity, name, message);
           };
         };
       };

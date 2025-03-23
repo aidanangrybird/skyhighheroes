@@ -119,13 +119,13 @@ function initModule(system) {
     modeID: "BrotherBand",
     helpMessage: "<n>!bb <nh>-<n> BrotherBand",
     chatModeInfo: "<n>You are now in <nh>BrotherBand<n> mode!",
-    messageHandler: function (entity) {
+    messageHandler: function (entity, name, range) {
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var message = entity.getData("skyhighheroes:dyn/entry");
       var foundPlayer = null;
       if (entity.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
         var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 120);
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 128);
         entities.forEach(player => {
           if (player.is("PLAYER") && player.getName() == reciever) {
             foundPlayer = player;
@@ -137,15 +137,7 @@ function initModule(system) {
       if (foundPlayer != null) {
         if (system.isWearingTranser(foundPlayer)) {
           if (hasBrother(entity, foundPlayer)) {
-            if (system.waveChangeIndex > -1) {
-              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                brotherBandMessage(entity, system.waveColor+system.waveChange+"\u00A7r", message);
-              } else {
-                brotherBandMessage(entity, system.human, message);
-              };
-            } else {
-              brotherBandMessage(entity, entity.getName(), message);
-            };
+            brotherBandMessage(entity, name, message);
           };
         };
       };

@@ -77,7 +77,7 @@ function initModule(system) {
     type: 2,
     modeID: "group",
     chatModeInfo: "<n>You are now in <nh>group<n> mode!",
-    messageHandler: function (entity) {
+    messageHandler: function (entity, name, range) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayers = [];
@@ -99,7 +99,7 @@ function initModule(system) {
         var group = nbt.getTagList("groups").getCompoundTag(activeChat);
         groupName = group.getString("groupName");
         var members = system.getStringArray(group.getStringList("members"));
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 30);
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
         entities.forEach(player => {
           if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
             foundPlayers.push(player);
@@ -112,27 +112,11 @@ function initModule(system) {
         foundPlayers.forEach(player => {
           if (system.hasComputer(player)) {
             if (hasGroup(entity, player, groupName)) {
-              if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
-                if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-                  groupMessage(player, groupName, system.waveColor+system.waveChange+"\u00A7r", message);
-                } else {
-                  groupMessage(player, groupName, system.human, message);
-                };
-              } else {
-                groupMessage(player, groupName, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
-              };
+              groupMessage(player, groupName, name, message);
             };
           };
         });
-        if ((typeof system.waveChangeIndex === "undefined") ? false : system.waveChangeIndex > -1) {
-          if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-            groupMessage(entity, groupName, system.waveColor+system.waveChange+"\u00A7r", message);
-          } else {
-            groupMessage(entity, groupName, system.human, message);
-          };
-        } else {
-          groupMessage(entity, groupName, (typeof entity.getData("fiskheroes:disguise") === "string") ? entity.getData("fiskheroes:disguise") : entity.getName(), message);
-        };
+        groupMessage(entity, groupName, name, message);
       };
     },
     chatInfo: function (player, manager, chat) {

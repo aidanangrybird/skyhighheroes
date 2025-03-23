@@ -207,7 +207,7 @@ function logMessage(message) {
  * Initializes robot system
  * @param {object} moduleList - robot system modules
  * @param {string} robotName - Required, you'll be happy that is a thing or else debugging is painful
- * @param {string} satellite - Required, or other robots will not recognize this robot as a robot
+ * @param {string} color - Required, or other robots will not recognize this robot as a robot
  **/
 function initSystem(moduleList, robotName, color) {
   var robotInstance = this;
@@ -648,7 +648,7 @@ function initSystem(moduleList, robotName, color) {
                 break;
             }
           } else {
-            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity);
+            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, robotName, 32);
           };
         };
       };

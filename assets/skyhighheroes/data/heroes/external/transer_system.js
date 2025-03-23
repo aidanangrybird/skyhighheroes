@@ -35,8 +35,9 @@ var months = [
   "December"
 ];
 
-function asssignTranser(entity, manager, satellite) {
+function assignTranser(entity, manager, satellite) {
   manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
+  manager.setBoolean(entity.getWornChestplate().nbt(), "Unbreakable", true);
   if (!entity.getWornChestplate().nbt().hasKey("worthy") && (entity.getWornChestplate().suitType() == "skyhighheroes:leo_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:pegasus_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:dragon_transer")) {
     if (PackLoader.getSide() == "SERVER") {
       var value = Math.random();
@@ -687,7 +688,7 @@ function initSystem(moduleList, transerName, satellite) {
      **/
     systemHandler: (entity, manager) => {
       if (!entity.getData("skyhighheroes:dyn/system_init")) {
-        asssignTranser(entity, manager, assignedSatellite);
+        assignTranser(entity, manager, assignedSatellite);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       };
@@ -756,7 +757,17 @@ function initSystem(moduleList, transerName, satellite) {
                 break;
             };
           } else {
-            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity);
+            var name = null;
+            if ((typeof waveChangeIndex === "undefined") ? false : waveChangeIndex > -1) {
+              if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+                name = waveColor+waveChange+"\u00A7r";
+              } else {
+                name = human;
+              };
+            } else {
+              name = entity.getName();
+            };
+            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, name, 32);
           };
         };
       };
