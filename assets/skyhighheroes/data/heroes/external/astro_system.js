@@ -30,7 +30,7 @@ var months = [
 ];
 
 function asssignID(entity, manager, robotName, color) {
-  manager.setString(entity.getWornLeggings().nbt(), "robotID", robotName+"-"+color);
+  manager.setString(entity.getWornLeggings().nbt(), "robotModel", robotName+"-"+color);
   if (!entity.getWornLeggings().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
@@ -45,7 +45,7 @@ function asssignID(entity, manager, robotName, color) {
  * @returns If the entity is wearing a robot
  **/
 function isRobot(entity) {
-  return entity.getWornLeggings().nbt().hasKey("robotID");
+  return entity.getWornLeggings().nbt().hasKey("robotModel");
 };
 
 /**
@@ -53,8 +53,8 @@ function isRobot(entity) {
  * @param {JSEntity} entity - Entity getting checked
  * @returns The satellite a robot is assigned to
  **/
-function getID(entity) {
-  return entity.getWornLeggings().nbt().getString("robotID");
+function getModel(entity) {
+  return entity.getWornLeggings().nbt().getString("robotModel");
 };
 
 /**
@@ -191,9 +191,24 @@ function chatMessage(player, message) {
  * @param {string} message - Message content
  **/
 function systemMessage(player, message) {
-  var id = getID(player);
+  var id = getModel(player);
   var color = id.split("-")[1];
   chatMessage(player, formatSystem("\u00A7" + color + "SYSTEM<r>> " + message));
+};
+/**
+ * Sends message from module
+ * @param {object} module - Reference 'this' module
+ * @param {JSEntity} entity - Entity recieving message
+ * @param {string} message - Message content
+ **/
+function moduleMessage(module, entity, message) {
+  var messageName = "SYSTEM";
+  if (module.hasOwnProperty("moduleMessageName")) {
+    messageName = module.moduleMessageName;
+  };
+  var id = getModel(entity);
+  var color = id.split("-")[1];
+  chatMessage(entity, formatSystem("\u00A7" + color + messageName + "<r>> " + message));
 };
 /**
  * Sends message in group format

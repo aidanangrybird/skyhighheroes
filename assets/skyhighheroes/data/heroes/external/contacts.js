@@ -24,25 +24,25 @@ function initModule(system) {
       nbt = player.getWornBoots().nbt();
     };
     if (player.getName() == username) {
-      system.systemMessage(player, "<e>You can not add yourself as a contact!");
+      system.moduleMessage(this, player, "<e>You can not add yourself as a contact!");
       return;
     };
     if (username.length > 16) {
-      system.systemMessage(player, "<e>Username is too long!");
+      system.moduleMessage(this, player, "<e>Username is too long!");
       return;
     };
     if (nbt.hasKey("contacts")) {
       var contacts = manager.newTagList();
       manager.appendString(contacts, username);
       manager.setTagList(nbt, "contacts", contacts);
-      system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+      system.moduleMessage(this, player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
     } else {
       var contacts = nbt.getStringList("contacts");
       var index = system.getStringArray(contacts).indexOf(username);
       if (index > -1) {
-        system.systemMessage(player, "<eh>" + username + "<e> is already a contact!");
+        system.moduleMessage(this, player, "<eh>" + username + "<e> is already a contact!");
       } else {
-        system.systemMessage(player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+        system.moduleMessage(this, player, "<s>Successfully added <sh>" + username + "<s> as a contact!");
         manager.appendString(contacts, username);
       };
     };
@@ -73,14 +73,14 @@ function initModule(system) {
     };
     var contacts = nbt.getStringList("contacts");
     if (contacts.tagCount() == 0) {
-      system.systemMessage(player, "<e>You have no contacts to remove!");
+      system.moduleMessage(this, player, "<e>You have no contacts to remove!");
       return;
     };
     var index = system.getStringArray(contacts).indexOf(username);
     if (index < 0) {
-      system.systemMessage(player, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
+      system.moduleMessage(this, player, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
     } else {
-      system.systemMessage(player, "<s>Removed contact with username <sh>" + username + "<s>!");
+      system.moduleMessage(this, player, "<s>Removed contact with username <sh>" + username + "<s>!");
       manager.removeTag(contacts, index);
     };
   };
@@ -107,13 +107,14 @@ function initModule(system) {
       manager.setTagList(nbt, "contacts", newContactsList);
     };
     var contacts = system.getStringArray(nbt.getStringList("contacts"));
-    system.systemMessage(entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contact:": "<n> contacts:"));
+    system.moduleMessage(this, entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contact:": "<n> contacts:"));
     contacts.forEach(entry => {
-      system.systemMessage(entity, "<nh>" + entry);
+      system.moduleMessage(this, entity, "<nh>" + entry);
     });
   };
   return {
     name: "contacts",
+    moduleMessageName: "Contacts",
     type: 1,
     command: "c",
     helpMessage: "<n>!c <nh>-<n> Contacts",
@@ -121,27 +122,27 @@ function initModule(system) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch(arguments[1]) {
           case "add":
-            (arguments.length == 3) ? addContact(entity, manager, arguments[2]) : system.systemMessage(entity, "<n>!c add <nh><name>");
+            (arguments.length == 3) ? addContact(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!c add <nh><name>");
             break;
           case "rem":
-            (arguments.length == 3) ? removeContact(entity, manager, arguments[2]) : system.systemMessage(entity, "<n>!c rem <nh><name>");
+            (arguments.length == 3) ? removeContact(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!c rem <nh><name>");
             break;
           case "list":
             listContacts(entity);
             break;
           case "help":
-            system.systemMessage(entity, "<n>Contact commands:");
-            system.systemMessage(entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
-            system.systemMessage(entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
-            system.systemMessage(entity, "<n>!c list <nh>-<n> Lists contacts");
-            system.systemMessage(entity, "<n>!c help <nh>-<n> Shows this list");
+            system.moduleMessage(this, entity, "<n>Contact commands:");
+            system.moduleMessage(this, entity, "<n>!c add <nh><name><n> <nh>-<n> Adds contact by name");
+            system.moduleMessage(this, entity, "<n>!c rem <nh><name><n> <nh>-<n> Removes contact by name");
+            system.moduleMessage(this, entity, "<n>!c list <nh>-<n> Lists contacts");
+            system.moduleMessage(this, entity, "<n>!c help <nh>-<n> Shows this list");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>contact<e> command! Try <eh>!c help<e> for a list of commands!");
       };
     },
   };

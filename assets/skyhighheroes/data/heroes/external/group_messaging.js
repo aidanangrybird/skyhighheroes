@@ -74,6 +74,7 @@ function initModule(system) {
   };
   return {
     name: "groupMessaging",
+    moduleMessageName: "Group Messaging",
     type: 2,
     modeID: "group",
     chatModeInfo: "<n>You are now in <nh>group<n> mode!",
@@ -106,7 +107,7 @@ function initModule(system) {
           };
         });
       } else {
-        system.systemMessage(entity, "<e>You have no groups to message!")
+        system.moduleMessage(this, entity, "<e>You have no groups to message!")
       };
       if (foundPlayers.length > 0) {
         foundPlayers.forEach(player => {
@@ -141,7 +142,7 @@ function initModule(system) {
             if (chatIndex > -1) {
               manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
             } else {
-              system.systemMessage(player, "<e>You do not have <eh>" + chat + "<e> as a group!");
+              system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a group!");
               return;
             };
           } else {
@@ -150,12 +151,12 @@ function initModule(system) {
             };
           };
           var group = groupList[player.getData("skyhighheroes:dyn/active_chat")];
-          system.systemMessage(player, "<n>You are now messaging <nh>" + group + "<n>!");
+          system.moduleMessage(this, player, "<n>You are now messaging <nh>" + group + "<n>!");
         } else {
-          system.systemMessage(player, "<e>You do not have any groups!");
+          system.moduleMessage(this, player, "<e>You do not have any groups!");
         };
       } else {
-        system.systemMessage(player, "<e>You do not have any groups!");
+        system.moduleMessage(this, player, "<e>You do not have any groups!");
       };
     },
   };

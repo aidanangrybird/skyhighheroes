@@ -80,7 +80,7 @@ function initModule(system) {
       radius = range;
     };
     if ((minRange <= radius) && (radius <= maxRange)) {
-      system.systemMessage(entity, "<n>Scanning for entities at a range of <nh>" + radius + "<n>!");
+      system.moduleMessage(this, entity, "<n>Scanning for entities at a range of <nh>" + radius + "<n>!");
       var entityList = entity.world().getEntitiesInRangeOf(entity.pos(), radius);
       var entities = [];
       entityList.forEach(thing => {
@@ -88,7 +88,7 @@ function initModule(system) {
           entities.push(thing);
         };
       });
-      system.systemMessage(entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:");
+      system.moduleMessage(this, entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:");
       entities.forEach(scannedEntity => {
         var beingName = scannedEntity.getName();
         if (scannedEntity.isWearingFullSuit()) {
@@ -119,7 +119,7 @@ function initModule(system) {
           };
           if (scannedEntity.getWornChestplate().suitType() == "tmf:omnitrix" && scannedEntity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
             var alien = scannedEntity.getData("tmf:dyn/transformed") + 0;
-            system.systemMessage(entity, alien);
+            system.moduleMessage(this, entity, alien);
             beingName = tmfAliens[alien];
           };
           if (isTransformed(scannedEntity) && ((scannedEntity.getData("fiskheroes:mask_open_timer2") == 1) || (scannedEntity.getData("fiskheroes:mask_open_timer") == 5))) {
@@ -129,19 +129,20 @@ function initModule(system) {
             beingName = scannedEntity.getData("fiskheroes:disguise");
           };
         };
-        system.systemMessage(entity, "<nh>" + beingName + " <n>(<nh>" + scannedEntity.getHealth() + "<n>)");
+        system.moduleMessage(this, entity, "<nh>" + beingName + " <n>(<nh>" + scannedEntity.getHealth() + "<n>)");
       });
     } else {
       if (radius > maxRange) {
-        system.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too large! Must be at most <eh>64<e>!");
+        system.moduleMessage(this, entity, "<e>Range of <eh>" + radius + " <e>is too large! Must be at most <eh>64<e>!");
       };
       if (radius <= minRange) {
-        system.systemMessage(entity, "<e>Range of <eh>" + radius + " <e>is too small! Must be at least <eh>1<e>!");
+        system.moduleMessage(this, entity, "<e>Range of <eh>" + radius + " <e>is too small! Must be at least <eh>1<e>!");
       };
     };
   };
   return {
     name: "scanner",
+    moduleMessageName: "Scanner",
     type: 1,
     command: "sc",
     helpMessage: "<n>!sc <nh>-<n> Scanner",
@@ -153,16 +154,16 @@ function initModule(system) {
             (arguments.length == 3) ? entityScan(entity, arguments[2]) : entityScan(entity);
             break;
           case "help":
-            system.systemMessage(entity, "<n>Scanner commands:");
-            system.systemMessage(entity, "<n>!sc entity <nh><range><n> <nh>-<n> Scans for entities around you");
-            system.systemMessage(entity, "<n>!sc help <nh>-<n> Shows scanner commands");
+            system.moduleMessage(this, entity, "<n>Scanner commands:");
+            system.moduleMessage(this, entity, "<n>!sc entity <nh><range><n> <nh>-<n> Scans for entities around you");
+            system.moduleMessage(this, entity, "<n>!sc help <nh>-<n> Shows scanner commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>scanner<e> command! Try <eh>!sc help<e> for a list of commands!");
       };
     },
   };

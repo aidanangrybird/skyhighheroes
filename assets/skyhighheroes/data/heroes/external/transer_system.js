@@ -11,9 +11,9 @@ var formatting = {
   "<sh>": "\u00A7e",
   "<e>": "\u00A7c",
   "<eh>": "\u00A76",
-  "<d>": "\u00A72SYSTEM\u00A7r",
-  "<l>": "\u00A74SYSTEM\u00A7r",
-  "<p>": "\u00A71SYSTEM\u00A7r",
+  "<d>": "\u00A72",
+  "<l>": "\u00A74",
+  "<p>": "\u00A71",
   "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r",
   "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r",
   "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r",
@@ -206,9 +206,9 @@ function chatMessage(player, message) {
  * "<sh>": "\u00A7e"
  * "<e>": "\u00A7c"
  * "<eh>": "\u00A76"
- * "<d>": "\u00A72SYSTEM\u00A7r"
- * "<l>": "\u00A74SYSTEM\u00A7r"
- * "<p>": "\u00A71SYSTEM\u00A7r"
+ * "<d>": "\u00A72"
+ * "<l>": "\u00A74"
+ * "<p>": "\u00A71"
  * "<dragon>": "\u00A72Dragon \u00A77Sky\u00A7r"
  * "<leo>": "\u00A76Leo \u00A74Kingdom\u00A7r"
  * "<pegasus>": "\u00A7bPegasus \u00A79Magic\u00A7r"
@@ -220,13 +220,13 @@ function chatMessage(player, message) {
 function systemMessage(player, message) {
   switch (getAssignedSatellite(player)) {
     case "dragon":
-      chatMessage(player, formatSystem("<d>> " + message));
+      chatMessage(player, formatSystem("<d>SYSTEM\u00A7r> " + message));
       break;
     case "leo":
-      chatMessage(player, formatSystem("<l>> " + message));
+      chatMessage(player, formatSystem("<l>SYSTEM\u00A7r> " + message));
       break;
     case "pegasus":
-      chatMessage(player, formatSystem("<p>> " + message));
+      chatMessage(player, formatSystem("<p>SYSTEM\u00A7r> " + message));
       break;
     default:
       chatMessage(player, formatSystem("<e>Transer is not assigned to a valid satellite!"));
@@ -239,6 +239,33 @@ function systemMessage(player, message) {
  **/
 function logMessage(message) {
   PackLoader.print(message);
+};
+
+/**
+ * Sends message from module
+ * @param {object} module - Reference 'this' module
+ * @param {JSEntity} entity - Entity recieving message
+ * @param {string} message - Message content
+ **/
+function moduleMessage(module, entity, message) {
+  var messageName = "SYSTEM";
+  if (module.hasOwnProperty("moduleMessageName")) {
+    messageName = module.moduleMessageName;
+  };
+  switch (getAssignedSatellite(entity)) {
+    case "dragon":
+      chatMessage(entity, formatSystem("<d>" + messageName + "<r>> " + message));
+      break;
+    case "leo":
+      chatMessage(entity, formatSystem("<l>" + messageName + "<r>> " + message));
+      break;
+    case "pegasus":
+      chatMessage(entity, formatSystem("<p>" + messageName + "<r>> " + message));
+      break;
+    default:
+      chatMessage(entity, formatSystem("<e>Transer is not assigned to a valid satellite!"));
+      break;
+  };
 };
 /**
  * Is the setKeyBind stuff for basic transers

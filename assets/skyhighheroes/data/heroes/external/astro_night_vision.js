@@ -5,6 +5,7 @@
 function initModule(system) {
   return {
     name: "nightVision",
+    moduleMessageName: "Night Vision",
     type: 1,
     command: "nv",
     helpMessage: "<n>!nv <nh>-<n> Night vision",
@@ -14,22 +15,24 @@ function initModule(system) {
         switch(arguments[1]) {
           case "on":
             manager.setData(entity, "skyhighheroes:dyn/night_vision", true);
+            system.moduleMessage(this, entity, "<n>Night vision on!");
             break;
           case "off":
             manager.setData(entity, "skyhighheroes:dyn/night_vision", false);
+            system.moduleMessage(this, entity, "<n>Night vision off!");
             break;
           case "help":
-            system.systemMessage(entity, "<n>Night vision commands:");
-            system.systemMessage(entity, "<n>!nv on <nh>-<n> Turns on night vision");
-            system.systemMessage(entity, "<n>!nv off <nh>-<n> Turns off night vision");
-            system.systemMessage(entity, "<n>!nv help <nh>-<n> Shows night vision commands");
+            system.moduleMessage(this, entity, "<n>Night vision commands:");
+            system.moduleMessage(this, entity, "<n>!nv on <nh>-<n> Turns on night vision");
+            system.moduleMessage(this, entity, "<n>!nv off <nh>-<n> Turns off night vision");
+            system.moduleMessage(this, entity, "<n>!nv help <nh>-<n> Shows night vision commands");
             break;
           default:
-            system.systemMessage(entity, "<e>Unknown <eh>nightVision<e> command! Try <eh>!nv help<e> for a list of commands!");
+            system.moduleMessage(this, entity, "<e>Unknown <eh>nightVision<e> command! Try <eh>!nv help<e> for a list of commands!");
             break;
         };
       } else {
-        system.systemMessage(entity, "<e>Unknown <eh>nightVision<e> command! Try <eh>!nv help<e> for a list of commands!");
+        system.moduleMessage(this, entity, "<e>Unknown <eh>nightVision<e> command! Try <eh>!nv help<e> for a list of commands!");
       };
     },
   };

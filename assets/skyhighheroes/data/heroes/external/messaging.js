@@ -46,6 +46,7 @@ function initModule(system) {
   };
   return {
     name: "messaging",
+    moduleMessageName: "Messaging",
     modeID: "normal",
     type: 2,
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
@@ -75,7 +76,7 @@ function initModule(system) {
           };
         });
       } else {
-        system.systemMessage(entity, "<e>You do not have any contacts to message!")
+        system.moduleMessage(this, entity, "<e>You do not have any contacts to message!")
       };
       if (foundPlayer != null) {
         if (system.hasComputer(foundPlayer)) {
@@ -108,7 +109,7 @@ function initModule(system) {
             if (chatIndex > -1) {
               manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
             } else {
-              system.systemMessage(player, "<e>You do not have <eh>" + chat + "<e> as a contact!");
+              system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a contact!");
               return;
             };
           } else {
@@ -117,12 +118,12 @@ function initModule(system) {
             };
           };
           var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          system.systemMessage(player, "<n>You are now messaging <nh>" + contact + "<n>!");
+          system.moduleMessage(this, player, "<n>You are now messaging <nh>" + contact + "<n>!");
         } else {
-          system.systemMessage(player, "<e>You do not have any contacts!");
+          system.moduleMessage(this, player, "<e>You do not have any contacts!");
         };
       } else {
-        system.systemMessage(player, "<e>You do not have any contacts!");
+        system.moduleMessage(this, player, "<e>You do not have any contacts!");
       };
     }
   };
