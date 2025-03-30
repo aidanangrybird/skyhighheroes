@@ -220,13 +220,13 @@ function chatMessage(player, message) {
 function systemMessage(player, message) {
   switch (getAssignedSatellite(player)) {
     case "dragon":
-      chatMessage(player, formatSystem("<d>SYSTEM\u00A7r> " + message));
+      chatMessage(player, formatSystem("<d>transerOS\u00A7r> " + message));
       break;
     case "leo":
-      chatMessage(player, formatSystem("<l>SYSTEM\u00A7r> " + message));
+      chatMessage(player, formatSystem("<l>transerOS\u00A7r> " + message));
       break;
     case "pegasus":
-      chatMessage(player, formatSystem("<p>SYSTEM\u00A7r> " + message));
+      chatMessage(player, formatSystem("<p>transerOS\u00A7r> " + message));
       break;
     default:
       chatMessage(player, formatSystem("<e>Transer is not assigned to a valid satellite!"));
