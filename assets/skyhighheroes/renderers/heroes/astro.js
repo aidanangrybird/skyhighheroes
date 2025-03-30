@@ -104,7 +104,8 @@ function initEffects(renderer) {
   });
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
   head_hair_model.anchor.set("head");
-  head_hair_model.setScale(1.05);
+  head_hair_model.setOffset(0.0, 0.5, 0.0);
+  head_hair_model.setScale(1.125);
   var body = renderer.createResource("MODEL", "skyhighheroes:AstroBoyBody");
   body.texture.set("full", "full_lights");
   body.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => {

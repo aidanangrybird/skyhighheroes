@@ -248,7 +248,7 @@ function logMessage(message) {
  * @param {string} message - Message content
  **/
 function moduleMessage(module, entity, message) {
-  var messageName = "SYSTEM";
+  var messageName = "transerOS";
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName;
   };
@@ -534,7 +534,7 @@ function initSystem(moduleList, transerName, satellite) {
         modulesMessage = modulesMessage + ((isModuleDisabled(entity, moduleName))?"<n>, <eh>":"<n>, <nh>") + moduleName;
       };
     });
-    systemMessage(entity, "<n>TranserOS");
+    systemMessage(entity, "<n>transerOS");
     systemMessage(entity, modulesMessage);
     systemMessage(entity, "<n>computerID: <nh>" + entity.getWornChestplate().nbt().getString("computerID"));
   };

@@ -193,7 +193,7 @@ function chatMessage(player, message) {
 function systemMessage(player, message) {
   var id = getModel(player);
   var color = id.split("-")[1];
-  chatMessage(player, formatSystem("\u00A7" + color + "SYSTEM<r>> " + message));
+  chatMessage(player, formatSystem("\u00A7" + color + "astrOS<r>> " + message));
 };
 /**
  * Sends message from module
@@ -202,7 +202,7 @@ function systemMessage(player, message) {
  * @param {string} message - Message content
  **/
 function moduleMessage(module, entity, message) {
-  var messageName = "SYSTEM";
+  var messageName = "astrOS";
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName;
   };
