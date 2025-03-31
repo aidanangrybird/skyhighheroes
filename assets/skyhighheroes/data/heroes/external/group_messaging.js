@@ -96,18 +96,20 @@ function initModule(system) {
       if (entity.getWornBoots().nbt().hasKey("computerID")) {
         nbt = entity.getWornBoots().nbt();
       };
-      if (nbt.getTagList("groups").tagCount() > 0) {
-        var group = nbt.getTagList("groups").getCompoundTag(activeChat);
-        groupName = group.getString("groupName");
-        var members = system.getStringArray(group.getStringList("members"));
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
-        entities.forEach(player => {
-          if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
-            foundPlayers.push(player);
-          };
-        });
-      } else {
-        system.moduleMessage(this, entity, "<e>You have no groups to message!")
+      if (nbt != null) {
+        if (nbt.getTagList("groups").tagCount() > 0) {
+          var group = nbt.getTagList("groups").getCompoundTag(activeChat);
+          groupName = group.getString("groupName");
+          var members = system.getStringArray(group.getStringList("members"));
+          var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
+          entities.forEach(player => {
+            if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
+              foundPlayers.push(player);
+            };
+          });
+        } else {
+          system.moduleMessage(this, entity, "<e>You have no groups to message!")
+        };
       };
       if (foundPlayers.length > 0) {
         foundPlayers.forEach(player => {
@@ -134,29 +136,31 @@ function initModule(system) {
       if (player.getWornBoots().nbt().hasKey("computerID")) {
         nbt = player.getWornBoots().nbt();
       };
-      if (nbt.hasKey("groups")) {
-        if (nbt.getTagList("groups").tagCount() > 0) {
-          var groupList = system.getGroupArray(player);
-          if (typeof chat === "string") {
-            var chatIndex = groupList.indexOf(chat);
-            if (chatIndex > -1) {
-              manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+      if (nbt != null) {
+        if (nbt.hasKey("groups")) {
+          if (nbt.getTagList("groups").tagCount() > 0) {
+            var groupList = system.getGroupArray(player);
+            if (typeof chat === "string") {
+              var chatIndex = groupList.indexOf(chat);
+              if (chatIndex > -1) {
+                manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+              } else {
+                system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a group!");
+                return;
+              };
             } else {
-              system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a group!");
-              return;
+              if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
+                manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+              };
             };
+            var group = groupList[player.getData("skyhighheroes:dyn/active_chat")];
+            system.moduleMessage(this, player, "<n>You are now messaging <nh>" + group + "<n>!");
           } else {
-            if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
-              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
-            };
+            system.moduleMessage(this, player, "<e>You do not have any groups!");
           };
-          var group = groupList[player.getData("skyhighheroes:dyn/active_chat")];
-          system.moduleMessage(this, player, "<n>You are now messaging <nh>" + group + "<n>!");
         } else {
           system.moduleMessage(this, player, "<e>You do not have any groups!");
         };
-      } else {
-        system.moduleMessage(this, player, "<e>You do not have any groups!");
       };
     },
   };

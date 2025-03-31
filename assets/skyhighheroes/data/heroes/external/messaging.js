@@ -67,22 +67,24 @@ function initModule(system) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayer = null;
-      if (nbt.getStringList("contacts").tagCount() > 0) {
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
-        var sender = nbt.getStringList("contacts").getString(activeChat);
-        entities.forEach(player => {
-          if (player.is("PLAYER") && player.getName() == sender) {
-            foundPlayer = player;
-          };
-        });
-      } else {
-        system.moduleMessage(this, entity, "<e>You do not have any contacts to message!")
-      };
-      if (foundPlayer != null) {
-        if (system.hasComputer(foundPlayer)) {
-          if (hasContact(entity, foundPlayer)) {
-            playerMessage(foundPlayer, name, message);
-            playerMessage(entity, name, message);
+      if (nbt != null) {
+        if (nbt.getStringList("contacts").tagCount() > 0) {
+          var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
+          var sender = nbt.getStringList("contacts").getString(activeChat);
+          entities.forEach(player => {
+            if (player.is("PLAYER") && player.getName() == sender) {
+              foundPlayer = player;
+            };
+          });
+        } else {
+          system.moduleMessage(this, entity, "<e>You do not have any contacts to message!")
+        };
+        if (foundPlayer != null) {
+          if (system.hasComputer(foundPlayer)) {
+            if (hasContact(entity, foundPlayer)) {
+              playerMessage(foundPlayer, name, message);
+              playerMessage(entity, name, message);
+            };
           };
         };
       };
@@ -101,29 +103,31 @@ function initModule(system) {
       if (player.getWornBoots().nbt().hasKey("computerID")) {
         nbt = player.getWornBoots().nbt();
       };
-      if (nbt.hasKey("contacts")) {
-        if (nbt.getStringList("contacts").tagCount() > 0) {
-          var contactsList = system.getStringArray(nbt.getStringList("contacts"));
-          if (typeof chat === "string") {
-            var chatIndex = contactsList.indexOf(chat);
-            if (chatIndex > -1) {
-              manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+      if (nbt != null) {
+        if (nbt.hasKey("contacts")) {
+          if (nbt.getStringList("contacts").tagCount() > 0) {
+            var contactsList = system.getStringArray(nbt.getStringList("contacts"));
+            if (typeof chat === "string") {
+              var chatIndex = contactsList.indexOf(chat);
+              if (chatIndex > -1) {
+                manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+              } else {
+                system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a contact!");
+                return;
+              };
             } else {
-              system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a contact!");
-              return;
+              if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+                manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+              };
             };
+            var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
+            system.moduleMessage(this, player, "<n>You are now messaging <nh>" + contact + "<n>!");
           } else {
-            if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
-              manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
-            };
+            system.moduleMessage(this, player, "<e>You do not have any contacts!");
           };
-          var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-          system.moduleMessage(this, player, "<n>You are now messaging <nh>" + contact + "<n>!");
         } else {
           system.moduleMessage(this, player, "<e>You do not have any contacts!");
         };
-      } else {
-        system.moduleMessage(this, player, "<e>You do not have any contacts!");
       };
     }
   };
