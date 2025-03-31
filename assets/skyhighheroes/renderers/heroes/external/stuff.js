@@ -104,4 +104,46 @@ function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
   prop.setRenderer(beam);
   prop.color.set(color);
   return prop;
-}
+};
+
+/**
+ * clamp as in FSK
+ * @param timer - input timer
+ * @param min - minimum value
+ * @param max - maximum
+ **/
+function timerClamp(timer, min, max) {
+  return Math.min(Math.max(timer, min), max);
+};
+/**
+ * animate as in FSK
+ * @param timer - input timer
+ * @param duration - duration of frame
+ * @param start - start of frame
+ **/
+function timerAnimate(timer, duration, start) {
+  return (timer > start && timer <= start + duration) ? ((timer - start) / duration) : 0.0;
+};
+/**
+ * animate2 as in FSK
+ * @param timer - input timer
+ * @param duration - duration of frame
+ * @param start - start of frame
+ * @param fadeIn - how long to fade in
+ * @param fadeOut - how long to fade out
+ **/
+function timerAnimate2(timer, duration, start, fadeIn, fadeOut) {
+  fadeIn = timerClamp(fadeIn, 0.0, duration);
+  fadeOut = timerClamp(fadeOut, 0.0, duration - fadeIn);
+  if (timer >= start && timer <= start + duration) {
+    pos = timer - start;
+    if (pos < fadeIn) {
+      return timerAnimate(pos, fadeIn, 0.0);
+    };
+    if (pos >= duration - fadeOut) {
+      return 1.0 - timerAnimate(pos, fadeOut, duration - fadeOut);
+    };
+    return 1.0;
+  };
+  return 0.0;
+};

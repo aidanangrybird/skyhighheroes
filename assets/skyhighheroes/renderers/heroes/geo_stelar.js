@@ -11,6 +11,8 @@ loadTextures({
   "santa_hat_em": "skyhighheroes:geo/mega_man_santa_hat",
 });
 
+var stuff = implement("skyhighheroes:external/stuff");
+
 var santaHat;
 var santaHatEM;
 var date = new Date();
@@ -95,7 +97,7 @@ function initEffects(renderer) {
 };
 
 function initAnimations(renderer) {
-  addAnimationWithData(renderer, "transer.CALLING", "skyhighheroes:stelar_calling", "skyhighheroes:dyn/calling_timer").setCondition(entity => {return entity.getData("skyhighheroes:dyn/calling")});
+  stuff.addAnimationWithData(renderer, "transer.CALLING", "skyhighheroes:stelar_calling", "skyhighheroes:dyn/calling_timer").setCondition(entity => {return entity.getData("skyhighheroes:dyn/calling")});
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
@@ -128,68 +130,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
   ears.render();
   forcefield.color.set(0x00FF00);
   callingBeam.color.set(0x00ff00);
-  callingLine.size.x = callingLine.size.y = timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
-  callingLine.end.y = timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
-  callingLine.start.y = timerAnimate2(callingTimer, 0.55, 0.45, 0.05, 0.0)*302-300;
-  forcefield.opacity = timerAnimate2(callingTimer, 0.4, 0.25, 0.05, 0.05);
-  var ffScale = timerAnimate2(callingTimer, 0.75, 0.25, 0.05, 0.0)*1 + timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*3;
+  callingLine.size.x = callingLine.size.y = stuff.timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
+  callingLine.end.y = stuff.timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
+  callingLine.start.y = stuff.timerAnimate2(callingTimer, 0.55, 0.45, 0.05, 0.0)*302-300;
+  forcefield.opacity = stuff.timerAnimate2(callingTimer, 0.4, 0.25, 0.05, 0.05);
+  var ffScale = stuff.timerAnimate2(callingTimer, 0.75, 0.25, 0.05, 0.0)*1 + stuff.timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*3;
   forcefield.setScale(ffScale);
   callingBeam.anchor.ignoreAnchor(isFirstPersonArm);
   if (callingTimer > 0 && entity.getData("skyhighheroes:dyn/calling") && callingTimer < 0.5) {
     callingBeam.render();
   };
-};
-
-/**
- * clamp as in FSK
- * @param timer - input timer
- * @param min - minimum value
- * @param max - maximum
- **/
-function timerClamp(timer, min, max) {
-  return Math.min(Math.max(timer, min), max);
-};
-/**
- * animate as in FSK
- * @param timer - input timer
- * @param duration - duration of frame
- * @param start - start of frame
- **/
-function timerAnimate(timer, duration, start) {
-  return (timer > start && timer <= start + duration) ? ((timer - start) / duration) : 0.0;
-};
-/**
- * animate2 as in FSK
- * @param timer - input timer
- * @param duration - duration of frame
- * @param start - start of frame
- * @param fadeIn - how long to fade in
- * @param fadeOut - how long to fade out
- **/
-function timerAnimate2(timer, duration, start, fadeIn, fadeOut) {
-  fadeIn = timerClamp(fadeIn, 0.0, duration);
-  fadeOut = timerClamp(fadeOut, 0.0, duration - fadeIn);
-  if (timer >= start && timer <= start + duration) {
-    pos = timer - start;
-    if (pos < fadeIn) {
-      return timerAnimate(pos, fadeIn, 0.0);
-    };
-    if (pos >= duration - fadeOut) {
-      return 1.0 - timerAnimate(pos, fadeOut, duration - fadeOut);
-    };
-    return 1.0;
-  };
-  return 0.0;
-};
-
-function addAnimation(renderer, key, anim) {
-  if (typeof anim === "string") {
-    anim = renderer.createResource("ANIMATION", anim);
-  };
-
-  renderer.addCustomAnimation(key, anim);
-  return anim;
-};
-function addAnimationWithData(renderer, key, anim, dataVar) {
-  return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
 };
