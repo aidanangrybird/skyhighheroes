@@ -10,6 +10,7 @@ var engine = implement("skyhighheroes:external/astro_engine");
 var blaster = implement("skyhighheroes:external/astro_blaster");
 var buttMachineGuns = implement("skyhighheroes:external/astro_butt_machine_guns");
 var flight = implement("skyhighheroes:external/astro_flight");
+var panelStatus = implement("skyhighheroes:external/astro_panel_status");
 var opener = implement("skyhighheroes:external/astro_opener");
 var closer = implement("skyhighheroes:external/astro_closer");
 var astrOS = robot.initSystem([
@@ -24,6 +25,7 @@ var astrOS = robot.initSystem([
   blaster,
   buttMachineGuns,
   flight,
+  panelStatus,
   opener,
   closer
 ], "Astro", "4");

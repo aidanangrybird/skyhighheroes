@@ -8,7 +8,7 @@ function initModule(system) {
     moduleMessageName: "Opener",
     type: 1,
     command: "open",
-    helpMessage: "<n>!open <nh>-<n> Panel opener",
+    helpMessage: "<n>!open <nh>-<n> Panel Opener",
     disabledMessage: "<e>Module <eh>bodyOpener<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {

@@ -11,7 +11,3 @@
 {rightArm_rotZ} = -37'
 {leftArm_rotX} = -170'
 {leftArm_rotZ} = 34'
-
-out "translate" (0, 0, 1)
-out "pivot" (0, 0.08, 0)
-out "rotate" (-90, 1, 0, 0)

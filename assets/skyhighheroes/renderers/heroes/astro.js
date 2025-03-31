@@ -147,7 +147,7 @@ function initEffects(renderer) {
   var left_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftLeg");
   left_leg.texture.set("full", "full_lights");
   left_leg.bindAnimation("skyhighheroes:astro_left_leg").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
+    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
     data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_boot_front_open_timer"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_boot_back_open_timer"));
@@ -161,7 +161,7 @@ function initEffects(renderer) {
   var right_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightLeg");
   right_leg.texture.set("full", "full_lights");
   right_leg.bindAnimation("skyhighheroes:astro_right_leg").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
+    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
     data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_boot_front_open_timer"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_boot_back_open_timer"));
@@ -174,7 +174,7 @@ function initEffects(renderer) {
   right_leg_model.setScale(0.999999999);
 
   astro.initNV(renderer);
-  rockets = astro.initNormalBoosters(renderer);
+  rockets = astro.initBoosters(renderer, [0xFFAE00, 0xFF8900, 0xFF0000]);
   astro.initBeams(renderer, 0xFFFFFF);
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
   metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
@@ -228,7 +228,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
     if (isFirstPersonArm) {
       blank_model.setOffset(0.0, 0.0, 0.0);
       blank_model.setScale(1000.0);
-      blank_model.opacity = 1-entity.getInterpolatedData("skyhighheroes:dyn/power_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
+      blank_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
       blank_model.anchor.ignoreAnchor(true);
       blank_model.render();
     };

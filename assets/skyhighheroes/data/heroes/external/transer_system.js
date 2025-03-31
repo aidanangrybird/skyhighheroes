@@ -347,7 +347,7 @@ function initSystem(moduleList, transerName, satellite) {
   moduleList.forEach(module => {
     if (module.hasOwnProperty("initModule")) {
       var moduleInit = module.initModule(transerInstance);
-      if (moduleInit.hasOwnProperty("type")) {
+      if ((moduleInit.hasOwnProperty("type")) ? typeof moduleInit.type === "number" : false) {
         switch (moduleInit.type) {
           case 1:
             type1Specs.forEach(spec => {
@@ -487,10 +487,10 @@ function initSystem(moduleList, transerName, satellite) {
             };
             break;
           default:
-            logMessage("Module at position " + moduleList.indexOf(module) + " does not have valid type value!");
+            logMessage("Module at position " + moduleList.indexOf(module) + " does not have a valid type value!");
         };
       } else {
-        logMessage("Module at position " + moduleList.indexOf(module) + " does not have a type value!");
+        logMessage("Module at position " + moduleList.indexOf(module) + " does not have a valid type value!");
       };
     } else {
       logMessage("Module at position " + moduleList.indexOf(module) + " cannot be initialized!");

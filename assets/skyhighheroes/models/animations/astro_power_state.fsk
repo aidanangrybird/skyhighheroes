@@ -1,4 +1,4 @@
-;{data} = (-1*{data})+1
+{data} = (-1*{data})+1
 ;animate2(data, length, start, ramp up, ramp down)
 {data} = curve({data})
 {overall} = if({data} != 1, animate2({data}, 1.0, 0.55, 0.4, 0.0), 1)
