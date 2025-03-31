@@ -718,6 +718,7 @@ function initSystem(moduleList, transerName, satellite) {
         assignTranser(entity, manager, assignedSatellite);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+        manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == waveChange || entity.getData("fiskheroes:disguise") == human)) {

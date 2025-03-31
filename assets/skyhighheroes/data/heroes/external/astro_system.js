@@ -595,6 +595,7 @@ function initSystem(moduleList, robotName, color) {
         asssignID(entity, manager, robotName, color);
         status(entity);
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
+        manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
         if (!(entity.getData("fiskheroes:disguise") == robotName)) {
