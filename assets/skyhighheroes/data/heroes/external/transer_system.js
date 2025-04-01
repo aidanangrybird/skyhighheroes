@@ -220,13 +220,13 @@ function chatMessage(player, message) {
 function systemMessage(player, message) {
   switch (getAssignedSatellite(player)) {
     case "dragon":
-      chatMessage(player, formatSystem("<d>transerOS\u00A7r> " + message));
+      chatMessage(player, formatSystem("<d>\u00A7ltranserOS\u00A7r> " + message));
       break;
     case "leo":
-      chatMessage(player, formatSystem("<l>transerOS\u00A7r> " + message));
+      chatMessage(player, formatSystem("<l>\u00A7ltranserOS\u00A7r> " + message));
       break;
     case "pegasus":
-      chatMessage(player, formatSystem("<p>transerOS\u00A7r> " + message));
+      chatMessage(player, formatSystem("<p>\u00A7ltranserOS\u00A7r> " + message));
       break;
     default:
       chatMessage(player, formatSystem("<e>Transer is not assigned to a valid satellite!"));
@@ -248,7 +248,7 @@ function logMessage(message) {
  * @param {string} message - Message content
  **/
 function moduleMessage(module, entity, message) {
-  var messageName = "transerOS";
+  var messageName = "\u00A7ltranserOS";
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName;
   };
