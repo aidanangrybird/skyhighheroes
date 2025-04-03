@@ -112,7 +112,7 @@ function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
  * @param min - minimum value
  * @param max - maximum
  **/
-function timerClamp(timer, min, max) {
+function clamp(timer, min, max) {
   return Math.min(Math.max(timer, min), max);
 };
 /**
@@ -121,7 +121,7 @@ function timerClamp(timer, min, max) {
  * @param duration - duration of frame
  * @param start - start of frame
  **/
-function timerAnimate(timer, duration, start) {
+function animate(timer, duration, start) {
   return (timer > start && timer <= start + duration) ? ((timer - start) / duration) : 0.0;
 };
 /**
@@ -132,16 +132,16 @@ function timerAnimate(timer, duration, start) {
  * @param fadeIn - how long to fade in
  * @param fadeOut - how long to fade out
  **/
-function timerAnimate2(timer, duration, start, fadeIn, fadeOut) {
-  fadeIn = timerClamp(fadeIn, 0.0, duration);
-  fadeOut = timerClamp(fadeOut, 0.0, duration - fadeIn);
+function animate2(timer, duration, start, fadeIn, fadeOut) {
+  fadeIn = clamp(fadeIn, 0.0, duration);
+  fadeOut = clamp(fadeOut, 0.0, duration - fadeIn);
   if (timer >= start && timer <= start + duration) {
     pos = timer - start;
     if (pos < fadeIn) {
-      return timerAnimate(pos, fadeIn, 0.0);
+      return animate(pos, fadeIn, 0.0);
     };
     if (pos >= duration - fadeOut) {
-      return 1.0 - timerAnimate(pos, fadeOut, duration - fadeOut);
+      return 1.0 - animate(pos, fadeOut, duration - fadeOut);
     };
     return 1.0;
   };

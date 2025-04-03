@@ -130,11 +130,11 @@ function render(entity, renderLayer, isFirstPersonArm) {
   ears.render();
   forcefield.color.set(0x00FF00);
   callingBeam.color.set(0x00ff00);
-  callingLine.size.x = callingLine.size.y = stuff.timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
-  callingLine.end.y = stuff.timerAnimate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
-  callingLine.start.y = stuff.timerAnimate2(callingTimer, 0.55, 0.45, 0.05, 0.0)*302-300;
-  forcefield.opacity = stuff.timerAnimate2(callingTimer, 0.4, 0.25, 0.05, 0.05);
-  var ffScale = stuff.timerAnimate2(callingTimer, 0.75, 0.25, 0.05, 0.0)*1 + stuff.timerAnimate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*3;
+  callingLine.size.x = callingLine.size.y = stuff.animate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*40+20;
+  callingLine.end.y = stuff.animate2(callingTimer, 0.85, 0.15, 0.1, 0.0)*302-300;
+  callingLine.start.y = stuff.animate2(callingTimer, 0.55, 0.45, 0.05, 0.0)*302-300;
+  forcefield.opacity = stuff.animate2(callingTimer, 0.4, 0.25, 0.05, 0.05);
+  var ffScale = stuff.animate2(callingTimer, 0.75, 0.25, 0.05, 0.0)*1 + stuff.animate2(callingTimer, 0.7, 0.3, 0.1, 0.0)*3;
   forcefield.setScale(ffScale);
   callingBeam.anchor.ignoreAnchor(isFirstPersonArm);
   if (callingTimer > 0 && entity.getData("skyhighheroes:dyn/calling") && callingTimer < 0.5) {
