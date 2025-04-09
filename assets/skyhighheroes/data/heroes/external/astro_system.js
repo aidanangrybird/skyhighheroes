@@ -79,6 +79,98 @@ function formatSystem(input) {
 };
 
 /**
+ * Number degree to a cardinal direction
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Cardinal direction
+ **/
+function angleToDirection(angle) {
+  var direction = angle;
+  if (((angle >= 0) && (angle <= 11.25)) || ((angle >= 348.75) && (angle <= 360))) {
+    direction = "N";
+  };
+  if ((angle <= 33.75) && (angle >= 11.25)) {
+    direction = "NNE";
+  };
+  if ((angle <= 56.25) && (angle >= 33.75)) {
+    direction = "NE";
+  };
+  if ((angle <= 78.75) && (angle >= 56.25)) {
+    direction = "ENE";
+  };
+  if ((angle <= 101.25) && (angle >= 78.75)) {
+    direction = "E";
+  };
+  if ((angle <= 123.75) && (angle >= 101.25)) {
+    direction = "ESE";
+  };
+  if ((angle <= 146.25) && (angle >= 123.75)) {
+    direction = "SE";
+  };
+  if ((angle <= 168.75) && (angle >= 146.25)) {
+    direction = "SSE";
+  };
+  if ((angle <= 191.25) && (angle >= 168.75)) {
+    direction = "S";
+  };
+  if ((angle <= 213.75) && (angle >= 191.25)) {
+    direction = "SSW";
+  };
+  if ((angle <= 236.25) && (angle >= 213.75)) {
+    direction = "SW";
+  };
+  if ((angle <= 258.75) && (angle >= 236.25)) {
+    direction = "WSW";
+  };
+  if ((angle <= 281.25) && (angle >= 258.75)) {
+    direction = "W";
+  };
+  if ((angle <= 303.75) && (angle >= 281.25)) {
+    direction = "WNW";
+  };
+  if ((angle <= 326.25) && (angle >= 303.75)) {
+    direction = "NW";
+  };
+  if ((angle <= 348.75) && (angle >= 326.25)) {
+    direction = "NNW";
+  };
+  return direction;
+};
+/**
+ * Gets distance from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Distance
+ **/
+function distance(base, other) {
+  var distance = base.multiply(1, 0, 1).distanceTo(other.multiply(1, 0, 1)).toFixed(0);
+  return distance;
+};
+
+/**
+ * Gets distance from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Distance
+ **/
+function elevation(base, other) {
+  var elevation = other.y() - base.y();
+  return elevation;
+};
+
+/**
+ * Gets direction from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Direction
+ **/
+function direction(base, other) {
+  var angle = (((Math.atan2(-1*(other.z()-base.z()), -1*(other.x()-base.x())) * 180) / Math.PI) + 270) % 360;
+  var direction = angleToDirection(angle);
+  return direction;
+};
+
+/**
  * Turns NBT String List into an array for easier use in code
  * @param {JSNBTList} nbtList - NBTList
  * @returns Array of values from the NBTList
