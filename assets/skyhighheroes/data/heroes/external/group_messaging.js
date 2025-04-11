@@ -8,17 +8,19 @@ function initModule(system) {
    **/
   function hasGroup(sender, receiver, groupName) {
     var nbt = null;
-    if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornHelmet().nbt();
-    };
-    if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornChestplate().nbt();
-    };
-    if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornLeggings().nbt();
-    };
-    if (receiver.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornBoots().nbt();
+    if (receiver.isWearingFullSuit()) {
+      if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornHelmet().nbt();
+      };
+      if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornChestplate().nbt();
+      };
+      if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornLeggings().nbt();
+      };
+      if (receiver.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornBoots().nbt();
+      };
     };
     var result = false;
     if (nbt.hasKey("groups")) {
@@ -35,14 +37,14 @@ function initModule(system) {
   };
   /**
    * Sends message in group format
-   * @param {JSPlayer} player - Entity recieving message
+   * @param {JSEntity} entity - Entity recieving message
    * @param {string} groupName - Name of group
    * @param {string} sender - Name of entity sending message
    * @param {string} message - Message content
    **/
-  function groupMessage(player, groupName, sender, message) {
+  function groupMessage(entity, groupName, sender, message) {
     if (PackLoader.getSide() == "SERVER") {
-      player.as("PLAYER").addChatMessage("[" + groupName + "]>" + sender + "> " + message);
+      entity.as("PLAYER").addChatMessage("[" + groupName + "]>" + sender + "> " + message);
     };
   };
   /**
@@ -52,17 +54,19 @@ function initModule(system) {
    **/
   function getGroupArray(entity) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     var groupList = nbt.getTagList("groups");
     var count = groupList.tagCount();
@@ -84,17 +88,19 @@ function initModule(system) {
       var foundPlayers = [];
       var groupName = "";
       var nbt = null;
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
+      if (entity.isWearingFullSuit()) {
+        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+          nbt = entity.getWornHelmet().nbt();
+        };
+        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+          nbt = entity.getWornChestplate().nbt();
+        };
+        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+          nbt = entity.getWornLeggings().nbt();
+        };
+        if (entity.getWornBoots().nbt().hasKey("computerID")) {
+          nbt = entity.getWornBoots().nbt();
+        };
       };
       if (nbt != null) {
         if (nbt.getTagList("groups").tagCount() > 0) {
@@ -122,44 +128,46 @@ function initModule(system) {
         groupMessage(entity, groupName, name, message);
       };
     },
-    chatInfo: function (player, manager, chat) {
+    chatInfo: function (entity, manager, chat) {
       var nbt = null;
-      if (player.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = player.getWornHelmet().nbt();
-      };
-      if (player.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = player.getWornChestplate().nbt();
-      };
-      if (player.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = player.getWornLeggings().nbt();
-      };
-      if (player.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = player.getWornBoots().nbt();
+      if (entity.isWearingFullSuit()) {
+        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+          nbt = entity.getWornHelmet().nbt();
+        };
+        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+          nbt = entity.getWornChestplate().nbt();
+        };
+        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+          nbt = entity.getWornLeggings().nbt();
+        };
+        if (entity.getWornBoots().nbt().hasKey("computerID")) {
+          nbt = entity.getWornBoots().nbt();
+        };
       };
       if (nbt != null) {
         if (nbt.hasKey("groups")) {
           if (nbt.getTagList("groups").tagCount() > 0) {
-            var groupList = system.getGroupArray(player);
+            var groupList = system.getGroupArray(entity);
             if (typeof chat === "string") {
               var chatIndex = groupList.indexOf(chat);
               if (chatIndex > -1) {
-                manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+                manager.setData(entity, "skyhighheroes:dyn/active_chat", chatIndex);
               } else {
-                system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a group!");
+                system.moduleMessage(this, entity, "<e>You do not have <eh>" + chat + "<e> as a group!");
                 return;
               };
             } else {
-              if (player.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
-                manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+              if (entity.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
+                manager.setData(entity, "skyhighheroes:dyn/active_chat", 0);
               };
             };
-            var group = groupList[player.getData("skyhighheroes:dyn/active_chat")];
-            system.moduleMessage(this, player, "<n>You are now messaging <nh>" + group + "<n>!");
+            var group = groupList[entity.getData("skyhighheroes:dyn/active_chat")];
+            system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + group + "<n>!");
           } else {
-            system.moduleMessage(this, player, "<e>You do not have any groups!");
+            system.moduleMessage(this, entity, "<e>You do not have any groups!");
           };
         } else {
-          system.moduleMessage(this, player, "<e>You do not have any groups!");
+          system.moduleMessage(this, entity, "<e>You do not have any groups!");
         };
       };
     },

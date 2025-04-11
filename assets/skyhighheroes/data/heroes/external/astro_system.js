@@ -190,54 +190,54 @@ function getStringArray(nbtList) {
  * @param {Array} moduleList - List of available module names
  * @param {string} moduleName - Module name to disable
  **/
-function disableModule(player, manager, moduleList, moduleName) {
+function disableModule(entity, manager, moduleList, moduleName) {
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornLeggings().nbt().hasKey("disabledModules")) {
+    if (!entity.getWornLeggings().nbt().hasKey("disabledModules")) {
       var disabledModules = manager.newTagList();
       manager.appendString(disabledModules, moduleName);
-      manager.setTagList(player.getWornLeggings().nbt(), "disabledModules", disabledModules);
-      systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+      manager.setTagList(entity.getWornLeggings().nbt(), "disabledModules", disabledModules);
+      systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
     } else {
-      var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
+      var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
       var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
       if (disabledModulesIndex > -1) {
-        systemMessage(player, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
+        systemMessage(entity, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
       } else {
-        systemMessage(player, "<s>Module <sh>" + moduleName + "<s> disabled!");
+        systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
         manager.appendString(disabledModules, moduleName);
       };
     };
   } else {
-    systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+    systemMessage(entity, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
   };
 };
 /**
  * Enables module
- * @param {JSPlayer} player - Player cutting BrotherBand
+ * @param {JSEntity} entity - Required
  * @param {JSDataManager} manager - Required
  * @param {Array} moduleList - List of available module names
- * @param {integer} moduleName - Username of player cutting BrotherBand with
+ * @param {integer} moduleName - Name of module to enable
  **/
-function enableModule(player, manager, moduleList, moduleName) {
+function enableModule(entity, manager, moduleList, moduleName) {
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!player.getWornLeggings().nbt().hasKey("disabledModules")) {
-      systemMessage(player, "<e>You have no disabled modules to enable!");
+    if (!entity.getWornLeggings().nbt().hasKey("disabledModules")) {
+      systemMessage(entity, "<e>You have no disabled modules to enable!");
     } else {
-      var disabledModules = player.getWornLeggings().nbt().getStringList("disabledModules");
+      var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
       if (disabledModules.tagCount() == 0) {
-        systemMessage(player, "<e>You have no disabled modules to enable!");
+        systemMessage(entity, "<e>You have no disabled modules to enable!");
       } else {
         var index = getStringArray(disabledModules).indexOf(moduleName);
         if (index < 0) {
-          systemMessage(player, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
+          systemMessage(entity, "<e>Module <eh>" + moduleName + "<e> is already enabled!");
         } else {
-          systemMessage(player, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
+          systemMessage(entity, "<s>Successfully enabled <sh>" + moduleName + "<s> module!");
           manager.removeTag(disabledModules, index);
         };
       };
     };
   } else {
-    systemMessage(player, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
+    systemMessage(entity, "<e>Unknown module of name <eh>" + moduleName + "<e>!");
   };
 };
 /**
@@ -259,12 +259,12 @@ function isModuleDisabled(entity, moduleName) {
 };
 /**
  * Prints message to player's chat
- * @param {JSPlayer} player - Required
+ * @param {JSEntity} entity - Required
  * @param {string} message - Message to be shown to player
  **/
-function chatMessage(player, message) {
+function chatMessage(entity, message) {
   if (PackLoader.getSide() == "SERVER") {
-    player.as("PLAYER").addChatMessage(message);
+    entity.as("PLAYER").addChatMessage(message);
   };
 };
 /**
@@ -279,13 +279,13 @@ function chatMessage(player, message) {
  * "<eh>": "\u00A76"
  * "<r>": "\u00A7r"
  * ```
- * @param {JSPlayer} player - Entity recieving message
+ * @param {JSEntity} entity - Entity recieving message
  * @param {string} message - Message content
  **/
-function systemMessage(player, message) {
+function systemMessage(entity, message) {
   var id = getModel(player);
   var color = id.split("-")[1];
-  chatMessage(player, formatSystem("\u00A7" + color + "\u00A7lastrOS<r>> " + message));
+  chatMessage(entity, formatSystem("\u00A7" + color + "\u00A7lastrOS<r>> " + message));
 };
 /**
  * Sends message from module
@@ -488,33 +488,33 @@ function initSystem(moduleList, robotName, color) {
     };
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on robot " + robotName + "!");
-  function cycleChatModes(player, manager) {
-    manager.setData(player, "skyhighheroes:dyn/chat_mode", player.getData("skyhighheroes:dyn/chat_mode") + 1);
-    if (player.getData("skyhighheroes:dyn/chat_mode") > (messagingIndexes.length-1)) {
-      manager.setData(player, "skyhighheroes:dyn/chat_mode", 0);
+  function cycleChatModes(entity, manager) {
+    manager.setData(entity, "skyhighheroes:dyn/chat_mode", entity.getData("skyhighheroes:dyn/chat_mode") + 1);
+    if (entity.getData("skyhighheroes:dyn/chat_mode") > (messagingIndexes.length-1)) {
+      manager.setData(entity, "skyhighheroes:dyn/chat_mode", 0);
     };
-    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-    systemMessage(player, modules[messagingIndexes[chatMode]].chatModeInfo);
-    modules[messagingIndexes[chatMode]].chatInfo(player, manager);
+    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
+    modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
     return true;
   };
-  function cycleChats(player, manager) {
-    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-    modules[messagingIndexes[chatMode]].chatInfo(player, manager);
+  function cycleChats(entity, manager) {
+    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
     return true;
   };
-  function switchChatModes(player, manager, mode) {
+  function switchChatModes(entity, manager, mode) {
     var modeIndex = chatModes.indexOf(mode);
     if (modeIndex > -1) {
-      manager.setData(player, "skyhighheroes:dyn/chat_mode", modeIndex);
-      var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-      systemMessage(player, modules[messagingIndexes[chatMode]].chatModeInfo);
-      modules[messagingIndexes[chatMode]].chatInfo(player, manager);
+      manager.setData(entity, "skyhighheroes:dyn/chat_mode", modeIndex);
+      var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+      systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
+      modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
     };
   };
-  function switchChats(player, manager, chat) {
-    var chatMode = player.getData("skyhighheroes:dyn/chat_mode");
-    modules[messagingIndexes[chatMode]].chatInfo(player, manager, chat);
+  function switchChats(entity, manager, chat) {
+    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
   function systemInfo(entity) {
     var modulesMessage = (moduleNames.length > 1) ? "<n>Loaded " + moduleNames.length + " modules: " : "<n>Loaded " + moduleNames.length + " module: ";

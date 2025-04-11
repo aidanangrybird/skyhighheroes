@@ -6,17 +6,19 @@ function initModule(system) {
    **/
   function getWaypointNameArray(entity, manager) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
@@ -37,17 +39,19 @@ function initModule(system) {
    **/
   function getWaypointArray(entity, manager) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
@@ -74,17 +78,19 @@ function initModule(system) {
    **/
   function addWaypoint(entity, manager, waypointName) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
@@ -117,17 +123,19 @@ function initModule(system) {
    **/
   function removeWaypoint(entity, manager, waypointName) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     var waypoints = nbt.getTagList("waypoints");
     var waypointIndex = getWaypointNameArray(entity, manager).indexOf(waypointName);
@@ -146,17 +154,19 @@ function initModule(system) {
    **/
   function teleportToWaypoint(entity, manager, waypointName) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
@@ -178,17 +188,19 @@ function initModule(system) {
    **/
   function listWaypoints(entity, manager) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();

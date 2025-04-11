@@ -11,17 +11,19 @@ function initModule(system) {
    **/
   function hasContact(sender, receiver) {
     var nbt = null;
-    if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornHelmet().nbt();
-    };
-    if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornChestplate().nbt();
-    };
-    if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornLeggings().nbt();
-    };
-    if (receiver.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = receiver.getWornBoots().nbt();
+    if (receiver.isWearingFullSuit()) {
+      if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornHelmet().nbt();
+      };
+      if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornChestplate().nbt();
+      };
+      if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornLeggings().nbt();
+      };
+      if (receiver.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = receiver.getWornBoots().nbt();
+      };
     };
     var contacts = nbt.getStringList("contacts");
     var contactsList = system.getStringArray(contacts);
@@ -52,17 +54,19 @@ function initModule(system) {
     chatModeInfo: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity, name, range) {
       var nbt = null;
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
+      if (entity.isWearingFullSuit()) {
+        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+          nbt = entity.getWornHelmet().nbt();
+        };
+        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+          nbt = entity.getWornChestplate().nbt();
+        };
+        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+          nbt = entity.getWornLeggings().nbt();
+        };
+        if (entity.getWornBoots().nbt().hasKey("computerID")) {
+          nbt = entity.getWornBoots().nbt();
+        };
       };
       var message = entity.getData("skyhighheroes:dyn/entry");
       var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
@@ -89,19 +93,21 @@ function initModule(system) {
         };
       };
     },
-    chatInfo: function (player, manager, chat) {
+    chatInfo: function (entity, manager, chat) {
       var nbt = null;
-      if (player.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = player.getWornHelmet().nbt();
-      };
-      if (player.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = player.getWornChestplate().nbt();
-      };
-      if (player.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = player.getWornLeggings().nbt();
-      };
-      if (player.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = player.getWornBoots().nbt();
+      if (entity.isWearingFullSuit()) {
+        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+          nbt = entity.getWornHelmet().nbt();
+        };
+        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+          nbt = entity.getWornChestplate().nbt();
+        };
+        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+          nbt = entity.getWornLeggings().nbt();
+        };
+        if (entity.getWornBoots().nbt().hasKey("computerID")) {
+          nbt = entity.getWornBoots().nbt();
+        };
       };
       if (nbt != null) {
         if (nbt.hasKey("contacts")) {
@@ -110,23 +116,23 @@ function initModule(system) {
             if (typeof chat === "string") {
               var chatIndex = contactsList.indexOf(chat);
               if (chatIndex > -1) {
-                manager.setData(player, "skyhighheroes:dyn/active_chat", chatIndex);
+                manager.setData(entity, "skyhighheroes:dyn/active_chat", chatIndex);
               } else {
-                system.moduleMessage(this, player, "<e>You do not have <eh>" + chat + "<e> as a contact!");
+                system.moduleMessage(this, entity, "<e>You do not have <eh>" + chat + "<e> as a contact!");
                 return;
               };
             } else {
-              if (player.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
-                manager.setData(player, "skyhighheroes:dyn/active_chat", 0);
+              if (entity.getData("skyhighheroes:dyn/active_chat") > (contactsList.length-1)) {
+                manager.setData(entity, "skyhighheroes:dyn/active_chat", 0);
               };
             };
-            var contact = contactsList[player.getData("skyhighheroes:dyn/active_chat")];
-            system.moduleMessage(this, player, "<n>You are now messaging <nh>" + contact + "<n>!");
+            var contact = contactsList[entity.getData("skyhighheroes:dyn/active_chat")];
+            system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + contact + "<n>!");
           } else {
-            system.moduleMessage(this, player, "<e>You do not have any contacts!");
+            system.moduleMessage(this, entity, "<e>You do not have any contacts!");
           };
         } else {
-          system.moduleMessage(this, player, "<e>You do not have any contacts!");
+          system.moduleMessage(this, entity, "<e>You do not have any contacts!");
         };
       };
     }

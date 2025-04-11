@@ -14,7 +14,7 @@ function initModule(system) {
       nbt = entity.getWornChestplate().nbt();
     };
     if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = player.getWornLeggings().nbt();
+      nbt = entity.getWornLeggings().nbt();
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
@@ -39,171 +39,27 @@ function initModule(system) {
   };
   /**
    * List groups
-   * @param {JSEntity} player - Required
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
    **/
-  function listGroups(player, manager) {
+  function listGroups(entity, manager) {
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
     };
-    var groups = getGroupArrayMembers(player, manager);
-    system.moduleMessage(this, player, "<n>You are in <nh>" + groups.length + ((groups.length == 1) ? "<n> group!" : "<n> groups!"));
+    var groups = getGroupArrayMembers(entity, manager);
+    system.moduleMessage(this, entity, "<n>You are in <nh>" + groups.length + ((groups.length == 1) ? "<n> group!" : "<n> groups!"));
     groups.forEach(entry => {
-      system.moduleMessage(this, player, "<nh>" + entry.groupName + "<n> (<nh>" + entry.memberCount + ((entry.memberCount > 1) ? "<n> members)" : "<n> member)"))
+      system.moduleMessage(this, entity, "<nh>" + entry.groupName + "<n> (<nh>" + entry.memberCount + ((entry.memberCount > 1) ? "<n> members)" : "<n> member)"))
     });
   };
   /**
    * Remove group by group name
-   * @param {JSPlayer} player - Required
+   * @param {JSEntity} entity - Required
    * @param {JSDataManager} manager - Required
    * @param {string} groupName - Name of group
    **/
-  function removeGroup(player, manager, groupName) {
-    var nbt = null;
-    if (player.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = player.getWornHelmet().nbt();
-    };
-    if (player.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = player.getWornChestplate().nbt();
-    };
-    if (player.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = player.getWornLeggings().nbt();
-    };
-    if (player.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = player.getWornBoots().nbt();
-    };
-    if (!nbt.hasKey("groups")) {
-      var newGroupsList = manager.newTagList();
-      manager.setTagList(nbt, "groups", newGroupsList);
-    };
-    var groups = nbt.getTagList("groups");
-    var groupIndex = getGroupArray(player).indexOf(groupName);
-    if (groupIndex < 0) {
-      system.moduleMessage(this, player, "<e>Unable to find group with name <eh>" + groupName + "<e> to remove!");
-    } else {
-      system.moduleMessage(this, player, "<e>Removed group <eh>" + groupName + "<e>!");
-      manager.removeTag(groups, groupIndex);
-    };
-  };
-  /**
-   * Adds member to group
-   * @param {JSPlayer} player - Required
-   * @param {JSDataManager} manager - Required
-   * @param {string} groupName - Name of group to add member to
-   * @param {string} username - Username to add to group
-   **/
-  function addGroupMember(player, manager, groupName, username) {
-    var nbt = null;
-    if (player.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = player.getWornHelmet().nbt();
-    };
-    if (player.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = player.getWornChestplate().nbt();
-    };
-    if (player.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = player.getWornLeggings().nbt();
-    };
-    if (player.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = player.getWornBoots().nbt();
-    };
-    var groups = nbt.getTagList("groups");
-    var groupIndex = getGroupArray(player).indexOf(groupName);
-    var members = groups.getCompoundTag(groupIndex).getStringList("members");
-    var memberIndex = system.getStringArray(members).indexOf(username);
-    var contacts = nbt.getTagList("contacts");
-    var contactIndex = system.getStringArray(contacts).indexOf(username);
-    if (!nbt.hasKey("groups")) {
-      system.moduleMessage(this, player, "<e>You have not set up any groups yet!");
-    } else if (groupIndex < 0) {
-      system.moduleMessage(this, player, "<e>Group <eh>" + groupName + "<e> does not exist!");
-    } else if (contactIndex < 0) {
-      system.moduleMessage(this, player, "<eh>" + username + "<e> is not added as a contact!")
-    } else if (memberIndex > -1) {
-      system.moduleMessage(this, player, "<e>Member <eh>" + username + "<e> is already in group <eh>" + groupName + "<e>!");
-    } else {
-      system.moduleMessage(this, player, "<s>Successfully added <sh>" + username  + "<s> to group <sh>" + groupName + "<s>!");
-      manager.appendString(members, username);
-    };
-  };
-  /**
-   * Adds member to group
-   * @param {JSPlayer} player - Required
-   * @param {JSDataManager} manager - Required
-   * @param {string} groupName - Name of group to add member to
-   * @param {string} username - Username to add to group
-   **/
-  function removeGroupMember(player, manager, groupName, username) {
-    var nbt = null;
-    if (player.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = player.getWornHelmet().nbt();
-    };
-    if (player.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = player.getWornChestplate().nbt();
-    };
-    if (player.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = player.getWornLeggings().nbt();
-    };
-    if (player.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = player.getWornBoots().nbt();
-    };
-    if (!nbt.hasKey("groups")) {
-      var newGroupsList = manager.newTagList();
-      manager.setTagList(nbt, "groups", newGroupsList);
-    };
-    var groups = nbt.getTagList("groups");
-    var groupIndex = getGroupArray(player).indexOf(groupName);
-    var members = groups.getCompoundTag(groupIndex).getStringList("members");
-    var memberIndex = system.getStringArray(members).indexOf(username);
-    if (groupIndex < 0) {
-      system.moduleMessage(this, player, "<e>Group <eh>" + groupName + "<e> does not exist!");
-    } else if (memberIndex < 0) {
-      system.moduleMessage(this, player, "<eh>" + username + "<e> is not in group <eh>" + groupName + "<e>!");
-    } else {
-      system.moduleMessage(this, player, "<s>Successfully removed <sh>" + username  + "<s> from group <sh>" + groupName + "<s>!");
-      manager.removeTag(members, memberIndex);
-    };
-  };
-  /**
-   * Lists members of group
-   * @param {JSPlayer} player - Required
-   * @param {integer} groupName - Name of group to add member to
-   **/
-  function listGroupMembers(player, manager, groupName) {
-    var nbt = null;
-    if (player.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = player.getWornHelmet().nbt();
-    };
-    if (player.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = player.getWornChestplate().nbt();
-    };
-    if (player.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = player.getWornLeggings().nbt();
-    };
-    if (player.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = player.getWornBoots().nbt();
-    };
-    if (!nbt.hasKey("groups")) {
-      var newGroupsList = manager.newTagList();
-      manager.setTagList(nbt, "groups", newGroupsList);
-    };
-    var groups = nbt.getTagList("groups");
-    var groupIndex = getGroupArray(player).indexOf(groupName);
-    var members = system.getStringArray(groups.getCompoundTag(groupIndex).getStringList("members"));
-    if (groupIndex < 0) {
-      system.moduleMessage(this, player, "<e>Group <eh>" + groupName + "<e> does not exist!");
-    } else {
-      system.moduleMessage(this, player, "<s>Members in <sh>" + groupName + "<s>:")
-      members.forEach(entry => {
-        system.moduleMessage(this, player, "<sh>" + entry);
-      });
-    };
-  };
-  /**
-   * Turns NBT String List into an array for easier use in code
-   * @param {JSEntity} entity - Entity to create group array from
-   * @returns Array of group names
-   **/
-  function getGroupArray(entity, manager) {
+  function removeGroup(entity, manager, groupName) {
     var nbt = null;
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
       nbt = entity.getWornHelmet().nbt();
@@ -216,6 +72,153 @@ function initModule(system) {
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
       nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
+    var groups = nbt.getTagList("groups");
+    var groupIndex = getGroupArray(entity).indexOf(groupName);
+    if (groupIndex < 0) {
+      system.moduleMessage(this, entity, "<e>Unable to find group with name <eh>" + groupName + "<e> to remove!");
+    } else {
+      system.moduleMessage(this, entity, "<e>Removed group <eh>" + groupName + "<e>!");
+      manager.removeTag(groups, groupIndex);
+    };
+  };
+  /**
+   * Adds member to group
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   * @param {string} groupName - Name of group to add member to
+   * @param {string} username - Username to add to group
+   **/
+  function addGroupMember(entity, manager, groupName, username) {
+    var nbt = null;
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = entity.getWornBoots().nbt();
+    };
+    var groups = nbt.getTagList("groups");
+    var groupIndex = getGroupArray(entity).indexOf(groupName);
+    var members = groups.getCompoundTag(groupIndex).getStringList("members");
+    var memberIndex = system.getStringArray(members).indexOf(username);
+    var contacts = nbt.getTagList("contacts");
+    var contactIndex = system.getStringArray(contacts).indexOf(username);
+    if (!nbt.hasKey("groups")) {
+      system.moduleMessage(this, entity, "<e>You have not set up any groups yet!");
+    } else if (groupIndex < 0) {
+      system.moduleMessage(this, entity, "<e>Group <eh>" + groupName + "<e> does not exist!");
+    } else if (contactIndex < 0) {
+      system.moduleMessage(this, entity, "<eh>" + username + "<e> is not added as a contact!")
+    } else if (memberIndex > -1) {
+      system.moduleMessage(this, entity, "<e>Member <eh>" + username + "<e> is already in group <eh>" + groupName + "<e>!");
+    } else {
+      system.moduleMessage(this, entity, "<s>Successfully added <sh>" + username  + "<s> to group <sh>" + groupName + "<s>!");
+      manager.appendString(members, username);
+    };
+  };
+  /**
+   * Adds member to group
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   * @param {string} groupName - Name of group to add member to
+   * @param {string} username - Username to add to group
+   **/
+  function removeGroupMember(entity, manager, groupName, username) {
+    var nbt = null;
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
+    var groups = nbt.getTagList("groups");
+    var groupIndex = getGroupArray(entity).indexOf(groupName);
+    var members = groups.getCompoundTag(groupIndex).getStringList("members");
+    var memberIndex = system.getStringArray(members).indexOf(username);
+    if (groupIndex < 0) {
+      system.moduleMessage(this, entity, "<e>Group <eh>" + groupName + "<e> does not exist!");
+    } else if (memberIndex < 0) {
+      system.moduleMessage(this, entity, "<eh>" + username + "<e> is not in group <eh>" + groupName + "<e>!");
+    } else {
+      system.moduleMessage(this, entity, "<s>Successfully removed <sh>" + username  + "<s> from group <sh>" + groupName + "<s>!");
+      manager.removeTag(members, memberIndex);
+    };
+  };
+  /**
+   * Lists members of group
+   * @param {JSEntity} entity - Required
+   * @param {integer} groupName - Name of group to add member to
+   **/
+  function listGroupMembers(entity, manager, groupName) {
+    var nbt = null;
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = entity.getWornBoots().nbt();
+    };
+    if (!nbt.hasKey("groups")) {
+      var newGroupsList = manager.newTagList();
+      manager.setTagList(nbt, "groups", newGroupsList);
+    };
+    var groups = nbt.getTagList("groups");
+    var groupIndex = getGroupArray(entity).indexOf(groupName);
+    var members = system.getStringArray(groups.getCompoundTag(groupIndex).getStringList("members"));
+    if (groupIndex < 0) {
+      system.moduleMessage(this, entity, "<e>Group <eh>" + groupName + "<e> does not exist!");
+    } else {
+      system.moduleMessage(this, entity, "<s>Members in <sh>" + groupName + "<s>:")
+      members.forEach(entry => {
+        system.moduleMessage(this, entity, "<sh>" + entry);
+      });
+    };
+  };
+  /**
+   * Turns NBT String List into an array for easier use in code
+   * @param {JSEntity} entity - Entity to create group array from
+   * @returns Array of group names
+   **/
+  function getGroupArray(entity, manager) {
+    var nbt = null;
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
@@ -236,17 +239,19 @@ function initModule(system) {
    **/
   function getGroupArrayMembers(entity, manager) {
     var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
+    if (entity.isWearingFullSuit()) {
+      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+        nbt = entity.getWornHelmet().nbt();
+      };
+      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+        nbt = entity.getWornChestplate().nbt();
+      };
+      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+        nbt = entity.getWornLeggings().nbt();
+      };
+      if (entity.getWornBoots().nbt().hasKey("computerID")) {
+        nbt = entity.getWornBoots().nbt();
+      };
     };
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
