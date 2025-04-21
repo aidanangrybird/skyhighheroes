@@ -1,0 +1,55 @@
+{
+  "name": "Deployable Wings",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|wings": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/wings",
+        "timerData": "skyhighheroes:dyn/wings_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|wing_left_deploy": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/wing_left_deployed",
+        "timerData": "skyhighheroes:dyn/wing_left_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|wing_right_deploy": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/wing_right_deployed",
+        "timerData": "skyhighheroes:dyn/wing_right_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:gliding": {
+      "gliding": {
+        "speed": 0.5,
+        "lift": 2.0,
+        "gravity": 1.0,
+        "stall": 1.0
+      },
+      "isPowered": false,
+      "isControlled": false,
+      "canJumpActivate": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": false
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": false
+        }
+      },
+      "knockback": 0.75,
+      "soundEvents": {
+        "ENABLE": "fiskheroes:gliding"
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{data} = (-1*{data})+1
+;animate2(data, length, start, ramp up, ramp down)
+{data} = curve({data})
+{overall} = if({data} != 1, animate2({data}, 1.0, 0.55, 0.4, 0.0), 1)
+{part1} = if({data} != 1, animate2({data}, 1.0, 0.0, 0.1, 0.0), 1)
+{part2} = if({data} != 1, animate2({data}, 1.0, 0.0, 0.3, 0.0), 1)
+{part3} = if({data} != 1, animate2({data}, 1.0, 0.25, 0.3, 0.0), 1)
+{part4} = if({data} != 1, animate2({data}, 1.0, 0.55, 0.15, 0.0), 1)
+{part5} = if({data} != 1, animate2({data}, 1.0, 0.7, 0.25, 0.0), 1)
+
+{head_rotX} = -5'{part1}+5'-80'{part2}+40'{part3}+40'{part5}
+{head_rotY} = -65'{part1}+65'
+{head_posY} += 2{part2}-2{part5}
+{head_posZ} += 8{part2}-8{part5}
+{body_rotX} = -30'{part2}-5'+45'{part5}-10'{part4}
+{body_posY} += 2{part2}-2{part5}
+{body_posZ} += 8{part2}-8{part5}
+{rightLeg_posZ} = 3{part2}+3{part3}-1-6{part4}+1{part5}
+{leftLeg_posZ} = 3{part2}+0.5{part3}-1-2.5{part4}
+{rightLeg_posY} += -1{part2}-7.5{part3}-0.5+6{part4}+3{part5}
+{leftLeg_posY} += -1{part2}-2{part3}-0.5+2{part4}+1.5{part5}
+{rightLeg_rotX} = -20'{part3}-20'{part2}+40'{part5}
+{rightLeg_rotZ} = -10'{part2}+10'
+{leftLeg_rotX} = -10'{part3}-20'{part2}+30'{part5}
+{leftLeg_rotZ} = 10'{part2}-10'
+{rightArm_posY} += 2{part2}+0.5{part3}-2.5{part5}
+{rightArm_posZ} += 5{part2}+1{part3}-6{part5}
+{leftArm_posY} += 2{part2}+0.5{part3}-2.5{part5}
+{leftArm_posZ} += 5{part2}+1{part3}-6{part5}
+{rightArm_rotX} = 30'{part2}-170'+25'{part3}+35'{part4}+80'{part5}
+{rightArm_rotZ} = 37'{part2}-37'
+{leftArm_rotX} = 30'{part2}-170'+25'{part3}+35'{part4}+80'{part5}
+{leftArm_rotZ} = -34'{part2}+34'
+;{data} = 0
+out "translate" (0, 0, -{overall}+1)
+out "pivot" (0, -0.08{overall}+0.08, 0)
+out "rotate" (90{overall}-90, 1, 0, 0)

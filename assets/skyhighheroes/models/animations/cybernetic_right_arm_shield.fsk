@@ -1,0 +1,9 @@
+{data} = curve {data}
+{rightArm_rotX} @ {data} -> 0.1{rightArm_rotX} - 1.7
+{rightArm_rotY} -= 0.7{data}
+{rightArm_rotZ} += 0.1{data}
+
+out "firstPerson" (true)
+out "translate" (-0.2{data}, -0.1{data}, 0)
+out "rotate" (40{data}, 0, 1, 0)
+out "rotate" (-30{data}, 0, 0, 1)

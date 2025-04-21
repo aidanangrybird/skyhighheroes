@@ -1,0 +1,5 @@
+{wings} = curve(clamp({data_0}, 0, 1))
+
+{part0_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.0, 0.15, 0.0), 1)
+
+{leftArm_rotZ} -= 80'{part0_wings}

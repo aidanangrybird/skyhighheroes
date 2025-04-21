@@ -1,0 +1,17 @@
+{inner_rocket} = curve(clamp({data_0}, 0, 1)){inner_rockets}
+{inner_booster_rocket} = curve(clamp({data_1}, 0, 1)){inner_rockets}
+{inner_rockets} = curve({data_2})
+
+{part0_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{part0_inner_booster_rocket} = if({inner_booster_rocket} != 1, animate2({inner_booster_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_inner_booster_rocket} = if({inner_booster_rocket} != 1, animate2({inner_booster_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_inner_booster_rocket} = if({inner_booster_rocket} != 1, animate2({inner_booster_rocket}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_inner_booster_rocket} = if({inner_booster_rocket} != 1, animate2({inner_booster_rocket}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_inner_booster_rocket} = if({inner_booster_rocket} != 1, animate2({inner_booster_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{leftLeg_rotZ} -= 10'{part3_inner_rocket} + 5'{part4_inner_rocket} + 10'{part3_inner_booster_rocket} + 5'{part4_inner_booster_rocket}

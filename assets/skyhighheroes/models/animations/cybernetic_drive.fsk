@@ -1,0 +1,8 @@
+{data} = curve {data}
+{head_rotX} = 0'
+{rightArm_rotX} @ {data} -> -0.2{rightArm_rotX} - 4.5
+{rightArm_rotY} += 40'{data}
+{rightArm_rotZ} -= 20'{data}
+
+out "firstPerson" (true)
+out "rotate" (-140{data}, 0, 0, 1)

@@ -1,0 +1,134 @@
+{rocket_left} = curve(clamp({data_0}, 0, 1))
+{rocket_right} = curve(clamp({data_1}, 0, 1))
+{cannon_left} = curve(clamp({data_2}, 0, 1))
+{cannon_right} = curve(clamp({data_3}, 0, 1))
+{wing_left} = curve(clamp({data_4}, 0, 1))
+{wing_right} = curve(clamp({data_5}, 0, 1))
+{ext_arm_left} = curve(clamp({data_6}, 0, 1))
+{ext_arm_right} = curve(clamp({data_7}, 0, 1))
+
+;rockets
+;left rocket
+{part0_rocket_left} = if({rocket_left} != 1, animate2({rocket_left}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_rocket_left} = if({rocket_left} != 1, animate2({rocket_left}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_rocket_left} = if({rocket_left} != 1, animate2({rocket_left}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_rocket_left} = if({rocket_left} != 1, animate2({rocket_left}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_rocket_left} = if({rocket_left} != 1, animate2({rocket_left}, 1.0, 0.9, 0.1, 0.0), 1)
+{body_left_outer_rocket_cover_posZ} -= 0.03{part0_rocket_left}
+{body_left_inner_rocket_cover_posZ} -= 0.03{part0_rocket_left}
+{body_left_outer_rocket_cover_posX} += 1{part1_rocket_left}
+{body_left_inner_rocket_cover_posX} -= 1{part1_rocket_left}
+{body_rocket_left_posY} += 0.15{part2_rocket_left} + 0.25{part4_rocket_left}
+{body_rocket_left_rotX} += 50'{part3_rocket_left}
+{body_rocket_left_posZ} += 0.25{part4_rocket_left}
+;right rocket
+{part0_rocket_right} = if({rocket_right} != 1, animate2({rocket_right}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_rocket_right} = if({rocket_right} != 1, animate2({rocket_right}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_rocket_right} = if({rocket_right} != 1, animate2({rocket_right}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_rocket_right} = if({rocket_right} != 1, animate2({rocket_right}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_rocket_right} = if({rocket_right} != 1, animate2({rocket_right}, 1.0, 0.9, 0.1, 0.0), 1)
+{body_right_outer_rocket_cover_posZ} -= 0.03{part0_rocket_right}
+{body_right_inner_rocket_cover_posZ} -= 0.03{part0_rocket_right}
+{body_right_outer_rocket_cover_posX} -= 1{part1_rocket_right}
+{body_right_inner_rocket_cover_posX} += 1{part1_rocket_right}
+{body_rocket_right_posY} += 0.15{part2_rocket_right} + 0.25{part4_rocket_right}
+{body_rocket_right_rotX} += 50'{part3_rocket_right}
+{body_rocket_right_posZ} += 0.25{part4_rocket_right}
+
+;cannons
+;left cannon
+{part1_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.2, 0.2, 0.0), 1)
+{part3_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.6, 0.4, 0.0), 1)
+{body_left_cannon_upper_cover_posZ} += 0.03{part1_cannon_left}
+{body_left_cannon_upper_cover_posY} -= 1{part2_cannon_left}
+{body_left_cannon_upper_cover_posX} += 1{part2_cannon_left}
+{body_left_cannon_lower_cover_posZ} += 0.03{part1_cannon_left}
+{body_left_cannon_lower_cover_posY} += 2{part2_cannon_left}
+{body_cannon_left_posZ} -= 4.25{part3_cannon_left}
+{body_cannon_left_base_posZ} -= 1.5{part3_cannon_left}
+;right cannon
+{part1_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.2, 0.2, 0.0), 1)
+{part3_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.6, 0.4, 0.0), 1)
+{body_right_cannon_upper_cover_posZ} += 0.03{part1_cannon_right}
+{body_right_cannon_upper_cover_posY} -= 1{part2_cannon_right}
+{body_right_cannon_upper_cover_posX} -= 1{part2_cannon_right}
+{body_right_cannon_lower_cover_posZ} += 0.03{part1_cannon_right}
+{body_right_cannon_lower_cover_posY} += 2{part2_cannon_right}
+{body_cannon_right_posZ} -= 4.25{part3_cannon_right}
+{body_cannon_right_base_posZ} -= 1.5{part3_cannon_right}
+
+;wings
+;left wing
+{part0_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.4, 0.1, 0.0), 1)
+{part3_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.5, 0.2, 0.0), 1)
+{part4_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.7, 0.15, 0.0), 1)
+{part5_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.85, 0.05, 0.0), 1)
+{part6_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.9, 0.05, 0.0), 1)
+{part7_wing_left} = if({wing_left} != 1, animate2({wing_left}, 1.0, 0.95, 0.05, 0.0), 1)
+
+{body_left_wing_cover_front_posX} -= 0.03{part0_wing_left} - 0.03{part6_wing_left}
+{body_left_wing_cover_back_posX} -= 0.03{part0_wing_left} - 0.03{part6_wing_left}
+{body_left_wing_cover_front_posZ} -= 1{part1_wing_left} - 1{part5_wing_left}
+{body_left_wing_cover_back_posZ} += 1{part1_wing_left} - 1{part5_wing_left}
+{body_wing_left_inner_base_posX} += 4.1{part3_wing_left}
+{body_wing_left_inner_base_posY} += 1{part3_wing_left}
+{body_wing_left_inner_base_rotZ} -= 90'{part2_wing_left}
+{body_wing_left_outer_base_posX} += 1{part4_wing_left}
+{body_wing_left_outer_base_posY} += 10{part3_wing_left}
+{body_wing_left_1_posX} -= {part7_wing_left}
+{body_wing_left_2_posX} -= {part6_wing_left}
+{body_wing_left_3_posX} -= {part5_wing_left}
+{body_wing_left_ext_1_posX} -= {part7_wing_left}
+{body_wing_left_ext_2_posX} -= {part6_wing_left}
+{body_wing_left_ext_3_posX} -= {part5_wing_left}
+{body_wing_left_ext_posY} += 3{part7_wing_left}
+;right wing
+{part0_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.4, 0.1, 0.0), 1)
+{part3_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.5, 0.2, 0.0), 1)
+{part4_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.7, 0.15, 0.0), 1)
+{part5_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.85, 0.05, 0.0), 1)
+{part6_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.9, 0.05, 0.0), 1)
+{part7_wing_right} = if({wing_right} != 1, animate2({wing_right}, 1.0, 0.95, 0.05, 0.0), 1)
+
+{body_right_wing_cover_front_posX} += 0.03{part0_wing_right} - 0.03{part6_wing_right}
+{body_right_wing_cover_back_posX} += 0.03{part0_wing_right} - 0.03{part6_wing_right}
+{body_right_wing_cover_front_posZ} -= 1{part1_wing_right} - 1{part5_wing_right}
+{body_right_wing_cover_back_posZ} += 1{part1_wing_right} - 1{part5_wing_right}
+{body_wing_right_inner_base_posX} -= 4.1{part3_wing_right}
+{body_wing_right_inner_base_posY} += 1{part3_wing_right}
+{body_wing_right_inner_base_rotZ} += 90'{part2_wing_right}
+{body_wing_right_outer_base_posX} -= 1{part4_wing_right}
+{body_wing_right_outer_base_posY} += 10{part3_wing_right}
+{body_wing_right_1_posX} += {part7_wing_right}
+{body_wing_right_2_posX} += {part6_wing_right}
+{body_wing_right_3_posX} += {part5_wing_right}
+{body_wing_right_ext_1_posX} += {part7_wing_right}
+{body_wing_right_ext_2_posX} += {part6_wing_right}
+{body_wing_right_ext_3_posX} += {part5_wing_right}
+{body_wing_right_ext_posY} += 3{part7_wing_right}
+
+;ext arms
+;left ext arm
+{part1_ext_arm_left} = if({ext_arm_left} != 1, animate2({ext_arm_left}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_ext_arm_left} = if({ext_arm_left} != 1, animate2({ext_arm_left}, 0.8, 0.2, 0.4, 0.0), 1)
+{part3_ext_arm_left} = if({ext_arm_left} != 1, animate2({ext_arm_left}, 0.8, 0.6, 0.4, 0.0), 1)
+{body_left_inner_ext_arm_cover_posZ} -= 0.03{part1_ext_arm_left}
+{body_left_outer_ext_arm_cover_posZ} -= 0.03{part1_ext_arm_left}
+{body_left_inner_ext_arm_cover_posX} -= 1{part2_ext_arm_left}
+{body_left_outer_ext_arm_cover_posX} += 1{part2_ext_arm_left}
+{body_ext_arm_left_posZ} += 2.75{part3_ext_arm_left}
+;right ext arm
+{part1_ext_arm_right} = if({ext_arm_right} != 1, animate2({ext_arm_right}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_ext_arm_right} = if({ext_arm_right} != 1, animate2({ext_arm_right}, 0.8, 0.2, 0.4, 0.0), 1)
+{part3_ext_arm_right} = if({ext_arm_right} != 1, animate2({ext_arm_right}, 0.8, 0.6, 0.4, 0.0), 1)
+{body_right_inner_ext_arm_cover_posZ} -= 0.03{part1_ext_arm_right}
+{body_right_outer_ext_arm_cover_posZ} -= 0.03{part1_ext_arm_right}
+{body_right_inner_ext_arm_cover_posX} += 1{part2_ext_arm_right}
+{body_right_outer_ext_arm_cover_posX} -= 1{part2_ext_arm_right}
+{body_ext_arm_right_posZ} += 2.75{part3_ext_arm_right}

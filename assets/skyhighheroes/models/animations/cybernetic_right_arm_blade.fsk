@@ -1,0 +1,11 @@
+{blade} = curve(clamp({data_0}, 0, 1))
+{blade_stealth} = curve(clamp({data_1}, 0, 1))
+
+;blade
+{part0_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.6, 0.2, 0.0), 1)
+{part4_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.8, 0.2, 0.0), 1)
+
+{rightArm_rotZ} += 55'{part2_blade} - 30'{part3_blade} - 20'{blade_stealth}{part4_blade}

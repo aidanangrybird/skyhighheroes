@@ -1,0 +1,16 @@
+{cannon} = curve({data})
+
+;cannon
+{part0_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.6, 0.4, 0.0), 1)
+
+{rightArm_rotX} @ {part1_cannon} -> {head_rotX} - pi / 2
+{rightArm_rotY} @ {part1_cannon} -> {head_rotY}
+{rightArm_rotZ} @ {part1_cannon} -> {head_rotZ}
+
+out "firstPerson" (true)
+out "translate" (-0.35{part1_cannon}, 0, 0.15{part1_cannon})
+out "rotate" (-27{part1_cannon}, 0, 1, 0)
+out "rotate" (-20{part1_cannon}, 1, 0, 0)
+out "rotate" (-30{part1_cannon}, 0, 0, 1)

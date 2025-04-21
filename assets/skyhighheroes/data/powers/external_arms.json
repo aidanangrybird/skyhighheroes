@@ -1,0 +1,83 @@
+{
+  "name": "External Arms",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:tentacles": {
+      "tentacles": [
+        [0.7, 0, 0.4],
+        [-0.7, 0, 0.4]
+      ],
+      "climbing": {
+        "speed": 0.2,
+        "range": 16,
+        "tolerance": 15,
+        "minAnchorPoints": 1,
+        "anchorPointZones": [
+          ["TOP", "BOTTOM", "LEFT", "RIGHT", "FRONT", "BACK"],
+          ["TOP", "BOTTOM", "LEFT", "RIGHT", "FRONT", "BACK"]
+        ]
+      },
+      "range": 16.0,
+      "damageProfile": {
+        "damage": 8.0,
+        "types": {
+          "SHARP": 0.5,
+          "BLUNT": 0.5
+        },
+        "properties": {
+          "DAMAGE_DROPOFF": 0.6,
+          "HIT_COOLDOWN": 0
+        }
+      },
+      "tentacleStrike": {
+        "chargeTime": 20,
+        "damageProfile": {
+          "damage": 17.0,
+          "types": {
+            "SHARP": 1.0
+          },
+          "properties": {
+            "HIT_COOLDOWN": 0
+          }
+        }
+      },
+      "canBreakGlass": true,
+      "soundEvents": {
+        "ENABLE": "fiskheroes:ock_enable",
+        "DISABLE": "fiskheroes:ock_disable",
+        "ANCHOR": "fiskheroes:ock_climb",
+        "UNANCHOR": "fiskheroes:ock_unanchor",
+        "RELEASE": "fiskheroes:ock_unanchor",
+        "JAB_START": "fiskheroes:ock_jab",
+        "GRAB_START": "fiskheroes:ock_grab",
+        "STRIKE_START": "fiskheroes:ock_strike",
+        "STRIKE_CHARGED": "fiskheroes:ock_strike_charged"
+      }
+    },
+    "fiskheroes:transformation|external_arms": {
+      "key": "EXTERNAL_ARMS",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/external_arms",
+        "timerData": "skyhighheroes:dyn/external_arms_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|external_arm_left_deploy": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/external_arm_left_deployed",
+        "timerData": "skyhighheroes:dyn/external_arm_left_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|external_arm_right_deploy": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/external_arm_right_deployed",
+        "timerData": "skyhighheroes:dyn/external_arm_right_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

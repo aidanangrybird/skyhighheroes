@@ -1,0 +1,400 @@
+{
+  "name": "Rocket System",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:controlled_flight|rockets_TFF": {
+      "speed": 0.05,
+      "boostSpeed": 0.1,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FTF": {
+      "speed": 0.1,
+      "boostSpeed": 0.2,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FFT": {
+      "speed": 0.1,
+      "boostSpeed": 0.25,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FTT": {
+      "speed": 0.1,
+      "boostSpeed": 0.45,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TFT": {
+      "speed": 0.1,
+      "boostSpeed": 0.35,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TTF": {
+      "speed": 0.1,
+      "boostSpeed": 0.3,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TTT": {
+      "speed": 0.1,
+      "boostSpeed": 0.55,
+      "canBoost": true,
+      "canRoll": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": []
+      }
+    },
+    "fiskheroes:transformation|rockets_body": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rockets_body",
+          "timerData": "skyhighheroes:dyn/rockets_body_timer",
+          "time": 10
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rockets_aux": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rockets_aux",
+        "timerData": "skyhighheroes:dyn/rockets_aux_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rockets_legs": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rockets_legs",
+        "timerData": "skyhighheroes:dyn/rockets_legs_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_body_left_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_body_left_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_body_left_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_body_right_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_body_right_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_body_right_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_arm_outer_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_left_arm_outer_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_arm_front_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_left_arm_front_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_arm_back_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_left_arm_back_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_arm_outer_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_right_arm_outer_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_arm_front_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_right_arm_front_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_arm_back_booster_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed",
+          "timerData": "skyhighheroes:dyn/rocket_right_arm_back_booster_deploy_timer",
+          "time": 40
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_main_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_main_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_main_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_main_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_main_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_main_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_inner_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_inner_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_outer_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_outer_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_front_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_front_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_back_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_back_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_inner_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_inner_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_outer_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_outer_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_front_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_front_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_back_booster_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_back_booster_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_inner_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_inner_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_outer_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_outer_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_outer_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_front_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_front_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_front_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_left_leg_back_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_left_leg_back_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_left_leg_back_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_inner_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_inner_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_outer_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_outer_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_outer_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_front_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_front_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_front_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_right_leg_back_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_right_leg_back_deployed",
+        "timerData": "skyhighheroes:dyn/rocket_right_leg_back_deploy_timer",
+        "time": 40
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|rocket_inner_legs": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/rocket_inner_legs",
+        "timerData": "skyhighheroes:dyn/rocket_inner_legs_timer",
+        "time": 10
+      },
+      "isToggle": true
+    }
+  }
+}

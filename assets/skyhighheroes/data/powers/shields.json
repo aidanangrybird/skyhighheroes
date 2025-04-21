@@ -1,0 +1,95 @@
+{
+  "name": "Shields",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:shield|shields_TF": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 100.0,
+        "pitchRadius": 160.0,
+        "yawOffset": -40.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": true,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:shield|shields_FT": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 100.0,
+        "pitchRadius": 160.0,
+        "yawOffset": 40.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": true,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:shield|shields_TT": {
+      "shield": {
+        "health": 300.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 220.0,
+        "pitchRadius": 160.0,
+        "yawOffset": 0.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": true,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:transformation|shield_left_arm": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/shield_left_arm",
+          "timerData": "skyhighheroes:dyn/shield_left_arm_timer",
+          "time": 20
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|shield_right_arm": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/shield_right_arm",
+        "timerData": "skyhighheroes:dyn/shield_right_arm_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|shield_left_arm_deployed": {
+        "transformation": {
+          "toggleData": "skyhighheroes:dyn/shield_left_arm_deployed",
+          "timerData": "skyhighheroes:dyn/shield_left_arm_deploy_timer",
+          "time": 60
+        },
+        "isToggle": true
+    },
+    "fiskheroes:transformation|shield_right_arm_deployed": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/shield_right_arm_deployed",
+        "timerData": "skyhighheroes:dyn/shield_right_arm_deploy_timer",
+        "time": 60
+      },
+      "isToggle": true
+    }
+  }
+}

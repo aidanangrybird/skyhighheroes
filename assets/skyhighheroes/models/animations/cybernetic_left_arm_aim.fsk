@@ -1,0 +1,10 @@
+{cannon} = curve({data})
+
+;cannon
+{part0_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.6, 0.4, 0.0), 1)
+
+{leftArm_rotX} @ {part1_cannon} -> ({head_rotX} - pi / 2)
+{leftArm_rotY} @ {part1_cannon} -> {head_rotY}
+{leftArm_rotZ} @ {part1_cannon} -> {head_rotZ}

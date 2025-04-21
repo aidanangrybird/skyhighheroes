@@ -1,0 +1,26 @@
+{
+  "texture": {
+    "in": "skyhighheroes:cyber/red/cyber_red_lights",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/cybernetic_thermoptic_base_<TIMER>"
+      },
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:cybernetic_head_hair_base"
+      }
+    ],
+    "out": "skyhighheroes:generated/cyber_red_head_hair_lights_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.ceil(47*Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer'), 0), 1)) | 0",
+      "values": {
+        "min": 0,
+        "max": 47
+      }
+    }
+  },
+  "isDynamic": true
+}

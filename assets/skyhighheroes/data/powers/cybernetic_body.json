@@ -1,0 +1,74 @@
+{
+  "name": "Cybernetic Body",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:potion_immunity": {
+      "potionEffects": ["minecraft:nausea", "minecraft:poison", "minecraft:wither", "minecraft:weakness", "minecraft:slowness", "minecraft:blindness", "minecraft:hunger", "minecraft:instant_damage", "minecraft:mining_fatigue", "minecraft:haste", "minecraft:fire_resistance", "minecraft:health_boost", "minecraft:instant_health", "minecraft:jump_boost", "minecraft:regeneration", "minecraft:resistance", "minecraft:saturation", "minecraft:speed", "minecraft:strength", "minecraft:water_breathing"]
+    },
+    "fiskheroes:regeneration": {
+      "factor": 5
+    },
+    "fiskheroes:water_breathing": {
+    },
+    "fiskheroes:fire_immunity": {
+    },
+    "fiskheroes:damage_immunity|fire": {
+      "damageType": "FIRE"
+    },
+    "fiskheroes:damage_immunity|cactus": {
+      "damageType": "CACTUS"
+    },
+    "fiskheroes:damage_immunity|thorns": {
+      "damageType": "THORNS"
+    },
+    "fiskheroes:damage_immunity|bullet": {
+      "damageType": "BULLET"
+    },
+    "fiskheroes:damage_immunity|water": {
+      "damageType": "WATER"
+    },
+    "fiskheroes:damage_immunity|radiation": {
+      "damageType": "RADIATION"
+    },
+    "fiskheroes:damage_immunity|gamma": {
+      "damageType": "GAMMA"
+    },
+    "fiskheroes:damage_immunity|atlantean_steel": {
+      "damageType": "ATLANTEAN_STEEL"
+    },
+    "fiskheroes:damage_immunity|eternium": {
+      "damageType": "ETERNIUM"
+    },
+    "fiskheroes:damage_immunity|kryptonite": {
+      "damageType": "KRYPTONITE"
+    },
+    "fiskheroes:damage_immunity|jv": {
+      "damageType": "JORMUNGANDR_VENOM"
+    },
+    "fiskheroes:damage_immunity|primordial": {
+      "damageType": "PRIMORDIAL"
+    },
+    "fiskheroes:damage_immunity|gale": {
+      "damageType": "GALE"
+    },
+    "fiskheroes:damage_immunity|bifrost": {
+      "damageType": "BIFROST"
+    },
+    "fiskheroes:damage_immunity|ice": {
+      "damageType": "ICE"
+    },
+    "fiskheroes:damage_immunity|positive": {
+      "damageType": "POSITIVE"
+    },
+    "fiskheroes:damage_immunity|cursed": {
+      "damageType": "CURSED"
+    },
+    "fiskheroes:damage_immunity|cancel": {
+      "damageType": "CANCEL"
+    },
+    "fiskheroes:projectile_immunity": {
+    },
+    "fiskheroes:metal_skin": {
+    }
+  }
+}

@@ -1,0 +1,272 @@
+{cannon} = curve(clamp({data_0}, 0, 1))
+{front_cannon} = curve(clamp({data_1}, 0, 1))
+{back_cannon} = curve(clamp({data_2}, 0, 1))
+{outer_rocket} = curve(clamp({data_3}, 0, 1))
+{front_rocket} = curve(clamp({data_4}, 0, 1))
+{back_rocket} = curve(clamp({data_5}, 0, 1))
+{blade} = curve(clamp({data_6}, 0, 1))
+{shield} = curve(clamp({data_7}, 0, 1))
+{blade_stealth} = curve(clamp({data_8}, 0, 1))
+{cannon_flush} = curve(clamp({data_9}, 0, 1))
+
+;cannon
+{part0_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.6, 0.4, 0.0), 1)
+{left_arm_inner_cannon_cover_posY} -= 0.03{part0_cannon}
+{left_arm_outer_cannon_cover_posY} -= 0.03{part0_cannon}
+{left_arm_inner_cannon_cover_posX} -= 1{part1_cannon}
+{left_arm_outer_cannon_cover_posX} += 1{part1_cannon}
+{left_arm_cannon_posY} += 3{part2_cannon} - 2.9{part2_cannon}{cannon_flush}
+
+{part0_front_cannon} = if({front_cannon} != 1, animate2({front_cannon}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_front_cannon} = if({front_cannon} != 1, animate2({front_cannon}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_front_cannon} = if({front_cannon} != 1, animate2({front_cannon}, 1.0, 0.6, 0.4, 0.0), 1)
+{left_arm_inner_front_cannon_cover_posZ} += 0.03{part0_front_cannon}
+{left_arm_outer_front_cannon_cover_posZ} += 0.03{part0_front_cannon}
+{left_arm_inner_front_cannon_cover_posX} -= 1{part1_front_cannon}
+{left_arm_outer_front_cannon_cover_posX} += 1{part1_front_cannon}
+{left_arm_front_cannon_posZ} -= 2.9{part2_front_cannon} - 0.8{part2_front_cannon}{cannon_flush}
+
+{part0_back_cannon} = if({back_cannon} != 1, animate2({back_cannon}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_back_cannon} = if({back_cannon} != 1, animate2({back_cannon}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_back_cannon} = if({back_cannon} != 1, animate2({back_cannon}, 1.0, 0.6, 0.4, 0.0), 1)
+{left_arm_inner_back_cannon_cover_posZ} -= 0.03{part0_back_cannon}
+{left_arm_outer_back_cannon_cover_posZ} -= 0.03{part0_back_cannon}
+{left_arm_inner_back_cannon_cover_posX} -= 1{part1_back_cannon}
+{left_arm_outer_back_cannon_cover_posX} += 1{part1_back_cannon}
+{left_arm_back_cannon_posZ} += 2.9{part2_back_cannon} - 0.8{part2_back_cannon}{cannon_flush}
+
+;rockets
+{part0_outer_rocket} = if({outer_rocket} != 1, animate2({outer_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_outer_rocket} = if({outer_rocket} != 1, animate2({outer_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_outer_rocket} = if({outer_rocket} != 1, animate2({outer_rocket}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_outer_rocket} = if({outer_rocket} != 1, animate2({outer_rocket}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_outer_rocket} = if({outer_rocket} != 1, animate2({outer_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{left_arm_front_outer_rocket_cover_posX} -= 0.03{part0_outer_rocket}
+{left_arm_back_outer_rocket_cover_posX} -= 0.03{part0_outer_rocket}
+{left_arm_front_outer_rocket_cover_posZ} -= 1{part1_outer_rocket}
+{left_arm_back_outer_rocket_cover_posZ} += 1{part1_outer_rocket}
+{left_arm_outer_rocket_posY} += -0.15{part2_outer_rocket} + 0.15{part3_outer_rocket} + 0.5{part4_outer_rocket}
+{left_arm_outer_rocket_rotZ} -= 45'{part3_outer_rocket}
+{left_arm_outer_rocket_posX} += 0.5{part4_outer_rocket}
+
+{part0_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{left_arm_outer_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
+{left_arm_inner_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
+{left_arm_outer_front_rocket_cover_posX} += 1{part1_front_rocket}
+{left_arm_inner_front_rocket_cover_posX} -= 1{part1_front_rocket}
+{left_arm_front_rocket_posY} += -0.15{part2_front_rocket} + 0.15{part3_front_rocket} + 0.5{part4_front_rocket}
+{left_arm_front_rocket_rotX} -= 45'{part3_front_rocket}
+{left_arm_front_rocket_posZ} -= 0.5{part4_front_rocket}
+
+{part0_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.5, 0.4, 0.0), 1)
+{part4_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{left_arm_outer_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
+{left_arm_inner_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
+{left_arm_outer_back_rocket_cover_posX} += 1{part1_back_rocket}
+{left_arm_inner_back_rocket_cover_posX} -= 1{part1_back_rocket}
+{left_arm_back_rocket_posY} += -0.15{part2_back_rocket} + 0.15{part3_back_rocket} + 0.5{part4_back_rocket}
+{left_arm_back_rocket_rotX} += 45'{part3_back_rocket}
+{left_arm_back_rocket_posZ} += 0.5{part4_back_rocket}
+
+;blade
+{part0_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.6, 0.2, 0.0), 1)
+{part4_blade} = if({blade} != 1, animate2({blade}, 1.0, 0.8, 0.2, 0.0), 1)
+{part1_blade_stealth} = if({blade_stealth} != 1, animate2({blade_stealth}, 1.0, 0.0, 0.4, 0.0), 1)
+{part2_blade_stealth} = if({blade_stealth} != 1, animate2({blade_stealth}, 1.0, 0.6, 0.4, 0.0), 1)
+{part3_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.5, 0.05, 0.0), 1)
+{part4_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.55, 0.05, 0.0), 1)
+{part5_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.6, 0.05, 0.0), 1)
+{part6_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.65, 0.05, 0.0), 1)
+{part7_blade_sides} = if({blade} != 1, animate2({blade}, 1.0, 0.7, 0.05, 0.0), 1)
+{part3_blade_center} = if({blade} != 1, animate2({blade}, 1.0, 0.75, 0.05, 0.0), 1)
+{part4_blade_center} = if({blade} != 1, animate2({blade}, 1.0, 0.8, 0.05, 0.0), 1)
+{part5_blade_center} = if({blade} != 1, animate2({blade}, 1.0, 0.85, 0.05, 0.0), 1)
+{part6_blade_center} = if({blade} != 1, animate2({blade}, 1.0, 0.9, 0.05, 0.0), 1)
+{part7_blade_center} = if({blade} != 1, animate2({blade}, 1.0, 0.95, 0.05, 0.0), 1)
+
+;cover
+{left_arm_front_blade_cover_posX} += 0.03{part0_blade}
+{left_arm_back_blade_cover_posX} += 0.03{part0_blade}
+{left_arm_front_blade_cover_posZ} -= 1{part1_blade}
+{left_arm_back_blade_cover_posZ} += 1{part1_blade}
+{left_arm_blade_arm_posY} += 3{part2_blade} - {part3_blade} - 2.5{part1_blade_stealth}{part4_blade} + 1.25{part2_blade_stealth}{part4_blade}
+{left_arm_blade_arm_rotZ} += 65'{part2_blade} - 70'{part3_blade}
+{left_arm_blade_base_rotZ} -= 65'{part2_blade} - 70'{part3_blade}
+{left_arm_blade_arm_posX} -= 2{part2_blade} - 0.9{part1_blade_stealth}{part4_blade} - 0.4{part2_blade_stealth}{part4_blade}
+;front
+{left_arm_blade_front_edge_upper_2_posX} -= 2{part3_blade_sides} - 2{part4_blade_sides}
+{left_arm_blade_front_edge_lower_2_posX} -= 2{part3_blade_sides} - 2{part4_blade_sides}
+{left_arm_blade_front_edge_upper_2_posZ} -= 2{part4_blade_sides}
+{left_arm_blade_front_edge_lower_2_posZ} += 2{part4_blade_sides}
+{left_arm_blade_front_edge_upper_1_posX} -= 2{part4_blade_sides} + 2{part6_blade_sides}
+{left_arm_blade_front_edge_lower_1_posX} -= 2{part4_blade_sides} + 2{part6_blade_sides}
+{left_arm_blade_front_edge_upper_1_posZ} -= {part6_blade_sides}
+{left_arm_blade_front_edge_lower_1_posZ} += {part6_blade_sides}
+{left_arm_blade_front_upper_3_posZ} += 2{part5_blade_sides}
+{left_arm_blade_front_upper_2_posZ} += 2{part6_blade_sides}
+{left_arm_blade_front_upper_1_posX} -= 2{part6_blade_sides}
+{left_arm_blade_front_upper_1_posZ} += 1{part7_blade_sides}
+{left_arm_blade_front_lower_4_posZ} -= 2{part4_blade_sides}
+{left_arm_blade_front_lower_3_posZ} -= 2{part5_blade_sides}
+{left_arm_blade_front_lower_2_posZ} -= 2{part6_blade_sides}
+{left_arm_blade_front_lower_1_posX} -= 2{part6_blade_sides}
+{left_arm_blade_front_lower_1_posZ} -= 1{part7_blade_sides}
+;back
+{left_arm_blade_back_edge_upper_2_posX} += 2{part3_blade_sides} - 2{part4_blade_sides}
+{left_arm_blade_back_edge_lower_2_posX} += 2{part3_blade_sides} - 2{part4_blade_sides}
+{left_arm_blade_back_edge_upper_2_posZ} -= 2{part4_blade_sides}
+{left_arm_blade_back_edge_lower_2_posZ} += 2{part4_blade_sides}
+{left_arm_blade_back_edge_upper_1_posX} += 2{part4_blade_sides} + 2{part6_blade_sides}
+{left_arm_blade_back_edge_lower_1_posX} += 2{part4_blade_sides} + 2{part6_blade_sides}
+{left_arm_blade_back_edge_upper_1_posZ} -= {part6_blade_sides}
+{left_arm_blade_back_edge_lower_1_posZ} += {part6_blade_sides}
+{left_arm_blade_back_upper_3_posZ} += 2{part5_blade_sides}
+{left_arm_blade_back_upper_2_posZ} += 2{part6_blade_sides}
+{left_arm_blade_back_upper_1_posX} += 2{part6_blade_sides}
+{left_arm_blade_back_upper_1_posZ} += 1{part7_blade_sides}
+{left_arm_blade_back_lower_4_posZ} -= 2{part4_blade_sides}
+{left_arm_blade_back_lower_3_posZ} -= 2{part5_blade_sides}
+{left_arm_blade_back_lower_2_posZ} -= 2{part6_blade_sides}
+{left_arm_blade_back_lower_1_posX} += 2{part6_blade_sides}
+{left_arm_blade_back_lower_1_posZ} -= 1{part7_blade_sides}
+;center
+{left_arm_blade_center_lower_4_posZ} -= 2{part4_blade_center}
+{left_arm_blade_center_lower_3_posZ} -= 2{part5_blade_center}
+{left_arm_blade_center_lower_2_posZ} -= 2{part6_blade_center}
+{left_arm_blade_center_lower_1_posZ} -= 2{part7_blade_center}
+{left_arm_blade_center_upper_2_posZ} += 2{part4_blade_center}
+{left_arm_blade_center_upper_1_posZ} += 2{part5_blade_center}
+
+;shield
+{part0_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.4, 0.2, 0.0), 1)
+{part3_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.5, 0.1, 0.0), 1)
+{part4_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.6, 0.1, 0.0), 1)
+{part5_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.7, 0.1, 0.0), 1)
+{part6_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.8, 0.1, 0.0), 1)
+{part7_shield} = if({shield} != 1, animate2({shield}, 1.0, 0.9, 0.1, 0.0), 1)
+
+{left_arm_front_shield_cover_posX} -= 0.03{part0_shield}
+{left_arm_back_shield_cover_posX} -= 0.03{part0_shield}
+{left_arm_front_shield_cover_posZ} -= 1{part1_shield}
+{left_arm_back_shield_cover_posZ} += 1{part1_shield}
+{left_arm_shield_arm_posX} += 2{part2_shield}
+{left_arm_shield_arm_posY} += 2{part2_shield}
+{left_arm_shield_arm_rotZ} -= 100'{part3_shield} - 40'{part3_outer_rocket}{part3_shield}
+{left_arm_shield_base_rotZ} += 100'{part3_shield} - 40'{part3_outer_rocket}{part3_shield}
+;upper
+{left_arm_shield_ring_4_upper_posX} += 2{part4_shield}
+{left_arm_shield_ring_4_upper_front_4_posZ} += 2{part4_shield}
+{left_arm_shield_ring_4_upper_back_4_posZ} -= 2{part4_shield}
+{left_arm_shield_ring_4_upper_front_3_posZ} += 2{part5_shield}
+{left_arm_shield_ring_4_upper_back_3_posZ} -= 2{part5_shield}
+{left_arm_shield_ring_4_upper_front_2_posZ} += 2{part6_shield}
+{left_arm_shield_ring_4_upper_back_2_posZ} -= 2{part6_shield}
+{left_arm_shield_ring_4_upper_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_4_upper_back_1_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_3_upper_posX} += 2{part5_shield}
+{left_arm_shield_ring_3_upper_front_3_posZ} += 2{part5_shield}
+{left_arm_shield_ring_3_upper_back_3_posZ} -= 2{part5_shield}
+{left_arm_shield_ring_3_upper_front_2_posZ} += 2{part6_shield}
+{left_arm_shield_ring_3_upper_back_2_posZ} -= 2{part6_shield}
+{left_arm_shield_ring_3_upper_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_3_upper_back_1_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_2_upper_posX} += 2{part6_shield}
+{left_arm_shield_ring_2_upper_front_2_posZ} += 2{part6_shield}
+{left_arm_shield_ring_2_upper_back_2_posZ} -= 2{part6_shield}
+{left_arm_shield_ring_2_upper_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_2_upper_back_1_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_1_upper_posX} += 2{part7_shield}
+{left_arm_shield_ring_1_upper_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_1_upper_back_1_posZ} -= 2{part7_shield}
+;lower
+{left_arm_shield_ring_4_lower_posX} += 2{part4_shield}
+{left_arm_shield_ring_4_lower_front_4_posZ} += 2{part4_shield}
+{left_arm_shield_ring_4_lower_back_4_posZ} -= 2{part4_shield}
+{left_arm_shield_ring_4_lower_front_3_posZ} += 2{part5_shield}
+{left_arm_shield_ring_4_lower_back_3_posZ} -= 2{part5_shield}
+{left_arm_shield_ring_4_lower_front_2_posZ} += 2{part6_shield}
+{left_arm_shield_ring_4_lower_back_2_posZ} -= 2{part6_shield}
+{left_arm_shield_ring_4_lower_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_4_lower_back_1_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_3_lower_posX} += 2{part5_shield}
+{left_arm_shield_ring_3_lower_front_3_posZ} += 2{part5_shield}
+{left_arm_shield_ring_3_lower_back_3_posZ} -= 2{part5_shield}
+{left_arm_shield_ring_3_lower_front_2_posZ} += 2{part6_shield}
+{left_arm_shield_ring_3_lower_back_2_posZ} -= 2{part6_shield}
+{left_arm_shield_ring_3_lower_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_3_lower_back_1_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_2_lower_posX} += 2{part6_shield}
+{left_arm_shield_ring_2_lower_front_2_posZ} += 2{part6_shield}
+{left_arm_shield_ring_2_lower_back_2_posZ} -= 2{part6_shield}
+{left_arm_shield_ring_2_lower_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_2_lower_back_1_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_1_lower_posX} -= 2{part7_shield}
+{left_arm_shield_ring_1_lower_front_1_posZ} += 2{part7_shield}
+{left_arm_shield_ring_1_lower_back_1_posZ} -= 2{part7_shield}
+;front
+{left_arm_shield_ring_4_front_posZ} += 2{part4_shield}
+{left_arm_shield_ring_4_front_upper_4_posX} += 2{part4_shield}
+{left_arm_shield_ring_4_front_lower_4_posX} -= 2{part4_shield}
+{left_arm_shield_ring_4_front_upper_3_posX} += 2{part5_shield}
+{left_arm_shield_ring_4_front_lower_3_posX} -= 2{part5_shield}
+{left_arm_shield_ring_4_front_upper_2_posX} += 2{part6_shield}
+{left_arm_shield_ring_4_front_lower_2_posX} -= 2{part6_shield}
+{left_arm_shield_ring_4_front_upper_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_4_front_lower_1_posX} -= 2{part7_shield}
+{left_arm_shield_ring_3_front_posZ} += 2{part5_shield}
+{left_arm_shield_ring_3_front_upper_3_posX} += 2{part5_shield}
+{left_arm_shield_ring_3_front_lower_3_posX} -= 2{part5_shield}
+{left_arm_shield_ring_3_front_upper_2_posX} += 2{part6_shield}
+{left_arm_shield_ring_3_front_lower_2_posX} -= 2{part6_shield}
+{left_arm_shield_ring_3_front_upper_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_3_front_lower_1_posX} -= 2{part7_shield}
+{left_arm_shield_ring_2_front_posZ} += 2{part6_shield}
+{left_arm_shield_ring_2_front_upper_2_posX} += 2{part6_shield}
+{left_arm_shield_ring_2_front_lower_2_posX} -= 2{part6_shield}
+{left_arm_shield_ring_2_front_upper_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_2_front_lower_1_posX} -= 2{part7_shield}
+{left_arm_shield_ring_1_front_posZ} -= 2{part7_shield}
+{left_arm_shield_ring_1_front_upper_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_1_front_lower_1_posX} -= 2{part7_shield}
+;back
+{left_arm_shield_ring_4_back_posZ} += 2{part4_shield}
+{left_arm_shield_ring_4_back_lower_4_posX} += 2{part4_shield}
+{left_arm_shield_ring_4_back_upper_4_posX} -= 2{part4_shield}
+{left_arm_shield_ring_4_back_lower_3_posX} += 2{part5_shield}
+{left_arm_shield_ring_4_back_upper_3_posX} -= 2{part5_shield}
+{left_arm_shield_ring_4_back_lower_2_posX} += 2{part6_shield}
+{left_arm_shield_ring_4_back_upper_2_posX} -= 2{part6_shield}
+{left_arm_shield_ring_4_back_lower_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_4_back_upper_1_posX} -= 2{part7_shield}
+{left_arm_shield_ring_3_back_posZ} += 2{part5_shield}
+{left_arm_shield_ring_3_back_lower_3_posX} += 2{part5_shield}
+{left_arm_shield_ring_3_back_upper_3_posX} -= 2{part5_shield}
+{left_arm_shield_ring_3_back_lower_2_posX} += 2{part6_shield}
+{left_arm_shield_ring_3_back_upper_2_posX} -= 2{part6_shield}
+{left_arm_shield_ring_3_back_lower_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_3_back_upper_1_posX} -= 2{part7_shield}
+{left_arm_shield_ring_2_back_posZ} += 2{part6_shield}
+{left_arm_shield_ring_2_back_lower_2_posX} += 2{part6_shield}
+{left_arm_shield_ring_2_back_upper_2_posX} -= 2{part6_shield}
+{left_arm_shield_ring_2_back_lower_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_2_back_upper_1_posX} -= 2{part7_shield}
+{left_arm_shield_ring_1_back_posZ} += 2{part7_shield}
+{left_arm_shield_ring_1_back_lower_1_posX} += 2{part7_shield}
+{left_arm_shield_ring_1_back_upper_1_posX} -= 2{part7_shield}

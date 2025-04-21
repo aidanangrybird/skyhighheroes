@@ -1,0 +1,17 @@
+{
+  "name": "Thermoptic Manipulation",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:transformation|camouflage": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/thermoptic_camouflage",
+        "timerData": "skyhighheroes:dyn/thermoptic_camouflage_timer",
+        "time": 20
+      },
+      "isToggle": true
+    },
+    "fiskheroes:invisibility": {
+      "isToggle": true
+    }
+  }
+}
