@@ -283,7 +283,7 @@ function chatMessage(entity, message) {
  * @param {string} message - Message content
  **/
 function systemMessage(entity, message) {
-  var id = getModel(player);
+  var id = getModel(entity);
   var color = id.split("-")[1];
   chatMessage(entity, formatSystem("\u00A7" + color + "\u00A7lastrOS<r>> " + message));
 };
