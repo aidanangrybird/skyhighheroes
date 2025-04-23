@@ -54,7 +54,7 @@ function init(renderer) {
   });
   renderer.showModel("HELMET", "head", "headwear", "body", "rightArm", "leftArm", "rightLeg", "leftLeg");
   renderer.fixHatLayer("HELMET");
-  renderer.setItemIcon("HELMET", "cyberbrain");
+  renderer.setItemIcon("HELMET", "%s_cybernetic_brain");
   initEffects(renderer);
   initAnimations(renderer);
 };
