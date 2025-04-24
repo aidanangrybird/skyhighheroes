@@ -35,7 +35,7 @@ function initLeftArmBeams(renderer, color) {
     { "firstPerson": [-7.0, 3.75, -11.4], "offset": [0.5, 8.0, -2.5], "size": [2.0, 2.0] },
     { "firstPerson": [-2.0, 3.75, -11.4], "offset": [0.5, 8.0, 2.5], "size": [2.0, 2.0] }
   ];
-  var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cannons_charged_beam", "rightArm", color, positionFlush);
+  var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cannons_charged_beam", "leftArm", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannon"));
 };
