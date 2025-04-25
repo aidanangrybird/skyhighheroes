@@ -72,7 +72,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "deploy":
+          case "show":
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/blade_left_arm_deployed", true);
@@ -89,7 +89,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "retract":
+          case "hide":
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/blade_left_arm_deployed", false);
@@ -144,8 +144,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Blades commands:");
             system.moduleMessage(this, entity, "<n>!blade arm <left|right|*> <nh>-<n> Arms blades");
             system.moduleMessage(this, entity, "<n>!blade disarm <left|right|*> <nh>-<n> Disarms blades");
-            system.moduleMessage(this, entity, "<n>!blade deploy <left|right|*> <nh>-<n> Deploys blades");
-            system.moduleMessage(this, entity, "<n>!blade retract <left|right|*> <nh>-<n> Retracts disarmed blades");
+            system.moduleMessage(this, entity, "<n>!blade show <left|right|*> <nh>-<n> Deploys blades");
+            system.moduleMessage(this, entity, "<n>!blade hide <left|right|*> <nh>-<n> Retracts disarmed blades");
             system.moduleMessage(this, entity, "<n>!blade stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
             system.moduleMessage(this, entity, "<n>!blade stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
             system.moduleMessage(this, entity, "<n>!blade status <nh>-<n> Shows status of blades");

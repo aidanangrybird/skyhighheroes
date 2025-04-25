@@ -23,7 +23,7 @@ function initModule(system) {
             manager.setBoolean(nbt, "wings", false);
             system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
             break;
-          case "deploy":
+          case "show":
             switch(arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/wing_left_deployed", true);
@@ -40,7 +40,7 @@ function initModule(system) {
                 break;
               };
             break;
-          case "retract":
+          case "hide":
             switch(arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/wing_left_deployed", false);
@@ -61,8 +61,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Wings commands:");
             system.moduleMessage(this, entity, "<n>!wing arm <nh>-<n> Arms wings");
             system.moduleMessage(this, entity, "<n>!wing disarm <nh>-<n> Disarms wings");
-            system.moduleMessage(this, entity, "<n>!wing deploy <nh>-<n> Deploys wings");
-            system.moduleMessage(this, entity, "<n>!wing retract <nh>-<n> Retracts wings");
+            system.moduleMessage(this, entity, "<n>!wing show <nh>-<n> Deploys wings");
+            system.moduleMessage(this, entity, "<n>!wing hide <nh>-<n> Retracts wings");
             system.moduleMessage(this, entity, "<n>!wing status <nh>-<n> Shows status of wings");
             system.moduleMessage(this, entity, "<n>!wing help <nh>-<n> Shows wings commands");
             break;

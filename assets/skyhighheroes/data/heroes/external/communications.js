@@ -191,7 +191,7 @@ function initModule(system) {
               system.moduleMessage(this, entity, "<n>No other cybers in range!")
             };
             break;
-          case "deploy":
+          case "show":
             switch (arguments[2]) {
               case "sat":
                 manager.setData(entity, "skyhighheroes:dyn/satellite", true);
@@ -207,7 +207,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "retract":
+          case "hide":
             switch (arguments[2]) {
               case "sat":
                 manager.setData(entity, "skyhighheroes:dyn/satellite", false);
@@ -231,8 +231,8 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Communications commands:");
-            system.moduleMessage(this, entity, "<n>!comms deploy <sat|ant|satRain> <nh>-<n> Deploys comms type");
-            system.moduleMessage(this, entity, "<n>!comms retract <sat|ant|satRain> <nh>-<n> Retracts comms type");
+            system.moduleMessage(this, entity, "<n>!comms show <sat|ant|satRain> <nh>-<n> Deploys comms type");
+            system.moduleMessage(this, entity, "<n>!comms hide <sat|ant|satRain> <nh>-<n> Retracts comms type");
             system.moduleMessage(this, entity, "<n>!comms suits <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
             system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");
             system.moduleMessage(this, entity, "<n>!comms help <nh>-<n> Shows communications commands");

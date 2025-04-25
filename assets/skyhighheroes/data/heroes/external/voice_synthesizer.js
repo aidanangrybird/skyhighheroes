@@ -48,11 +48,11 @@ function initModule(system) {
             manager.setBoolean(nbt, "mouth", false);
             system.moduleMessage(this, entity, "<n>Disarmed mouth!");
             break;
-          case "deploy":
+          case "show":
             manager.setData(entity, "skyhighheroes:dyn/mouth_deployed", true);
             system.moduleMessage(this, entity, "<n>Deployed mouth!");
             break;
-          case "retract":
+          case "hide":
             manager.setData(entity, "skyhighheroes:dyn/mouth_deployed", false);
             system.moduleMessage(this, entity, "<n>Retracted mouth!");
             break;
@@ -64,8 +64,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Voice Synthesizer commands:");
             system.moduleMessage(this, entity, "<n>!vs arm <nh>-<n> Arms mouth");
             system.moduleMessage(this, entity, "<n>!vs disarm <nh>-<n> Disarms mouth");
-            system.moduleMessage(this, entity, "<n>!vs deploy <nh>-<n> Shows mouth");
-            system.moduleMessage(this, entity, "<n>!vs retract <nh>-<n> Hides mouth");
+            system.moduleMessage(this, entity, "<n>!vs show <nh>-<n> Shows mouth");
+            system.moduleMessage(this, entity, "<n>!vs hide <nh>-<n> Hides mouth");
             system.moduleMessage(this, entity, "<n>!vs status <nh>-<n> Shows status of voice synthesizer");
             system.moduleMessage(this, entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
             break;

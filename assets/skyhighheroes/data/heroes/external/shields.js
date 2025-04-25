@@ -72,7 +72,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "deploy":
+          case "show":
             switch (arguments[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/shield_left_arm_deployed", true);
@@ -89,7 +89,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "retract":
+          case "hide":
             switch (arguments[2]) {
               case "left":
                 if (!nbt.getBoolean("shieldsLeft") && entity.getData("fiskheroes:shield_timer") > 0) {
@@ -118,8 +118,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Shields commands:");
             system.moduleMessage(this, entity, "<n>!shield arm <left|right|*> <nh>-<n> Arms shields");
             system.moduleMessage(this, entity, "<n>!shield disarm <left|right|*> <nh>-<n> Disarms shields");
-            system.moduleMessage(this, entity, "<n>!shield deploy <left|right|*> <nh>-<n> Deploys shields");
-            system.moduleMessage(this, entity, "<n>!shield retract <left|right|*> <nh>-<n> Retracts disarmed shields");
+            system.moduleMessage(this, entity, "<n>!shield show <left|right|*> <nh>-<n> Deploys shields");
+            system.moduleMessage(this, entity, "<n>!shield hide <left|right|*> <nh>-<n> Retracts disarmed shields");
             system.moduleMessage(this, entity, "<n>!shield status <nh>-<n> Shows status of shields");
             system.moduleMessage(this, entity, "<n>!shield help <nh>-<n> Shows shields commands");
             break;

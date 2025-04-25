@@ -103,7 +103,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "deploy":
+          case "show":
             switch (arguments[2]) {
               case "eyes":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_eye_left_deployed", true);
@@ -150,11 +150,11 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm bottom<s> cannon!");
                 break;
-              case "leftArmFrnt":
+              case "leftArmFront":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_front_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm front<s> cannon!");
                 break;
-              case "leftArmBck":
+              case "leftArmBack":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm back<s> cannon!");
                 break;
@@ -168,11 +168,11 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm bottom<s> cannon!");
                 break;
-              case "rightArmFrnt":
+              case "rightArmFront":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm front<s> cannon!");
                 break;
-              case "rightArmBck":
+              case "rightArmBack":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm back<s> cannon!");
                 break;
@@ -191,7 +191,7 @@ function initModule(system) {
                 break;
             };
             break;
-          case "retract":
+          case "hide":
             switch (arguments[2]) {
               case "eyes":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_eye_left_deployed", false);
@@ -234,11 +234,11 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm bottom<s> cannon!");
                 break;
-              case "leftArmFrnt":
+              case "leftArmFront":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_front_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm front<s> cannon!");
                 break;
-              case "leftArmBck":
+              case "leftArmBack":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm back<s> cannon!");
                 break;
@@ -252,11 +252,11 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm bottom<s> cannon!");
                 break;
-              case "rightArmFrnt":
+              case "rightArmFront":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm front<s> cannon!");
                 break;
-              case "rightArmBck":
+              case "rightArmBack":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm back<s> cannon!");
                 break;
@@ -280,8 +280,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!cannon status <nh>-<n> Shows status of cannons");
             system.moduleMessage(this, entity, "<n>!cannon arm <eyes|body|arms|*> <nh>-<n> Arms set of cannons");
             system.moduleMessage(this, entity, "<n>!cannon disarm <eyes|body|arms|*> <nh>-<n> Disarm set of cannons");
-            system.moduleMessage(this, entity, "<n>!cannon deploy <eyes|body|arms|*> <nh>-<n> Deploys cannons");
-            system.moduleMessage(this, entity, "<n>!cannon retract <eyes|body|arms|*> <nh>-<n> Retracts cannons");
+            system.moduleMessage(this, entity, "<n>!cannon show <eyes|body|arms|*> <nh>-<n> Deploys cannons");
+            system.moduleMessage(this, entity, "<n>!cannon hide <eyes|body|arms|*> <nh>-<n> Retracts cannons");
             system.moduleMessage(this, entity, "<n>!cannon help <nh>-<n> Shows cannons commands");
             break;
           case "status":

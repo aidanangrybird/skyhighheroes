@@ -20,18 +20,18 @@ function initModule(system) {
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 3) {
         switch (arguments[1]) {
-          case "deploy":
+          case "show":
             manager.setData(entity, "skyhighheroes:dyn/external_arm_left_deployed", true);
             manager.setData(entity, "skyhighheroes:dyn/external_arm_right_deployed", true);
             break;
-          case "retract":
+          case "hide":
             manager.setData(entity, "skyhighheroes:dyn/external_arm_left_deployed", false);
             manager.setData(entity, "skyhighheroes:dyn/external_arm_right_deployed", false);
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>External Arms commands:");
-            system.moduleMessage(this, entity, "<n>!extarms deploy <nh>-<n> Deploys external arms");
-            system.moduleMessage(this, entity, "<n>!extarms retract <nh>-<n> Retracts external arms");
+            system.moduleMessage(this, entity, "<n>!extarms show <nh>-<n> Deploys external arms");
+            system.moduleMessage(this, entity, "<n>!extarms hide <nh>-<n> Retracts external arms");
             system.moduleMessage(this, entity, "<n>!extarms status <nh>-<n> Shows status of external arms");
             system.moduleMessage(this, entity, "<n>!extarms help <nh>-<n> Shows externalArms commands");
             break;
