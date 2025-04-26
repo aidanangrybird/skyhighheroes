@@ -1,0 +1,23 @@
+{
+  "suit": "skyhighheroes:cyber_green",
+  "requirements": [
+    "skyhighheroes:cybernetics",
+    "fiskheroes:tier8_9",
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "exist": {
+      "trigger": "fiskheroes:player_killed",
+      "description": {
+        "translate": "Die in fire"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_KILLED",
+          "damage": "DAMAGE_SOURCE"
+        },
+        "check": "player.isBurning() && damage.isFireDamage()"
+      }
+    }
+  }
+}

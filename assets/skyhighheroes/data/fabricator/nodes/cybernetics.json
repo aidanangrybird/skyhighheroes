@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "Cybernetics"
+    },
+    "description": {
+      "translate": "Be rebuilt into a more powerful being!"
+    },
+    "icon": {
+      "texture": "skyhighheroes:textures/gui/nodes/cybernetic_brain.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ]
+}
