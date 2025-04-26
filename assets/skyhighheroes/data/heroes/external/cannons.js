@@ -220,8 +220,12 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right body<s> cannon!");
                 break;
               case "arms":
-                manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>arm<s> cannons!");
                 break;
               case "leftArm":
