@@ -313,6 +313,7 @@ function initLeftLegBoosters(renderer, model, color) {
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0;
+      var innerRockets = entity.getData("skyhighheroes:dyn/rocket_inner_legs_timer");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
       b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
       var f = Math.PI * 2;
@@ -340,7 +341,6 @@ function initLeftLegBoosters(renderer, model, color) {
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0;
-      var innerRockets = entity.getData("skyhighheroes:dyn/rocket_inner_legs_timer");
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
       b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
       var f = Math.PI * 2;
@@ -437,19 +437,19 @@ function initLeftLegBoosters(renderer, model, color) {
       //Center
       bloomOuterBoosterCenter.progress = bloomOuterBoosterCenter.opacity = flight;
       //Inner
-      boosterInnerBooster.progress = boost;
-      boosterInnerBooster.speedScale = 2.0 * boost;
-      boosterInnerBooster.flutter = 1 + boost;
+      boosterInnerBooster.progress = boost * innerRockets;
+      boosterInnerBooster.speedScale = 2.0 * boost * innerRockets;
+      boosterInnerBooster.flutter = 1 + boost * innerRockets;
       //Beams
       lineInnerBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 1.5 * 1.5 / 8);
       lineInnerBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.75 * 0.75 / 8);
       lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
-      bloomInnerBoosterEdge.progress = bloomInnerBoosterEdge.opacity = flight;
+      bloomInnerBoosterEdge.progress = bloomInnerBoosterEdge.opacity = flight * innerRockets;
       //Middle
-      bloomInnerBoosterMiddle.progress = bloomInnerBoosterMiddle.opacity = flight;
+      bloomInnerBoosterMiddle.progress = bloomInnerBoosterMiddle.opacity = flight * innerRockets;
       //Center
-      bloomInnerBoosterCenter.progress = bloomInnerBoosterCenter.opacity = flight;
+      bloomInnerBoosterCenter.progress = bloomInnerBoosterCenter.opacity = flight * innerRockets;
       //Front
       boosterFrontBooster.progress = boost;
       boosterFrontBooster.speedScale = 2.0 * boost;
