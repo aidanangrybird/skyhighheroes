@@ -41,7 +41,7 @@ function assignTranser(entity, manager, satellite) {
   if (!entity.getWornChestplate().nbt().hasKey("worthy") && (entity.getWornChestplate().suitType() == "skyhighheroes:leo_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:pegasus_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:dragon_transer")) {
     if (PackLoader.getSide() == "SERVER") {
       var value = Math.random();
-      if (value < 0.005) {
+      if (value < 0.05) {
         manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", true);
         manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:geo_stelar");
       } else {
@@ -691,6 +691,16 @@ function initSystem(moduleList, transerName, satellite) {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
       hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
       hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
+    },
+    setKeyBind: (entity, keyBind) => {
+      switch (keyBind) {
+        case "CYCLE_CHATS":
+          return !entity.isSneaking();
+        case "CYCLE_CHAT_MODES":
+          return entity.isSneaking();
+        default:
+          return true;
+      };
     },
     /**
      * EM wave change stuff
