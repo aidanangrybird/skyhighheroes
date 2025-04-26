@@ -27,7 +27,7 @@ function init(hero) {
     return transerOS.getWaveProfile(entity);
   });
   hero.addPowers("skyhighheroes:transer_system");
-  hero.setKeyBindEnabled((entity, keyBind) => transerSystem.setKeyBind(entity, keyBind));
+  hero.setKeyBindEnabled((entity, keyBind) => transerOS.setKeyBind(entity, keyBind));
   hero.setTickHandler((entity, manager) => {
     transerOS.waveHandler(entity, hero);
     transerOS.systemHandler(entity, manager);
