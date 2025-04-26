@@ -37,10 +37,11 @@ function initModule(system) {
   };
   /**
   * Lists suits on suit data drive
+  * @param module - module passthrough
   * @param entity - Required
   * @param manager - Required
   **/
-  function listDriveSuits(entity, manager) {
+  function listDriveSuits(module, entity, manager) {
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
@@ -52,12 +53,12 @@ function initModule(system) {
     };
     if (suitDrive != null) {
       var dataDriveSuits = system.getStringArray(suitDrive.getStringList("Suits"));
-      system.moduleMessage(this, entity, "<nh>" + ((dataDriveSuits.length == 1) ? ("<nh>" + dataDriveSuits.length + "<n> suit:") : ("<nh>" + dataDriveSuits.length + "<n> suits:")));
+      system.moduleMessage(module, entity, "<nh>" + ((dataDriveSuits.length == 1) ? ("<nh>" + dataDriveSuits.length + "<n> suit:") : ("<nh>" + dataDriveSuits.length + "<n> suits:")));
       dataDriveSuits.forEach(entry => {
-        system.moduleMessage(this, entity, "<nh>" + dataDriveSuits.indexOf(entry) + "<n>> <nh>" + entry);
+        system.moduleMessage(module, entity, "<nh>" + dataDriveSuits.indexOf(entry) + "<n>> <nh>" + entry);
       });
     } else {
-      system.moduleMessage(this, entity, "<e>Suit drive not plugged in!");
+      system.moduleMessage(module, entity, "<e>Suit drive not plugged in!");
     };
   };
   /**
@@ -68,6 +69,10 @@ function initModule(system) {
   * @param suitList - List of suit indexes seperated by commas
   **/
   function downloadSuits(module, entity, manager, suitList) {
+    if (typeof suitList === "undefined") {
+      system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
+      return;
+    };
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
@@ -155,6 +160,10 @@ function initModule(system) {
   * @param suitList - List of suit indexes seperated by commas
   **/
   function uploadSuits(module, entity, manager, suitList) {
+    if (typeof suitList === "undefined") {
+      system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
+      return;
+    };
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
@@ -224,12 +233,17 @@ function initModule(system) {
     };
   };
   /**
-   * Removes suits by index
-   * @param {JSEntity} entity - Required
-   * @param {JSDataManager} manager - Required
-   * @param {string} suitIndex - Index of suit to remove
-   **/
-  function removeSuit(entity, manager, suitIndex) {
+  * Removes suits by index
+  * @param module - module passthrough
+  * @param {JSEntity} entity - Required
+  * @param {JSDataManager} manager - Required
+  * @param {string} suitIndex - Index of suit to remove
+  **/
+  function removeSuit(module, entity, manager, suitIndex) {
+    if (typeof suitIndex === "undefined") {
+      system.moduleMessage(module, entity, "<e>Suit index cannot be empty!");
+      return;
+    };
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
@@ -240,17 +254,17 @@ function initModule(system) {
     var suitDatastore = nbt.getStringList("suitDatastore");
     if (suitIndex == "*") {
       manager.removeTag(nbt, "suitDatastore");
-      system.moduleMessage(this, entity, "<s>Deleted the entire suit datastore!");
+      system.moduleMessage(module, entity, "<s>Deleted the entire suit datastore!");
     } else {
       if ((suitIndex < suitDatastoreArray.length) && (suitIndex > -1)) {
         var currentSuit = suitDatastoreArray[suitIndex];
-        system.moduleMessage(this, entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
+        system.moduleMessage(module, entity, "<n>Removeing suit \"<nh>" + currentSuit + "<n>\"!");
         if (suitDatastoreArray.indexOf(currentSuit) > -1) {
           manager.removeTag(suitDatastore, suitIndex);
-          system.moduleMessage(this, entity, "<s>Successfully removed suit \"<sh>" + currentSuit + "<s>\"!");
+          system.moduleMessage(module, entity, "<s>Successfully removed suit \"<sh>" + currentSuit + "<s>\"!");
           suitsRemoved = suitsRemoved + 1;
         } else {
-          system.moduleMessage(this, entity, "<e>Failed to remove suit \"<eh>" + currentSuit + "<e>\"!");
+          system.moduleMessage(module, entity, "<e>Failed to remove suit \"<eh>" + currentSuit + "<e>\"!");
         };
       };
     };
@@ -260,16 +274,16 @@ function initModule(system) {
   * @param entity - Required
   * @param manager - Required
   **/
-  function listSuits(entity, manager) {
+  function listSuits(module, entity, manager) {
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
     };
     var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
-    system.moduleMessage(this, entity, "<nh>" + ((suitDatastoreArray.length == 1) ? suitDatastoreArray.length + "<n> suit:" : suitDatastoreArray.length + "<n> suits:"));
+    system.moduleMessage(module, entity, "<nh>" + ((suitDatastoreArray.length == 1) ? suitDatastoreArray.length + "<n> suit:" : suitDatastoreArray.length + "<n> suits:"));
     suitDatastoreArray.forEach(entry => {
-      system.moduleMessage(this, entity, "<nh>" + suitDatastoreArray.indexOf(entry) + "<n>> <nh>" + entry);
+      system.moduleMessage(module, entity, "<nh>" + suitDatastoreArray.indexOf(entry) + "<n>> <nh>" + entry);
     });
   };
   return {
@@ -283,7 +297,7 @@ function initModule(system) {
       if (arguments.length > 1 && arguments.length < 4) {
         switch(arguments[1]) {
           case "listDrive":
-            listDriveSuits(entity, manager);
+            listDriveSuits(this, entity, manager);
             break;
           case "download":
             downloadSuits(this, entity, manager, arguments[2]);
@@ -292,10 +306,10 @@ function initModule(system) {
             uploadSuits(this, entity, manager, arguments[2]);
             break;
           case "rem":
-            removeSuit(entity, manager, arguments[2]);
+            removeSuit(this, entity, manager, arguments[2]);
             break;
           case "list":
-            listSuits(entity, manager);
+            listSuits(this, entity, manager);
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Suits Datastore commands:");

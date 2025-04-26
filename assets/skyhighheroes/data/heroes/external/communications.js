@@ -76,6 +76,10 @@ function initModule(system) {
   * @param suitList - List of suit indexes seperated by commas
   **/
   function transmitSuits(module, entity, manager, suitList) {
+    if (typeof suitList === "undefined") {
+      system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
+      return;
+    };
     var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
