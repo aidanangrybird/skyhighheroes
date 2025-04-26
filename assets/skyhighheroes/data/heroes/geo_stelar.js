@@ -52,22 +52,22 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return true;
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
-      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return !entity.isSneaking();
     };
     if (keyBind == "CYCLE_CHAT_MODES") {
-      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
+      return entity.isSneaking();
     };
     if (keyBind == "SHAPE_SHIFT") {
-      return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/jet_streak_timer") == 1);
+      return true;
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
