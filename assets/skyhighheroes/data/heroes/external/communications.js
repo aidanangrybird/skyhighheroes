@@ -175,7 +175,7 @@ function initModule(system) {
             if (foundPlayers.length > 0) {
               //entity = tx
               //player = rx
-              transmitSuits(entity, manager, arguments[2]);
+              transmitSuits(this, entity, manager, arguments[2]);
               foundPlayers.forEach(player => {
                 var rxAntennaDeployed = (player.getData("skyhighheroes:dyn/antenna_timer") == 1) && (player.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (player.getData("skyhighheroes:dyn/satellite_timer") == 1) && (player.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
