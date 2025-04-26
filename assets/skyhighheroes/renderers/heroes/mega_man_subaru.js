@@ -12,7 +12,7 @@ loadTextures({
   "wave_changing_lights": "skyhighheroes:geo/mega_man_subaru_wave_changing_lights.tx.json",
   "predation_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_subaru_predation_wave_changing_sides_lights.tx.json",
   "predation_wave_changing_front_lights": "skyhighheroes:geo/mega_man_subaru_predation_wave_changing_front_lights.tx.json",
-  "sword_blade": "skyhighheroes:geo/mega_man_sword_blade.tx.json",
+  "sword_blade": "skyhighheroes:geo/mega_man_subaru_sword_blade.tx.json",
   "sword": "skyhighheroes:geo/mega_man_subaru_sword.tx.json",
   "sword_wave_changing_lights": "skyhighheroes:geo/mega_man_subaru_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighheroes:geo/mega_man_subaru_sword_sides.tx.json",
