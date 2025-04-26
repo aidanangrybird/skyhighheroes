@@ -14,7 +14,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("SHIELDS", (player, manager) => {
-        system.moduleMessage(this, player, "<e>At least one shield must be armed!");
+        system.moduleMessage(this, player, "<e>To arm a shield do <eh>!shield arm <left|right><e>.");
         return true;
       }, "\u00A7" + color + "Shields (None armed)", 1);
       hero.addKeyBind("SHIELD", "\u00A7" + color + "Shields", 1);

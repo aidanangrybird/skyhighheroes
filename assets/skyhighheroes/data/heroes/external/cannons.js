@@ -3,9 +3,7 @@
  * @param system - Required
  **/
 function initModule(system) {
-  // Charged Beam = 0
-  // Heat Vision = 1
-  // Energy Projection = 2
+  //All of the required functions and stuff go here
   return {
     name: "cannons",
     moduleMessageName: "Cannons",
@@ -16,7 +14,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("CANNONS", (player, manager) => {
-        system.moduleMessage(this, player, "<e>At least one cannon set must be armed!");
+        system.moduleMessage(this, player, "<e>To arm a cannon set do <eh>!cannon arm <arms|body|eyes><e>.");
         return true;
       }, "\u00A7" + color + "Cannons (None armed)", 4);
       hero.addKeyBind("CHARGED_BEAM", "\u00A7" + color + "Cannons", 4);
