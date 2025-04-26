@@ -38,7 +38,10 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/wing_right_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>wings<s>!");
                 break;
-              };
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>wing<e>!");
+                break;
+            };
             break;
           case "hide":
             switch(arguments[2]) {
@@ -55,7 +58,10 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/wing_right_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>wings<s>!");
                 break;
-              };
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>wing<e>!");
+                break;
+            };
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Wings commands:");

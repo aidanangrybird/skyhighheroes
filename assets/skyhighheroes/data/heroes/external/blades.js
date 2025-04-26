@@ -53,6 +53,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "bladesRight", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>all<s> blades!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e>!");
+                break;
             };
             break;
           case "disarm":
@@ -69,6 +72,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "bladesLeft", false);
                 manager.setBoolean(nbt, "bladesRight", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> blades!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e>!");
                 break;
             };
             break;
@@ -87,6 +93,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/blade_right_arm_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> blades!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e>!");
+                break;
             };
             break;
           case "hide":
@@ -103,6 +112,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/blade_left_arm_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/blade_right_arm_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> blades!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e>!");
                 break;
             };
             break;
@@ -121,6 +133,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "bladesRightStealth", true);
                 system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>all<s> blades!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e>!");
+                break;
             };
             break;
           case "stealthOff":
@@ -137,6 +152,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "bladesLeftStealth", false);
                 manager.setBoolean(nbt, "bladesRightStealth", false);
                 system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>all<s> blades!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e>!");
                 break;
             };
             break;

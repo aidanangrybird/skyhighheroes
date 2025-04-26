@@ -205,6 +205,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/satellite_rain_mode", true);
                 system.moduleMessage(this, entity, "<n>Activating satellite rain mode!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>transmitter<e>!");
+                break;
             };
             break;
           case "hide":
@@ -220,6 +223,9 @@ function initModule(system) {
               case "satRain":
                 manager.setData(entity, "skyhighheroes:dyn/satellite_rain_mode", false);
                 system.moduleMessage(this, entity, "<n>Deactivating satellite rain mode!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>transmitter<e>!");
                 break;
             };
             break;

@@ -79,6 +79,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "cannonsArms", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>all<s> cannons!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>cannon set<e>!");
+                break;
             };
             break;
           case "disarm":
@@ -100,6 +103,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "cannonsBody", false);
                 manager.setBoolean(nbt, "cannonsArms", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> cannons!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>cannon set<e>!");
                 break;
             };
             break;
@@ -189,6 +195,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> cannons!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>cannon<e>!");
+                break;
             };
             break;
           case "hide":
@@ -276,6 +285,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_left_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> cannons!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>cannon<e>!");
                 break;
             };
             break;

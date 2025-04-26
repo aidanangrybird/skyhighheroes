@@ -53,6 +53,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "shieldsRight", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>all<s> shields!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>shield<e>!");
+                break;
             };
             break;
           case "disarm":
@@ -70,6 +73,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "shieldsRight", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> shields!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>shield<e>!");
+                break;
             };
             break;
           case "show":
@@ -86,6 +92,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/shield_left_arm_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/shield_right_arm_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> shields!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>shield<e>!");
                 break;
             };
             break;
@@ -111,6 +120,9 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/shield_left_arm_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/shield_right_arm_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> shields!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>shield<e>!");
                 break;
             };
             break;

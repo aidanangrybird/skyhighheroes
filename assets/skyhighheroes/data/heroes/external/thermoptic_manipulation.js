@@ -25,6 +25,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "autoCamouflage", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>auto camouflage<n>!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>action<e>!");
+                break;
             };
             break;
           case "disable":
@@ -36,6 +39,9 @@ function initModule(system) {
               case "autoCamo":
                 manager.setBoolean(nbt, "autoCamouflage", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>auto camouflage<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>action<e>!");
                 break;
             };
             break;

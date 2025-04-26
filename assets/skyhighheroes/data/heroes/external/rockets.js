@@ -48,6 +48,9 @@ function initModule(system) {
                 manager.setBoolean(nbt, "rocketsLegs", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>all<s> rockets!");
                 break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>rocket set<e>!");
+                break;
             };
             break;
           case "disarm":
@@ -108,6 +111,9 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>leg<e> rockets!");
                 };
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> inactive rockets!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>rocket set<e>!");
                 break;
             };
             break;
@@ -409,7 +415,8 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> rockets!");
                 break;
               default:
-                system.moduleMessage(this, entity, "<e>Unknown rocket!");
+                system.moduleMessage(this, entity, "<e>Unknown <eh>rocket<e>!");
+                break;
             };
             break;
           case "hide":
@@ -709,10 +716,11 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_right_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> rockets!");
                 break;
-                default:
-                system.moduleMessage(this, entity, "<e>Unknown rocket!");
-              };
-              break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>rocket<e>!");
+                break;
+            };
+            break;
           case "help":
             system.moduleMessage(this, entity, "<n>Rockets commands:");
             system.moduleMessage(this, entity, "<n>!rocket arm <onFall|aux|body|legs|*> <nh>-<n> Arms set of rockets or onFall protection");
