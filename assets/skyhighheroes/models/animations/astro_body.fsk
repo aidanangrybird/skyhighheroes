@@ -1,9 +1,8 @@
-{machine_gun} = curve({data_0})
-{open_up_upper_front} = curve({data_1})
-{open_up_upper_back} = curve({data_2})
-{open_up_lower_front} = curve({data_3})
-{open_up_lower_back} = curve({data_4})
-{open_up_machine_gun} = curve({data_5})
+{machine_gun} = curve(clamp({data_0}, 0, 1))
+{upper_front} = curve(clamp({data_1}, 0, 1))
+{upper_back} = curve(clamp({data_2}, 0, 1))
+{lower_front} = curve(clamp({data_3}, 0, 1))
+{lower_back} = curve(clamp({data_4}, 0, 1))
 
 ;body
 {part1} = if({machine_gun} != 1, animate2({machine_gun}, 1.0, 0.0, 0.1, 0.0), 1)
@@ -30,54 +29,30 @@
 {gun_barrel_right_tip_posY} += 6.25{part3}
 {gun_barrel_right_tip_posZ} += 6.25{part3}
 
-{part1_upper_front} = if({open_up_upper_front} != 1, animate2({open_up_upper_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_upper_front} = if({open_up_upper_front} != 1, animate2({open_up_upper_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_upper_front} = if({open_up_upper_front} != 1, animate2({open_up_upper_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_upper_front} = if({upper_front} != 1, animate2({upper_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_upper_front} = if({upper_front} != 1, animate2({upper_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_upper_front} = if({upper_front} != 1, animate2({upper_front}, 0.3, 0.7, 0.3, 0.0), 1)
 {body_front_upper_panel_rotX} -= 80'{part2_upper_front}
 {body_front_upper_side_left_rotY} += 5'{part1_upper_front} + 75'{part3_upper_front}
 {body_front_upper_side_right_rotY} -= 5'{part1_upper_front} + 75'{part3_upper_front}
 
-{part1_upper_back} = if({open_up_upper_back} != 1, animate2({open_up_upper_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_upper_back} = if({open_up_upper_back} != 1, animate2({open_up_upper_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_upper_back} = if({open_up_upper_back} != 1, animate2({open_up_upper_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_upper_back} = if({upper_back} != 1, animate2({upper_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_upper_back} = if({upper_back} != 1, animate2({upper_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_upper_back} = if({upper_back} != 1, animate2({upper_back}, 0.3, 0.7, 0.3, 0.0), 1)
 {body_back_upper_panel_rotX} += 80'{part2_upper_back}
 {body_back_upper_side_left_rotY} -= 5'{part1_upper_back} + 75'{part3_upper_back}
 {body_back_upper_side_right_rotY} += 5'{part1_upper_back} + 75'{part3_upper_back}
 
-{part1_lower_front} = if({open_up_lower_front} != 1, animate2({open_up_lower_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_lower_front} = if({open_up_lower_front} != 1, animate2({open_up_lower_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_lower_front} = if({open_up_lower_front} != 1, animate2({open_up_lower_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_lower_front} = if({lower_front} != 1, animate2({lower_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_lower_front} = if({lower_front} != 1, animate2({lower_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_lower_front} = if({lower_front} != 1, animate2({lower_front}, 0.3, 0.7, 0.3, 0.0), 1)
 {body_front_lower_panel_rotX} += 80'{part2_lower_front}
 {body_front_lower_side_left_rotY} += 5'{part1_lower_front} + 75'{part3_lower_front}
 {body_front_lower_side_right_rotY} -= 5'{part1_lower_front} + 75'{part3_lower_front}
 
-{part1_lower_back} = if({open_up_lower_back} != 1, animate2({open_up_lower_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_lower_back} = if({open_up_lower_back} != 1, animate2({open_up_lower_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_lower_back} = if({open_up_lower_back} != 1, animate2({open_up_lower_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_lower_back} = if({lower_back} != 1, animate2({lower_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_lower_back} = if({lower_back} != 1, animate2({lower_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_lower_back} = if({lower_back} != 1, animate2({lower_back}, 0.3, 0.7, 0.3, 0.0), 1)
 {body_back_lower_panel_rotX} -= 80'{part2_lower_back}
 {body_back_lower_side_left_rotY} -= 5'{part1_lower_back} + 75'{part3_lower_back}
 {body_back_lower_side_right_rotY} += 5'{part1_lower_back} + 75'{part3_lower_back}
-
-{part1_machine_gun} = if({open_up_machine_gun} != 1, animate2({open_up_machine_gun}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_machine_gun} = if({open_up_machine_gun} != 1, animate2({open_up_machine_gun}, 0.75, 0.25, 0.5, 0.0), 1)
-{part3_machine_gun} = if({open_up_machine_gun} != 1, animate2({open_up_machine_gun}, 0.3, 0.7, 0.3, 0.0), 1)
-{body_gun_cover_left_back_posZ} -= 0.008{part1_machine_gun}
-{body_gun_cover_right_back_posZ} -= 0.008{part1_machine_gun}
-{body_gun_cover_left_bottom_posY} -= 0.008{part1_machine_gun}
-{body_gun_cover_right_bottom_posY} -= 0.008{part1_machine_gun}
-{body_gun_cover_left_back_posY} -= 1{part2_machine_gun}
-{body_gun_cover_right_back_posY} -= 1{part2_machine_gun}
-{body_gun_cover_left_bottom_posZ} -= 1{part2_machine_gun}
-{body_gun_cover_right_bottom_posZ} -= 1{part2_machine_gun}
-{gun_barrel_left_base_posZ} += 2.5{part3_machine_gun}
-{gun_barrel_left_base_posY} += 2.5{part3_machine_gun}
-{gun_barrel_left_middle_posZ} += 4.5{part3_machine_gun}
-{gun_barrel_left_middle_posY} += 4.5{part3_machine_gun}
-{gun_barrel_left_tip_posY} += 6.25{part3_machine_gun}
-{gun_barrel_left_tip_posZ} += 6.25{part3_machine_gun}
-{gun_barrel_right_base_posZ} += 2.5{part3_machine_gun}
-{gun_barrel_right_base_posY} += 2.5{part3_machine_gun}
-{gun_barrel_right_middle_posY} += 4.5{part3_machine_gun}
-{gun_barrel_right_middle_posZ} += 4.5{part3_machine_gun}
-{gun_barrel_right_tip_posY} += 6.25{part3_machine_gun}
-{gun_barrel_right_tip_posZ} += 6.25{part3_machine_gun}

@@ -109,12 +109,11 @@ function initEffects(renderer) {
   var body = renderer.createResource("MODEL", "skyhighheroes:AstroBoyBody");
   body.texture.set("full", "full_lights");
   body.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:beam_charge"));
+    data.load(0, entity.getInterpolatedData("fiskheroes:beam_charge") + entity.getInterpolatedData("skyhighheroes:dyn/body_machine_gun_open_timer"));
     data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/body_upper_front_open_timer"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/body_upper_back_open_timer"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/body_lower_front_open_timer"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/body_lower_back_open_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/body_machine_gun_open_timer"));
   });
   body_model = renderer.createEffect("fiskheroes:model").setModel(body);
   body_model.anchor.set("body");

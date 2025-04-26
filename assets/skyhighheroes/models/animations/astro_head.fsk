@@ -1,55 +1,46 @@
-{flight} = curve({data_0})
-{boost} = curve({data_1}){flight}
-{aim} = curve({data_2})
-{energy_proj} = curve({data_3})
-{machine_gun} = curve({data_4})
-{open_up_top_front} = curve({data_5})
-{open_up_top_back} = curve({data_6})
-{open_up_bottom_front} = curve({data_7})
-{open_up_bottom_back} = curve({data_8})
+{flight} = curve(clamp({data_0}, 0, 1))
+{boost} = curve(clamp({data_1}, 0, 1)){flight}
+{aim} = curve(clamp({data_2}, 0, 1))
+{energy_proj} = curve(clamp({data_3}, 0, 1))
+{machine_gun} = curve(clamp({data_4}, 0, 1))
+{top_front} = curve(clamp({data_5}, 0, 1))
+{top_back} = curve(clamp({data_6}, 0, 1))
+{bottom_front} = curve(clamp({data_7}, 0, 1))
+{bottom_back} = curve(clamp({data_8}, 0, 1))
 {spinner} = {data_9}
-
-{head_eye_right_inner_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_right_upper_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_right_outer_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_right_lower_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_left_inner_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_left_upper_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_left_outer_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
-{head_eye_left_lower_rotX} -= 5'{energy_proj} - 5'{flight} - 5'{boost} - 5'{aim}
 
 {head_thinking_spinner1_rotX} += 90'{spinner} + 270'{spinner}{flight} + 360'{spinner}{boost} + 270'{spinner}{energy_proj} + 270'{spinner}{aim} + 270'{spinner}{machine_gun}
 {head_thinking_spinner2_rotX} += 90'{spinner} + 270'{spinner}{flight} + 360'{spinner}{boost} + 270'{spinner}{energy_proj} + 270'{spinner}{aim} + 270'{spinner}{machine_gun}
 
-{part1_top_front} = if({open_up_top_front} != 1, animate2({open_up_top_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_top_front} = if({open_up_top_front} != 1, animate2({open_up_top_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_top_front} = if({open_up_top_front} != 1, animate2({open_up_top_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_top_front} = if({top_front} != 1, animate2({top_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_top_front} = if({top_front} != 1, animate2({top_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_top_front} = if({top_front} != 1, animate2({top_front}, 0.3, 0.7, 0.3, 0.0), 1)
 {head_top_right_panel_rotY} -= 5'{part1_top_front} + 75'{part3_top_front}
 {head_top_left_panel_rotY} += 5'{part1_top_front} + 75'{part3_top_front}
 {head_top_front_panel_rotX} += 5'{part1_top_front} + 75'{part3_top_front}
 {head_front_panel_rotX} += 80'{part2_top_front}
 
-{part1_top_back} = if({open_up_top_back} != 1, animate2({open_up_top_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_top_back} = if({open_up_top_back} != 1, animate2({open_up_top_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_top_back} = if({open_up_top_back} != 1, animate2({open_up_top_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_top_back} = if({top_back} != 1, animate2({top_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_top_back} = if({top_back} != 1, animate2({top_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_top_back} = if({top_back} != 1, animate2({top_back}, 0.3, 0.7, 0.3, 0.0), 1)
 {head_back_right_panel_rotY} += 5'{part1_top_back} + 75'{part3_top_back}
 {head_back_left_panel_rotY} -= 5'{part1_top_back} + 75'{part3_top_back}
 {head_top_back_panel_rotX} -= 5'{part1_top_back} + 75'{part3_top_back}
 {head_back_panel_rotX} -= 80'{part2_top_back}
 
-{part1_bottom_front} = if({open_up_bottom_front} != 1, animate2({open_up_bottom_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_bottom_front} = if({open_up_bottom_front} != 1, animate2({open_up_bottom_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_bottom_front} = if({open_up_bottom_front} != 1, animate2({open_up_bottom_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 0.3, 0.7, 0.3, 0.0), 1)
 {head_bottom_front_right_panel_rotX} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
 {head_bottom_front_left_panel_rotX} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
 {head_bottom_left_panel_rotY} += 5'{part1_bottom_front} + 75'{part3_bottom_front}
 {head_bottom_right_panel_rotY} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
-{head_eye_left_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
-{head_eye_right_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
+{head_front_left_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
+{head_front_right_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
 
-{part1_bottom_back} = if({open_up_bottom_back} != 1, animate2({open_up_bottom_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_bottom_back} = if({open_up_bottom_back} != 1, animate2({open_up_bottom_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_bottom_back} = if({open_up_bottom_back} != 1, animate2({open_up_bottom_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 1.0, 0.0, 0.01, 0.0), 1)
+{part2_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 0.5, 0.5, 0.5, 0.0), 1)
+{part3_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 0.3, 0.7, 0.3, 0.0), 1)
 {head_right_bottom_back_panel_rotX} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
 {head_left_bottom_back_panel_rotX} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
 {head_bottom_back_left_panel_rotY} -= 5'{part1_bottom_back} + 75'{part3_bottom_back}
