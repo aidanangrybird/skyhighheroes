@@ -133,11 +133,10 @@ function initEffects(renderer) {
   var right_arm = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightArm");
   right_arm.texture.set("full", "full_lights");
   right_arm.bindAnimation("skyhighheroes:astro_right_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_outer_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_cannon_outer_open_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_cannon_inner_open_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_outer_open_timer"));
+    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_cannon_outer_open_timer"));
+    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_cannon_inner_open_timer"));
   });
   right_arm_model = renderer.createEffect("fiskheroes:model").setModel(right_arm);
   right_arm_model.anchor.set("rightArm");
