@@ -177,7 +177,25 @@
       "damageType": "BLUE_KRYPTONITE"
     },
     "fiskheroes:damage_immunity|sound_blast": {
-      "damageType": "CANCEL"
+      "damageType": "SOUND_BLAST"
+    },
+    "fiskheroes:damage_immunity|god": {
+      "damageType": "GOD"
+    },
+    "fiskheroes:damage_immunity|angel": {
+      "damageType": "ANGEL"
+    },
+    "fiskheroes:damage_immunity|archangel": {
+      "damageType": "ARCHANGEL"
+    },
+    "fiskheroes:damage_immunity|demon": {
+      "damageType": "DEMON"
+    },
+    "fiskheroes:damage_immunity|the_colt": {
+      "damageType": "THE_COLT"
+    },
+    "fiskheroes:damage_immunity|bone": {
+      "damageType": "BONE"
     },
     "fiskheroes:shield_throwing": {
       "cooldownTime": 0,
