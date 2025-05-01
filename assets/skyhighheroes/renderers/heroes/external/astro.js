@@ -13,7 +13,7 @@ function bindBeam(renderer, propertyName, beam, anchor, color, entries) {
 
   prop.setConstellation(constln);
   prop.setRenderer(beam);
-  prop.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
+  prop.color.set((typeof color === "object" && color.length == 3) ? color[0] : color);
   return prop;
 };
 

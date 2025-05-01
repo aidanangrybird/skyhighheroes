@@ -12,7 +12,7 @@ function initLeftLegBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
@@ -546,7 +546,7 @@ function initRightLegBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
@@ -1073,7 +1073,7 @@ function initBodyBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
 
   //Left
   var boosterLeft = renderer.createEffect("fiskheroes:booster");
@@ -1212,7 +1212,7 @@ function initLeftArmBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
   
   //Booster
   //Outer
@@ -1393,7 +1393,7 @@ function initRightArmBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
   
   //Booster
   var boosterOuterBooster = renderer.createEffect("fiskheroes:booster");
