@@ -382,16 +382,16 @@ function initSystem(moduleList, name, color) {
   var type3Specs = ["command", "messageHandler", "commandHandler", "chatModeInfo", "chatInfo", "helpMessage", "modeID"];
   //Type 11 - commands (can have data management) with disabled thing
   /** @var type11Specs - Type 11 Specs */
-  var type11Specs = ["command", "commandHandler", "helpMessage", "powers", "whenDisabled"];
+  var type11Specs = ["command", "commandHandler", "helpMessage", "whenDisabled"];
   //Type 12 - cyber module
   /** @var type12Specs - Type 12 Specs */
-  var type12Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "powers", "whenDisabled"];
+  var type12Specs = ["command", "commandHandler", "helpMessage", "isModifierEnabled", "whenDisabled"];
   //Type 13 - cyber module
   /** @var type13Specs - Type 13 Specs */
-  var type13Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "powers", "whenDisabled"];
+  var type13Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "whenDisabled"];
   //Type 14 - cyber module
   /** @var type14Specs - Type 14 Specs */
-  var type14Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfile", "getDamageProfile", "powers", "whenDisabled"];
+  var type14Specs = ["command", "commandHandler", "helpMessage", "keyBinds", "isKeyBindEnabled", "isModifierEnabled", "initAttributeProfiles", "initDamageProfiles", "getAttributeProfile", "getDamageProfile", "whenDisabled"];
   /** @var modules - Array of modules */
   var modules = [];
   /** @var moduleNames - Module names */
@@ -528,10 +528,6 @@ function initSystem(moduleList, name, color) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberneticModules.push(moduleInit.name);
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (moduleInit.hasOwnProperty("tickHandler")) {
                 tickHandlerIndexes.push(modules.length-1);
@@ -567,10 +563,6 @@ function initSystem(moduleList, name, color) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberneticModules.push(moduleInit.name);
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
               if (moduleInit.hasOwnProperty("tickHandler")) {
@@ -607,10 +599,6 @@ function initSystem(moduleList, name, color) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberneticModules.push(moduleInit.name);
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
               keyBindIndexes.push(modules.length-1);
               modifierIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
@@ -648,10 +636,6 @@ function initSystem(moduleList, name, color) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               cyberneticModules.push(moduleInit.name);
-              var modulePowers = moduleInit.powers;
-              modulePowers.forEach(power => {
-                powerArray.push(power);
-              });
               attributeProfileIndexes.push(modules.length-1);
               damageProfileIndexes.push(modules.length-1);
               keyBindIndexes.push(modules.length-1);
@@ -868,57 +852,7 @@ function initSystem(moduleList, name, color) {
   function addPowers(hero) {
     var name = formatAlias(cyberName);
     var hud = "skyhighheroes:" + name + "_hud";
-    if (powerArray.length == 0) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud);
-    };
-    if (powerArray.length == 1) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0]);
-    };
-    if (powerArray.length == 2) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1]);
-    };
-    if (powerArray.length == 3) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2]);
-    };
-    if (powerArray.length == 4) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
-    };
-    if (powerArray.length == 5) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
-    };
-    if (powerArray.length == 6) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
-    };
-    if (powerArray.length == 7) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
-    };
-    if (powerArray.length == 8) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
-    };
-    if (powerArray.length == 9) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
-    };
-    if (powerArray.length == 10) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
-    };
-    if (powerArray.length == 11) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10]);
-    };
-    if (powerArray.length == 12) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11]);
-    };
-    if (powerArray.length == 13) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12]);
-    };
-    if (powerArray.length == 14) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13]);
-    };
-    if (powerArray.length == 15) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14]);
-    };
-    if (powerArray.length >= 16) {
-      hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud, powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9], powerArray[10], powerArray[11], powerArray[12], powerArray[13], powerArray[14], powerArray[15]);
-    };
+    hero.addPowers("skyhighheroes:cybernetic_os", "skyhighheroes:cybernetic_body", hud);
   };
   /**
    * Basic keybinds

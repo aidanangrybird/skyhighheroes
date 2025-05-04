@@ -8,7 +8,6 @@ function initModule(system) {
     moduleMessageName: "Thermoptics",
     type: 12,
     command: "thermo",
-    powers: ["skyhighheroes:thermoptic_manipulation"],
     helpMessage: "<n>!thermo <nh>-<n> Thermoptics",
     disabledMessage: "<e>Module <eh>thermoptics<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {

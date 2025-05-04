@@ -9,7 +9,6 @@ function initModule(system) {
     moduleMessageName: "VoiceSynth",
     type: 13,
     command: "vs",
-    powers: ["skyhighheroes:voice_synthesizer"],
     helpMessage: "<n>!vs <nh>-<n> Voice Synthesizer",
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     keyBinds: function (hero, color) {

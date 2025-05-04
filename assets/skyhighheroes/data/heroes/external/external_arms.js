@@ -7,7 +7,6 @@ function initModule(system) {
     name: "externalArms",
     type: 13,
     command: "extarms",
-    powers: ["skyhighheroes:external_arms"],
     helpMessage: "<n>!extarms <nh>-<n> ExtArms",
     disabledMessage: "<e>Module <eh>externalArms<e> is disabled!",
     keyBinds: function (hero, color) {

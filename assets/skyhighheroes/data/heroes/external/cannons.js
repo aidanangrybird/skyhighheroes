@@ -8,7 +8,6 @@ function initModule(system) {
     name: "cannons",
     moduleMessageName: "Cannons",
     type: 13,
-    powers: ["skyhighheroes:cannons"],
     command: "cannon",
     helpMessage: "<n>!cannon <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",

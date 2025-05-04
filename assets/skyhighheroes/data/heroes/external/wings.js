@@ -8,7 +8,6 @@ function initModule(system) {
     moduleMessageName: "Wings",
     type: 12,
     command: "wing",
-    powers: ["skyhighheroes:wings"],
     helpMessage: "<n>!wing <nh>-<n> Wings",
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, arguments) {

@@ -291,7 +291,6 @@ function initModule(system) {
     moduleMessageName: "Suits",
     type: 11,
     command: "suits",
-    powers: ["skyhighheroes:suit_datastore"],
     helpMessage: "<n>!suits <nh>-<n> Suit Datastore",
     commandHandler: function (entity, manager, arguments) {
       if (arguments.length > 1 && arguments.length < 4) {
