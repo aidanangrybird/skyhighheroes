@@ -320,6 +320,8 @@ function initEffects(renderer) {
 function initAnimations(renderer) {
   //stuff.initHoloFlightAnim(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
   cybernetic.initCyberneticAnimations(renderer);
+  stuff.addAnimationEvent(renderer, "FLIGHT_DIVE", "skyhighheroes:cybernetic_dive");
+  stuff.addAnimationEvent(renderer, "FLIGHT_DIVE_ROLL", "skyhighheroes:cybernetic_dive_roll");
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

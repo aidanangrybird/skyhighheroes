@@ -7,6 +7,7 @@
       "boostSpeed": 0.1,
       "canBoost": true,
       "canRoll": true,
+      "diveSpeedRetention": 0.15,
       "collision": {
         "blocks": {
           "stopFlying": false,
@@ -28,6 +29,7 @@
       "boostSpeed": 0.2,
       "canBoost": true,
       "canRoll": true,
+      "diveSpeedRetention": 0.25,
       "collision": {
         "blocks": {
           "stopFlying": false,
@@ -49,48 +51,7 @@
       "boostSpeed": 0.25,
       "canBoost": true,
       "canRoll": true,
-      "collision": {
-        "blocks": {
-          "stopFlying": false,
-          "takeDamage": true
-        },
-        "entities": {
-          "stopFlying": false,
-          "dealDamage": true
-        }
-      },
-      "knockback": 1.0,
-      "soundEvents": {
-        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
-        "BOOST": "skyhighheroes:tenma_flight_boost"
-      }
-    },
-    "fiskheroes:controlled_flight|rockets_FTT": {
-      "speed": 0.1,
-      "boostSpeed": 0.45,
-      "canBoost": true,
-      "canRoll": true,
-      "collision": {
-        "blocks": {
-          "stopFlying": false,
-          "takeDamage": true
-        },
-        "entities": {
-          "stopFlying": false,
-          "dealDamage": true
-        }
-      },
-      "knockback": 1.0,
-      "soundEvents": {
-        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
-        "BOOST": "skyhighheroes:tenma_flight_boost"
-      }
-    },
-    "fiskheroes:controlled_flight|rockets_TFT": {
-      "speed": 0.1,
-      "boostSpeed": 0.35,
-      "canBoost": true,
-      "canRoll": true,
+      "diveSpeedRetention": 0.3,
       "collision": {
         "blocks": {
           "stopFlying": false,
@@ -112,6 +73,51 @@
       "boostSpeed": 0.3,
       "canBoost": true,
       "canRoll": true,
+      "diveSpeedRetention": 0.35,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_TFT": {
+      "speed": 0.1,
+      "boostSpeed": 0.35,
+      "canBoost": true,
+      "canRoll": true,
+      "diveSpeedRetention": 0.4,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": true
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "ENABLE": ["skyhighheroes:tenma_flight_enable", "skyhighheroes:tenma_flight_loop"],
+        "BOOST": "skyhighheroes:tenma_flight_boost"
+      }
+    },
+    "fiskheroes:controlled_flight|rockets_FTT": {
+      "speed": 0.1,
+      "boostSpeed": 0.45,
+      "canBoost": true,
+      "canRoll": true,
+      "diveSpeedRetention": 0.5,
       "collision": {
         "blocks": {
           "stopFlying": false,
@@ -133,6 +139,7 @@
       "boostSpeed": 0.55,
       "canBoost": true,
       "canRoll": true,
+      "diveSpeedRetention": 0.6,
       "collision": {
         "blocks": {
           "stopFlying": false,
