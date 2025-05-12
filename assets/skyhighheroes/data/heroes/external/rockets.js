@@ -421,7 +421,7 @@ function initModule(system) {
           case "hide":
             switch (arguments[2]) {
               case "aux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", e);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
