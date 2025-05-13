@@ -31,10 +31,10 @@ function initModule(system) {
         manager.setData(player, "skyhighheroes:dyn/predation", false);
         manager.setData(player, "skyhighheroes:dyn/omega_xis_timer", 0);
         manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
-        if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 1) {
+        if (player.getData("skyhighheroes:dyn/visualizer_toggle")) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         };
-        if (player.getData("skyhighheroes:dyn/visualizer_toggle") == 0) {
+        if (!player.getData("skyhighheroes:dyn/visualizer_toggle")) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
         };
         return true;

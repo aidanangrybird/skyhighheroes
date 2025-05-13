@@ -147,3 +147,94 @@ function animate2(timer, duration, start, fadeIn, fadeOut) {
   };
   return 0.0;
 };
+
+var hostileEntities = [
+  "fiskheroes.Creetle",
+  "Zombie",
+  "Skeleton",
+  "Spider",
+  "Creeper",
+  "Ghast",
+  "Enderman",
+  "Slime"
+];
+
+var friendlyEntities = [
+  "Pig",
+  "Sheep",
+  "Cow",
+  "Bat",
+  "Squid",
+  "Chicken",
+  "Villager"
+];
+
+function entityLocation(renderer) {
+  var beamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighheroes:entity_location");
+  var shapeEntityLocation = renderer.createResource("SHAPE", null);
+  var lineEntityLocation = shapeEntityLocation.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [100.0, 100.0] });
+  var beamEntityLocation = renderer.createEffect("fiskheroes:lines").setRenderer(beamRenderer).setShape(shapeEntityLocation).setOffset(0.0, 0.0, 0.0);
+  beamEntityLocation.mirror = false;
+  beamEntityLocation.setScale(16.0);
+  beamEntityLocation.anchor.set("head");
+  beamEntityLocation.anchor.ignoreAnchor(true);
+  beamEntityLocation.color.set(0x000000);
+
+  return {
+    render: function (isFirstPersonArm, entity, otherEntity, color) {
+      if (isFirstPersonArm) {
+        beamEntityLocation.color.set(color);
+        var distance = entity.eyePos().distanceTo(otherEntity.pos().x(), otherEntity.pos().y(), otherEntity.pos().z());
+        var pitch = (entity.rotationInterpolated().y()/180)*Math.PI + Math.atan2((otherEntity.pos().y()-entity.eyePos().y()), (Math.sqrt(otherEntity.pos().x()^2 + otherEntity.pos().z()^2)-entity.eyePos().xz().distanceTo(otherEntity.pos().x(), otherEntity.pos().z())));
+        var yaw = (entity.rotationInterpolated().x()/180)*Math.PI - Math.atan2((otherEntity.pos().z()-entity.eyePos().z()), (otherEntity.pos().x()-entity.eyePos().x()));
+        var distanceXZ = entity.eyePos().multiply(1, 0, 1).distanceTo(otherEntity.pos().x(), 0, otherEntity.pos().z());
+        var x = distanceXZ*Math.cos(yaw);
+        var y = (entity.eyePos().y()-otherEntity.pos().y());
+        var z = distanceXZ*Math.sin(yaw);
+        lineEntityLocation.start.x = lineEntityLocation.end.x = x;
+        lineEntityLocation.start.y = y;
+        lineEntityLocation.end.y = y - 3;
+        lineEntityLocation.start.z = lineEntityLocation.end.z = z;
+        lineEntityLocation.size.x = clamp(distance, 16.0, 1024.0);
+        lineEntityLocation.size.y = clamp(distance, 16.0, 1024.0);
+        beamEntityLocation.setRotation(-1*entity.rotationInterpolated().y(), 0, 0);
+        beamEntityLocation.render();
+      };
+    }
+  };
+};
+
+function location(renderer) {
+  var beamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighheroes:location");
+  var shapeLocation = renderer.createResource("SHAPE", null);
+  var lineLocation = shapeLocation.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.0, 1.0] });
+  var beamLocation = renderer.createEffect("fiskheroes:lines").setRenderer(beamRenderer).setShape(shapeLocation).setOffset(0.0, 0.0, 0.0);
+  beamLocation.mirror = false;
+  beamLocation.setScale(16.0);
+  beamLocation.anchor.set("head");
+  beamLocation.anchor.ignoreAnchor(true);
+  beamLocation.color.set(0x000000);
+
+  return {
+    render: function (isFirstPersonArm, entity, posX, posY, posZ, color) {
+      if (isFirstPersonArm) {
+        beamLocation.color.set(color);
+        var distance = entity.eyePos().distanceTo(posX, posY, posZ);
+        var pitch = (entity.rotationInterpolated().y()/180)*Math.PI + Math.atan2((posY-entity.eyePos().y()), (Math.sqrt(posX^2 + posZ^2)-entity.eyePos().xz().distanceTo(posX, posZ)));
+        var yaw = (entity.rotationInterpolated().x()/180)*Math.PI - Math.atan2((posZ-entity.eyePos().z()), (posX-entity.eyePos().x()));
+        var distanceXZ = entity.eyePos().multiply(1, 0, 1).distanceTo(posX, 0, posZ);
+        var x = distanceXZ*Math.cos(yaw);
+        var y = (entity.eyePos().y()-posY);
+        var z = distanceXZ*Math.sin(yaw);
+        beamLocation.setRotation(-1*entity.rotationInterpolated().y(), 0, 0); 
+        lineLocation.start.x = lineLocation.end.x = x;
+        lineLocation.start.y = y + 1;
+        lineLocation.end.y = y - 0.0625*clamp(distance, 1.0, 1024.0);;
+        lineLocation.start.z = lineLocation.end.z = z;
+        lineLocation.size.x = clamp(distance, 16.0, 1024.0);
+        lineLocation.size.y = clamp(distance, 16.0, 1024.0);
+        beamLocation.render();
+      };
+    }
+  };
+};

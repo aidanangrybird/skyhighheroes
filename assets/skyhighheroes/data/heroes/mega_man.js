@@ -1,6 +1,7 @@
 var bodyTemp = implement("skyhighheroes:external/body_temperature");
 var stelar = implement("skyhighheroes:external/stelar");
 var transer = implement("skyhighheroes:external/transer_system");
+var settings = implement("skyhighheroes:external/transer_settings");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
@@ -11,6 +12,7 @@ var waypoints = implement("skyhighheroes:external/waypoint");
 var megaMan = implement("skyhighheroes:external/mega_man");
 var omegaXis = implement("skyhighheroes:external/omega_xis");
 var transerOS = transer.initSystem([
+  settings,
   messaging,
   groupMessaging,
   transerBrotherBand,

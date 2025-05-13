@@ -1,7 +1,7 @@
 {
   "inputs": [
-    "skyhighocs:flight/cybernetic_header",
-    "skyhighocs:flight/cybernetic_idle",
-    "skyhighocs:flight/cybernetic_boost"
+    "skyhighheroes:flight/cybernetic_header",
+    "skyhighheroes:flight/cybernetic_idle",
+    "skyhighheroes:flight/cybernetic_boost"
   ]
 }

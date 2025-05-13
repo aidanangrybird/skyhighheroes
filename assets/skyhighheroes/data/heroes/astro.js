@@ -1,4 +1,5 @@
 var robot = implement("skyhighheroes:external/astro_system");
+var settings = implement("skyhighheroes:external/astro_settings");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var groups = implement("skyhighheroes:external/groups");
@@ -14,6 +15,7 @@ var panelStatus = implement("skyhighheroes:external/astro_panel_status");
 var opener = implement("skyhighheroes:external/astro_opener");
 var closer = implement("skyhighheroes:external/astro_closer");
 var astrOS = robot.initSystem([
+  settings,
   messaging,
   groupMessaging,
   groups,

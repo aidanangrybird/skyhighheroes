@@ -46,6 +46,23 @@ var colorDamage = {
   "e": "11"
 };
 
+var hexColors = {
+  //Base
+  "C-9": "0x00AEFF",
+  //Blue
+  "CB-1": "0x0000FF",
+  //Green
+  "CG-2": "0x00FF00",
+  //Orange
+  "C0-6": "0xFF9400",
+  //Purple
+  "CP-5": "0x7C00FF",
+  //Red
+  "CR-4": "0xFF0000",
+  //Yellow
+  "CY-e": "0xFFFF00"
+};
+
 modelRegex = /[a-z\s]/gm;
 
 aliasRegex = /[\s]/gm;
@@ -367,9 +384,9 @@ function clamp(value, min, max) {
  * Initializes cyber system
  * @param {object} moduleList - cyber system modules
  * @param {string} name - Name of the cybernetic being
- * @param {string} color - Color to set system thing to
+ * @param {string} colorCode - Color to set system thing to
  **/
-function initSystem(moduleList, name, color) {
+function initSystem(moduleList, name, colorCode) {
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -425,11 +442,11 @@ function initSystem(moduleList, name, color) {
   /** @var powerArray - Array of powers to add */
   var powerArray = [];
   /** @var cyberModelID - cyber model name */
-  var cyberModelID = formatModel(name) + "-" + color;
+  var cyberModelID = formatModel(name) + "-" + colorCode;
   /** @var cyberName - cyber name */
   var cyberName = name;
-  /** @var hudColor - UUID */
-  var hudColor = color;
+  /** @var color - Color */
+  var color = colorCode;
   var hasError = false;
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on cybernetic body " + cyberName + "!");
@@ -859,10 +876,10 @@ function initSystem(moduleList, name, color) {
    * @param {JSHero} hero - Required
    **/
   function keyBinds(hero) {
-    hero.addKeyBind("SHAPE_SHIFT", "\u00A7" + hudColor + "Send message/Enter command", 5);
+    hero.addKeyBind("SHAPE_SHIFT", "\u00A7" + color + "Send message/Enter command", 5);
     modules.forEach(module => {
       if (module.hasOwnProperty("keyBinds")) {
-        module.keyBinds(hero, hudColor);
+        module.keyBinds(hero, color);
       };
     });
   };
@@ -1046,10 +1063,24 @@ function initSystem(moduleList, name, color) {
       if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
         manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
       };
+      if (!entity.getWornHelmet().nbt().hasKey("hudRange")) {
+        manager.setShort(entity.getWornHelmet().nbt(), "hudRange", 32);
+      };
+      if (!entity.getWornHelmet().nbt().hasKey("hostilesOnHud")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "hostilesOnHud", true);
+      };
+      if (!entity.getWornHelmet().nbt().hasKey("friendliesOnHud")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "friendliesOnHud", true);
+      };
+      if (!entity.getWornHelmet().nbt().hasKey("playersOnHud")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "playersOnHud", true);
+      };
       onInitSystemIndexes.forEach(index => {
         var module = modules[index];
         module.onInitSystem(entity, manager);
       });
+      var hexColor = hexColors[getModelID(entity)];
+      manager.setString(entity.getWornHelmet().nbt(), "hudColorSkyHigh", hexColor);
       systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
       status(entity);
       manager.setData(entity, "skyhighheroes:dyn/system_init", true);

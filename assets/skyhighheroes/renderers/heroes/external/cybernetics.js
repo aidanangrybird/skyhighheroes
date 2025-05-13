@@ -171,10 +171,6 @@ function initCyberneticAnimations(renderer) {
   addAnimationWithData(renderer, "cybernetic.POWER", "skyhighheroes:cybernetic_powering_down", "skyhighheroes:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") > 0))
     .priority = -10;
-  addAnimation(renderer, "cybernetic.POWERED_DOWN", "skyhighheroes:cybernetic_powering_down")
-    .setData((entity, data) => data.load(1.0))
-    .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") == 1))
-    .priority = -10;
 };
 
 function initNV(renderer, uuid) {

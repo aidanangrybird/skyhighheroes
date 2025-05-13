@@ -90,43 +90,45 @@ function initModule(system) {
       });
       system.moduleMessage(this, entity, "<n>There " + ((entities.length == 1)?"is <nh>":"are <nh>") + entities.length + ((entities.length == 1)?"<n> entity ":"<n> entities ") + "nearby:");
       entities.forEach(scannedEntity => {
-        var beingName = scannedEntity.getName();
-        if (scannedEntity.isWearingFullSuit()) {
-          if (!scannedEntity.getWornHelmet().isEmpty()) {
-            var itemName = scannedEntity.getWornHelmet().displayName().split("'s");
-            beingName = itemName[0];
-          };
-          if (!scannedEntity.getWornChestplate().isEmpty()) {
-            var itemName = scannedEntity.getWornChestplate().displayName().split("'s");
-            beingName = itemName[0];
-          };
-          if (!scannedEntity.getWornLeggings().isEmpty()) {
-            var itemName = scannedEntity.getWornLeggings().displayName().split("'s");
-            beingName = itemName[0];
-          };
-          if (!scannedEntity.getWornBoots().isEmpty()) {
-            var itemName = scannedEntity.getWornBoots().displayName().split("'s");
-            beingName = itemName[0];
-          };
-          if (!isTransformed(scannedEntity)) {
-            beingName = scannedEntity.getName();
-          };
-          if (entity.getDataOrDefault("secretheroes:dyn/moonknight_timer", 0) == 1) {
-            beingName = "Moon Knight";
-          };
-          if (entity.getDataOrDefault("secretheroes:dyn/mrknight_timer", 0) == 1) {
-            beingName = "Mr Knight";
-          };
-          if (scannedEntity.getWornChestplate().suitType() == "tmf:omnitrix" && scannedEntity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
-            var alien = scannedEntity.getData("tmf:dyn/transformed") + 0;
-            system.moduleMessage(this, entity, alien);
-            beingName = tmfAliens[alien];
-          };
-          if (isTransformed(scannedEntity) && ((scannedEntity.getData("fiskheroes:mask_open_timer2") == 1) || (scannedEntity.getData("fiskheroes:mask_open_timer") == 5))) {
-            beingName = scannedEntity.getName();
-          };
-          if (scannedEntity.getData("fiskheroes:disguise") != null) {
-            beingName = scannedEntity.getData("fiskheroes:disguise");
+        if (scannedEntity.isAlive()) {
+          var beingName = scannedEntity.getName();
+          if (scannedEntity.isWearingFullSuit()) {
+            if (!scannedEntity.getWornHelmet().isEmpty()) {
+              var itemName = scannedEntity.getWornHelmet().displayName().split("'s");
+              beingName = itemName[0];
+            };
+            if (!scannedEntity.getWornChestplate().isEmpty()) {
+              var itemName = scannedEntity.getWornChestplate().displayName().split("'s");
+              beingName = itemName[0];
+            };
+            if (!scannedEntity.getWornLeggings().isEmpty()) {
+              var itemName = scannedEntity.getWornLeggings().displayName().split("'s");
+              beingName = itemName[0];
+            };
+            if (!scannedEntity.getWornBoots().isEmpty()) {
+              var itemName = scannedEntity.getWornBoots().displayName().split("'s");
+              beingName = itemName[0];
+            };
+            if (!isTransformed(scannedEntity)) {
+              beingName = scannedEntity.getName();
+            };
+            if (entity.getDataOrDefault("secretheroes:dyn/moonknight_timer", 0) == 1) {
+              beingName = "Moon Knight";
+            };
+            if (entity.getDataOrDefault("secretheroes:dyn/mrknight_timer", 0) == 1) {
+              beingName = "Mr Knight";
+            };
+            if (scannedEntity.getWornChestplate().suitType() == "tmf:omnitrix" && scannedEntity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
+              var alien = scannedEntity.getData("tmf:dyn/transformed") + 0;
+              system.moduleMessage(this, entity, alien);
+              beingName = tmfAliens[alien];
+            };
+            if (isTransformed(scannedEntity) && ((scannedEntity.getData("fiskheroes:mask_open_timer2") == 1) || (scannedEntity.getData("fiskheroes:mask_open_timer") == 5))) {
+              beingName = scannedEntity.getName();
+            };
+            if (scannedEntity.getData("fiskheroes:disguise") != null) {
+              beingName = scannedEntity.getData("fiskheroes:disguise");
+            };
           };
         };
         system.moduleMessage(this, entity, "<nh>" + beingName + " <n>(<nh>" + scannedEntity.getHealth() + "<n>)");

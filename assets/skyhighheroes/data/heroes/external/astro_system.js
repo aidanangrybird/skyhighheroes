@@ -29,6 +29,10 @@ var months = [
   "December"
 ];
 
+var hexColors = {
+  "Astro": "0xFFFFFF"
+};
+
 function asssignID(entity, manager, robotName, color) {
   manager.setString(entity.getWornLeggings().nbt(), "robotModel", robotName+"-"+color);
   if (!entity.getWornLeggings().nbt().hasKey("computerID")) {
@@ -313,10 +317,10 @@ function logMessage(message) {
 /**
  * Initializes robot system
  * @param {object} moduleList - robot system modules
- * @param {string} robotName - Required, you'll be happy that is a thing or else debugging is painful
- * @param {string} color - Required, or other robots will not recognize this robot as a robot
+ * @param {string} name - Required, you'll be happy that is a thing or else debugging is painful
+ * @param {string} colorCode - Required, or other robots will not recognize this robot as a robot
  **/
-function initSystem(moduleList, robotName, color) {
+function initSystem(moduleList, name, colorCode) {
   var robotInstance = this;
   //Type 1 - commands (can have data management)
   var type1Specs = ["command", "commandHandler", "helpMessage"];
@@ -348,6 +352,10 @@ function initSystem(moduleList, robotName, color) {
   var keyBindIndexes = [];
   /** @var powerArray - Array of powers to add */
   var powerArray = [];
+  /** @var robotName - Name of robot */
+  var robotName = name;
+  /** @var color - Color of robot */
+  var color = colorCode;
   var hasError = false;
   var errors = [];
   logMessage("Attempting to initialize " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on robot " + robotName + "!");
@@ -686,6 +694,20 @@ function initSystem(moduleList, robotName, color) {
       if (!entity.getData("skyhighheroes:dyn/system_init") && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
         asssignID(entity, manager, robotName, color);
         status(entity);
+        var hexColor = hexColors[robotName];
+        manager.setString(entity.getWornLeggings().nbt(), "hudColorSkyHigh", hexColor);
+      if (!entity.getWornLeggings().nbt().hasKey("hudRange")) {
+        manager.setShort(entity.getWornLeggings().nbt(), "hudRange", 32);
+      };
+      if (!entity.getWornLeggings().nbt().hasKey("hostilesOnHud")) {
+        manager.setBoolean(entity.getWornLeggings().nbt(), "hostilesOnHud", true);
+      };
+      if (!entity.getWornLeggings().nbt().hasKey("friendliesOnHud")) {
+        manager.setBoolean(entity.getWornLeggings().nbt(), "friendliesOnHud", true);
+      };
+      if (!entity.getWornLeggings().nbt().hasKey("playersOnHud")) {
+        manager.setBoolean(entity.getWornLeggings().nbt(), "playersOnHud", true);
+      };
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };

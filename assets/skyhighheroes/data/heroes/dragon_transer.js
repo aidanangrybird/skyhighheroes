@@ -1,4 +1,5 @@
 var transer = implement("skyhighheroes:external/transer_system");
+var settings = implement("skyhighheroes:external/transer_settings");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var transerBrotherBand = implement("skyhighheroes:external/transer_brotherband");
@@ -7,6 +8,7 @@ var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var transerOS = transer.initSystem([
+  settings,
   messaging,
   groupMessaging,
   transerBrotherBand,

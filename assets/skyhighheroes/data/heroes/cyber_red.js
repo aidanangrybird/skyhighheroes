@@ -1,5 +1,5 @@
 var cybernetics = implement("skyhighheroes:external/cybernetics");
-var settings = implement("skyhighheroes:external/settings");
+var settings = implement("skyhighheroes:external/cybernetic_settings");
 var messaging = implement("skyhighheroes:external/messaging");
 var groupMessaging = implement("skyhighheroes:external/group_messaging");
 var groups = implement("skyhighheroes:external/groups");

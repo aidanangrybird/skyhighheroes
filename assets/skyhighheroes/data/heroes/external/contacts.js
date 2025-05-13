@@ -141,7 +141,7 @@ function initModule(system) {
             (arguments.length == 3) ? removeContact(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!c rem <nh><name>");
             break;
           case "list":
-            listContacts(entity);
+            listContacts(entity, manager);
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Contact commands:");

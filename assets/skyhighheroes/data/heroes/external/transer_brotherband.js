@@ -126,7 +126,7 @@ function initModule(system) {
       var foundPlayer = null;
       if (entity.getWornChestplate().nbt().getStringList("brothers").tagCount() > 0) {
         var reciever = entity.getWornChestplate().nbt().getStringList("brothers").getString(activeChat);
-        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 128);
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 512);
         entities.forEach(player => {
           if (player.is("PLAYER") && player.getName() == reciever) {
             foundPlayer = player;
