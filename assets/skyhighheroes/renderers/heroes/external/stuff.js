@@ -150,13 +150,20 @@ function animate2(timer, duration, start, fadeIn, fadeOut) {
 
 var hostileEntities = [
   "fiskheroes.Creetle",
+  "fiskheroes.Cactus",
   "Zombie",
   "Skeleton",
   "Spider",
   "Creeper",
   "Ghast",
   "Enderman",
-  "Slime"
+  "Slime",
+  "Witch",
+  "Cave Spider",
+  "Silverfish",
+  "Blaze",
+  "Magma Cube",
+  "Zombie Pigman"
 ];
 
 var friendlyEntities = [
@@ -166,7 +173,13 @@ var friendlyEntities = [
   "Bat",
   "Squid",
   "Chicken",
-  "Villager"
+  "Villager",
+  "Wolf",
+  "Mooshroom",
+  "Ocelot",
+  "Horse",
+  "Snow Golem",
+  "Iron Golem"
 ];
 
 function entityLocation(renderer) {
