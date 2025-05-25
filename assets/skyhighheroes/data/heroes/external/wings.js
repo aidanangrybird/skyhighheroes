@@ -15,8 +15,12 @@ function initModule(system) {
         var nbt = entity.getWornHelmet().nbt();
         switch(arguments[1]) {
           case "arm":
-            manager.setBoolean(nbt, "wings", true);
-            system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
+            if (nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
+              system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
+            } else {
+              manager.setBoolean(nbt, "wings", true);
+              system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
+            };
             break;
           case "disarm":
             manager.setBoolean(nbt, "wings", false);
@@ -109,7 +113,7 @@ function initModule(system) {
     tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
       var wings = nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding");
-      if (entity.getData("fiskheroes:gliding_timer") > 0) {
+      if (!nbt.getBoolean("rocketsWings") && entity.getData("fiskheroes:gliding_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/wings", wings);
       };
     }

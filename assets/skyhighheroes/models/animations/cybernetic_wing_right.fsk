@@ -2,4 +2,5 @@
 
 {part0_wings} = if({wings} != 1, animate2({wings}, 1.0, 0.0, 0.15, 0.0), 1)
 
-{rightArm_rotZ} += 80'{part0_wings}
+{rightArm_posX} -= 1{part0_wings}
+{rightArm_rotZ} += 82'{part0_wings}
