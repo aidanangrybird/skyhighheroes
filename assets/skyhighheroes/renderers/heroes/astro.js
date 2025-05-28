@@ -202,6 +202,8 @@ function initEffects(renderer) {
 function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight");
   astro.initAstroAnimations(renderer);
+  stuff.addAnimationEvent(renderer, "FLIGHT_DIVE", "skyhighheroes:astro_dive");
+  stuff.addAnimationEvent(renderer, "FLIGHT_DIVE_ROLL", "skyhighheroes:astro_dive_roll");
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

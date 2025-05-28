@@ -1,0 +1,28 @@
+{data} = curve {data}
+{vel} = sqrt({motX}^2 + (1.5{motY})^2 + {motZ}^2)
+{horVel} = sqrt({motX}^2 + {motZ}^2)
+{pitch} = atan2({motY}, {horVel})
+{yaw} = 0
+{yaw} @ {data} -'> ({bodyYaw} + 90)' - atan2({motZ}, {motX})
+
+{x} = {data}min({horVel} / 3 - min({motY} / 2, 0), 1)
+{m} = log1p(3{vel}) / 3
+
+{head_rotX} @ {data} -> max({pitch} - 60', -pi / 3)
+{rightArm_rotX} @ {x} -> 0.6{m}
+{rightArm_rotY} @ {x} -'> 0.5{m}
+{rightArm_rotZ} @ {x} -> 0.6{m}
+{leftArm_rotX} @ {x} -> 0.6{m}
+{leftArm_rotY} @ {x} -'> -0.5{m}
+{leftArm_rotZ} @ {x} -> -0.6{m}
+
+{rightLeg_rotX} @ {x} -> 0.65{m}
+{rightLeg_rotY} @ {x} -> 0.1{m}
+{rightLeg_rotZ} @ {x} -> 0.2{m}
+{leftLeg_rotX} @ {x} -> 0.65{m}
+{leftLeg_rotY} @ {x} -> -0.1{m}
+{leftLeg_rotZ} @ {x} -> -0.2{m}
+
+out "pivot" (0, 0.5, 0)
+out "rotate" ({yaw} / 1', 0, 1, 0)
+out "rotate" ({data}({pitch} / 1' - 60), 1, 0, 0)
