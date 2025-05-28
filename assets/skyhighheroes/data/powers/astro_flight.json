@@ -7,6 +7,7 @@
       "boostSpeed": 0.5,
       "canBoost": true,
       "canRoll": true,
+      "diveSpeedRetention": 0.6,
       "collision": {
         "blocks": {
           "stopFlying": false,
