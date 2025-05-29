@@ -59,6 +59,7 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  stuff.bindSpeedTrail(renderer, "skyhighheroes:astro_speed");
   locationBeam = stuff.location(renderer);
   entityLocationBeam = stuff.entityLocation(renderer);
   var blank = renderer.createResource("MODEL", "skyhighheroes:BlankThing");
