@@ -104,34 +104,34 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
 //Cyber Animations
 function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.LEFT_ARM_BLADE", "skyhighheroes:cybernetic_left_arm_blade").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_stealth_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_timer") + getHoloBooleans(entity, "holoBlades", "bladesLeft"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_stealth_timer") + getHoloBooleans(entity, "holoBlades", "bladesLeftStealth"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_ARM_BLADE", "skyhighheroes:cybernetic_right_arm_blade").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_stealth_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_timer") + getHoloBooleans(entity, "holoBlades", "bladesRight"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_stealth_timer") + getHoloBooleans(entity, "holoBlades", "bladesRightStealth"));
   });
   addAnimation(renderer, "cybernetic.LEFT_LEG_ROCKETS", "skyhighheroes:cybernetic_left_leg_rockets").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
+    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_LEG_ROCKETS", "skyhighheroes:cybernetic_right_leg_rockets").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_booster_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer") + getHoloBooleans(entity, "holoFlight", "rocketsAux"));
+    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   });
   addAnimation(renderer, "cybernetic.WING_LEFT", "skyhighheroes:cybernetic_wing_left").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer"));
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings"));
   });
   addAnimation(renderer, "cybernetic.WING_RIGHT", "skyhighheroes:cybernetic_wing_right").setData((entity, data) => {
-    data.load( entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer"));
+    data.load( entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings"));
   });
   addAnimation(renderer, "cybernetic.LEFT_ARM_AIM", "skyhighheroes:cybernetic_left_arm_aim").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer"));
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
   });
   addAnimation(renderer, "cybernetic.RIGHT_ARM_AIM", "skyhighheroes:cybernetic_right_arm_aim").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer"));
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
   });
   addAnimation(renderer, "cybernetic.LEFT_ARM_SHIELD", "skyhighheroes:cybernetic_left_arm_shield").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighheroes:dyn/shield_left_arm_timer") * entity.getInterpolatedData("fiskheroes:shield_blocking_timer") * (1 - entity.getInterpolatedData("fiskheroes:beam_charge")));
@@ -142,7 +142,7 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.BASE", "skyhighheroes:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })
-  .setCondition(entity => !entity.is("DISPLAY") && !entity.getWornHelmet().nbt().getBoolean("naturalArms"))
+  .setCondition(entity => !entity.is("DISPLAY") && !entity.getWornHelmet().nbt().getBoolean("naturalArms") && (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1))
   .priority = -11;/* 
   addAnimation(renderer, "cybernetic.LEFT_ARM_PUNCH", "skyhighheroes:cybernetic_left_arm_punch").setData((entity, data) => {
     data.load(entity.getPunchTimerInterpolated());
@@ -171,6 +171,11 @@ function initCyberneticAnimations(renderer) {
   addAnimationWithData(renderer, "cybernetic.POWER", "skyhighheroes:cybernetic_powering_down", "skyhighheroes:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") > 0))
     .priority = -10;
+
+  addAnimation(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighheroes:cybernetic_holo_flight").setData((entity, data) => {
+    data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight") ? (getHoloBoolean(entity, "rocketsAux") + getHoloBoolean(entity, "rocketsBody") + getHoloBoolean(entity, "rocketsLegs")) : 0.0);
+    data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
+  }).priority = -9;
 };
 
 function initNV(renderer, uuid) {
@@ -289,4 +294,25 @@ function beamThing(renderer, color) {
       };
     }
   };
+};
+
+/**
+ * Checks a NBT boolean to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} value - NBT boolean to check
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBoolean(entity, value) {
+  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+};
+
+/**
+ * Checks two NBT booleans to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} condition - NBT boolean to use for condition
+ * @param {string} value - NBT boolean to use for condition
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBooleans(entity, condition, value) {
+  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
 };

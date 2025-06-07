@@ -309,8 +309,8 @@ function initLeftLegBoosters(renderer, model, color) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Main
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsLegs") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var innerRockets = entity.getData("skyhighheroes:dyn/rocket_inner_legs_timer");
@@ -337,8 +337,8 @@ function initLeftLegBoosters(renderer, model, color) {
 
       //Sides
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsLegs") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -413,8 +413,8 @@ function initLeftLegBoosters(renderer, model, color) {
 
       //Booster
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsAux") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -843,8 +843,8 @@ function initRightLegBoosters(renderer, model, color) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Main
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsLegs") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var innerRockets = entity.getData("skyhighheroes:dyn/rocket_inner_legs_timer");
@@ -871,8 +871,8 @@ function initRightLegBoosters(renderer, model, color) {
 
       //Sides
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsLegs") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -947,8 +947,8 @@ function initRightLegBoosters(renderer, model, color) {
 
       //Booster
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsAux") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -1146,8 +1146,8 @@ function initBodyBoosters(renderer, model, color) {
     bloomRightCenter: bloomRightCenter,
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_body_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsBody") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_body_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -1309,8 +1309,8 @@ function initLeftArmBoosters(renderer, model, color) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Booster
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsAux") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -1489,8 +1489,8 @@ function initRightArmBoosters(renderer, model, color) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Booster
       //Equations
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBooleans(entity, "holoFlight", "rocketsAux") + entity.getInterpolatedData("fiskheroes:flight_timer")*((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("skyhighheroes:dyn/rockets_aux_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0);
+      var data_1 = getHoloBoolean(entity, "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer")
       var boost = data_1;
       var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -1561,4 +1561,25 @@ function initRightArmBoosters(renderer, model, color) {
     }
   };
   return obj;
+};
+
+/**
+ * Checks a NBT boolean to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} value - NBT boolean to check
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBoolean(entity, value) {
+  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+};
+
+/**
+ * Checks two NBT booleans to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} condition - NBT boolean to use for condition
+ * @param {string} value - NBT boolean to use for condition
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBooleans(entity, condition, value) {
+  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
 };

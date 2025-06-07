@@ -69,6 +69,42 @@ function initModule(system) {
             manager.setBoolean(nbt, "playersOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
             system.moduleMessage(this, entity, "<n>playersOnHud set to <nh>" + nbt.getBoolean("playersOnHud") + "<n>!");
             break;
+          case "holoFlight":
+            manager.setBoolean(nbt, "holoFlight", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoFlight")));
+            system.moduleMessage(this, entity, "<n>holoFlight set to <nh>" + nbt.getBoolean("holoFlight") + "<n>!");
+            break;
+          case "holoBoostFlight":
+            manager.setBoolean(nbt, "holoBoostFlight", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoBoostFlight")));
+            system.moduleMessage(this, entity, "<n>holoBoostFlight set to <nh>" + nbt.getBoolean("holoBoostFlight") + "<n>!");
+            break;
+          case "holoCannons":
+            manager.setBoolean(nbt, "holoCannons", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoCannons")));
+            system.moduleMessage(this, entity, "<n>holoCannons set to <nh>" + nbt.getBoolean("holoCannons") + "<n>!");
+            break;
+          case "holoBlades":
+            manager.setBoolean(nbt, "holoBlades", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoBlades")));
+            system.moduleMessage(this, entity, "<n>holoBlades set to <nh>" + nbt.getBoolean("holoBlades") + "<n>!");
+            break;
+          case "holoShields":
+            manager.setBoolean(nbt, "holoShields", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoShields")));
+            system.moduleMessage(this, entity, "<n>holoShields set to <nh>" + nbt.getBoolean("holoShields") + "<n>!");
+            break;
+          case "holoWings":
+            manager.setBoolean(nbt, "holoWings", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoWings")));
+            system.moduleMessage(this, entity, "<n>holoWings set to <nh>" + nbt.getBoolean("holoWings") + "<n>!");
+            break;
+          case "holoMouth":
+            manager.setBoolean(nbt, "holoMouth", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoMouth")));
+            system.moduleMessage(this, entity, "<n>holoMouth set to <nh>" + nbt.getBoolean("holoMouth") + "<n>!");
+            break;
+          case "holoAnt":
+            manager.setBoolean(nbt, "holoAnt", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoAnt")));
+            system.moduleMessage(this, entity, "<n>holoAnt set to <nh>" + nbt.getBoolean("holoAnt") + "<n>!");
+            break;
+          case "holoSat":
+            manager.setBoolean(nbt, "holoSat", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoSat")));
+            system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
+            break;
           case "list":
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + nbt.getShort("durationFightOrFlight"));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin: <nh>" + nbt.getShort("minHealthFightOrFlight"));

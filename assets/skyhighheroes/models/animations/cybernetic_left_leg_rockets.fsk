@@ -1,6 +1,6 @@
+{inner_rockets} = curve(clamp({data_2}, 0, 1))
 {inner_rocket} = curve(clamp({data_0}, 0, 1)){inner_rockets}
 {inner_booster_rocket} = curve(clamp({data_1}, 0, 1)){inner_rockets}
-{inner_rockets} = curve({data_2})
 
 {part0_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
