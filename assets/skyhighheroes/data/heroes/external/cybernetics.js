@@ -54,7 +54,7 @@ var hexColors = {
   //Green
   "CG-2": "0x00FF00",
   //Orange
-  "C0-6": "0xFF9400",
+  "CO-6": "0xFF9400",
   //Purple
   "CP-5": "0x7C00FF",
   //Red
