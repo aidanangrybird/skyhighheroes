@@ -1,57 +1,39 @@
 //I spent a lot of time trying to figure this out
 //If you want to use this in your heropack, please contact aidanangrybird on Discord and make sure to credit aidanangrybird in your heropack
-function getTemperatureProfile(entity, map, clothingVar) {
-  var i = 0;
+function getTemperatureTicks(entity, map, clothingVar) {
   if (typeof clothingVar === "string") {
-    while (i < map.length) {
-      var clothes = map[i].clothingType;
-      var locat = map[i].biome;
-      var ticks = map[i].tempChangeTicks;
-      if (entity.getData(clothingVar) == clothes && entity.world().getLocation(entity.pos()).biome().startsWith(locat) && map[i].hasOwnProperty("clothingType")) {
-        mismatch = true;
-        i = 10000000000;
-      } else {
-        ticks = 0;
-        mismatch = false;
-        i = i + 1;
+    var ticks = 0;
+    var currentClothing = map.ids[entity.getData(clothingVar)];
+    if (entity.world().isUnobstructed(entity.pos(), entity.pos().add(0, 100, 0))) {
+      if (map.hasOwnProperty(currentClothing)) {
+        var clothing = map[currentClothing];
+        if (clothing.hasOwnProperty(entity.world().getLocation(entity.pos()).biome())) {
+          ticks = clothing[entity.world().getLocation(entity.pos()).biome()];
+        };
       };
     };
-    var obj = {
-      isMismatch: mismatch,
-      getTicks: ticks,
-    };
-    return obj;
+    return ticks;
   } else {
-    while (i < map.length) {
-      var locat = map[i].biome;
-      var ticks = map[i].tempChangeTicks;
-      if (entity.world().getLocation(entity.pos()).biome().startsWith(locat) && !map[i].hasOwnProperty("clothingType")) {
-        mismatch = true;
-        i = 10000000000;
-      } else {
-        ticks = 0;
-        mismatch = false;
-        i = i + 1;
+    var ticks = 0;
+    if (entity.world().isUnobstructed(entity.pos(), entity.pos().add(0, 100, 0))) {
+      if (map.hasOwnProperty(entity.world().getLocation(entity.pos()).biome())) {
+        ticks = map[entity.world().getLocation(entity.pos()).biome()];
       };
     };
-    var obj = {
-      isMismatch: mismatch,
-      getTicks: ticks,
-    };
-    return obj;
+    return ticks;
   };
 };
 
 function change(entity, manager, map, tempVar, stableRate, clothingVar) {
-  var profile = getTemperatureProfile(entity, map, clothingVar);
-  if (profile.isMismatch) {
-    if (profile.getTicks > 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
-      manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/profile.getTicks)));
+  var ticks = getTemperatureTicks(entity, map, clothingVar);
+  if (!(ticks == 0)) {
+    if (ticks > 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
+      manager.setData(entity, tempVar, entity.getData(tempVar) + Math.abs((1.0/ticks)));
     };
-    if (profile.getTicks < 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
-      manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/profile.getTicks)));
+    if (ticks < 0.0 && entity.getData(tempVar) >= -1.0 && entity.getData(tempVar) <= 1.0) {
+      manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/ticks)));
     };
-  } else if (!profile.isMismatch) {
+  } else {
     if (entity.getData(tempVar) > 0.0 && entity.getData(tempVar) <= 1.3) {
       manager.setData(entity, tempVar, entity.getData(tempVar) - Math.abs((1.0/stableRate)));
     };
@@ -127,31 +109,31 @@ function initProfiles(hero) {
 };
 
 function getAttributeProfile(entity) {
-  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -1.4 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") >= -1.4 && entity.getData("skyhighocs:dyn/body_temperature") < -0.95 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "FROZEN";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.95 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.85 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") >= -0.95 && entity.getData("skyhighocs:dyn/body_temperature") < -0.85 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "COLD3";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.85 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.5 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") >= -0.85 && entity.getData("skyhighocs:dyn/body_temperature") < -0.5 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "COLD2";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.5 && entity.getData("skyhighheroes:dyn/body_temperature") < -0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") >= -0.5 && entity.getData("skyhighocs:dyn/body_temperature") < -0.01 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "COLD1";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") == 0 || (entity.getData("skyhighheroes:dyn/body_temperature") >= -0.01 && entity.getData("skyhighheroes:dyn/body_temperature") <= 0.01) || (entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") == 0 || (entity.getData("skyhighocs:dyn/body_temperature") >= -0.01 && entity.getData("skyhighocs:dyn/body_temperature") <= 0.01) || (entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "INACTIVE";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.55 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.01 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") <= 0.55 && entity.getData("skyhighocs:dyn/body_temperature") > 0.01 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "HOT1";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.9 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.55 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") <= 0.9 && entity.getData("skyhighocs:dyn/body_temperature") > 0.55 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "HOT2";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 0.95 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.9 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") <= 0.95 && entity.getData("skyhighocs:dyn/body_temperature") > 0.9 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "HOT3";
   };
-  if (entity.getData("skyhighheroes:dyn/body_temperature") <= 1.4 && entity.getData("skyhighheroes:dyn/body_temperature") > 0.95 && !(entity.getData("skyhighheroes:dyn/stelar_clothes") == 2 && entity.isInWater())) {
+  if (entity.getData("skyhighocs:dyn/body_temperature") <= 1.4 && entity.getData("skyhighocs:dyn/body_temperature") > 0.95 && !(entity.getData("skyhighocs:dyn/stelar_clothes") == 2 && entity.isInWater())) {
     return "FIRE";
   };
 };
