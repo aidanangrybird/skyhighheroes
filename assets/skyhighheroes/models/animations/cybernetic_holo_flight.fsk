@@ -36,6 +36,7 @@
 {forward} = clamp({mot_Z}{cosa} - {mot_X}{sina}, -1, 1)
 {hover} = {data_0}(1 - {data_1})
 
+out "translate" (0, 0, -0.75{hover})
 out "pivot" (0, 0.56{hover}, 0)
 
 ;idle

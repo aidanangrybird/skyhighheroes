@@ -89,9 +89,9 @@ function initModule(system) {
             manager.setBoolean(nbt, "holoShields", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoShields")));
             system.moduleMessage(this, entity, "<n>holoShields set to <nh>" + nbt.getBoolean("holoShields") + "<n>!");
             break;
-          case "holoWings":
-            manager.setBoolean(nbt, "holoWings", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoWings")));
-            system.moduleMessage(this, entity, "<n>holoWings set to <nh>" + nbt.getBoolean("holoWings") + "<n>!");
+          case "holoGlide":
+            manager.setBoolean(nbt, "holoGlide", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoGlide")));
+            system.moduleMessage(this, entity, "<n>holoGlide set to <nh>" + nbt.getBoolean("holoGlide") + "<n>!");
             break;
           case "holoMouth":
             manager.setBoolean(nbt, "holoMouth", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("holoMouth")));
@@ -120,6 +120,15 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>friendliesOnHud: <nh>" + nbt.getBoolean("friendliesOnHud"));
             system.moduleMessage(this, entity, "<n>hostilesOnHud: <nh>" + nbt.getBoolean("hostilesOnHud"));
             system.moduleMessage(this, entity, "<n>playersOnHud: <nh>" + nbt.getBoolean("playersOnHud"));
+            system.moduleMessage(this, entity, "<n>holoFlight: <nh>" + nbt.getBoolean("holoFlight"));
+            system.moduleMessage(this, entity, "<n>holoBoostFlight: <nh>" + nbt.getBoolean("holoBoostFlight"));
+            system.moduleMessage(this, entity, "<n>holoCannons: <nh>" + nbt.getBoolean("holoCannons"));
+            system.moduleMessage(this, entity, "<n>holoBlades: <nh>" + nbt.getBoolean("holoBlades"));
+            system.moduleMessage(this, entity, "<n>holoShields: <nh>" + nbt.getBoolean("holoShields"));
+            system.moduleMessage(this, entity, "<n>holoGlide: <nh>" + nbt.getBoolean("holoGlide"));
+            system.moduleMessage(this, entity, "<n>holoMouth: <nh>" + nbt.getBoolean("holoMouth"));
+            system.moduleMessage(this, entity, "<n>holoAnt: <nh>" + nbt.getBoolean("holoAnt"));
+            system.moduleMessage(this, entity, "<n>holoSat: <nh>" + nbt.getBoolean("holoSat"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
@@ -138,6 +147,15 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set friendliesOnHud <true|false> <nh>-<n> Sets if friendly mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set hostilesOnHud <true|false> <nh>-<n> Sets if hostile mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set playersOnHud <true|false> <nh>-<n> Sets if players appear on HUD");
+            system.moduleMessage(this, entity, "<n>!set holoFlight <true|false> <nh>-<n> Sets if hologram will be flying using armed rockets");
+            system.moduleMessage(this, entity, "<n>!set holoBoostFlight <true|false> <nh>-<n> Sets if hologram will be boost flying using armed rockets");
+            system.moduleMessage(this, entity, "<n>!set holoCannons <true|false> <nh>-<n> Sets if hologram will have armed cannons deployed");
+            system.moduleMessage(this, entity, "<n>!set holoBlades <true|false> <nh>-<n> Sets if hologram will have armed blades deployed");
+            system.moduleMessage(this, entity, "<n>!set holoShields <true|false> <nh>-<n> Sets if hologram will have armed shields deployed");
+            system.moduleMessage(this, entity, "<n>!set holoGlide <true|false> <nh>-<n> Sets if hologram will be gliding");
+            system.moduleMessage(this, entity, "<n>!set holoMouth <true|false> <nh>-<n> Sets if hologram will have mouth deployed");
+            system.moduleMessage(this, entity, "<n>!set holoAnt <true|false> <nh>-<n> Sets if hologram will have antenna deployed");
+            system.moduleMessage(this, entity, "<n>!set holoSat <true|false> <nh>-<n> Sets if hologram will have satellite dish deployed");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

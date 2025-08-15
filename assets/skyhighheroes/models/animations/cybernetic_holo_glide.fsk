@@ -1,0 +1,5 @@
+{data} = curve({data})
+
+{head_rotX} @ {data} -> -50'
+out "translate" (0, 1.5{data}, 0.75{data})
+out "rotate" (-90*{data}, 1, 0, 0)

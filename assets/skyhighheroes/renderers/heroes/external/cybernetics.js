@@ -122,10 +122,10 @@ function initCyberneticAnimations(renderer) {
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   });
   addAnimation(renderer, "cybernetic.WING_LEFT", "skyhighheroes:cybernetic_wing_left").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings"));
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings") + getHoloBoolean(entity, "holoGlide"));
   });
   addAnimation(renderer, "cybernetic.WING_RIGHT", "skyhighheroes:cybernetic_wing_right").setData((entity, data) => {
-    data.load( entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings"));
+    data.load( entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings") + getHoloBoolean(entity, "holoGlide"));
   });
   addAnimation(renderer, "cybernetic.LEFT_ARM_AIM", "skyhighheroes:cybernetic_left_arm_aim").setData((entity, data) => {
     data.load(entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer") + getHoloBooleans(entity, "holoCannons", "cannonsArms"));
@@ -175,6 +175,10 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighheroes:cybernetic_holo_flight").setData((entity, data) => {
     data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight") ? (getHoloBoolean(entity, "rocketsAux") + getHoloBoolean(entity, "rocketsBody") + getHoloBoolean(entity, "rocketsLegs")) : 0.0);
     data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
+  }).priority = -9;
+  
+  addAnimation(renderer, "cybernetic.HOLOGRAM_GLIDE", "skyhighocs:cybernetic_holo_glide").setData((entity, data) => {
+    data.load(0.0 + getHoloBoolean(entity, "holoGlide"));
   }).priority = -9;
 };
 
