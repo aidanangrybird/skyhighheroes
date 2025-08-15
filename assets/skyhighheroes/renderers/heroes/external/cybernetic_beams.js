@@ -31,9 +31,9 @@ function initLeftArmBeams(renderer, color) {
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannon"));
   var positionFlush = [
-    { "firstPerson": [-4.5, 3.75, -11.4], "offset": [0.5, 10.0, 0.0], "size": [2.0, 2.0] },
-    { "firstPerson": [-7.0, 3.75, -11.4], "offset": [0.5, 8.0, -2.5], "size": [2.0, 2.0] },
-    { "firstPerson": [-2.0, 3.75, -11.4], "offset": [0.5, 8.0, 2.5], "size": [2.0, 2.0] }
+    { "firstPerson": [4.5, 3.75, -11.4], "offset": [0.5, 10.0, 0.0], "size": [2.0, 2.0] },
+    { "firstPerson": [7.0, 3.75, -11.4], "offset": [0.5, 8.0, -2.5], "size": [2.0, 2.0] },
+    { "firstPerson": [2.0, 3.75, -11.4], "offset": [0.5, 8.0, 2.5], "size": [2.0, 2.0] }
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "leftArm", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
@@ -41,9 +41,9 @@ function initLeftArmBeams(renderer, color) {
 };
 function initRightArmBeams(renderer, color) {
   var position = [
-    { "firstPerson": [4.5, 3.75, -11.4], "offset": [-0.5, 12.9, 0.0], "size": [2.0, 2.0] },
-    { "firstPerson": [0.9, 3.75, -11.4], "offset": [-0.5, 8.0, -3.6], "size": [2.0, 2.0] },
-    { "firstPerson": [8.1, 3.75, -11.4], "offset": [-0.5, 8.0, 3.6], "size": [2.0, 2.0] }
+    { "firstPerson": [-4.5, 3.75, -11.4], "offset": [-0.5, 12.9, 0.0], "size": [2.0, 2.0] },
+    { "firstPerson": [-0.9, 3.75, -11.4], "offset": [-0.5, 8.0, -3.6], "size": [2.0, 2.0] },
+    { "firstPerson": [-8.1, 3.75, -11.4], "offset": [-0.5, 8.0, 3.6], "size": [2.0, 2.0] }
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "rightArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
