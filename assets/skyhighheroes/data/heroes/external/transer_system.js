@@ -813,7 +813,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      if (!entity.getData("skyhighheroes:dyn/system_init")) {
+      if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true)) {
         assignTranser(entity, manager, assignedSatellite);
         status(entity);
         if (human != null) {

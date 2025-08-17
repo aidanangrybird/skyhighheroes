@@ -1052,7 +1052,7 @@ function initSystem(moduleList, name, colorCode) {
     };
   };
   function tickHandler(entity, manager) {
-    if ((!entity.getData("skyhighheroes:dyn/system_init"))) {
+    if ((!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true))) {
       manager.setString(entity.getWornHelmet().nbt(), "cyberModelID", cyberModelID);
       manager.setString(entity.getWornHelmet().nbt(), "cyberAliasName", cyberName);
       manager.setBoolean(entity.getWornHelmet().nbt(), "Unbreakable", true);

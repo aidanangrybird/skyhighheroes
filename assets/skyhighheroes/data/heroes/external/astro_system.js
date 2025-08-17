@@ -691,7 +691,7 @@ function initSystem(moduleList, name, colorCode) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      if (!entity.getData("skyhighheroes:dyn/system_init") && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
+      if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
         asssignID(entity, manager, robotName, color);
         status(entity);
         var hexColor = hexColors[robotName];
