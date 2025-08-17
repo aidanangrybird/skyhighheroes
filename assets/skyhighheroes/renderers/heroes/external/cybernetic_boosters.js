@@ -325,9 +325,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterMain.speedScale = 2.0 * boost;
       boosterMain.flutter = 1 + boost;
       //Beams
-      lineMainEdge.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 1.5 * 1.5 / 8);
-      lineMainMiddle.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.75 * 0.75 / 8);
-      lineMainCenter.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.375 * 0.375 / 8);
+      lineMainEdge.end.y = lineMainMiddle.end.y = lineMainCenter.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineMainMiddle.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineMainCenter.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomMainEdge.progress = bloomMainEdge.opacity = flight;
       //Middle
@@ -352,9 +352,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterOuter.speedScale = 2.0 * boost;
       boosterOuter.flutter = 1 + boost;
       //Beams
-      lineOuterEdge.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 2.5 * 1.5 / 8);
-      lineOuterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 1.25 * 0.75 / 8);
-      lineOuterCenter.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 0.625 * 0.375 / 8);
+      lineOuterEdge.end.y = lineOuterMiddle.end.y = lineOuterCenter.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineOuterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineOuterCenter.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomOuterEdge.progress = bloomOuterEdge.opacity = flight;
       //Middle
@@ -368,9 +368,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterInner.speedScale = 2.0 * boost * innerRockets;
       boosterInner.flutter = 1 + boost * innerRockets;
       //Beams
-      lineInnerEdge.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 2.5 * 1.5 / 8);
-      lineInnerMiddle.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 1.25 * 0.75 / 8);
-      lineInnerCenter.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 0.625 * 0.375 / 8);
+      lineInnerEdge.end.y = lineInnerMiddle.end.y = lineInnerCenter.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineInnerMiddle.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineInnerCenter.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomInnerEdge.progress = bloomInnerEdge.opacity = flight * innerRockets;
       //Middle
@@ -384,9 +384,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterFront.speedScale = 2.0 * boost;
       boosterFront.flutter = 1 + boost;
       //Beams
-      lineFrontEdge.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 2.5 * 1.5 / 8);
-      lineFrontMiddle.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 1.25 * 0.75 / 8);
-      lineFrontCenter.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 0.625 * 0.375 / 8);
+      lineFrontEdge.end.y = lineFrontMiddle.end.y = lineFrontCenter.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineFrontMiddle.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineFrontCenter.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomFrontEdge.progress = bloomFrontEdge.opacity = flight;
       //Middle
@@ -400,9 +400,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterBack.speedScale = 2.0 * boost;
       boosterBack.flutter = 1 + boost;
       //Beams
-      lineBackEdge.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 2.5 * 1.5 / 8);
-      lineBackMiddle.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 1.25 * 0.75 / 8);
-      lineBackCenter.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 0.625 * 0.375 / 8);
+      lineBackEdge.end.y = lineBackMiddle.end.y = lineBackCenter.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineBackMiddle.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineBackCenter.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomBackEdge.progress = bloomBackEdge.opacity = flight;
       //Middle
@@ -427,9 +427,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterOuterBooster.speedScale = 2.0 * boost;
       boosterOuterBooster.flutter = 1 + boost;
       //Beams
-      lineOuterBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineOuterBoosterEdge.end.y = lineOuterBoosterMiddle.end.y = lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomOuterBoosterEdge.progress = bloomOuterBoosterEdge.opacity = flight;
       //Middle
@@ -441,9 +441,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterInnerBooster.speedScale = 2.0 * boost * innerRockets;
       boosterInnerBooster.flutter = 1 + boost * innerRockets;
       //Beams
-      lineInnerBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineInnerBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineInnerBoosterEdge.end.y = lineInnerBoosterMiddle.end.y = lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineInnerBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomInnerBoosterEdge.progress = bloomInnerBoosterEdge.opacity = flight * innerRockets;
       //Middle
@@ -455,9 +455,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterFrontBooster.speedScale = 2.0 * boost;
       boosterFrontBooster.flutter = 1 + boost;
       //Beams
-      lineFrontBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineFrontBoosterEdge.end.y = lineFrontBoosterMiddle.end.y = lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomFrontBoosterEdge.progress = bloomFrontBoosterEdge.opacity = flight;
       //Middle
@@ -469,9 +469,9 @@ function initLeftLegBoosters(renderer, model, color) {
       boosterBackBooster.speedScale = 2.0 * boost;
       boosterBackBooster.flutter = 1 + boost;
       //Beams
-      lineBackBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineBackBoosterEdge.end.y = lineBackBoosterMiddle.end.y = lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBackBoosterEdge.progress = bloomBackBoosterEdge.opacity = flight;
       //Middle
@@ -859,9 +859,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterMain.speedScale = 2.0 * boost;
       boosterMain.flutter = 1 + boost;
       //Beams
-      lineMainEdge.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 1.5 * 1.5 / 8);
-      lineMainMiddle.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.75 * 0.75 / 8);
-      lineMainCenter.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.375 * 0.375 / 8);
+      lineMainEdge.end.y = lineMainMiddle.end.y = lineMainCenter.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineMainMiddle.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineMainCenter.end.y = ((0.5*boost + 1 + f * boosterMain.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomMainEdge.progress = bloomMainEdge.opacity = flight;
       //Middle
@@ -886,9 +886,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterOuter.speedScale = 2.0 * boost;
       boosterOuter.flutter = 1 + boost;
       //Beams
-      lineOuterEdge.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 2.5 * 1.5 / 8);
-      lineOuterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 1.25 * 0.75 / 8);
-      lineOuterCenter.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 0.625 * 0.375 / 8);
+      lineOuterEdge.end.y = lineOuterMiddle.end.y = lineOuterCenter.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineOuterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineOuterCenter.end.y = ((0.5*boost + 1 + f * boosterOuter.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomOuterEdge.progress = bloomOuterEdge.opacity = flight;
       //Middle
@@ -902,9 +902,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterInner.speedScale = 2.0 * boost * innerRockets;
       boosterInner.flutter = 1 + boost * innerRockets;
       //Beams
-      lineInnerEdge.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 2.5 * 1.5 / 8);
-      lineInnerMiddle.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 1.25 * 0.75 / 8);
-      lineInnerCenter.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 0.625 * 0.375 / 8);
+      lineInnerEdge.end.y = lineInnerMiddle.end.y = lineInnerCenter.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineInnerMiddle.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineInnerCenter.end.y = ((0.5*boost + 1 + f * boosterInner.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomInnerEdge.progress = bloomInnerEdge.opacity = flight * innerRockets;
       //Middle
@@ -918,9 +918,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterFront.speedScale = 2.0 * boost;
       boosterFront.flutter = 1 + boost;
       //Beams
-      lineFrontEdge.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 2.5 * 1.5 / 8);
-      lineFrontMiddle.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 1.25 * 0.75 / 8);
-      lineFrontCenter.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 0.625 * 0.375 / 8);
+      lineFrontEdge.end.y = lineFrontMiddle.end.y = lineFrontCenter.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineFrontMiddle.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineFrontCenter.end.y = ((0.5*boost + 1 + f * boosterFront.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomFrontEdge.progress = bloomFrontEdge.opacity = flight;
       //Middle
@@ -934,9 +934,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterBack.speedScale = 2.0 * boost;
       boosterBack.flutter = 1 + boost;
       //Beams
-      lineBackEdge.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 2.5 * 1.5 / 8);
-      lineBackMiddle.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 1.25 * 0.75 / 8);
-      lineBackCenter.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 0.625 * 0.375 / 8);
+      lineBackEdge.end.y = lineBackMiddle.end.y = lineBackCenter.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 2.5 * 1.5 / 8);
+      //lineBackMiddle.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 1.25 * 0.75 / 8);
+      //lineBackCenter.end.y = ((0.5*boost + 1 + f * boosterBack.flutter / 4) * 0.625 * 0.375 / 8);
       //Edge
       bloomBackEdge.progress = bloomBackEdge.opacity = flight;
       //Middle
@@ -961,9 +961,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterOuterBooster.speedScale = 2.0 * boost;
       boosterOuterBooster.flutter = 1 + boost;
       //Beams
-      lineOuterBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineOuterBoosterEdge.end.y = lineOuterBoosterMiddle.end.y = lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomOuterBoosterEdge.progress = bloomOuterBoosterEdge.opacity = flight;
       //Middle
@@ -975,9 +975,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterInnerBooster.speedScale = 2.0 * boost * innerRockets;
       boosterInnerBooster.flutter = 1 + boost * innerRockets;
       //Beams
-      lineInnerBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineInnerBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineInnerBoosterEdge.end.y = lineInnerBoosterMiddle.end.y = lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineInnerBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineInnerBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterInnerBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomInnerBoosterEdge.progress = bloomInnerBoosterEdge.opacity = flight * innerRockets;
       //Middle
@@ -989,9 +989,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterFrontBooster.speedScale = 2.0 * boost;
       boosterFrontBooster.flutter = 1 + boost;
       //Beams
-      lineFrontBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineFrontBoosterEdge.end.y = lineFrontBoosterMiddle.end.y = lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomFrontBoosterEdge.progress = bloomFrontBoosterEdge.opacity = flight;
       //Middle
@@ -1003,9 +1003,9 @@ function initRightLegBoosters(renderer, model, color) {
       boosterBackBooster.speedScale = 2.0 * boost;
       boosterBackBooster.flutter = 1 + boost;
       //Beams
-      lineBackBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineBackBoosterEdge.end.y = lineBackBoosterMiddle.end.y = lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBackBoosterEdge.progress = bloomBackBoosterEdge.opacity = flight;
       //Middle
@@ -1323,9 +1323,9 @@ function initLeftArmBoosters(renderer, model, color) {
       boosterOuterBooster.speedScale = 2.0 * boost;
       boosterOuterBooster.flutter = 1 + boost;
       //Beams
-      lineOuterBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineOuterBoosterEdge.end.y = lineOuterBoosterMiddle.end.y = lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomOuterBoosterEdge.progress = bloomOuterBoosterEdge.opacity = flight;
       //Middle
@@ -1338,9 +1338,9 @@ function initLeftArmBoosters(renderer, model, color) {
       boosterFrontBooster.speedScale = 2.0 * boost;
       boosterFrontBooster.flutter = 1 + boost;
       //Beams
-      lineFrontBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineFrontBoosterEdge.end.y = lineFrontBoosterMiddle.end.y = lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomFrontBoosterEdge.progress = bloomFrontBoosterEdge.opacity = flight;
       //Middle
@@ -1353,9 +1353,9 @@ function initLeftArmBoosters(renderer, model, color) {
       boosterBackBooster.speedScale = 2.0 * boost;
       boosterBackBooster.flutter = 1 + boost;
       //Beams
-      lineBackBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineBackBoosterEdge.end.y = lineBackBoosterMiddle.end.y = lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBackBoosterEdge.progress = bloomBackBoosterEdge.opacity = flight;
       //Middle
@@ -1503,9 +1503,9 @@ function initRightArmBoosters(renderer, model, color) {
       boosterOuterBooster.speedScale = 2.0 * boost;
       boosterOuterBooster.flutter = 1 + boost;
       //Beams
-      lineOuterBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineOuterBoosterEdge.end.y = lineOuterBoosterMiddle.end.y = lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineOuterBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineOuterBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterOuterBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomOuterBoosterEdge.progress = bloomOuterBoosterEdge.opacity = flight;
       //Middle
@@ -1518,9 +1518,9 @@ function initRightArmBoosters(renderer, model, color) {
       boosterFrontBooster.speedScale = 2.0 * boost;
       boosterFrontBooster.flutter = 1 + boost;
       //Beams
-      lineFrontBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineFrontBoosterEdge.end.y = lineFrontBoosterMiddle.end.y = lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineFrontBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineFrontBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterFrontBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomFrontBoosterEdge.progress = bloomFrontBoosterEdge.opacity = flight;
       //Middle
@@ -1533,9 +1533,9 @@ function initRightArmBoosters(renderer, model, color) {
       boosterBackBooster.speedScale = 2.0 * boost;
       boosterBackBooster.flutter = 1 + boost;
       //Beams
-      lineBackBoosterEdge.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
-      lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
-      lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
+      lineBackBoosterEdge.end.y = lineBackBoosterMiddle.end.y = lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineBackBoosterMiddle.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.75 * 0.75 / 8);
+      //lineBackBoosterCenter.end.y = ((0.5*boost + 1 + f * boosterBackBooster.flutter / 4) * 0.375 * 0.375 / 8);
       //Edge
       bloomBackBoosterEdge.progress = bloomBackBoosterEdge.opacity = flight;
       //Middle
