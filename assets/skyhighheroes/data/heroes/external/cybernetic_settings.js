@@ -37,9 +37,9 @@ function initModule(system) {
             manager.setBoolean(nbt, "innerRockets", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("innerRockets")));
             system.moduleMessage(this, entity, "<n>innerRockets set to <nh>" + nbt.getBoolean("innerRockets") + "<n>!");
             break;
-          case "flushEyeCannons":
-            manager.setBoolean(nbt, "flushEyeCannons", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("flushEyeCannons")));
-            system.moduleMessage(this, entity, "<n>flushEyeCannons set to <nh>" + nbt.getBoolean("flushEyeCannons") + "<n>!");
+          case "flushHeadCannons":
+            manager.setBoolean(nbt, "flushHeadCannons", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
+            system.moduleMessage(this, entity, "<n>flushHeadCannons set to <nh>" + nbt.getBoolean("flushHeadCannons") + "<n>!");
             break;
           case "flushLeftArmCannon":
             manager.setBoolean(nbt, "flushLeftArmCannon", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("flushLeftArmCannon")));
@@ -112,7 +112,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>aliasActive: <nh>" + nbt.getBoolean("aliasActive"));
             system.moduleMessage(this, entity, "<n>nightVision: <nh>" + nbt.getBoolean("nightVision"));
             system.moduleMessage(this, entity, "<n>innerRockets: <nh>" + nbt.getBoolean("innerRockets"));
-            system.moduleMessage(this, entity, "<n>flushEyeCannons: <nh>" + nbt.getBoolean("flushEyeCannons"));
+            system.moduleMessage(this, entity, "<n>flushHeadCannons: <nh>" + nbt.getBoolean("flushHeadCannons"));
             system.moduleMessage(this, entity, "<n>flushLeftArmCannon: <nh>" + nbt.getBoolean("flushLeftArmCannon"));
             system.moduleMessage(this, entity, "<n>flushRightArmCannon: <nh>" + nbt.getBoolean("flushRightArmCannon"));
             system.moduleMessage(this, entity, "<n>flushMouth: <nh>" + nbt.getBoolean("flushMouth"));
@@ -139,7 +139,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set aliasActive <true|false> <nh>-<n> Sets if alias name appears above head");
             system.moduleMessage(this, entity, "<n>!set nightVision <true|false> <nh>-<n> Sets if night vision is active");
             system.moduleMessage(this, entity, "<n>!set innerRockets <true|false> <nh>-<n> Sets if inner rockets are enabled");
-            system.moduleMessage(this, entity, "<n>!set flushEyeCannons <true|false> <nh>-<n> Sets if eye cannons are flush to head");
+            system.moduleMessage(this, entity, "<n>!set flushHeadCannons <true|false> <nh>-<n> Sets if head cannons are flush to head");
             system.moduleMessage(this, entity, "<n>!set flushLeftArmCannon <true|false> <nh>-<n> Sets if left arm cannons are flush to arm");
             system.moduleMessage(this, entity, "<n>!set flushRightArmCannon <true|false> <nh>-<n> Sets if right arm cannons are flush to arm");
             system.moduleMessage(this, entity, "<n>!set flushMouth <true|false> <nh>-<n> Sets if mouth is flush to head");

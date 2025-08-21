@@ -10,23 +10,23 @@
 {inner_rockets} = curve(clamp({data_9}, 0, 1))
 
 ;main rocket
-{part1_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.0, 0.1, 0.0), 1)
-{part2_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.2, 0.4, 0.0), 1)
-{part3_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.6, 0.4, 0.0), 1)
+{part0_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
+{part1_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.2, 0.2, 0.0), 1)
+{part2_main_rocket} = if({main_rocket} != 1, animate2({main_rocket}, 1.0, 0.4, 0.6, 0.0), 1)
 
-{right_leg_back_rocket_cover_posY} -= 0.03{part1_main_rocket}
-{right_leg_back_rocket_cover_posZ} += {part2_main_rocket}
+{right_leg_back_rocket_cover_posY} -= 0.03{part0_main_rocket}
+{right_leg_back_rocket_cover_posZ} += 0.99{part1_main_rocket} + 0.01{part0_main_rocket}
 
-{right_leg_front_rocket_cover_posY} -= 0.03{part1_main_rocket}
-{right_leg_front_rocket_cover_posZ} -= {part2_main_rocket}
+{right_leg_front_rocket_cover_posY} -= 0.03{part0_main_rocket}
+{right_leg_front_rocket_cover_posZ} -= 0.99{part1_main_rocket} + 0.01{part0_main_rocket}
 
-{right_leg_inner_rocket_cover_posY} -= 0.03{part1_main_rocket}
-{right_leg_inner_rocket_cover_posX} += {part2_main_rocket}
+{right_leg_inner_rocket_cover_posY} -= 0.03{part0_main_rocket}
+{right_leg_inner_rocket_cover_posX} += 0.99{part1_main_rocket} + 0.01{part0_main_rocket}
 
-{right_leg_outer_rocket_cover_posY} -= 0.03{part1_main_rocket}
-{right_leg_outer_rocket_cover_posX} -= {part2_main_rocket}
+{right_leg_outer_rocket_cover_posY} -= 0.03{part0_main_rocket}
+{right_leg_outer_rocket_cover_posX} -= 0.99{part1_main_rocket} + 0.01{part0_main_rocket}
 
-{right_leg_main_rocket_posY} += 2.6{part3_main_rocket}
+{right_leg_main_rocket_posY} += 2.6{part2_main_rocket}
 
 ;side rockets
 ;inner
@@ -37,10 +37,10 @@
 {part4_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
 
 {right_leg_front_inner_rocket_cover_posX} -= 0.03{part0_inner_rocket}
-{right_leg_front_inner_rocket_cover_posZ} -= {part1_inner_rocket}
+{right_leg_front_inner_rocket_cover_posZ} -= 0.99{part1_inner_rocket} + 0.01{part0_inner_rocket}
 {right_leg_back_inner_rocket_cover_posX} -= 0.03{part0_inner_rocket}
-{right_leg_back_inner_rocket_cover_posZ} += {part1_inner_rocket}
-{right_leg_rocket_inner_posY} += 0.15{part2_inner_rocket} + 0.75{part4_inner_rocket}
+{right_leg_back_inner_rocket_cover_posZ} += 0.99{part1_inner_rocket} + 0.01{part0_inner_rocket}
+{right_leg_rocket_inner_posY} += 0.15{part2_inner_rocket} + 0.675{part4_inner_rocket}
 {right_leg_rocket_inner_rotX} += 50'{part3_inner_rocket}
 {right_leg_rocket_inner_posX} += 0.75{part4_inner_rocket}
 
@@ -52,10 +52,10 @@
 {part4_outer_rocket} = if({outer_rocket} != 1, animate2({outer_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
 
 {right_leg_front_outer_rocket_cover_posX} += 0.03{part0_outer_rocket}
-{right_leg_front_outer_rocket_cover_posZ} -= {part1_outer_rocket}
+{right_leg_front_outer_rocket_cover_posZ} -= 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
 {right_leg_back_outer_rocket_cover_posX} += 0.03{part0_outer_rocket}
-{right_leg_back_outer_rocket_cover_posZ} += {part1_outer_rocket}
-{right_leg_rocket_outer_posY} += 0.15{part2_outer_rocket} + 0.75{part4_outer_rocket}
+{right_leg_back_outer_rocket_cover_posZ} += 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
+{right_leg_rocket_outer_posY} += 0.15{part2_outer_rocket} + 0.675{part4_outer_rocket}
 {right_leg_rocket_outer_rotX} += 50'{part3_outer_rocket}
 {right_leg_rocket_outer_posX} -= 0.75{part4_outer_rocket}
 
@@ -67,10 +67,10 @@
 {part4_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
 
 {right_leg_inner_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
-{right_leg_inner_front_rocket_cover_posX} += {part1_front_rocket}
+{right_leg_inner_front_rocket_cover_posX} += 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
 {right_leg_outer_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
-{right_leg_outer_front_rocket_cover_posX} -= {part1_front_rocket}
-{right_leg_rocket_front_posY} += 0.15{part2_front_rocket} + 0.75{part4_front_rocket}
+{right_leg_outer_front_rocket_cover_posX} -= 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
+{right_leg_rocket_front_posY} += 0.15{part2_front_rocket} + 0.675{part4_front_rocket}
 {right_leg_rocket_front_rotX} += 50'{part3_front_rocket}
 {right_leg_rocket_front_posZ} -= 0.75{part4_front_rocket}
 
@@ -82,10 +82,10 @@
 {part4_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.9, 0.1, 0.0), 1)
 
 {right_leg_inner_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
-{right_leg_inner_back_rocket_cover_posX} += {part1_back_rocket}
+{right_leg_inner_back_rocket_cover_posX} += 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
 {right_leg_outer_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
-{right_leg_outer_back_rocket_cover_posX} -= {part1_back_rocket}
-{right_leg_rocket_back_posY} += 0.15{part2_back_rocket} + 0.75{part4_back_rocket}
+{right_leg_outer_back_rocket_cover_posX} -= 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
+{right_leg_rocket_back_posY} += 0.15{part2_back_rocket} + 0.675{part4_back_rocket}
 {right_leg_rocket_back_rotX} += 50'{part3_back_rocket}
 {right_leg_rocket_back_posZ} += 0.75{part4_back_rocket}
 
@@ -98,8 +98,8 @@
 
 {right_leg_outer_back_booster_rocket_cover_posZ} -= 0.03{part0_back_booster_rocket}
 {right_leg_inner_back_booster_rocket_cover_posZ} -= 0.03{part0_back_booster_rocket}
-{right_leg_outer_back_booster_rocket_cover_posX} -= 1{part1_back_booster_rocket}
-{right_leg_inner_back_booster_rocket_cover_posX} += 1{part1_back_booster_rocket}
+{right_leg_outer_back_booster_rocket_cover_posX} -= 0.99{part1_back_booster_rocket} + 0.01{part0_back_booster_rocket}
+{right_leg_inner_back_booster_rocket_cover_posX} += 0.99{part1_back_booster_rocket} + 0.01{part0_back_booster_rocket}
 {right_leg_back_booster_rocket_posY} += -0.15{part2_back_booster_rocket} + 0.15{part3_back_booster_rocket} + 0.25{part4_back_booster_rocket}
 {right_leg_back_booster_rocket_rotX} += 45'{part3_back_booster_rocket}
 {right_leg_back_booster_rocket_posZ} += 0.25{part4_back_booster_rocket}
@@ -112,8 +112,8 @@
 
 {right_leg_front_outer_booster_rocket_cover_posX} += 0.03{part0_outer_booster_rocket}
 {right_leg_back_outer_booster_rocket_cover_posX} += 0.03{part0_outer_booster_rocket}
-{right_leg_front_outer_booster_rocket_cover_posZ} -= 1{part1_outer_booster_rocket}
-{right_leg_back_outer_booster_rocket_cover_posZ} += 1{part1_outer_booster_rocket}
+{right_leg_front_outer_booster_rocket_cover_posZ} -= 0.99{part1_outer_booster_rocket} + 0.01{part0_outer_booster_rocket}
+{right_leg_back_outer_booster_rocket_cover_posZ} += 0.99{part1_outer_booster_rocket} + 0.01{part0_outer_booster_rocket}
 {right_leg_outer_booster_rocket_posY} += -0.15{part2_outer_booster_rocket} + 0.15{part3_outer_booster_rocket} + 0.25{part4_outer_booster_rocket}
 {right_leg_outer_booster_rocket_rotZ} += 45'{part3_outer_booster_rocket}
 {right_leg_outer_booster_rocket_posX} -= 0.25{part4_outer_booster_rocket}
@@ -126,8 +126,8 @@
 
 {right_leg_front_inner_booster_rocket_cover_posX} -= 0.03{part0_inner_booster_rocket}
 {right_leg_back_inner_booster_rocket_cover_posX} -= 0.03{part0_inner_booster_rocket}
-{right_leg_front_inner_booster_rocket_cover_posZ} -= 1{part1_inner_booster_rocket}
-{right_leg_back_inner_booster_rocket_cover_posZ} += 1{part1_inner_booster_rocket}
+{right_leg_front_inner_booster_rocket_cover_posZ} -= 0.99{part1_inner_booster_rocket} + 0.01{part0_inner_booster_rocket}
+{right_leg_back_inner_booster_rocket_cover_posZ} += 0.99{part1_inner_booster_rocket} + 0.01{part0_inner_booster_rocket}
 {right_leg_inner_booster_rocket_posY} += -0.15{part2_inner_booster_rocket} + 0.15{part3_inner_booster_rocket} + 0.25{part4_inner_booster_rocket}
 {right_leg_inner_booster_rocket_rotZ} -= 45'{part3_inner_booster_rocket}
 {right_leg_inner_booster_rocket_posX} += 0.25{part4_inner_booster_rocket}
@@ -140,8 +140,8 @@
 
 {right_leg_outer_front_booster_rocket_cover_posZ} += 0.03{part0_front_booster_rocket}
 {right_leg_inner_front_booster_rocket_cover_posZ} += 0.03{part0_front_booster_rocket}
-{right_leg_outer_front_booster_rocket_cover_posX} -= 1{part1_front_booster_rocket}
-{right_leg_inner_front_booster_rocket_cover_posX} += 1{part1_front_booster_rocket}
+{right_leg_outer_front_booster_rocket_cover_posX} -= 0.99{part1_front_booster_rocket} + 0.01{part0_front_booster_rocket}
+{right_leg_inner_front_booster_rocket_cover_posX} += 0.99{part1_front_booster_rocket} + 0.01{part0_front_booster_rocket}
 {right_leg_front_booster_rocket_posY} += -0.15{part2_front_booster_rocket} + 0.15{part3_front_booster_rocket} + 0.25{part4_front_booster_rocket}
 {right_leg_front_booster_rocket_rotX} -= 45'{part3_front_booster_rocket}
 {right_leg_front_booster_rocket_posZ} -= 0.25{part4_front_booster_rocket}

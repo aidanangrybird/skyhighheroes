@@ -65,14 +65,14 @@ function initHeadBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "head", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsEyes") && !entity.getWornHelmet().nbt().getBoolean("flushEyeCannons"));
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && !entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
   var positionFlush = [
     { "firstPerson": [-2.2, 0.0, 2.0], "offset": [-2.0, -3.0, -4.0], "size": [2.0, 2.0] },
     { "firstPerson": [2.2, 0.0, 2.0], "offset": [2.0, -3.0, -4.0], "size": [2.0, 2.0] }
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "head", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsEyes") && entity.getWornHelmet().nbt().getBoolean("flushEyeCannons"));
+  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
   var scream = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:cybernetic_scream", "head", color, [
     { "firstPerson": [0.0, 2.5, -3.2], "offset": [0.0, -1.5, -4.9], "size": [10.0, 10.0] }
   ]);

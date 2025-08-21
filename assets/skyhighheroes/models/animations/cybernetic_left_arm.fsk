@@ -15,8 +15,8 @@
 {part2_cannon} = if({cannon} != 1, animate2({cannon}, 1.0, 0.6, 0.4, 0.0), 1)
 {left_arm_inner_cannon_cover_posY} -= 0.03{part0_cannon}
 {left_arm_outer_cannon_cover_posY} -= 0.03{part0_cannon}
-{left_arm_inner_cannon_cover_posX} -= 1{part1_cannon}
-{left_arm_outer_cannon_cover_posX} += 1{part1_cannon}
+{left_arm_inner_cannon_cover_posX} -= 0.99{part1_cannon} + 0.01{part0_cannon}
+{left_arm_outer_cannon_cover_posX} += 0.99{part1_cannon} + 0.01{part0_cannon}
 {left_arm_cannon_posY} += 3{part2_cannon} - 2.9{part2_cannon}{cannon_flush}
 
 {part0_front_cannon} = if({front_cannon} != 1, animate2({front_cannon}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -24,8 +24,8 @@
 {part2_front_cannon} = if({front_cannon} != 1, animate2({front_cannon}, 1.0, 0.6, 0.4, 0.0), 1)
 {left_arm_inner_front_cannon_cover_posZ} += 0.03{part0_front_cannon}
 {left_arm_outer_front_cannon_cover_posZ} += 0.03{part0_front_cannon}
-{left_arm_inner_front_cannon_cover_posX} -= 1{part1_front_cannon}
-{left_arm_outer_front_cannon_cover_posX} += 1{part1_front_cannon}
+{left_arm_inner_front_cannon_cover_posX} -= 0.99{part1_front_cannon} + 0.01{part0_front_cannon}
+{left_arm_outer_front_cannon_cover_posX} += 0.99{part1_front_cannon} + 0.01{part0_front_cannon}
 {left_arm_front_cannon_posZ} -= 2.9{part2_front_cannon} - 0.8{part2_front_cannon}{cannon_flush}
 
 {part0_back_cannon} = if({back_cannon} != 1, animate2({back_cannon}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -33,8 +33,8 @@
 {part2_back_cannon} = if({back_cannon} != 1, animate2({back_cannon}, 1.0, 0.6, 0.4, 0.0), 1)
 {left_arm_inner_back_cannon_cover_posZ} -= 0.03{part0_back_cannon}
 {left_arm_outer_back_cannon_cover_posZ} -= 0.03{part0_back_cannon}
-{left_arm_inner_back_cannon_cover_posX} -= 1{part1_back_cannon}
-{left_arm_outer_back_cannon_cover_posX} += 1{part1_back_cannon}
+{left_arm_inner_back_cannon_cover_posX} -= 0.99{part1_back_cannon} + 0.01{part0_back_cannon}
+{left_arm_outer_back_cannon_cover_posX} += 0.99{part1_back_cannon} + 0.01{part0_back_cannon}
 {left_arm_back_cannon_posZ} += 2.9{part2_back_cannon} - 0.8{part2_back_cannon}{cannon_flush}
 
 ;rockets
@@ -46,8 +46,12 @@
 
 {left_arm_front_outer_rocket_cover_posX} -= 0.03{part0_outer_rocket}
 {left_arm_back_outer_rocket_cover_posX} -= 0.03{part0_outer_rocket}
-{left_arm_front_outer_rocket_cover_posZ} -= 1{part1_outer_rocket}
-{left_arm_back_outer_rocket_cover_posZ} += 1{part1_outer_rocket}
+{left_arm_lower_outer_rocket_cover_posX} -= 0.03{part0_outer_rocket}
+{left_arm_front_outer_rocket_cover_posZ} -= 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
+{left_arm_back_outer_rocket_cover_posZ} += 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
+{left_arm_lower_outer_rocket_cover_posY} += 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
+{left_arm_front_outer_rocket_cover_posY} -= 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
+{left_arm_back_outer_rocket_cover_posY} -= 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
 {left_arm_outer_rocket_posY} += -0.15{part2_outer_rocket} + 0.15{part3_outer_rocket} + 0.5{part4_outer_rocket}
 {left_arm_outer_rocket_rotZ} -= 45'{part3_outer_rocket}
 {left_arm_outer_rocket_posX} += 0.5{part4_outer_rocket}
@@ -60,8 +64,10 @@
 
 {left_arm_outer_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
 {left_arm_inner_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
-{left_arm_outer_front_rocket_cover_posX} += 1{part1_front_rocket}
-{left_arm_inner_front_rocket_cover_posX} -= 1{part1_front_rocket}
+{left_arm_outer_front_rocket_cover_posX} += 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
+{left_arm_outer_front_rocket_cover_posY} -= 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
+{left_arm_inner_front_rocket_cover_posX} -= 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
+{left_arm_inner_front_rocket_cover_posY} += 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
 {left_arm_front_rocket_posY} += -0.15{part2_front_rocket} + 0.15{part3_front_rocket} + 0.5{part4_front_rocket}
 {left_arm_front_rocket_rotX} -= 45'{part3_front_rocket}
 {left_arm_front_rocket_posZ} -= 0.5{part4_front_rocket}
@@ -74,8 +80,10 @@
 
 {left_arm_outer_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
 {left_arm_inner_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
-{left_arm_outer_back_rocket_cover_posX} += 1{part1_back_rocket}
-{left_arm_inner_back_rocket_cover_posX} -= 1{part1_back_rocket}
+{left_arm_outer_back_rocket_cover_posX} += 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
+{left_arm_outer_back_rocket_cover_posY} -= 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
+{left_arm_inner_back_rocket_cover_posX} -= 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
+{left_arm_inner_back_rocket_cover_posY} += 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
 {left_arm_back_rocket_posY} += -0.15{part2_back_rocket} + 0.15{part3_back_rocket} + 0.5{part4_back_rocket}
 {left_arm_back_rocket_rotX} += 45'{part3_back_rocket}
 {left_arm_back_rocket_posZ} += 0.5{part4_back_rocket}
@@ -102,8 +110,8 @@
 ;cover
 {left_arm_front_blade_cover_posX} += 0.03{part0_blade}
 {left_arm_back_blade_cover_posX} += 0.03{part0_blade}
-{left_arm_front_blade_cover_posZ} -= 1{part1_blade}
-{left_arm_back_blade_cover_posZ} += 1{part1_blade}
+{left_arm_front_blade_cover_posZ} -= 0.99{part1_blade} + 0.01{part0_blade}
+{left_arm_back_blade_cover_posZ} += 0.99{part1_blade} + 0.01{part0_blade}
 {left_arm_blade_arm_posY} += 3{part2_blade} - {part3_blade} - 2.5{part1_blade_stealth}{part4_blade} + 1.25{part2_blade_stealth}{part4_blade}
 {left_arm_blade_arm_rotZ} += 65'{part2_blade} - 70'{part3_blade}
 {left_arm_blade_base_rotZ} -= 65'{part2_blade} - 70'{part3_blade}
@@ -164,8 +172,8 @@
 
 {left_arm_front_shield_cover_posX} -= 0.03{part0_shield}
 {left_arm_back_shield_cover_posX} -= 0.03{part0_shield}
-{left_arm_front_shield_cover_posZ} -= 1{part1_shield}
-{left_arm_back_shield_cover_posZ} += 1{part1_shield}
+{left_arm_front_shield_cover_posZ} -= 0.99{part1_shield} + 0.01{part0_shield}
+{left_arm_back_shield_cover_posZ} += 0.99{part1_shield} + 0.01{part0_shield}
 {left_arm_shield_arm_posX} += 2{part2_shield}
 {left_arm_shield_arm_posY} += 2{part2_shield}
 {left_arm_shield_arm_rotZ} -= 100'{part3_shield} - 40'{part3_outer_rocket}{part3_shield}

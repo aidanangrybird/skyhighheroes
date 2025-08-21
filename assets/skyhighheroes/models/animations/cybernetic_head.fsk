@@ -7,32 +7,58 @@
 {cannon_flush} = curve(clamp({data_6}, 0, 1))
 {mouth_flush} = curve(clamp({data_7}, 0, 1))
 
-;eyes
+;cannons
 ;left cannon
 {part0_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.2, 0.2, 0.0), 1)
 {part2_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.6, 0.4, 0.0), 1)
-{head_left_eye_upper_cover_posZ} += 0.03{part0_cannon_left}
-{head_left_eye_lower_cover_posZ} += 0.03{part0_cannon_left}
-{head_left_eye_upper_cover_posY} -= 1{part1_cannon_left}
-{head_left_eye_lower_cover_posY} += 1{part1_cannon_left}
-{head_left_eye_posZ} -= 2.9{part2_cannon_left} - 2.8{part2_cannon_left}{cannon_flush}
+{head_left_upper_front_cannon_cover_posX} -= 0.03{part0_cannon_left}
+{head_left_lower_front_cannon_cover_posX} -= 0.03{part0_cannon_left}
+{head_left_upper_back_cannon_cover_posX} -= 0.03{part0_cannon_left}
+{head_left_lower_back_cannon_cover_posX} -= 0.03{part0_cannon_left}
+{head_left_upper_front_cannon_cover_posY} -= 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_upper_front_cannon_cover_posZ} -= 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_lower_front_cannon_cover_posY} += 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_lower_front_cannon_cover_posZ} -= 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_upper_back_cannon_cover_posY} -= 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_upper_back_cannon_cover_posZ} += 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_lower_back_cannon_cover_posY} += 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_lower_back_cannon_cover_posZ} += 0.99{part1_cannon_left} + 0.01{part0_cannon_left}
+{head_left_lower_cannon_base_posX} += 2.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
+{head_left_upper_cannon_base_posX} += 2.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
+{head_left_front_cannon_base_posX} += 2.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
+{head_left_back_cannon_base_posX} += 2.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
+{head_left_cannon_posX} += 5.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
 ;right cannon
 {part0_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.2, 0.2, 0.0), 1)
 {part2_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.6, 0.4, 0.0), 1)
-{head_right_eye_upper_cover_posZ} += 0.03{part0_cannon_right}
-{head_right_eye_lower_cover_posZ} += 0.03{part0_cannon_right}
-{head_right_eye_upper_cover_posY} -= 1{part1_cannon_right}
-{head_right_eye_lower_cover_posY} += 1{part1_cannon_right}
-{head_right_eye_posZ} -= 2.9{part2_cannon_right} - 2.8{part2_cannon_right}{cannon_flush}
+{head_right_upper_front_cannon_cover_posX} += 0.03{part0_cannon_right}
+{head_right_lower_front_cannon_cover_posX} += 0.03{part0_cannon_right}
+{head_right_upper_back_cannon_cover_posX} += 0.03{part0_cannon_right}
+{head_right_lower_back_cannon_cover_posX} += 0.03{part0_cannon_right}
+{head_right_upper_front_cannon_cover_posY} -= 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_upper_front_cannon_cover_posZ} -= 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_lower_front_cannon_cover_posY} += 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_lower_front_cannon_cover_posZ} -= 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_upper_back_cannon_cover_posY} -= 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_upper_back_cannon_cover_posZ} += 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_lower_back_cannon_cover_posY} += 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_lower_back_cannon_cover_posZ} += 0.99{part1_cannon_right} + 0.01{part0_cannon_right}
+{head_right_lower_cannon_base_posX} -= 2.9{part2_cannon_right} - 2.8{cannon_flush}{part2_cannon_right}
+{head_right_upper_cannon_base_posX} -= 2.9{part2_cannon_right} - 2.8{cannon_flush}{part2_cannon_right}
+{head_right_front_cannon_base_posX} -= 2.9{part2_cannon_right} - 2.8{cannon_flush}{part2_cannon_right}
+{head_right_back_cannon_base_posX} -= 2.9{part2_cannon_right} - 2.8{cannon_flush}{part2_cannon_right}
+{head_right_cannon_posX} -= 5.9{part2_cannon_right} - 2.8{cannon_flush}{part2_cannon_right}
 
 ;mouth
 {part0_mouth} = if({mouth} != 1, animate2({mouth}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_mouth} = if({mouth} != 1, animate2({mouth}, 1.0, 0.2, 0.2, 0.0), 1)
 {part2_mouth} = if({mouth} != 1, animate2({mouth}, 1.0, 0.6, 0.4, 0.0), 1)
-{head_mouth_cover_posZ} += 0.03{part0_mouth}
-{head_mouth_cover_posY} -= 1{part1_mouth}
+{head_mouth_left_cover_posZ} += 0.03{part0_mouth}
+{head_mouth_right_cover_posZ} += 0.03{part0_mouth}
+{head_mouth_left_cover_posX} -= 0.99{part1_mouth} + 0.01{part0_mouth}
+{head_mouth_right_cover_posX} += 0.99{part1_mouth} + 0.01{part0_mouth}
 {head_mouth_posZ} -= 1.9{part2_mouth} - 1.8{part2_mouth}{mouth_flush}
 
 ;antenna
@@ -44,8 +70,8 @@
 
 {head_left_antenna_cover_posY} += 0.03{part0_antenna}
 {head_right_antenna_cover_posY} += 0.03{part0_antenna}
-{head_left_antenna_cover_posX} += 1{part1_antenna}
-{head_right_antenna_cover_posX} -= 1{part1_antenna}
+{head_left_antenna_cover_posX} += 0.99{part1_antenna} + 0.01{part0_antenna}
+{head_right_antenna_cover_posX} -= 0.99{part1_antenna} + 0.01{part0_antenna}
 {head_antenna_base_posY} -= 6.9{part2_antenna}
 {head_antenna_base_posZ} -= 1{part4_antenna}
 {head_antenna_posY} -= 6.95{part3_antenna}
@@ -67,8 +93,8 @@
 
 {head_left_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
 {head_right_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
-{head_left_satellite_dish_cover_posX} += 1{part1_satellite_dish_arm}
-{head_right_satellite_dish_cover_posX} -= 1{part1_satellite_dish_arm}
+{head_left_satellite_dish_cover_posX} += 0.99{part1_satellite_dish_arm} + 0.01{part0_satellite_dish_arm}
+{head_right_satellite_dish_cover_posX} -= 0.99{part1_satellite_dish_arm} + 0.01{part0_satellite_dish_arm}
 {head_satellite_dish_arm_base_posZ} += 6.4{part3_satellite_dish_arm}
 {head_satellite_dish_arm_base_posY} += {part4_satellite_dish_arm}
 {head_satellite_dish_base_posY} += {part4_satellite_dish_arm}

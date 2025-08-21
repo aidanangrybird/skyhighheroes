@@ -71,13 +71,13 @@ function initEffects(renderer) {
   var head = renderer.createResource("MODEL", "skyhighheroes:CyberneticHead");
   head.texture.set("head", "head_lights");
   head.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer"));
     data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eyes_flush_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/mouth_flush_timer"));
   });
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
@@ -88,13 +88,13 @@ function initEffects(renderer) {
   var head_hair = renderer.createResource("MODEL", "skyhighheroes:CyberneticHeadL2");
   head_hair.texture.set("head_hair", "head_hair_lights");
   head_hair.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer"));
     data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eyes_flush_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/mouth_flush_timer"));
   });
   head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
@@ -197,13 +197,13 @@ function initEffects(renderer) {
   var head_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticHead");
   head_camouflage.texture.set("head_camouflage");
   head_camouflage.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer"));
     data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eyes_flush_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/mouth_flush_timer"));
   });
   head_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_camouflage);
@@ -212,13 +212,13 @@ function initEffects(renderer) {
   var head_hair_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticHeadL2");
   head_hair_camouflage.texture.set("head_hair_camouflage");
   head_hair_camouflage.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eye_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_eyes_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsEyes"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
+    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsHead"));
     data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/mouth_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/mouth_timer") + cybernetics.getHoloBoolean(entity, "holoMouth"));
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") + cybernetics.getHoloBoolean(entity, "holoSat"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer"));
     data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") + cybernetics.getHoloBoolean(entity, "holoAnt"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_eyes_flush_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_flush_timer"));
     data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/mouth_flush_timer"));
   });
   head_hair_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_camouflage);
