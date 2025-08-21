@@ -110,8 +110,8 @@ function initEffects(renderer) {
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_body_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsBody"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsWings") + cybernetics.getHoloBoolean(entity, "holoGlide"));
     data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsWings") + cybernetics.getHoloBoolean(entity, "holoGlide"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_left_deployed") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
-    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deployed") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
+    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
   });
   body_model = renderer.createEffect("fiskheroes:model").setModel(body);
   body_model.anchor.set("body");
@@ -234,8 +234,8 @@ function initEffects(renderer) {
     data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_body_timer") + cybernetics.getHoloBooleans(entity, "holoCannons", "cannonsBody"));
     data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsWings") + cybernetics.getHoloBoolean(entity, "holoGlide"));
     data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + cybernetics.getHoloBooleans(entity, "holoFlight", "rocketsWings") + cybernetics.getHoloBoolean(entity, "holoGlide"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_left_deployed") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
-    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deployed") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
+    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
+    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
   });
   body_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(body_camouflage);
   body_camouflage_model.anchor.set("body");
