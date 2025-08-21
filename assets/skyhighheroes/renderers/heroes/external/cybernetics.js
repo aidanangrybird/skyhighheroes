@@ -177,7 +177,7 @@ function initCyberneticAnimations(renderer) {
     data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
   }).priority = -9;
   
-  addAnimation(renderer, "cybernetic.HOLOGRAM_GLIDE", "skyhighocs:cybernetic_holo_glide").setData((entity, data) => {
+  addAnimation(renderer, "cybernetic.HOLOGRAM_GLIDE", "skyhighheroes:cybernetic_holo_glide").setData((entity, data) => {
     data.load(0.0 + getHoloBoolean(entity, "holoGlide"));
   }).priority = -9;
 };
