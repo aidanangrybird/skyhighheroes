@@ -11,7 +11,7 @@
   },
   "getters": {
     "TIMER": {
-      "key": "Math.ceil(80 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')) | 0",
+      "key": "Math.min(Math.max(Math.ceil(80 * entity.getInterpolatedData('skyhighheroes:dyn/wave_changing_timer')), 40), 80) | 0",
       "values": {
         "min": 40,
         "max": 80

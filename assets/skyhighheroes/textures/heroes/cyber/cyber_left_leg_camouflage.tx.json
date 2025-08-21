@@ -15,9 +15,9 @@
   },
   "getters": {
     "TIMER": {
-      "key": "Math.ceil(47 * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer')) + ((entity.getWornHelmet().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0) | 0",
+      "key": "Math.min(Math.max(Math.ceil(47 * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer')) + ((entity.getWornHelmet().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0), 31), 47) | 0",
       "values": {
-        "min": 0,
+        "min": 31,
         "max": 47
       }
     }
