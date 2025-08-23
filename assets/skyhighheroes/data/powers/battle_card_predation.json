@@ -3,7 +3,6 @@
   "value": 1,
   "modifiers": {
     "fiskheroes:transformation|predation": {
-      "key": "PREDATION",
       "transformation": {
         "toggleData": "skyhighheroes:dyn/predation",
         "timerData": "skyhighheroes:dyn/predation_timer",
@@ -11,20 +10,14 @@
       },
       "isToggle": true
     },
-    "fiskheroes:cooldown": {
-      "cooldown": {
-        "toggleData": "skyhighheroes:dyn/predation",
-        "cooldownData": "skyhighheroes:dyn/predation_cooldown",
-        "duration": 200,
-        "recovery": 50.0
+    "fiskheroes:gravity_manipulation": {
+      "range": 0.0,
+      "radius": 0.0,
+      "minGravity": 1.0,
+      "maxGravity": 1.0,
+      "affectsUser": false,
+      "soundEvents": {
       }
     }
-  },
-  "hud": [
-    {
-      "type": "PROGRESS",
-      "texture": "skyhighheroes:textures/gui/bars/predation.png",
-      "data": "skyhighheroes:dyn/predation_cooldown"
-    }
-  ]
+  }
 }

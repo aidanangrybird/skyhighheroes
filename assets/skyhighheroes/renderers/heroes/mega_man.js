@@ -15,18 +15,26 @@ loadTextures({
   "base_wave_change": "skyhighheroes:geo/mega_man_wave_change.tx.json",
   "lights_wave_change": "skyhighheroes:geo/mega_man_wave_change_lights.tx.json",
   "wave_changing_lights": "skyhighheroes:geo/mega_man_wave_changing_lights.tx.json",
-  "predation_wave_changing_front_lights": "skyhighheroes:geo/mega_man_predation_wave_changing_front_lights.tx.json",
-  "predation_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_predation_wave_changing_sides_lights.tx.json",
   "sword_blade": "skyhighheroes:geo/mega_man_sword_blade.tx.json",
   "sword": "skyhighheroes:geo/mega_man_sword.tx.json",
   "sword_lights": "skyhighheroes:null",
   "sword_wave_changing_lights": "skyhighheroes:geo/mega_man_sword_wave_changing_lights.tx.json",
   "sword_sides": "skyhighheroes:geo/mega_man_sword_sides.tx.json",
   "sword_front": "skyhighheroes:geo/mega_man_sword_front.tx.json",
+  "sword_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_sword_wave_changing_sides_lights.tx.json",
+  "sword_wave_changing_front_lights": "skyhighheroes:geo/mega_man_sword_wave_changing_front_lights.tx.json",
+  "cannon_sides": "skyhighheroes:geo/mega_man_cannon_sides.tx.json",
+  "cannon_top": "skyhighheroes:geo/mega_man_cannon_top.tx.json",
+  "cannon_bottom": "skyhighheroes:geo/mega_man_cannon_bottom.tx.json",
+  "cannon_front": "skyhighheroes:geo/mega_man_cannon_front.tx.json",
+  "cannon_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_cannon_wave_changing_sides_lights.tx.json",
+  "cannon_wave_changing_front_lights": "skyhighheroes:geo/mega_man_cannon_wave_changing_front_lights.tx.json",
   "jet_attack_top": "skyhighheroes:geo/mega_man_jet_attack_top.tx.json",
   "jet_attack_bottom": "skyhighheroes:geo/mega_man_jet_attack_bottom.tx.json",
   "jet_attack_sides": "skyhighheroes:geo/mega_man_jet_attack_sides.tx.json",
   "jet_attack_front": "skyhighheroes:geo/mega_man_jet_attack_front.tx.json",
+  "jet_attack_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_jet_attack_wave_changing_sides_lights.tx.json",
+  "jet_attack_wave_changing_front_lights": "skyhighheroes:geo/mega_man_jet_attack_wave_changing_front_lights.tx.json",
   "jet_attack_wings": "skyhighheroes:geo/mega_man_jet_attack_wings.tx.json",
   "jet_attack_wings_wave_changing_lights": "skyhighheroes:geo/mega_man_jet_attack_wings_wave_changing_lights.tx.json",
   "knuckle_top": "skyhighheroes:geo/mega_man_knuckle_top.tx.json",
@@ -34,10 +42,8 @@ loadTextures({
   "knuckle_right": "skyhighheroes:geo/mega_man_knuckle_right.tx.json",
   "knuckle_left": "skyhighheroes:geo/mega_man_knuckle_left.tx.json",
   "knuckle_front": "skyhighheroes:geo/mega_man_knuckle_front.tx.json",
-  "cannon_sides": "skyhighheroes:geo/mega_man_cannon_sides.tx.json",
-  "cannon_top": "skyhighheroes:geo/mega_man_cannon_top.tx.json",
-  "cannon_bottom": "skyhighheroes:geo/mega_man_cannon_bottom.tx.json",
-  "cannon_front": "skyhighheroes:geo/mega_man_cannon_front.tx.json",
+  "knuckle_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_knuckle_wave_changing_sides_lights.tx.json",
+  "knuckle_wave_changing_front_lights": "skyhighheroes:geo/mega_man_knuckle_wave_changing_front_lights.tx.json",
   "head_right": "skyhighheroes:geo/omega_xis_right.tx.json",
   "head_right_lights": "skyhighheroes:geo/omega_xis_right_lights.tx.json",
   "head_wave_change_right": "skyhighheroes:geo/omega_xis_wave_change_right.tx.json",
@@ -186,12 +192,12 @@ function initEffects(renderer) {
   ears.angle = 0;
   ears.inset = -0.039;
   stuff.bindFlightTrail(renderer, "skyhighheroes:mega_man_flight");
-  //Battle card predation wave changing
-  predation = stelar.initHandThing(renderer, "predation_wave_changing", 0, 2);
   //Cannon
   cannon = stelar.initHandThing(renderer, "cannon", 3, 0);
+  cannonPredation = stelar.initHandThing(renderer, "cannon_wave_changing", 0, 2);
   //Jet Attack
   jetAttack = stelar.initHandThing(renderer, "jet_attack", 3, 0);
+  jetAttackPredation = stelar.initHandThing(renderer, "jet_attack_wave_changing", 0, 2);
   jetAttackWings = renderer.createEffect("fiskheroes:shield");
   jetAttackWings.texture.set("jet_attack_wings");
   jetAttackWings.anchor.set("rightArm");
@@ -204,6 +210,7 @@ function initEffects(renderer) {
   jetAttackWingsWaveChanging.large = true;
   //Knuckle
   knuckle = stelar.initHandThing(renderer, "knuckle", 1, 0);
+  knucklePredation = stelar.initHandThing(renderer, "knuckle_wave_changing", 0, 2);
   //Sword
   swordMain = renderer.createEffect("fiskheroes:shield");
   swordMain.texture.set("sword", "sword_lights");
@@ -221,6 +228,7 @@ function initEffects(renderer) {
   swordWaveChanging.setRotation(0.0, 0.0, 0.0).setCurve(0.0, 0.0).setOffset(1.0, 12.5, 0.0);
   swordWaveChanging.large = true;
   sword = stelar.initHandThing(renderer, "sword", 2, 0);
+  swordPredation = stelar.initHandThing(renderer, "sword_wave_changing", 0, 2);
   //Head
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
@@ -286,27 +294,28 @@ function render(entity, renderLayer, isFirstPersonArm) {
       headWaveChanging.render();
     }
   };
-  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-    predation.render();
-  };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/sword_timer") > 0) {
     swordWaveChanging.render();
     swordMain.render();
     sword.render();
+    swordPredation.render();
     if (entity.getData("skyhighheroes:dyn/sword") && entity.getHeldItem().isEmpty()) {
       swordBlade.render();
     };
   };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/cannon_timer") > 0) {
     cannon.render();
+    cannonPredation.render();
   };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/jet_attack_timer") > 0) {
     jetAttack.render();
+    jetAttackPredation.render();
     jetAttackWings.render();
     jetAttackWingsWaveChanging.render();
   };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getInterpolatedData("skyhighheroes:dyn/knuckle_timer") > 0) {
     knuckle.render();
+    knucklePredation.render();
   };
   var nbt = entity.getWornChestplate().nbt();
   var entities = [];

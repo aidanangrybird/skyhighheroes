@@ -64,7 +64,7 @@ function addPredationAnimation(renderer, key, value) {
   };
   renderer.addCustomAnimation(key, anim);
   anim.setData((entity, data) => data.load(entity.getInterpolatedData("skyhighheroes:dyn/predation_timer")));
-  anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") > 0)
+  anim.setCondition(entity => entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0)
   anim.priority = -9.75;
 };
 
@@ -76,7 +76,7 @@ function addBasePredationAnimation(renderer, key, value) {
   anim.setData((entity, data) => {
     data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/predation_timer"));
   });
-  anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 0)
+  anim.setCondition(entity => entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0)
   anim.priority = -9.75;
 };
 
@@ -171,22 +171,22 @@ function initForceField(renderer, color) {
 //Stelar Animations
 function initStelarAnimations(renderer) {
   //Aiming
-  addAnimationWithData(renderer, "stelar.AIMING", "skyhighheroes:em_wave_change_aim", "fiskheroes:aiming_timer")
+  addAnimationWithData(renderer, "em_wave_change.AIMING", "skyhighheroes:em_wave_change_aim", "fiskheroes:aiming_timer")
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 10;
   addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wave_change_wall_ceiling_stand");
-  addPredationAnimation(renderer, "stelar.PREDATION", "skyhighheroes:em_wave_change_predation");
-  addSwordAnimations(renderer, "stelar.SWORD", "skyhighheroes:em_wave_change_sword");
+  addPredationAnimation(renderer, "em_wave_change.PREDATION", "skyhighheroes:em_wave_change_predation");
+  addSwordAnimations(renderer, "em_wave_change.SWORD", "skyhighheroes:em_wave_change_sword");
   //Flight
-  addFlightBaseAnimation(renderer, "stelar.BASE_FLIGHT", "skyhighheroes:flight/em_wave_change_base_flight.anim.json");
-  addFlightHoldingAnimation(renderer, "stelar.HOLDING_FLIGHT", "skyhighheroes:flight/em_wave_change_holding_flight.anim.json");
-  addAnimationWithData(renderer, "stelar.LAND", "skyhighheroes:em_wave_change_landing", "skyhighheroes:dyn/superhero_landing_timer")
+  addFlightBaseAnimation(renderer, "em_wave_change.BASE_FLIGHT", "skyhighheroes:flight/em_wave_change_base_flight.anim.json");
+  addFlightHoldingAnimation(renderer, "em_wave_change.HOLDING_FLIGHT", "skyhighheroes:flight/em_wave_change_holding_flight.anim.json");
+  addAnimationWithData(renderer, "em_wave_change.LAND", "skyhighheroes:em_wave_change_landing", "skyhighheroes:dyn/superhero_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "stelar.LAND_BOOST", "skyhighheroes:em_wave_change_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
+  addAnimationWithData(renderer, "em_wave_change.LAND_BOOST", "skyhighheroes:em_wave_change_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
     .priority = -8;
-  addAnimationWithData(renderer, "stelar.ROLL", "skyhighheroes:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
+  addAnimationWithData(renderer, "em_wave_change.ROLL", "skyhighheroes:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "stelar.HOVER", "skyhighheroes:em_wave_change_hover");
+  addHoverAnimation(renderer, "em_wave_change.HOVER", "skyhighheroes:em_wave_change_hover");
 };
 //Mega Buster
 function initMegaBuster(renderer, color, color_other) {

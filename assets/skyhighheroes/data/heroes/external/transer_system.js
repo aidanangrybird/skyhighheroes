@@ -315,6 +315,20 @@ function chatMessage(entity, message) {
   };
 };
 /**
+ * Prints message to every line of sight visible player's chat within range
+ * @param {JSEntity} entity - Required base entity
+ * @param {string} message - Message to be shown to players in range
+ * @param {number} range - Range which to shout message at
+ **/
+function shoutMessage(entity, message, range) {
+  var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range)
+  entities.forEach(player => {
+    if (player.is("PLAYER") && entity.canSee(player)) {
+      chatMessage(player, message);
+    };
+  });
+};
+/**
  * Sends system message, formatting tags are below
  * ```
  * "<ob>": "\u00A7k"

@@ -1,4 +1,3 @@
-{data} = -1*{data}+1
 ;animate2(input, duration, start, ramp up, ramp down)
 {part0} = curve(if({data} != 1, animate2({data}, 1.0, 0.0, 0.25, 0.35), 0))
 {part1} = curve(if({data} != 1, animate2({data}, 0.9, 0.1, 0.15, 0.35), 0))

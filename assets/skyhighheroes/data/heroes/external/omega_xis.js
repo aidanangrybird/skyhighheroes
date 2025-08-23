@@ -5,9 +5,20 @@
 function initModule(system) {
   //All of the required functions and stuff go here
   function resetBattleCard(player, manager) {
-    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
     manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
     return true;
+  };
+  function cycleUpCard(player, manager) {
+    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
+    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 5) {
+      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+    };
+  };
+  function cycleDownCard(player, manager) {
+    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
+    if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
+      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 5);
+    };
   };
   return {
     name: "omegaXis",
@@ -20,8 +31,8 @@ function initModule(system) {
       "skyhighheroes:mega_buster"
     ],
     keyBinds: function (hero) {
-      hero.addKeyBindFunc("BATTLE_CARD_RESET_PREDATION", (player, manager) => resetBattleCard(player, manager), "Return To Mega Buster", 2);
-      hero.addKeyBind("PREDATION", "Battle Card Predation", 2);
+      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Mega Buster", 2);
+      hero.addKeyBind("GRAVITY_MANIPULATION", "Battle Card Predation", 2);
       hero.addKeyBind("AIM", "Aim Mega Buster", 4);
       hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
@@ -40,9 +51,7 @@ function initModule(system) {
         return true;
       }, "EM Wave Change!", 5);
       hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("<Geo Stelar> EM Wave Change! \u00A7bGeo Stelar\u00A7r, On-Air!");
-        };
+        system.shoutMessage(player, "<Geo Stelar> EM Wave Change! \u00A7bGeo Stelar\u00A7r, On-Air!", 16);
         manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
@@ -55,34 +64,25 @@ function initModule(system) {
       }, "EM Wave Change!", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
       hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle Mega Buster", 5);
-      hero.addKeyBind("AIM", "Aim Mega Buster", 4);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too cold for us to EM Wave Change.");
-        };
+        system.shoutMessage(player, "\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too cold for us to EM Wave Change.", 16);
         return true;
       }, "\u00A7mEM Wave Change!\u00A7r You are too cold", 5);
       hero.addKeyBindFunc("HOT_TEMPERATURE", (player, manager) => {
-        if (PackLoader.getSide() == "CLIENT") {
-          PackLoader.printChat("\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too hot for us to EM Wave Change.");
-        };
+        system.shoutMessage(player, "\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too hot for us to EM Wave Change.", 16);
         return true;
       }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
-      hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Mega Buster", 5);
     },
     canAim: function (entity) {
       return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && ((entity.getData("skyhighheroes:dyn/battle_card") == 0 && entity.getData("skyhighheroes:dyn/omega_xis_timer") == 0) || entity.getData("skyhighheroes:dyn/battle_card") == 3) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
     },
     isKeyBindEnabled: function (entity, keyBind) {
       var result = false;
-      if (keyBind == "PREDATION") {
+      if (keyBind == "GRAVITY_MANIPULATION") {
         result = (entity.getData("skyhighheroes:dyn/battle_card") > 0 || entity.getData("skyhighheroes:dyn/omega_xis_timer") < 1) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
       };
-      if (keyBind == "BATTLE_CARD_RESET_PREDATION") {
-        result = entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-      };
       if (keyBind == "BATTLE_CARD_RESET") {
-        result = entity.getData("fiskheroes:flight_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/battle_card") > 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
+        result = entity.isSneaking() && (entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/selected_battle_card") > 0) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
       };
       if (keyBind == "SYNCHRONIZE_WAVES") {
         result = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
@@ -120,15 +120,34 @@ function initModule(system) {
       if (modifier.name() == "fiskheroes:energy_bolt") {
         result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 0;
       };
+      if (modifier.name() == "fiskheroes:gravity_manipulation") {
+        result = entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().isEmpty()
+      };
       return result;
     },
     tickHandler: function (entity, manager) {
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && ((entity.getData("skyhighheroes:dyn/predation") && entity.getData("skyhighheroes:dyn/predation_timer") > 0 && entity.getData("skyhighheroes:dyn/predation_timer") < 1))) {
-        manager.setData(entity, "skyhighheroes:dyn/battle_card", 0);
-        manager.setData(entity, "skyhighheroes:dyn/selected_battle_card", 0);
-        manager.setData(entity, "skyhighheroes:dyn/sword", false);
-        manager.setData(entity, "skyhighheroes:dyn/omega_xis", false);
+      if (entity.getData("skyhighheroes:dyn/predation_timer") >= 1) {
+        manager.setData(entity, "skyhighheroes:dyn/predation", false);
+        manager.setData(entity, "skyhighheroes:dyn/predation_timer", 0.0);
       };
-    }
+      if (entity.getData("fiskheroes:gravity_manip")) {
+        if (entity.getData("skyhighheroes:dyn/reset_gravity_manip")) {
+          manager.setData(entity, "fiskheroes:gravity_amount", 0);
+          manager.setData(entity, "skyhighheroes:dyn/reset_gravity_manip", false);
+        };
+        var gravity_amount = entity.getData("fiskheroes:gravity_amount");
+        if (gravity_amount > 0) {
+          cycleUpCard(entity, manager);
+          manager.setData(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
+        };
+        if (gravity_amount < 0) {
+          cycleDownCard(entity, manager);
+          manager.setData(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
+        };
+      };
+      if (!entity.getData("fiskheroes:gravity_manip") && (entity.getData("skyhighheroes:dyn/battle_card") != entity.getData("skyhighheroes:dyn/selected_battle_card"))) {
+        manager.setData(entity, "skyhighheroes:dyn/predation", true);
+      };
+    },
   };
 };
