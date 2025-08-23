@@ -11,7 +11,7 @@
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighheroes:dyn/jet_attack') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/jet_attack_timer') + (entity.getData('skyhighheroes:dyn/jet_attack') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 1), 24) | 0",
+      "key": "Math.min(Math.max(Math.ceil(28 - ((entity.getData('skyhighheroes:dyn/jet_attack') ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/jet_attack_timer') + (entity.getData('skyhighheroes:dyn/jet_attack') ? 28 : 0)) - ((!entity.getHeldItem().isEmpty() ? -1 : 1) * 28 * entity.getInterpolatedData('skyhighheroes:dyn/item_holding_timer') + (!entity.getHeldItem().isEmpty() ? 28 : 0))), 0), 25) | 0",
       "values": {
         "min": 0,
         "max": 25
