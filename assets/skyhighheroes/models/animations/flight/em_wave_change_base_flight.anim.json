@@ -1,0 +1,8 @@
+{
+  "inputs": [
+    "skyhighheroes:flight/em_wave_change_base_header",
+    "skyhighheroes:flight/em_wave_change_base_idle",
+    "skyhighheroes:flight/em_wave_change_base_boost",
+    "skyhighheroes:flight/em_wave_change_base_fp"
+  ]
+}
