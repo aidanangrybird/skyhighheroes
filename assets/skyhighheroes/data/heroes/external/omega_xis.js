@@ -4,20 +4,20 @@
  **/
 function initModule(system) {
   //All of the required functions and stuff go here
-  function resetBattleCard(player, manager) {
-    manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
+  function resetBattleCard(entity, manager) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/battle_card", 0);
     return true;
   };
-  function cycleUpCard(player, manager) {
-    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") + 1);
-    if (player.getData("skyhighheroes:dyn/selected_battle_card") > 5) {
-      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
+  function cycleUpCard(entity, manager) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_battle_card", entity.getData("skyhighheroes:dyn/selected_battle_card") + 1);
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") > 5) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_battle_card", 0);
     };
   };
-  function cycleDownCard(player, manager) {
-    manager.setData(player, "skyhighheroes:dyn/selected_battle_card", player.getData("skyhighheroes:dyn/selected_battle_card") - 1);
-    if (player.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
-      manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 5);
+  function cycleDownCard(entity, manager) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_battle_card", entity.getData("skyhighheroes:dyn/selected_battle_card") - 1);
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") < 0) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_battle_card", 5);
     };
   };
   return {
@@ -127,26 +127,26 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       if (entity.getData("skyhighheroes:dyn/predation_timer") >= 1) {
-        manager.setData(entity, "skyhighheroes:dyn/predation", false);
-        manager.setData(entity, "skyhighheroes:dyn/predation_timer", 0.0);
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/predation", false);
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/predation_timer", 0.0);
       };
       if (entity.getData("fiskheroes:gravity_manip")) {
         if (entity.getData("skyhighheroes:dyn/reset_gravity_manip")) {
-          manager.setData(entity, "fiskheroes:gravity_amount", 0);
-          manager.setData(entity, "skyhighheroes:dyn/reset_gravity_manip", false);
+          manager.setDataWithNotify(entity, "fiskheroes:gravity_amount", 0);
+          manager.setDataWithNotify(entity, "skyhighheroes:dyn/reset_gravity_manip", false);
         };
         var gravity_amount = entity.getData("fiskheroes:gravity_amount");
         if (gravity_amount > 0) {
           cycleUpCard(entity, manager);
-          manager.setData(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
+          manager.setDataWithNotify(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
         };
         if (gravity_amount < 0) {
           cycleDownCard(entity, manager);
-          manager.setData(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
+          manager.setDataWithNotify(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
         };
       };
       if (!entity.getData("fiskheroes:gravity_manip") && (entity.getData("skyhighheroes:dyn/battle_card") != entity.getData("skyhighheroes:dyn/selected_battle_card"))) {
-        manager.setData(entity, "skyhighheroes:dyn/predation", true);
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/predation", true);
       };
     },
   };
