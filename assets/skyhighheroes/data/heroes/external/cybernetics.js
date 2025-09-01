@@ -1064,7 +1064,7 @@ function initSystem(moduleList, name, colorCode) {
         manager.setShort(entity.getWornHelmet().nbt(), "minHealthFightOrFlight", 5);
       };
       if (!entity.getWornHelmet().nbt().hasKey("hudRange")) {
-        manager.setShort(entity.getWornHelmet().nbt(), "hudRange", 32);
+        manager.setShort(entity.getWornHelmet().nbt(), "hudRange", 0);
       };
       if (!entity.getWornHelmet().nbt().hasKey("hostilesOnHud")) {
         manager.setBoolean(entity.getWornHelmet().nbt(), "hostilesOnHud", true);

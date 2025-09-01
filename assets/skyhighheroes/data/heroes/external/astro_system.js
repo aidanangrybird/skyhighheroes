@@ -696,18 +696,18 @@ function initSystem(moduleList, name, colorCode) {
         status(entity);
         var hexColor = hexColors[robotName];
         manager.setString(entity.getWornLeggings().nbt(), "hudColorSkyHigh", hexColor);
-      if (!entity.getWornLeggings().nbt().hasKey("hudRange")) {
-        manager.setShort(entity.getWornLeggings().nbt(), "hudRange", 32);
-      };
-      if (!entity.getWornLeggings().nbt().hasKey("hostilesOnHud")) {
-        manager.setBoolean(entity.getWornLeggings().nbt(), "hostilesOnHud", true);
-      };
-      if (!entity.getWornLeggings().nbt().hasKey("friendliesOnHud")) {
-        manager.setBoolean(entity.getWornLeggings().nbt(), "friendliesOnHud", true);
-      };
-      if (!entity.getWornLeggings().nbt().hasKey("playersOnHud")) {
-        manager.setBoolean(entity.getWornLeggings().nbt(), "playersOnHud", true);
-      };
+        if (!entity.getWornLeggings().nbt().hasKey("hudRange")) {
+          manager.setShort(entity.getWornLeggings().nbt(), "hudRange", 0);
+        };
+        if (!entity.getWornLeggings().nbt().hasKey("hostilesOnHud")) {
+          manager.setBoolean(entity.getWornLeggings().nbt(), "hostilesOnHud", true);
+        };
+        if (!entity.getWornLeggings().nbt().hasKey("friendliesOnHud")) {
+          manager.setBoolean(entity.getWornLeggings().nbt(), "friendliesOnHud", true);
+        };
+        if (!entity.getWornLeggings().nbt().hasKey("playersOnHud")) {
+          manager.setBoolean(entity.getWornLeggings().nbt(), "playersOnHud", true);
+        };
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };

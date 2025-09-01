@@ -39,36 +39,13 @@ function initModule(system) {
               system.moduleMessage(this, entity, "<e>Invalid color code!");
             };
             break;
-          case "hudRange":
-            manager.setShort(nbt, "hudRange", parseInt(arguments[2]));
-            system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
-            break;
-          case "friendliesOnHud":
-            manager.setBoolean(nbt, "friendliesOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
-            system.moduleMessage(this, entity, "<n>friendliesOnHud set to <nh>" + nbt.getBoolean("friendliesOnHud") + "<n>!");
-            break;
-          case "hostilesOnHud":
-            manager.setBoolean(nbt, "hostilesOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
-            system.moduleMessage(this, entity, "<n>hostilesOnHud set to <nh>" + nbt.getBoolean("hostilesOnHud") + "<n>!");
-            break;
-          case "playersOnHud":
-            manager.setBoolean(nbt, "playersOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
-            system.moduleMessage(this, entity, "<n>playersOnHud set to <nh>" + nbt.getBoolean("playersOnHud") + "<n>!");
-            break;
           case "list":
             system.moduleMessage(this, entity, "<n>color: <nh>\u00A7" + nbt.getString("systemColor") + "COLOR");
-            system.moduleMessage(this, entity, "<n>hudRange: <nh>" + nbt.getShort("hudRange"));
-            system.moduleMessage(this, entity, "<n>friendliesOnHud: <nh>" + nbt.getBoolean("friendliesOnHud"));
-            system.moduleMessage(this, entity, "<n>hostilesOnHud: <nh>" + nbt.getBoolean("hostilesOnHud"));
-            system.moduleMessage(this, entity, "<n>playersOnHud: <nh>" + nbt.getBoolean("playersOnHud"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
             system.moduleMessage(this, entity, "<n>!set list <nh>-<n> Lists current settings and their values");
             system.moduleMessage(this, entity, "<n>!set color <color code> <nh>-<n> Sets system color");
-            system.moduleMessage(this, entity, "<n>!set hudRange <number> <nh>-<n> Sets range of HUD scanner");
-            system.moduleMessage(this, entity, "<n>!set friendliesOnHud <true|false> <nh>-<n> Sets if friendly mobs appear on HUD");
-            system.moduleMessage(this, entity, "<n>!set hostilesOnHud <true|false> <nh>-<n> Sets if hostile mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

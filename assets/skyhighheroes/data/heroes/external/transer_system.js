@@ -834,18 +834,6 @@ function initSystem(moduleList, transerName, satellite) {
           var hexColor = hexColors[human];
           manager.setString(entity.getWornChestplate().nbt(), "hudColorSkyHigh", hexColor);
         };
-      if (!entity.getWornChestplate().nbt().hasKey("hudRange")) {
-        manager.setShort(entity.getWornChestplate().nbt(), "hudRange", 32);
-      };
-      if (!entity.getWornChestplate().nbt().hasKey("hostilesOnHud")) {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "hostilesOnHud", true);
-      };
-      if (!entity.getWornChestplate().nbt().hasKey("friendliesOnHud")) {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "friendliesOnHud", true);
-      };
-      if (!entity.getWornChestplate().nbt().hasKey("playersOnHud")) {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "playersOnHud", true);
-      };
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };
