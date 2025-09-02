@@ -1,0 +1,22 @@
+{
+  "suit": "skyhighheroes:chakra_the_invincible",
+  "requirements": [
+    "skyhighheroes:chakra",
+    "fiskheroes:tier8_9",
+    "skyhighheroes:base"
+  ],
+  "criteria": {
+    "chance": {
+      "trigger": "fiskheroes:player_struck_by_lightning",
+      "description": {
+        "translate": "Get struck by lightning"
+      },
+      "condition": {
+        "variables": {
+          "player": "PLAYER_STRUCK"
+        },
+        "check": "player.exists()"
+      }
+    }
+  }
+}

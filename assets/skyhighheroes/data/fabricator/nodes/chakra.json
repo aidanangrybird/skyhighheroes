@@ -1,0 +1,13 @@
+{
+  "display": {
+    "name": {
+      "translate": "Chakra OCs"
+    },
+    "icon": {
+      "texture": "skyhighheroes:textures/gui/nodes/chakra.png"
+    }
+  },
+  "requirements": [
+      "skyhighheroes:base"
+  ]
+}

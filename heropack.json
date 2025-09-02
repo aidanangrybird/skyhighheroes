@@ -21,6 +21,8 @@
     "fight_or_flight": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
     "bearing": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
 
+    "chakra_suit": { "type": "BOOLEAN", "resetWithoutSuit": true },
+
     "wave_changing_timer": "FLOAT_INTERP",
     "wave_changed": "BOOLEAN",
     "calling_value": { "type": "FLOAT", "resetWithoutSuit": true },

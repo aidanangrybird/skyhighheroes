@@ -1,0 +1,123 @@
+{
+  "name": "Chakra Suit",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:potion_immunity": {
+      "potionEffects": ["minecraft:nausea", "minecraft:poison", "minecraft:wither", "minecraft:weakness", "minecraft:slowness", "minecraft:blindness", "minecraft:hunger", "minecraft:instant_damage", "minecraft:mining_fatigue", "minecraft:haste", "minecraft:fire_resistance", "minecraft:health_boost", "minecraft:instant_health", "minecraft:jump_boost", "minecraft:regeneration", "minecraft:resistance", "minecraft:saturation", "minecraft:speed", "minecraft:strength", "minecraft:water_breathing"]
+    },
+    "fiskheroes:controlled_flight": {
+      "speed": 0.1,
+      "boostSpeed": 0.4,
+      "canRoll": true,
+      "canBoost": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": false
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:shield": {
+      "shield": {
+        "health": 200.0,
+        "regeneration": 25.0,
+        "recoveryDelay": 200
+      },
+      "coverage": {
+        "yawRadius": 360.0,
+        "pitchRadius": 360.0,
+        "yawOffset": 0.0,
+        "pitchOffset": 0.0
+      },
+      "knockback": 0.0,
+      "isToggle": false,
+      "soundEvents": {
+        "BLOCK_START": "skyhighheroes:forcefield",
+        "DEFLECT": "skyhighheroes:forcefield_deflect"
+      }
+    },
+    "fiskheroes:energy_projection": {
+      "damageProfile": {
+        "damage": 10.0,
+        "types": {
+          "ENERGY": 1.0
+        },
+        "properties": {
+          "ADD_KNOCKBACK": 0.0,
+          "HIT_COOLDOWN": 10
+        }
+      },
+      "range": 32.0,
+      "radius": 0.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:energy_bolt": {
+      "damageProfile": {
+        "damage": 10.0,
+        "types": {
+          "ENERGY": 1.0
+        },
+        "properties": {
+          "HIT_COOLDOWN": 0
+        }
+      },
+      "isExplosive": false,
+      "cooldownTime": 7.5,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:sonic_waves": {
+      "damageProfile": {
+        "damage": 10.0,
+        "types": {
+          "SOUND": 1.0
+        }
+      },
+      "knockback": 1.0,
+      "canBreakGlass": true
+    },
+    "fiskheroes:telekinesis": {
+      "telekinesis": {
+        "crushMelons": false,
+        "crushThrowables": false,
+        "squeezeChickens": false,
+        "explodeCreepers": false,
+        "destroyInanimates": false
+      },
+      "canGrab": {
+        "mobs": true,
+        "items": true,
+        "projectiles": true,
+        "inanimates": true
+      },
+      "range": 128.0,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:regeneration": {
+      "factor": 2
+    },
+    "fiskheroes:healing_factor": {
+        "delay": 100
+    },
+    "fiskheroes:water_breathing": {
+    },
+    "fiskheroes:shape_shifting": {
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": "skyhighheroes:wave_teleport"
+      }
+    }
+  }
+}
