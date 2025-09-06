@@ -1,6 +1,8 @@
 function initChakras(hero, name) {
   var suit_name = name + " the Invicible";
+  var suit_alias = name.toLowerCase() + "_the_invicible";
   hero.setName(suit_name);
+  hero.setAliases(suit_alias);
   hero.setChestplate("Suit");
 
   hero.addPowers("skyhighheroes:chakra_suit");
