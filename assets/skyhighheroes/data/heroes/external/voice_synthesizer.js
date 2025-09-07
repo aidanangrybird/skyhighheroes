@@ -94,9 +94,17 @@ function initModule(system) {
       manager.setBoolean(nbt, "mouth", false);
       manager.setData(entity, "skyhighheroes:dyn/mouth", false);
     },
-    fightOrFlight: function (entity, manager) {
+    tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
       manager.setData(entity, "skyhighheroes:dyn/mouth_flush", nbt.getBoolean("flushMouth"));
+      var mouth = nbt.getBoolean("mouth") && entity.getData("fiskheroes:energy_projection");
+      if (entity.getData("fiskheroes:energy_projection_timer") > 0) {
+        if (entity.getData("fiskheroes:energy_projection_timer") < 0.1) {
+          if (mouth) {
+            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Voice Synthesizer!", 16);
+          };
+        };
+      };
     },
     fightOrFlight: function (entity, manager) {
       if (!entity.getWornHelmet().nbt().getBoolean("mouth")) {

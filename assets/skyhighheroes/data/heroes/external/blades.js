@@ -266,6 +266,18 @@ function initModule(system) {
       if (entity.getData("fiskheroes:blade_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/blade_left_arm", left);
         manager.setData(entity, "skyhighheroes:dyn/blade_right_arm", right);
+        if (entity.getData("fiskheroes:blade_timer") < 0.2) {
+          if (left && right) {
+            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Blades!", 16);
+          } else {
+            if (left) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Left Blade!", 16);
+            };
+            if (right) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Right Blade!", 16);
+            };
+          };
+        };
       };
       var leftStealth = nbt.getBoolean("bladesLeftStealth");
       var rightStealth = nbt.getBoolean("bladesRightStealth");

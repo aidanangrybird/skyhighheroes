@@ -352,6 +352,31 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/cannons_arms", arms);
         manager.setData(entity, "skyhighheroes:dyn/cannons_body", body);
         manager.setData(entity, "skyhighheroes:dyn/cannons_head", head);
+        if (entity.getData("fiskheroes:beam_charge") < 0.1) {
+          if (head && body && arms) {
+            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Cannons!", 16);
+          } else if ((head && body && !arms) || (head && !body && arms) || (!head && body && arms)) {
+            if (head && body && !arms) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Head and Body Cannons!", 16);
+            };
+            if (head && !body && arms) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Body and Arm Cannons!", 16);              
+            };
+            if (!head && body && arms) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Body and Arm Cannons!", 16);
+            };
+          } else {
+            if (head) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Head Cannons!", 16);
+            };
+            if (body) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Body Cannons!", 16);
+            };
+            if (arms) {
+              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Arm Cannons!", 16);
+            };
+          };
+        };
       };
       manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush", nbt.getBoolean("flushHeadCannons"));
       manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannon"));
