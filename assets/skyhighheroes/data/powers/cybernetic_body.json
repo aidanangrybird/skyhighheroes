@@ -984,8 +984,7 @@
       "knockback": 0.0,
       "isToggle": true,
       "soundEvents": {
-        "BLOCK_START": "skyhighheroes:forcefield",
-        "DEFLECT": "skyhighheroes:forcefield_deflect"
+        "DEFLECT": "fiskheroes:shield_deflect"
       }
     },
     "fiskheroes:shield|shields_FT": {
@@ -1003,8 +1002,7 @@
       "knockback": 0.0,
       "isToggle": true,
       "soundEvents": {
-        "BLOCK_START": "skyhighheroes:forcefield",
-        "DEFLECT": "skyhighheroes:forcefield_deflect"
+        "DEFLECT": "fiskheroes:shield_deflect"
       }
     },
     "fiskheroes:shield|shields_TT": {
@@ -1022,8 +1020,7 @@
       "knockback": 0.0,
       "isToggle": true,
       "soundEvents": {
-        "BLOCK_START": "skyhighheroes:forcefield",
-        "DEFLECT": "skyhighheroes:forcefield_deflect"
+        "DEFLECT": "fiskheroes:shield_deflect"
       }
     },
     "fiskheroes:transformation|shield_left_arm": {
