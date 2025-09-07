@@ -1101,7 +1101,7 @@ function initSystem(moduleList, name, colorCode) {
       manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
     };
     if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
-      if (!entity.getData("skyhighheroes:dyn/fight_or_flight")) {
+        if (!entity.getDataOrDefault("skyhighocs:dyn/fight_or_flight", true)) {
         systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
         manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", true);
       };
