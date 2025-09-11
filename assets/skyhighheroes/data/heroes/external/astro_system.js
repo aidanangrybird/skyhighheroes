@@ -711,78 +711,80 @@ function initSystem(moduleList, name, colorCode) {
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };
-      if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!(entity.getData("fiskheroes:disguise") == robotName)) {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-          manager.setData(entity, "fiskheroes:disguise", robotName);
-          manager.setData(entity, "fiskheroes:shape_shifting_to", null);
-          manager.setData(entity, "fiskheroes:shape_shifting_from", null);
-          manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-          var entry = entity.getData("skyhighheroes:dyn/entry");
-          if (entry.startsWith("!")) {
-            manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-            var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
-            switch (args[0]) {
-              case "systemInfo":
-                systemInfo(entity);
-                break;
-              case "status":
-                status(entity);
-                break;
-              case "powerOff":
-                manager.setData(entity, "skyhighheroes:dyn/powered_down", true);
-                systemMessage(entity, "<n>Powering down!");
-                break;
-              case "powerOn":
-                manager.setData(entity, "skyhighheroes:dyn/powered_down", false);
-                systemMessage(entity, "<n>Powering on!");
-                break;
-              case "help":
-                systemMessage(entity, "<n>Available commands:");
-                commandIndexes.forEach(index => {
-                  var module = modules[index];
-                  if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
-                    systemMessage(entity, module.helpMessage);
-                  };
-                });
-                systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
-                systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
-                systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
-                systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
-                systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
-                break;
-              case "disable":
-                disableModule(entity, manager, moduleNames, args[1]);
-                break;
-              case "enable":
-                enableModule(entity, manager, moduleNames, args[1]);
-                break;
-              case "chatMode":
-                switchChatModes(entity, manager, args[1]);
-                break;
-              case "msg":
-                switchChats(entity, manager, args[1]);
-                break;
-              default:
-                var index = commands.indexOf(args[0]);
-                if (index > -1 && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
-                  var module = modules[commandIndexes[index]];
-                  if (!isModuleDisabled(entity, module.name)) {
-                    module.commandHandler(entity, manager, args);
+      if (entity.getDataOrDefault("skyhighocs:dyn/system_init", false)) {
+        if (typeof entity.getData("fiskheroes:disguise") === "string") {
+          if (!(entity.getData("fiskheroes:disguise") == robotName)) {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", robotName);
+            manager.setData(entity, "fiskheroes:shape_shifting_to", null);
+            manager.setData(entity, "fiskheroes:shape_shifting_from", null);
+            manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
+            var entry = entity.getData("skyhighheroes:dyn/entry");
+            if (entry.startsWith("!")) {
+              manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
+              var args = entity.getData("skyhighheroes:dyn/entry").split(" ");
+              switch (args[0]) {
+                case "systemInfo":
+                  systemInfo(entity);
+                  break;
+                case "status":
+                  status(entity);
+                  break;
+                case "powerOff":
+                  manager.setData(entity, "skyhighheroes:dyn/powered_down", true);
+                  systemMessage(entity, "<n>Powering down!");
+                  break;
+                case "powerOn":
+                  manager.setData(entity, "skyhighheroes:dyn/powered_down", false);
+                  systemMessage(entity, "<n>Powering on!");
+                  break;
+                case "help":
+                  systemMessage(entity, "<n>Available commands:");
+                  commandIndexes.forEach(index => {
+                    var module = modules[index];
+                    if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
+                      systemMessage(entity, module.helpMessage);
+                    };
+                  });
+                  systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
+                  systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                  systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
+                  systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
+                  systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
+                  break;
+                case "disable":
+                  disableModule(entity, manager, moduleNames, args[1]);
+                  break;
+                case "enable":
+                  enableModule(entity, manager, moduleNames, args[1]);
+                  break;
+                case "chatMode":
+                  switchChatModes(entity, manager, args[1]);
+                  break;
+                case "msg":
+                  switchChats(entity, manager, args[1]);
+                  break;
+                default:
+                  var index = commands.indexOf(args[0]);
+                  if (index > -1 && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
+                    var module = modules[commandIndexes[index]];
+                    if (!isModuleDisabled(entity, module.name)) {
+                      module.commandHandler(entity, manager, args);
+                    } else {
+                      systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                    };
                   } else {
-                    systemMessage(entity, "<e>Module <eh>" + module.name +"<e> is disabled!");
+                    systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                   };
-                } else {
-                  systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
-                };
-                break;
-            }
-          } else {
-            modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, robotName, 32);
+                  break;
+              }
+            } else {
+              modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, robotName, 32);
+            };
           };
         };
+        manager.setData(entity, "fiskheroes:disguise", robotName);
       };
-      manager.setData(entity, "fiskheroes:disguise", robotName);
       var x = entity.posX();
       var y = entity.posY();
       var z = entity.posZ();
