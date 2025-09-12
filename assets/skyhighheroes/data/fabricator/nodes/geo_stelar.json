@@ -8,13 +8,14 @@
     "exist": {
       "trigger": "fiskheroes:tick",
       "description": {
-        "translate": "Are you worthy?"
+        "translate": "Wear a basic transer for 24000 ticks (one Minecraft day)"
       },
+      "minSuccessCount": 24000,
       "condition": {
         "variables": {
           "player": "PLAYER_TICKING"
         },
-        "check": "player.getWornChestplate().nbt().getBoolean('worthy') && player.getWornChestplate().suitType() == 'skyhighheroes:geo_stelar'"
+        "check": "player.getWornChestplate().suitType() == 'skyhighheroes:pegasus_transer' || player.getWornChestplate().suitType() == 'skyhighheroes:leo_transer' || player.getWornChestplate().suitType() == 'skyhighheroes:dragon_transer'"
       }
     }
   }

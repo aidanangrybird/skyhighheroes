@@ -39,20 +39,6 @@ var hexColors = {
 function assignTranser(entity, manager, satellite) {
   manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
   manager.setBoolean(entity.getWornChestplate().nbt(), "Unbreakable", true);
-  if (!entity.getWornChestplate().nbt().hasKey("worthy") && (entity.getWornChestplate().suitType() == "skyhighheroes:leo_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:pegasus_transer" || entity.getWornChestplate().suitType() == "skyhighheroes:dragon_transer")) {
-    if (PackLoader.getSide() == "SERVER") {
-      var value = Math.random();
-      if (value < 0.05) {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", true);
-        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:geo_stelar");
-      } else {
-        manager.setBoolean(entity.getWornChestplate().nbt(), "worthy", false);
-      };
-    };
-  };
-  if (entity.getWornChestplate().nbt().hasKey("worthy") && entity.getWornChestplate().suitType() == "skyhighheroes:geo_stelar") {
-    manager.removeTag(entity.getWornChestplate().nbt(), "worthy")
-  };
   if (!entity.getWornChestplate().nbt().hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
