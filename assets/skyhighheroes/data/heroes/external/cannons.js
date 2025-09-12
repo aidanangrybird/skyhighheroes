@@ -298,15 +298,15 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!cannon help <nh>-<n> Shows cannons commands");
             break;
           case "status":
-            var headset = (entity.getData("skyhighheroes:dyn/cannons_head_timer") > 0);
+            var headSet = (entity.getData("skyhighheroes:dyn/cannons_head_timer") > 0);
             var bodySet = (entity.getData("skyhighheroes:dyn/cannons_body_timer") > 0);
             var armSet = (entity.getData("skyhighheroes:dyn/cannons_arms_timer") > 0);
             system.moduleMessage(this, entity, "<n>Cannons status:");
             system.moduleMessage(this, entity, "<n>Head set: <nh>" + (nbt.getBoolean("cannonsHead") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Body set: <nh>" + (nbt.getBoolean("cannonsBody") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Arm set: <nh>" + (nbt.getBoolean("cannonsArms") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Left Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_left_deploy_timer") > 0) || headset ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_right_deploy_timer") > 0) || headset ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_left_deploy_timer") > 0) || headSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_right_deploy_timer") > 0) || headSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Body: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_body_left_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Body: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_body_right_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Arm bottom: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
@@ -322,6 +322,52 @@ function initModule(system) {
         };
       } else {
         system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannon help<e> for a list of commands!");
+      };
+    },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "headCannons":
+          manager.setBoolean(nbt, "cannonsHead", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>head<s> cannons!");
+          return;
+        case "bodyCannons":
+          manager.setBoolean(nbt, "cannonsBody", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>body<s> cannons!");
+          return;
+        case "armCannons":
+          manager.setBoolean(nbt, "cannonsArms", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> cannons!");
+          return;
+        case "cannons":
+          manager.setBoolean(nbt, "cannonsHead", true);
+          manager.setBoolean(nbt, "cannonsBody", true);
+          manager.setBoolean(nbt, "cannonsArms", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>all<s> cannons!");
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "headCannons":
+          manager.setBoolean(nbt, "cannonsHead", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>head<s> cannons!");
+          return;
+        case "bodyCannons":
+          manager.setBoolean(nbt, "cannonsBody", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> cannons!");
+          return;
+        case "armCannons":
+          manager.setBoolean(nbt, "cannonsArms", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> cannons!");
+          return;
+        case "cannons":
+          manager.setBoolean(nbt, "cannonsHead", false);
+          manager.setBoolean(nbt, "cannonsBody", false);
+          manager.setBoolean(nbt, "cannonsArms", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> cannons!");
+          return;
       };
     },
     whenDisabled: function (entity, manager) {

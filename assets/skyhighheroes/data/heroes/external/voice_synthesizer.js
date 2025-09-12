@@ -14,7 +14,7 @@ function initModule(system) {
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("MOUTH", (player, manager) => {
         system.moduleMessage(this, player, "<e>To arm the mouth do <eh>!vs arm<e>.");
-        return true;
+        return false;
       }, "\u00A7" + color + "Scream (Not armed)", 3);
       hero.addKeyBind("SCREAM", "\u00A7" + color + "Scream", 3);
       hero.addKeyBind("ENERGY_PROJECTION", "\u00A7" + color + "Scream", 3);
@@ -75,6 +75,24 @@ function initModule(system) {
         };
       } else {
         system.moduleMessage(this, entity, "<e>Unknown <eh>voiceSynthesizer<e> command! Try <eh>!vs help<e> for a list of commands!");
+      };
+    },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "mouth":
+          manager.setBoolean(nbt, "mouth", true);
+          system.moduleMessage(this, entity, "<n>Armed mouth!");
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "mouth":
+          manager.setBoolean(nbt, "mouth", false);
+          system.moduleMessage(this, entity, "<n>Disarmed mouth!");
+          return;
       };
     },
     isModifierEnabled: function (entity, modifier) {

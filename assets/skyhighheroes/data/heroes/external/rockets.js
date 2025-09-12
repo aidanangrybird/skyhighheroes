@@ -788,6 +788,91 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rocket help<e> for a list of commands!");
       };
     },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      if (nbt.getBoolean("wings")) {
+        system.moduleMessage(this, entity, "<e>Unable to arm rockets! Wings are already armed!");
+      } else {
+        switch(arg) {
+          case "auxRockets":
+            manager.setBoolean(nbt, "rocketsAux", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>aux<s> rockets!");
+            return;
+          case "bodyRockets":
+            manager.setBoolean(nbt, "rocketsBody", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>body<s> rockets!");
+            return;
+          case "legsRockets":
+            manager.setBoolean(nbt, "rocketsLegs", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>leg<s> rockets!");
+            return;
+          case "wingsRockets":
+            manager.setBoolean(nbt, "rocketsWings", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>wings<s> to deploy on rockets!");
+            return;
+          case "rockets":
+            manager.setBoolean(nbt, "rocketsAux", true);
+            manager.setBoolean(nbt, "rocketsBody", true);
+            manager.setBoolean(nbt, "rocketsLegs", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>all<s> rockets!");
+            return;
+        };
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "auxRockets":
+          if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsAux", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>aux<s> rockets!");
+          } else {
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+          };
+          return;
+        case "bodyRockets":
+          if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsBody", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> rockets!");
+          } else {
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>body<e> rockets!");
+          };
+          return;
+        case "legsRockets":
+          if (!(nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsLegs", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>leg<s> rockets!");
+          } else {
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>leg<e> rockets!");
+          };
+          return;
+        case "wingsRockets":
+          manager.setBoolean(nbt, "rocketsWings", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s> to deploy on rockets!");
+          return;
+        case "rockets":
+          if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsAux", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>aux<s> rockets!");
+          } else {
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+          };
+          if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsBody", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> rockets!");
+          } else {
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>body<e> rockets!");
+          };
+          if (!(nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsLegs", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>leg<s> rockets!");
+          } else {
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>leg<e> rockets!");
+          };
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> inactive rockets!");
+          return;
+      }
+    },
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {

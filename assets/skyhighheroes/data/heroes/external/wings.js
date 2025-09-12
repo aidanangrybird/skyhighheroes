@@ -90,6 +90,28 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wing help<e> for a list of commands!");
       };
     },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "wings":
+          if (nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
+            system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
+          } else {
+            manager.setBoolean(nbt, "wings", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
+          };
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "wings":
+          manager.setBoolean(nbt, "wings", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
+          return;
+      };
+    },
     isModifierEnabled: function (entity, modifier) {
       result = false;
       var nbt = entity.getWornHelmet().nbt();

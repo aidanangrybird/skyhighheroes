@@ -453,6 +453,10 @@ function initSystem(moduleList, name, colorCode) {
   var onInitSystemIndexes = [];
   /** @var fightOrFlightIndexes - Indexes of fight or flight capable modules */
   var fightOrFlightIndexes = [];
+  /** @var armHandlerIndexes - Indexes of arming capable modules */
+  var armHandlerIndexes = [];
+  /** @var disarmHandlerIndexes - Indexes of disarming capable modules */
+  var disarmHandlerIndexes = [];
   /** @var powerArray - Array of powers to add */
   var powerArray = [];
   /** @var cyberModelID - cyber model name */
@@ -608,6 +612,14 @@ function initSystem(moduleList, name, colorCode) {
                 fightOrFlightIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
               };
+              if (moduleInit.hasOwnProperty("armHandler")) {
+                armHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"armHandler\"!");
+              };
+              if (moduleInit.hasOwnProperty("disarmHandler")) {
+                disarmHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"disarmHandler\"!");
+              };
             };
             hasError = false;
             break;
@@ -644,6 +656,14 @@ function initSystem(moduleList, name, colorCode) {
               if (moduleInit.hasOwnProperty("fightOrFlight")) {
                 fightOrFlightIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
+              };
+              if (moduleInit.hasOwnProperty("armHandler")) {
+                armHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"armHandler\"!");
+              };
+              if (moduleInit.hasOwnProperty("disarmHandler")) {
+                disarmHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"disarmHandler\"!");
               };
             };
             hasError = false;
@@ -683,6 +703,14 @@ function initSystem(moduleList, name, colorCode) {
               if (moduleInit.hasOwnProperty("fightOrFlight")) {
                 fightOrFlightIndexes.push(modules.length-1);
                 logMessage("Module \"" + moduleInit.name + "\" has optional spec \"fightOrFlight\"!");
+              };
+              if (moduleInit.hasOwnProperty("armHandler")) {
+                armHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"armHandler\"!");
+              };
+              if (moduleInit.hasOwnProperty("disarmHandler")) {
+                disarmHandlerIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"disarmHandler\"!");
               };
             };
             hasError = false;
@@ -1153,6 +1181,8 @@ function initSystem(moduleList, name, colorCode) {
                 });
                 systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
                 systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                systemMessage(entity, "<n>!arm <ability> <nh>-<n> Arms an ability");
+                systemMessage(entity, "<n>!disarm <ability> <nh>-<n> Disarms an ability");
                 systemMessage(entity, "<n>!powerOn <nh>-<n> Powers you up");
                 systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
                 systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
@@ -1162,6 +1192,54 @@ function initSystem(moduleList, name, colorCode) {
                 break;
               case "msg":
                 switchChats(entity, manager, args[1]);
+                break;
+              case "arm":
+                var nbt = entity.getWornHelmet().nbt();
+                if (args[1] == "*") {
+                  manager.setBoolean(nbt, "rocketsAux", true);
+                  manager.setBoolean(nbt, "rocketsBody", true);
+                  manager.setBoolean(nbt, "rocketsLegs", true);
+                  manager.setBoolean(nbt, "rocketsWings", true);
+                  manager.setBoolean(nbt, "cannonsHead", true);
+                  manager.setBoolean(nbt, "cannonsBody", true);
+                  manager.setBoolean(nbt, "cannonsArms", true);
+                  manager.setBoolean(nbt, "shieldsLeft", true);
+                  manager.setBoolean(nbt, "shieldsRight", true);
+                  manager.setBoolean(nbt, "bladesLeft", true);
+                  manager.setBoolean(nbt, "bladesRight", true);
+                  manager.setBoolean(nbt, "mouth", true);
+                  manager.setBoolean(nbt, "wings", false);
+                  systemMessage(entity, "<s>Armed <sh>everything<s>!");
+                } else {
+                  armHandlerIndexes.forEach((index) => {
+                    var module = modules[index];
+                    module.armHandler(entity, manager, args[1]);
+                  });
+                };
+                break;
+              case "disarm":
+                var nbt = entity.getWornHelmet().nbt();
+                if (args[1] == "*") {
+                  manager.setBoolean(nbt, "rocketsAux", false);
+                  manager.setBoolean(nbt, "rocketsBody", false);
+                  manager.setBoolean(nbt, "rocketsLegs", false);
+                  manager.setBoolean(nbt, "rocketsWings", false);
+                  manager.setBoolean(nbt, "cannonsHead", false);
+                  manager.setBoolean(nbt, "cannonsBody", false);
+                  manager.setBoolean(nbt, "cannonsArms", false);
+                  manager.setBoolean(nbt, "shieldsLeft", false);
+                  manager.setBoolean(nbt, "shieldsRight", false);
+                  manager.setBoolean(nbt, "bladesLeft", false);
+                  manager.setBoolean(nbt, "bladesRight", false);
+                  manager.setBoolean(nbt, "mouth", false);
+                  manager.setBoolean(nbt, "wings", false);
+                  systemMessage(entity, "<s>Disarmed <sh>everything<s>!");
+                } else {
+                  disarmHandlerIndexes.forEach((index) => {
+                    var module = modules[index];
+                    module.disarmHandler(entity, manager, args[1]);
+                  });
+                };
                 break;
               default:
                 var index = commands.indexOf(args[0]);

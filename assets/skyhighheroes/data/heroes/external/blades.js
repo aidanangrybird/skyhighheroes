@@ -14,7 +14,7 @@ function initModule(system) {
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("BLADES", (player, manager) => {
         system.moduleMessage(this, player, "<e>To arm a blade do <eh>!blade arm <left|right><e>.");
-        return true;
+        return false;
       }, "\u00A7" + color + "Blades (None armed)", 1);
       hero.addKeyBind("BLADE", "\u00A7" + color + "Blades", 1);
     },
@@ -181,6 +181,42 @@ function initModule(system) {
         };
       } else {
         system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blade help<e> for a list of commands!");
+      };
+    },
+    armHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "leftBlade":
+          manager.setBoolean(nbt, "bladesLeft", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> blade!");
+          return;
+        case "rightBlade":
+          manager.setBoolean(nbt, "bladesRight", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>right arm<s> blade!");
+          return;
+        case "blades":
+          manager.setBoolean(nbt, "bladesLeft", true);
+          manager.setBoolean(nbt, "bladesRight", true);
+          system.moduleMessage(this, entity, "<s>Armed <sh>all<s> blades!");
+          return;
+      };
+    },
+    disarmHandler: function (entity, manager, arg) {
+      var nbt = entity.getWornHelmet().nbt();
+      switch (arg) {
+        case "leftBlade":
+          manager.setBoolean(nbt, "bladesLeft", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> blade!");
+          return;
+        case "rightBlade":
+          manager.setBoolean(nbt, "bladesRight", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>right arm<s> blade!");
+          return;
+        case "blades":
+          manager.setBoolean(nbt, "bladesLeft", false);
+          manager.setBoolean(nbt, "bladesRight", false);
+          system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> blades!");
+          return;
       };
     },
     isModifierEnabled: function (entity, modifier) {
