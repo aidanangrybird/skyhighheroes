@@ -15,7 +15,7 @@
     "chance": {
       "trigger": "fiskheroes:player_hurt",
       "description": {
-        "translate": "Omega-Xis: The Fugitive"
+        "translate": "Stand in a Plains or Sunflower Plains biome next to a Beach biome as Geo Stelar"
       },
       "condition": {
         "variables": {
