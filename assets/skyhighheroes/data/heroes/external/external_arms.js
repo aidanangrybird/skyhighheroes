@@ -16,9 +16,9 @@ function initModule(system) {
       hero.addKeyBind("TENTACLES", "\u00A7" + color + "External Arms", 2);
       hero.addKeyBind("EXTERNAL_ARMS", "\u00A7" + color + "External Arms", 2);
     },
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
-        switch (arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 3) {
+        switch (argList[1]) {
           case "show":
             manager.setData(entity, "skyhighheroes:dyn/external_arm_left_deployed", true);
             manager.setData(entity, "skyhighheroes:dyn/external_arm_right_deployed", true);

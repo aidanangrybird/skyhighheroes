@@ -10,10 +10,10 @@ function initModule(system) {
     command: "wing",
     helpMessage: "<n>!wing <nh>-<n> Wings",
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch(arguments[1]) {
+        switch(argList[1]) {
           case "arm":
             if (nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
               system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
@@ -27,7 +27,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
             break;
           case "show":
-            switch(arguments[2]) {
+            switch(argList[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/wing_left_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left<s> wing!");
@@ -47,7 +47,7 @@ function initModule(system) {
             };
             break;
           case "hide":
-            switch(arguments[2]) {
+            switch(argList[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/wing_left_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left<s> wing!");

@@ -27,13 +27,13 @@ function initModule(system) {
     type: 1,
     command: "set",
     helpMessage: "<n>!set <nh>-<n> Settings",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, args) {
+      if (args.length > 1 && args.length < 4) {
         var nbt = entity.getWornChestplate().nbt();
-        switch(arguments[1]) {
+        switch(args[1]) {
           case "color":
-            if (colors.indexOf(arguments[2]) > -1) {
-              manager.setString(nbt, "systemColor", arguments[2]);
+            if (colors.indexOf(args[2]) > -1) {
+              manager.setString(nbt, "systemColor", args[2]);
               system.moduleMessage(this, entity, "<n>color set to <nh>\u00A7" + nbt.getString("systemColor") + "COLOR<n>!");
             } else {
               system.moduleMessage(this, entity, "<e>Invalid color code!");

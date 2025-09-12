@@ -292,20 +292,20 @@ function initModule(system) {
     type: 11,
     command: "suits",
     helpMessage: "<n>!suits <nh>-<n> Suit Datastore",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch(arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch(argList[1]) {
           case "listDrive":
             listDriveSuits(this, entity, manager);
             break;
           case "download":
-            downloadSuits(this, entity, manager, arguments[2]);
+            downloadSuits(this, entity, manager, argList[2]);
             break;
           case "upload":
-            uploadSuits(this, entity, manager, arguments[2]);
+            uploadSuits(this, entity, manager, argList[2]);
             break;
           case "rem":
-            removeSuit(this, entity, manager, arguments[2]);
+            removeSuit(this, entity, manager, argList[2]);
             break;
           case "list":
             listSuits(this, entity, manager);

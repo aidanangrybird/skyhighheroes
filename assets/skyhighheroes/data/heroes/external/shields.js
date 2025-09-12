@@ -33,12 +33,12 @@ function initModule(system) {
       };
       return result;
     },
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch (arguments[1]) {
+        switch (argList[1]) {
           case "arm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "shieldsLeft", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> shield!");
@@ -58,7 +58,7 @@ function initModule(system) {
             };
             break;
           case "disarm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "shieldsLeft", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> shield!");
@@ -78,7 +78,7 @@ function initModule(system) {
             };
             break;
           case "show":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/shield_left_arm_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> shield!");
@@ -98,7 +98,7 @@ function initModule(system) {
             };
             break;
           case "hide":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 if (!nbt.getBoolean("shieldsLeft") && entity.getData("fiskheroes:shield_timer") > 0) {
                   manager.setData(entity, "skyhighheroes:dyn/shield_left_arm_deployed", false);

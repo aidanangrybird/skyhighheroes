@@ -276,23 +276,23 @@ function initModule(system) {
     type: 1,
     command: "g",
     helpMessage: "<n>!g <nh>-<n> Groups",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch (arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch (argList[1]) {
           case "add":
-            (arguments.length == 3) ? addGroup(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!g add <nh><name>");
+            (argList.length == 3) ? addGroup(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!g add <nh><name>");
             break;
           case "rem":
-            (arguments.length == 3) ? removeGroup(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!g rem <nh><name>");
+            (argList.length == 3) ? removeGroup(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!g rem <nh><name>");
             break;
           case "list":
             listGroups(entity, manager);
             break;
           case "addMem":
-            (arguments.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : system.moduleMessage(this, entity, "<n>!g addMem <nh><name>");
+            (argList.length == 3) ? addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), argList[2]) : system.moduleMessage(this, entity, "<n>!g addMem <nh><name>");
             break;
           case "remMem":
-            (arguments.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), arguments[2]) : system.moduleMessage(this, entity, "<n>!g remMem <nh><name>");
+            (argList.length == 3) ? removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/group_name"), argList[2]) : system.moduleMessage(this, entity, "<n>!g remMem <nh><name>");
             break;
           case "listMem":
             listGroupMembers(entity, manager, entity.getData("skyhighheroes:dyn/group_name"));

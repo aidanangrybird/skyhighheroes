@@ -10,9 +10,9 @@ function initModule(system) {
     command: "panelStatus",
     helpMessage: "<n>!panelStatus <nh>-<n> Panel status",
     disabledMessage: "<e>Module <eh>panelStatus<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch(arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch(argList[1]) {
           case "head":
             system.moduleMessage(this, entity, "<n>Head panel status:");
             system.moduleMessage(this, entity, "<n>Top front panel: <nh>" + ((entity.getData("skyhighheroes:dyn/head_top_front_open_timer") > 0) ? "OPEN" : "CLOSED"));

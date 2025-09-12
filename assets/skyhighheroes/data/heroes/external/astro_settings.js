@@ -9,24 +9,24 @@ function initModule(system) {
     type: 1,
     command: "set",
     helpMessage: "<n>!set <nh>-<n> Settings",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornLeggings().nbt();
-        switch(arguments[1]) {
+        switch(argList[1]) {
           case "hudRange":
-            manager.setShort(nbt, "hudRange", parseInt(arguments[2]));
+            manager.setShort(nbt, "hudRange", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
             break;
           case "friendliesOnHud":
-            manager.setBoolean(nbt, "friendliesOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
+            manager.setBoolean(nbt, "friendliesOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
             system.moduleMessage(this, entity, "<n>friendliesOnHud set to <nh>" + nbt.getBoolean("friendliesOnHud") + "<n>!");
             break;
           case "hostilesOnHud":
-            manager.setBoolean(nbt, "hostilesOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
+            manager.setBoolean(nbt, "hostilesOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
             system.moduleMessage(this, entity, "<n>hostilesOnHud set to <nh>" + nbt.getBoolean("hostilesOnHud") + "<n>!");
             break;
           case "playersOnHud":
-            manager.setBoolean(nbt, "playersOnHud", ((arguments[2] == "true") ? true : (arguments[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
+            manager.setBoolean(nbt, "playersOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
             system.moduleMessage(this, entity, "<n>playersOnHud set to <nh>" + nbt.getBoolean("playersOnHud") + "<n>!");
             break;
           case "list":

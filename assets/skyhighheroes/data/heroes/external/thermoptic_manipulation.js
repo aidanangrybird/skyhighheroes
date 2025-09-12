@@ -10,12 +10,12 @@ function initModule(system) {
     command: "thermo",
     helpMessage: "<n>!thermo <nh>-<n> Thermoptics",
     disabledMessage: "<e>Module <eh>thermoptics<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch (arguments[1]) {
+        switch (argList[1]) {
           case "enable":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "camo":
                 manager.setData(entity, "skyhighheroes:dyn/thermoptic_camouflage", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>camo<n>!");
@@ -30,7 +30,7 @@ function initModule(system) {
             };
             break;
           case "disable":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "camo":
                 manager.setData(entity, "skyhighheroes:dyn/thermoptic_camouflage", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>camo<n>!");

@@ -233,18 +233,18 @@ function initModule(system) {
     command: "wp",
     helpMessage: "<n>!wp <nh>-<n> Waypoints",
     disabledMessage: "<e>Module <eh>waypoints<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch (arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch (argList[1]) {
           case "add":
-            (arguments.length == 3) ? addWaypoint(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!wp add <nh><waypointName>");
+            (argList.length == 3) ? addWaypoint(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!wp add <nh><waypointName>");
             break;
           case "rem":
-            (arguments.length == 3) ? removeWaypoint(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!wp rem <nh><waypointName>");
+            (argList.length == 3) ? removeWaypoint(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!wp rem <nh><waypointName>");
             break;
           case "tp":
             if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-              (arguments.length == 3) ? teleportToWaypoint(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!wp tp <nh><waypointName>");
+              (argList.length == 3) ? teleportToWaypoint(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!wp tp <nh><waypointName>");
             } else {
               system.moduleMessage(this, entity, "<e>Unknown waypoint command! Try <eh>!wp help<e> for a list of commands!");
             };

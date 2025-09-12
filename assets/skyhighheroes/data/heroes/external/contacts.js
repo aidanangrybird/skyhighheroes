@@ -131,14 +131,14 @@ function initModule(system) {
     type: 1,
     command: "c",
     helpMessage: "<n>!c <nh>-<n> Contacts",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch(arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch(argList[1]) {
           case "add":
-            (arguments.length == 3) ? addContact(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!c add <nh><name>");
+            (argList.length == 3) ? addContact(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!c add <nh><name>");
             break;
           case "rem":
-            (arguments.length == 3) ? removeContact(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!c rem <nh><name>");
+            (argList.length == 3) ? removeContact(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!c rem <nh><name>");
             break;
           case "list":
             listContacts(entity, manager);

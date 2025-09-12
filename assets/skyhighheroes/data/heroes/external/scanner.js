@@ -149,11 +149,11 @@ function initModule(system) {
     command: "sc",
     helpMessage: "<n>!sc <nh>-<n> Scanner",
     disabledMessage: "<e>Module <eh>scanner<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch(arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch(argList[1]) {
           case "entity":
-            (arguments.length == 3) ? entityScan(entity, arguments[2]) : entityScan(entity);
+            (argList.length == 3) ? entityScan(entity, argList[2]) : entityScan(entity);
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Scanner commands:");

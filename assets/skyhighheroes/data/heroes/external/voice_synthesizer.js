@@ -36,10 +36,10 @@ function initModule(system) {
       };
       return result;
     },
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 3) {
         var nbt = entity.getWornHelmet().nbt();
-        switch (arguments[1]) {
+        switch (argList[1]) {
           case "arm":
             manager.setBoolean(nbt, "mouth", true);
             system.moduleMessage(this, entity, "<n>Armed mouth!");

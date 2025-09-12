@@ -143,14 +143,14 @@ function initModule(system) {
         };
       };
     },
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
-        switch (arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
+        switch (argList[1]) {
           case "form":
-            (arguments.length == 3) ? formBrotherBand(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!bb form <nh><name>");
+            (argList.length == 3) ? formBrotherBand(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!bb form <nh><name>");
             break;
           case "cut":
-            (arguments.length == 3) ? cutBrotherBand(entity, manager, arguments[2]) : system.moduleMessage(this, entity, "<n>!bb cut <nh><name>");
+            (argList.length == 3) ? cutBrotherBand(entity, manager, argList[2]) : system.moduleMessage(this, entity, "<n>!bb cut <nh><name>");
             break;
           case "list":
             listBrotherBands(entity);

@@ -11,15 +11,15 @@ function initModule(system) {
     command: "rocket",
     helpMessage: "<n>!rocket <nh>-<n> Rockets",
     disabledMessage: "<e>Module <eh>rockets<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch(arguments[1]) {
+        switch(argList[1]) {
           case "arm":
             if (nbt.getBoolean("wings")) {
               system.moduleMessage(this, entity, "<e>Unable to arm rockets! Wings are already armed!");
             } else {
-              switch (arguments[2]) {
+              switch (argList[2]) {
                 case "auxOnFall":
                   manager.setBoolean(nbt, "auxRocketsOnFall", true);
                   system.moduleMessage(this, entity, "<s>Armed aux rockets for <sh>onFall<s> protection!");
@@ -61,7 +61,7 @@ function initModule(system) {
             };
             break;
           case "disarm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "auxOnFall":
                 manager.setBoolean(nbt, "auxRocketsOnFall", false);
                 system.moduleMessage(this, entity, "<s>Disarmed aux rockets for <sh>onFall<s> protection!");
@@ -129,7 +129,7 @@ function initModule(system) {
             };
             break;
           case "show":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "aux":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", true);
@@ -431,7 +431,7 @@ function initModule(system) {
             };
             break;
           case "hide":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "aux":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);

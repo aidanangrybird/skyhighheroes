@@ -10,9 +10,9 @@ function initModule(system) {
     command: "open",
     helpMessage: "<n>!open <nh>-<n> Panel Opener",
     disabledMessage: "<e>Module <eh>bodyOpener<e> is disabled!",
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 3) {
-        switch(arguments[1]) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 3) {
+        switch(argList[1]) {
           case "headTop":
             manager.setData(entity, "skyhighheroes:dyn/head_top_front_open", true);
             manager.setData(entity, "skyhighheroes:dyn/head_top_back_open", true);

@@ -52,12 +52,12 @@ function initModule(system) {
       };
       return result;
     },
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch (arguments[1]) {
+        switch (argList[1]) {
           case "arm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "head":
                 manager.setBoolean(nbt, "cannonsHead", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>head<s> cannons!");
@@ -82,7 +82,7 @@ function initModule(system) {
             };
             break;
           case "disarm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "head":
                 manager.setBoolean(nbt, "cannonsHead", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>head<s> cannons!");
@@ -107,7 +107,7 @@ function initModule(system) {
             };
             break;
           case "show":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "head":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_left_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_right_deployed", true);
@@ -198,7 +198,7 @@ function initModule(system) {
             };
             break;
           case "hide":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "head":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_left_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_right_deployed", false);

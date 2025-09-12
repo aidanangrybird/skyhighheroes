@@ -33,12 +33,12 @@ function initModule(system) {
       };
       return result;
     },
-    commandHandler: function (entity, manager, arguments) {
-      if (arguments.length > 1 && arguments.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch (arguments[1]) {
+        switch (argList[1]) {
           case "arm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeft", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> blade!");
@@ -58,7 +58,7 @@ function initModule(system) {
             };
             break;
           case "disarm":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeft", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> blade!");
@@ -78,7 +78,7 @@ function initModule(system) {
             };
             break;
           case "show":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/blade_left_arm_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> blade!");
@@ -98,7 +98,7 @@ function initModule(system) {
             };
             break;
           case "hide":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setData(entity, "skyhighheroes:dyn/blade_left_arm_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm<s> blade!");
@@ -118,7 +118,7 @@ function initModule(system) {
             };
             break;
           case "stealthOn":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeftStealth", true);
                 system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>left arm<s> blade!");
@@ -138,7 +138,7 @@ function initModule(system) {
             };
             break;
           case "stealthOff":
-            switch (arguments[2]) {
+            switch (argList[2]) {
               case "left":
                 manager.setBoolean(nbt, "bladesLeftStealth", false);
                 system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>left arm<s> blade!");
