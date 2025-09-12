@@ -7,7 +7,7 @@
       "translate": "Basic transers. Communication devices that are extremely useful."
     },
     "icon": {
-      "texture": "skyhighheroes:textures/gui/nodes/star_force.png"
+      "texture": "skyhighheroes:textures/gui/nodes/transers.png"
     }
   },
   "requirements": [
