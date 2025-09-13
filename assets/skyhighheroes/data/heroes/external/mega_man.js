@@ -234,7 +234,7 @@ function initModule(system) {
         result = true;
       };
       if (modifier.name() == "fiskheroes:fire_immunity") {
-        result = true;
+        result = entity.getData("fiskheroes:invisible");
       };
       if (modifier.name() == "fiskheroes:damage_immunity") {/* 
         var invis = ["explosion", "magic", "shuriken", "sharp", "bullet", "blunt", "saitama"];
