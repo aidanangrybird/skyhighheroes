@@ -381,7 +381,49 @@ function initHandThing(renderer, battleCard, textureType, lightType, offset) {
       battleCardFront.render();
     }
   }
-}
+};
+
+/**
+ * Renders EM Being with random chance to spook you
+ * @param {JSHeroRenderer} renderer - Required
+ **/
+function initEMBeing(renderer) {
+  var value = 0.0;
+  var chance = 1.0;
+  var checked = false;
+  var animation = 0.0;
+  var em_being_model = renderer.createResource("MODEL", "skyhighheroes:EMBeing");
+  em_being_model.texture.set("em_being_base", "em_being_lights");
+  em_being_model.bindAnimation("skyhighheroes:em_being_visualizer_spook").setData((entity, data) => {
+    data.load(animation);
+  });
+  var em_being = renderer.createEffect("fiskheroes:model").setModel(em_being_model);
+  em_being.anchor.set("head");
+  em_being.anchor.ignoreAnchor(true);
+  em_being.setScale(1.0);
+  em_being.setOffset(0.0, 0.0, -8.0);
+  em_being.setRotation(0.0, 180.0, 0.0);
+  return {
+    render: (entity, renderLayer, isFirstPersonArm) => {
+      if (entity.getData("skyhighheroes:dyn/visualizer_toggle") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+        if (value < chance) {
+          if (isFirstPersonArm) {
+            em_being.render();
+          };
+        };
+      };
+      if (!entity.getData("skyhighheroes:dyn/visualizer_toggle")) {
+        checked = false;
+      };
+      if (!checked && entity.getData("skyhighheroes:dyn/visualizer_toggle") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+        var random = Math.random();
+        value = random;
+        animation = Math.ceil(6*value);
+        checked = true;
+      };
+    }
+  };
+};
 
 /**
  * Turns NBT String List into an array for easier use in code

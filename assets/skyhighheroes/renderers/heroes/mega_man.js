@@ -41,6 +41,8 @@ loadTextures({
   "knuckle_front": "skyhighheroes:geo/mega_man_knuckle_front.tx.json",
   "knuckle_wave_changing_sides_lights": "skyhighheroes:geo/mega_man_knuckle_wave_changing_sides_lights.tx.json",
   "knuckle_wave_changing_front_lights": "skyhighheroes:geo/mega_man_knuckle_wave_changing_front_lights.tx.json",
+  "em_being_base": "skyhighheroes:geo/omega_xis_base",
+  "em_being_lights": "skyhighheroes:geo/omega_xis_lights",
   "head_right": "skyhighheroes:geo/omega_xis_right.tx.json",
   "head_right_lights": "skyhighheroes:geo/omega_xis_right_lights.tx.json",
   "head_wave_change_right": "skyhighheroes:geo/omega_xis_wave_change_right.tx.json",
@@ -228,6 +230,7 @@ function initEffects(renderer) {
   head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   headWaveChange = stelar.initHandThing(renderer, "head_wave_change", 1, 4, 3);
   headWaveChanging = stelar.initHandThing(renderer, "head_wave_changing", 0, 1, 3);
+  //emBeing = stelar.initEMBeing(renderer);
 };
 
 function initAnimations(renderer) {
@@ -312,4 +315,5 @@ function render(entity, renderLayer, isFirstPersonArm) {
     knuckle.render();
     knucklePredation.render();
   };
+  //emBeing.render(entity, renderLayer, isFirstPersonArm);
 };

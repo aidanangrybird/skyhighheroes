@@ -1,0 +1,105 @@
+{pos0} = if({data} == 0, 1, 0)
+{pos1} = if({data} == 1, 1, 0)
+{pos2} = if({data} == 2, 1, 0)
+{pos3} = if({data} == 3, 1, 0)
+{pos4} = if({data} == 4, 1, 0)
+{pos5} = if({data} == 5, 1, 0)
+{pos6} = if({data} == 6, 1, 0)
+
+;pos0
+{head_rotX} += 10'{pos0}
+{head_rotY} -= 30'{pos0}
+{rightArm_rotX} += 40'{pos0}
+{rightArm_rotZ} += -40'{pos0}
+{leftArm_rotX} += 40'{pos0}
+{leftArm_rotZ} -= -40'{pos0}
+{wave1_rotX} += 0.3{pos0}
+{wave2_rotX} += 0.2{pos0}
+{wave3_rotX} += 0.2{pos0}
+out "firstPerson" (true)
+out "rotate" (20{pos0}, 0, 1, 0)
+
+;pos1
+{head_rotX} += 10'{pos1}
+{head_rotY} += 30'{pos1}
+{rightArm_rotX} += 40'{pos1}
+{rightArm_rotZ} += -40'{pos1}
+{leftArm_rotX} += 40'{pos1}
+{leftArm_rotZ} -= -40'{pos1}
+{wave1_rotX} += 0.3{pos1}
+{wave2_rotX} += 0.2{pos1}
+{wave3_rotX} += 0.2{pos1}
+out "firstPerson" (true)
+out "rotate" (-20{pos1}, 0, 1, 0)
+
+;pos2
+{head_rotX} += -20'{pos2}
+{head_rotY} -= -20'{pos2}
+{rightArm_rotX} += 40'{pos2}
+{rightArm_rotZ} += -40'{pos2}
+{leftArm_rotX} += 40'{pos2}
+{leftArm_rotZ} -= -40'{pos2}
+{wave1_rotX} += 0.3{pos2}
+{wave2_rotX} += 0.2{pos2}
+{wave3_rotX} += 0.2{pos2}
+out "firstPerson" (true)
+out "rotate" (-20{pos2}, 0, 1, 0)
+
+;pos3
+{head_rotX} += -20'{pos3}
+{head_rotY} -= 20'{pos3}
+{rightArm_rotX} += 40'{pos3}
+{rightArm_rotZ} += -40'{pos3}
+{leftArm_rotX} += 40'{pos3}
+{leftArm_rotZ} -= -40'{pos3}
+{wave1_rotX} += 0.3{pos3}
+{wave2_rotX} += 0.2{pos3}
+{wave3_rotX} += 0.2{pos3}
+out "firstPerson" (true)
+out "rotate" (20{pos3}, 0, 1, 0)
+
+;pos4
+{head_rotX} += 10'{pos4}
+{head_rotY} += 10'{pos4}
+{rightArm_rotX} -= 200'{pos4}
+{leftArm_rotX} -= 200'{pos4}
+{rightArm_rotZ} += 20'{pos4}
+{leftArm_rotZ} -= 20'{pos4}
+{wave1_rotX} += 0.1{pos4}
+{wave2_rotX} += 0.1{pos4}
+{wave3_rotX} += 0.1{pos4}
+out "firstPerson" (true)
+out "translate" (-1{pos4}, 1{pos4}, 0{pos4})
+out "rotate" (90{pos4}, 1, 0, 0)
+out "rotate" (-90{pos4}, 0, 0, 1)
+
+;pos5
+{head_rotX} += 10'{pos5}
+{head_rotY} += -10'{pos5}
+{rightArm_rotX} -= 200'{pos5}
+{leftArm_rotX} -= 200'{pos5}
+{rightArm_rotZ} += 20'{pos5}
+{leftArm_rotZ} -= 20'{pos5}
+{wave1_rotX} += 0.1{pos5}
+{wave2_rotX} += 0.1{pos5}
+{wave3_rotX} += 0.1{pos5}
+out "firstPerson" (true)
+out "translate" (1{pos5}, 1{pos5}, 0{pos5})
+out "rotate" (90{pos5}, 1, 0, 0)
+out "rotate" (90{pos5}, 0, 0, 1)
+
+;pos6
+{head_rotX} += 10'{pos6}
+{head_rotY} -= 0'{pos6}
+{rightArm_rotX} -= 160'{pos6}
+{rightArm_rotZ} += -10'{pos6}
+{leftArm_rotX} -= 160'{pos6}
+{leftArm_rotZ} -= -10'{pos6}
+{body_rotX} += 0.2{pos6}
+{wave1_rotX} += 0.3{pos6}
+{wave2_rotX} += 0.2{pos6}
+{wave3_rotX} += 0.2{pos6}
+out "firstPerson" (true)
+out "translate" (0{pos6}, 0{pos6}, -0.5{pos6})
+out "pivot" (0, 1{pos6}, 0)
+out "rotate" (-15{pos6}, 1, 0, 0)
