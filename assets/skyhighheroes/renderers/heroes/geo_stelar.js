@@ -9,12 +9,23 @@ loadTextures({
   "null": "skyhighheroes:null",
   "santa_hat": "skyhighheroes:santa_hat",
   "santa_hat_em": "skyhighheroes:geo/mega_man_santa_hat",
+  "head_right": "skyhighheroes:geo/omega_xis_right",
+  "head_right_lights": "skyhighheroes:geo/omega_xis_right_lights",
+  "head_left": "skyhighheroes:geo/omega_xis_left",
+  "head_left_lights": "skyhighheroes:geo/omega_xis_left_lights",
+  "head_top": "skyhighheroes:geo/omega_xis_top",
+  "head_top_lights": "skyhighheroes:geo/omega_xis_top_lights",
+  "head_bottom": "skyhighheroes:geo/omega_xis_bottom",
+  "head_bottom_lights": "skyhighheroes:geo/omega_xis_bottom_lights",
+  "head_front": "skyhighheroes:geo/omega_xis_front",
 });
 
+var stelar = implement("skyhighheroes:external/stelar");
 var stuff = implement("skyhighheroes:external/stuff");
 
 var santaHat;
 var santaHatEM;
+var head;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
@@ -82,6 +93,7 @@ function initEffects(renderer) {
   ears.anchor.set("head");
   ears.angle = 0;
   ears.inset = -0.039;
+  head = stelar.initHandThing(renderer, "head", 1, 4, 3);
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:wave_calling");
   var callingShape = renderer.createResource("SHAPE", null);
   callingLine = callingShape.bindLine({ "start": [0.0, -300.0, 0.0], "end": [0.0, -300.0, 0.0], "size": [20.0, 20.0] });
@@ -125,6 +137,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
     if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
       hair.render();
     };
+  };
+  if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
+    head.render();
   };
   var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");
   ears.render();
