@@ -36,7 +36,7 @@ function initModule(system) {
       hero.addKeyBind("BATTLE_CARD_4", "Battle Card! Jet Attack!", 2);
       hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Knuckle!", 2);
       hero.addKeyBind("INVISIBILITY", "Wave World", 3);
-      hero.addKeyBind("CANNON_AIM", "Aim Cannon", 4);
+      hero.addKeyBind("AIM_CANNON", "Aim Cannon", 4);
       hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
       hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
       hero.addKeyBind("RIFLE_AIM", "Aim Rifle", 4);
@@ -194,8 +194,8 @@ function initModule(system) {
       if (keyBind == "BATTLE_CARD_5") {
         result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighheroes:dyn/selected_battle_card") == 5;
       };
-      if (keyBind == "CANNON_AIM") {
-        result = !(entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" || entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" || entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" || entity.getHeldItem().name() == "fiskheroes:tutridium_shovel") && entity.getData("skyhighheroes:dyn/battle_card") == 3;
+      if (keyBind == "AIM_CANNON") {
+        result = entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/battle_card") == 3;
       };
       return result;
     },

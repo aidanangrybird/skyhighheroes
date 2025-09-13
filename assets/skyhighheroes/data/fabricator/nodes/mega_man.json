@@ -15,7 +15,7 @@
     "chance": {
       "trigger": "fiskheroes:player_hurt",
       "description": {
-        "translate": "Stand in a Plains or Sunflower Plains biome next to a Beach biome as Geo Stelar"
+        "translate": "During nighttime, stand in a Plains or Sunflower Plains biome next to a Beach biome as Geo Stelar"
       },
       "condition": {
         "variables": {
