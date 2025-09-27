@@ -60,15 +60,15 @@ function initRightArmBeams(renderer, color) {
 
 function initHeadBeams(renderer, color) {
   var position = [
-    { "firstPerson": [-2.2, 0.0, 2.0], "offset": [-2.0, -3.0, -6.8], "size": [2.0, 2.0] },
-    { "firstPerson": [2.2, 0.0, 2.0], "offset": [2.0, -3.0, -6.8], "size": [2.0, 2.0] }
+    { "firstPerson": [-8.15, 0.0, -1.0], "offset": [-8.15, -3.85, -1.0], "size": [2.0, 2.0] },
+    { "firstPerson": [8.15, 0.0, -1.0], "offset": [8.15, -3.85, -1.0], "size": [2.0, 2.0] }
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "head", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && !entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
   var positionFlush = [
-    { "firstPerson": [-2.2, 0.0, 2.0], "offset": [-2.0, -3.0, -4.0], "size": [2.0, 2.0] },
-    { "firstPerson": [2.2, 0.0, 2.0], "offset": [2.0, -3.0, -4.0], "size": [2.0, 2.0] }
+    { "firstPerson": [-5.15, 0.0, -1.0], "offset": [-5.15, -3.85, -1.0], "size": [2.0, 2.0] },
+    { "firstPerson": [5.15, 0.0, -1.0], "offset": [5.15, -3.85, -1.0], "size": [2.0, 2.0] }
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "head", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
