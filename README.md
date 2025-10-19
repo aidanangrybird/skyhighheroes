@@ -3,3 +3,5 @@ This is a repository for the Sky High Heroes heropack. You can go ahead and lear
 Since it is now released, you can download the heropack to experience it for yourself at these locations:\
 CurseForge: https://www.curseforge.com/minecraft/customization/sky-high-heroes \
 Planet Minecraft: https://www.planetminecraft.com/mod/sky-high-heroes/
+
+All Rights Reserved.
