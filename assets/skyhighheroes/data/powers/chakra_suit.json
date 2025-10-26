@@ -114,9 +114,8 @@
     },
     "fiskheroes:teleportation": {
       "canReachMoon": true,
-      "range": 1024.0,
+      "range": 512.0,
       "soundEvents": {
-        "TELEPORT": "skyhighheroes:wave_teleport"
       }
     }
   }
