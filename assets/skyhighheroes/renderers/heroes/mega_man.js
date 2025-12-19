@@ -243,7 +243,7 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   if (isChristmasSeason) {
-    if (entity.isAlive() && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+    if (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
       santaHat.setScale(1.05);
       santaHat.setOffset(0.0, -5.75, 1.25);
       santaHat.setRotation(-45.0, 0.0, 0.0);
