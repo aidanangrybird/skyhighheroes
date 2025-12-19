@@ -34,7 +34,7 @@ function initModule(system) {
       return;
     };
     if (nbt != null) {
-      if (nbt.hasKey("contacts")) {
+      if (!nbt.hasKey("contacts")) {
         var contacts = manager.newTagList();
         manager.appendString(contacts, username);
         manager.setTagList(nbt, "contacts", contacts);
