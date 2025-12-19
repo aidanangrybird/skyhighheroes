@@ -289,6 +289,14 @@ function initModule(system) {
       if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
         manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
       };
+      if ((entity.getData("fiskheroes:flight_timer") < 1.0) && (entity.getData("fiskheroes:flight_timer") > 0.0) && !entity.getData("fiskheroes:flying")) {
+        var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 20);
+        entities.forEach(other => {
+          if (other.getDataOrDefault("sind:dyn/flares", false)) {
+            manager.setDataWithNotify(entity, "fiskheroes:flying", true);
+          };
+        });
+      };
       var item_holding = (!entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0);
       manager.incrementData(entity, "skyhighheroes:dyn/item_holding_timer", 10, item_holding);
       var sword = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getData("skyhighheroes:dyn/battle_card") == 2 && (entity.getData("fiskheroes:flight_boost_timer") == 0 || (entity.getData("fiskheroes:flight_boost_timer") < 0.5 && !entity.isSprinting())));
