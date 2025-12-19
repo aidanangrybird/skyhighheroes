@@ -214,7 +214,8 @@ function initTentacles(renderer, model) {
   tentacles.segments = 16;
 };
 
-function initTransceiveBeams(renderer, model, color) {
+
+function initSatelliteBeams(renderer, model, color) {
   var receiveBase = model.getCubeOffset("head_satellite_dish_base");
   var transmitBase = model.getCubeOffset("head_satellite_dish_antenna");
 
@@ -237,17 +238,23 @@ function initTransceiveBeams(renderer, model, color) {
   receiveBeam.color.set(color);
   
   return {
-    render: function (entity, renderLayer, isFirstPersonArm) {
+    render: function (entity, isFirstPersonArm) {
+      var vector = PackLoader.asVec3(entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5);
+      var transmitTimer = entity.getInterpolatedData("skyhighheroes:dyn/transmit_beam_timer");
+      var receiveTimer = entity.getInterpolatedData("skyhighheroes:dyn/receive_beam_timer");
+      var factor = entity.eyePos().add(0, 1, 0).distanceTo(vector);
+      receiveLine.start.y = factor+0.375;
+      receiveLine.end.y = factor+0.375;
+      transmitLine.end.y = transmitLine.start.y+factor*transmitTimer;
+      receiveLine.end.y = receiveLine.start.y-factor*receiveTimer;
       if (!isFirstPersonArm) {
-        var transmitTimer = entity.getInterpolatedData("skyhighheroes:dyn/transmit_beam_timer");
-        var receiveTimer = entity.getInterpolatedData("skyhighheroes:dyn/receive_beam_timer");
-        transmitLine.end.y = transmitLine.start.y+300*transmitTimer;
-        receiveLine.end.y = receiveLine.start.y-300*receiveTimer;
-        if (transmitTimer > 0) {
-          transmitBeam.render();
-        };
-        if (receiveTimer > 0) {
-          receiveBeam.render();
+        if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), vector) && entity.getData("skyhighheroes:dyn/satellite")) {
+          if (transmitTimer > 0) {
+            transmitBeam.render();
+          };
+          if (receiveTimer > 0) {
+            receiveBeam.render();
+          };
         };
       };
     }
@@ -255,15 +262,33 @@ function initTransceiveBeams(renderer, model, color) {
 };
 
 /**
- * Gets direction from one vector to another
- * @param {JSVector3} base - Base vector
- * @param {JSVector3} other - Vector to measure to
- * @returns Direction
+ * Attempts to get model of a cybernetic player by id
+ * @param {JSEntity} entity - Required
+ * @param {integer} id - ID
  **/
-function direction(base, other) {
-  var angle = (((Math.atan2(-1*(other.z()-base.z()), -1*(other.x()-base.x())) * 180) / Math.PI) + 270) % 360;
-  var direction = angleToDirection(angle);
-  return direction;
+function isStillCyber(entity, id) {
+  var result = false;
+  var otherEntity = entity.world().getEntityById(id);
+  if (otherEntity.exists() && otherEntity.isLivingEntity()) {
+    if (otherEntity.is("PLAYER")) {
+      var otherPlayer = otherEntity.as("PLAYER");
+      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+        if (hasCyberneticBody(otherPlayer)) {
+          result = true;
+        };
+      };
+    };
+  };
+  return result;
+};
+
+/**
+ * Checks if an entity is cybernetic
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns If the entity is cybernetic
+ **/
+function hasCyberneticBody(entity) {
+  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
 };
 
 function beamThing(renderer, color) {

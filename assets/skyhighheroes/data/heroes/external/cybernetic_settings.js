@@ -9,101 +9,117 @@ function initModule(system) {
     type: 1,
     command: "set",
     helpMessage: "<n>!set <nh>-<n> Settings",
-    commandHandler: function (entity, manager, args) {
-      if (args.length > 1 && args.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornHelmet().nbt();
-        switch(args[1]) {
+        switch(argList[1]) {
           case "fightOrFlightDur":
-            manager.setShort(nbt, "durationFightOrFlight", parseInt(args[2]));
+            manager.setShort(nbt, "durationFightOrFlight", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>fightOrFlightDur set to <nh>" + nbt.getShort("durationFightOrFlight") + "<n>!");
             break;
           case "fightOrFlightMin":
-            manager.setInteger(nbt, "minHealthFightOrFlight", parseInt(args[2]));
+            manager.setInteger(nbt, "minHealthFightOrFlight", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin set to <nh>" + nbt.getShort("minHealthFightOrFlight") + "<n>!");
             break;
           case "naturalArms":
-            manager.setBoolean(nbt, "naturalArms", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("naturalArms")));
+            manager.setBoolean(nbt, "naturalArms", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("naturalArms")));
             system.moduleMessage(this, entity, "<n>naturalArms set to <nh>" + nbt.getBoolean("naturalArms") + "<n>!");
             break;
           case "aliasActive":
-            manager.setBoolean(nbt, "aliasActive", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("aliasActive")));
+            manager.setBoolean(nbt, "aliasActive", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("aliasActive")));
             system.moduleMessage(this, entity, "<n>aliasActive set to <nh>" + nbt.getBoolean("aliasActive") + "<n>!");
             break;
           case "nightVision":
-            manager.setBoolean(nbt, "nightVision", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("nightVision")));
+            manager.setBoolean(nbt, "nightVision", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("nightVision")));
             system.moduleMessage(this, entity, "<n>nightVision set to <nh>" + nbt.getBoolean("nightVision") + "<n>!");
             break;
           case "innerRockets":
-            manager.setBoolean(nbt, "innerRockets", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("innerRockets")));
+            manager.setBoolean(nbt, "innerRockets", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("innerRockets")));
             system.moduleMessage(this, entity, "<n>innerRockets set to <nh>" + nbt.getBoolean("innerRockets") + "<n>!");
             break;
           case "flushHeadCannons":
-            manager.setBoolean(nbt, "flushHeadCannons", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
+            manager.setBoolean(nbt, "flushHeadCannons", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
             system.moduleMessage(this, entity, "<n>flushHeadCannons set to <nh>" + nbt.getBoolean("flushHeadCannons") + "<n>!");
             break;
           case "flushLeftArmCannon":
-            manager.setBoolean(nbt, "flushLeftArmCannon", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("flushLeftArmCannon")));
+            manager.setBoolean(nbt, "flushLeftArmCannon", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushLeftArmCannon")));
             system.moduleMessage(this, entity, "<n>flushLeftArmCannon set to <nh>" + nbt.getBoolean("flushLeftArmCannon") + "<n>!");
             break;
           case "flushRightArmCannon":
-            manager.setBoolean(nbt, "flushRightArmCannon", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("flushRightArmCannon")));
+            manager.setBoolean(nbt, "flushRightArmCannon", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushRightArmCannon")));
             system.moduleMessage(this, entity, "<n>flushRightArmCannon set to <nh>" + nbt.getBoolean("flushRightArmCannon") + "<n>!");
             break;
           case "flushMouth":
-            manager.setBoolean(nbt, "flushMouth", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("flushMouth")));
+            manager.setBoolean(nbt, "flushMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushMouth")));
             system.moduleMessage(this, entity, "<n>flushMouth set to <nh>" + nbt.getBoolean("flushMouth") + "<n>!");
             break;
           case "hudRange":
-            manager.setShort(nbt, "hudRange", parseInt(args[2]));
+            manager.setShort(nbt, "hudRange", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
             break;
           case "friendliesOnHud":
-            manager.setBoolean(nbt, "flushMouth", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
+            manager.setBoolean(nbt, "flushMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
             system.moduleMessage(this, entity, "<n>friendliesOnHud set to <nh>" + nbt.getBoolean("friendliesOnHud") + "<n>!");
             break;
           case "hostilesOnHud":
-            manager.setBoolean(nbt, "flushMouth", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
+            manager.setBoolean(nbt, "flushMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
             system.moduleMessage(this, entity, "<n>hostilesOnHud set to <nh>" + nbt.getBoolean("hostilesOnHud") + "<n>!");
             break;
           case "playersOnHud":
-            manager.setBoolean(nbt, "playersOnHud", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
+            manager.setBoolean(nbt, "playersOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
             system.moduleMessage(this, entity, "<n>playersOnHud set to <nh>" + nbt.getBoolean("playersOnHud") + "<n>!");
             break;
           case "holoFlight":
-            manager.setBoolean(nbt, "holoFlight", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoFlight")));
+            manager.setBoolean(nbt, "holoFlight", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoFlight")));
             system.moduleMessage(this, entity, "<n>holoFlight set to <nh>" + nbt.getBoolean("holoFlight") + "<n>!");
             break;
           case "holoBoostFlight":
-            manager.setBoolean(nbt, "holoBoostFlight", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoBoostFlight")));
+            manager.setBoolean(nbt, "holoBoostFlight", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoBoostFlight")));
             system.moduleMessage(this, entity, "<n>holoBoostFlight set to <nh>" + nbt.getBoolean("holoBoostFlight") + "<n>!");
             break;
           case "holoCannons":
-            manager.setBoolean(nbt, "holoCannons", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoCannons")));
+            manager.setBoolean(nbt, "holoCannons", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoCannons")));
             system.moduleMessage(this, entity, "<n>holoCannons set to <nh>" + nbt.getBoolean("holoCannons") + "<n>!");
             break;
           case "holoBlades":
-            manager.setBoolean(nbt, "holoBlades", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoBlades")));
+            manager.setBoolean(nbt, "holoBlades", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoBlades")));
             system.moduleMessage(this, entity, "<n>holoBlades set to <nh>" + nbt.getBoolean("holoBlades") + "<n>!");
             break;
           case "holoShields":
-            manager.setBoolean(nbt, "holoShields", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoShields")));
+            manager.setBoolean(nbt, "holoShields", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoShields")));
             system.moduleMessage(this, entity, "<n>holoShields set to <nh>" + nbt.getBoolean("holoShields") + "<n>!");
             break;
           case "holoGlide":
-            manager.setBoolean(nbt, "holoGlide", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoGlide")));
+            manager.setBoolean(nbt, "holoGlide", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoGlide")));
             system.moduleMessage(this, entity, "<n>holoGlide set to <nh>" + nbt.getBoolean("holoGlide") + "<n>!");
             break;
           case "holoMouth":
-            manager.setBoolean(nbt, "holoMouth", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoMouth")));
+            manager.setBoolean(nbt, "holoMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoMouth")));
             system.moduleMessage(this, entity, "<n>holoMouth set to <nh>" + nbt.getBoolean("holoMouth") + "<n>!");
             break;
           case "holoAnt":
-            manager.setBoolean(nbt, "holoAnt", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoAnt")));
+            manager.setBoolean(nbt, "holoAnt", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoAnt")));
             system.moduleMessage(this, entity, "<n>holoAnt set to <nh>" + nbt.getBoolean("holoAnt") + "<n>!");
             break;
           case "holoSat":
-            manager.setBoolean(nbt, "holoSat", ((args[2] == "true") ? true : (args[2] == "false") ? false : nbt.getBoolean("holoSat")));
+            manager.setBoolean(nbt, "holoSat", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoSat")));
             system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
+            break;
+          case "xSat":
+            manager.setShort(nbt, "xSat", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
+            break;
+          case "ySat":
+            manager.setShort(nbt, "ySat", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
+            break;
+          case "zSat":
+            manager.setShort(nbt, "zSat", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
+            break;
+          case "freq":
+            manager.setShort(nbt, "freq", parseInt(argList[2]));
+            system.moduleMessage(this, entity, "<n>freq set to <nh>" + nbt.getShort("freq") + "<n>!");
             break;
           case "list":
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + nbt.getShort("durationFightOrFlight"));
@@ -129,6 +145,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>holoMouth: <nh>" + nbt.getBoolean("holoMouth"));
             system.moduleMessage(this, entity, "<n>holoAnt: <nh>" + nbt.getBoolean("holoAnt"));
             system.moduleMessage(this, entity, "<n>holoSat: <nh>" + nbt.getBoolean("holoSat"));
+            system.moduleMessage(this, entity, "<n>xSat: <nh>" + nbt.getShort("xSat"));
+            system.moduleMessage(this, entity, "<n>ySat: <nh>" + nbt.getShort("ySat"));
+            system.moduleMessage(this, entity, "<n>zSat: <nh>" + nbt.getShort("zSat"));
+            system.moduleMessage(this, entity, "<n>freq: <nh>" + nbt.getShort("freq"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
@@ -156,6 +176,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set holoMouth <true|false> <nh>-<n> Sets if hologram will have mouth deployed");
             system.moduleMessage(this, entity, "<n>!set holoAnt <true|false> <nh>-<n> Sets if hologram will have antenna deployed");
             system.moduleMessage(this, entity, "<n>!set holoSat <true|false> <nh>-<n> Sets if hologram will have satellite dish deployed");
+            system.moduleMessage(this, entity, "<n>!set xSat <number> <nh>-<n> Sets x coordinate of satellite");
+            system.moduleMessage(this, entity, "<n>!set ySat <number> <nh>-<n> Sets y coordinate of satellite");
+            system.moduleMessage(this, entity, "<n>!set zSat <number> <nh>-<n> Sets z coordinate of satellite");
+            system.moduleMessage(this, entity, "<n>!set freq <number> <nh>-<n> Sets freqency of antenna");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

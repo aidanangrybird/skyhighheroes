@@ -6,9 +6,45 @@
 {antenna} = curve(clamp({data_5}, 0, 1))(1-{rain_mode}{satellite_dish})
 {cannon_flush} = curve(clamp({data_6}, 0, 1))
 {mouth_flush} = curve(clamp({data_7}, 0, 1))
+{not_rain_mode} = (1-{rain_mode})
+{bearing} = {data_8}*1'
+{pitch} = {data_9}*1'
+{angle_Y} = {data_10}*1'
+{angle_X} = {data_11}*1'
+{left_eye_lid} = {data_12}
+{right_eye_lid} = {data_13}
+{left_eye_angle_X} = {data_14}
+{right_eye_angle_X} = {data_15}
+{left_eye_angle_Y} = {data_16}
+{right_eye_angle_Y} = {data_17}
+{diff} = {angle_Y} - {bearing}
+
+;eyes
+;left
+{part0_left_eye} = if({left_eye_lid} != 1, animate2({left_eye_lid}, 1.0, 0.0, 0.95, 0.0), 1)
+{part1_left_eye} = if({left_eye_lid} != 1, animate2({left_eye_lid}, 1.0, 0.95, 0.05, 0.0), 1)
+{head_left_eye_upper_posY} += {part0_left_eye} + {part1_left_eye}*0.95
+{head_left_eye_lower_posY} -= {part0_left_eye} + {part1_left_eye}*0.95
+{head_left_eye_upper_posX} -= clamp({left_eye_angle_X}, 0, 1)*(1-{part1_left_eye})
+{head_left_eye_lower_posX} -= clamp({left_eye_angle_X}, 0, 1)*(1-{part1_left_eye})
+{head_left_eye_upper_posZ} -= {part1_left_eye}*0.05
+{head_left_eye_lower_posZ} -= {part1_left_eye}*0.05
+{head_left_eye_posX} += clamp({left_eye_angle_X}, 0, 1)*(1-{part1_left_eye})
+{head_left_eye_posY} += clamp({left_eye_angle_Y}*0.95, -0.95, 0.95)*{part0_left_eye}*(1-{part1_left_eye})
+;right
+{part0_right_eye} = if({right_eye_lid} != 1, animate2({right_eye_lid}, 1.0, 0.0, 0.95, 0.0), 1)
+{part1_right_eye} = if({right_eye_lid} != 1, animate2({right_eye_lid}, 1.0, 0.95, 0.05, 0.0), 1)
+{head_right_eye_upper_posY} += {part0_right_eye} + {part1_right_eye}*0.95
+{head_right_eye_lower_posY} -= {part0_right_eye} + {part1_right_eye}*0.95
+{head_right_eye_upper_posX} += clamp({right_eye_angle_X}, 0, 1)*(1-{part1_right_eye})
+{head_right_eye_lower_posX} += clamp({right_eye_angle_X}, 0, 1)*(1-{part1_right_eye})
+{head_right_eye_upper_posZ} -= {part1_right_eye}*0.05
+{head_right_eye_lower_posZ} -= {part1_right_eye}*0.05
+{head_right_eye_posX} -= clamp({right_eye_angle_X}, 0, 1)*(1-{part1_right_eye})
+{head_right_eye_posY} += clamp({right_eye_angle_Y}*0.95, -0.95, 0.95)*{right_eye_lid}*(1-{part1_right_eye})
 
 ;cannons
-;left cannon
+;left
 {part0_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.2, 0.2, 0.0), 1)
 {part2_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.6, 0.4, 0.0), 1)
@@ -29,7 +65,7 @@
 {head_left_front_cannon_base_posX} += 2.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
 {head_left_back_cannon_base_posX} += 2.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
 {head_left_cannon_posX} += 5.9{part2_cannon_left} - 2.8{cannon_flush}{part2_cannon_left}
-;right cannon
+;right
 {part0_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.2, 0.2, 0.0), 1)
 {part2_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.6, 0.4, 0.0), 1)
@@ -64,46 +100,55 @@
 ;antenna
 {part0_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.2, 0.2, 0.0), 1)
-{part2_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.4, 0.2, 0.0), 1)
-{part3_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.5, 0.4, 0.0), 1)
-{part4_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.9, 0.1, 0.0), 1)
+{part2_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.4, 0.1, 0.0), 1)
+{part3_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.5, 0.1, 0.0), 1)
+{part4_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.6, 0.1, 0.0), 1)
+{part5_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.7, 0.1, 0.0), 1)
+{part6_antenna} = if({antenna} != 1, animate2({antenna}, 1.0, 0.8, 0.2, 0.0), 1)
 
 {head_left_antenna_cover_posY} += 0.03{part0_antenna}
 {head_right_antenna_cover_posY} += 0.03{part0_antenna}
 {head_left_antenna_cover_posX} += 0.99{part1_antenna} + 0.01{part0_antenna}
 {head_right_antenna_cover_posX} -= 0.99{part1_antenna} + 0.01{part0_antenna}
-{head_antenna_base_posY} -= 6.9{part2_antenna}
-{head_antenna_base_posZ} -= 1{part4_antenna}
-{head_antenna_posY} -= 6.95{part3_antenna}
+{head_antenna_base_posY} -= 6.9{part5_antenna}
+{head_antenna_base_posZ} -= 1{part6_antenna}
+{head_antenna_lower_posY} -= 6.95{part4_antenna}
+{head_antenna_upper_posY} -= 6.95{part3_antenna}
+{head_antenna_bearing_rotX} -= {pitch}{part6_antenna}
 
 ;satellite dish
 {part0_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.0, 0.15, 0.0), 1)
 {part1_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.2, 0.2, 0.0), 1)
-{part2_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.4, 0.2, 0.0), 1)
+{part2_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.4, 0.1, 0.0), 1)
 {part3_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.5, 0.1, 0.0), 1)
 {part4_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.6, 0.1, 0.0), 1)
 {part5_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.7, 0.1, 0.0), 1)
 {part6_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.8, 0.2, 0.0), 1)
 
-{part1_satellite_dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.5, 0.05, 0.0), 1)
-{part2_satellite_dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.55, 0.05, 0.0), 1)
-{part3_satellite_dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.6, 0.05, 0.0), 1)
-{part4_satellite_dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.65, 0.05, 0.0), 1)
-{part5_satellite_dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.8, 0.2, 0.0), 1)
+{dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.65, 0.35, 0.0), 1)
+{part1_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.0, 0.1, 0.0), 1)
+{part2_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.1, 0.1, 0.0), 1)
+{part3_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.2, 0.1, 0.0), 1)
+{part4_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.3, 0.1, 0.0), 1)
+{part5_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.6, 0.4, 0.0), 1)
 
 {head_left_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
 {head_right_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
 {head_left_satellite_dish_cover_posX} += 0.99{part1_satellite_dish_arm} + 0.01{part0_satellite_dish_arm}
 {head_right_satellite_dish_cover_posX} -= 0.99{part1_satellite_dish_arm} + 0.01{part0_satellite_dish_arm}
-{head_satellite_dish_arm_base_posZ} += 6.4{part3_satellite_dish_arm}
-{head_satellite_dish_arm_base_posY} += {part4_satellite_dish_arm}
-{head_satellite_dish_base_posY} += {part4_satellite_dish_arm}
-{head_satellite_dish_arm_posY} += 5.5{part2_satellite_dish_arm}
-{head_satellite_dish_arm_posZ} -= 0.2{part4_satellite_dish_arm} - 0.2{part4_satellite_dish_arm}{rain_mode}
-{head_satellite_dish_arm_base_rotX} += 40'{part4_satellite_dish_arm} + 15'{part4_satellite_dish_arm}{rain_mode}
-{head_satellite_dish_arm_rotX} += 20'{part5_satellite_dish_arm} + 70'{part5_satellite_dish_arm}{rain_mode}
+{head_satellite_dish_arm_base_posZ} += 6.4{part5_satellite_dish_arm}
+{head_satellite_dish_arm_base_posY} += {part6_satellite_dish_arm}
+{head_satellite_dish_base_posY} += {part2_satellite_dish_arm}
+{head_satellite_dish_arm_lower_posY} += 5{part4_satellite_dish_arm} + 0.5{part2_satellite_dish_arm}
+{head_satellite_dish_arm_lower_posZ} -= 0.2{part5_satellite_dish_arm} - 0.2{part5_satellite_dish_arm}{rain_mode}
+{head_satellite_dish_arm_upper_posY} += 3{part2_satellite_dish_arm} + 4{part3_satellite_dish_arm}
+{head_satellite_dish_arm_base_rotX} += 55'{part6_satellite_dish_arm} - 15'{part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} - 35', 0', 55')){part6_satellite_dish_arm}{not_rain_mode} - (clamp({pitch} - 50', 0', 50')){part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 62', -17', 0')){part6_satellite_dish_arm}{rain_mode}
+{head_satellite_dish_arm_lower_rotX} += 35'{part6_satellite_dish_arm}{not_rain_mode} + 105'{part6_satellite_dish_arm}{rain_mode} - (clamp({pitch}, 0', 35')){part6_satellite_dish_arm}{not_rain_mode} - (clamp({pitch}, 0', 90')){part6_satellite_dish_arm}{rain_mode} + (clamp({pitch} - 35', 0', 0')){part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 55', -7', 0')){part6_satellite_dish_arm}{rain_mode}
 {head_satellite_dish_antenna_posY} += 3{part6_satellite_dish_arm} - 3{part6_satellite_dish_arm}{rain_mode}
-{head_satellite_dish_base_rotX} -= 55'{part6_satellite_dish_arm}{rain_mode}
+{head_satellite_dish_arm_bearing_rotX} += -35'{part6_satellite_dish_arm}{rain_mode} - if({pitch}>0,0,1){pitch}{part6_satellite_dish_arm}{not_rain_mode} - (clamp({pitch}, -55', 0')){part6_satellite_dish_arm}{rain_mode} + (clamp({pitch} - 70', 0', 20')){part6_satellite_dish_arm}{rain_mode}
+{head_satellite_dish_base_rotX} += {angle_X}{part6_satellite_dish_arm}{not_rain_mode} - 20'{part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 79', -11', 0')){part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 62', 11', 0')){part6_satellite_dish_arm}{rain_mode} + (clamp({pitch} - 50', 0', 20')){part6_satellite_dish_arm}{rain_mode}
+{head_satellite_dish_arm_upper_rotY} += {bearing}{part6_satellite_dish_arm}{not_rain_mode} - {angle_Y}{part6_satellite_dish_arm}{not_rain_mode}
+
 
 ;upper
 {head_satellite_dish_ring_4_upper_posX} += 2{part1_satellite_dish}

@@ -251,3 +251,38 @@ function location(renderer) {
     }
   };
 };
+
+function getBearing(entity) {
+  var rotation = entity.rotationInterpolated().x()%360;
+  var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
+  return bearing;
+};
+
+/**
+ * Gets direction from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Direction
+ **/
+function direction(base, other) {
+  var angle = (((Math.atan2(-1*(other.z()-base.z()), -1*(other.x()-base.x())) * 180) / Math.PI) + 270) % 360;
+  return angle;
+};
+
+/**
+ * Gets direction from one vector to another
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Direction
+ **/
+function directionAngle(entity, posX, posZ) {
+  var angle = (entity.eyePos().add(0,1,0).xz().angleTo(posX, posZ) + 90);
+  return angle;
+};
+
+function elevation(entity, posX, posY, posZ) {
+  var distance = entity.pos().xz().distanceTo(posX, posZ);
+  var vector = PackLoader.asVec2(0, entity.pos().y());
+  var angle = 90-vector.angleTo(distance, posY);
+  return angle;
+};
