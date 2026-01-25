@@ -10,19 +10,7 @@ function initModule(system) {
    * @param {string} presetName - Name of preset
    **/
   function addPreset(entity, manager, presetName) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -46,6 +34,7 @@ function initModule(system) {
    * @param {JSDataManager} manager - Required
    **/
   function listPresets(entity, manager) {
+    var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -53,7 +42,7 @@ function initModule(system) {
     var presets = getPresetArray(entity, manager);
     system.moduleMessage(this, entity, "<n>You have <nh>" + presets.length + ((presets.length == 1) ? "<n> preset!" : "<n> presets!"));
     presets.forEach(entry => {
-      system.moduleMessage(this, entity, "<nh>" + entry.presetName);
+      system.moduleMessage(this, entity, "<nh>" + entry);
     });
   };
   /**
@@ -63,19 +52,7 @@ function initModule(system) {
    * @param {string} presetName - Name of preset
    **/
   function removePreset(entity, manager, presetName) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -95,21 +72,7 @@ function initModule(system) {
    * @returns Array of preset names
    **/
   function getPresetArray(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -129,19 +92,7 @@ function initModule(system) {
    * @param {string} presetName - Name of preset
    **/
   function setPreset(entity, manager, presetName) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = entity.getWornHelmet().nbt();
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);

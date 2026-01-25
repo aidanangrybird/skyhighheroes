@@ -4,6 +4,7 @@
  **/
 function initModule(system) {
   //All of the required functions and stuff go here
+  var bladeMultiTap = system.initMultiTap("skyhighheroes:dyn/blade");
   return {
     name: "blades",
     moduleMessageName: "Blades",
@@ -13,10 +14,14 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("BLADES", (player, manager) => {
-        system.moduleMessage(this, player, "<e>To arm a blade do <eh>!blade arm <left|right><e>.");
+        //system.moduleMessage(this, player, "<e>To arm a blade do <eh>!blade arm <left|right><e>.");
+        bladeMultiTap.tap(player, manager);
         return false;
-      }, "\u00A7" + color + "Blades (None armed)", 1);
-      hero.addKeyBind("BLADE", "\u00A7" + color + "Blades", 1);
+      }, "\u00A7" + color + "Blades (x2 to arm)", 1);
+      hero.addKeyBindFunc("BLADE", (player, manager) => {
+        bladeMultiTap.tap(player, manager);
+        return true;
+      }, "\u00A7" + color + "Blades (x2 to disarm)", 1);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
@@ -24,10 +29,10 @@ function initModule(system) {
         var nbt = entity.getWornHelmet().nbt();
         var left = nbt.getBoolean("bladesLeft");
         var right = nbt.getBoolean("bladesRight");
-        if (keyBind == "BLADES" && !entity.isSneaking() && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "BLADES" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (!left && !right);
         };
-        if (keyBind == "BLADE" && !entity.isSneaking() && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "BLADE" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (left || right);
         };
       };
@@ -299,7 +304,17 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       var left = nbt.getBoolean("bladesLeft") && entity.getData("fiskheroes:blade");
       var right = nbt.getBoolean("bladesRight") && entity.getData("fiskheroes:blade");
-      if (entity.getData("fiskheroes:blade_timer") > 0) {
+      if ((!nbt.getBoolean("bladesLeft") || !nbt.getBoolean("bladesRight")) && bladeMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setBoolean(nbt, "bladesLeft", true);
+        manager.setBoolean(nbt, "bladesRight", true);
+        system.moduleMessage(this, entity, "<s>Armed <sh>all<s> blades!");
+      };
+      if ((nbt.getBoolean("bladesLeft") || nbt.getBoolean("bladesRight")) && bladeMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setBoolean(nbt, "bladesLeft", false);
+        manager.setBoolean(nbt, "bladesRight", false);
+        system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> blades!");
+      };
+      if ((nbt.getBoolean("bladesLeft") || nbt.getBoolean("bladesRight")) && entity.getData("fiskheroes:blade_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/blade_left_arm", left);
         manager.setData(entity, "skyhighheroes:dyn/blade_right_arm", right);
         if (entity.getData("fiskheroes:blade_timer") < 0.2) {
@@ -319,6 +334,7 @@ function initModule(system) {
       var rightStealth = nbt.getBoolean("bladesRightStealth");
       manager.setData(entity, "skyhighheroes:dyn/blade_left_arm_stealth", leftStealth);
       manager.setData(entity, "skyhighheroes:dyn/blade_right_arm_stealth", rightStealth);
+      bladeMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
       if (!entity.getWornHelmet().nbt().getBoolean("bladesLeft") || !entity.getWornHelmet().nbt().getBoolean("bladesRight")) {

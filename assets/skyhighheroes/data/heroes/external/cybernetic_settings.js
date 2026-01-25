@@ -58,11 +58,11 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
             break;
           case "friendliesOnHud":
-            manager.setBoolean(nbt, "flushMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
+            manager.setBoolean(nbt, "friendliesOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("friendliesOnHud")));
             system.moduleMessage(this, entity, "<n>friendliesOnHud set to <nh>" + nbt.getBoolean("friendliesOnHud") + "<n>!");
             break;
           case "hostilesOnHud":
-            manager.setBoolean(nbt, "flushMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
+            manager.setBoolean(nbt, "hostilesOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hostilesOnHud")));
             system.moduleMessage(this, entity, "<n>hostilesOnHud set to <nh>" + nbt.getBoolean("hostilesOnHud") + "<n>!");
             break;
           case "playersOnHud":
@@ -121,6 +121,10 @@ function initModule(system) {
             manager.setShort(nbt, "freq", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>freq set to <nh>" + nbt.getShort("freq") + "<n>!");
             break;
+          case "hudScale":
+            manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
+            system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
+            break;
           case "list":
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + nbt.getShort("durationFightOrFlight"));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin: <nh>" + nbt.getShort("minHealthFightOrFlight"));
@@ -149,6 +153,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>ySat: <nh>" + nbt.getShort("ySat"));
             system.moduleMessage(this, entity, "<n>zSat: <nh>" + nbt.getShort("zSat"));
             system.moduleMessage(this, entity, "<n>freq: <nh>" + nbt.getShort("freq"));
+            system.moduleMessage(this, entity, "<n>hudScale: <nh>" + nbt.getShort("hudScale"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");

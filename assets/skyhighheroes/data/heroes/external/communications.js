@@ -4,6 +4,37 @@
  **/
 function initModule(system) {
   /**
+  * Gets position of other cybers
+  * @param tx - Transmitter
+  * @param rx - Receiver
+  **/
+  function getPos(module, tx, rx) {
+    var otherName = system.getModelID(tx);
+    var positionMessage = "<nh>" + otherName + "<n> | (<nh>" + tx.posX().toFixed(0) + "<n>, <nh>" + tx.posY().toFixed(0) + "<n>, <nh>" + tx.posZ().toFixed(0) + "<n>)";
+    if (system.hasOwnProperty("distance")) {
+      var distance = system.distance(rx.pos(), tx.pos());
+      positionMessage = positionMessage + "<n> | <nh>" + distance;
+    };
+    if (system.hasOwnProperty("direction")) {
+      var direction = system.direction(rx.pos(), tx.pos());
+      positionMessage = positionMessage + "<n> | <nh>" + direction;
+    };
+    if (system.hasOwnProperty("elevation")) {
+      var elevation = system.elevation(rx.pos(), tx.pos());
+      positionMessage = positionMessage + "<n> | <nh>" + ((elevation == 0) ? "-" : ((elevation > 0) ? "+" + elevation : elevation));
+    };
+    system.moduleMessage(module, rx, positionMessage);
+  };
+  /**
+  * Transmits status of tx to rx
+  * @param tx - Transmitter
+  * @param rx - Receiver
+  **/
+  function getStatus(module, tx, rx) {
+    var otherName = system.getModelID(tx);
+    system.moduleMessage(module, rx, "<nh>" + otherName + "<n> | <nh>" + ((tx.getHealth()/tx.getMaxHealth())*100) + "%<n> | <nh>" + ((tx.as("PLAYER").getFoodLevel()/20)*100) + "%<n>");
+  };
+  /**
   * Receives suits
   * @param module - module passthrough
   * @param tx - Transmitter requried
@@ -38,9 +69,9 @@ function initModule(system) {
     var rxName = system.getModelID(rx);
     system.moduleMessage(module, rx, "<n>Receiving suits from <nh>" + txName + "<n>!");
     system.moduleMessage(module, tx, "<n>Transmitting suits to " + rxName + "!");
-    manager.setDataWithNotify(tx, "skyhighheroes:dyn/receive_duration", suitReceiveDuration);
+    manager.setBoolean(nbt, "suitReceiveDuration", suitReceiveDuration);
     system.moduleMessage(module, rx, "<n>Attempting to receive <nh>" + receivesBuffered + "<n> " + ((receivesBuffered == 1) ? "suit!" : "suits!"));
-    manager.setDataWithNotify(rx, "skyhighheroes:dyn/receiving", true);
+    manager.setBoolean(nbt, "receiving", true);
   };
   /**
   * Receives suit
@@ -90,6 +121,7 @@ function initModule(system) {
       manager.setTagList(nbt, "transmitBuffer", newBuffer);
     };
     var suitDatastoreArray = system.getStringArray(nbt.getStringList("suitDatastore"));
+    var suitsToTransmit = [];
     if (suitList == "*") {
       for (var i = 0;i<suitDatastoreArray.length;i++) {
         suitsToTransmit.push(i);
@@ -97,14 +129,13 @@ function initModule(system) {
     } else {
       suitsToTransmit = suitList.split(",");
     };
-    var suitsToTransmit = [];
     var suitTransmitBuffer = nbt.getStringList("transmitBuffer")
     var suitTransmitBufferArray = system.getStringArray(nbt.getStringList("transmitBuffer"));
     var suitTransmitDuration = 0;
     var transmitsBuffered = 0;
     suitsToTransmit.forEach(entry => {
       if ((entry < (suitDatastoreArray.length)) && (entry > -1)) {
-        var currentSuit = dataDriveSuitsArray[entry];
+        var currentSuit = suitDatastoreArray[entry];
         if (suitTransmitBufferArray.indexOf(currentSuit) == -1) {
           manager.appendString(suitTransmitBuffer, currentSuit);
           suitTransmitBufferArray.push(currentSuit);
@@ -309,15 +340,15 @@ function initModule(system) {
               //entity = tx
               //player = rx
               transmitSuits(this, entity, manager, argList[2]);
-              foundPlayers.forEach(player => {
-                var rxAntennaDeployed = (player.getData("skyhighheroes:dyn/antenna_timer") == 1) && (player.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
-                var rxSatelliteDeployed = (player.getData("skyhighheroes:dyn/satellite_timer") == 1) && (player.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
-                if (entity.canSee(player) && entity.pos().distanceTo(player.pos()) <= range) {
-                  receiveSuits(this, player, entity);
-                } else if (txAntennaDeployed && rxAntennaDeployed && system.checkFrequency(entity, player) && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-                  receiveSuits(this, player, entity);
-                } else if (txSatelliteDeployed && rxSatelliteDeployed && system.checkSatellite(entity, player)) {
-                  receiveSuits(this, player, entity);
+              foundPlayers.forEach(receiver => {
+                var rxAntennaDeployed = (receiver.getData("skyhighheroes:dyn/antenna_timer") == 1) && (receiver.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+                var rxSatelliteDeployed = (receiver.getData("skyhighheroes:dyn/satellite_timer") == 1) && (receiver.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+                if (entity.canSee(receiver) && entity.pos().distanceTo(receiver.pos()) <= range) {
+                  receiveSuits(this, entity, receiver, manager);
+                } else if (txAntennaDeployed && rxAntennaDeployed && system.checkFrequency(entity, receiver) && entity.canSee(receiver) && (entity.pos().distanceTo(receiver.pos()) <= range*4)) {
+                  receiveSuits(this, entity, receiver, manager);
+                } else if (txSatelliteDeployed && rxSatelliteDeployed && system.checkSatellite(entity, receiver)) {
+                  receiveSuits(this, entity, receiver, manager);
                 };
               });
             } else {
@@ -413,6 +444,7 @@ function initModule(system) {
       };
       var nbt = entity.getWornHelmet().nbt();
       if (entity.getData("skyhighheroes:dyn/receive_timer") == 1) {
+        manager.setBoolean(nbt, "receiving", false);
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/receiving", false);
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");
         manager.setTagList(nbt, "receiveBuffer", manager.newTagList());

@@ -61,11 +61,11 @@ function initModule(system) {
           var rxAntennaDeployed = (player.getData("skyhighheroes:dyn/antenna_timer") == 1) && (player.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
           var rxSatelliteDeployed = (player.getData("skyhighheroes:dyn/satellite_timer") == 1) && (player.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
           if (entity.canSee(player) && entity.pos().distanceTo(player.pos()) <= range) {
-            cyberMessage(entity, newName, message);
+            cyberMessage(player, newName, message);
           } else if (txAntennaDeployed && rxAntennaDeployed && system.checkFrequency(entity, player) && entity.canSee(player) && (entity.pos().distanceTo(player.pos()) <= range*4)) {
-            cyberMessage(entity, newName, message);
+            cyberMessage(player, newName, message);
           } else if (txSatelliteDeployed && rxSatelliteDeployed && system.checkSatellite(entity, player)) {
-            cyberMessage(entity, newName, message);
+            cyberMessage(player, newName, message);
           };
         });
       } else {

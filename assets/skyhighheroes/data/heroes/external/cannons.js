@@ -4,6 +4,7 @@
  **/
 function initModule(system) {
   //All of the required functions and stuff go here
+  var cannonMultiTap = system.initMultiTap("skyhighheroes:dyn/cannon");
   return {
     name: "cannons",
     moduleMessageName: "Cannons",
@@ -13,10 +14,15 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("CANNONS", (player, manager) => {
-        system.moduleMessage(this, player, "<e>To arm a cannon set do <eh>!cannon arm <arms|body|head><e>.");
+        //system.moduleMessage(this, player, "<e>To arm a cannon set do <eh>!cannon arm <arms|body|head><e>.");
+        cannonMultiTap.tap(player, manager);
         return true;
-      }, "\u00A7" + color + "Cannons (None armed)", 4);
-      hero.addKeyBind("CHARGED_BEAM", "\u00A7" + color + "Cannons", 4);
+      }, "\u00A7" + color + "Cannons (x2 to arm)", 4);
+      hero.addKeyBindFunc("CHARGED_BEAM", (player, manager) => {
+        cannonMultiTap.tap(player, manager);
+        return true;
+      }, "\u00A7" + color + "Cannons (x2 to disarm)", 4);
+      hero.addKeyBind("CANNONS_ARMS", "\u00A7" + color + "", 4);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
@@ -25,10 +31,10 @@ function initModule(system) {
         var head = nbt.getBoolean("cannonsHead");
         var body = nbt.getBoolean("cannonsBody");
         var arms = nbt.getBoolean("cannonsArms");
-        if (keyBind == "CANNONS" && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "CANNONS" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (!head && !body && !arms);
         };
-        if (keyBind == "CHARGED_BEAM" && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "CHARGED_BEAM" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (head || body || arms);
         };
       };
@@ -394,7 +400,19 @@ function initModule(system) {
       var head = nbt.getBoolean("cannonsHead") && entity.getData("fiskheroes:beam_charging");
       var body = nbt.getBoolean("cannonsBody") && entity.getData("fiskheroes:beam_charging");
       var arms = nbt.getBoolean("cannonsArms") && entity.getData("fiskheroes:beam_charging");
-      if (entity.getData("fiskheroes:beam_charge") > 0) {
+      if ((!nbt.getBoolean("cannonsHead") || !nbt.getBoolean("cannonsBody") || !nbt.getBoolean("cannonsArms")) && cannonMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setBoolean(nbt, "cannonsHead", true);
+        manager.setBoolean(nbt, "cannonsBody", true);
+        manager.setBoolean(nbt, "cannonsArms", true);
+        system.moduleMessage(this, entity, "<s>Armed <sh>all<s> cannons!");
+      };
+      if ((nbt.getBoolean("cannonsHead") || nbt.getBoolean("cannonsBody") || nbt.getBoolean("cannonsArms")) && cannonMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setBoolean(nbt, "cannonsHead", false);
+        manager.setBoolean(nbt, "cannonsBody", false);
+        manager.setBoolean(nbt, "cannonsArms", false);
+        system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> cannons!");
+      };
+      if ((nbt.getBoolean("cannonsHead") || nbt.getBoolean("cannonsBody") || nbt.getBoolean("cannonsArms")) && entity.getData("fiskheroes:beam_charge") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/cannons_arms", arms);
         manager.setData(entity, "skyhighheroes:dyn/cannons_body", body);
         manager.setData(entity, "skyhighheroes:dyn/cannons_head", head);
@@ -427,6 +445,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush", nbt.getBoolean("flushHeadCannons"));
       manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannon"));
       manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush", nbt.getBoolean("flushRightArmCannon"));
+      cannonMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
       if (!entity.getWornHelmet().nbt().getBoolean("cannonsHead") || !entity.getWornHelmet().nbt().getBoolean("cannonsBody") || !entity.getWornHelmet().nbt().getBoolean("cannonsArms")) {

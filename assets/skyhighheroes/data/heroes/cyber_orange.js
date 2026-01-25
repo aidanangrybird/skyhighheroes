@@ -7,6 +7,7 @@ var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var communications = implement("skyhighheroes:external/communications");
+var cyberneticMessaging = implement("skyhighheroes:external/cybernetic_messaging");
 var cannons = implement("skyhighheroes:external/cannons");
 var rockets = implement("skyhighheroes:external/rockets");
 var blades = implement("skyhighheroes:external/blades");
@@ -26,6 +27,7 @@ var cyberOS = cybernetics.initSystem([
   scanner,
   waypoints,
   communications,
+  cyberneticMessaging,
   cannons,
   rockets,
   blades,

@@ -4,6 +4,7 @@
  **/
 function initModule(system) {
   //All of the required functions and stuff go here
+  var mouthMultiTap = system.initMultiTap("skyhighheroes:dyn/mouth");
   return {
     name: "voiceSynthesizer",
     moduleMessageName: "VoiceSynth",
@@ -13,24 +14,27 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>voiceSynthesizer<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBindFunc("MOUTH", (player, manager) => {
-        system.moduleMessage(this, player, "<e>To arm the mouth do <eh>!vs arm<e>.");
-        return false;
-      }, "\u00A7" + color + "Scream (Not armed)", 3);
-      hero.addKeyBind("SCREAM", "\u00A7" + color + "Scream", 3);
-      hero.addKeyBind("ENERGY_PROJECTION", "\u00A7" + color + "Scream", 3);
+        mouthMultiTap.tap(player, manager);
+        return true;
+      }, "\u00A7" + color + "Scream (x2 to arm)", 3);
+      hero.addKeyBindFunc("SCREAM", (player, manager) => {
+        mouthMultiTap.tap(player, manager);
+        return true;
+      }, "\u00A7" + color + "Scream (x2 to disarm)", 3);
+      hero.addKeyBind("ENERGY_PROJECTION", "\u00A7" + color + "Scream (x2 to disarm)", 3);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         var nbt = entity.getWornHelmet().nbt();
         var mouth = nbt.getBoolean("mouth");
-        if (keyBind == "MOUTH" && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "MOUTH" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = !mouth;
         };
-        if (keyBind == "ENERGY_PROJECTION" && (entity.getData("skyhighheroes:dyn/mouth_timer") == 1) && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "ENERGY_PROJECTION" && (entity.getData("skyhighheroes:dyn/mouth_timer") == 1) && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = mouth;
         };
-        if (keyBind == "SCREAM" && entity.getData("fiskheroes:tentacles") == null) {
+        if (keyBind == "SCREAM" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = mouth;
         };
       };
@@ -116,13 +120,22 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       manager.setData(entity, "skyhighheroes:dyn/mouth_flush", nbt.getBoolean("flushMouth"));
       var mouth = nbt.getBoolean("mouth") && entity.getData("fiskheroes:energy_projection");
-      if (entity.getData("fiskheroes:energy_projection_timer") > 0) {
+      if (!nbt.getBoolean("mouth") && mouthMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setBoolean(nbt, "mouth", true);
+        system.moduleMessage(this, entity, "<s>Armed <sh>mouth<s>!");
+      };
+      if (nbt.getBoolean("mouth") && mouthMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setBoolean(nbt, "mouth", false);
+        system.moduleMessage(this, entity, "<s>Disarmed <sh>mouth<s>!");
+      };
+      if (nbt.getBoolean("mouth") && entity.getData("fiskheroes:energy_projection_timer") > 0) {
         if (entity.getData("fiskheroes:energy_projection_timer") < 0.1) {
           if (mouth) {
             system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Voice Synthesizer!", 16);
           };
         };
       };
+      mouthMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
       if (!entity.getWornHelmet().nbt().getBoolean("mouth")) {

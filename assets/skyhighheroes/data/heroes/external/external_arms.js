@@ -39,7 +39,6 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>External Arms status:");
             system.moduleMessage(this, entity, "<n>Left External Arm: <nh>" + ((entity.getData("skyhighheroes:dyn/external_arm_left_deploy_timer") > 0) || extArms ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right External Arm: <nh>" + ((entity.getData("skyhighheroes:dyn/external_arm_right_deploy_timer") > 0) || extArms ? "DEPLOYED" : "RETRACTED"));
-            break;
           default:
             system.moduleMessage(this, entity, "<e>Unknown <eh>extarms<e> command! Try <eh>!extarms help<e> for a list of commands!");
             break;
@@ -64,19 +63,19 @@ function initModule(system) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         if (keyBind == "TENTACLES") {
-          result = true;
+          result = entity.getData("skyhighheroes:dyn/battle_mode");
         };
         if (keyBind == "TENTACLE_GRAB") {
-          result = entity.getData("fiskheroes:tentacles") != null;
+          result = entity.getData("skyhighheroes:dyn/battle_mode");
         };
         if (keyBind == "TENTACLE_JAB") {
-          result = entity.getData("fiskheroes:tentacles") != null;
+          result = entity.getData("skyhighheroes:dyn/battle_mode");
         };
         if (keyBind == "TENTACLE_STRIKE") {
-          result = entity.getData("fiskheroes:tentacles") != null;
+          result = entity.getData("skyhighheroes:dyn/battle_mode");
         };
         if (keyBind == "EXTERNAL_ARMS") {
-          result = true;
+          result = entity.getData("skyhighheroes:dyn/battle_mode");
         };
       };
       return result;
