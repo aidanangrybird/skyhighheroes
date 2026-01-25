@@ -20,6 +20,15 @@
     "powering_down_timer": { "type": "FLOAT_INTERP", "resetOnDeath": false, "resetWithoutSuit": false },
     "fight_or_flight": { "type": "BOOLEAN", "resetOnDeath": false, "resetWithoutSuit": false },
     "bearing": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    
+    "sneak_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "sneak_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "sneak_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "sneak_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "punch_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "punch_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "punch_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "punch_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
     "chakra_suit": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
@@ -148,6 +157,11 @@
     "cannon_right_arm_flush": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "cannon_head_flush_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "cannon_head_flush": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "cannon_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "cannon_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "cannon_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "cannon_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "cannon_tapped" : { "type": "BOOLEAN", "resetWithoutSuit": true },
 
     "rockets_body_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "rockets_body": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -260,6 +274,7 @@
     "external_arm_right_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "external_arm_right_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "external_arms_menu": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "battle_mode": "BOOLEAN",
     
     "mouth_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "mouth": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -267,6 +282,11 @@
     "mouth_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "mouth_flush_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "mouth_flush": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "mouth_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "mouth_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "mouth_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "mouth_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "mouth_tapped" : { "type": "BOOLEAN", "resetWithoutSuit": true },
     
     "blade_left_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "blade_left_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -280,6 +300,11 @@
     "blade_left_arm_stealth": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "blade_right_arm_stealth_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "blade_right_arm_stealth": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "blade_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "blade_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "blade_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "blade_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "blade_tapped" : { "type": "BOOLEAN", "resetWithoutSuit": true },
     
     "shield_left_arm_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "shield_left_arm": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -289,11 +314,22 @@
     "shield_left_arm_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "shield_right_arm_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "shield_right_arm_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "shield_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "shield_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "shield_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "shield_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "shield_tapped" : { "type": "BOOLEAN", "resetWithoutSuit": true },
     
     "thermoptic_disguise_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "thermoptic_disguise": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "thermoptic_camouflage_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "thermoptic_camouflage": { "type": "BOOLEAN", "resetWithoutSuit": true }
+    "thermoptic_camouflage": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    
+    "selected_module_left": "INTEGER",
+    "selected_module_top": "INTEGER",
+    "selected_module_right": "INTEGER",
+    "selected_side": "INTEGER",
+    "editing_mode": "BOOLEAN"
   },
   "sounds": {
     "download": {
