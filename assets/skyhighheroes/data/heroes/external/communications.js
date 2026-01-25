@@ -184,7 +184,7 @@ function initModule(system) {
     helpMessage: "<n>!comms <nh>-<n> Communications",
     disabledMessage: "<e>Module <eh>communications<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 4) {
+      if (argList.length > 1 && argList.length < 5) {
         switch (argList[1]) {
           case "cyberPos":
             var range = 16;
@@ -393,6 +393,37 @@ function initModule(system) {
                 break;
             };
             break;
+          case "set":
+            switch (argList[2]) {
+              case "holoAnt":
+                manager.setBoolean(nbt, "holoAnt", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoAnt")));
+                system.moduleMessage(this, entity, "<n>holoAnt set to <nh>" + nbt.getBoolean("holoAnt") + "<n>!");
+                break;
+              case "holoSat":
+                manager.setBoolean(nbt, "holoSat", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoSat")));
+                system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
+                break;
+              case "xSat":
+                manager.setShort(nbt, "xSat", parseInt(argList[2]));
+                system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
+                break;
+              case "ySat":
+                manager.setShort(nbt, "ySat", parseInt(argList[2]));
+                system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
+                break;
+              case "zSat":
+                manager.setShort(nbt, "zSat", parseInt(argList[2]));
+                system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
+                break;
+              case "freq":
+                manager.setShort(nbt, "freq", parseInt(argList[2]));
+                system.moduleMessage(this, entity, "<n>Freqency set to <nh>" + nbt.getShort("freq") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>comms<e> setting!");
+                break;
+            };
+            break;
           case "status":
             system.moduleMessage(this, entity, "<n>Comms status:");
             system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighheroes:dyn/antenna_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
@@ -400,6 +431,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getWornHelmet().nbt().getShort("xSat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("ySat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("zSat"));
             system.moduleMessage(this, entity, "<n>Freqency: <nh>" + entity.getWornHelmet().nbt().getShort("freq"));
+            system.moduleMessage(this, entity, "<n>Antenna Hologram: <nh>" + (nbt.getBoolean("holoAnt") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Satellite Hologram: <nh>" + (nbt.getBoolean("holoSat") ? "ENABLED" : "DISABLED"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Communications commands:");
@@ -408,6 +441,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!comms suits <suits> <nh>-<n> Transmits suits (comma seperated indexes) to other Cybers");
             system.moduleMessage(this, entity, "<n>!comms cyberPos <nh>-<n> Gets position of other Cybers");
             system.moduleMessage(this, entity, "<n>!comms cyberStatus <nh>-<n> Gets stats of other Cybers");
+            system.moduleMessage(this, entity, "<n>!comms set <holoAnt|holoSat|xSat|ySat|zSat|freq> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!comms status <nh>-<n> Status of comms");
             system.moduleMessage(this, entity, "<n>!comms help <nh>-<n> Shows communications commands");
             break;

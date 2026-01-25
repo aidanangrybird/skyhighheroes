@@ -39,7 +39,7 @@ function initModule(system) {
       return result;
     },
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 4) {
+      if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();
         switch (argList[1]) {
           case "arm":
@@ -162,6 +162,17 @@ function initModule(system) {
                 break;
             };
             break;
+          case "set":
+            switch (argList[2]) {
+              case "holo":
+                manager.setBoolean(nbt, "holoBlades", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoBlades")));
+                system.moduleMessage(this, entity, "<n>Hologram set to <nh>" + nbt.getBoolean("holoBlades") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>blade<e> setting!");
+                break;
+            };
+            break;
           case "help":
             system.moduleMessage(this, entity, "<n>Blades commands:");
             system.moduleMessage(this, entity, "<n>!blade arm <left|right|*> <nh>-<n> Arms blades");
@@ -170,6 +181,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!blade hide <left|right|*> <nh>-<n> Retracts disarmed blades");
             system.moduleMessage(this, entity, "<n>!blade stealthOn <left|right|*> <nh>-<n> Enables stealth mode for blades");
             system.moduleMessage(this, entity, "<n>!blade stealthOff <left|right|*> <nh>-<n> Disables stealth mode for blades");
+            system.moduleMessage(this, entity, "<n>!blade set <holo> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!blade status <nh>-<n> Shows status of blades");
             system.moduleMessage(this, entity, "<n>!blade help <nh>-<n> Shows blades commands");
             break;
@@ -179,6 +191,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Left stealth mode: <nh>" + (nbt.getBoolean("bladesLeftStealth") ? "ENGAGED" : "DISENGAGED"));
             system.moduleMessage(this, entity, "<n>Right: <nh>" + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighheroes:dyn/blade_right_arm_deploy_timer") > 0) || (entity.getData("skyhighheroes:dyn/blade_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right stealth mode: <nh>" + (nbt.getBoolean("bladesRightStealth") ? "ENGAGED" : "DISENGAGED"));
+            system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoBlades") ? "ENABLED" : "DISABLED"));
             break;
           default:
             system.moduleMessage(this, entity, "<e>Unknown <eh>blades<e> command! Try <eh>!blade help<e> for a list of commands!");

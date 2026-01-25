@@ -11,7 +11,7 @@ function initModule(system) {
     helpMessage: "<n>!wing <nh>-<n> Wings",
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 4) {
+      if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();
         switch(argList[1]) {
           case "arm":
@@ -66,12 +66,24 @@ function initModule(system) {
                 break;
             };
             break;
+          case "set":
+            switch (argList[2]) {
+              case "holo":
+                manager.setBoolean(nbt, "holoGlide", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoGlide")));
+                system.moduleMessage(this, entity, "<n>Hologram set to <nh>" + nbt.getBoolean("holoGlide") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>wing<e> setting!");
+                break;
+            };
+            break;
           case "help":
             system.moduleMessage(this, entity, "<n>Wings commands:");
             system.moduleMessage(this, entity, "<n>!wing arm <nh>-<n> Arms wings");
             system.moduleMessage(this, entity, "<n>!wing disarm <nh>-<n> Disarms wings");
             system.moduleMessage(this, entity, "<n>!wing show <nh>-<n> Deploys wings");
             system.moduleMessage(this, entity, "<n>!wing hide <nh>-<n> Retracts wings");
+            system.moduleMessage(this, entity, "<n>!wing set <holo> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!wing status <nh>-<n> Shows status of wings");
             system.moduleMessage(this, entity, "<n>!wing help <nh>-<n> Shows wings commands");
             break;
@@ -81,6 +93,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Wings: <nh>" + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Left wing: <nh>" + ((entity.getData("skyhighheroes:dyn/wing_left_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right wing: <nh>" + ((entity.getData("skyhighheroes:dyn/wing_right_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoGlide") ? "ENABLED" : "DISABLED"));
             break;
           default:
             system.moduleMessage(this, entity, "<e>Unknown <eh>wings<e> command! Try <eh>!wing help<e> for a list of commands!");
@@ -136,7 +149,7 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       var wings = nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding");
       if (!nbt.getBoolean("rocketsWings") && entity.getData("fiskheroes:gliding_timer") > 0) {
-        manager.setData(entity, "skyhighheroes:dyn/wings", wings);
+        manager.setData(entity, "skyhighocs:dyn/wings", wings);
         if (entity.getData("fiskheroes:gliding_timer") < 0.2) {
           if (wings) {
             system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Wings!", 16);

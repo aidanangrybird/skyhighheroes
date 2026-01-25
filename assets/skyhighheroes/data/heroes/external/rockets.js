@@ -12,7 +12,7 @@ function initModule(system) {
     helpMessage: "<n>!rocket <nh>-<n> Rockets",
     disabledMessage: "<e>Module <eh>rockets<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 4) {
+      if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();
         switch(argList[1]) {
           case "arm":
@@ -732,12 +732,32 @@ function initModule(system) {
                 break;
             };
             break;
+          case "set":
+            switch (argList[2]) {
+              case "holo":
+                manager.setBoolean(nbt, "holoFlight", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoFlight")));
+                system.moduleMessage(this, entity, "<n>Hologram set to <nh>" + nbt.getBoolean("holoFlight") + "<n>!");
+                break;
+              case "holoBoost":
+                manager.setBoolean(nbt, "holoBoostFlight", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoBoostFlight")));
+                system.moduleMessage(this, entity, "<n>Hologram Boost set to <nh>" + nbt.getBoolean("holoBoostFlight") + "<n>!");
+                break;
+              case "inner":
+                manager.setBoolean(nbt, "innerRockets", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("innerRockets")));
+                system.moduleMessage(this, entity, "<n>Inner Rockets set to <nh>" + nbt.getBoolean("innerRockets") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>rocket<e> setting!");
+                break;
+            };
+            break;
           case "help":
             system.moduleMessage(this, entity, "<n>Rockets commands:");
             system.moduleMessage(this, entity, "<n>!rocket arm <onFall|aux|body|legs|*> <nh>-<n> Arms set of rockets or onFall protection");
             system.moduleMessage(this, entity, "<n>!rocket disarm <onFall|aux|body|legs|*> <nh>-<n> Disarms set of rockets or onFall protection");
             system.moduleMessage(this, entity, "<n>!rocket show <rocket|rocketSet> <nh>-<n> Deploys set of rockets");
             system.moduleMessage(this, entity, "<n>!rocket hide <rocket|rocketSet> <nh>-<n> Retracts set of rockets");
+            system.moduleMessage(this, entity, "<n>!rocket set <holo|holoBoost|inner> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!rocket status <nh>-<n> Shows status of rockets");
             system.moduleMessage(this, entity, "<n>!rocket help <nh>-<n> Shows rockets commands");
             break;
@@ -779,6 +799,9 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right Leg back: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_back_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Leg main: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_main_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Leg main: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_main_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoFlight") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Hologram Boost: <nh>" + (nbt.getBoolean("holoBoostFlight") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Inner: <nh>" + (nbt.getBoolean("innerRockets") ? "ENABLED" : "DISABLED"));
             break;
           default:
             system.moduleMessage(this, entity, "<e>Unknown <eh>rockets<e> command! Try <eh>!rocket help<e> for a list of commands!");

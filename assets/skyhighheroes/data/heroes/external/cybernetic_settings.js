@@ -33,26 +33,6 @@ function initModule(system) {
             manager.setBoolean(nbt, "nightVision", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("nightVision")));
             system.moduleMessage(this, entity, "<n>nightVision set to <nh>" + nbt.getBoolean("nightVision") + "<n>!");
             break;
-          case "innerRockets":
-            manager.setBoolean(nbt, "innerRockets", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("innerRockets")));
-            system.moduleMessage(this, entity, "<n>innerRockets set to <nh>" + nbt.getBoolean("innerRockets") + "<n>!");
-            break;
-          case "flushHeadCannons":
-            manager.setBoolean(nbt, "flushHeadCannons", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
-            system.moduleMessage(this, entity, "<n>flushHeadCannons set to <nh>" + nbt.getBoolean("flushHeadCannons") + "<n>!");
-            break;
-          case "flushLeftArmCannon":
-            manager.setBoolean(nbt, "flushLeftArmCannon", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushLeftArmCannon")));
-            system.moduleMessage(this, entity, "<n>flushLeftArmCannon set to <nh>" + nbt.getBoolean("flushLeftArmCannon") + "<n>!");
-            break;
-          case "flushRightArmCannon":
-            manager.setBoolean(nbt, "flushRightArmCannon", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushRightArmCannon")));
-            system.moduleMessage(this, entity, "<n>flushRightArmCannon set to <nh>" + nbt.getBoolean("flushRightArmCannon") + "<n>!");
-            break;
-          case "flushMouth":
-            manager.setBoolean(nbt, "flushMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("flushMouth")));
-            system.moduleMessage(this, entity, "<n>flushMouth set to <nh>" + nbt.getBoolean("flushMouth") + "<n>!");
-            break;
           case "hudRange":
             manager.setShort(nbt, "hudRange", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
@@ -69,58 +49,6 @@ function initModule(system) {
             manager.setBoolean(nbt, "playersOnHud", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("playersOnHud")));
             system.moduleMessage(this, entity, "<n>playersOnHud set to <nh>" + nbt.getBoolean("playersOnHud") + "<n>!");
             break;
-          case "holoFlight":
-            manager.setBoolean(nbt, "holoFlight", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoFlight")));
-            system.moduleMessage(this, entity, "<n>holoFlight set to <nh>" + nbt.getBoolean("holoFlight") + "<n>!");
-            break;
-          case "holoBoostFlight":
-            manager.setBoolean(nbt, "holoBoostFlight", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoBoostFlight")));
-            system.moduleMessage(this, entity, "<n>holoBoostFlight set to <nh>" + nbt.getBoolean("holoBoostFlight") + "<n>!");
-            break;
-          case "holoCannons":
-            manager.setBoolean(nbt, "holoCannons", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoCannons")));
-            system.moduleMessage(this, entity, "<n>holoCannons set to <nh>" + nbt.getBoolean("holoCannons") + "<n>!");
-            break;
-          case "holoBlades":
-            manager.setBoolean(nbt, "holoBlades", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoBlades")));
-            system.moduleMessage(this, entity, "<n>holoBlades set to <nh>" + nbt.getBoolean("holoBlades") + "<n>!");
-            break;
-          case "holoShields":
-            manager.setBoolean(nbt, "holoShields", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoShields")));
-            system.moduleMessage(this, entity, "<n>holoShields set to <nh>" + nbt.getBoolean("holoShields") + "<n>!");
-            break;
-          case "holoGlide":
-            manager.setBoolean(nbt, "holoGlide", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoGlide")));
-            system.moduleMessage(this, entity, "<n>holoGlide set to <nh>" + nbt.getBoolean("holoGlide") + "<n>!");
-            break;
-          case "holoMouth":
-            manager.setBoolean(nbt, "holoMouth", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoMouth")));
-            system.moduleMessage(this, entity, "<n>holoMouth set to <nh>" + nbt.getBoolean("holoMouth") + "<n>!");
-            break;
-          case "holoAnt":
-            manager.setBoolean(nbt, "holoAnt", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoAnt")));
-            system.moduleMessage(this, entity, "<n>holoAnt set to <nh>" + nbt.getBoolean("holoAnt") + "<n>!");
-            break;
-          case "holoSat":
-            manager.setBoolean(nbt, "holoSat", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("holoSat")));
-            system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
-            break;
-          case "xSat":
-            manager.setShort(nbt, "xSat", parseInt(argList[2]));
-            system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
-            break;
-          case "ySat":
-            manager.setShort(nbt, "ySat", parseInt(argList[2]));
-            system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
-            break;
-          case "zSat":
-            manager.setShort(nbt, "zSat", parseInt(argList[2]));
-            system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
-            break;
-          case "freq":
-            manager.setShort(nbt, "freq", parseInt(argList[2]));
-            system.moduleMessage(this, entity, "<n>freq set to <nh>" + nbt.getShort("freq") + "<n>!");
-            break;
           case "hudScale":
             manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
             system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
@@ -131,28 +59,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>naturalArms: <nh>" + nbt.getBoolean("naturalArms"));
             system.moduleMessage(this, entity, "<n>aliasActive: <nh>" + nbt.getBoolean("aliasActive"));
             system.moduleMessage(this, entity, "<n>nightVision: <nh>" + nbt.getBoolean("nightVision"));
-            system.moduleMessage(this, entity, "<n>innerRockets: <nh>" + nbt.getBoolean("innerRockets"));
-            system.moduleMessage(this, entity, "<n>flushHeadCannons: <nh>" + nbt.getBoolean("flushHeadCannons"));
-            system.moduleMessage(this, entity, "<n>flushLeftArmCannon: <nh>" + nbt.getBoolean("flushLeftArmCannon"));
-            system.moduleMessage(this, entity, "<n>flushRightArmCannon: <nh>" + nbt.getBoolean("flushRightArmCannon"));
-            system.moduleMessage(this, entity, "<n>flushMouth: <nh>" + nbt.getBoolean("flushMouth"));
             system.moduleMessage(this, entity, "<n>hudRange: <nh>" + nbt.getShort("hudRange"));
             system.moduleMessage(this, entity, "<n>friendliesOnHud: <nh>" + nbt.getBoolean("friendliesOnHud"));
             system.moduleMessage(this, entity, "<n>hostilesOnHud: <nh>" + nbt.getBoolean("hostilesOnHud"));
             system.moduleMessage(this, entity, "<n>playersOnHud: <nh>" + nbt.getBoolean("playersOnHud"));
-            system.moduleMessage(this, entity, "<n>holoFlight: <nh>" + nbt.getBoolean("holoFlight"));
-            system.moduleMessage(this, entity, "<n>holoBoostFlight: <nh>" + nbt.getBoolean("holoBoostFlight"));
-            system.moduleMessage(this, entity, "<n>holoCannons: <nh>" + nbt.getBoolean("holoCannons"));
-            system.moduleMessage(this, entity, "<n>holoBlades: <nh>" + nbt.getBoolean("holoBlades"));
-            system.moduleMessage(this, entity, "<n>holoShields: <nh>" + nbt.getBoolean("holoShields"));
-            system.moduleMessage(this, entity, "<n>holoGlide: <nh>" + nbt.getBoolean("holoGlide"));
-            system.moduleMessage(this, entity, "<n>holoMouth: <nh>" + nbt.getBoolean("holoMouth"));
-            system.moduleMessage(this, entity, "<n>holoAnt: <nh>" + nbt.getBoolean("holoAnt"));
-            system.moduleMessage(this, entity, "<n>holoSat: <nh>" + nbt.getBoolean("holoSat"));
-            system.moduleMessage(this, entity, "<n>xSat: <nh>" + nbt.getShort("xSat"));
-            system.moduleMessage(this, entity, "<n>ySat: <nh>" + nbt.getShort("ySat"));
-            system.moduleMessage(this, entity, "<n>zSat: <nh>" + nbt.getShort("zSat"));
-            system.moduleMessage(this, entity, "<n>freq: <nh>" + nbt.getShort("freq"));
             system.moduleMessage(this, entity, "<n>hudScale: <nh>" + nbt.getShort("hudScale"));
             break;
           case "help":
@@ -163,28 +73,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set naturalArms <true|false> <nh>-<n> Sets if natural arm movement is not supressed");
             system.moduleMessage(this, entity, "<n>!set aliasActive <true|false> <nh>-<n> Sets if alias name appears above head");
             system.moduleMessage(this, entity, "<n>!set nightVision <true|false> <nh>-<n> Sets if night vision is active");
-            system.moduleMessage(this, entity, "<n>!set innerRockets <true|false> <nh>-<n> Sets if inner rockets are enabled");
-            system.moduleMessage(this, entity, "<n>!set flushHeadCannons <true|false> <nh>-<n> Sets if head cannons are flush to head");
-            system.moduleMessage(this, entity, "<n>!set flushLeftArmCannon <true|false> <nh>-<n> Sets if left arm cannons are flush to arm");
-            system.moduleMessage(this, entity, "<n>!set flushRightArmCannon <true|false> <nh>-<n> Sets if right arm cannons are flush to arm");
-            system.moduleMessage(this, entity, "<n>!set flushMouth <true|false> <nh>-<n> Sets if mouth is flush to head");
             system.moduleMessage(this, entity, "<n>!set hudRange <number> <nh>-<n> Sets range of HUD scanner");
             system.moduleMessage(this, entity, "<n>!set friendliesOnHud <true|false> <nh>-<n> Sets if friendly mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set hostilesOnHud <true|false> <nh>-<n> Sets if hostile mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set playersOnHud <true|false> <nh>-<n> Sets if players appear on HUD");
-            system.moduleMessage(this, entity, "<n>!set holoFlight <true|false> <nh>-<n> Sets if hologram will be flying using armed rockets");
-            system.moduleMessage(this, entity, "<n>!set holoBoostFlight <true|false> <nh>-<n> Sets if hologram will be boost flying using armed rockets");
-            system.moduleMessage(this, entity, "<n>!set holoCannons <true|false> <nh>-<n> Sets if hologram will have armed cannons deployed");
-            system.moduleMessage(this, entity, "<n>!set holoBlades <true|false> <nh>-<n> Sets if hologram will have armed blades deployed");
-            system.moduleMessage(this, entity, "<n>!set holoShields <true|false> <nh>-<n> Sets if hologram will have armed shields deployed");
-            system.moduleMessage(this, entity, "<n>!set holoGlide <true|false> <nh>-<n> Sets if hologram will be gliding");
-            system.moduleMessage(this, entity, "<n>!set holoMouth <true|false> <nh>-<n> Sets if hologram will have mouth deployed");
-            system.moduleMessage(this, entity, "<n>!set holoAnt <true|false> <nh>-<n> Sets if hologram will have antenna deployed");
-            system.moduleMessage(this, entity, "<n>!set holoSat <true|false> <nh>-<n> Sets if hologram will have satellite dish deployed");
-            system.moduleMessage(this, entity, "<n>!set xSat <number> <nh>-<n> Sets x coordinate of satellite");
-            system.moduleMessage(this, entity, "<n>!set ySat <number> <nh>-<n> Sets y coordinate of satellite");
-            system.moduleMessage(this, entity, "<n>!set zSat <number> <nh>-<n> Sets z coordinate of satellite");
-            system.moduleMessage(this, entity, "<n>!set freq <number> <nh>-<n> Sets freqency of antenna");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

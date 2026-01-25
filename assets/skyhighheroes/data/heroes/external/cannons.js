@@ -59,7 +59,7 @@ function initModule(system) {
       return result;
     },
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 4) {
+      if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();
         switch (argList[1]) {
           case "arm":
@@ -294,6 +294,29 @@ function initModule(system) {
                 break;
             };
             break;
+          case "set":
+            switch (argList[2]) {
+              case "holo":
+                manager.setBoolean(nbt, "holoCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoCannons")));
+                system.moduleMessage(this, entity, "<n>Hologram set to <nh>" + nbt.getBoolean("holoCannons") + "<n>!");
+                break;
+              case "flushHead":
+                manager.setBoolean(nbt, "flushHeadCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
+                system.moduleMessage(this, entity, "<n>Flush Head Cannons set to <nh>" + nbt.getBoolean("flushHeadCannons") + "<n>!");
+                break;
+              case "flushLeftArm":
+                manager.setBoolean(nbt, "flushLeftArmCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushLeftArmCannons")));
+                system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon set to <nh>" + nbt.getBoolean("flushLeftArmCannons") + "<n>!");
+                break;
+              case "flushRightArm":
+                manager.setBoolean(nbt, "flushRightArmCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushRightArmCannons")));
+                system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon set to <nh>" + nbt.getBoolean("flushRightArmCannons") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>cannon<e> setting!");
+                break;
+            };
+            break;
           case "help":
             system.moduleMessage(this, entity, "<n>Cannons commands:");
             system.moduleMessage(this, entity, "<n>!cannon status <nh>-<n> Shows status of cannons");
@@ -301,6 +324,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!cannon disarm <head|body|arms|*> <nh>-<n> Disarm set of cannons");
             system.moduleMessage(this, entity, "<n>!cannon show <head|body|arms|*> <nh>-<n> Deploys cannons");
             system.moduleMessage(this, entity, "<n>!cannon hide <head|body|arms|*> <nh>-<n> Retracts cannons");
+            system.moduleMessage(this, entity, "<n>!cannon set <holo|flushHead|flushLeftArm|flushRightArm> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!cannon help <nh>-<n> Shows cannons commands");
             break;
           case "status":
@@ -321,6 +345,10 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right Arm bottom: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Flush Head Cannons: <nh>" + (nbt.getBoolean("flushHeadCannons") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon: <nh>" + (nbt.getBoolean("flushLeftArmCannons") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon: <nh>" + (nbt.getBoolean("flushRightArmCannons") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoCannons") ? "ENABLED" : "DISABLED"));
             break;
           default:
             system.moduleMessage(this, entity, "<e>Unknown <eh>cannons<e> command! Try <eh>!cannon help<e> for a list of commands!");
@@ -443,8 +471,8 @@ function initModule(system) {
         };
       };
       manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush", nbt.getBoolean("flushHeadCannons"));
-      manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannon"));
-      manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush", nbt.getBoolean("flushRightArmCannon"));
+      manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannons"));
+      manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush", nbt.getBoolean("flushRightArmCannons"));
       cannonMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {

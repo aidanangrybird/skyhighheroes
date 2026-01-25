@@ -24,6 +24,10 @@ function initModule(system) {
                 manager.setBoolean(nbt, "autoCamouflage", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>auto camouflage<n>!");
                 break;
+              case "camoOnStand":
+                manager.setBoolean(nbt, "camoOnStand", true);
+                system.moduleMessage(this, entity, "<n>Enabled <nh>camouflage on stand<n>!");
+                break;
               default:
                 system.moduleMessage(this, entity, "<e>Unknown <eh>action<e>!");
                 break;
@@ -39,6 +43,10 @@ function initModule(system) {
                 manager.setBoolean(nbt, "autoCamouflage", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>auto camouflage<n>!");
                 break;
+              case "camoOnStand":
+                manager.setBoolean(nbt, "camoOnStand", false);
+                system.moduleMessage(this, entity, "<n>Disabled <nh>camouflage on stand<n>!");
+                break;
               default:
                 system.moduleMessage(this, entity, "<e>Unknown <eh>action<e>!");
                 break;
@@ -51,8 +59,8 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Thermoptics commands:");
-            system.moduleMessage(this, entity, "<n>!thermo enable <camo> <nh>-<n> Enables function");
-            system.moduleMessage(this, entity, "<n>!thermo disable <camo> <nh>-<n> Disables function");
+            system.moduleMessage(this, entity, "<n>!thermo enable <camo|autoCamo|camoOnStand> <nh>-<n> Enables function");
+            system.moduleMessage(this, entity, "<n>!thermo disable <camo|autoCamo|camoOnStand> <nh>-<n> Disables function");
             system.moduleMessage(this, entity, "<n>!thermo help <nh>-<n> Shows thermoptics commands");
             break;
           default:
@@ -76,7 +84,6 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      manager.setData(entity, "skyhighheroes:dyn/thermoptic_camouflage", false);
     },
     tickHandler: function (entity, manager) {
       var invis = entity.getData("skyhighheroes:dyn/thermoptic_camouflage_timer") == 1;

@@ -41,7 +41,7 @@ function initModule(system) {
       return result;
     },
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 3) {
+      if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();
         switch (argList[1]) {
           case "arm":
@@ -60,9 +60,26 @@ function initModule(system) {
             manager.setData(entity, "skyhighheroes:dyn/mouth_deployed", false);
             system.moduleMessage(this, entity, "<n>Retracted mouth!");
             break;
+          case "set":
+            switch (argList[2]) {
+              case "flush":
+                manager.setBoolean(nbt, "flushMouth", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushMouth")));
+                system.moduleMessage(this, entity, "<n>Flush set to <nh>" + nbt.getBoolean("flushMouth") + "<n>!");
+                break;
+              case "holo":
+                manager.setBoolean(nbt, "holoMouth", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoMouth")));
+                system.moduleMessage(this, entity, "<n>Hologram set to <nh>" + nbt.getBoolean("holoMouth") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>voiceSynthesizer<e> setting!");
+                break;
+            };
+            break;
           case "status":
             system.moduleMessage(this, entity, "<n>Voice Synthesizer status:");
             system.moduleMessage(this, entity, "<n>Mouth: <nh>" + (nbt.getBoolean("mouth") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighheroes:dyn/mouth_deploy_timer") > 0) || (entity.getData("skyhighheroes:dyn/mouth_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Flush: <nh>" + nbt.getBoolean("flushMouth"));
+            system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoMouth") ? "ENABLED" : "DISABLED"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Voice Synthesizer commands:");
@@ -70,6 +87,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!vs disarm <nh>-<n> Disarms mouth");
             system.moduleMessage(this, entity, "<n>!vs show <nh>-<n> Shows mouth");
             system.moduleMessage(this, entity, "<n>!vs hide <nh>-<n> Hides mouth");
+            system.moduleMessage(this, entity, "<n>!vs set <holo|flush> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!vs status <nh>-<n> Shows status of voice synthesizer");
             system.moduleMessage(this, entity, "<n>!vs help <nh>-<n> Shows voiceSynthesizer commands");
             break;

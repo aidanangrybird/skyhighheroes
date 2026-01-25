@@ -516,19 +516,19 @@ function clamp(value, min, max) {
 function cycleUp(entity, manager) {
   if (entity.getData("skyhighheroes:dyn/selected_side") == 0) {
     manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_left", entity.getData("skyhighheroes:dyn/selected_module_left") + 1);
-    if (entity.getData("skyhighheroes:dyn/selected_module_left") > 2) {
+    if (entity.getData("skyhighheroes:dyn/selected_module_left") > 3) {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_left", 0);
     };
   };
   if (entity.getData("skyhighheroes:dyn/selected_side") == 1) {
     manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_top", entity.getData("skyhighheroes:dyn/selected_module_top") + 1);
-    if (entity.getData("skyhighheroes:dyn/selected_module_top") > 1) {
+    if (entity.getData("skyhighheroes:dyn/selected_module_top") > 2) {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_top", 0);
     };
   };
   if (entity.getData("skyhighheroes:dyn/selected_side") == 2) {
     manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_right", entity.getData("skyhighheroes:dyn/selected_module_right") + 1);
-    if (entity.getData("skyhighheroes:dyn/selected_module_right") > 1) {
+    if (entity.getData("skyhighheroes:dyn/selected_module_right") > 2) {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_right", 0);
     };
   };
@@ -538,19 +538,19 @@ function cycleDown(entity, manager) {
   if (entity.getData("skyhighheroes:dyn/selected_side") == 0) {
     manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_left", entity.getData("skyhighheroes:dyn/selected_module_left") - 1);
     if (entity.getData("skyhighheroes:dyn/selected_module_left") < 0) {
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_left", 2);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_left", 3);
     };
   };
   if (entity.getData("skyhighheroes:dyn/selected_side") == 1) {
     manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_top", entity.getData("skyhighheroes:dyn/selected_module_top") - 1);
     if (entity.getData("skyhighheroes:dyn/selected_module_top") < 0) {
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_top", 1);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_top", 2);
     };
   };
   if (entity.getData("skyhighheroes:dyn/selected_side") == 2) {
     manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_right", entity.getData("skyhighheroes:dyn/selected_module_right") - 1);
     if (entity.getData("skyhighheroes:dyn/selected_module_right") < 0) {
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_right", 1);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_module_right", 2);
     };
   };
 };
@@ -654,6 +654,7 @@ function initMultiTap(varPrefix) {
 function initSystem(moduleList, name, colorCode) {
   var sneakMultiTap = initMultiTap("skyhighheroes:dyn/sneak");
   var punchMultiTap = initMultiTap("skyhighheroes:dyn/punch");
+  var selectedSideMultiTap = initMultiTap("skyhighheroes:dyn/selected_side");
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -1418,10 +1419,10 @@ function initSystem(moduleList, name, colorCode) {
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
           manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
-          var entry = entity.getDataOrDefault("skyhighheroes:dyn/entry");
+          var entry = entity.getDataOrDefault("skyhighheroes:dyn/entry", "");
           if (entry.startsWith("!")) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entry.substring(1));
-            var args = entity.getDataOrDefault("skyhighheroes:dyn/entry").split(" ");
+            var args = entity.getDataOrDefault("skyhighheroes:dyn/entry", "").split(" ");
             switch (args[0]) {
               case "systemInfo":
                 systemInfo(entity);
@@ -1453,14 +1454,20 @@ function initSystem(moduleList, name, colorCode) {
                 systemMessage(entity, "<n>!powerOff <nh>-<n> Powers you down");
                 systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
                 break;
+              case "disable":
+                disableModule(entity, manager, args[1]);
+                break;
+              case "enable":
+                enableModule(entity, manager, args[1]);
+                break;
+              case "idSet":
+                maybeGetID(entity, manager, args[1])
+                break;
               case "chatMode":
                 switchChatModes(entity, manager, args[1]);
                 break;
               case "msg":
                 switchChats(entity, manager, args[1]);
-                break;
-              case "idSet":
-                maybeGetID(entity, manager, args[1])
                 break;
               case "arm":
                 var nbt = entity.getWornHelmet().nbt();
@@ -1618,7 +1625,7 @@ function initSystem(moduleList, name, colorCode) {
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
       };
     };
-    if (punchMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.isPunching())) {
+    if (selectedSideMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.getData("fiskheroes:gravity_manip"))) {
       if (entity.getData("skyhighheroes:dyn/selected_side") == 2) {
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_side", 0);
       } else {
@@ -1688,10 +1695,10 @@ function initSystem(moduleList, name, colorCode) {
       });
       hero.setKeyBindEnabled((entity, keyBind) => {
         if (keyBind == "SHAPE_SHIFT") {
-          return !entity.getData("skyhighheroes:dyn/editing_mode");
+          return !entity.isSneaking();
         };
         if (keyBind == "GRAVITY_MANIPULATION") {
-          return entity.getData("skyhighheroes:dyn/editing_mode");
+          return entity.isSneaking();
         };
         return isKeyBindEnabled(entity, keyBind);
       });

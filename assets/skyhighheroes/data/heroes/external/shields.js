@@ -39,7 +39,7 @@ function initModule(system) {
       return result;
     },
     commandHandler: function (entity, manager, argList) {
-      if (argList.length > 1 && argList.length < 4) {
+      if (argList.length > 1 && argList.length < 5) {
         var nbt = entity.getWornHelmet().nbt();
         switch (argList[1]) {
           case "arm":
@@ -130,12 +130,24 @@ function initModule(system) {
                 break;
             };
             break;
+          case "set":
+            switch (argList[2]) {
+              case "holo":
+                manager.setBoolean(nbt, "holoShields", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoShields")));
+                system.moduleMessage(this, entity, "<n>holoShields set to <nh>" + nbt.getBoolean("holoShields") + "<n>!");
+                break;
+              default:
+                system.moduleMessage(this, entity, "<e>Unknown <eh>shield<e> setting!");
+                break;
+            };
+            break;
           case "help":
             system.moduleMessage(this, entity, "<n>Shields commands:");
             system.moduleMessage(this, entity, "<n>!shield arm <left|right|*> <nh>-<n> Arms shields");
             system.moduleMessage(this, entity, "<n>!shield disarm <left|right|*> <nh>-<n> Disarms shields");
             system.moduleMessage(this, entity, "<n>!shield show <left|right|*> <nh>-<n> Deploys shields");
             system.moduleMessage(this, entity, "<n>!shield hide <left|right|*> <nh>-<n> Retracts disarmed shields");
+            system.moduleMessage(this, entity, "<n>!shield set <holo> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!shield status <nh>-<n> Shows status of shields");
             system.moduleMessage(this, entity, "<n>!shield help <nh>-<n> Shows shields commands");
             break;
@@ -143,6 +155,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Shields status:");
             system.moduleMessage(this, entity, "<n>Left: <nh>" + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighheroes:dyn/shield_left_arm_deploy_timer") > 0) || (entity.getData("skyhighheroes:dyn/shield_left_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right: <nh>" + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED") + " <n>-<nh> " + ((entity.getData("skyhighheroes:dyn/shield_right_arm_deploy_timer") > 0) || (entity.getData("skyhighheroes:dyn/shield_right_arm_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoShields") ? "ENABLED" : "DISABLED"));
             break;
           default:
             system.moduleMessage(this, entity, "<e>Unknown <eh>shields<e> command! Try <eh>!shield help<e> for a list of commands!");
