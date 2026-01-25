@@ -149,7 +149,7 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       var wings = nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding");
       if (!nbt.getBoolean("rocketsWings") && entity.getData("fiskheroes:gliding_timer") > 0) {
-        manager.setData(entity, "skyhighocs:dyn/wings", wings);
+        manager.setData(entity, "skyhighheroes:dyn/wings", wings);
         if (entity.getData("fiskheroes:gliding_timer") < 0.2) {
           if (wings) {
             system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Wings!", 16);
