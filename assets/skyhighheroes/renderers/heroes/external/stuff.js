@@ -286,3 +286,289 @@ function elevation(entity, posX, posY, posZ) {
   var angle = 90-vector.angleTo(distance, posY);
   return angle;
 };
+
+var chars = ["!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","<","=",">","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~"];
+
+var charWidths = {
+  "!": 1.0,
+  "\"": 3.0,
+  "#": 5.0,
+  "$": 5.0,
+  "%": 5.0,
+  "&": 5.0,
+  "'": 1.0,
+  "(": 4.0,
+  ")": 4.0,
+  "*": 5.0,
+  "+": 5.0,
+  ",": 1.0,
+  "-": 4.0,
+  ".": 1.0,
+  "/": 5.0,
+  "0": 5.0,
+  "1": 5.0,
+  "2": 5.0,
+  "3": 5.0,
+  "4": 5.0,
+  "5": 5.0,
+  "6": 5.0,
+  "7": 5.0,
+  "8": 5.0,
+  "9": 5.0,
+  ":": 1.0,
+  ";": 1.0,
+  "<": 5.0,
+  "=": 5.0,
+  ">": 5.0,
+  "?": 5.0,
+  "@": 6.0,
+  "A": 5.0,
+  "B": 5.0,
+  "C": 5.0,
+  "D": 5.0,
+  "E": 5.0,
+  "F": 5.0,
+  "G": 5.0,
+  "H": 5.0,
+  "I": 3.0,
+  "J": 5.0,
+  "K": 5.0,
+  "L": 5.0,
+  "M": 5.0,
+  "N": 5.0,
+  "O": 5.0,
+  "P": 5.0,
+  "Q": 5.0,
+  "R": 5.0,
+  "S": 5.0,
+  "T": 5.0,
+  "U": 5.0,
+  "V": 5.0,
+  "W": 5.0,
+  "X": 5.0,
+  "Y": 5.0,
+  "Z": 5.0,
+  "[": 5.0,
+  "\\": 5.0,
+  "]": 3.0,
+  "^": 5.0,
+  "_": 5.0,
+  "`": 2.0,
+  "a": 5.0,
+  "b": 5.0,
+  "c": 5.0,
+  "d": 5.0,
+  "e": 5.0,
+  "f": 4.0,
+  "g": 5.0,
+  "h": 5.0,
+  "i": 1.0,
+  "j": 3.0,
+  "k": 4.0,
+  "l": 2.0,
+  "m": 5.0,
+  "n": 5.0,
+  "o": 5.0,
+  "p": 5.0,
+  "q": 5.0,
+  "r": 5.0,
+  "s": 5.0,
+  "t": 3.0,
+  "u": 5.0,
+  "v": 5.0,
+  "w": 5.0,
+  "x": 5.0,
+  "y": 5.0,
+  "z": 5.0,
+  "{": 3.0,
+  "|": 1.0,
+  "}": 3.0,
+  "~": 6.0,
+  " ": 4.0,
+}
+
+function text(renderer) {
+  var characterModels = [];
+  var index = 0;
+  /* if (chars.length != charWidths.length) {
+    return;
+  }; */
+  for (var char in chars) {
+    var character_model = renderer.createResource("MODEL", "skyhighheroes:Character");
+    character_model.texture.set(null, "character_" + index.toString());
+    var character = renderer.createEffect("fiskheroes:model").setModel(character_model);
+    character.anchor.set("head");
+    character.anchor.ignoreAnchor(true);
+    character.setScale(1.0);
+    character.setOffset(0.0, 0.0, 0.0);
+    characterModels.push(character);
+    index = index + 1;
+  };
+  return {
+    renderLine: (isFirstPersonArm, horizontalAlignment, verticalAlignment, text, posX, posY, posZ, scale) => {
+      if (isFirstPersonArm && text != null) {
+        var textCharacters = text.toString().split("");
+        var overallPosX = 0.0;
+        var overallOffsetPosX = 0.0;
+        var overallPosY = 0.0;
+        var overallOffsetPosY = 0.0;
+        textCharacters.forEach(textCharacter => {
+          if (charWidths.hasOwnProperty(textCharacter)) {
+            overallOffsetPosX = overallOffsetPosX + charWidths[textCharacter]*scale + 1.0*scale;
+          };
+        });
+        switch (horizontalAlignment.toLowerCase()) {
+          case "center":
+            overallOffsetPosX = overallOffsetPosX/2;
+            break;
+          case "left":
+            overallOffsetPosX = 0.0;
+            break;
+          case "right":
+            overallOffsetPosX = overallOffsetPosX;
+            break;
+        };
+        switch (verticalAlignment.toLowerCase()) {
+          case "center":
+            overallOffsetPosY = overallOffsetPosY/2;
+            break;
+          case "top":
+            overallOffsetPosY = 0.0;
+            break;
+          case "bottom":
+            overallOffsetPosY = overallOffsetPosY;
+            break;
+        };
+        textCharacters.forEach(textCharacter => {
+          var index = chars.indexOf(textCharacter);
+          if (index > -1) {
+            var model = characterModels[index];
+            model.setRotation(0, 0, 0);
+            model.setOffset(posX+overallPosX-overallOffsetPosX, posY+offsetY-overallOffsetPosY, posZ);
+            model.setScale(scale);
+            model.render();
+            overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+          };
+          if (textCharacter == " ") {
+            overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+          };
+        });
+      };
+    },
+    renderLines: (isFirstPersonArm, horizontalAlignment, verticalAlignment, textArray, posX, posY, posZ, scale) => {
+      if (isFirstPersonArm) {
+        var overallPosY = 0.0;
+        var overallOffsetPosY = 0.0;
+        textArray.forEach(line => {
+          if (line != null) {
+            var textCharacters = line.toString().split("");
+            var overallPosX = 0.0;
+            var overallOffsetPosX = 0.0;
+            textCharacters.forEach(textCharacter => {
+              if (charWidths.hasOwnProperty(textCharacter)) {
+                overallOffsetPosX = overallOffsetPosX + charWidths[textCharacter]*scale + 1.0*scale;
+              };
+            });
+        switch (horizontalAlignment.toLowerCase()) {
+          case "center":
+            overallOffsetPosX = overallOffsetPosX/2;
+            break;
+          case "left":
+            overallOffsetPosX = 0.0;
+            break;
+          case "right":
+            overallOffsetPosX = overallOffsetPosX;
+            break;
+        };
+            textCharacters.forEach(textCharacter => {
+              var index = chars.indexOf(textCharacter);
+              if (index > -1) {
+                var model = characterModels[index];
+                model.setRotation(0, 0, 0);
+                model.setOffset(posX+overallPosX-overallOffsetPosX, posY+offsetY-overallOffsetPosY, posZ);
+                model.setScale(scale);
+                model.render();
+                overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+              };
+              if (textCharacter == " ") {
+                overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+              };
+            });
+          };
+          offsetY = offsetY + 11.0*scale;
+        });
+      };
+    },
+    renderLocation: (entity, isFirstPersonArm, text, posX, posY, posZ) => {
+      if (isFirstPersonArm && text != null) {
+        var textCharacters = text.toString().split("");
+        var overallPosX = 0.0;
+        var distance = entity.eyePos().distanceTo(posX, posY, posZ);
+        var pitch = (entity.rotationInterpolated().y()/180)*Math.PI + Math.atan2((posY-entity.eyePos().y()), (Math.sqrt(posX^2 + posZ^2)-entity.eyePos().xz().distanceTo(posX, posZ)));
+        var yaw = (entity.rotationInterpolated().x()/180)*Math.PI - Math.atan2((posZ-entity.eyePos().z()), (posX-entity.eyePos().x()));
+        var distanceXZ = entity.eyePos().multiply(1, 0, 1).distanceTo(posX, 0, posZ);
+        var x = distanceXZ*Math.cos(yaw);
+        var y = (entity.eyePos().y()-posY);
+        var z = distanceXZ*Math.sin(yaw);
+        var overallOffsetPosX = 0.0;
+        var overallPosX = 0.0;
+        textCharacters.forEach(textCharacter => {
+          if (charWidths.hasOwnProperty(textCharacter)) {
+            overallOffsetPosX = overallOffsetPosX + charWidths[textCharacter] + 0.5;
+          };
+        });
+        overallOffsetPosX = overallOffsetPosX/2;
+        textCharacters.forEach(textCharacter => {
+          var index = chars.indexOf(textCharacter);
+          if (index > -1) {
+            var model = characterModels[index];
+            model.setRotation(0, 0, 0);
+            model.setOffset(x+overallPosX-overallOffsetPosX, y, z);
+            model.render();
+            overallPosX = overallPosX + charWidths[textCharacter] + 0.5;
+          };
+        });
+      };
+    },
+    renderEntity: (entity, isFirstPersonArm, otherEntity) => {
+      if (isFirstPersonArm) {
+        if (otherEntity.isAlive() && otherEntity.getUUID() != entity.getUUID()) {
+          var data = []
+          data.push(otherEntity.getName());
+          data.push("Health: " + otherEntity.getHealth());
+          var distance = entity.eyePos().distanceTo(otherEntity.pos().x(), otherEntity.pos().y(), otherEntity.pos().z());
+          var pitch = (entity.rotationInterpolated().y()/180)*Math.PI + Math.atan2((otherEntity.pos().y()-entity.eyePos().y()), (Math.sqrt(otherEntity.pos().x()^2 + otherEntity.pos().z()^2)-entity.eyePos().xz().distanceTo(otherEntity.pos().x(), otherEntity.pos().z())));
+          var yaw = (entity.rotationInterpolated().x()/180)*Math.PI - Math.atan2((otherEntity.pos().z()-entity.eyePos().z()), (otherEntity.pos().x()-entity.eyePos().x()));
+          var distanceXZ = entity.eyePos().multiply(1, 0, 1).distanceTo(otherEntity.pos().x(), 0, otherEntity.pos().z());
+          var x = distanceXZ*Math.cos(yaw);
+          var y = (entity.eyePos().y()-otherEntity.pos().y());
+          var z = distanceXZ*Math.sin(yaw);
+          var yOffset = 0.0;
+          data.forEach(entry => {
+            var overallOffsetPosX = 0.0;
+            var overallPosX = 0.0;
+            textCharacters = entry.split("");
+            textCharacters.forEach(textCharacter => {
+              var index = chars.indexOf(textCharacter);
+              if (index > -1) {
+                overallOffsetPosX = overallOffsetPosX + charWidths[textCharacter] + 0.5;
+              };
+            });
+            overallOffsetPosX = overallOffsetPosX/2;
+            textCharacters.forEach(textCharacter => {
+              var index = chars.indexOf(textCharacter);
+              if (index > -1) {
+                var model = characterModels[index];
+                model.setRotation(0, 0, 0);
+                model.setOffset(x+overallPosX-overallOffsetPosX, y+yOffset, z);
+                model.render();
+                overallPosX = overallPosX + charWidths[textCharacter] + 0.5;
+              };
+            });
+            yOffset = yOffset + 10.0;
+          });
+        };
+      };
+    }
+  };
+};

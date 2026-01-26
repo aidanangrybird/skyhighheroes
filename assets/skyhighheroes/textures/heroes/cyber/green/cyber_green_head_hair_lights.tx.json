@@ -8,7 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:cybernetic_head_hair_base"
+        "supply": "skyhighheroes:cybernetic_head_hair"
       }
     ],
     "out": "skyhighheroes:generated/cyber_green_head_hair_lights_<TIMER>"

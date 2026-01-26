@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:cybernetic_body_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighheroes:cyber/blue/cyber_blue_body_lights"
+        "supply": "skyhighheroes:cybernetic_body"
       }
     ],
     "out": "skyhighheroes:generated/cyber_blue_body_lights_<TIMER>"

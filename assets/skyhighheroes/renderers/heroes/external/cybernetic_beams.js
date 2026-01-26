@@ -29,7 +29,7 @@ function initLeftArmBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "leftArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannon"));
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannons"));
   var positionFlush = [
     { "firstPerson": [4.5, 3.75, -11.4], "offset": [0.5, 10.0, 0.0], "size": [2.0, 2.0] },
     { "firstPerson": [7.0, 3.75, -11.4], "offset": [0.5, 8.0, -2.5], "size": [2.0, 2.0] },
@@ -37,7 +37,7 @@ function initLeftArmBeams(renderer, color) {
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "leftArm", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannon"));
+  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushLeftArmCannons"));
 };
 function initRightArmBeams(renderer, color) {
   var position = [
@@ -47,7 +47,7 @@ function initRightArmBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "rightArm", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushRightArmCannon"));
+  chargedBeam.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && !entity.getWornHelmet().nbt().getBoolean("flushRightArmCannons"));
   var positionFlush = [
     { "firstPerson": [-4.5, 3.75, -11.4], "offset": [-0.5, 10.0, 0.0], "size": [2.0, 2.0] },
     { "firstPerson": [-7.0, 3.75, -11.4], "offset": [-0.5, 8.0, -2.5], "size": [2.0, 2.0] },
@@ -55,7 +55,7 @@ function initRightArmBeams(renderer, color) {
   ];
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "rightArm", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushRightArmCannon"));
+  chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsArms") && entity.getWornHelmet().nbt().getBoolean("flushRightArmCannons"));
 };
 
 function initHeadBeams(renderer, color) {

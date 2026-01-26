@@ -325,11 +325,10 @@
     "thermoptic_camouflage_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "thermoptic_camouflage": { "type": "BOOLEAN", "resetWithoutSuit": true },
     
-    "selected_module_left": "INTEGER",
-    "selected_module_top": "INTEGER",
-    "selected_module_right": "INTEGER",
-    "selected_side": "INTEGER",
-    "editing_mode": "BOOLEAN"
+    "selected_side_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
+    "selected_side_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
+    "selected_side_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
+    "selected_side_tap_cooling_down": { "type": "BOOLEAN", "resetWithoutSuit": true }
   },
   "sounds": {
     "download": {

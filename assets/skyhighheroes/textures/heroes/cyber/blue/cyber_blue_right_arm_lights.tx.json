@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:cybernetic_right_arm_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighheroes:cyber/blue/cyber_blue_right_arm_lights"
+        "supply": "skyhighheroes:cybernetic_right_arm"
       }
     ],
     "out": "skyhighheroes:generated/cyber_blue_right_arm_lights_<TIMER>"

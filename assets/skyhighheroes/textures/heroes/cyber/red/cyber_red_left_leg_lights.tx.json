@@ -8,11 +8,7 @@
       },
       {
         "operation": "STITCH",
-        "supply": "skyhighheroes:cybernetic_left_leg_base"
-      },
-      {
-        "operation": "ADD",
-        "supply": "skyhighheroes:cyber/red/cyber_red_left_leg_lights"
+        "supply": "skyhighheroes:cybernetic_left_leg"
       }
     ],
     "out": "skyhighheroes:generated/cyber_red_left_leg_lights_<TIMER>"
