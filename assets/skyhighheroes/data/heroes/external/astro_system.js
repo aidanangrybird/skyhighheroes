@@ -699,14 +699,14 @@ function initSystem(moduleList, name, colorCode) {
         if (!entity.getWornLeggings().nbt().hasKey("hudRange")) {
           manager.setShort(entity.getWornLeggings().nbt(), "hudRange", 0);
         };
-        if (!entity.getWornLeggings().nbt().hasKey("hostilesOnHud")) {
-          manager.setBoolean(entity.getWornLeggings().nbt(), "hostilesOnHud", true);
+        if (!entity.getWornLeggings().nbt().hasKey("hudHostiles")) {
+          manager.setBoolean(entity.getWornLeggings().nbt(), "hudHostiles", true);
         };
-        if (!entity.getWornLeggings().nbt().hasKey("friendliesOnHud")) {
-          manager.setBoolean(entity.getWornLeggings().nbt(), "friendliesOnHud", true);
+        if (!entity.getWornLeggings().nbt().hasKey("hudFriendlies")) {
+          manager.setBoolean(entity.getWornLeggings().nbt(), "hudFriendlies", true);
         };
-        if (!entity.getWornLeggings().nbt().hasKey("playersOnHud")) {
-          manager.setBoolean(entity.getWornLeggings().nbt(), "playersOnHud", true);
+        if (!entity.getWornLeggings().nbt().hasKey("hudPlayers")) {
+          manager.setBoolean(entity.getWornLeggings().nbt(), "hudPlayers", true);
         };
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
