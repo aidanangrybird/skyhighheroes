@@ -530,7 +530,7 @@ function cycleUp(entity, manager) {
   };
   if (nbt.getInteger("hudSelectedSide") == 0) {
     manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") + 1);
-    if (nbt.getInteger("hudLeftSide") > 3) {
+    if (nbt.getInteger("hudLeftSide") > 7) {
       manager.setInteger(nbt, "hudLeftSide", 0);
     };
   };
@@ -565,7 +565,7 @@ function cycleDown(entity, manager) {
   if (nbt.getInteger("hudSelectedSide") == 0) {
     manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") - 1);
     if (nbt.getInteger("hudLeftSide") < 0) {
-      manager.setInteger(nbt, "hudLeftSide", 3);
+      manager.setInteger(nbt, "hudLeftSide", 7);
     };
   };
   if (nbt.getInteger("hudSelectedSide") == 1) {
