@@ -384,8 +384,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
       var mouthToRender = ["Mouth:"];
       var armed = "" + (nbt.getBoolean("mouth") ? "ARMED" : "DISARMED");
       var deployed = "" + ((entity.getData("skyhighheroes:dyn/mouth_deploy_timer") > 0) || (entity.getData("skyhighheroes:dyn/mouth_timer") > 0) ? "DEPLOYED" : "STOWED");
-      wingsToRender.push(armed);
-      wingsToRender.push(deployed);
+      mouthToRender.push(armed);
+      mouthToRender.push(deployed);
       text_renderer.renderLines(isFirstPersonArm, "left", "center", mouthToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     //Top
