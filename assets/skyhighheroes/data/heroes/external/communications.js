@@ -417,7 +417,7 @@ function initModule(system) {
                 break;
               case "freq":
                 manager.setShort(nbt, "freq", parseInt(argList[2]));
-                system.moduleMessage(this, entity, "<n>Freqency set to <nh>" + nbt.getShort("freq") + "<n>!");
+                system.moduleMessage(this, entity, "<n>Frequency set to <nh>" + nbt.getShort("freq") + "<n>!");
                 break;
               default:
                 system.moduleMessage(this, entity, "<e>Unknown <eh>comms<e> setting!");
@@ -430,7 +430,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getWornHelmet().nbt().getShort("xSat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("ySat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("zSat"));
-            system.moduleMessage(this, entity, "<n>Freqency: <nh>" + entity.getWornHelmet().nbt().getShort("freq"));
+            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + entity.getWornHelmet().nbt().getShort("freq"));
             system.moduleMessage(this, entity, "<n>Antenna Hologram: <nh>" + (nbt.getBoolean("holoAnt") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Satellite Hologram: <nh>" + (nbt.getBoolean("holoSat") ? "ENABLED" : "DISABLED"));
             break;
