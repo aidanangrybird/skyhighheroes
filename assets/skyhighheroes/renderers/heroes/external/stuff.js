@@ -287,6 +287,65 @@ function elevation(entity, posX, posY, posZ) {
   return angle;
 };
 
+/**
+ * Number degree to a cardinal direction
+ * @param {JSVector3} base - Base vector
+ * @param {JSVector3} other - Vector to measure to
+ * @returns Cardinal direction
+ **/
+function angleToDirection(angle) {
+  var direction = angle.toFixed(0);
+  if (((angle >= 0) && (angle <= 11.25)) || ((angle >= 348.75) && (angle <= 360))) {
+    direction = "N";
+  };
+  if ((angle <= 33.75) && (angle >= 11.25)) {
+    direction = "NNE";
+  };
+  if ((angle <= 56.25) && (angle >= 33.75)) {
+    direction = "NE";
+  };
+  if ((angle <= 78.75) && (angle >= 56.25)) {
+    direction = "ENE";
+  };
+  if ((angle <= 101.25) && (angle >= 78.75)) {
+    direction = "E";
+  };
+  if ((angle <= 123.75) && (angle >= 101.25)) {
+    direction = "ESE";
+  };
+  if ((angle <= 146.25) && (angle >= 123.75)) {
+    direction = "SE";
+  };
+  if ((angle <= 168.75) && (angle >= 146.25)) {
+    direction = "SSE";
+  };
+  if ((angle <= 191.25) && (angle >= 168.75)) {
+    direction = "S";
+  };
+  if ((angle <= 213.75) && (angle >= 191.25)) {
+    direction = "SSW";
+  };
+  if ((angle <= 236.25) && (angle >= 213.75)) {
+    direction = "SW";
+  };
+  if ((angle <= 258.75) && (angle >= 236.25)) {
+    direction = "WSW";
+  };
+  if ((angle <= 281.25) && (angle >= 258.75)) {
+    direction = "W";
+  };
+  if ((angle <= 303.75) && (angle >= 281.25)) {
+    direction = "WNW";
+  };
+  if ((angle <= 326.25) && (angle >= 303.75)) {
+    direction = "NW";
+  };
+  if ((angle <= 348.75) && (angle >= 326.25)) {
+    direction = "NNW";
+  };
+  return direction;
+};
+
 var chars = ["!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","<","=",">","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~"];
 
 var charWidths = {
@@ -394,7 +453,7 @@ function text(renderer) {
     return;
   }; */
   for (var char in chars) {
-    var character_model = renderer.createResource("MODEL", "skyhighheroes:Character");
+    var character_model = renderer.createResource("MODEL", "skyhighocs:Character");
     character_model.texture.set(null, "character_" + index.toString());
     var character = renderer.createEffect("fiskheroes:model").setModel(character_model);
     character.anchor.set("head");
@@ -406,11 +465,10 @@ function text(renderer) {
   };
   return {
     renderLine: (isFirstPersonArm, horizontalAlignment, verticalAlignment, text, posX, posY, posZ, scale) => {
-      if (isFirstPersonArm && text != null) {
+      if (isFirstPersonArm && text != null && typeof text === "string") {
         var textCharacters = text.toString().split("");
-        var overallPosX = 0.0;
+        var currentPosX = 0.0;
         var overallOffsetPosX = 0.0;
-        var overallPosY = 0.0;
         var overallOffsetPosY = 0.0;
         textCharacters.forEach(textCharacter => {
           if (charWidths.hasOwnProperty(textCharacter)) {
@@ -430,13 +488,13 @@ function text(renderer) {
         };
         switch (verticalAlignment.toLowerCase()) {
           case "center":
-            overallOffsetPosY = overallOffsetPosY/2;
-            break;
-          case "top":
             overallOffsetPosY = 0.0;
             break;
+          case "top":
+            overallOffsetPosY = -5.5;
+            break;
           case "bottom":
-            overallOffsetPosY = overallOffsetPosY;
+            overallOffsetPosY = 5.5;
             break;
         };
         textCharacters.forEach(textCharacter => {
@@ -444,58 +502,111 @@ function text(renderer) {
           if (index > -1) {
             var model = characterModels[index];
             model.setRotation(0, 0, 0);
-            model.setOffset(posX+overallPosX-overallOffsetPosX, posY+offsetY-overallOffsetPosY, posZ);
+            model.setOffset(posX+currentPosX-overallOffsetPosX, posY+overallOffsetPosY, posZ);
             model.setScale(scale);
             model.render();
-            overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+            currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
           };
           if (textCharacter == " ") {
-            overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+            currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
           };
         });
       };
     },
     renderLines: (isFirstPersonArm, horizontalAlignment, verticalAlignment, textArray, posX, posY, posZ, scale) => {
-      if (isFirstPersonArm) {
+      if (isFirstPersonArm && typeof textArray !== "string") {
         var overallPosY = 0.0;
-        var overallOffsetPosY = 0.0;
+        var totalHeight = 11.0*((textArray.length-1)*1.0)*scale;
+        var overallPosX = 0.0;
+        var largestLineLength = 0.0;
+        //Overall X position
         textArray.forEach(line => {
           if (line != null) {
             var textCharacters = line.toString().split("");
-            var overallPosX = 0.0;
-            var overallOffsetPosX = 0.0;
+            var lineLength = 0.0;
             textCharacters.forEach(textCharacter => {
               if (charWidths.hasOwnProperty(textCharacter)) {
-                overallOffsetPosX = overallOffsetPosX + charWidths[textCharacter]*scale + 1.0*scale;
+                lineLength = lineLength + charWidths[textCharacter]*scale + 1.0*scale;
+              };
+              if (largestLineLength < lineLength) {
+                largestLineLength = lineLength;
               };
             });
+          };
+        });
         switch (horizontalAlignment.toLowerCase()) {
           case "center":
-            overallOffsetPosX = overallOffsetPosX/2;
+            overallPosX = largestLineLength/2;
             break;
           case "left":
-            overallOffsetPosX = 0.0;
+            overallPosX = 0.0;
             break;
           case "right":
-            overallOffsetPosX = overallOffsetPosX;
+            overallPosX = largestLineLength;
+            break;
+          default:
+            overallPosX = 0.0;
             break;
         };
+        switch (verticalAlignment.toLowerCase()) {
+          case "center":
+            overallPosY = totalHeight/2;
+            break;
+          case "top":
+            overallPosY = 0.0;
+            break;
+          case "bottom":
+            overallPosY = -1*totalHeight;
+            break;
+          default:
+            overallPosY = 0.0;
+            break;
+        };
+        //Per line X position
+        var currentPosY = 0.0;
+        textArray.forEach(line => {
+          if (line != null) {
+            var textCharacters = line.toString().split("");
+            var currentPosX = 0.0;
+            var lineLength = 0.0;
+            var linePosX = 0.0;
+            textCharacters.forEach(textCharacter => {
+              if (charWidths.hasOwnProperty(textCharacter)) {
+                lineLength = lineLength + charWidths[textCharacter]*scale + 1.0*scale;
+              };
+            });
+            switch (horizontalAlignment.toLowerCase()) {
+              case "center":
+                var difference = largestLineLength - lineLength;
+                linePosX = difference/2;
+                break;
+              case "left":
+                linePosX = 0.0;
+                break;
+              case "right":
+                var difference = lineLength - largestLineLength;
+                linePosX = -1*difference;
+                break;
+              default:
+                linePosX = 0.0;
+                break;
+            };
             textCharacters.forEach(textCharacter => {
               var index = chars.indexOf(textCharacter);
               if (index > -1) {
                 var model = characterModels[index];
                 model.setRotation(0, 0, 0);
-                model.setOffset(posX+overallPosX-overallOffsetPosX, posY+offsetY-overallOffsetPosY, posZ);
+                model.setOffset(posX+currentPosX-overallPosX+linePosX, posY+currentPosY-overallPosY, posZ);
                 model.setScale(scale);
                 model.render();
-                overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+                currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
               };
               if (textCharacter == " ") {
-                overallPosX = overallPosX + charWidths[textCharacter]*scale + 1.0*scale;
+                currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
               };
             });
           };
-          offsetY = offsetY + 11.0*scale;
+          currentPosY = currentPosY + 11.0*scale;
         });
       };
     },

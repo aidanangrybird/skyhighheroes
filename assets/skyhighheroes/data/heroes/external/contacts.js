@@ -33,20 +33,21 @@ function initModule(system) {
       system.moduleMessage(this, entity, "<e>Username is too long!");
       return;
     };
-    if (nbt != null) {
-      if (!nbt.hasKey("contacts")) {
-        var contacts = manager.newTagList();
-        manager.appendString(contacts, username);
-        manager.setTagList(nbt, "contacts", contacts);
-        system.moduleMessage(this, entity, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+    if (!nbt.hasKey("contacts")) {
+      var contacts = manager.newTagList();
+      manager.appendString(contacts, username);
+      manager.setTagList(nbt, "contacts", contacts);
+      system.moduleMessage(this, entity, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+    } else {
+      var contacts = nbt.getStringList("contacts");
+      var index = system.getStringArray(contacts).indexOf(username);
+      if (index > -1) {
+        system.moduleMessage(this, entity, "<eh>" + username + "<e> is already a contact!");
       } else {
-        var contacts = nbt.getStringList("contacts");
-        var index = system.getStringArray(contacts).indexOf(username);
-        if (index > -1) {
-          system.moduleMessage(this, entity, "<eh>" + username + "<e> is already a contact!");
-        } else {
-          system.moduleMessage(this, entity, "<s>Successfully added <sh>" + username + "<s> as a contact!");
-          manager.appendString(contacts, username);
+        system.moduleMessage(this, entity, "<s>Successfully added <sh>" + username + "<s> as a contact!");
+        manager.appendString(contacts, username);
+        if (nbt.getString("normalSelected") == "") {
+          manager.setString(nbt, "normalSelected", username);
         };
       };
     };
@@ -73,23 +74,21 @@ function initModule(system) {
         nbt = entity.getWornBoots().nbt();
       };
     };
-    if (nbt != null) {
-      if (!nbt.hasKey("contacts")) {
-        var newContactsList = manager.newTagList();
-        manager.setTagList(nbt, "contacts", newContactsList);
-      };
-      var contacts = nbt.getStringList("contacts");
-      if (contacts.tagCount() == 0) {
-        system.moduleMessage(this, entity, "<e>You have no contacts to remove!");
-        return;
-      };
-      var index = system.getStringArray(contacts).indexOf(username);
-      if (index < 0) {
-        system.moduleMessage(this, entity, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
-      } else {
-        system.moduleMessage(this, entity, "<s>Removed contact with username <sh>" + username + "<s>!");
-        manager.removeTag(contacts, index);
-      };
+    if (!nbt.hasKey("contacts")) {
+      var newContactsList = manager.newTagList();
+      manager.setTagList(nbt, "contacts", newContactsList);
+    };
+    var contacts = nbt.getStringList("contacts");
+    if (contacts.tagCount() == 0) {
+      system.moduleMessage(this, entity, "<e>You have no contacts to remove!");
+      return;
+    };
+    var index = system.getStringArray(contacts).indexOf(username);
+    if (index < 0) {
+      system.moduleMessage(this, entity, "<e>Unable to find contact with username <eh>" + username + "<e> to remove!");
+    } else {
+      system.moduleMessage(this, entity, "<s>Removed contact with username <sh>" + username + "<s>!");
+      manager.removeTag(contacts, index);
     };
   };
   /**
@@ -113,17 +112,15 @@ function initModule(system) {
         nbt = entity.getWornBoots().nbt();
       };
     };
-    if (nbt != null) {
-      if (!nbt.hasKey("contacts")) {
-        var newContactsList = manager.newTagList();
-        manager.setTagList(nbt, "contacts", newContactsList);
-      };
-      var contacts = system.getStringArray(nbt.getStringList("contacts"));
-      system.moduleMessage(this, entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contact:": "<n> contacts:"));
-      contacts.forEach(entry => {
-        system.moduleMessage(this, entity, "<nh>" + entry);
-      });
+    if (!nbt.hasKey("contacts")) {
+      var newContactsList = manager.newTagList();
+      manager.setTagList(nbt, "contacts", newContactsList);
     };
+    var contacts = system.getStringArray(nbt.getStringList("contacts"));
+    system.moduleMessage(this, entity,"<n>You have <nh>" + contacts.length + ((contacts.length == 1)?"<n> contact:": "<n> contacts:"));
+    contacts.forEach(entry => {
+      system.moduleMessage(this, entity, "<nh>" + entry);
+    });
   };
   return {
     name: "contacts",

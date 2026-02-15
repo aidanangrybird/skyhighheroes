@@ -152,7 +152,7 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/wings", wings);
         if (entity.getData("fiskheroes:gliding_timer") < 0.2) {
           if (wings) {
-            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Wings!", 16);
+            system.shoutMessage(entity, "Activating Wings!", 16);
           };
         };
       };

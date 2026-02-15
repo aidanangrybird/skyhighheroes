@@ -332,13 +332,13 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/blade_right_arm", right);
         if (entity.getData("fiskheroes:blade_timer") < 0.2) {
           if (left && right) {
-            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Blades!", 16);
+            system.shoutMessage(entity, "Activating Blades!", 16);
           } else {
             if (left) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Left Blade!", 16);
+              system.shoutMessage(entity, "Activating Left Blade!", 16);
             };
             if (right) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Right Blade!", 16);
+              system.shoutMessage(entity, "Activating Right Blade!", 16);
             };
           };
         };

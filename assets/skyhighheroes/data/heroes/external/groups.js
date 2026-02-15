@@ -35,6 +35,9 @@ function initModule(system) {
     } else {
       system.moduleMessage(this, entity, "<s>Group created with name: <sh>" + groupName + "<s>!");
       manager.appendTag(groups, group);
+      if (nbt.getString("groupSelected") == "") {
+        manager.setString(nbt, "groupSelected", groupName);
+      };
     };
   };
   /**
@@ -43,6 +46,19 @@ function initModule(system) {
    * @param {JSDataManager} manager - Required
    **/
   function listGroups(entity, manager) {
+    var nbt = null;
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      nbt = entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      nbt = entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      nbt = entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      nbt = entity.getWornBoots().nbt();
+    };
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);

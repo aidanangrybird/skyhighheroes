@@ -261,36 +261,6 @@ function initSatelliteBeams(renderer, model, color) {
   };
 };
 
-/**
- * Attempts to get model of a cybernetic player by id
- * @param {JSEntity} entity - Required
- * @param {integer} id - ID
- **/
-function isStillCyber(entity, id) {
-  var result = false;
-  var otherEntity = entity.world().getEntityById(id);
-  if (otherEntity.exists() && otherEntity.isLivingEntity()) {
-    if (otherEntity.is("PLAYER")) {
-      var otherPlayer = otherEntity.as("PLAYER");
-      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
-        if (hasCyberneticBody(otherPlayer)) {
-          result = true;
-        };
-      };
-    };
-  };
-  return result;
-};
-
-/**
- * Checks if an entity is cybernetic
- * @param {JSEntity} entity - Entity getting checked
- * @returns If the entity is cybernetic
- **/
-function hasCyberneticBody(entity) {
-  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
-};
-
 function beamThing(renderer, color) {
   
   var beamRenderer = renderer.createResource("BEAM_RENDERER", "fiskheroes:energy_projection");
@@ -508,4 +478,182 @@ function hudPlayer(renderer) {
       };
     },
   };
+};
+
+/**
+ * Gets the position of available cybers
+ * @param {JSEntity} entity - Entity receiving data
+ * @returns Position
+ **/
+function availableCybers(entity) {
+  var range = 16;
+  var foundPlayers = [];
+  var foundPlayerNames = [];
+  var data = [];
+  var newRange = (range*1);
+  var txAntennaDeployed = (entity.getData("skyhighheroes:dyn/antenna_timer") == 1) && (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+  var txSatelliteDeployed = (entity.getData("skyhighheroes:dyn/satellite_timer") == 1) && (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+  if (txAntennaDeployed) {
+    newRange = (range*4);
+  };
+  var entities = entity.world().getEntitiesInRangeOf(entity.pos(), newRange);
+  entities.forEach(otherEntity => {
+    if (otherEntity.is("PLAYER") && (otherEntity.getUUID() != entity.getUUID())) {
+      if (hasCyberneticBody(otherEntity) && checkFrequency(entity, otherEntity)) {
+        if (foundPlayerNames.indexOf(otherEntity.getName()) == -1) {
+          foundPlayerNames.push(otherEntity.getName());
+          foundPlayers.push(otherEntity);
+        };
+      };
+    };
+  });
+  if (txSatelliteDeployed) {
+    var idList = getSatIDList(entity);
+    idList.forEach(id => {
+      if (id > -1) {
+        if (isStillCyber(entity, id)) {
+          var otherEntity = entity.world().getEntityById(id)
+          if (foundPlayerNames.indexOf(otherEntity.getName()) == -1) {
+            if (checkSatellite(entity, otherEntity)) {
+              foundPlayerNames.push(otherEntity.getName());
+              foundPlayers.push(otherEntity);
+            };
+          };
+        };
+      };
+    });
+  };
+  if (foundPlayers.length > 0) {
+    //entity = tx
+    //otherEntity = rx
+    foundPlayers.forEach(otherEntity => {
+      var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
+      var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
+      var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
+      if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
+        data.push(position(otherEntity));
+      } else if (txAntennaDeployed && rxAntennaDeployed && checkFrequency(entity, otherEntity) && entity.canSee(otherEntity) && (entity.pos().distanceTo(otherEntity.pos()) <= range*4)) {
+        data.push(position(otherEntity));
+      } else if (txSatelliteDeployed && rxSatelliteDeployed && checkSatellite(entity, otherEntity)) {
+        data.push(position(otherEntity));
+      };
+    });
+  };
+  return data;
+};
+
+/**
+ * Gets the position of a cyber
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns Position
+ **/
+function position(entity) {
+  var otherName = getModelID(entity);
+  var positionMessage = otherName + ": " + entity.posX().toFixed(0) + ", " + entity.posY().toFixed(0) + ", " + entity.posZ().toFixed(0);
+  return positionMessage
+};
+
+/**
+ * Gets the Cyber ID
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Cyber ID
+ **/
+function getModelID(entity) {
+  return entity.getWornHelmet().nbt().getString("cyberModelID");
+};
+/**
+ * Gets the Cyber name
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The Cyber alias
+ **/
+function getAliasName(entity) {
+  return entity.getWornHelmet().nbt().getString("cyberAliasName");
+};
+
+/**
+ * Gets satellite UUID list from entity 
+ * @param {JSEntity} entity - Required
+ **/
+function getSatUUIDList(entity) {
+  var list = entity.getWornHelmet().nbt().getTagList("playerInfoSat");
+  var count = list.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    result.push(list.getCompoundTag(i).getString("uuid"));
+  };
+  return result;
+};
+
+/**
+ * Gets satellite ID list from entity 
+ * @param {JSEntity} entity - Required
+ **/
+function getSatIDList(entity) {
+  var list = entity.getWornHelmet().nbt().getTagList("playerInfoSat");
+  var count = list.tagCount();
+  var result = [];
+  for (i=0;i<count;i++) {
+    result.push(list.getCompoundTag(i).getString("id"));
+  };
+  return result;
+};
+
+/**
+ * Compares satellites between two entities
+ * @param {JSEntity} entity - Required
+ * @param {JSEntity} otherEntity - Required
+ **/
+function checkSatellite(entity, otherEntity) {
+  var nbt = entity.getWornHelmet().nbt();
+  var nbtOther = otherEntity.getWornHelmet().nbt()
+  if ((nbt.getShort("xSat") == nbtOther.getShort("xSat")) && (nbt.getShort("ySat") == nbtOther.getShort("ySat")) && (nbt.getShort("zSat") == nbtOther.getShort("zSat"))) {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+/**
+ * Compares frequencies between two entities
+ * @param {JSEntity} entity - Required
+ * @param {JSEntity} otherEntity - Required
+ **/
+function checkFrequency(entity, otherEntity) {
+  var nbt = entity.getWornHelmet().nbt();
+  var nbtOther = otherEntity.getWornHelmet().nbt()
+  if (nbt.getShort("freq") == nbtOther.getShort("freq")) {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+/**
+ * Attempts to get model of a cybernetic otherEntity by id
+ * @param {JSEntity} entity - Required
+ * @param {integer} id - ID
+ **/
+function isStillCyber(entity, id) {
+  var result = false;
+  var otherEntity = entity.world().getEntityById(id);
+  if (otherEntity.exists() && otherEntity.isLivingEntity()) {
+    if (otherEntity.is("PLAYER")) {
+      var otherPlayer = otherEntity.as("PLAYER");
+      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+        if (hasCyberneticBody(otherPlayer)) {
+          result = true;
+        };
+      };
+    };
+  };
+  return result;
+};
+
+/**
+ * Checks if an entity is cybernetic
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns If the entity is cybernetic
+ **/
+function hasCyberneticBody(entity) {
+  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
 };

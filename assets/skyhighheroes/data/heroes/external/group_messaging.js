@@ -81,10 +81,9 @@ function initModule(system) {
     moduleMessageName: "Group Messaging",
     type: 2,
     modeID: "group",
-    chatModeInfo: "<n>You are now in <nh>group<n> mode!",
+    chatModeMessage: "<n>You are now in <nh>group<n> mode!",
     messageHandler: function (entity, name, range) {
       var message = entity.getData("skyhighheroes:dyn/entry");
-      var activeChat = entity.getData("skyhighheroes:dyn/active_chat");
       var foundPlayers = [];
       var groupName = "";
       var nbt = null;
@@ -102,26 +101,32 @@ function initModule(system) {
           nbt = entity.getWornBoots().nbt();
         };
       };
-      if (nbt != null) {
-        if (nbt.getTagList("groups").tagCount() > 0) {
-          var group = nbt.getTagList("groups").getCompoundTag(activeChat);
+      if (nbt.getTagList("groups").tagCount() > 0) {
+        var groupList = system.getGroupArray(entity);
+        var chat = nbt.getString("groupSelected");
+        var chatIndex = groupList.indexOf(chat);
+        if (chatIndex > -1) {
+          var group = nbt.getTagList("groups").getCompoundTag(chatIndex);
           groupName = group.getString("groupName");
           var members = system.getStringArray(group.getStringList("members"));
           var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
-          entities.forEach(player => {
-            if (player.is("PLAYER") && members.indexOf(player.getName()) > -1) {
-              foundPlayers.push(player);
+          entities.forEach(otherEntity => {
+            if (otherEntity.is("PLAYER") && members.indexOf(otherEntity.getName()) > -1) {
+              foundPlayers.push(otherEntity);
             };
           });
         } else {
-          system.moduleMessage(this, entity, "<e>You have no groups to message!")
+          system.moduleMessage(this, entity, "<e>You do not have <eh>" + chat + "<e> as a group!");
+          return;
         };
+      } else {
+        system.moduleMessage(this, entity, "<e>You have no groups to message!")
       };
       if (foundPlayers.length > 0) {
-        foundPlayers.forEach(player => {
-          if (system.hasComputer(player)) {
-            if (hasGroup(entity, player, groupName)) {
-              groupMessage(player, groupName, name, message);
+        foundPlayers.forEach(otherEntity => {
+          if (system.hasComputer(otherEntity)) {
+            if (hasGroup(entity, otherEntity, groupName)) {
+              groupMessage(otherEntity, groupName, name, message);
             };
           };
         });
@@ -144,31 +149,56 @@ function initModule(system) {
           nbt = entity.getWornBoots().nbt();
         };
       };
-      if (nbt != null) {
-        if (nbt.hasKey("groups")) {
-          if (nbt.getTagList("groups").tagCount() > 0) {
-            var groupList = system.getGroupArray(entity);
-            if (typeof chat === "string") {
-              var chatIndex = groupList.indexOf(chat);
-              if (chatIndex > -1) {
-                manager.setData(entity, "skyhighheroes:dyn/active_chat", chatIndex);
-              } else {
-                system.moduleMessage(this, entity, "<e>You do not have <eh>" + chat + "<e> as a group!");
-                return;
-              };
-            } else {
-              if (entity.getData("skyhighheroes:dyn/active_chat") > (groupList.length-1)) {
-                manager.setData(entity, "skyhighheroes:dyn/active_chat", 0);
-              };
-            };
-            var group = groupList[entity.getData("skyhighheroes:dyn/active_chat")];
-            system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + group + "<n>!");
+      if (nbt.hasKey("groups")) {
+        if (nbt.getTagList("groups").tagCount() > 0) {
+          var groupList = system.getGroupArray(entity);
+          var chatIndex = groupList.indexOf(chat);
+          if (chatIndex > -1) {
+            manager.setString(nbt, "groupSelected", chat);
+            system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n> group!");
           } else {
-            system.moduleMessage(this, entity, "<e>You do not have any groups!");
+            system.moduleMessage(this, entity, "<e>You do not have <eh>" + chat + "<e> as a group!");
+            return;
           };
         } else {
           system.moduleMessage(this, entity, "<e>You do not have any groups!");
         };
+      } else {
+        system.moduleMessage(this, entity, "<e>You do not have any groups!");
+      };
+    },
+    chatModeInfo: function (entity) {
+      var nbt = null;
+      if (entity.isWearingFullSuit()) {
+        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+          nbt = entity.getWornHelmet().nbt();
+        };
+        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+          nbt = entity.getWornChestplate().nbt();
+        };
+        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+          nbt = entity.getWornLeggings().nbt();
+        };
+        if (entity.getWornBoots().nbt().hasKey("computerID")) {
+          nbt = entity.getWornBoots().nbt();
+        };
+      };
+      if (nbt.hasKey("groups")) {
+        if (nbt.getTagList("groups").tagCount() > 0) {
+          var groupList = system.getGroupArray(entity);
+          var chat = nbt.getString("groupSelected");
+          var chatIndex = groupList.indexOf(chat);
+          if (chatIndex > -1) {
+            system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n> group!");
+          } else {
+            system.moduleMessage(this, entity, "<e>You do not have <eh>" + chat + "<e> as a group!");
+            return;
+          };
+        } else {
+          system.moduleMessage(this, entity, "<e>You do not have any groups!");
+        };
+      } else {
+        system.moduleMessage(this, entity, "<e>You do not have any groups!");
       };
     },
   };

@@ -512,16 +512,19 @@ function initSystem(moduleList, name, colorCode) {
     return true;
   };
   function switchChatModes(entity, manager, mode) {
-    var modeIndex = chatModes.indexOf(mode);
-    if (modeIndex > -1) {
-      manager.setData(entity, "skyhighheroes:dyn/chat_mode", modeIndex);
-      var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
-      systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
-      modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
+    var chatMode = chatModes.indexOf(mode);
+    if (chatMode > -1) {
+      var chatModule = modules[messagingIndexes[chatMode]];
+      manager.setString(entity.getWornHelmet().nbt(), "chatMode", chatModule.modeID);
+      systemMessage(entity, chatModule.chatModeMessage);
+      chatModule.chatModeInfo(entity);
+    } else {
+      systemMessage(entity, "<n>Unable to find <nh>" + mode + "<n> chat mode!");
     };
   };
   function switchChats(entity, manager, chat) {
-    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    var modeID = entity.getWornChestplate().nbt().getString("chatMode");
+    var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
   function systemInfo(entity) {
@@ -691,22 +694,31 @@ function initSystem(moduleList, name, colorCode) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
+      var nbt = entity.getWornLeggings().nbt();
       if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
         asssignID(entity, manager, robotName, color);
         status(entity);
         var hexColor = hexColors[robotName];
-        manager.setString(entity.getWornLeggings().nbt(), "hudColorSkyHigh", hexColor);
-        if (!entity.getWornLeggings().nbt().hasKey("hudRange")) {
-          manager.setShort(entity.getWornLeggings().nbt(), "hudRange", 0);
+        manager.setString(nbt, "hudColorSkyHigh", hexColor);
+        if (!nbt.hasKey("hudRange")) {
+          manager.setShort(nbt, "hudRange", 0);
         };
-        if (!entity.getWornLeggings().nbt().hasKey("hudHostiles")) {
-          manager.setBoolean(entity.getWornLeggings().nbt(), "hudHostiles", true);
+        if (!nbt.hasKey("hudHostiles")) {
+          manager.setBoolean(nbt, "hudHostiles", true);
         };
-        if (!entity.getWornLeggings().nbt().hasKey("hudFriendlies")) {
-          manager.setBoolean(entity.getWornLeggings().nbt(), "hudFriendlies", true);
+        if (!nbt.hasKey("hudFriendlies")) {
+          manager.setBoolean(nbt, "hudFriendlies", true);
         };
-        if (!entity.getWornLeggings().nbt().hasKey("hudPlayers")) {
-          manager.setBoolean(entity.getWornLeggings().nbt(), "hudPlayers", true);
+        if (!nbt.hasKey("hudPlayers")) {
+          manager.setBoolean(nbt, "hudPlayers", true);
+        };
+        chatModes.forEach(mode => {
+          if (!nbt.hasKey(mode + "Selected")) {
+            manager.setString(nbt, mode + "Selected", "");
+          };
+        });
+        if (!nbt.hasKey("chatMode")) {
+          manager.setString(nbt, "chatMode", "");
         };
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
@@ -779,7 +791,11 @@ function initSystem(moduleList, name, colorCode) {
                   break;
               }
             } else {
-              modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, robotName, 32);
+              var chatMode = chatModes.indexOf(nbt.getString("chatMode"));
+              if (chatMode > -1) {
+                var chatModule = modules[messagingIndexes[chatMode]];
+                chatModule.messageHandler(entity, robotName, 32);
+              };
             };
           };
         };

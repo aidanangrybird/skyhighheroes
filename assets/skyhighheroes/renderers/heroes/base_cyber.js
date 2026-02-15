@@ -58,13 +58,6 @@ loadTextures({
   "right_arm_base": "skyhighheroes:cyber/cyber_right_arm_base.tx.json",
   "left_leg_base": "skyhighheroes:cyber/cyber_left_leg_base.tx.json",
   "right_leg_base": "skyhighheroes:cyber/cyber_right_leg_base.tx.json",
-  "head_camouflage": "skyhighheroes:cyber/cyber_head_camouflage.tx.json",
-  "head_hair_camouflage": "skyhighheroes:cyber/cyber_head_hair_camouflage.tx.json",
-  "body_camouflage": "skyhighheroes:cyber/cyber_body_camouflage.tx.json",
-  "left_arm_camouflage": "skyhighheroes:cyber/cyber_left_arm_camouflage.tx.json",
-  "right_arm_camouflage": "skyhighheroes:cyber/cyber_right_arm_camouflage.tx.json",
-  "left_leg_camouflage": "skyhighheroes:cyber/cyber_left_leg_camouflage.tx.json",
-  "right_leg_camouflage": "skyhighheroes:cyber/cyber_right_leg_camouflage.tx.json",
 });
 
 function init(renderer) {
@@ -176,54 +169,9 @@ function initEffects(renderer) {
   right_leg_base_model = renderer.createEffect("fiskheroes:model").setModel(right_leg_base);
   right_leg_base_model.anchor.set("rightLeg");
   right_leg_base_model.setScale(1.0);
-  
-  //Camouflage
-  var head_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticHeadL2");
-  head_camouflage.texture.set("head_camouflage");
-  head_camouflage.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => cybernetics.headAnimations(entity, data));
-  head_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_camouflage);
-  head_camouflage_model.anchor.set("head");
-  head_camouflage_model.setScale(1.0);
-  var head_hair_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticHeadL2");
-  head_hair_camouflage.texture.set("head_hair_camouflage");
-  head_hair_camouflage.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => cybernetics.headAnimations(entity, data));
-  head_hair_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_camouflage);
-  head_hair_camouflage_model.setOffset(0.0, 0.5, 0.0);
-  head_hair_camouflage_model.anchor.set("head");
-  head_hair_camouflage_model.setScale(1.125);
-  var body_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticBodyL2");
-  body_camouflage.texture.set("body_camouflage");
-  body_camouflage.bindAnimation("skyhighheroes:cybernetic_body").setData((entity, data) => cybernetics.bodyAnimations(entity, data));
-  body_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(body_camouflage);
-  body_camouflage_model.anchor.set("body");
-  body_camouflage_model.setScale(1.0);
-  var left_arm_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticLeftArmL2");
-  left_arm_camouflage.texture.set("left_arm_camouflage");
-  left_arm_camouflage.bindAnimation("skyhighheroes:cybernetic_left_arm").setData((entity, data) => cybernetics.leftArmAnimations(entity, data));
-  left_arm_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(left_arm_camouflage);
-  left_arm_camouflage_model.anchor.set("leftArm");
-  left_arm_camouflage_model.setScale(1.0);
-  var right_arm_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticRightArmL2");
-  right_arm_camouflage.texture.set("right_arm_camouflage");
-  right_arm_camouflage.bindAnimation("skyhighheroes:cybernetic_right_arm").setData((entity, data) => cybernetics.rightArmAnimations(entity, data));
-  right_arm_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(right_arm_camouflage);
-  right_arm_camouflage_model.anchor.set("rightArm");
-  right_arm_camouflage_model.setScale(1.0);
-  var left_leg_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticLeftLegL2");
-  left_leg_camouflage.texture.set("left_leg_camouflage");
-  left_leg_camouflage.bindAnimation("skyhighheroes:cybernetic_left_leg").setData((entity, data) => cybernetics.leftLegAnimations(entity, data));
-  left_leg_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(left_leg_camouflage);
-  left_leg_camouflage_model.anchor.set("leftLeg");
-  left_leg_camouflage_model.setScale(1.0);
-  var right_leg_camouflage = renderer.createResource("MODEL", "skyhighheroes:CyberneticRightLegL2");
-  right_leg_camouflage.texture.set("right_leg_camouflage");
-  right_leg_camouflage.bindAnimation("skyhighheroes:cybernetic_right_leg").setData((entity, data) => cybernetics.rightLegAnimations(entity, data));
-  right_leg_camouflage_model = renderer.createEffect("fiskheroes:model").setModel(right_leg_camouflage);
-  right_leg_camouflage_model.anchor.set("rightLeg");
-  right_leg_camouflage_model.setScale(1.0);
 
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
-  metal_heat.includeEffects(head_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, head_base_model, head_hair_base_model, body_base_model, left_arm_base_model, right_arm_base_model, left_leg_base_model, right_leg_base_model, head_camouflage_model, head_hair_camouflage_model, body_camouflage_model, left_arm_camouflage_model, right_arm_camouflage_model, left_leg_camouflage_model, right_leg_camouflage_model);
+  metal_heat.includeEffects(head_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, head_base_model, head_hair_base_model, body_base_model, left_arm_base_model, right_arm_base_model, left_leg_base_model, right_leg_base_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
   }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
@@ -245,16 +193,22 @@ function render(entity, renderLayer, isFirstPersonArm) {
   var suit = entity.getWornHelmet();
   var nbt = suit.nbt();
   if (entity.is("DISPLAY")) {
-    if (nbt.getBoolean("camoOnStand")) {
-      head_camouflage_model.render();
-      head_hair_camouflage_model.render();
-      body_camouflage_model.render();
-      left_arm_camouflage_model.render();
-      right_arm_camouflage_model.render();
-      left_leg_camouflage_model.render();
-      right_leg_camouflage_model.render();
-    };
-    if (!nbt.getBoolean("camoOnStand")) {
+    head_base_model.render();
+    head_hair_base_model.render();
+    body_base_model.render();
+    left_arm_base_model.render();
+    right_arm_base_model.render();
+    left_leg_base_model.render();
+    right_leg_base_model.render();
+    head_model.render();
+    body_model.render();
+    left_arm_model.render();
+    right_arm_model.render();
+    left_leg_model.render();
+    right_leg_model.render();
+  };
+  if (entity.isWearingFullSuit()) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") < 1) {
       head_base_model.render();
       head_hair_base_model.render();
       body_base_model.render();
@@ -263,36 +217,14 @@ function render(entity, renderLayer, isFirstPersonArm) {
       left_leg_base_model.render();
       right_leg_base_model.render();
     };
-    head_model.render();
-    body_model.render();
-    left_arm_model.render();
-    right_arm_model.render();
-    left_leg_model.render();
-    right_leg_model.render();
-  };
-  if (entity.isWearingFullSuit() && (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") < 1)) {
-    head_model.render();
-    body_model.render();
-    left_arm_model.render();
-    right_arm_model.render();
-    left_leg_model.render();
-    right_leg_model.render();
-    
-    head_base_model.render();
-    head_hair_base_model.render();
-    body_base_model.render();
-    left_arm_base_model.render();
-    right_arm_base_model.render();
-    left_leg_base_model.render();
-    right_leg_base_model.render();
-
-    head_camouflage_model.render();
-    head_hair_camouflage_model.render();
-    body_camouflage_model.render();
-    left_arm_camouflage_model.render();
-    right_arm_camouflage_model.render();
-    left_leg_camouflage_model.render();
-    right_leg_camouflage_model.render();
+    if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") == 0) {
+      head_model.render();
+      body_model.render();
+      left_arm_model.render();
+      right_arm_model.render();
+      left_leg_model.render();
+      right_leg_model.render();
+    };
 
     satellite_beams.render(entity, isFirstPersonArm);
     body_boosters.render(entity, renderLayer, isFirstPersonArm);
@@ -333,26 +265,59 @@ function render(entity, renderLayer, isFirstPersonArm) {
     };
     if (nbt.getInteger("hudLeftSide") == 3) {
       leftSide = "Rockets";
+      var auxSet = (entity.getData("skyhighheroes:dyn/rockets_aux_timer") > 0);
+      var bodySet = (entity.getData("skyhighheroes:dyn/rockets_body_timer") > 0);
+      var legsSet = (entity.getData("skyhighheroes:dyn/rockets_legs_timer") > 0);
       var rocketsToRender = ["Rockets:"];
       var auxRocket = "Aux: " + (nbt.getBoolean("rocketsAux") ? "ARMED" : "DISARMED") + " (" + (nbt.getBoolean("auxRocketsOnFall") ? "ON FALL" : "OFF") + ")";
       var bodyRocket = "Body: " + (nbt.getBoolean("rocketsBody") ? "ARMED" : "DISARMED") + " (" + (nbt.getBoolean("bodyRocketsOnFall") ? "ON FALL" : "OFF") + ")";
       var legRocket = "Legs: " + (nbt.getBoolean("rocketsLegs") ? "ARMED" : "DISARMED") + " (" + (nbt.getBoolean("legRocketsOnFall") ? "ON FALL" : "OFF") + ")";
       var wingRocket = "Wings: " + (nbt.getBoolean("rocketsWings") ? "ARMED" : "DISARMED");
+
+      var bodyRockets = "Body: " + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_body_left_deploy_timer") > 0) ? "L" : "-") + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_body_right_deploy_timer") > 0) ? "R" : "-");
+      var leftArmRockets = "Left Arm: " + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_outer_booster_deploy_timer") > 0) ? "O" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_front_booster_deploy_timer") > 0) ? "F" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_back_booster_deploy_timer") > 0) ? "B" : "-");
+      var rightArmRockets = "Right Arm: " + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_arm_outer_booster_deploy_timer") > 0) ? "O" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_arm_front_booster_deploy_timer") > 0) ? "F" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_arm_back_booster_deploy_timer") > 0) ? "B" : "-");
+      var upperLeftLegRockets = "Upper Left Leg: " + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_outer_booster_deploy_timer") > 0) ? "O" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_front_booster_deploy_timer") > 0) ? "F" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_back_booster_deploy_timer") > 0) ? "B" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_booster_deploy_timer") > 0) ? "I" : "-");
+      var upperRightLegRockets = "Upper Right Leg: " + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_outer_booster_deploy_timer") > 0) ? "O" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_front_booster_deploy_timer") > 0) ? "F" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_back_booster_deploy_timer") > 0) ? "B" : "-") + ((auxSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_booster_deploy_timer") > 0) ? "I" : "-");
+      var leftLegRockets = "Left Leg: " + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_main_deploy_timer") > 0) ? "M" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_outer_deploy_timer") > 0) ? "O" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_front_deploy_timer") > 0) ? "F" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_back_deploy_timer") > 0) ? "B" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") > 0) ? "I" : "-");
+      var rightLegRockets = "Right Leg: " + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_main_deploy_timer") > 0) ? "M" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_outer_deploy_timer") > 0) ? "O" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_front_deploy_timer") > 0) ? "F" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_back_deploy_timer") > 0) ? "B" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") > 0) ? "I" : "-");
+      
       rocketsToRender.push(auxRocket);
       rocketsToRender.push(bodyRocket);
       rocketsToRender.push(legRocket);
       rocketsToRender.push(wingRocket);
+      rocketsToRender.push(bodyRockets);
+      rocketsToRender.push(leftArmRockets);
+      rocketsToRender.push(rightArmRockets);
+      rocketsToRender.push(upperLeftLegRockets);
+      rocketsToRender.push(upperRightLegRockets);
+      rocketsToRender.push(leftLegRockets);
+      rocketsToRender.push(rightLegRockets);
+
       text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     if (nbt.getInteger("hudLeftSide") == 4) {
       leftSide = "Cannons";
+      var headSet = (entity.getData("skyhighheroes:dyn/cannons_head_timer") > 0);
+      var bodySet = (entity.getData("skyhighheroes:dyn/cannons_body_timer") > 0);
+      var armsSet = (entity.getData("skyhighheroes:dyn/cannons_arms_timer") > 0);
       var cannonsToRender = ["Cannons:"];
       var headCannon = "Head: " + (nbt.getBoolean("cannonsHead") ? "ARMED" : "DISARMED");
       var bodyCannon = "Body: " + (nbt.getBoolean("cannonsBody") ? "ARMED" : "DISARMED");
       var armCannon = "Arms: " + (nbt.getBoolean("cannonsArms") ? "ARMED" : "DISARMED");
+
+      var headCannons = "Head: " + ((headSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") > 0) ? "L" : "-") + ((headSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") > 0) ? "R" : "-");
+      var bodyCannons = "Body: " + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_left_deploy_timer") > 0) ? "L" : "-") + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_right_deploy_timer") > 0) ? "R" : "-");
+      var leftArmCannons = "Left Arm: " + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_bottom_deploy_timer") > 0) ? "M" : "-") + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_front_deploy_timer") > 0) ? "F" : "-") + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_back_deploy_timer") > 0) ? "B" : "-");
+      var rightArmCannons = "Right Arm: " + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_bottom_deploy_timer") > 0) ? "M" : "-") + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_front_deploy_timer") > 0) ? "F" : "-") + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_back_deploy_timer") > 0) ? "B" : "-");
+
       cannonsToRender.push(headCannon);
       cannonsToRender.push(bodyCannon);
       cannonsToRender.push(armCannon);
+      cannonsToRender.push(headCannons);
+      cannonsToRender.push(bodyCannons);
+      cannonsToRender.push(leftArmCannons);
+      cannonsToRender.push(rightArmCannons);
       text_renderer.renderLines(isFirstPersonArm, "left", "center", cannonsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     if (nbt.getInteger("hudLeftSide") == 5) {
@@ -366,6 +331,12 @@ function render(entity, renderLayer, isFirstPersonArm) {
       commsToRender.push(antenna);
       commsToRender.push(connectedSatellite);
       commsToRender.push(frequency);
+      var cybers = cybernetics.availableCybers(entity);
+      if (cybers.length > 0) {
+        cybers.forEach(cyber => {
+          commsToRender.push(cyber);
+        });
+      };
       text_renderer.renderLines(isFirstPersonArm, "left", "center", commsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     if (nbt.getInteger("hudLeftSide") == 6) {
@@ -392,21 +363,17 @@ function render(entity, renderLayer, isFirstPersonArm) {
     if (nbt.getInteger("hudTopSide") == 1) {
       topSide = "Thermoptics";
       var thermoToRender = [];
-      var disguise = "" + (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") == 1 ? "DISGUISED" : "UNDISGUISED");
-      var clothing = "" + (nbt.getBoolean("disguiseClothing") ? "CLOTHED" : "UNCLOTHED");
       var camouflage = "" + (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") == 1 ? "CAMOUFLAGED" : "UNCAMOUFLAGED");
-      thermoToRender.push(disguise);
       thermoToRender.push(camouflage);
-      thermoToRender.push(clothing);
       text_renderer.renderLines(isFirstPersonArm, "center", "center", thermoToRender, 0.0, -100.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     if (nbt.getInteger("hudTopSide") == 2) {
       topSide = "Coords";
       var coordsToRender = [];
       var coords = "" + Math.round(entity.posX()) + " " + Math.round(entity.posY()) + " " + Math.round(entity.posZ());
-      var dimension = entity.world().getDimension();
+      var direction = stuff.angleToDirection(entity.getInterpolatedData("skyhighheroes:dyn/bearing"));
       coordsToRender.push(coords);
-      coordsToRender.push(dimension);
+      coordsToRender.push(direction);
       text_renderer.renderLines(isFirstPersonArm, "center", "center", coordsToRender, 0.0, -100.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     //Right
@@ -415,12 +382,20 @@ function render(entity, renderLayer, isFirstPersonArm) {
       var statusToRender = [];
       var model = nbt.getString("cyberModelID");
       var name = "(" + nbt.getString("cyberAliasName") + ")";
-      var durability = "Durability: " + (suit.maxDamage() - suit.damage()) + "/" + suit.maxDamage();
       var health = "Health: " + entity.getHealth() + "/" + entity.getMaxHealth();
+      var chatMode = "Chat Mode: " + nbt.getString("chatMode");
       statusToRender.push(model);
       statusToRender.push(name);
-      statusToRender.push(durability);
       statusToRender.push(health);
+      statusToRender.push(chatMode);
+      if (nbt.getString("chatMode") == "group") {
+        var selectedGroup = "Group: " + nbt.getString("groupSelected");
+        statusToRender.push(selectedGroup);
+      };
+      if (nbt.getString("chatMode") == "normal") {
+        var selectedContact = "Contact: " + nbt.getString("normalSelected");
+        statusToRender.push(selectedContact);
+      };
       text_renderer.renderLines(isFirstPersonArm, "right", "center", statusToRender, 210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
     };
     if (nbt.getInteger("hudRightSide") == 2) {

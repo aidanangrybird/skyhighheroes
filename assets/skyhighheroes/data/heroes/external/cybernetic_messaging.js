@@ -14,7 +14,7 @@ function initModule(system) {
     name: "cyberMessaging",
     type: 2,
     modeID: "cyber",
-    chatModeInfo: "<n>You are now in <nh>cyber<n> mode!",
+    chatModeMessage: "<n>You are now in <nh>cyber<n> mode!",
     messageHandler: function (entity, name, range) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var newName = system.getModelID(entity);
@@ -73,8 +73,14 @@ function initModule(system) {
       };
       cyberMessage(entity, newName, message);
     },
-    chatInfo: function (player, manager, chat) {
-      system.systemMessage(player, "<n>You are in <nh>cyber messaging <n>mode!");
+    chatInfo: function (entity) {
+      var nbt = entity.getWornHelmet().nbt();
+      system.systemMessage(entity, "<n>You are connected to a satellite at <nh>" + nbt.getShort("xSat") + ", " + nbt.getShort("ySat") + ", " + nbt.getShort("zSat")  + "<n> on frequency <nh>" + nbt.getShort("freq") + "<n>!");
+    },
+    chatModeInfo: function (entity) {
+      var nbt = entity.getWornHelmet().nbt();
+      system.systemMessage(entity, "<n>You are in <nh>cyber messaging <n>mode!");
+      system.systemMessage(entity, "<n>You are connected to a satellite at <nh>" + nbt.getShort("xSat") + ", " + nbt.getShort("ySat") + ", " + nbt.getShort("zSat")  + "<n> on frequency <nh>" + nbt.getShort("freq") + "<n>!");
     },
   };
 };

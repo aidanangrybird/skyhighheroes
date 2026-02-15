@@ -975,26 +975,26 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/wings", wings);
         if (entity.getData("fiskheroes:flight_timer") < 0.2) {
           if (aux && body && legs) {
-            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Rockets!", 16);
+            system.shoutMessage(entity, "Activating Rockets!", 16);
           } else if ((aux && body && !legs) || (aux && !body && legs) || (!aux && body && legs)) {
             if (aux && body && !legs) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Aux and Body Rockets!", 16);
+              system.shoutMessage(entity, "Activating Aux and Body Rockets!", 16);
             };
             if (aux && !body && legs) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Body and Leg Rockets!", 16);              
+              system.shoutMessage(entity, "Activating Body and Leg Rockets!", 16);              
             };
             if (!aux && body && legs) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Body and Leg Rockets!", 16);
+              system.shoutMessage(entity, "Activating Body and Leg Rockets!", 16);
             };
           } else {
             if (aux) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Aux Rockets!", 16);
+              system.shoutMessage(entity, "Activating Aux Rockets!", 16);
             };
             if (body) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Body Rockets!", 16);
+              system.shoutMessage(entity, "Activating Body Rockets!", 16);
             };
             if (legs) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Leg Rockets!", 16);
+              system.shoutMessage(entity, "Activating Leg Rockets!", 16);
             };
           };
         };

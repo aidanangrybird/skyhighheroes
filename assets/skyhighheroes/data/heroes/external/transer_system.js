@@ -363,10 +363,6 @@ function moduleMessage(module, entity, message) {
  **/
 function setKeyBind(entity, keyBind) {
   switch (keyBind) {
-    case "CYCLE_CHATS":
-      return !entity.isSneaking();
-    case "CYCLE_CHAT_MODES":
-      return entity.isSneaking();
     default:
       return true;
   };
@@ -586,32 +582,20 @@ function initSystem(moduleList, transerName, satellite) {
     };
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
-  function cycleChatModes(entity, manager) {
-    manager.setData(entity, "skyhighheroes:dyn/chat_mode", entity.getData("skyhighheroes:dyn/chat_mode") + 1);
-    if (entity.getData("skyhighheroes:dyn/chat_mode") > (messagingIndexes.length-1)) {
-      manager.setData(entity, "skyhighheroes:dyn/chat_mode", 0);
-    };
-    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
-    systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
-    modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
-    return true;
-  };
-  function cycleChats(entity, manager) {
-    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
-    modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
-    return true;
-  };
   function switchChatModes(entity, manager, mode) {
-    var modeIndex = chatModes.indexOf(mode);
-    if (modeIndex > -1) {
-      manager.setData(entity, "skyhighheroes:dyn/chat_mode", modeIndex);
-      var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
-      systemMessage(entity, modules[messagingIndexes[chatMode]].chatModeInfo);
-      modules[messagingIndexes[chatMode]].chatInfo(entity, manager);
+    var chatMode = chatModes.indexOf(mode);
+    if (chatMode > -1) {
+      var chatModule = modules[messagingIndexes[chatMode]];
+      manager.setString(entity.getWornHelmet().nbt(), "chatMode", chatModule.modeID);
+      systemMessage(entity, chatModule.chatModeMessage);
+      chatModule.chatModeInfo(entity);
+    } else {
+      systemMessage(entity, "<n>Unable to find <nh>" + mode + "<n> chat mode!");
     };
   };
   function switchChats(entity, manager, chat) {
-    var chatMode = entity.getData("skyhighheroes:dyn/chat_mode");
+    var modeID = entity.getWornChestplate().nbt().getString("chatMode");
+    var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
   function systemInfo(entity) {
@@ -686,15 +670,9 @@ function initSystem(moduleList, transerName, satellite) {
      **/
     keyBinds: (hero) => {
       hero.addKeyBind("SHAPE_SHIFT", "Send message/Enter command", 4);
-      hero.addKeyBindFunc("CYCLE_CHATS", (player, manager) => cycleChats(player, manager), "Cycle chats", 3);
-      hero.addKeyBindFunc("CYCLE_CHAT_MODES", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 3);
     },
     setKeyBind: (entity, keyBind) => {
       switch (keyBind) {
-        case "CYCLE_CHATS":
-          return !entity.isSneaking();
-        case "CYCLE_CHAT_MODES":
-          return entity.isSneaking();
         default:
           return true;
       };
@@ -704,8 +682,6 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {JSHero} hero - Required
      **/
     initEMWaveChange: (hero) => {
-      hero.addKeyBindFunc("CYCLE_CHATS_EM", (player, manager) => cycleChats(player, manager), "Cycle chats", 2);
-      hero.addKeyBindFunc("CYCLE_CHAT_MODES_EM", (player, manager) => cycleChatModes(player, manager), "Cycle chat modes", 2);
       if (emBeingIndex > -1) {
         modules[emBeingIndex].keyBinds(hero);
       };
@@ -813,12 +789,21 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
+      var nbt = entity.getWornChestplate().nbt();
       if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true)) {
         assignTranser(entity, manager, assignedSatellite);
         status(entity);
         if (human != null) {
           var hexColor = hexColors[human];
-          manager.setString(entity.getWornChestplate().nbt(), "hudColorSkyHigh", hexColor);
+          manager.setString(nbt, "hudColorSkyHigh", hexColor);
+        };
+        chatModes.forEach(mode => {
+          if (!nbt.hasKey(mode + "Selected")) {
+            manager.setString(nbt, mode + "Selected", "");
+          };
+        });
+        if (!nbt.hasKey("chatMode")) {
+          manager.setString(nbt, "chatMode", "");
         };
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
@@ -899,7 +884,11 @@ function initSystem(moduleList, transerName, satellite) {
               } else {
                 name = entity.getName();
               };
-              modules[messagingIndexes[entity.getData("skyhighheroes:dyn/chat_mode")]].messageHandler(entity, name, 32);
+              var chatMode = chatModes.indexOf(nbt.getString("chatMode"));
+              if (chatMode > -1) {
+                var chatModule = modules[messagingIndexes[chatMode]];
+                chatModule.messageHandler(entity, name, 32);
+              };
             };
           };
         };

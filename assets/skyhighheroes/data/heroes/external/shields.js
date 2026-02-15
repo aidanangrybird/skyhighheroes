@@ -307,13 +307,13 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/shield_right_arm", right);
         if (entity.getData("fiskheroes:shield_timer") < 0.5) {
           if (left && right) {
-            system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Shields!", 16);
+            system.shoutMessage(entity, "Activating Shields!", 16);
           } else {
             if (left) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Left Shield!", 16);
+              system.shoutMessage(entity, "Activating Left Shield!", 16);
             };
             if (right) {
-              system.shoutMessage(entity, "<" + entity.getData("fiskheroes:disguise") + "> Activating Right Shield!", 16);
+              system.shoutMessage(entity, "Activating Right Shield!", 16);
             };
           };
         };
