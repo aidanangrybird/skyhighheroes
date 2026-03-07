@@ -20,9 +20,9 @@ function initModule(system) {
               system.moduleMessage(this, entity, "<e>Unable to arm rockets! Wings are already armed!");
             } else {
               switch (argList[2]) {
-                case "auxOnFall":
-                  manager.setBoolean(nbt, "auxRocketsOnFall", true);
-                  system.moduleMessage(this, entity, "<s>Armed aux rockets for <sh>onFall<s> protection!");
+                case "armsOnFall":
+                  manager.setBoolean(nbt, "armRocketsOnFall", true);
+                  system.moduleMessage(this, entity, "<s>Armed arm rockets for <sh>onFall<s> protection!");
                   break;
                 case "bodyOnFall":
                   manager.setBoolean(nbt, "bodyRocketsOnFall", true);
@@ -32,9 +32,9 @@ function initModule(system) {
                   manager.setBoolean(nbt, "legRocketsOnFall", true);
                   system.moduleMessage(this, entity, "<s>Armed leg rockets for <sh>onFall<s> protection!");
                   break;
-                case "aux":
-                  manager.setBoolean(nbt, "rocketsAux", true);
-                  system.moduleMessage(this, entity, "<s>Armed <sh>aux<s> rockets!");
+                case "arms":
+                  manager.setBoolean(nbt, "rocketsArms", true);
+                  system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> rockets!");
                   break;
                 case "body":
                   manager.setBoolean(nbt, "rocketsBody", true);
@@ -49,7 +49,7 @@ function initModule(system) {
                   system.moduleMessage(this, entity, "<s>Armed <sh>wings<s> to deploy on rockets!");
                   break;
                 case "*":
-                  manager.setBoolean(nbt, "rocketsAux", true);
+                  manager.setBoolean(nbt, "rocketsArms", true);
                   manager.setBoolean(nbt, "rocketsBody", true);
                   manager.setBoolean(nbt, "rocketsLegs", true);
                   system.moduleMessage(this, entity, "<s>Armed <sh>all<s> rockets!");
@@ -62,9 +62,9 @@ function initModule(system) {
             break;
           case "disarm":
             switch (argList[2]) {
-              case "auxOnFall":
-                manager.setBoolean(nbt, "auxRocketsOnFall", false);
-                system.moduleMessage(this, entity, "<s>Disarmed aux rockets for <sh>onFall<s> protection!");
+              case "armsOnFall":
+                manager.setBoolean(nbt, "armsRocketsOnFall", false);
+                system.moduleMessage(this, entity, "<s>Disarmed arm rockets for <sh>onFall<s> protection!");
                 break;
               case "bodyOnFall":
                 manager.setBoolean(nbt, "bodyRocketsOnFall", false);
@@ -74,12 +74,12 @@ function initModule(system) {
                 manager.setBoolean(nbt, "legRocketsOnFall", false);
                 system.moduleMessage(this, entity, "<s>Disarmed leg rockets for <sh>onFall<s> protection!");
                 break;
-              case "aux":
-                if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
-                  manager.setBoolean(nbt, "rocketsAux", false);
-                  system.moduleMessage(this, entity, "<s>Disarmed <sh>aux<s> rockets!");
+              case "arms":
+                if (!(nbt.getBoolean("rocketsArms") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsArms", false);
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> rockets!");
                 } else {
-                  system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+                  system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>arm<e> rockets!");
                 };
                 break;
               case "body":
@@ -103,11 +103,11 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s> to deploy on rockets!");
                 break;
               case "*":
-                if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
-                  manager.setBoolean(nbt, "rocketsAux", false);
-                  system.moduleMessage(this, entity, "<s>Disarmed <sh>aux<s> rockets!");
+                if (!(nbt.getBoolean("rocketsArms") && entity.getData("fiskheroes:flight_timer") > 0)) {
+                  manager.setBoolean(nbt, "rocketsArms", false);
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> rockets!");
                 } else {
-                  system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+                  system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>arm<e> rockets!");
                 };
                 if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
                   manager.setBoolean(nbt, "rocketsBody", false);
@@ -130,124 +130,50 @@ function initModule(system) {
             break;
           case "show":
             switch (argList[2]) {
-              case "aux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>aux<s> rockets!");
-                break;
               case "arms":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>arm<s> rockets!");
                 break;
               case "leftArm":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> rockets!");
                 break;
               case "leftArmOuter":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm outer<s> rocket!");
                 break;
               case "leftArmFront":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm front<s> rocket!");
                 break;
               case "leftArmBack":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left arm back<s> rocket!");
                 break;
               case "rightArm":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm<s> rockets!");
                 break;
               case "rightArmOuter":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm outer<s> rocket!");
                 break;
               case "rightArmFront":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm front<s> rocket!");
                 break;
               case "rightArmBack":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right arm back<s> rocket!");
-                break;
-              case "legsAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>aux legs<s> rockets!");
-                break;
-              case "leftLegAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>left leg aux<s> rocket!");
-                break;
-              case "leftLegOuterAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>left leg outer aux<s> rocket!");
-                break;
-              case "leftLegInnerAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>left leg inner aux<s> rocket!");
-                break;
-              case "leftLegFrontAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>left leg front aux<s> rocket!");
-                break;
-              case "leftLegBackAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>left leg back aux<s> rocket!");
-                break;
-              case "rightLegAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>right leg aux<s> rocket!");
-                break;
-              case "rightLegOuterAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>right leg outer aux<s> rocket!");
-                break;
-              case "rightLegInnerAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>right leg inner aux<s> rocket!");
-                break;
-              case "rightLegFrontAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>right leg front aux<s> rocket!");
-                break;
-              case "rightLegBackAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>right leg back aux<s> rocket!");
                 break;
               case "body":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_left_deployed", true);
@@ -262,16 +188,6 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_right_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right body<s> rocket!");
               case "legs":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_deployed", true);
@@ -280,18 +196,16 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>leg<s> rockets!");
                 break;
               case "leftLeg":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left leg<s> rockets!");
                 break;
               case "leftLegMain":
@@ -322,27 +236,16 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Deployed <sh>left leg back<s> rocket!");
                 break;
               case "rightLeg":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>right leg<s> rockets!");
                 break;
               case "rightLegMain":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>main right leg<s> rocket!");
-                break;
-              case "rightLegLower":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", true);
-                system.moduleMessage(this, entity, "<s>Deployed <sh>right leg lower<s> rockets!");
                 break;
               case "rightLegOuter":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_deployed", false);
@@ -397,22 +300,12 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Deployed <sh>back leg<s> rockets!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", true);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_deployed", true);
@@ -421,6 +314,8 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", true);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_left_deployed", true);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_right_deployed", true);
                 system.moduleMessage(this, entity, "<s>Deployed <sh>all<s> rockets!");
@@ -432,124 +327,50 @@ function initModule(system) {
             break;
           case "hide":
             switch (argList[2]) {
-              case "aux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>aux<s> rockets!");
-                break;
               case "arms":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>arm<s> rockets!");
                 break;
               case "leftArm":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm<s> rockets!");
                 break;
               case "leftArmOuter":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm outer<s> rocket!");
                 break;
               case "leftArmFront":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm front<s> rocket!");
                 break;
               case "leftArmBack":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left arm back<s> rocket!");
                 break;
               case "rightArm":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm<s> rockets!");
                 break;
               case "rightArmOuter":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm outer<s> rocket!");
                 break;
               case "rightArmFront":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm front<s> rocket!");
                 break;
               case "rightArmBack":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right arm back<s> rocket!");
-                break;
-              case "legsAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>aux legs<s> rockets!");
-                break;
-              case "leftLegAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left leg aux<s> rocket!");
-                break;
-              case "leftLegOuterAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left leg outer aux<s> rocket!");
-                break;
-              case "leftLegInnerAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left leg inner aux<s> rocket!");
-                break;
-              case "leftLegFrontAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left leg front aux<s> rocket!");
-                break;
-              case "leftLegBackAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left leg back aux<s> rocket!");
-                break;
-              case "rightLegAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right leg aux<s> rocket!");
-                break;
-              case "rightLegOuterAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right leg outer aux<s> rocket!");
-                break;
-              case "rightLegInnerAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right leg inner aux<s> rocket!");
-                break;
-              case "rightLegFrontAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right leg front aux<s> rocket!");
-                break;
-              case "rightLegBackAux":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right leg back aux<s> rocket!");
                 break;
               case "body":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_left_deployed", false);
@@ -564,16 +385,6 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_right_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right body<s> rocket!");
               case "legs":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_deployed", false);
@@ -582,18 +393,16 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>leg<s> rockets!");
                 break;
               case "leftLeg":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left leg<s> rockets!");
                 break;
               case "leftLegMain":
@@ -624,15 +433,11 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Retracted <sh>left leg back<s> rocket!");
                 break;
               case "rightLeg":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>right leg<s> rockets!");
                 break;
               case "rightLegMain":
@@ -699,22 +504,12 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<s>Retracted <sh>back leg<s> rockets!");
                 break;
               case "*":
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
-                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_deployed", false);
@@ -723,6 +518,8 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
+                manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_left_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/rocket_body_right_deployed", false);
                 system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> rockets!");
@@ -753,8 +550,8 @@ function initModule(system) {
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Rockets commands:");
-            system.moduleMessage(this, entity, "<n>!rocket arm <onFall|aux|body|legs|*> <nh>-<n> Arms set of rockets or onFall protection");
-            system.moduleMessage(this, entity, "<n>!rocket disarm <onFall|aux|body|legs|*> <nh>-<n> Disarms set of rockets or onFall protection");
+            system.moduleMessage(this, entity, "<n>!rocket arm <onFall|arms|body|legs|*> <nh>-<n> Arms set of rockets or onFall protection");
+            system.moduleMessage(this, entity, "<n>!rocket disarm <onFall|arms|body|legs|*> <nh>-<n> Disarms set of rockets or onFall protection");
             system.moduleMessage(this, entity, "<n>!rocket show <rocket|rocketSet> <nh>-<n> Deploys set of rockets");
             system.moduleMessage(this, entity, "<n>!rocket hide <rocket|rocketSet> <nh>-<n> Retracts set of rockets");
             system.moduleMessage(this, entity, "<n>!rocket set <holo|holoBoost|inner> <nh>-<n> Settings");
@@ -762,39 +559,31 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!rocket help <nh>-<n> Shows rockets commands");
             break;
           case "status":
-            var auxSet = (entity.getData("skyhighheroes:dyn/rockets_aux_timer") > 0);
+            var armsSet = (entity.getData("skyhighheroes:dyn/rockets_arms_timer") > 0);
             var bodySet = (entity.getData("skyhighheroes:dyn/rockets_body_timer") > 0);
             var legsSet = (entity.getData("skyhighheroes:dyn/rockets_legs_timer") > 0);
             system.moduleMessage(this, entity, "<n>Rocket status:");
-            system.moduleMessage(this, entity, "<n>Aux set: <nh>" + (nbt.getBoolean("rocketsAux") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Arm set: <nh>" + (nbt.getBoolean("rocketsArms") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Body set: <nh>" + (nbt.getBoolean("rocketsBody") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Leg set: <nh>" + (nbt.getBoolean("rocketsLegs") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Aux set fall protection: <nh>" + (nbt.getBoolean("auxRocketsOnFall") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Arm set fall protection: <nh>" + (nbt.getBoolean("armRocketsOnFall") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Body set fall protection: <nh>" + (nbt.getBoolean("bodyRocketsOnFall") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Leg set fall protection: <nh>" + (nbt.getBoolean("legRocketsOnFall") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Wings: <nh>" + (nbt.getBoolean("rocketsWings") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Left Arm outer aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_arm_outer_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Arm front aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_arm_front_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Arm back aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_arm_back_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>right Arm outer aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_arm_outer_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>right Arm front aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_arm_front_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>right Arm back aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_arm_back_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Arm outer: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_arm_outer_deploy_timer") > 0) || armsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_arm_front_deploy_timer") > 0) || armsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_arm_back_deploy_timer") > 0) || armsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>right Arm outer: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_arm_outer_deploy_timer") > 0) || armsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>right Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_arm_front_deploy_timer") > 0) || armsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>right Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_arm_back_deploy_timer") > 0) || armsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Body: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_body_left_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Body: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_body_right_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>left Leg outer aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_inner_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>left Leg inner aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_outer_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>left Leg front aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_front_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>left Leg back aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_back_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Leg outer: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Leg inner: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_outer_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Leg inner: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Leg outer: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_outer_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Leg front: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_front_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Leg back: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_back_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Leg outer aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_inner_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Leg inner aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_outer_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Leg front aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_front_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Leg back aux: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_back_booster_deploy_timer") > 0) || auxSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Leg outer: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Leg inner: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_outer_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Left Leg back: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_back_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));;
+            system.moduleMessage(this, entity, "<n>Right Leg inner: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
+            system.moduleMessage(this, entity, "<n>Right Leg outer: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_outer_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Leg front: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_front_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right Leg back: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_back_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Left Leg main: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_left_leg_main_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "RETRACTED"));
@@ -817,9 +606,9 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unable to arm rockets! Wings are already armed!");
       } else {
         switch(arg) {
-          case "auxRockets":
-            manager.setBoolean(nbt, "rocketsAux", true);
-            system.moduleMessage(this, entity, "<s>Armed <sh>aux<s> rockets!");
+          case "armsRockets":
+            manager.setBoolean(nbt, "rocketsArms", true);
+            system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> rockets!");
             return;
           case "bodyRockets":
             manager.setBoolean(nbt, "rocketsBody", true);
@@ -834,7 +623,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<s>Armed <sh>wings<s> to deploy on rockets!");
             return;
           case "rockets":
-            manager.setBoolean(nbt, "rocketsAux", true);
+            manager.setBoolean(nbt, "rocketsArms", true);
             manager.setBoolean(nbt, "rocketsBody", true);
             manager.setBoolean(nbt, "rocketsLegs", true);
             system.moduleMessage(this, entity, "<s>Armed <sh>all<s> rockets!");
@@ -845,12 +634,12 @@ function initModule(system) {
     disarmHandler: function (entity, manager, arg) {
       var nbt = entity.getWornHelmet().nbt();
       switch (arg) {
-        case "auxRockets":
-          if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
-            manager.setBoolean(nbt, "rocketsAux", false);
-            system.moduleMessage(this, entity, "<s>Disarmed <sh>aux<s> rockets!");
+        case "armsRockets":
+          if (!(nbt.getBoolean("rocketsArms") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsArms", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> rockets!");
           } else {
-            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>arm<e> rockets!");
           };
           return;
         case "bodyRockets":
@@ -874,11 +663,11 @@ function initModule(system) {
           system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s> to deploy on rockets!");
           return;
         case "rockets":
-          if (!(nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flight_timer") > 0)) {
-            manager.setBoolean(nbt, "rocketsAux", false);
-            system.moduleMessage(this, entity, "<s>Disarmed <sh>aux<s> rockets!");
+          if (!(nbt.getBoolean("rocketsArms") && entity.getData("fiskheroes:flight_timer") > 0)) {
+            manager.setBoolean(nbt, "rocketsArms", false);
+            system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> rockets!");
           } else {
-            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>aux<e> rockets!");
+            system.moduleMessage(this, entity, "<e>Unable to disarm active <eh>arm<e> rockets!");
           };
           if (!(nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flight_timer") > 0)) {
             manager.setBoolean(nbt, "rocketsBody", false);
@@ -900,12 +689,12 @@ function initModule(system) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         var nbt = entity.getWornHelmet().nbt();
-        var aux = (nbt.getBoolean("rocketsAux")) ? "T" : "F";
+        var arms = (nbt.getBoolean("rocketsArms")) ? "T" : "F";
         var body = (nbt.getBoolean("rocketsBody")) ? "T" : "F";
         var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
-        if (modifier.name() == "fiskheroes:controlled_flight") {
-          if (modifier.id() == "rockets_" + aux + body + legs) {
-            result = nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs");
+        if (modifier.name() == "fiskheroes:controlled_flight" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
+          if (modifier.id() == "rockets_" + arms + body + legs) {
+            result = nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs");
           };
         };
       };
@@ -916,24 +705,16 @@ function initModule(system) {
     },
     whenDisabled: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
-      manager.setBoolean(nbt, "rocketsAux", false);
+      manager.setBoolean(nbt, "rocketsArms", false);
       manager.setBoolean(nbt, "rocketsBody", false);
       manager.setBoolean(nbt, "rocketsLegs", false);
       manager.setBoolean(nbt, "rocketsWings", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_inner_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_front_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_back_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_outer_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_inner_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_front_booster_deployed", false);
-      manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_back_booster_deployed", false);
+      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_outer_deployed", false);
+      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_front_deployed", false);
+      manager.setData(entity, "skyhighheroes:dyn/rocket_left_arm_back_deployed", false);
+      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_outer_deployed", false);
+      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_front_deployed", false);
+      manager.setData(entity, "skyhighheroes:dyn/rocket_right_arm_back_deployed", false);
       manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_main_deployed", false);
       manager.setData(entity, "skyhighheroes:dyn/rocket_right_leg_main_deployed", false);
       manager.setData(entity, "skyhighheroes:dyn/rocket_left_leg_outer_deployed", false);
@@ -949,10 +730,10 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       var nbt = entity.getWornHelmet().nbt();
-      if (!entity.isSneaking() && !entity.getData("fiskheroes:flying") && (nbt.getBoolean("auxRocketsOnFall") || nbt.getBoolean("bodyRocketsOnFall") || nbt.getBoolean("legRocketsOnFall")) && entity.world().isUnobstructed(entity.pos(), entity.pos().add(0, -5, 0)) && entity.motionY() < -0.75) {
-        if (nbt.getBoolean("auxRocketsOnFall")) {
-          manager.setBoolean(nbt, "rocketsAux", true);
-          system.moduleMessage(this, entity, "<n>Auto activated aux rockets!");
+      if (!entity.isSneaking() && !entity.getData("fiskheroes:flying") && (nbt.getBoolean("armsRocketsOnFall") || nbt.getBoolean("bodyRocketsOnFall") || nbt.getBoolean("legRocketsOnFall")) && entity.world().isUnobstructed(entity.pos(), entity.pos().add(0, -5, 0)) && entity.motionY() < -0.75) {
+        if (nbt.getBoolean("armsRocketsOnFall")) {
+          manager.setBoolean(nbt, "rocketsArms", true);
+          system.moduleMessage(this, entity, "<n>Auto activated arms rockets!");
         };
         if (nbt.getBoolean("bodyRocketsOnFall")) {
           manager.setBoolean(nbt, "rocketsBody", true);
@@ -964,31 +745,31 @@ function initModule(system) {
         };
         manager.setData(entity, "fiskheroes:flying", true);
       };
-      var aux = nbt.getBoolean("rocketsAux") && entity.getData("fiskheroes:flying");
+      var arms = nbt.getBoolean("rocketsArms") && entity.getData("fiskheroes:flying");
       var body = nbt.getBoolean("rocketsBody") && entity.getData("fiskheroes:flying");
       var legs = nbt.getBoolean("rocketsLegs") && entity.getData("fiskheroes:flying");
       var wings = nbt.getBoolean("rocketsWings") && entity.getData("fiskheroes:flying");
       if (entity.getData("fiskheroes:flight_timer") > 0) {
-        manager.setData(entity, "skyhighheroes:dyn/rockets_aux", aux);
+        manager.setData(entity, "skyhighheroes:dyn/rockets_arms", arms);
         manager.setData(entity, "skyhighheroes:dyn/rockets_legs", legs);
         manager.setData(entity, "skyhighheroes:dyn/rockets_body", body);
         manager.setData(entity, "skyhighheroes:dyn/wings", wings);
         if (entity.getData("fiskheroes:flight_timer") < 0.2) {
-          if (aux && body && legs) {
+          if (arms && body && legs) {
             system.shoutMessage(entity, "Activating Rockets!", 16);
-          } else if ((aux && body && !legs) || (aux && !body && legs) || (!aux && body && legs)) {
-            if (aux && body && !legs) {
-              system.shoutMessage(entity, "Activating Aux and Body Rockets!", 16);
+          } else if ((arms && body && !legs) || (arms && !body && legs) || (!arms && body && legs)) {
+            if (arms && body && !legs) {
+              system.shoutMessage(entity, "Activating Arms and Body Rockets!", 16);
             };
-            if (aux && !body && legs) {
-              system.shoutMessage(entity, "Activating Body and Leg Rockets!", 16);              
+            if (arms && !body && legs) {
+              system.shoutMessage(entity, "Activating Arms and Leg Rockets!", 16);              
             };
-            if (!aux && body && legs) {
+            if (!arms && body && legs) {
               system.shoutMessage(entity, "Activating Body and Leg Rockets!", 16);
             };
           } else {
-            if (aux) {
-              system.shoutMessage(entity, "Activating Aux Rockets!", 16);
+            if (arms) {
+              system.shoutMessage(entity, "Activating Arms Rockets!", 16);
             };
             if (body) {
               system.shoutMessage(entity, "Activating Body Rockets!", 16);
@@ -1026,8 +807,8 @@ function initModule(system) {
       manager.incrementData(entity, "skyhighheroes:dyn/superhero_landing_timer", 10, 10, pain);
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("rocketsAux") || !entity.getWornHelmet().nbt().getBoolean("rocketsBody") || !entity.getWornHelmet().nbt().getBoolean("rocketsLegs")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsAux", true);
+      if (!entity.getWornHelmet().nbt().getBoolean("rocketsArms") || !entity.getWornHelmet().nbt().getBoolean("rocketsBody") || !entity.getWornHelmet().nbt().getBoolean("rocketsLegs")) {
+        manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsArms", true);
         manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsBody", true);
         manager.setBoolean(entity.getWornHelmet().nbt(), "rocketsLegs", true);
         system.systemMessage(entity, "<n>Automatically armed <nh>rockets<n>!");

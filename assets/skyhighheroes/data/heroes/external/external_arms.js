@@ -11,10 +11,10 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>externalArms<e> is disabled!",
     keyBinds: function (hero, color) {
       hero.addKeyBind("TENTACLE_JAB", "\u00A7" + color + "Jab", 1);
-      hero.addKeyBind("TENTACLE_GRAB", "\u00A7" + color + "Grab", 3);
+      hero.addKeyBind("TENTACLE_GRAB", "\u00A7" + color + "Grab", 2);
       hero.addKeyBind("TENTACLE_STRIKE", "\u00A7" + color + "Strike", 4);
-      hero.addKeyBind("TENTACLES", "\u00A7" + color + "External Arms", 2);
-      hero.addKeyBind("EXTERNAL_ARMS", "\u00A7" + color + "External Arms", 2);
+      hero.addKeyBind("TENTACLES", "\u00A7" + color + "External Arms", 3);
+      hero.addKeyBind("EXTERNAL_ARMS", "\u00A7" + color + "External Arms", 3);
     },
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 3) {
@@ -50,7 +50,7 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        if (modifier.name() == "fiskheroes:tentacles") {
+        if (modifier.name() == "fiskheroes:tentacles" && entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = true;
         };
       };

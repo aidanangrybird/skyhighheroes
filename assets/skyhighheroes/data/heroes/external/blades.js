@@ -240,7 +240,7 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        if (modifier.name() == "fiskheroes:blade") {
+        if (modifier.name() == "fiskheroes:blade" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = true;
         };
       };

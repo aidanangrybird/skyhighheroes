@@ -206,7 +206,7 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       var left = (nbt.getBoolean("shieldsLeft")) ? "T" : "F";
       var right = (nbt.getBoolean("shieldsRight")) ? "T" : "F";
-      if (modifier.name() == "fiskheroes:shield") {
+      if (modifier.name() == "fiskheroes:shield" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
         if (modifier.id() == "shields_" + left + right) {
           result = true;
         };

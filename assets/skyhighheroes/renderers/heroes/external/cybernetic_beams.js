@@ -73,14 +73,6 @@ function initHeadBeams(renderer, color) {
   var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "skyhighheroes:cybernetic_cannons", "head", color, positionFlush);
   chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
   chargedBeamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("cannonsHead") && entity.getWornHelmet().nbt().getBoolean("flushHeadCannons"));
-  var scream = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:cybernetic_scream", "head", color, [
-    { "firstPerson": [0.0, 2.5, -3.2], "offset": [0.0, -1.5, -4.9], "size": [10.0, 10.0] }
-  ]);
-  scream.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("mouth") && !entity.getWornHelmet().nbt().getBoolean("flushMouth"));
-  var screamFlush = bindBeam(renderer, "fiskheroes:energy_projection", "skyhighheroes:cybernetic_scream", "head", color, [
-    { "firstPerson": [0.0, 2.5, -3.2], "offset": [0.0, -1.5, -3.1], "size": [10.0, 10.0] }
-  ]);
-  screamFlush.setCondition(entity => entity.getWornHelmet().nbt().getBoolean("mouth") && entity.getWornHelmet().nbt().getBoolean("flushMouth"));
 };
 
 function initBodyBeams(renderer, color) {

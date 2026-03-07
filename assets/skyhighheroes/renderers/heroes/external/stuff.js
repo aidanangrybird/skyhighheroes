@@ -453,7 +453,7 @@ function text(renderer) {
     return;
   }; */
   for (var char in chars) {
-    var character_model = renderer.createResource("MODEL", "skyhighocs:Character");
+    var character_model = renderer.createResource("MODEL", "skyhighheroes:Character");
     character_model.texture.set(null, "character_" + index.toString());
     var character = renderer.createEffect("fiskheroes:model").setModel(character_model);
     character.anchor.set("head");
@@ -682,4 +682,111 @@ function text(renderer) {
       };
     }
   };
+};
+
+function entitySuitName(entity) {
+  var beingName = entity.getName();
+  if (entity.isWearingFullSuit()) {
+    if (!entity.getWornHelmet().isEmpty()) {
+      var itemName = entity.getWornHelmet().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!entity.getWornChestplate().isEmpty()) {
+      var itemName = entity.getWornChestplate().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!entity.getWornLeggings().isEmpty()) {
+      var itemName = entity.getWornLeggings().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!entity.getWornBoots().isEmpty()) {
+      var itemName = entity.getWornBoots().displayName().split("'s");
+      beingName = itemName[0];
+    };
+    if (!isTransformed(entity)) {
+      beingName = entity.getName();
+    };
+    if (entity.getDataOrDefault("secretheroes:dyn/moonknight_timer", 0) == 1) {
+      beingName = "Moon Knight";
+    };
+    if (entity.getDataOrDefault("secretheroes:dyn/mrknight_timer", 0) == 1) {
+      beingName = "Mr Knight";
+    };
+    if (entity.getWornChestplate().suitType() == "tmf:omnitrix" && entity.getDataOrDefault("tmf:dyn/transformed", -1) > -1) {
+      var alien = entity.getData("tmf:dyn/transformed") + 0;
+      system.moduleMessage(this, entity, alien);
+      beingName = tmfAliens[alien];
+    };
+    if (isTransformed(entity) && ((entity.getData("fiskheroes:mask_open_timer2") == 1) || (entity.getData("fiskheroes:mask_open_timer") == 5))) {
+      beingName = entity.getName();
+    };
+    if (entity.getData("fiskheroes:disguise") != null) {
+      beingName = entity.getData("fiskheroes:disguise");
+    };
+  };
+  return beingName;
+};
+
+var tmfAliens = [
+  "Heatblast",
+  "Wildmutt",
+  "Diamondhead",
+  "XLR8",
+  "Grey Matter",
+  "Four Arms",
+  "Stinkfly",
+  "Ripjaws",
+  "Upgrade",
+  "Ghostfreak",
+  "Heatjaws",
+  "Stinkarms",
+  "Diamondmatter",
+  "13",
+  "14",
+  "15",
+  "Cannonbolt",
+  "Wildvine",
+  "Blitzwolfer",
+  "Snare-oh",
+  "Frankenstrike",
+  "Zs'Skayr",
+  "Upchuck",
+  "Ditto",
+  "Eyeguy",
+  "Waybig"
+];
+
+var transformedVars = [
+  "fiskheroes:dyn/nanite_timer",
+  "dhhp:dyn/helmet_timer",
+  "nameless:dyn/backpack_timer",
+  "nameless:dyn/symbiote_timer",
+  "sabri:dyn/vibranium_nanite_timer",
+  "secretheroes:dyn/hulk_timer",
+  "stellar:dyn/danny_phantom_transform_timer",
+  "tmf:dyn/transform_timer",
+  "jmctheroes:dyn/fate_timer",
+  "jmctheroes:dyn/beetle_timer",
+  "jmctheroes:dyn/suit_timer",
+  "stellar:dyn/suit_timer",
+  "pwt:dyn/symbiot_timer",
+  "jmctheroes:dyn/symbiote_timer",
+  "skarredheroes:dyn/scarab_timer",
+  "sind:dyn/b_timer_model",
+  "sind:dyn/b_timer",
+  "ironmaniac:dyn/mk5_timer",
+  "secretheroes:dyn/moonknight_timer",
+  "secretheroes:dyn/mrknight_timer",
+  "skyhighocs:dyn/wave_changing_timer",
+  "skyhighheroes:dyn/wave_changing_timer",
+];
+
+function isTransformed(entity) {
+  var transformed = false;
+  transformedVars.forEach(variable => {
+    if (!transformed) {
+      transformed = (entity.getDataOrDefault(variable, 1) == 1);
+    };
+  });
+  return transformed;
 };

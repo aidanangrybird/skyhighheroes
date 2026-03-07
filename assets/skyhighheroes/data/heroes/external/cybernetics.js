@@ -1212,8 +1212,15 @@ function initSystem(moduleList, name, colorCode) {
    * @param {JSHero} hero - Required
    **/
   function keyBinds(hero) {
+    hero.addKeyBindFunc("BATTLE_MODE", (entity, manager) => {
+      manager.setData(entity, "skyhighheroes:dyn/battle_mode", !entity.getData("skyhighheroes:dyn/battle_mode"));
+      if (!entity.getData("skyhighheroes:dyn/battle_mode")) {
+        manager.setData(entity, "skyhighheroes:dyn/external_arms", false);
+      };
+      return true;
+    }, "\u00A7" + color + "Toggle Battle Mode", 5);
     hero.addKeyBind("SHAPE_SHIFT", "\u00A7" + color + "Send message/Enter command", 5);
-    hero.addKeyBind("GRAVITY_MANIPULATION", "\u00A7" + color + "Switch displayed module (x2 to switch sides)", 5);
+    hero.addKeyBind("GRAVITY_MANIPULATION", "\u00A7" + color + "Switch displayed module (x2 to switch sides)", 3);
     modules.forEach(module => {
       if (module.hasOwnProperty("keyBinds")) {
         module.keyBinds(hero, color);
@@ -1511,7 +1518,7 @@ function initSystem(moduleList, name, colorCode) {
                 break;
               case "arm":
                 if (args[1] == "*") {
-                  manager.setBoolean(nbt, "rocketsAux", true);
+                  manager.setBoolean(nbt, "rocketsArms", true);
                   manager.setBoolean(nbt, "rocketsBody", true);
                   manager.setBoolean(nbt, "rocketsLegs", true);
                   manager.setBoolean(nbt, "rocketsWings", true);
@@ -1522,7 +1529,6 @@ function initSystem(moduleList, name, colorCode) {
                   manager.setBoolean(nbt, "shieldsRight", true);
                   manager.setBoolean(nbt, "bladesLeft", true);
                   manager.setBoolean(nbt, "bladesRight", true);
-                  manager.setBoolean(nbt, "mouth", true);
                   manager.setBoolean(nbt, "wings", false);
                   systemMessage(entity, "<s>Armed <sh>everything<s>!");
                 } else {
@@ -1534,7 +1540,7 @@ function initSystem(moduleList, name, colorCode) {
                 break;
               case "disarm":
                 if (args[1] == "*") {
-                  manager.setBoolean(nbt, "rocketsAux", false);
+                  manager.setBoolean(nbt, "rocketsArms", false);
                   manager.setBoolean(nbt, "rocketsBody", false);
                   manager.setBoolean(nbt, "rocketsLegs", false);
                   manager.setBoolean(nbt, "rocketsWings", false);
@@ -1545,7 +1551,6 @@ function initSystem(moduleList, name, colorCode) {
                   manager.setBoolean(nbt, "shieldsRight", false);
                   manager.setBoolean(nbt, "bladesLeft", false);
                   manager.setBoolean(nbt, "bladesRight", false);
-                  manager.setBoolean(nbt, "mouth", false);
                   manager.setBoolean(nbt, "wings", false);
                   systemMessage(entity, "<s>Disarmed <sh>everything<s>!");
                 } else {
@@ -1607,7 +1612,7 @@ function initSystem(moduleList, name, colorCode) {
     };
     //Eyes
     //Lid
-    if ((nbt.getShort("eyeLeftLid")/100.0) == round(entity.getData("skyhighheroes:dyn/eye_left_lid_timer"))) {
+    /* if ((nbt.getShort("eyeLeftLid")/100.0) == round(entity.getData("skyhighheroes:dyn/eye_left_lid_timer"))) {
       manager.setInterpolatedData(entity, "skyhighheroes:dyn/prev_eye_left_lid_timer", round(entity.getData("skyhighheroes:dyn/eye_left_lid_timer")));
     };
     if ((nbt.getShort("eyeLeftLid")/100.0) != round(entity.getData("skyhighheroes:dyn/eye_left_lid_timer"))) {
@@ -1650,7 +1655,7 @@ function initSystem(moduleList, name, colorCode) {
     if ((nbt.getShort("eyeRightY")/100.0) != round(entity.getData("skyhighheroes:dyn/eye_right_Y_timer"))) {
       var diff = Math.ceil(((nbt.getShort("eyeRightY")/100.0) - entity.getData("skyhighheroes:dyn/prev_eye_right_Y_timer"))*100.0)/2000.0;
       manager.setInterpolatedData(entity, "skyhighheroes:dyn/eye_right_Y_timer", clamp((round(entity.getData("skyhighheroes:dyn/eye_right_Y_timer")) + round(diff)), Math.min((nbt.getShort("eyeRightY")/100.0), entity.getData("skyhighheroes:dyn/prev_eye_right_Y_timer")), Math.max((nbt.getShort("eyeRightY")/100.0), entity.getData("skyhighheroes:dyn/prev_eye_right_Y_timer"))));
-    };
+    }; */
     //Scroll to change module info displayed
     if (entity.getData("fiskheroes:gravity_manip")) {
       if (entity.getData("skyhighheroes:dyn/reset_gravity_manip")) {
@@ -1675,7 +1680,7 @@ function initSystem(moduleList, name, colorCode) {
       };
     };
     if (sneakMultiTap.conditionalMultiTap(entity, manager, 2, 10, 1, entity.isSneaking())) {
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/battle_mode", !entity.getData("skyhighheroes:dyn/battle_mode"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/thermoptic_camouflage", !entity.getData("skyhighheroes:dyn/thermoptic_camouflage"));
     };
   };
   return {
@@ -1739,8 +1744,11 @@ function initSystem(moduleList, name, colorCode) {
         if (keyBind == "SHAPE_SHIFT") {
           return !entity.isSneaking();
         };
-        if (keyBind == "GRAVITY_MANIPULATION") {
+        if (keyBind == "BATTLE_MODE") {
           return entity.isSneaking();
+        };
+        if (keyBind == "GRAVITY_MANIPULATION") {
+          return !entity.getData("skyhighheroes:dyn/battle_mode");
         };
         return isKeyBindEnabled(entity, keyBind);
       });

@@ -47,7 +47,7 @@ function initModule(system) {
         var head = (nbt.getBoolean("cannonsHead")) ? "T" : "F";
         var body = (nbt.getBoolean("cannonsBody")) ? "T" : "F";
         var arms = (nbt.getBoolean("cannonsArms")) ? "T" : "F";
-        if (modifier.name() == "fiskheroes:charged_beam") {
+        if (modifier.name() == "fiskheroes:charged_beam" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           if (modifier.id() == "cannons_" + head + body + arms) {
             result = true;
           };

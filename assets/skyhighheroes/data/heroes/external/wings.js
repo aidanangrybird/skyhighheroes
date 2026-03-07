@@ -15,7 +15,7 @@ function initModule(system) {
         var nbt = entity.getWornHelmet().nbt();
         switch(argList[1]) {
           case "arm":
-            if (nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
+            if (nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
               system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
             } else {
               manager.setBoolean(nbt, "wings", true);
@@ -107,7 +107,7 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       switch (arg) {
         case "wings":
-          if (nbt.getBoolean("rocketsAux") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
+          if (nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
             system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
           } else {
             manager.setBoolean(nbt, "wings", true);
@@ -130,7 +130,7 @@ function initModule(system) {
       var nbt = entity.getWornHelmet().nbt();
       var wings = nbt.getBoolean("wings");
       if (!system.isModuleDisabled(entity, this.name)) {
-        if (modifier.name() == "fiskheroes:gliding") {
+        if (modifier.name() == "fiskheroes:gliding" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = wings;
         };
       };

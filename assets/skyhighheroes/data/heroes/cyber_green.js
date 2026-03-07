@@ -16,8 +16,7 @@ var thermopticManipulation = implement("skyhighheroes:external/thermoptic_manipu
 var wings = implement("skyhighheroes:external/wings");
 var externalArms = implement("skyhighheroes:external/external_arms");
 var suitDatastore = implement("skyhighheroes:external/suit_datastore");
-var voiceSynthesizer = implement("skyhighheroes:external/voice_synthesizer");
-var cyberneticEyes = implement("skyhighheroes:external/cybernetic_eyes");
+var intakes = implement("skyhighheroes:external/intakes");
 var cyberOS = cybernetics.initSystem([
   settings,
   messaging,
@@ -36,8 +35,7 @@ var cyberOS = cybernetics.initSystem([
   wings,
   externalArms,
   suitDatastore,
-  voiceSynthesizer,
-  cyberneticEyes,
+  intakes,
 ], "Cyber Green", "2");
 function init(hero) {
   cyberOS.initCybernetics(hero);
