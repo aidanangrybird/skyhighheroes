@@ -143,42 +143,50 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|body_upper_front": {
+    "fiskheroes:transformation|torso_front": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/body_upper_front_open",
-        "timerData": "skyhighheroes:dyn/body_upper_front_open_timer",
+        "toggleData": "skyhighheroes:dyn/torso_front_open",
+        "timerData": "skyhighheroes:dyn/torso_front_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|body_upper_back": {
+    "fiskheroes:transformation|core": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/body_upper_back_open",
-        "timerData": "skyhighheroes:dyn/body_upper_back_open_timer",
+        "toggleData": "skyhighheroes:dyn/core_open",
+        "timerData": "skyhighheroes:dyn/core_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|body_lower_front": {
+    "fiskheroes:transformation|torso_back": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/body_lower_front_open",
-        "timerData": "skyhighheroes:dyn/body_lower_front_open_timer",
+        "toggleData": "skyhighheroes:dyn/torso_back_open",
+        "timerData": "skyhighheroes:dyn/torso_back_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|body_lower_back": {
+    "fiskheroes:transformation|shorts_front": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/body_lower_back_open",
-        "timerData": "skyhighheroes:dyn/body_lower_back_open_timer",
+        "toggleData": "skyhighheroes:dyn/shorts_front_open",
+        "timerData": "skyhighheroes:dyn/shorts_front_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|body_machine_gun": {
+    "fiskheroes:transformation|shorts_back": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/body_machine_gun_open",
-        "timerData": "skyhighheroes:dyn/body_machine_gun_open_timer",
+        "toggleData": "skyhighheroes:dyn/shorts_back_open",
+        "timerData": "skyhighheroes:dyn/shorts_back_open_timer",
+        "time": 60
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|machine_gun": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/machine_gun_open",
+        "timerData": "skyhighheroes:dyn/machine_gun_open_timer",
         "time": 60
       },
       "isToggle": true
@@ -191,18 +199,18 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|left_arm_cannon_outer": {
+    "fiskheroes:transformation|left_cannon_outer": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/left_arm_cannon_outer_open",
-        "timerData": "skyhighheroes:dyn/left_arm_cannon_outer_open_timer",
+        "toggleData": "skyhighheroes:dyn/left_cannon_outer_open",
+        "timerData": "skyhighheroes:dyn/left_cannon_outer_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|left_arm_cannon_inner": {
+    "fiskheroes:transformation|left_cannon_inner": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/left_arm_cannon_inner_open",
-        "timerData": "skyhighheroes:dyn/left_arm_cannon_inner_open_timer",
+        "toggleData": "skyhighheroes:dyn/left_cannon_inner_open",
+        "timerData": "skyhighheroes:dyn/left_cannon_inner_open_timer",
         "time": 60
       },
       "isToggle": true
@@ -215,34 +223,34 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|right_arm_cannon_outer": {
+    "fiskheroes:transformation|right_cannon_outer": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/right_arm_cannon_outer_open",
-        "timerData": "skyhighheroes:dyn/right_arm_cannon_outer_open_timer",
+        "toggleData": "skyhighheroes:dyn/right_cannon_outer_open",
+        "timerData": "skyhighheroes:dyn/right_cannon_outer_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|right_arm_cannon_inner": {
+    "fiskheroes:transformation|right_cannon_inner": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/right_arm_cannon_inner_open",
-        "timerData": "skyhighheroes:dyn/right_arm_cannon_inner_open_timer",
+        "toggleData": "skyhighheroes:dyn/right_cannon_inner_open",
+        "timerData": "skyhighheroes:dyn/right_cannon_inner_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|left_leg_boot_front": {
+    "fiskheroes:transformation|left_boot_front": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/left_leg_boot_front_open",
-        "timerData": "skyhighheroes:dyn/left_leg_boot_front_open_timer",
+        "toggleData": "skyhighheroes:dyn/left_boot_front_open",
+        "timerData": "skyhighheroes:dyn/left_boot_front_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|left_leg_boot_back": {
+    "fiskheroes:transformation|left_boot_back": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/left_leg_boot_back_open",
-        "timerData": "skyhighheroes:dyn/left_leg_boot_back_open_timer",
+        "toggleData": "skyhighheroes:dyn/left_boot_back_open",
+        "timerData": "skyhighheroes:dyn/left_boot_back_open_timer",
         "time": 60
       },
       "isToggle": true
@@ -263,26 +271,26 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|left_leg_boot": {
+    "fiskheroes:transformation|left_boot": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/left_leg_boot_open",
-        "timerData": "skyhighheroes:dyn/left_leg_boot_open_timer",
+        "toggleData": "skyhighheroes:dyn/left_boot_open",
+        "timerData": "skyhighheroes:dyn/left_boot_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|right_leg_boot_front": {
+    "fiskheroes:transformation|right_boot_front": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/right_leg_boot_front_open",
-        "timerData": "skyhighheroes:dyn/right_leg_boot_front_open_timer",
+        "toggleData": "skyhighheroes:dyn/right_boot_front_open",
+        "timerData": "skyhighheroes:dyn/right_boot_front_open_timer",
         "time": 60
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|right_leg_boot_back": {
+    "fiskheroes:transformation|right_boot_back": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/right_leg_boot_back_open",
-        "timerData": "skyhighheroes:dyn/right_leg_boot_back_open_timer",
+        "toggleData": "skyhighheroes:dyn/right_boot_back_open",
+        "timerData": "skyhighheroes:dyn/right_boot_back_open_timer",
         "time": 60
       },
       "isToggle": true
@@ -303,10 +311,10 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|right_leg_boot": {
+    "fiskheroes:transformation|right_boot": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/right_leg_boot_open",
-        "timerData": "skyhighheroes:dyn/right_leg_boot_open_timer",
+        "toggleData": "skyhighheroes:dyn/right_boot_open",
+        "timerData": "skyhighheroes:dyn/right_boot_open_timer",
         "time": 60
       },
       "isToggle": true

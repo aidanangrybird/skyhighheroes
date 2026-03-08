@@ -170,53 +170,6 @@ function initNV(renderer, uuid) {
   nv.setCondition(entity => entity.getUUID() == uuid);
 };
 
-//Init
-//Beams
-function initBeams(renderer, color) {
-  renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
-  bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color, [
-    { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
-  ]);
-  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "body", color, [
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
-    { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
-    { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
-
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
-    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
-    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
-};
-function initDualBeams(renderer, colorLeft, colorRight) {
-  renderer.bindProperty("fiskheroes:energy_bolt").color.set(colorRight);
-  bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", colorRight, [
-    { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
-  ]);
-  bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "body", colorRight, [
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", colorRight, [
-    { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", colorLeft, [
-    { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
-
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", colorRight, [
-    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
-  bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", colorLeft, [
-    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
-  ]).setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
-};
-//Cannon
 function initCannon(renderer) {
   var light_thing = renderer.createEffect("fiskheroes:overlay");
   light_thing.texture.set("cannon", "cannon_lights");
@@ -232,7 +185,99 @@ function initCannon(renderer) {
   return obj;
 };
 
-function initBoosters(renderer, colors) {
+//Init
+//Beams
+function initBodyBeams(renderer, color) {
+  var machineGun = bindBeam(renderer, "fiskheroes:charged_beam", "fiskheroes:charged_beam", "body", color, [
+  ])
+  machineGun.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
+};
+
+function initLeftArmBeams(renderer, color) {
+  var cannon = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
+    { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
+  ]);
+  cannon.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
+
+  var cannonNoraml = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
+    { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+  ])
+  cannonNoraml.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
+};
+
+function initRightArmBeams(renderer, color) {
+  renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
+
+  var cannon = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
+    { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
+  ]);
+  cannon.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
+
+  var cannonNormal = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
+    { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
+  ]);
+  cannonNormal.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
+};
+
+function headAnimations(entity, data) {
+  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
+  data.load(4, entity.getInterpolatedData("fiskheroes:beam_charge"));
+  data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
+  data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
+  data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
+  data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
+  data.load(9, entity.loop(20));
+};
+
+function bodyAnimations(entity, data) {
+  data.load(0, entity.getInterpolatedData("fiskheroes:beam_charge") + entity.getInterpolatedData("skyhighheroes:dyn/machine_gun_open_timer"));
+  data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/torso_front_open_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/torso_back_open_timer"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/shorts_front_open_timer"));
+  data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/shorts_back_open_timer"));
+  data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/core_open_timer"));
+};
+
+function leftArmAnimations(entity, data) {
+  data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
+  data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/left_arm_outer_open_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_cannon_outer_open_timer"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_cannon_inner_open_timer"));
+};
+
+function rightArmAnimations(entity, data) {
+  data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
+  data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_outer_open_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_cannon_outer_open_timer"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_cannon_inner_open_timer"));
+};
+
+function leftLegAnimations(entity, data) {
+  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
+  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_boot_front_open_timer"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_boot_back_open_timer"));
+  data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_front_open_timer"));
+  data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_back_open_timer"));
+  data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/left_boot_open_timer"));
+};
+
+function rightLegAnimations(entity, data) {
+  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
+  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_boot_front_open_timer"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_boot_back_open_timer"));
+  data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_front_open_timer"));
+  data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_back_open_timer"));
+  data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/right_boot_open_timer"));
+};
+
+function initLeftLegBooster(renderer, model, colors) {
+
+  var cubeOffset = model.getCubeOffset("left_leg_booster");
 
   var color;
 
@@ -244,93 +289,73 @@ function initBoosters(renderer, colors) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
-  var boosterLegLeft = renderer.createEffect("fiskheroes:booster");
-  boosterLegLeft.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
-  boosterLegLeft.anchor.set("leftLeg");
-  boosterLegLeft.mirror = false;
+  var booster = renderer.createEffect("fiskheroes:booster");
+  booster.setIcon(icon).setOffset(0.0, 2.6, 0.0).setSize(4.0, 2.0);
+  booster.anchor.set("leftLeg", cubeOffset);
+  booster.mirror = false;
   
-  var boosterLegRight = renderer.createEffect("fiskheroes:booster");
-  boosterLegRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
-  boosterLegRight.anchor.set("rightLeg");
-  boosterLegRight.mirror = false;
+  var boosterNormal = renderer.createEffect("fiskheroes:booster");
+  boosterNormal.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
+  boosterNormal.anchor.set("leftLeg");
+  boosterNormal.mirror = false;
 
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
 
   //Edge
-  var shapeLegEdge = renderer.createResource("SHAPE", null);
-  var lineLegEdge = shapeLegEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
-  var bloomLegLeftEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegEdge).setOffset(0.0, 12.0, 0.0);
-  var bloomLegRightEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegEdge).setOffset(0.0, 12.0, 0.0);
-  bloomLegLeftEdge.anchor.set("leftLeg");
-  bloomLegLeftEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
-  bloomLegLeftEdge.mirror = false;
-  bloomLegLeftEdge.setScale(16.0);
-  bloomLegRightEdge.anchor.set("rightLeg");
-  bloomLegRightEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
-  bloomLegRightEdge.mirror = false;
-  bloomLegRightEdge.setScale(16.0);
+  var shapeEdge = renderer.createResource("SHAPE", null);
+  var lineEdge = shapeEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
+  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.6, 0.0);
+  var bloomNormalEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 12.0, 0.0);
+  bloomEdge.anchor.set("leftLeg", cubeOffset);
+  bloomEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
+  bloomEdge.mirror = false;
+  bloomEdge.setScale(16.0);
+  bloomNormalEdge.anchor.set("leftLeg");
+  bloomNormalEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
+  bloomNormalEdge.mirror = false;
+  bloomNormalEdge.setScale(16.0);
 
   //Middle
-  var shapeLegMiddle = renderer.createResource("SHAPE", null);
-  var lineLegMiddle = shapeLegMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
-  var bloomLegLeftMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegMiddle).setOffset(0.0, 12.0, 0.0);
-  var bloomLegRightMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegMiddle).setOffset(0.0, 12.0, 0.0);
-  bloomLegLeftMiddle.anchor.set("leftLeg");
-  bloomLegLeftMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
-  bloomLegLeftMiddle.mirror = false;
-  bloomLegLeftMiddle.setScale(16.0);
-  bloomLegRightMiddle.anchor.set("rightLeg");
-  bloomLegRightMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
-  bloomLegRightMiddle.mirror = false;
-  bloomLegRightMiddle.setScale(16.0);
+  var shapeMiddle = renderer.createResource("SHAPE", null);
+  var lineMiddle = shapeMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
+  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.6, 0.0);
+  var bloomNormalMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 12.0, 0.0);
+  bloomMiddle.anchor.set("leftLeg", cubeOffset);
+  bloomMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
+  bloomMiddle.mirror = false;
+  bloomMiddle.setScale(16.0);
+  bloomNormalMiddle.anchor.set("leftLeg");
+  bloomNormalMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
+  bloomNormalMiddle.mirror = false;
+  bloomNormalMiddle.setScale(16.0);
 
   //Center
-  var shapeLegCenter = renderer.createResource("SHAPE", null);
-  var lineLegCenter = shapeLegCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
-  var bloomLegLeftCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegCenter).setOffset(0.0, 12.0, 0.0);
-  var bloomLegRightCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegCenter).setOffset(0.0, 12.0, 0.0);
-  bloomLegLeftCenter.anchor.set("leftLeg");
-  bloomLegLeftCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
-  bloomLegLeftCenter.mirror = false;
-  bloomLegLeftCenter.setScale(16.0);
-  bloomLegRightCenter.anchor.set("rightLeg");
-  bloomLegRightCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
-  bloomLegRightCenter.mirror = false;
-  bloomLegRightCenter.setScale(16.0);
+  var shapeCenter = renderer.createResource("SHAPE", null);
+  var lineCenter = shapeCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
+  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.6, 0.0);
+  var bloomNormalCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 12.0, 0.0);
+  bloomCenter.anchor.set("leftLeg", cubeOffset);
+  bloomCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
+  bloomCenter.mirror = false;
+  bloomCenter.setScale(16.0);
+  bloomNormalCenter.anchor.set("leftLeg");
+  bloomNormalCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
+  bloomNormalCenter.mirror = false;
+  bloomNormalCenter.setScale(16.0);
 
   var obj = {
-    boosterLegLeft: boosterLegLeft,
-    boosterLegRight: boosterLegRight,
-    bloomLegLeftEdge: bloomLegLeftEdge,
-    bloomLegLeftMiddle: bloomLegLeftMiddle,
-    bloomLegLeftCenter: bloomLegLeftCenter,
-    bloomLegRightEdge: bloomLegRightEdge,
-    bloomLegRightMiddle: bloomLegRightMiddle,
-    bloomLegRightCenter: bloomLegRightCenter,
-    renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
-        boosterLegLeft.setOffset(0.0, 10.0, 0.0);
-        boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftEdge.setOffset(0.0, 11.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 10.5, 0.0);
-        bloomLegLeftCenter.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightEdge.setOffset(0.0, 11.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 10.5, 0.0);
-        bloomLegRightCenter.setOffset(0.0, 10.0, 0.0);
-      };
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
-        boosterLegLeft.setOffset(0.0, 12.0, 0.0);
-        boosterLegRight.setOffset(0.0, 12.0, 0.0);
-        bloomLegLeftEdge.setOffset(0.0, 12.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegLeftCenter.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightEdge.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightCenter.setOffset(0.0, 12.0, 0.0);
-      };
+    booster: booster,
+    boosterNormal: boosterNormal,
+    bloomEdge: bloomEdge,
+    bloomMiddle: bloomMiddle,
+    bloomCenter: bloomCenter,
+    bloomNormalEdge: bloomNormalEdge,
+    bloomNormalMiddle: bloomNormalMiddle,
+    bloomNormalCenter: bloomNormalCenter,
+    render: (entity, renderLayer, isFirstPersonArm) => {
       //Boots
       //Equations
-      var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_0 = (Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0;
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
@@ -339,171 +364,161 @@ function initBoosters(renderer, colors) {
       var f = Math.PI * 2;
       f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-      //Left
+      booster.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      bloomEdge.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      bloomMiddle.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      bloomCenter.setOffset(0.0, 2.6+0.6*boost, 0.0);
+
+      //Default
       //Booster
-      boosterLegLeft.progress = boost;
-      boosterLegLeft.speedScale = 0.5 * boost;
-      boosterLegLeft.flutter = 1 + boost;
-      boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      booster.progress = boost;
+      booster.speedScale = 0.5 * boost;
+      booster.flutter = 1 + boost;
+      booster.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineLegEdge.end.y = lineLegMiddle.end.y = lineLegCenter.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.5 * 1.5 / 8);
-      //lineLegMiddle.end.y = \(2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.25 * 1.25 / 8);
-      //lineLegCenter.end.y = \(2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1 * 1 / 8);
+      lineEdge.end.y = lineMiddle.end.y = lineCenter.end.y = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineMiddle = (2 * boost) + ((1 + f * booster.flutter / 4) * 1.25 * 1.25 / 8);
+      //lineCenter = (2 * boost) + ((1 + f * booster.flutter / 4) * 1 * 1 / 8);
       //Edge
-      bloomLegLeftEdge.progress = bloomLegLeftEdge.opacity = flight;
+      bloomEdge.progress = bloomEdge.opacity = flight;
       //Middle
-      bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
+      bloomMiddle.progress = bloomMiddle.opacity = flight;
       //Center
-      bloomLegLeftCenter.progress = bloomLegLeftCenter.opacity = flight;
-      //Right
+      bloomCenter.progress = bloomCenter.opacity = flight;
+
+      //Normal
+      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var boost = data_1;
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
+
       //Booster
-      boosterLegRight.progress = boost;
-      boosterLegRight.speedScale = 0.5 * boost;
-      boosterLegRight.flutter = 1 + boost;
-      boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      boosterNormal.progress = boost;
+      boosterNormal.speedScale = 0.5 * boost;
+      boosterNormal.flutter = 1 + boost;
+      boosterNormal.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beam
-      lineLegEdge.end.y = lineLegMiddle.end.y = lineLegCenter.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.5 * 1.5 / 8);
-      //lineLegMiddle.end.y = \(2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.25 * 1.25 / 8);
-      //lineLegCenter.end.y = \(2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1 * 1 / 8);
+      lineEdge.end.y = lineMiddle.end.y = lineCenter.end.y = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineMiddle = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1.25 * 1.25 / 8);
+      //lineCenter = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1 * 1 / 8);
       //Edge
-      bloomLegRightEdge.progress = bloomLegRightEdge.opacity = flight;
+      bloomNormalEdge.progress = bloomNormalEdge.opacity = flight;
       //Middle
-      bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
+      bloomNormalMiddle.progress = bloomNormalMiddle.opacity = flight;
       //Center
-      bloomLegRightCenter.progress = bloomLegRightCenter.opacity = flight;
+      bloomNormalCenter.progress = bloomNormalCenter.opacity = flight;
 
-      lineLegCenter.size.x = 0.025 + boost*0.85;
-      lineLegCenter.size.y = 0.025 + boost*0.85;
+      lineCenter.size.x = 0.025 + boost*0.85;
+      lineCenter.size.y = 0.025 + boost*0.85;
       
-      lineLegMiddle.size.x = 0.05 + boost*1.7;
-      lineLegMiddle.size.y = 0.05 + boost*1.7;
+      lineMiddle.size.x = 0.05 + boost*1.7;
+      lineMiddle.size.y = 0.05 + boost*1.7;
 
-      lineLegEdge.size.x = 0.1 + boost*3.4;
-      lineLegEdge.size.y = 0.1 + boost*3.4;
+      lineEdge.size.x = 0.1 + boost*3.4;
+      lineEdge.size.y = 0.1 + boost*3.4;
 
       if (!isFirstPersonArm) {
-        //Left
-        boosterLegLeft.render();
-        bloomLegLeftEdge.render();
-        bloomLegLeftMiddle.render();
-        bloomLegLeftCenter.render();
-        //Right
-        boosterLegRight.render();
-        bloomLegRightEdge.render();
-        bloomLegRightMiddle.render();
-        bloomLegRightCenter.render();
+        if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
+          booster.render();
+          bloomEdge.render();
+          bloomMiddle.render();
+          bloomCenter.render();
+        } else {
+          boosterNormal.render();
+          bloomNormalEdge.render();
+          bloomNormalMiddle.render();
+          bloomNormalCenter.render();
+        };
       };
     }
   };
   return obj;
 };
 
-function initDualBoosters(renderer, colorsLeft, colorsRight) {
+function initRightLegBooster(renderer, model, colors) {
 
-  var colorLeft
-  var colorRight;
+  var cubeOffset = model.getCubeOffset("right_leg_booster");
 
-  if (typeof colorsLeft !== "object") {
-    colorLeft = colorsLeft;
+  var color;
+
+  if (typeof colors !== "object") {
+    color = colors;
   } else {
-    colorLeft = 0x000000;
-  };
-
-  if (typeof colorsRight !== "object") {
-    colorRight = colorsRight;
-  } else {
-    colorRight = 0x000000;
+    color = 0x000000;
   };
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
-  var boosterLegLeft = renderer.createEffect("fiskheroes:booster");
-  boosterLegLeft.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
-  boosterLegLeft.anchor.set("leftLeg");
-  boosterLegLeft.mirror = false;
+  var booster = renderer.createEffect("fiskheroes:booster");
+  booster.setIcon(icon).setOffset(0.0, 2.6, 0.0).setSize(4.0, 2.0);
+  booster.anchor.set("rightLeg", cubeOffset);
+  booster.mirror = false;
   
-  var boosterLegRight = renderer.createEffect("fiskheroes:booster");
-  boosterLegRight.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
-  boosterLegRight.anchor.set("rightLeg");
-  boosterLegRight.mirror = false;
+  var boosterNormal = renderer.createEffect("fiskheroes:booster");
+  boosterNormal.setIcon(icon).setOffset(0.0, 12.0, 0.0).setSize(4.0, 2.0);
+  boosterNormal.anchor.set("rightLeg");
+  boosterNormal.mirror = false;
 
   beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
 
   //Edge
-  var shapeLegEdge = renderer.createResource("SHAPE", null);
-  var lineLegEdge = shapeLegEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
-  var bloomLegLeftEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegEdge).setOffset(0.0, 12.0, 0.0);
-  var bloomLegRightEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegEdge).setOffset(0.0, 12.0, 0.0);
-  bloomLegLeftEdge.anchor.set("leftLeg");
-  bloomLegLeftEdge.color.set((typeof colorsLeft === "object" && colorsLeft.length == 3) ? colorsLeft[2] : colorLeft);
-  bloomLegLeftEdge.mirror = false;
-  bloomLegLeftEdge.setScale(16.0);
-  bloomLegRightEdge.anchor.set("rightLeg");
-  bloomLegRightEdge.color.set((typeof colorsRight === "object" && colorsRight.length == 3) ? colorsRight[2] : colorRight);
-  bloomLegRightEdge.mirror = false;
-  bloomLegRightEdge.setScale(16.0);
+  var shapeEdge = renderer.createResource("SHAPE", null);
+  var lineEdge = shapeEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
+  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.6, 0.0);
+  var bloomNormalEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 12.0, 0.0);
+  bloomEdge.anchor.set("rightLeg", cubeOffset);
+  bloomEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
+  bloomEdge.mirror = false;
+  bloomEdge.setScale(16.0);
+  bloomNormalEdge.anchor.set("rightLeg");
+  bloomNormalEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
+  bloomNormalEdge.mirror = false;
+  bloomNormalEdge.setScale(16.0);
 
   //Middle
-  var shapeLegMiddle = renderer.createResource("SHAPE", null);
-  var lineLegMiddle = shapeLegMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
-  var bloomLegLeftMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegMiddle).setOffset(0.0, 12.0, 0.0);
-  var bloomLegRightMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegMiddle).setOffset(0.0, 12.0, 0.0);
-  bloomLegLeftMiddle.anchor.set("leftLeg");
-  bloomLegLeftMiddle.color.set((typeof colorsLeft === "object" && colorsLeft.length == 3) ? colorsLeft[2] : colorLeft);
-  bloomLegLeftMiddle.mirror = false;
-  bloomLegLeftMiddle.setScale(16.0);
-  bloomLegRightMiddle.anchor.set("rightLeg");
-  bloomLegRightMiddle.color.set((typeof colorsRight === "object" && colorsRight.length == 3) ? colorsRight[2] : colorRight);
-  bloomLegRightMiddle.mirror = false;
-  bloomLegRightMiddle.setScale(16.0);
+  var shapeMiddle = renderer.createResource("SHAPE", null);
+  var lineMiddle = shapeMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
+  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.6, 0.0);
+  var bloomNormalMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 12.0, 0.0);
+  bloomMiddle.anchor.set("rightLeg", cubeOffset);
+  bloomMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
+  bloomMiddle.mirror = false;
+  bloomMiddle.setScale(16.0);
+  bloomNormalMiddle.anchor.set("rightLeg");
+  bloomNormalMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
+  bloomNormalMiddle.mirror = false;
+  bloomNormalMiddle.setScale(16.0);
 
   //Center
-  var shapeLegCenter = renderer.createResource("SHAPE", null);
-  var lineLegCenter = shapeLegCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
-  var bloomLegLeftCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegCenter).setOffset(0.0, 12.0, 0.0);
-  var bloomLegRightCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeLegCenter).setOffset(0.0, 12.0, 0.0);
-  bloomLegLeftCenter.anchor.set("leftLeg");
-  bloomLegLeftCenter.color.set((typeof colorsLeft === "object" && colorsLeft.length == 3) ? colorsLeft[2] : colorLeft);
-  bloomLegLeftCenter.mirror = false;
-  bloomLegLeftCenter.setScale(16.0);
-  bloomLegRightCenter.anchor.set("rightLeg");
-  bloomLegRightCenter.color.set((typeof colorsRight === "object" && colorsRight.length == 3) ? colorsRight[2] : colorRight);
-  bloomLegRightCenter.mirror = false;
-  bloomLegRightCenter.setScale(16.0);
+  var shapeCenter = renderer.createResource("SHAPE", null);
+  var lineCenter = shapeCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
+  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.6, 0.0);
+  var bloomNormalCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 12.0, 0.0);
+  bloomCenter.anchor.set("rightLeg", cubeOffset);
+  bloomCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
+  bloomCenter.mirror = false;
+  bloomCenter.setScale(16.0);
+  bloomNormalCenter.anchor.set("rightLeg");
+  bloomNormalCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
+  bloomNormalCenter.mirror = false;
+  bloomNormalCenter.setScale(16.0);
 
   var obj = {
-    boosterLegLeft: boosterLegLeft,
-    boosterLegRight: boosterLegRight,
-    bloomLegLeftEdge: bloomLegLeftEdge,
-    bloomLegLeftMiddle: bloomLegLeftMiddle,
-    bloomLegLeftCenter: bloomLegLeftCenter,
-    bloomLegRightEdge: bloomLegRightEdge,
-    bloomLegRightMiddle: bloomLegRightMiddle,
-    bloomLegRightCenter: bloomLegRightCenter,
-    renderBoosters: (entity, renderLayer, isFirstPersonArm) => {
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
-        boosterLegLeft.setOffset(0.0, 10.0, 0.0);
-        boosterLegRight.setOffset(0.0, 10.0, 0.0);
-        bloomLegLeftEdge.setOffset(0.0, 11.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 10.5, 0.0);
-        bloomLegLeftCenter.setOffset(0.0, 10.0, 0.0);
-        bloomLegRightEdge.setOffset(0.0, 11.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 10.5, 0.0);
-        bloomLegRightCenter.setOffset(0.0, 10.0, 0.0);
-      };
-      if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
-        boosterLegLeft.setOffset(0.0, 12.0, 0.0);
-        boosterLegRight.setOffset(0.0, 12.0, 0.0);
-        bloomLegLeftEdge.setOffset(0.0, 12.0, 0.0);
-        bloomLegLeftMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegLeftCenter.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightEdge.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightMiddle.setOffset(0.0, 12.0, 0.0);
-        bloomLegRightCenter.setOffset(0.0, 12.0, 0.0);
-      };
+    booster: booster,
+    boosterNormal: boosterNormal,
+    bloomEdge: bloomEdge,
+    bloomMiddle: bloomMiddle,
+    bloomCenter: bloomCenter,
+    bloomNormalEdge: bloomNormalEdge,
+    bloomNormalMiddle: bloomNormalMiddle,
+    bloomNormalCenter: bloomNormalCenter,
+    render: (entity, renderLayer, isFirstPersonArm) => {
       //Boots
       //Equations
-      var data_0 = entity.getData("skyhighheroes:dyn/astro_clothes") != 3 ? ((Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0) : entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_0 = (Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0;
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
@@ -512,59 +527,74 @@ function initDualBoosters(renderer, colorsLeft, colorsRight) {
       var f = Math.PI * 2;
       f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-      //Left
+      booster.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      bloomEdge.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      bloomMiddle.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      bloomCenter.setOffset(0.0, 2.6+0.6*boost, 0.0);
+
+      //Default
       //Booster
-      boosterLegLeft.progress = boost;
-      boosterLegLeft.speedScale = 0.5 * boost;
-      boosterLegLeft.flutter = 1 + boost;
-      boosterLegLeft.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      booster.progress = boost;
+      booster.speedScale = 0.5 * boost;
+      booster.flutter = 1 + boost;
+      booster.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beams
-      lineLegEdge.end.y = lineLegMiddle.end.y = lineLegCenter.end.y = (2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.5 * 1.5 / 8);
-      //lineLegMiddle.end.y = \(2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1.25 * 1.25 / 8);
-      //lineLegCenter.end.y = \(2 * boost) + ((1 + f * boosterLegLeft.flutter / 4) * 1 * 1 / 8);
+      lineEdge.end.y = lineMiddle.end.y = lineCenter.end.y = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineMiddle = (2 * boost) + ((1 + f * booster.flutter / 4) * 1.25 * 1.25 / 8);
+      //lineCenter = (2 * boost) + ((1 + f * booster.flutter / 4) * 1 * 1 / 8);
       //Edge
-      bloomLegLeftEdge.progress = bloomLegLeftEdge.opacity = flight;
+      bloomEdge.progress = bloomEdge.opacity = flight;
       //Middle
-      bloomLegLeftMiddle.progress = bloomLegLeftMiddle.opacity = flight;
+      bloomMiddle.progress = bloomMiddle.opacity = flight;
       //Center
-      bloomLegLeftCenter.progress = bloomLegLeftCenter.opacity = flight;
-      //Right
+      bloomCenter.progress = bloomCenter.opacity = flight;
+
+      //Normal
+      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer");
+      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var boost = data_1;
+      var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
+      b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
+      var f = Math.PI * 2;
+      f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
+
       //Booster
-      boosterLegRight.progress = boost;
-      boosterLegRight.speedScale = 0.5 * boost;
-      boosterLegRight.flutter = 1 + boost;
-      boosterLegRight.setSize(4.0 + b * 4, 2.0 - b * 3.9);
+      boosterNormal.progress = boost;
+      boosterNormal.speedScale = 0.5 * boost;
+      boosterNormal.flutter = 1 + boost;
+      boosterNormal.setSize(4.0 + b * 4, 2.0 - b * 3.9);
       //Beam
-      lineLegEdge.end.y = lineLegMiddle.end.y = lineLegCenter.end.y = (2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.5 * 1.5 / 8);
-      //lineLegMiddle.end.y = \(2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1.25 * 1.25 / 8);
-      //lineLegCenter.end.y = \(2 * boost) + ((1 + f * boosterLegRight.flutter / 4) * 1 * 1 / 8);
+      lineEdge.end.y = lineMiddle.end.y = lineCenter.end.y = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1.5 * 1.5 / 8);
+      //lineMiddle = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1.25 * 1.25 / 8);
+      //lineCenter = (2 * boost) + ((1 + f * boosterNormal.flutter / 4) * 1 * 1 / 8);
       //Edge
-      bloomLegRightEdge.progress = bloomLegRightEdge.opacity = flight;
+      bloomNormalEdge.progress = bloomNormalEdge.opacity = flight;
       //Middle
-      bloomLegRightMiddle.progress = bloomLegRightMiddle.opacity = flight;
+      bloomNormalMiddle.progress = bloomNormalMiddle.opacity = flight;
       //Center
-      bloomLegRightCenter.progress = bloomLegRightCenter.opacity = flight;
+      bloomNormalCenter.progress = bloomNormalCenter.opacity = flight;
 
-      lineLegCenter.size.x = 0.025 + boost*0.85;
-      lineLegCenter.size.y = 0.025 + boost*0.85;
+      lineCenter.size.x = 0.025 + boost*0.85;
+      lineCenter.size.y = 0.025 + boost*0.85;
       
-      lineLegMiddle.size.x = 0.05 + boost*1.7;
-      lineLegMiddle.size.y = 0.05 + boost*1.7;
+      lineMiddle.size.x = 0.05 + boost*1.7;
+      lineMiddle.size.y = 0.05 + boost*1.7;
 
-      lineLegEdge.size.x = 0.1 + boost*3.4;
-      lineLegEdge.size.y = 0.1 + boost*3.4;
+      lineEdge.size.x = 0.1 + boost*3.4;
+      lineEdge.size.y = 0.1 + boost*3.4;
 
       if (!isFirstPersonArm) {
-        //Left
-        boosterLegLeft.render();
-        bloomLegLeftEdge.render();
-        bloomLegLeftMiddle.render();
-        bloomLegLeftCenter.render();
-        //Right
-        boosterLegRight.render();
-        bloomLegRightEdge.render();
-        bloomLegRightMiddle.render();
-        bloomLegRightCenter.render();
+        if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
+          booster.render();
+          bloomEdge.render();
+          bloomMiddle.render();
+          bloomCenter.render();
+        } else {
+          boosterNormal.render();
+          bloomNormalEdge.render();
+          bloomNormalMiddle.render();
+          bloomNormalCenter.render();
+        };
       };
     }
   };

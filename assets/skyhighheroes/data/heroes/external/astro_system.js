@@ -555,37 +555,37 @@ function initSystem(moduleList, name, colorCode) {
      **/
     addPowers: (hero) => {
       if (powerArray.length == 1) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body");
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine");
       };
       if (powerArray.length == 1) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0]);
       };
       if (powerArray.length == 2) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1]);
       };
       if (powerArray.length == 3) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2]);
       };
       if (powerArray.length == 4) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3]);
       };
       if (powerArray.length == 5) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4]);
       };
       if (powerArray.length == 6) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5]);
       };
       if (powerArray.length == 7) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6]);
       };
       if (powerArray.length == 8) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7]);
       };
       if (powerArray.length == 9) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8]);
       };
       if (powerArray.length == 10) {
-        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
+        hero.addPowers("skyhighheroes:astro_system", "skyhighheroes:astro_body", "skyhighheroes:astro_engine", powerArray[0], powerArray[1], powerArray[2], powerArray[3], powerArray[4], powerArray[5], powerArray[6], powerArray[7], powerArray[8], powerArray[9]);
       };
     },
     /**

@@ -12,25 +12,25 @@
 {head_thinking_spinner1_rotX} += 90'{spinner} + 270'{spinner}{flight} + 360'{spinner}{boost} + 270'{spinner}{energy_proj} + 270'{spinner}{aim} + 270'{spinner}{machine_gun}
 {head_thinking_spinner2_rotX} += 90'{spinner} + 270'{spinner}{flight} + 360'{spinner}{boost} + 270'{spinner}{energy_proj} + 270'{spinner}{aim} + 270'{spinner}{machine_gun}
 
-{part1_top_front} = if({top_front} != 1, animate2({top_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_top_front} = if({top_front} != 1, animate2({top_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_top_front} = if({top_front} != 1, animate2({top_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_top_front} = if({top_front} != 1, animate2({top_front}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_top_front} = if({top_front} != 1, animate2({top_front}, 1.0, 0.5, 0.5, 0.0), 1)
+{part3_top_front} = if({top_front} != 1, animate2({top_front}, 1.0, 0.7, 0.3, 0.0), 1)
 {head_top_right_panel_rotY} -= 5'{part1_top_front} + 75'{part3_top_front}
 {head_top_left_panel_rotY} += 5'{part1_top_front} + 75'{part3_top_front}
 {head_top_front_panel_rotX} += 5'{part1_top_front} + 75'{part3_top_front}
 {head_front_panel_rotX} += 80'{part2_top_front}
 
-{part1_top_back} = if({top_back} != 1, animate2({top_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_top_back} = if({top_back} != 1, animate2({top_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_top_back} = if({top_back} != 1, animate2({top_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_top_back} = if({top_back} != 1, animate2({top_back}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_top_back} = if({top_back} != 1, animate2({top_back}, 1.0, 0.5, 0.5, 0.0), 1)
+{part3_top_back} = if({top_back} != 1, animate2({top_back}, 1.0, 0.7, 0.3, 0.0), 1)
 {head_back_right_panel_rotY} += 5'{part1_top_back} + 75'{part3_top_back}
 {head_back_left_panel_rotY} -= 5'{part1_top_back} + 75'{part3_top_back}
 {head_top_back_panel_rotX} -= 5'{part1_top_back} + 75'{part3_top_back}
 {head_back_panel_rotX} -= 80'{part2_top_back}
 
-{part1_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 1.0, 0.5, 0.5, 0.0), 1)
+{part3_bottom_front} = if({bottom_front} != 1, animate2({bottom_front}, 1.0, 0.7, 0.3, 0.0), 1)
 {head_bottom_front_right_panel_rotX} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
 {head_bottom_front_left_panel_rotX} -= 5'{part1_bottom_front} + 75'{part3_bottom_front}
 {head_bottom_left_panel_rotY} += 5'{part1_bottom_front} + 75'{part3_bottom_front}
@@ -38,12 +38,22 @@
 {head_front_left_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
 {head_front_right_panel_rotX} -= 140'{part2_bottom_front} - 50'{part2_top_front}{part2_bottom_front}
 
-{part1_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 1.0, 0.0, 0.01, 0.0), 1)
-{part2_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 0.5, 0.5, 0.5, 0.0), 1)
-{part3_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 0.3, 0.7, 0.3, 0.0), 1)
+{part1_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 1.0, 0.0, 0.15, 0.0), 1)
+{part2_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 1.0, 0.5, 0.5, 0.0), 1)
+{part3_bottom_back} = if({bottom_back} != 1, animate2({bottom_back}, 1.0, 0.7, 0.3, 0.0), 1)
 {head_right_bottom_back_panel_rotX} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
 {head_left_bottom_back_panel_rotX} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
 {head_bottom_back_left_panel_rotY} -= 5'{part1_bottom_back} + 75'{part3_bottom_back}
 {head_bottom_back_right_panel_rotY} += 5'{part1_bottom_back} + 75'{part3_bottom_back}
 {head_back_bottom_left_panel_rotX} += 140'{part2_bottom_back} - 50'{part2_top_back}{part2_bottom_back}
 {head_back_bottom_right_panel_rotX} += 140'{part2_bottom_back} - 50'{part2_top_back}{part2_bottom_back}
+
+{eye_thing} = -18'{aim}
+{head_eye_right_upper_rotX} += {eye_thing}
+{head_eye_right_lower_rotX} += {eye_thing}
+{head_eye_right_outer_rotX} += {eye_thing}
+{head_eye_right_inner_rotX} += {eye_thing}
+{head_eye_left_upper_rotX} += {eye_thing}
+{head_eye_left_lower_rotX} += {eye_thing}
+{head_eye_left_outer_rotX} += {eye_thing}
+{head_eye_left_inner_rotX} += {eye_thing}

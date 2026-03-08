@@ -7,14 +7,14 @@ function initModule(system) {
   return {
     name: "machineGuns",
     type: 6,
-    powers: ["skyhighheroes:astro_machine_guns"],
+    powers: ["skyhighocs:astro_machine_guns"],
     keyBinds: function (hero) {
-      hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 5);
+      hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 3);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (keyBind == "CHARGED_BEAM") {
-        result = entity.isSneaking();
+        result = true;
       };
       return result;
     },
@@ -28,7 +28,7 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (modifier.name() == "fiskheroes:charged_beam") {
-        result = entity.isSneaking();
+        result = true;
       };
       return result;
     },

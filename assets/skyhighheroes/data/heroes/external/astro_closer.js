@@ -56,65 +56,70 @@ function initModule(system) {
             manager.setData(entity, "skyhighheroes:dyn/head_bottom_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing head!");
             break;
-          case "bodyUpper":
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_back_open", false);
+          case "torso":
+            manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper body!");
             break;
-          case "bodyLower":
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_back_open", false);
+          case "shorts":
+            manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing lower body!");
             break;
           case "bodyFront":
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing front body!");
             break;
           case "bodyBack":
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing back body!");
             break;
-          case "bodyUpperFront":
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_front_open", false);
+          case "torsoFront":
+            manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper front body!");
             break;
-          case "bodyLowerFront":
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_front_open", false);
+          case "shortsFront":
+            manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing lower front body!");
             break;
-          case "bodyUpperBack":
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_back_open", false);
+          case "torsoBack":
+            manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper back body!");
             break;
-          case "bodyLowerBack":
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_back_open", false);
+          case "shortsBack":
+            manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing lower back body!");
             break;
           case "machineGun":
-            manager.setData(entity, "skyhighheroes:dyn/body_machine_gun_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/machine_gun_open", false);
             system.moduleMessage(this, entity, "<n>Closing body machine guns!");
             break;
+          case "core":
+            manager.setData(entity, "skyhighheroes:dyn/core_open", false);
+            system.moduleMessage(this, entity, "<n>Closing core!");
+            break;
           case "body":
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_machine_gun_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/machine_gun_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/core_open", false);
             system.moduleMessage(this, entity, "<n>Closing body!");
             break;
-          case "leftArmCannon":
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_inner_open", false);
+          case "leftCannon":
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_outer_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_inner_open", false);
             system.moduleMessage(this, entity, "<n>Closing left arm cannon!");
             break;
-          case "leftArmCannonOuter":
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_outer_open", false);
+          case "leftCannonOuter":
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_outer_open", false);
             system.moduleMessage(this, entity, "<n>Closing outer left arm cannon!");
             break;
-          case "leftArmCannonInner":
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_inner_open", false);
+          case "leftCannonInner":
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_inner_open", false);
             system.moduleMessage(this, entity, "<n>Closing inner left arm cannon!");
             break;
           case "leftArmOuter":
@@ -122,22 +127,22 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Closing outer left arm!");
             break;
           case "leftArm":
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_inner_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_outer_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_inner_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_arm_outer_open", false);
             system.moduleMessage(this, entity, "<n>Closing left arm!");
             break;
-          case "rightArmCannon":
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_inner_open", false);
+          case "rightCannon":
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_outer_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_inner_open", false);
             system.moduleMessage(this, entity, "<n>Closing right arm cannon!");
             break;
-          case "rightArmCannonOuter":
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_outer_open", false);
+          case "rightCannonOuter":
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_outer_open", false);
             system.moduleMessage(this, entity, "<n>Closing outer right arm cannon!");
             break;
-          case "rightArmCannonInner":
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_inner_open", false);
+          case "rightCannonInner":
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_inner_open", false);
             system.moduleMessage(this, entity, "<n>Closing inner right arm cannon!");
             break;
           case "rightArmOuter":
@@ -145,107 +150,107 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Closing outer right arm!");
             break;
           case "rightArm":
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_inner_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_outer_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_inner_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_arm_outer_open", false);
             system.moduleMessage(this, entity, "<n>Closing right arm!");
             break;
-          case "leftLegUpper":
+          case "leftLeg":
             manager.setData(entity, "skyhighheroes:dyn/left_leg_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_leg_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper left leg!");
             break;
-          case "leftLegBoot":
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_open", false);
+          case "leftBoot":
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_open", false);
             system.moduleMessage(this, entity, "<n>Closing left leg boot!");
             break;
           case "leftLegFront":
             manager.setData(entity, "skyhighheroes:dyn/left_leg_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing front left leg!");
             break;
           case "leftLegBack":
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_back_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_leg_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing back left leg!");
             break;
-          case "leftLegUpperFront":
+          case "leftLegFront":
             manager.setData(entity, "skyhighheroes:dyn/left_leg_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper front left leg!");
             break;
-          case "leftLegBootFront":
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_front_open", false);
+          case "leftBootFront":
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing front left leg boot!");
             break;
-          case "leftLegUpperBack":
+          case "leftLegBack":
             manager.setData(entity, "skyhighheroes:dyn/left_leg_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper back left leg!");
             break;
-          case "leftLegBootBack":
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_back_open", false);
+          case "leftBootBack":
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing back left leg boot!");
             break;
-          case "leftLegBootRocket":
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_open", false);
+          case "leftBootRocket":
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_open", false);
             system.moduleMessage(this, entity, "<n>Closing left leg rocket!");
             break;
           case "leftLeg":
             manager.setData(entity, "skyhighheroes:dyn/left_leg_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_leg_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_open", false);
             system.moduleMessage(this, entity, "<n>Closing left leg!");
             break;
-          case "rightLegUpper":
+          case "rightLeg":
             manager.setData(entity, "skyhighheroes:dyn/right_leg_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_leg_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper right leg!");
             break;
-          case "rightLegBoot":
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_open", false);
+          case "rightBoot":
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_open", false);
             system.moduleMessage(this, entity, "<n>Closing right leg boot!");
             break;
           case "rightLegFront":
             manager.setData(entity, "skyhighheroes:dyn/right_leg_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing front right leg!");
             break;
           case "rightLegBack":
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_back_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_leg_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing back right leg!");
             break;
-          case "rightLegUpperFront":
+          case "rightLegFront":
             manager.setData(entity, "skyhighheroes:dyn/right_leg_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper front right leg!");
             break;
-          case "rightLegBootFront":
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_front_open", false);
+          case "rightBootFront":
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_front_open", false);
             system.moduleMessage(this, entity, "<n>Closing front right leg boot!");
             break;
-          case "rightLegUpperBack":
+          case "rightLegBack":
             manager.setData(entity, "skyhighheroes:dyn/right_leg_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing upper back right leg!");
             break;
-          case "rightLegBootBack":
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_back_open", false);
+          case "rightBootBack":
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_back_open", false);
             system.moduleMessage(this, entity, "<n>Closing back right leg boot!");
             break;
-          case "rightLegBootRocket":
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_open", false);
+          case "rightBootRocket":
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_open", false);
             system.moduleMessage(this, entity, "<n>Closing right leg rocket!");
             break;
           case "rightLeg":
             manager.setData(entity, "skyhighheroes:dyn/right_leg_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_leg_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_open", false);
             system.moduleMessage(this, entity, "<n>Closing right leg!");
             break;
           case "*":
@@ -255,25 +260,25 @@ function initModule(system) {
             manager.setData(entity, "skyhighheroes:dyn/head_bottom_back_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_leg_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_leg_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_leg_boot_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_boot_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_leg_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_leg_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_leg_boot_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/right_arm_cannon_inner_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_boot_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_outer_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/right_cannon_inner_open", false);
             manager.setData(entity, "skyhighheroes:dyn/right_arm_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/left_arm_cannon_inner_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_outer_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/left_cannon_inner_open", false);
             manager.setData(entity, "skyhighheroes:dyn/left_arm_outer_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_upper_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_front_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_lower_back_open", false);
-            manager.setData(entity, "skyhighheroes:dyn/body_machine_gun_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
+            manager.setData(entity, "skyhighheroes:dyn/machine_gun_open", false);
             system.moduleMessage(this, entity, "<n>Closing everything!");
             break;
           case "help":

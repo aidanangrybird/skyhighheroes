@@ -4,33 +4,58 @@ var stuff = implement("skyhighheroes:external/stuff");
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 var santaHat;
+var santaHatNormal;
 var blank_model;
 var metal_heat;
+
+//Stuff models
 var head_model;
-var head_hair_model;
 var body_model;
 var left_arm_model;
 var right_arm_model;
 var left_leg_model;
 var right_leg_model;
 
+//Base skin models
+var head_base_model;
+var head_hair_base_model;
+var body_base_model;
+var left_arm_base_model;
+var right_arm_base_model;
+var left_leg_base_model;
+var right_leg_base_model;
+
+var left_leg_booster;
+var right_leg_booster;
+
 var locationBeam;
 var entityLocationBeam;
 
 loadTextures({
   "null": "skyhighheroes:null",
-  "full": "skyhighheroes:astro/astro_full_base",
-  "full_lights": "skyhighheroes:astro/astro_full_lights",
-  "head": "skyhighheroes:astro/astro_head.tx.json",
-  "body": "skyhighheroes:astro/astro_body.tx.json",
-  "left_arm": "skyhighheroes:astro/astro_left_arm.tx.json",
-  "right_arm": "skyhighheroes:astro/astro_right_arm.tx.json",
-  "left_leg": "skyhighheroes:astro/astro_left_leg.tx.json",
-  "right_leg": "skyhighheroes:astro/astro_right_leg.tx.json",
+  "santa_hat_normal": "skyhighheroes:santa_hat",
+  "blank": "skyhighheroes:astro_blank",
   "boots": "skyhighheroes:astro/astro_boots",
   "shorts": "skyhighheroes:astro/astro_shorts",
-  "santa_hat": "skyhighheroes:santa_hat",
-  "blank": "skyhighheroes:astro_blank"
+  "head": "skyhighheroes:astro_head_base",
+  "body": "skyhighheroes:astro_body_base",
+  "left_arm": "skyhighheroes:astro_left_arm_base",
+  "right_arm": "skyhighheroes:astro_right_arm_base",
+  "left_leg": "skyhighheroes:astro_left_leg_base",
+  "right_leg": "skyhighheroes:astro_right_leg_base",
+  "head_lights": "skyhighheroes:astro/astro_head_lights",
+  "body_lights": "skyhighheroes:astro/astro_body_lights",
+  "left_arm_lights": "skyhighheroes:astro/astro_left_arm_lights",
+  "right_arm_lights": "skyhighheroes:astro/astro_right_arm_lights",
+  "left_leg_lights": "skyhighheroes:astro/astro_left_leg_lights",
+  "right_leg_lights": "skyhighheroes:astro/astro_right_leg_lights",
+  "head_base": "skyhighheroes:astro/astro_head_base.tx.json",
+  "head_hair_base": "skyhighheroes:astro/astro_head_hair_base.tx.json",
+  "body_base": "skyhighheroes:astro/astro_body_base.tx.json",
+  "left_arm_base": "skyhighheroes:astro/astro_left_arm_base.tx.json",
+  "right_arm_base": "skyhighheroes:astro/astro_right_arm_base.tx.json",
+  "left_leg_base": "skyhighheroes:astro/astro_left_leg_base.tx.json",
+  "right_leg_base": "skyhighheroes:astro/astro_right_leg_base.tx.json",
 });
 
 function init(renderer) {
@@ -46,12 +71,12 @@ function init(renderer) {
     if (entity.isWearingFullSuit() && (entity.as("DISPLAY").getDisplayType() != "null")) {
       return "null";
     } else {
-      return "null";
+      return "null"
     };
   });
-  renderer.setItemIcon("LEGGINGS", "%s_shorts");
-  renderer.setItemIcon("BOOTS", "%s_boots");
-  renderer.showModel("LEGGINGS", "head", "headwear", "body", "rightArm", "leftArm", "rightLeg", "leftLeg");
+  renderer.setItemIcon("LEGGINGS", "astro_shorts");
+  renderer.setItemIcon("BOOTS", "astro_boots");
+  renderer.showModel("LEGGINGS", "head", "headwear", "body", "rightArm", "leftArm");
   renderer.showModel("BOOTS", "rightLeg", "leftLeg");
   renderer.fixHatLayer("LEGGINGS");
   initEffects(renderer);
@@ -59,7 +84,6 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
-  stuff.bindSpeedTrail(renderer, "skyhighheroes:astro_speed");
   locationBeam = stuff.location(renderer);
   entityLocationBeam = stuff.entityLocation(renderer);
   var blank = renderer.createResource("MODEL", "skyhighheroes:BlankThing");
@@ -83,121 +107,123 @@ function initEffects(renderer) {
     santaHatNormal.setOffset(0.0, -5.25, 1.25);
     santaHatNormal.setRotation(-45.0, 0.0, 0.0);
   };
-  var head = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHead");
-  head.texture.set("full", "full_lights");
-  head.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
-    data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
-    data.load(4, entity.getInterpolatedData("fiskheroes:beam_charge"));
-    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
-    data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
-    data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
-    data.load(9, entity.loop(20));
-  });
+  if (isChristmasSeason) {
+    var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_model.texture.set("santa_hat_normal");
+    santaHat = renderer.createEffect("fiskheroes:model").setModel(santa_hat_model);
+    santaHat.anchor.set("head");
+    santaHat.setScale(1.05);
+    santaHat.setOffset(0.0, -5.25, 1.25);
+    santaHat.setRotation(-45.0, 0.0, 0.0);
+    var santa_hat_normal_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
+    santa_hat_normal_model.texture.set("santa_hat");
+    santaHatNormal = renderer.createEffect("fiskheroes:model").setModel(santa_hat_normal_model);
+    santaHatNormal.anchor.set("head");
+    santaHatNormal.setScale(1.05);
+    santaHatNormal.setOffset(0.0, -5.25, 1.25);
+    santaHatNormal.setRotation(-45.0, 0.0, 0.0);
+  };
+
+  //Mechanical
+  var head = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHeadL1");
+  head.texture.set("head", "head_lights");
+  head.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => astro.headAnimations(entity, data));
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
   head_model.anchor.set("head");
-  head_model.setScale(0.999999999);
-  var head_hair = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHeadLayer2");
-  head_hair.texture.set("full", "full_lights");
-  head_hair.bindAnimation("skyhighheroes:astro_head_layer2").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer"));
-  });
-  head_hair_model = renderer.createEffect("fiskheroes:model").setModel(head_hair);
-  head_hair_model.anchor.set("head");
-  head_hair_model.setOffset(0.0, 0.5, 0.0);
-  head_hair_model.setScale(1.125);
-  var body = renderer.createResource("MODEL", "skyhighheroes:AstroBoyBody");
-  body.texture.set("full", "full_lights");
-  body.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:beam_charge") + entity.getInterpolatedData("skyhighheroes:dyn/body_machine_gun_open_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/body_upper_front_open_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/body_upper_back_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/body_lower_front_open_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/body_lower_back_open_timer"));
-  });
+  head_model.setScale(1.0);
+  var body = renderer.createResource("MODEL", "skyhighheroes:AstroBoyBodyL1");
+  body.texture.set("body", "body_lights");
+  body.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => astro.bodyAnimations(entity, data));
   body_model = renderer.createEffect("fiskheroes:model").setModel(body);
   body_model.anchor.set("body");
-  body_model.setScale(0.999999999);
-  var left_arm = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftArm");
-  left_arm.texture.set("full", "full_lights");
-  left_arm.bindAnimation("skyhighheroes:astro_left_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/left_arm_outer_open_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_arm_cannon_outer_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_arm_cannon_inner_open_timer"));
-  });
+  body_model.setScale(1.0);
+  astro.initBodyBeams(renderer, 0xFFFFFF);
+  var left_arm = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftArmL1");
+  left_arm.texture.set("left_arm", "left_arm_lights");
+  left_arm.bindAnimation("skyhighheroes:astro_left_arm").setData((entity, data) => astro.leftArmAnimations(entity, data));
   left_arm_model = renderer.createEffect("fiskheroes:model").setModel(left_arm);
   left_arm_model.anchor.set("leftArm");
-  left_arm_model.setOffset(-1.0, -2.0, 0.0);
-  left_arm_model.setScale(0.999999999);
-  var right_arm = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightArm");
-  right_arm.texture.set("full", "full_lights");
-  right_arm.bindAnimation("skyhighheroes:astro_right_arm").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
-    data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_outer_open_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_cannon_outer_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_cannon_inner_open_timer"));
-  });
+  left_arm_model.setScale(1.0);
+  astro.initLeftArmBeams(renderer, 0xFFFFFF);
+  var right_arm = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightArmL1");
+  right_arm.texture.set("right_arm", "right_arm_lights");
+  right_arm.bindAnimation("skyhighheroes:astro_right_arm").setData((entity, data) => astro.rightArmAnimations(entity, data));
   right_arm_model = renderer.createEffect("fiskheroes:model").setModel(right_arm);
   right_arm_model.anchor.set("rightArm");
-  right_arm_model.setOffset(1.0, -2.0, 0.0);
-  right_arm_model.setScale(0.999999999);
-  var left_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftLeg");
-  left_leg.texture.set("full", "full_lights");
-  left_leg.bindAnimation("skyhighheroes:astro_left_leg").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
-    data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_boot_front_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_boot_back_open_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_front_open_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_back_open_timer"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_boot_open_timer"));
-  });
+  right_arm_model.setScale(1.0);
+  astro.initRightArmBeams(renderer, 0xFFFFFF);
+  var left_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftLegL1");
+  left_leg.texture.set("left_leg", "left_leg_lights");
+  left_leg.bindAnimation("skyhighheroes:astro_left_leg").setData((entity, data) => astro.leftLegAnimations(entity, data));
   left_leg_model = renderer.createEffect("fiskheroes:model").setModel(left_leg);
   left_leg_model.anchor.set("leftLeg");
-  left_leg_model.setScale(0.999999999);
-  var right_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightLeg");
-  right_leg.texture.set("full", "full_lights");
-  right_leg.bindAnimation("skyhighheroes:astro_right_leg").setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
-    data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-    data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_boot_front_open_timer"));
-    data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_boot_back_open_timer"));
-    data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_front_open_timer"));
-    data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_back_open_timer"));
-    data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_boot_open_timer"));
-  });
+  left_leg_model.setScale(1.0);
+  left_leg_booster = astro.initLeftLegBooster(renderer, left_leg, 0xFFFFFF);
+  var right_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightLegL1");
+  right_leg.texture.set("right_leg", "right_leg_lights");
+  right_leg.bindAnimation("skyhighheroes:astro_right_leg").setData((entity, data) => astro.rightLegAnimations(entity, data));
   right_leg_model = renderer.createEffect("fiskheroes:model").setModel(right_leg);
   right_leg_model.anchor.set("rightLeg");
-  right_leg_model.setScale(0.999999999);
+  right_leg_model.setScale(1.0);
+  right_leg_booster = astro.initRightLegBooster(renderer, right_leg, 0xFFFFFF);
 
-  astro.initNV(renderer);
-  rockets = astro.initBoosters(renderer, [0xFFAE00, 0xFF8900, 0xFF0000]);
-  astro.initBeams(renderer, 0xFFFFFF);
+  //Base skin
+  var head_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHeadL2");
+  head_base.texture.set("head_base");
+  head_base.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => astro.headAnimations(entity, data));
+  head_base_model = renderer.createEffect("fiskheroes:model").setModel(head_base);
+  head_base_model.anchor.set("head");
+  head_base_model.setScale(1.0);
+  var head_hair_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHeadL2");
+  head_hair_base.texture.set("head_hair_base");
+  head_hair_base.bindAnimation("skyhighheroes:astro_head").setData((entity, data) => astro.headAnimations(entity, data));
+  head_hair_base_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_base);
+  head_hair_base_model.anchor.set("head");
+  head_hair_base_model.setOffset(0.0, 0.5, 0.0);
+  head_hair_base_model.setScale(1.125);
+  var body_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyBodyL2");
+  body_base.texture.set("body_base");
+  body_base.bindAnimation("skyhighheroes:astro_body").setData((entity, data) => astro.bodyAnimations(entity, data));
+  body_base_model = renderer.createEffect("fiskheroes:model").setModel(body_base);
+  body_base_model.anchor.set("body");
+  body_base_model.setScale(1.0);
+  var left_arm_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftArmL2");
+  left_arm_base.texture.set("left_arm_base");
+  left_arm_base.bindAnimation("skyhighheroes:astro_left_arm").setData((entity, data) => astro.leftArmAnimations(entity, data));
+  left_arm_base_model = renderer.createEffect("fiskheroes:model").setModel(left_arm_base);
+  left_arm_base_model.anchor.set("leftArm");
+  left_arm_base_model.setScale(1.0);
+  var right_arm_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightArmL2");
+  right_arm_base.texture.set("right_arm_base");
+  right_arm_base.bindAnimation("skyhighheroes:astro_right_arm").setData((entity, data) => astro.rightArmAnimations(entity, data));
+  right_arm_base_model = renderer.createEffect("fiskheroes:model").setModel(right_arm_base);
+  right_arm_base_model.anchor.set("rightArm");
+  right_arm_base_model.setScale(1.0);
+  var left_leg_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyLeftLegL2");
+  left_leg_base.texture.set("left_leg_base");
+  left_leg_base.bindAnimation("skyhighheroes:astro_left_leg").setData((entity, data) => astro.leftLegAnimations(entity, data));
+  left_leg_base_model = renderer.createEffect("fiskheroes:model").setModel(left_leg_base);
+  left_leg_base_model.anchor.set("leftLeg");
+  left_leg_base_model.setScale(1.0);
+  var right_leg_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightLegL2");
+  right_leg_base.texture.set("right_leg_base");
+  right_leg_base.bindAnimation("skyhighheroes:astro_right_leg").setData((entity, data) => astro.rightLegAnimations(entity, data));
+  right_leg_base_model = renderer.createEffect("fiskheroes:model").setModel(right_leg_base);
+  right_leg_base_model.anchor.set("rightLeg");
+  right_leg_base_model.setScale(1.0);
+
+  //astro.initNV(renderer, getID());
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
-  metal_heat.includeEffects(head_model, head_hair_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model);
+  metal_heat.includeEffects(head_base_model, head_hair_base_model, body_base_model, left_arm_base_model, right_arm_base_model, left_leg_base_model, right_leg_base_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
   }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
-
-  clothing_head = renderer.createEffect("fiskheroes:overlay");
-  clothing_head.texture.set("head");
-  clothing_body = renderer.createEffect("fiskheroes:overlay");
-  clothing_body.texture.set("body");
-  clothing_left_arm = renderer.createEffect("fiskheroes:overlay");
-  clothing_left_arm.texture.set("left_arm");
-  clothing_right_arm = renderer.createEffect("fiskheroes:overlay");
-  clothing_right_arm.texture.set("right_arm");
-  clothing_left_leg = renderer.createEffect("fiskheroes:overlay");
-  clothing_left_leg.texture.set("left_leg");
-  clothing_right_leg = renderer.createEffect("fiskheroes:overlay");
-  clothing_right_leg.texture.set("right_leg");
+  
+  var nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.factor = 1.0;
+  nv.firstPersonOnly = false;
+  nv.setCondition(entity => (entity.isWearingFullSuit()));
 };
 
 function initAnimations(renderer) {
@@ -209,63 +235,33 @@ function initAnimations(renderer) {
 
 function render(entity, renderLayer, isFirstPersonArm) {
   var nbt = entity.getWornLeggings().nbt();
-  var entities = [];
-  if (nbt.getBoolean("hudHostiles") || nbt.getBoolean("hudFriendlies") || nbt.getBoolean("hudPlayers")) {
-    entities = entity.world().getEntitiesInRangeOf(entity.pos(), nbt.getInteger("hudRange"));
-  };
-  if (entities.length > 0) {
-    entities.forEach(scannedEntity => {
-      if (scannedEntity.isAlive()) {
-        if (nbt.getBoolean("hudHostiles") && stuff.hostileEntities.indexOf(scannedEntity.getEntityName()) > -1) {
-          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x770000);
-        };
-        if (nbt.getBoolean("hudFriendlies") && stuff.friendlyEntities.indexOf(scannedEntity.getEntityName()) > -1) {
-          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, 0x007700);
-        };
-        if (nbt.getBoolean("hudPlayers") && entity.getUUID() != scannedEntity.getUUID() && scannedEntity.is("PLAYER") && !scannedEntity.getData("fiskheroes:invisible")) {
-          var color = 0x000077;
-          if (scannedEntity.isWearingFullSuit()) {
-            if (scannedEntity.getWornHelmet().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornHelmet().nbt().getString("hudColorSkyHigh");
-            };
-            if (scannedEntity.getWornChestplate().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornChestplate().nbt().getString("hudColorSkyHigh");
-            };
-            if (scannedEntity.getWornLeggings().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornLeggings().nbt().getString("hudColorSkyHigh");
-            };
-            if (scannedEntity.getWornBoots().nbt().hasKey("hudColorSkyHigh")) {
-              color = scannedEntity.getWornBoots().nbt().getString("hudColorSkyHigh");
-            };
-          };
-          entityLocationBeam.render(isFirstPersonArm, entity, scannedEntity, color);
-        };
-      };
-    });
-  };
-  rockets.renderBoosters(entity, renderLayer, isFirstPersonArm);
   if (entity.isWearingFullSuit()) {
-    if (isChristmasSeason && entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer") == 0 && entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_back_open_timer") == 0) {
+    if (isChristmasSeason) {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
         santaHat.render();
       } else {
         santaHatNormal.render();
       };
     };
+
     head_model.render();
-    head_hair_model.render();
     body_model.render();
     left_arm_model.render();
     right_arm_model.render();
     left_leg_model.render();
     right_leg_model.render();
 
-    clothing_head.render();
-    clothing_body.render();
-    clothing_left_arm.render();
-    clothing_right_arm.render();
-    clothing_left_leg.render();
-    clothing_right_leg.render();
+    head_base_model.render();
+    head_hair_base_model.render();
+    body_base_model.render();
+    left_arm_base_model.render();
+    right_arm_base_model.render();
+    left_leg_base_model.render();
+    right_leg_base_model.render();
+
+    left_leg_booster.render(entity, renderLayer, isFirstPersonArm);
+    right_leg_booster.render(entity, renderLayer, isFirstPersonArm);
+
     if (isFirstPersonArm) {
       blank_model.setOffset(0.0, 0.0, 0.0);
       blank_model.setScale(1000.0);

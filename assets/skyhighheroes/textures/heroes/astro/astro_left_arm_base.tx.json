@@ -1,0 +1,19 @@
+{
+  "texture": {
+    "in": "skyhighheroes:astro/astro_<CLOTHING>",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:astro_left_arm"
+      }
+    ],
+    "out": "skyhighheroes:generated/astro_left_arm_<CLOTHING>"
+  },
+  "getters": {
+    "CLOTHING": {
+      "key": "entity.getData('skyhighheroes:dyn/astro_clothes') == 0 ? 'base' : entity.getData('skyhighheroes:dyn/astro_clothes') == 1 ? 'long' : entity.getData('skyhighheroes:dyn/astro_clothes') == 2 ? 'short' : 'normal'",
+      "values": ["base", "long", "short", "normal"]
+    }
+  },
+  "isDynamic": true
+}
