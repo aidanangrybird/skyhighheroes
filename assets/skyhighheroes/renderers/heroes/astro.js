@@ -158,14 +158,14 @@ function initEffects(renderer) {
   left_leg_model = renderer.createEffect("fiskheroes:model").setModel(left_leg);
   left_leg_model.anchor.set("leftLeg");
   left_leg_model.setScale(1.0);
-  left_leg_booster = astro.initLeftLegBooster(renderer, left_leg, 0xFFFFFF);
+  left_leg_booster = astro.initLeftLegBooster(renderer, left_leg, [0xFFAE00, 0xFF8900, 0xFF0000]);
   var right_leg = renderer.createResource("MODEL", "skyhighheroes:AstroBoyRightLegL1");
   right_leg.texture.set("right_leg", "right_leg_lights");
   right_leg.bindAnimation("skyhighheroes:astro_right_leg").setData((entity, data) => astro.rightLegAnimations(entity, data));
   right_leg_model = renderer.createEffect("fiskheroes:model").setModel(right_leg);
   right_leg_model.anchor.set("rightLeg");
   right_leg_model.setScale(1.0);
-  right_leg_booster = astro.initRightLegBooster(renderer, right_leg, 0xFFFFFF);
+  right_leg_booster = astro.initRightLegBooster(renderer, right_leg, [0xFFAE00, 0xFF8900, 0xFF0000]);
 
   //Base skin
   var head_base = renderer.createResource("MODEL", "skyhighheroes:AstroBoyHeadL2");

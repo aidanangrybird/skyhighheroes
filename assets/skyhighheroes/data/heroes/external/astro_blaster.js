@@ -26,18 +26,22 @@ function initModule(system) {
       result = false;
       if (keyBind == "ARM_CANNON") {
         result = entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
+        result = entity.getHeldItem().isEmpty();
       };
       if (keyBind == "INHIBIT_ARM_CANNON") {
         result = false;
       };
       if (keyBind == "AIM") {
         result = entity.getHeldItem().isEmpty() && (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) ? true : (entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1);
+        result = entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/arm_cannon_timer") == 1;
       };
       if (keyBind == "ENERGY_PROJECTION") {
         result = entity.getHeldItem().isEmpty() && (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) ? true : (entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1);
+        result = entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/dual_arm_cannon_timer") == 1;
       };
       if (keyBind == "DUAL_ARM_CANNONS") {
         result = entity.getHeldItem().isEmpty() && entity.getData("skyhighheroes:dyn/astro_clothes") != 3;
+        result = entity.getHeldItem().isEmpty();
       };
       if (keyBind == "INHIBIT_DUAL_ARM_CANNON") {
         result = false;

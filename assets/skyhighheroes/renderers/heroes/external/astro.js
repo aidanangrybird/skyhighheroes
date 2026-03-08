@@ -196,13 +196,13 @@ function initBodyBeams(renderer, color) {
 function initLeftArmBeams(renderer, color) {
   var cannon = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
     { "firstPerson": [4.5, 3.75, -5.0], "offset": [0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]);
+  ]);/* 
   cannon.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
 
   var cannonNoraml = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "leftArm", color, [
     { "firstPerson": [4.5, 3.75, -8.0], "offset": [0.5, 9.0, 0.0], "size": [2.0, 2.0] }
   ])
-  cannonNoraml.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
+  cannonNoraml.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3); */
 };
 
 function initRightArmBeams(renderer, color) {
@@ -210,13 +210,13 @@ function initRightArmBeams(renderer, color) {
 
   var cannon = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
     { "firstPerson": [-4.5, 3.75, -5.0], "offset": [-0.5, 4.0, 0.0], "size": [2.0, 2.0] }
-  ]);
+  ]);/* 
   cannon.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") != 3);
 
   var cannonNormal = bindBeam(renderer, "fiskheroes:energy_projection", "fiskheroes:charged_beam", "rightArm", color, [
     { "firstPerson": [-4.5, 3.75, -8.0], "offset": [-0.5, 9.0, 0.0], "size": [2.0, 2.0] }
   ]);
-  cannonNormal.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3);
+  cannonNormal.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam")).setCondition(entity => entity.getData("skyhighheroes:dyn/astro_clothes") == 3); */
 };
 
 function headAnimations(entity, data) {
@@ -287,10 +287,10 @@ function initLeftLegBooster(renderer, model, colors) {
     color = 0x000000;
   };
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
   
   var booster = renderer.createEffect("fiskheroes:booster");
-  booster.setIcon(icon).setOffset(0.0, 2.6, 0.0).setSize(4.0, 2.0);
+  booster.setIcon(icon).setOffset(0.0, 2.55, 0.0).setSize(4.0, 2.0);
   booster.anchor.set("leftLeg", cubeOffset);
   booster.mirror = false;
   
@@ -299,59 +299,62 @@ function initLeftLegBooster(renderer, model, colors) {
   boosterNormal.anchor.set("leftLeg");
   boosterNormal.mirror = false;
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:astro_booster");
 
   //Edge
   var shapeEdge = renderer.createResource("SHAPE", null);
   var lineEdge = shapeEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
-  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.6, 0.0);
-  var bloomNormalEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 12.0, 0.0);
+  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.55, 0.0);
   bloomEdge.anchor.set("leftLeg", cubeOffset);
   bloomEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
   bloomEdge.mirror = false;
   bloomEdge.setScale(16.0);
+/* 
+  var bloomNormalEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 12.0, 0.0);
   bloomNormalEdge.anchor.set("leftLeg");
   bloomNormalEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
   bloomNormalEdge.mirror = false;
-  bloomNormalEdge.setScale(16.0);
+  bloomNormalEdge.setScale(16.0); */
 
   //Middle
   var shapeMiddle = renderer.createResource("SHAPE", null);
   var lineMiddle = shapeMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
-  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.6, 0.0);
-  var bloomNormalMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 12.0, 0.0);
+  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.55, 0.0);
   bloomMiddle.anchor.set("leftLeg", cubeOffset);
   bloomMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
   bloomMiddle.mirror = false;
   bloomMiddle.setScale(16.0);
+  /* 
+  var bloomNormalMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 12.0, 0.0);
   bloomNormalMiddle.anchor.set("leftLeg");
   bloomNormalMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
   bloomNormalMiddle.mirror = false;
-  bloomNormalMiddle.setScale(16.0);
+  bloomNormalMiddle.setScale(16.0); */
 
   //Center
   var shapeCenter = renderer.createResource("SHAPE", null);
   var lineCenter = shapeCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
-  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.6, 0.0);
-  var bloomNormalCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 12.0, 0.0);
+  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.55, 0.0);
   bloomCenter.anchor.set("leftLeg", cubeOffset);
   bloomCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
   bloomCenter.mirror = false;
   bloomCenter.setScale(16.0);
+  /* 
+  var bloomNormalCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 12.0, 0.0);
   bloomNormalCenter.anchor.set("leftLeg");
   bloomNormalCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
   bloomNormalCenter.mirror = false;
-  bloomNormalCenter.setScale(16.0);
+  bloomNormalCenter.setScale(16.0); */
 
   var obj = {
     booster: booster,
-    boosterNormal: boosterNormal,
     bloomEdge: bloomEdge,
     bloomMiddle: bloomMiddle,
     bloomCenter: bloomCenter,
+    /* boosterNormal: boosterNormal,
     bloomNormalEdge: bloomNormalEdge,
     bloomNormalMiddle: bloomNormalMiddle,
-    bloomNormalCenter: bloomNormalCenter,
+    bloomNormalCenter: bloomNormalCenter, */
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Boots
       //Equations
@@ -364,10 +367,10 @@ function initLeftLegBooster(renderer, model, colors) {
       var f = Math.PI * 2;
       f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-      booster.setOffset(0.0, 2.6+0.6*boost, 0.0);
-      bloomEdge.setOffset(0.0, 2.6+0.6*boost, 0.0);
-      bloomMiddle.setOffset(0.0, 2.6+0.6*boost, 0.0);
-      bloomCenter.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      booster.setOffset(0.0,2.55+0.65*boost, 0.0);
+      bloomEdge.setOffset(0.0,2.55+0.65*boost, 0.0);
+      bloomMiddle.setOffset(0.0,2.55+0.65*boost, 0.0);
+      bloomCenter.setOffset(0.0,2.55+0.65*boost, 0.0);
 
       //Default
       //Booster
@@ -387,7 +390,7 @@ function initLeftLegBooster(renderer, model, colors) {
       bloomCenter.progress = bloomCenter.opacity = flight;
 
       //Normal
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer");
+      /* var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer");
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -409,7 +412,7 @@ function initLeftLegBooster(renderer, model, colors) {
       //Middle
       bloomNormalMiddle.progress = bloomNormalMiddle.opacity = flight;
       //Center
-      bloomNormalCenter.progress = bloomNormalCenter.opacity = flight;
+      bloomNormalCenter.progress = bloomNormalCenter.opacity = flight; */
 
       lineCenter.size.x = 0.025 + boost*0.85;
       lineCenter.size.y = 0.025 + boost*0.85;
@@ -421,7 +424,11 @@ function initLeftLegBooster(renderer, model, colors) {
       lineEdge.size.y = 0.1 + boost*3.4;
 
       if (!isFirstPersonArm) {
-        if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
+        booster.render();
+        bloomEdge.render();
+        bloomMiddle.render();
+        bloomCenter.render();/* 
+        if (entity.getData("skyhighocs:dyn/astro_clothes") != 3) {
           booster.render();
           bloomEdge.render();
           bloomMiddle.render();
@@ -431,7 +438,7 @@ function initLeftLegBooster(renderer, model, colors) {
           bloomNormalEdge.render();
           bloomNormalMiddle.render();
           bloomNormalCenter.render();
-        };
+        }; */
       };
     }
   };
@@ -450,10 +457,10 @@ function initRightLegBooster(renderer, model, colors) {
     color = 0x000000;
   };
 
-  var icon = renderer.createResource("ICON", "skyhighheroes:null");
+  var icon = renderer.createResource("ICON", "skyhighocs:null");
   
   var booster = renderer.createEffect("fiskheroes:booster");
-  booster.setIcon(icon).setOffset(0.0, 2.6, 0.0).setSize(4.0, 2.0);
+  booster.setIcon(icon).setOffset(0.0, 2.55, 0.0).setSize(4.0, 2.0);
   booster.anchor.set("rightLeg", cubeOffset);
   booster.mirror = false;
   
@@ -462,59 +469,62 @@ function initRightLegBooster(renderer, model, colors) {
   boosterNormal.anchor.set("rightLeg");
   boosterNormal.mirror = false;
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:astro_booster");
 
   //Edge
   var shapeEdge = renderer.createResource("SHAPE", null);
   var lineEdge = shapeEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
-  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.6, 0.0);
-  var bloomNormalEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 12.0, 0.0);
+  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.55, 0.0);
   bloomEdge.anchor.set("rightLeg", cubeOffset);
   bloomEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
   bloomEdge.mirror = false;
   bloomEdge.setScale(16.0);
+/* 
+  var bloomNormalEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 12.0, 0.0);
   bloomNormalEdge.anchor.set("rightLeg");
   bloomNormalEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
   bloomNormalEdge.mirror = false;
-  bloomNormalEdge.setScale(16.0);
+  bloomNormalEdge.setScale(16.0); */
 
   //Middle
   var shapeMiddle = renderer.createResource("SHAPE", null);
   var lineMiddle = shapeMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
-  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.6, 0.0);
-  var bloomNormalMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 12.0, 0.0);
+  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.55, 0.0);
   bloomMiddle.anchor.set("rightLeg", cubeOffset);
   bloomMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
   bloomMiddle.mirror = false;
   bloomMiddle.setScale(16.0);
+  /* 
+  var bloomNormalMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 12.0, 0.0);
   bloomNormalMiddle.anchor.set("rightLeg");
   bloomNormalMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
   bloomNormalMiddle.mirror = false;
-  bloomNormalMiddle.setScale(16.0);
+  bloomNormalMiddle.setScale(16.0); */
 
   //Center
   var shapeCenter = renderer.createResource("SHAPE", null);
   var lineCenter = shapeCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
-  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.6, 0.0);
-  var bloomNormalCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 12.0, 0.0);
+  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.55, 0.0);
   bloomCenter.anchor.set("rightLeg", cubeOffset);
   bloomCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
   bloomCenter.mirror = false;
   bloomCenter.setScale(16.0);
+  /* 
+  var bloomNormalCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 12.0, 0.0);
   bloomNormalCenter.anchor.set("rightLeg");
   bloomNormalCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
   bloomNormalCenter.mirror = false;
-  bloomNormalCenter.setScale(16.0);
+  bloomNormalCenter.setScale(16.0); */
 
   var obj = {
     booster: booster,
-    boosterNormal: boosterNormal,
     bloomEdge: bloomEdge,
     bloomMiddle: bloomMiddle,
     bloomCenter: bloomCenter,
+    /* boosterNormal: boosterNormal,
     bloomNormalEdge: bloomNormalEdge,
     bloomNormalMiddle: bloomNormalMiddle,
-    bloomNormalCenter: bloomNormalCenter,
+    bloomNormalCenter: bloomNormalCenter, */
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Boots
       //Equations
@@ -527,10 +537,10 @@ function initRightLegBooster(renderer, model, colors) {
       var f = Math.PI * 2;
       f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-      booster.setOffset(0.0, 2.6+0.6*boost, 0.0);
-      bloomEdge.setOffset(0.0, 2.6+0.6*boost, 0.0);
-      bloomMiddle.setOffset(0.0, 2.6+0.6*boost, 0.0);
-      bloomCenter.setOffset(0.0, 2.6+0.6*boost, 0.0);
+      booster.setOffset(0.0,2.55+0.65*boost, 0.0);
+      bloomEdge.setOffset(0.0,2.55+0.65*boost, 0.0);
+      bloomMiddle.setOffset(0.0,2.55+0.65*boost, 0.0);
+      bloomCenter.setOffset(0.0,2.55+0.65*boost, 0.0);
 
       //Default
       //Booster
@@ -550,7 +560,7 @@ function initRightLegBooster(renderer, model, colors) {
       bloomCenter.progress = bloomCenter.opacity = flight;
 
       //Normal
-      var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer");
+      /* var data_0 = entity.getInterpolatedData("fiskheroes:flight_timer");
       var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
@@ -572,7 +582,7 @@ function initRightLegBooster(renderer, model, colors) {
       //Middle
       bloomNormalMiddle.progress = bloomNormalMiddle.opacity = flight;
       //Center
-      bloomNormalCenter.progress = bloomNormalCenter.opacity = flight;
+      bloomNormalCenter.progress = bloomNormalCenter.opacity = flight; */
 
       lineCenter.size.x = 0.025 + boost*0.85;
       lineCenter.size.y = 0.025 + boost*0.85;
@@ -584,7 +594,11 @@ function initRightLegBooster(renderer, model, colors) {
       lineEdge.size.y = 0.1 + boost*3.4;
 
       if (!isFirstPersonArm) {
-        if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
+        booster.render();
+        bloomEdge.render();
+        bloomMiddle.render();
+        bloomCenter.render();/* 
+        if (entity.getData("skyhighocs:dyn/astro_clothes") != 3) {
           booster.render();
           bloomEdge.render();
           bloomMiddle.render();
@@ -594,7 +608,7 @@ function initRightLegBooster(renderer, model, colors) {
           bloomNormalEdge.render();
           bloomNormalMiddle.render();
           bloomNormalCenter.render();
-        };
+        }; */
       };
     }
   };
