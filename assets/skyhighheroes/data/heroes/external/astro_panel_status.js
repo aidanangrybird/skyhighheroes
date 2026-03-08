@@ -27,6 +27,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Lower front panel: <nh>" + ((entity.getData("skyhighheroes:dyn/shorts_front_open_timer") > 0) ? "OPEN" : "CLOSED"));
             system.moduleMessage(this, entity, "<n>Lower back panel: <nh>" + ((entity.getData("skyhighheroes:dyn/shorts_back_open_timer") > 0) ? "OPEN" : "CLOSED"));
             system.moduleMessage(this, entity, "<n>Machine gun panels: <nh>" + ((entity.getData("skyhighheroes:dyn/machine_gun_open_timer") > 0) ? "OPEN" : "CLOSED"));
+            system.moduleMessage(this, entity, "<n>Core panels: <nh>" + ((entity.getData("skyhighheroes:dyn/core_open_timer") > 0) ? "OPEN" : "CLOSED"));
             break;
           case "leftArm":
             system.moduleMessage(this, entity, "<n>Left Arm panel status:");

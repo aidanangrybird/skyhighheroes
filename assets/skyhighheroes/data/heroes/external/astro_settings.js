@@ -13,6 +13,10 @@ function initModule(system) {
       if (argList.length > 1 && argList.length < 4) {
         var nbt = entity.getWornLeggings().nbt();
         switch(argList[1]) {
+          case "hudScale":
+            manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
+            system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
+            break;
           case "hudRange":
             manager.setShort(nbt, "hudRange", parseInt(argList[2]));
             system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
@@ -34,6 +38,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>hudFriendlies: <nh>" + nbt.getBoolean("hudFriendlies"));
             system.moduleMessage(this, entity, "<n>hudHostiles: <nh>" + nbt.getBoolean("hudHostiles"));
             system.moduleMessage(this, entity, "<n>hudPlayers: <nh>" + nbt.getBoolean("hudPlayers"));
+            system.moduleMessage(this, entity, "<n>hudScale: <nh>" + nbt.getFloat("hudScale"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
@@ -42,6 +47,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set hudFriendlies <true|false> <nh>-<n> Sets if friendly mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set hudHostiles <true|false> <nh>-<n> Sets if hostile mobs appear on HUD");
             system.moduleMessage(this, entity, "<n>!set hudPlayers <true|false> <nh>-<n> Sets if players appear on HUD");
+            system.moduleMessage(this, entity, "<n>!set hudScale <number> <nh>-<n> Sets scale of HUD elements");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:

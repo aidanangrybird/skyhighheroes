@@ -101,6 +101,35 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
   return anim;
 };
 
+var panels = [
+  "skyhighheroes:dyn/head_top_front_open_timer",
+  "skyhighheroes:dyn/head_top_back_open_timer",
+  "skyhighheroes:dyn/head_bottom_front_open_timer",
+  "skyhighheroes:dyn/head_bottom_back_open_timer",
+  "skyhighheroes:dyn/torso_front_open_timer",
+  "skyhighheroes:dyn/torso_back_open_timer",
+  "skyhighheroes:dyn/shorts_front_open_timer",
+  "skyhighheroes:dyn/shorts_back_open_timer",
+  "skyhighheroes:dyn/machine_gun_open_timer",
+  "skyhighheroes:dyn/core_open_timer",
+  "skyhighheroes:dyn/left_arm_outer_open_timer",
+  "skyhighheroes:dyn/left_cannon_outer_open_timer",
+  "skyhighheroes:dyn/left_cannon_inner_open_timer",
+  "skyhighheroes:dyn/right_arm_outer_open_timer",
+  "skyhighheroes:dyn/right_cannon_outer_open_timer",
+  "skyhighheroes:dyn/right_cannon_inner_open_timer",
+  "skyhighheroes:dyn/left_leg_front_open_timer",
+  "skyhighheroes:dyn/left_leg_back_open_timer",
+  "skyhighheroes:dyn/left_boot_front_open_timer",
+  "skyhighheroes:dyn/left_boot_back_open_timer",
+  "skyhighheroes:dyn/left_boot_open_timer",
+  "skyhighheroes:dyn/right_leg_front_open_timer",
+  "skyhighheroes:dyn/right_leg_back_open_timer",
+  "skyhighheroes:dyn/right_boot_front_open_timer",
+  "skyhighheroes:dyn/right_boot_back_open_timer",
+  "skyhighheroes:dyn/right_boot_open_timer"
+];
+
 //Astro Animations
 function initAstroAnimations(renderer) {
   //Aiming
@@ -287,7 +316,7 @@ function initLeftLegBooster(renderer, model, colors) {
     color = 0x000000;
   };
 
-  var icon = renderer.createResource("ICON", "skyhighocs:null");
+  var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
   var booster = renderer.createEffect("fiskheroes:booster");
   booster.setIcon(icon).setOffset(0.0, 2.55, 0.0).setSize(4.0, 2.0);
@@ -299,7 +328,7 @@ function initLeftLegBooster(renderer, model, colors) {
   boosterNormal.anchor.set("leftLeg");
   boosterNormal.mirror = false;
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
 
   //Edge
   var shapeEdge = renderer.createResource("SHAPE", null);
@@ -428,7 +457,7 @@ function initLeftLegBooster(renderer, model, colors) {
         bloomEdge.render();
         bloomMiddle.render();
         bloomCenter.render();/* 
-        if (entity.getData("skyhighocs:dyn/astro_clothes") != 3) {
+        if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
           booster.render();
           bloomEdge.render();
           bloomMiddle.render();
@@ -457,7 +486,7 @@ function initRightLegBooster(renderer, model, colors) {
     color = 0x000000;
   };
 
-  var icon = renderer.createResource("ICON", "skyhighocs:null");
+  var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
   var booster = renderer.createEffect("fiskheroes:booster");
   booster.setIcon(icon).setOffset(0.0, 2.55, 0.0).setSize(4.0, 2.0);
@@ -469,7 +498,7 @@ function initRightLegBooster(renderer, model, colors) {
   boosterNormal.anchor.set("rightLeg");
   boosterNormal.mirror = false;
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighocs:astro_booster");
+  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:astro_booster");
 
   //Edge
   var shapeEdge = renderer.createResource("SHAPE", null);
@@ -598,7 +627,7 @@ function initRightLegBooster(renderer, model, colors) {
         bloomEdge.render();
         bloomMiddle.render();
         bloomCenter.render();/* 
-        if (entity.getData("skyhighocs:dyn/astro_clothes") != 3) {
+        if (entity.getData("skyhighheroes:dyn/astro_clothes") != 3) {
           booster.render();
           bloomEdge.render();
           bloomMiddle.render();

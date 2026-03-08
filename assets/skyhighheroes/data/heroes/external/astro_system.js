@@ -712,6 +712,9 @@ function initSystem(moduleList, name, colorCode) {
         if (!nbt.hasKey("hudPlayers")) {
           manager.setBoolean(nbt, "hudPlayers", true);
         };
+        if (!entity.getWornHelmet().nbt().hasKey("hudScale")) {
+          manager.setFloat(nbt, "hudScale", 1.0);
+        };
         chatModes.forEach(mode => {
           if (!nbt.hasKey(mode + "Selected")) {
             manager.setString(nbt, mode + "Selected", "");
