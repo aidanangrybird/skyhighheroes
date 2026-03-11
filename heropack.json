@@ -29,6 +29,15 @@
 
     "chakra_suit": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
+
+    "wave_suit_editing": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "wave_suit_editing_mode": { "type": "BYTE", "resetWithoutSuit": true },
+    "wave_suit_visor": { "type": "INTEGER", "resetWithoutSuit": true },
+    "wave_suit_armor": { "type": "INTEGER", "resetWithoutSuit": true },
+    "wave_suit_armor_accent": { "type": "INTEGER", "resetWithoutSuit": true },
+    "wave_suit": { "type": "INTEGER", "resetWithoutSuit": true },
+    "wave_suit_accent": { "type": "INTEGER", "resetWithoutSuit": true },
+
     "wave_changing_timer": "FLOAT_INTERP",
     "wave_changed": "BOOLEAN",
     "calling_value": { "type": "FLOAT", "resetWithoutSuit": true },

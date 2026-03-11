@@ -1,0 +1,172 @@
+{
+  "name": "Wave Suit",
+  "value": 1,
+  "modifiers": {
+    "fiskheroes:gravity_manipulation": {
+      "range": 0.0,
+      "radius": 0.0,
+      "minGravity": 1.0,
+      "maxGravity": 1.0,
+      "affectsUser": false,
+      "soundEvents": {
+      }
+    },
+    "fiskheroes:wall_crawling": {
+    },
+    "fiskheroes:intangibility|absolute": {
+      "isAbsolute": true
+    },
+    "fiskheroes:intangibility|not_absolute": {
+      "isAbsolute": false
+    },
+    "fiskheroes:invisibility": {
+        "isToggle": true
+    },
+    "fiskheroes:fire_immunity": {
+    },
+    "fiskheroes:damage_immunity|explosion": {
+      "damageType": "EXPLOSION"
+    },
+    "fiskheroes:damage_immunity|magic": {
+      "damageType": "MAGIC"
+    },
+    "fiskheroes:damage_immunity|shuriken": {
+      "damageType": "SHURIKEN"
+    },
+    "fiskheroes:damage_immunity|sharp": {
+      "damageType": "SHARP"
+    },
+    "fiskheroes:damage_immunity|bullet": {
+      "damageType": "BULLET"
+    },
+    "fiskheroes:damage_immunity|blunt": {
+      "damageType": "BLUNT"
+    },
+    "fiskheroes:damage_immunity|fire": {
+      "damageType": "FIRE"
+    },
+    "fiskheroes:damage_immunity|cactus": {
+      "damageType": "CACTUS"
+    },
+    "fiskheroes:damage_immunity|cold": {
+      "damageType": "COLD"
+    },
+    "fiskheroes:damage_immunity|energy": {
+      "damageType": "ENERGY"
+    },
+    "fiskheroes:damage_immunity|electricity": {
+      "damageType": "ELECTRICITY"
+    },
+    "fiskheroes:damage_immunity|sound": {
+      "damageType": "SOUND"
+    },
+    "fiskheroes:damage_immunity|thorns": {
+      "damageType": "THORNS"
+    },
+    "fiskheroes:damage_immunity|gamma": {
+      "damageType": "GAMMA"
+    },
+    "fiskheroes:damage_immunity|hellfire": {
+      "damageType": "HELLFIRE"
+    },
+    "fiskheroes:damage_immunity|adamantium": {
+      "damageType": "ADAMANTIUM"
+    },
+    "fiskheroes:damage_immunity|hulk": {
+      "damageType": "HULK"
+    },
+    "fiskheroes:damage_immunity|holy": {
+      "damageType": "HOLY"
+    },
+    "fiskheroes:damage_immunity|mineral": {
+      "damageType": "MINERAL"
+    },
+    "fiskheroes:damage_immunity|radiation": {
+      "damageType": "RADIATION"
+    },
+    "fiskheroes:damage_immunity|saitama": {
+      "damageType": "SAITAMA"
+    },
+    "fiskheroes:damage_immunity|shockwave": {
+      "damageType": "SHOCKWAVE"
+    },
+    "fiskheroes:damage_immunity|water": {
+      "damageType": "WATER"
+    },
+    "fiskheroes:damage_immunity|atlantean_steel": {
+      "damageType": "ATLANTEAN_STEEL"
+    },
+    "fiskheroes:damage_immunity|eternium": {
+      "damageType": "ETERNIUM"
+    },
+    "fiskheroes:damage_immunity|cosmic": {
+      "damageType": "COSMIC"
+    },
+    "fiskheroes:damage_immunity|kryptonite": {
+      "damageType": "KRYPTONITE"
+    },
+    "fiskheroes:damage_immunity|light": {
+      "damageType": "LIGHT"
+    },
+    "fiskheroes:damage_immunity|cs": {
+      "damageType": "CELESTIALSAPIEN"
+    },
+    "fiskheroes:damage_immunity|force": {
+      "damageType": "FORCE"
+    },
+    "fiskheroes:damage_immunity|jv": {
+      "damageType": "JORMUNGANDR_VENOM"
+    },
+    "fiskheroes:damage_immunity|primordial": {
+      "damageType": "PRIMORDIAL"
+    },
+    "fiskheroes:damage_immunity|gale": {
+      "damageType": "GALE"
+    },
+    "fiskheroes:damage_immunity|bifrost": {
+      "damageType": "BIFROST"
+    },
+    "fiskheroes:damage_immunity|ice": {
+      "damageType": "ICE"
+    },
+    "fiskheroes:damage_immunity|positive": {
+      "damageType": "POSITIVE"
+    },
+    "fiskheroes:damage_immunity|cursed": {
+      "damageType": "CURSED"
+    },
+    "fiskheroes:damage_immunity|cancel": {
+      "damageType": "CANCEL"
+    },
+    "fiskheroes:damage_immunity|chi": {
+      "damageType": "CHI"
+    },
+    "fiskheroes:damage_immunity|omega": {
+      "damageType": "OMEGA"
+    },
+    "fiskheroes:damage_immunity|blue_kryptonite": {
+      "damageType": "BLUE_KRYPTONITE"
+    },
+    "fiskheroes:damage_immunity|sound_blast": {
+      "damageType": "SOUND_BLAST"
+    },
+    "fiskheroes:damage_immunity|god": {
+      "damageType": "GOD"
+    },
+    "fiskheroes:damage_immunity|angel": {
+      "damageType": "ANGEL"
+    },
+    "fiskheroes:damage_immunity|archangel": {
+      "damageType": "ARCHANGEL"
+    },
+    "fiskheroes:damage_immunity|demon": {
+      "damageType": "DEMON"
+    },
+    "fiskheroes:damage_immunity|the_colt": {
+      "damageType": "THE_COLT"
+    },
+    "fiskheroes:damage_immunity|bone": {
+      "damageType": "BONE"
+    }
+  }
+}

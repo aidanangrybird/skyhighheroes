@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:wave_suit/wave_suit_armor",
+    "transform": [
+      {
+        "operation": "HUE",
+        "supply": "<COLOR>"
+      }
+    ],
+    "out": "skyhighheroes:generated/wave_suit_armor_<COLOR>"
+  },
+  "getters": {
+    "COLOR": {
+      "key": "((entity.getData('skyhighheroes:dyn/wave_suit_editing') ? entity.getData('skyhighheroes:dyn/wave_suit_armor') : entity.getWornChestplate().nbt().getInteger('armorColor')) * 4 % 360) | 0",
+      "values": {
+        "min": 0,
+        "max": 360,
+        "step": 4
+      }
+    }
+  }
+}

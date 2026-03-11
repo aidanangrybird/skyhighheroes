@@ -1,0 +1,22 @@
+{
+  "texture": {
+    "in": "skyhighheroes:characters/red/red_character_54",
+    "transform": [
+      {
+        "operation": "HUE",
+        "supply": "<COLOR>"
+      }
+    ],
+    "out": "skyhighheroes:generated/wave_suit_character_54_<COLOR>"
+  },
+  "getters": {
+    "COLOR": {
+      "key": "((entity.getData('skyhighheroes:dyn/wave_suit_editing') ? entity.getData('skyhighheroes:dyn/wave_suit_visor') : entity.getWornChestplate().nbt().getInteger('visorColor')) * 4 % 360) | 0",
+      "values": {
+        "min": 0,
+        "max": 360,
+        "step": 4
+      }
+    }
+  }
+}
