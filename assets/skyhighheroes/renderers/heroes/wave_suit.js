@@ -35,6 +35,11 @@ function initEffects(renderer) {
   accent.texture.set("accent", null);
   armor_accent = renderer.createEffect("fiskheroes:overlay");
   armor_accent.texture.set("armor_accent", null);
+  nv = renderer.bindProperty("fiskheroes:night_vision");
+  nv.fogStrength = 0.0;
+  nv.factor = 1.0;
+  nv.firstPersonOnly = true;
+  nv.setCondition(entity => true);
 };
 
 function initAnimations(renderer) {
