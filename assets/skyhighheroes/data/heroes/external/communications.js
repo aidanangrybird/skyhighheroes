@@ -97,6 +97,9 @@ function initModule(system) {
       suitDatastoreArray.push(currentSuit);
       manager.appendString(suitDatastore, currentSuit);
       system.moduleMessage(module, entity, "<s>Successfully received suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
+      if (PackLoader.getSide() == "CLIENT") {
+        entity.playSound("minecraft:random.orb", 1.0, 1.0);
+      };
     } else {
       system.moduleMessage(module, entity, "<e>Failed to receive suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
     };
@@ -174,6 +177,9 @@ function initModule(system) {
     system.moduleMessage(module, entity, "<n>Transmitting suit \"<nh>" + currentSuit + "<n>\"!");
     if (suitDatastoreArray.indexOf(currentSuit) == -1) {
       system.moduleMessage(module, entity, "<s>Successfully transmitted suit \"<sh>" + currentSuit + "<s>\" to other cybers in range!");
+      if (PackLoader.getSide() == "CLIENT") {
+        entity.playSound("minecraft:random.orb", 1.0, 1.0);
+      };
     } else {
       system.moduleMessage(module, entity, "<e>Failed to transmit suit \"<eh>" + currentSuit + "<e>\"!");
     };
@@ -484,6 +490,9 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");
         manager.setTagList(nbt, "receiveBuffer", manager.newTagList());
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/receive_duration", 0);
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
       };
       var suitReceiveBuffer = manager.newTagList();
       if (nbt.getStringList("receiveBuffer") != null) {
@@ -510,6 +519,9 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<s>Finished transmitting suits!");
         manager.setTagList(nbt, "transmitBuffer", manager.newTagList());
         manager.setDataWithNotify(nbt, "skyhighheroes:dyn/transmit_duration", 0);
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
       };
       var suitTransmitBuffer = manager.newTagList();
       if (nbt.getStringList("transmitBuffer") != null) {

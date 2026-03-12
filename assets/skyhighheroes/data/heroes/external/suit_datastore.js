@@ -145,6 +145,9 @@ function initModule(system) {
         suitDatastoreArray.push(currentSuit);
         manager.appendString(suitDatastore, currentSuit);
         system.moduleMessage(module, entity, "<s>Successfully downloaded suit \"<sh>" + currentSuit + "<s>\" to " + system.getModelID(entity) + "!");
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.orb", 1.0, 1.0);
+        };
       } else {
         system.moduleMessage(module, entity, "<e>Failed to download suit \"<eh>" + currentSuit + "<e>\"! Already exists in datastore!");
       };
@@ -225,6 +228,9 @@ function initModule(system) {
         suitDriveArray.push(currentSuit);
         manager.appendString(suitDrive.getStringList("Suits"), currentSuit);
         system.moduleMessage(module, entity, "<s>Successfully uploaded suit \"<sh>" + currentSuit + "<s>\" to " + suitDriveName(entity) + "<s>!");
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.orb", 1.0, 1.0);
+        };
       } else {
         system.moduleMessage(module, entity, "<e>Failed to uploaded suit \"<eh>" + currentSuit + "<e>\"! Already exists " + suitDriveName(entity) + "<e>!");
       };
@@ -334,6 +340,9 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<s>Finished downloading suits!");
         manager.setTagList(nbt, "downloadBuffer", manager.newTagList());
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/download_duration", 0);
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
       };
       var suitDownloadBuffer = manager.newTagList();
       if (nbt.getStringList("downloadBuffer") != null) {
@@ -359,6 +368,9 @@ function initModule(system) {
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/uploading", false);
         system.moduleMessage(this, entity, "<s>Finished uploading suits!");
         manager.setTagList(nbt, "uploadBuffer", manager.newTagList());
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
       };
       var suitUploadBuffer = manager.newTagList();
       if (nbt.getStringList("uploadBuffer") != null) {
