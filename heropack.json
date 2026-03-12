@@ -29,7 +29,6 @@
 
     "chakra_suit": { "type": "BOOLEAN", "resetWithoutSuit": true },
 
-
     "wave_suit_editing": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "wave_suit_editing_mode": { "type": "BYTE", "resetWithoutSuit": true },
     "wave_suit_visor": { "type": "INTEGER", "resetWithoutSuit": true },

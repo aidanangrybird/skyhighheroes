@@ -4,22 +4,26 @@
     "transform": [
       {
         "operation": "XOR",
-        "supply": "skyhighheroes:xor/cybernetic_thermoptic_base_<TIMER>"
+        "supply": "skyhighheroes:xor/cybernetic_thermoptic<SWITCH>_<TIMER>"
       },
       {
         "operation": "STITCH",
         "supply": "skyhighheroes:cybernetic_left_leg"
       }
     ],
-    "out": "skyhighheroes:generated/cyber_yellow_left_leg_lights_<TIMER>"
+    "out": "skyhighheroes:generated/cyber_yellow_left_leg_lights<SWITCH>_<TIMER>"
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(47*Math.min(Math.max(entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer'), 0), 1)), 31), 47) | 0",
+      "key": "Math.min(Math.max(Math.ceil(47*(((!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise_timer') + (!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? 1 : 0)) - ((entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer') + (entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? 1 : 0)))), 31), 47) | 0",
       "values": {
         "min": 31,
         "max": 47
       }
+    },
+    "SWITCH": {
+      "key": "entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise') || entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage') ? '_base' : ''",
+      "values": ["", "_base"]
     }
   },
   "isDynamic": true
