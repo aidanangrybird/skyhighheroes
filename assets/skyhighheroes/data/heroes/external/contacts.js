@@ -10,21 +10,7 @@ function initModule(system) {
    * @param {string} username - Username to add as contact
    **/
   function addContact(entity, manager, username) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (entity.getName() == username) {
       system.moduleMessage(this, entity, "<e>You can not add yourself as a contact!");
       return;
@@ -59,21 +45,7 @@ function initModule(system) {
    * @param {string} username - username of contact
    **/
   function removeContact(entity, manager, username) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("contacts")) {
       var newContactsList = manager.newTagList();
       manager.setTagList(nbt, "contacts", newContactsList);
@@ -97,21 +69,7 @@ function initModule(system) {
    * @param {JSDataManager} manager - Required
    **/
   function listContacts(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("contacts")) {
       var newContactsList = manager.newTagList();
       manager.setTagList(nbt, "contacts", newContactsList);

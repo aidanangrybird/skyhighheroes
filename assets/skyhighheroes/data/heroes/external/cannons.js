@@ -27,7 +27,7 @@ function initModule(system) {
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         var head = nbt.getBoolean("cannonsHead");
         var body = nbt.getBoolean("cannonsBody");
         var arms = nbt.getBoolean("cannonsArms");
@@ -43,7 +43,7 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         var head = (nbt.getBoolean("cannonsHead")) ? "T" : "F";
         var body = (nbt.getBoolean("cannonsBody")) ? "T" : "F";
         var arms = (nbt.getBoolean("cannonsArms")) ? "T" : "F";
@@ -60,7 +60,7 @@ function initModule(system) {
     },
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch (argList[1]) {
           case "arm":
             switch (argList[2]) {
@@ -359,7 +359,7 @@ function initModule(system) {
       };
     },
     armHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "headCannons":
           manager.setBoolean(nbt, "cannonsHead", true);
@@ -382,7 +382,7 @@ function initModule(system) {
       };
     },
     disarmHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "headCannons":
           manager.setBoolean(nbt, "cannonsHead", false);
@@ -405,7 +405,7 @@ function initModule(system) {
       };
     },
     whenDisabled: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       manager.setBoolean(nbt, "cannonsHead", false);
       manager.setBoolean(nbt, "cannonsBody", false);
       manager.setBoolean(nbt, "cannonsArms", false);
@@ -424,7 +424,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var head = nbt.getBoolean("cannonsHead") && entity.getData("fiskheroes:beam_charging");
       var body = nbt.getBoolean("cannonsBody") && entity.getData("fiskheroes:beam_charging");
       var arms = nbt.getBoolean("cannonsArms") && entity.getData("fiskheroes:beam_charging");

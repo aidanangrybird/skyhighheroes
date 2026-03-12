@@ -12,7 +12,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "arm":
             if (nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
@@ -104,7 +104,7 @@ function initModule(system) {
       };
     },
     armHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "wings":
           if (nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
@@ -117,7 +117,7 @@ function initModule(system) {
       };
     },
     disarmHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "wings":
           manager.setBoolean(nbt, "wings", false);
@@ -127,7 +127,7 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var wings = nbt.getBoolean("wings");
       if (!system.isModuleDisabled(entity, this.name)) {
         if (modifier.name() == "fiskheroes:gliding" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -140,13 +140,13 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       manager.setBoolean(nbt, "wings", false);
       manager.setData(entity, "skyhighheroes:dyn/wing_left_deployed", false);
       manager.setData(entity, "skyhighheroes:dyn/wing_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var wings = nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding");
       if (!nbt.getBoolean("rocketsWings") && entity.getData("fiskheroes:gliding_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/wings", wings);

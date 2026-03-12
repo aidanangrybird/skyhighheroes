@@ -106,7 +106,7 @@ function formatAlias(input) {
 };
 
 function assignID(entity, manager) {
-  var nbt = entity.getWornHelmet().nbt();
+  var nbt = mainNBT(entity);
   if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
@@ -121,7 +121,7 @@ function assignID(entity, manager) {
  * @returns If the entity is cybernetic
  **/
 function hasCyberneticBody(entity) {
-  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
+  return mainNBT(entity).hasKey("cyberModelID") && mainNBT(entity).getString("cyberAliasName");
 };
 
 /**
@@ -130,7 +130,7 @@ function hasCyberneticBody(entity) {
  * @returns The Cyber ID
  **/
 function getModelID(entity) {
-  return entity.getWornHelmet().nbt().getString("cyberModelID");
+  return mainNBT(entity).getString("cyberModelID");
 };
 /**
  * Gets the Cyber name
@@ -138,7 +138,7 @@ function getModelID(entity) {
  * @returns The Cyber alias
  **/
 function getAliasName(entity) {
-  return entity.getWornHelmet().nbt().getString("cyberAliasName");
+  return mainNBT(entity).getString("cyberAliasName");
 };
 
 /**
@@ -147,7 +147,7 @@ function getAliasName(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornHelmet().nbt().hasKey("computerID") || entity.getWornChestplate().nbt().hasKey("computerID") || entity.getWornLeggings().nbt().hasKey("computerID") || entity.getWornBoots().nbt().hasKey("computerID");
+  return getMainNBT(entity).hasKey("computerID");
 };
 
 /**
@@ -254,6 +254,28 @@ function direction(base, other) {
   return direction;
 };
 
+function mainNBT(entity) {
+  return entity.getWornHelmet().nbt();
+};
+
+function getMainNBT(entity) {
+  if (entity.isWearingFullSuit()) {
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      return entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      return entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      return entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      return entity.getWornBoots().nbt();
+    };
+  };
+  return null;
+};
+
 function round(input) {
   var output = ((Math.ceil(input*1000.0))/1000.0);
   return output;
@@ -266,7 +288,7 @@ function round(input) {
  * @param {integer} id - ID
  **/
 function maybeGetID(entity, manager, id) {
-  var nbt = entity.getWornHelmet().nbt();
+  var nbt = mainNBT(entity);
   var otherEntity = entity.world().getEntityById(id);
   if (!nbt.hasKey("playerInfoSat")) {
     manager.setTagList(nbt, "playerInfoSat", manager.newTagList());
@@ -307,7 +329,7 @@ function maybeGetID(entity, manager, id) {
  * @param {JSEntity} entity - Required
  **/
 function getSatUUIDList(entity) {
-  var list = entity.getWornHelmet().nbt().getTagList("playerInfoSat");
+  var list = mainNBT(entity).getTagList("playerInfoSat");
   var count = list.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -321,7 +343,7 @@ function getSatUUIDList(entity) {
  * @param {JSEntity} entity - Required
  **/
 function getSatIDList(entity) {
-  var list = entity.getWornHelmet().nbt().getTagList("playerInfoSat");
+  var list = mainNBT(entity).getTagList("playerInfoSat");
   var count = list.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -336,8 +358,8 @@ function getSatIDList(entity) {
  * @param {JSEntity} otherEntity - Required
  **/
 function checkSatellite(entity, otherEntity) {
-  var nbt = entity.getWornHelmet().nbt();
-  var nbtOther = otherEntity.getWornHelmet().nbt()
+  var nbt = mainNBT(entity);
+  var nbtOther = mainNBT(otherEntity);
   if ((nbt.getShort("xSat") == nbtOther.getShort("xSat")) && (nbt.getShort("ySat") == nbtOther.getShort("ySat")) && (nbt.getShort("zSat") == nbtOther.getShort("zSat"))) {
     return true;
   } else {
@@ -351,8 +373,8 @@ function checkSatellite(entity, otherEntity) {
  * @param {JSEntity} otherEntity - Required
  **/
 function checkFrequency(entity, otherEntity) {
-  var nbt = entity.getWornHelmet().nbt();
-  var nbtOther = otherEntity.getWornHelmet().nbt()
+  var nbt = mainNBT(entity);
+  var nbtOther = mainNBT(otherEntity);
   if (nbt.getShort("freq") == nbtOther.getShort("freq")) {
     return true;
   } else {
@@ -371,7 +393,7 @@ function isStillCyber(entity, id) {
   if (otherEntity.exists() && otherEntity.isLivingEntity()) {
     if (otherEntity.is("PLAYER")) {
       var otherPlayer = otherEntity.as("PLAYER");
-      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+      if (otherPlayer.isWearingFullSuit() && mainNBT(entity).hasKey("computerID")) {
         if (hasCyberneticBody(otherPlayer)) {
           result = true;
         };
@@ -395,46 +417,13 @@ function getStringArray(nbtList) {
   return result;
 };
 /**
- * Turns NBT String List into an array for easier use in code
- * @param {JSEntity} entity - Entity to create group array from
- * @returns Array of group names
- **/
-function getGroupArray(entity) {
-  var groupList = entity.getWornHelmet().nbt().getTagList("groups");
-  var count = groupList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    result.push(groupList.getCompoundTag(i).getString("groupName"));
-  };
-  return result;
-};
-/**
- * Turns NBT String List into an array for easier use in code
- * @param {JSEntity} entity - Entity to create group array from
- * @returns Array of group names and member counts
- **/
-function getGroupArrayMembers(entity) {
-  var groupList = entity.getWornHelmet().nbt().getTagList("groups");
-  var count = groupList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    var group = groupList.getCompoundTag(i);
-    var entry = {
-      "groupName": group.getString("groupName"),
-      "memberCount": group.getStringList("members").tagCount(),
-    };
-    result.push(entry);
-  };
-  return result;
-};
-/**
  * Checks if a module is disabled
  * @param {JSEntity} entity - Player getting checked
  * @param {string} moduleName - Module being checked if disabled
  * @returns If module is disabled
  **/
 function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
+  var disabledModules = mainNBT(entity).getStringList("disabledModules");
   var modulesDisabled = getStringArray(disabledModules);
   var result = false;
   modulesDisabled.forEach(entry => {
@@ -527,7 +516,7 @@ function clamp(value, min, max) {
 };
 
 function cycleUp(entity, manager) {
-  var nbt = entity.getWornHelmet().nbt();
+  var nbt = mainNBT(entity);
   if (!nbt.hasKey("hudSelectedSide")) {
     manager.setInteger(nbt, "hudSelectedSide", 0);
   };
@@ -561,7 +550,7 @@ function cycleUp(entity, manager) {
 };
 
 function cycleDown(entity, manager) {
-  var nbt = entity.getWornHelmet().nbt();
+  var nbt = mainNBT(entity);
   if (!nbt.hasKey("hudSelectedSide")) {
     manager.setInteger(nbt, "hudSelectedSide", 0);
   };
@@ -1053,7 +1042,7 @@ function initSystem(moduleList, name, colorCode) {
     systemMessage(entity, "<n>cyberOS");
     systemMessage(entity, normalModulesMessage);
     systemMessage(entity, cyberneticModulesMessage);
-    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornHelmet().nbt().getString("computerID"));
+    systemMessage(entity, "<n>computerID: <nh>" + mainNBT(entity).getString("computerID"));
     systemMessage(entity, "<n>Model: <nh>" + getModelID(entity));
   };
   function status(entity) {
@@ -1072,9 +1061,9 @@ function initSystem(moduleList, name, colorCode) {
    **/
   function silentEnableModule(entity, manager, moduleName) {
     if (moduleNames.indexOf(moduleName) > -1) {
-      if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
+      if (!mainNBT(entity).hasKey("disabledModules")) {
       } else {
-        var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModules = mainNBT(entity).getStringList("disabledModules");
         if (disabledModules.tagCount() == 0) {
         } else {
           var index = getStringArray(disabledModules).indexOf(moduleName);
@@ -1095,10 +1084,10 @@ function initSystem(moduleList, name, colorCode) {
    **/
   function enableModule(entity, manager, moduleName) {
     if (moduleNames.indexOf(moduleName) > -1) {
-      if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
+      if (!mainNBT(entity).hasKey("disabledModules")) {
         systemMessage(entity, "<e>You have no disabled modules to enable!");
       } else {
-        var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModules = mainNBT(entity).getStringList("disabledModules");
         if (disabledModules.tagCount() == 0) {
           systemMessage(entity, "<e>You have no disabled modules to enable!");
         } else {
@@ -1118,13 +1107,13 @@ function initSystem(moduleList, name, colorCode) {
   function disableModule(entity, manager, moduleName) {
     var moduleIndex = moduleNames.indexOf(moduleName);
     if (moduleIndex > -1) {
-      if (!entity.getWornHelmet().nbt().hasKey("disabledModules")) {
+      if (!mainNBT(entity).hasKey("disabledModules")) {
         var disabledModules = manager.newTagList();
         manager.appendString(disabledModules, moduleName);
-        manager.setTagList(entity.getWornHelmet().nbt(), "disabledModules", disabledModules);
+        manager.setTagList(mainNBT(entity), "disabledModules", disabledModules);
         systemMessage(entity, "<s>Module <sh>" + moduleName + "<s> disabled!");
       } else {
-        var disabledModules = entity.getWornHelmet().nbt().getStringList("disabledModules");
+        var disabledModules = mainNBT(entity).getStringList("disabledModules");
         var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
         if (disabledModulesIndex > -1) {
           systemMessage(entity, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
@@ -1396,39 +1385,39 @@ function initSystem(moduleList, name, colorCode) {
     };
   };
   function tickHandler(entity, manager) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = mainNBT(entity);
     if ((!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true))) {
       manager.setString(nbt, "cyberModelID", cyberModelID);
       manager.setString(nbt, "cyberAliasName", cyberName);
       manager.setBoolean(nbt, "Unbreakable", true);
       assignID(entity, manager);
       chatModes.forEach(mode => {
-        if (!entity.getWornHelmet().nbt().hasKey(mode + "Selected")) {
+        if (!nbt.hasKey(mode + "Selected")) {
           manager.setString(nbt, mode + "Selected", "");
         };
       });
-      if (!entity.getWornHelmet().nbt().hasKey("chatMode")) {
+      if (!nbt.hasKey("chatMode")) {
         manager.setString(nbt, "chatMode", "");
       };
-      if (!entity.getWornHelmet().nbt().hasKey("durationFightOrFlight")) {
+      if (!nbt.hasKey("durationFightOrFlight")) {
         manager.setShort(nbt, "durationFightOrFlight", 20);
       };
-      if (!entity.getWornHelmet().nbt().hasKey("minHealthFightOrFlight")) {
+      if (!nbt.hasKey("minHealthFightOrFlight")) {
         manager.setShort(nbt, "minHealthFightOrFlight", 5);
       };
-      if (!entity.getWornHelmet().nbt().hasKey("xSat")) {
+      if (!nbt.hasKey("xSat")) {
         manager.setShort(nbt, "xSat", 0);
       };
-      if (!entity.getWornHelmet().nbt().hasKey("ySat")) {
+      if (!nbt.hasKey("ySat")) {
         manager.setShort(nbt, "ySat", 1000);
       };
-      if (!entity.getWornHelmet().nbt().hasKey("zSat")) {
+      if (!nbt.hasKey("zSat")) {
         manager.setShort(nbt, "zSat", 0);
       };
-      if (!entity.getWornHelmet().nbt().hasKey("freq")) {
+      if (!nbt.hasKey("freq")) {
         manager.setShort(nbt, "freq", 100);
       };
-      if (!entity.getWornHelmet().nbt().hasKey("hudScale")) {
+      if (!nbt.hasKey("hudScale")) {
         manager.setFloat(nbt, "hudScale", 1.0);
       };
       var hexColor = hexColors[getModelID(entity)];

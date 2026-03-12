@@ -10,21 +10,7 @@ function initModule(system) {
    * @returns If sender is in receiver's contacts
    **/
   function hasContact(sender, receiver) {
-    var nbt = null;
-    if (receiver.isWearingFullSuit()) {
-      if (receiver.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = receiver.getWornHelmet().nbt();
-      };
-      if (receiver.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = receiver.getWornChestplate().nbt();
-      };
-      if (receiver.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = receiver.getWornLeggings().nbt();
-      };
-      if (receiver.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = receiver.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     var contacts = nbt.getStringList("contacts");
     var contactsList = system.getStringArray(contacts);
     var result = false;
@@ -53,21 +39,7 @@ function initModule(system) {
     type: 2,
     chatModeMessage: "<n>You are now in <nh>normal<n> mode!",
     messageHandler: function (entity, name, range) {
-      var nbt = null;
-      if (entity.isWearingFullSuit()) {
-        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-          nbt = entity.getWornHelmet().nbt();
-        };
-        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-          nbt = entity.getWornChestplate().nbt();
-        };
-        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-          nbt = entity.getWornLeggings().nbt();
-        };
-        if (entity.getWornBoots().nbt().hasKey("computerID")) {
-          nbt = entity.getWornBoots().nbt();
-        };
-      };
+      var nbt = system.getMainNBT(entity);
       var message = entity.getData("skyhighheroes:dyn/entry");
       var foundPlayer = null;
       if (nbt.getStringList("contacts").tagCount() > 0) {
@@ -98,21 +70,7 @@ function initModule(system) {
       };
     },
     chatInfo: function (entity, manager, chat) {
-      var nbt = null;
-      if (entity.isWearingFullSuit()) {
-        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-          nbt = entity.getWornHelmet().nbt();
-        };
-        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-          nbt = entity.getWornChestplate().nbt();
-        };
-        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-          nbt = entity.getWornLeggings().nbt();
-        };
-        if (entity.getWornBoots().nbt().hasKey("computerID")) {
-          nbt = entity.getWornBoots().nbt();
-        };
-      };
+      var nbt = system.getMainNBT(entity);
       if (nbt.hasKey("contacts")) {
         if (nbt.getStringList("contacts").tagCount() > 0) {
           var contactsList = system.getStringArray(nbt.getStringList("contacts"));
@@ -132,21 +90,7 @@ function initModule(system) {
       };
     },
     chatModeInfo: function (entity) {
-      var nbt = null;
-      if (entity.isWearingFullSuit()) {
-        if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-          nbt = entity.getWornHelmet().nbt();
-        };
-        if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-          nbt = entity.getWornChestplate().nbt();
-        };
-        if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-          nbt = entity.getWornLeggings().nbt();
-        };
-        if (entity.getWornBoots().nbt().hasKey("computerID")) {
-          nbt = entity.getWornBoots().nbt();
-        };
-      };
+      var nbt = system.getMainNBT(entity);
       if (nbt.hasKey("contacts")) {
         if (nbt.getStringList("contacts").tagCount() > 0) {
           var contactsList = system.getStringArray(nbt.getStringList("contacts"));

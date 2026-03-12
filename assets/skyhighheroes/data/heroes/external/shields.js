@@ -26,7 +26,7 @@ function initModule(system) {
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         var left = nbt.getBoolean("shieldsLeft");
         var right = nbt.getBoolean("shieldsRight");
         if (keyBind == "SHIELDS" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -40,7 +40,7 @@ function initModule(system) {
     },
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch (argList[1]) {
           case "arm":
             switch (argList[2]) {
@@ -166,7 +166,7 @@ function initModule(system) {
       };
     },
     armHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "leftShield":
           manager.setBoolean(nbt, "shieldsLeft", true);
@@ -184,7 +184,7 @@ function initModule(system) {
       };
     },
     disarmHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "leftShield":
           manager.setBoolean(nbt, "shieldsLeft", false);
@@ -203,7 +203,7 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var left = (nbt.getBoolean("shieldsLeft")) ? "T" : "F";
       var right = (nbt.getBoolean("shieldsRight")) ? "T" : "F";
       if (modifier.name() == "fiskheroes:shield" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -280,7 +280,7 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       manager.setBoolean(nbt, "shieldsLeft", false);
       manager.setBoolean(nbt, "shieldsRight", false);
       manager.setData(entity, "skyhighheroes:dyn/shield_left_arm", false);
@@ -289,7 +289,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/shield_right_arm_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var left = nbt.getBoolean("shieldsLeft") && entity.getData("fiskheroes:shield");
       var right = nbt.getBoolean("shieldsRight") && entity.getData("fiskheroes:shield");
       if ((!nbt.getBoolean("shieldsLeft") || !nbt.getBoolean("shieldsRight")) && shieldMultiTap.multiTap(entity, manager, 2, 20, 1)) {

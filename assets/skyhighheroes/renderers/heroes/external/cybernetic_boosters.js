@@ -1140,7 +1140,7 @@ function initRightArmBoosters(renderer, model, color) {
  * @returns NBT boolean if the entity is a holographic display stand
  **/
 function getHoloBoolean(entity, value) {
-  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+  return entity.is("DISPLAY") && mainNBT(entity).getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
 };
 
 /**
@@ -1151,5 +1151,9 @@ function getHoloBoolean(entity, value) {
  * @returns NBT boolean if the entity is a holographic display stand
  **/
 function getHoloBooleans(entity, condition, value) {
-  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+  return entity.is("DISPLAY") && mainNBT(entity).getBoolean(condition) && mainNBT(entity).getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+};
+
+function mainNBT(entity) {
+  return entity.getWornHelmet().nbt();
 };

@@ -26,7 +26,7 @@ function initModule(system) {
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         var left = nbt.getBoolean("bladesLeft");
         var right = nbt.getBoolean("bladesRight");
         if (keyBind == "BLADES" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -40,7 +40,7 @@ function initModule(system) {
     },
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch (argList[1]) {
           case "arm":
             switch (argList[2]) {
@@ -202,7 +202,7 @@ function initModule(system) {
       };
     },
     armHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "leftBlade":
           manager.setBoolean(nbt, "bladesLeft", true);
@@ -220,7 +220,7 @@ function initModule(system) {
       };
     },
     disarmHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "leftBlade":
           manager.setBoolean(nbt, "bladesLeft", false);
@@ -301,7 +301,7 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       manager.setBoolean(nbt, "bladesLeft", false);
       manager.setBoolean(nbt, "bladesRight", false);
       manager.setBoolean(nbt, "bladesLeftStealth", false);
@@ -314,7 +314,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/blade_right_arm_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       var left = nbt.getBoolean("bladesLeft") && entity.getData("fiskheroes:blade");
       var right = nbt.getBoolean("bladesRight") && entity.getData("fiskheroes:blade");
       if ((!nbt.getBoolean("bladesLeft") || !nbt.getBoolean("bladesRight")) && bladeMultiTap.multiTap(entity, manager, 2, 20, 1)) {

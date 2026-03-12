@@ -13,7 +13,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>rockets<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "arm":
             if (nbt.getBoolean("wings")) {
@@ -601,7 +601,7 @@ function initModule(system) {
       };
     },
     armHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       if (nbt.getBoolean("wings")) {
         system.moduleMessage(this, entity, "<e>Unable to arm rockets! Wings are already armed!");
       } else {
@@ -632,7 +632,7 @@ function initModule(system) {
       };
     },
     disarmHandler: function (entity, manager, arg) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       switch (arg) {
         case "armsRockets":
           if (!(nbt.getBoolean("rocketsArms") && entity.getData("fiskheroes:flight_timer") > 0)) {
@@ -688,7 +688,7 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         var arms = (nbt.getBoolean("rocketsArms")) ? "T" : "F";
         var body = (nbt.getBoolean("rocketsBody")) ? "T" : "F";
         var legs = (nbt.getBoolean("rocketsLegs")) ? "T" : "F";
@@ -704,7 +704,7 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       manager.setBoolean(nbt, "rocketsArms", false);
       manager.setBoolean(nbt, "rocketsBody", false);
       manager.setBoolean(nbt, "rocketsLegs", false);
@@ -729,7 +729,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/rocket_body_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       if (!entity.isSneaking() && !entity.getData("fiskheroes:flying") && (nbt.getBoolean("armsRocketsOnFall") || nbt.getBoolean("bodyRocketsOnFall") || nbt.getBoolean("legRocketsOnFall")) && entity.world().isUnobstructed(entity.pos(), entity.pos().add(0, -5, 0)) && entity.motionY() < -0.75) {
         if (nbt.getBoolean("armsRocketsOnFall")) {
           manager.setBoolean(nbt, "rocketsArms", true);

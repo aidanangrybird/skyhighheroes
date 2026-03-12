@@ -790,3 +790,21 @@ function isTransformed(entity) {
   });
   return transformed;
 };
+
+function getMainNBT(entity) {
+  if (entity.isWearingFullSuit()) {
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      return entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      return entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      return entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      return entity.getWornBoots().nbt();
+    };
+  };
+  return null;
+};

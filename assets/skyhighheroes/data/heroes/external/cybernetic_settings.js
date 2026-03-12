@@ -11,7 +11,7 @@ function initModule(system) {
     helpMessage: "<n>!set <nh>-<n> Settings",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 4) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "fightOrFlightDur":
             manager.setShort(nbt, "durationFightOrFlight", parseInt(argList[2]));

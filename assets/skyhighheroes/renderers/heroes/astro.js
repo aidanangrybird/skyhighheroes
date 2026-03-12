@@ -330,7 +330,7 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  var nbt = entity.getWornLeggings().nbt();
+  var nbt = astro.mainNBT(entity);
   if (entity.isWearingFullSuit()) {
     if (isChristmasSeason) {
       if (entity.getData("skyhighheroes:dyn/astro_clothes") == 3) {
@@ -361,7 +361,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
     if (isFirstPersonArm) {
       blank_model.setOffset(0.0, 0.0, 0.0);
       blank_model.setScale(1000.0);
-      blank_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") + (astro.isModuleDisabled(entity, "eyes") ? 1 : 0);
+      blank_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer");
       blank_model.anchor.ignoreAnchor(true);
       blank_model.render();
     };

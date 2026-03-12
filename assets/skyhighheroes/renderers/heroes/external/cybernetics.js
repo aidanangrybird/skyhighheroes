@@ -140,7 +140,7 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.BASE", "skyhighheroes:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })
-  .setCondition(entity => !entity.is("DISPLAY") && !entity.getWornHelmet().nbt().getBoolean("naturalArms") && (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1))
+  .setCondition(entity => !entity.is("DISPLAY") && !mainNBT(entity).getBoolean("naturalArms") && (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1))
   .priority = -11;
   addAnimation(renderer, "cybernetic.LEFT_ARM_PUNCH", "skyhighheroes:cybernetic_left_arm_punch").setData((entity, data) => {
     data.load(entity.getPunchTimerInterpolated());
@@ -237,7 +237,7 @@ function initSatelliteBeams(renderer, model, color) {
   
   return {
     render: function (entity, isFirstPersonArm) {
-      var vector = PackLoader.asVec3(entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5);
+      var vector = PackLoader.asVec3(mainNBT(entity).getShort("xSat")+0.5, mainNBT(entity).getShort("ySat")+0.5, mainNBT(entity).getShort("zSat")+0.5);
       var transmitTimer = entity.getInterpolatedData("skyhighheroes:dyn/transmit_beam_timer");
       var receiveTimer = entity.getInterpolatedData("skyhighheroes:dyn/receive_beam_timer");
       var factor = entity.eyePos().add(0, 1, 0).distanceTo(vector);
@@ -317,7 +317,7 @@ function initAntennaBeams(renderer, model, color) {
  * @returns NBT boolean if the entity is a holographic display stand
  **/
 function getHoloBoolean(entity, value) {
-  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+  return entity.is("DISPLAY") && mainNBT(entity).getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
 };
 
 /**
@@ -328,7 +328,7 @@ function getHoloBoolean(entity, value) {
  * @returns NBT boolean if the entity is a holographic display stand
  **/
 function getHoloBooleans(entity, condition, value) {
-  return entity.is("DISPLAY") && entity.getWornHelmet().nbt().getBoolean(condition) && entity.getWornHelmet().nbt().getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+  return entity.is("DISPLAY") && mainNBT(entity).getBoolean(condition) && mainNBT(entity).getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
 };
 
 function elevation(entity, posX, posY, posZ) {
@@ -370,8 +370,8 @@ function headAnimations(entity, data) {
   data.load(9, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_head_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_head_right_start_up_timer") == 0)?0:1));
   data.load(10, stuff.getBearing(entity));
   data.load(11, entity.rotationInterpolated().y());
-  data.load(12, stuff.directionAngle(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
-  data.load(13, stuff.elevation(entity, entity.getWornHelmet().nbt().getShort("xSat")+0.5, entity.getWornHelmet().nbt().getShort("ySat")+0.5, entity.getWornHelmet().nbt().getShort("zSat")+0.5));
+  data.load(12, stuff.directionAngle(entity, mainNBT(entity).getShort("xSat")+0.5, mainNBT(entity).getShort("zSat")+0.5));
+  data.load(13, stuff.elevation(entity, mainNBT(entity).getShort("xSat")+0.5, mainNBT(entity).getShort("ySat")+0.5, mainNBT(entity).getShort("zSat")+0.5));
 };
 
 function bodyAnimations(entity, data) {
@@ -610,7 +610,7 @@ function position(entity) {
  * @returns The Cyber ID
  **/
 function getModelID(entity) {
-  return entity.getWornHelmet().nbt().getString("cyberModelID");
+  return mainNBT(entity).getString("cyberModelID");
 };
 /**
  * Gets the Cyber name
@@ -618,7 +618,7 @@ function getModelID(entity) {
  * @returns The Cyber alias
  **/
 function getAliasName(entity) {
-  return entity.getWornHelmet().nbt().getString("cyberAliasName");
+  return mainNBT(entity).getString("cyberAliasName");
 };
 
 /**
@@ -626,7 +626,7 @@ function getAliasName(entity) {
  * @param {JSEntity} entity - Required
  **/
 function getSatUUIDList(entity) {
-  var list = entity.getWornHelmet().nbt().getTagList("playerInfoSat");
+  var list = mainNBT(entity).getTagList("playerInfoSat");
   var count = list.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -640,7 +640,7 @@ function getSatUUIDList(entity) {
  * @param {JSEntity} entity - Required
  **/
 function getSatIDList(entity) {
-  var list = entity.getWornHelmet().nbt().getTagList("playerInfoSat");
+  var list = mainNBT(entity).getTagList("playerInfoSat");
   var count = list.tagCount();
   var result = [];
   for (i=0;i<count;i++) {
@@ -655,8 +655,8 @@ function getSatIDList(entity) {
  * @param {JSEntity} otherEntity - Required
  **/
 function checkSatellite(entity, otherEntity) {
-  var nbt = entity.getWornHelmet().nbt();
-  var nbtOther = otherEntity.getWornHelmet().nbt()
+  var nbt = mainNBT(entity);
+  var nbtOther = mainNBT(otherEntity);
   if ((nbt.getShort("xSat") == nbtOther.getShort("xSat")) && (nbt.getShort("ySat") == nbtOther.getShort("ySat")) && (nbt.getShort("zSat") == nbtOther.getShort("zSat"))) {
     return true;
   } else {
@@ -670,8 +670,8 @@ function checkSatellite(entity, otherEntity) {
  * @param {JSEntity} otherEntity - Required
  **/
 function checkFrequency(entity, otherEntity) {
-  var nbt = entity.getWornHelmet().nbt();
-  var nbtOther = otherEntity.getWornHelmet().nbt()
+  var nbt = mainNBT(entity);
+  var nbtOther = mainNBT(otherEntity);
   if (nbt.getShort("freq") == nbtOther.getShort("freq")) {
     return true;
   } else {
@@ -690,7 +690,7 @@ function isStillCyber(entity, id) {
   if (otherEntity.exists() && otherEntity.isLivingEntity()) {
     if (otherEntity.is("PLAYER")) {
       var otherPlayer = otherEntity.as("PLAYER");
-      if (otherPlayer.isWearingFullSuit() && entity.getWornHelmet().nbt().hasKey("computerID")) {
+      if (otherPlayer.isWearingFullSuit() && mainNBT(entity).hasKey("computerID")) {
         if (hasCyberneticBody(otherPlayer)) {
           result = true;
         };
@@ -706,5 +706,9 @@ function isStillCyber(entity, id) {
  * @returns If the entity is cybernetic
  **/
 function hasCyberneticBody(entity) {
-  return entity.getWornHelmet().nbt().hasKey("cyberModelID") && entity.getWornHelmet().nbt().getString("cyberAliasName");
+  return mainNBT(entity).hasKey("cyberModelID") && mainNBT(entity).getString("cyberAliasName");
+};
+
+function mainNBT(entity) {
+  return entity.getWornHelmet().nbt();
 };

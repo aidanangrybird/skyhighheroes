@@ -42,8 +42,8 @@ function initModule(system) {
   * @param manager - Required
   **/
   function receiveSuits(module, tx, rx, manager) {
-    var rxNBT = rx.getWornHelmet().nbt();
-    var txNBT = tx.getWornHelmet().nbt();
+    var rxNBT = system.mainNBT(rx)
+    var txNBT = system.mainNBT(tx)
     if (!rxNBT.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(rxNBT, "suitDatastore", newSuitsList);
@@ -83,7 +83,7 @@ function initModule(system) {
   * @param currentReceive - Current suit being received
   **/
   function receiveSuit(module, entity, manager, currentReceive) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -116,7 +116,7 @@ function initModule(system) {
       system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
       return;
     };
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuits);
@@ -166,7 +166,7 @@ function initModule(system) {
   * @param currentTransmission - Suit index
   **/
   function transmitSuit(module, entity, manager, currentTransmission) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -437,8 +437,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighheroes:dyn/antenna_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getWornHelmet().nbt().getShort("xSat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("ySat") + "<n>, <nh>" + entity.getWornHelmet().nbt().getShort("zSat"));
-            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + entity.getWornHelmet().nbt().getShort("freq"));
+            system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + nbt.getShort("xSat") + "<n>, <nh>" + nbt.getShort("ySat") + "<n>, <nh>" + nbt.getShort("zSat"));
+            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + nbt.getShort("freq"));
             system.moduleMessage(this, entity, "<n>Antenna Hologram: <nh>" + (nbt.getBoolean("holoAnt") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Satellite Hologram: <nh>" + (nbt.getBoolean("holoSat") ? "ENABLED" : "DISABLED"));
             break;
@@ -484,7 +484,7 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/transmit_beam", false);
         manager.setData(entity, "skyhighheroes:dyn/receive_beam", false);
       };
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       if (entity.getData("skyhighheroes:dyn/receive_timer") >= 1) {
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/receiving", false);
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");

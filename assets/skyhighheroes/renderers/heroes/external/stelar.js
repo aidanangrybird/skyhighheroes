@@ -455,3 +455,7 @@ function isModuleDisabled(entity, moduleName) {
   });
   return result;
 };
+
+function mainNBT(entity) {
+  return entity.getWornChestplate().nbt();
+};

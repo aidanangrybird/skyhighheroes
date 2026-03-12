@@ -11,7 +11,7 @@ function initModule(system) {
    * @param {string} username - Username of player to form BrotherBand with
    **/
   function formBrotherBand(entity, manager, username) {
-    var nbt = entity.getWornChestplate().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("brothers")) {
       var newBrotherBandList = manager.newTagList();
       manager.setTagList(nbt, "brothers", newBrotherBandList);
@@ -57,7 +57,7 @@ function initModule(system) {
    * @param {integer} username - Username of player cutting BrotherBand with
    **/
   function cutBrotherBand(entity, manager, username) {
-    var nbt = entity.getWornChestplate().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("brothers")) {
       system.moduleMessage(this, entity, "<e>You have no BrotherBands to cut!");
     } else {
@@ -125,7 +125,7 @@ function initModule(system) {
     messageHandler: function (entity, name, range) {
       var message = entity.getData("skyhighheroes:dyn/entry");
       var foundPlayer = null;
-      var nbt = entity.getWornChestplate().nbt();
+      var nbt = system.mainNBT(entity);
       if (nbt.getStringList("brothers").tagCount() > 0) {
         var brothersList = system.getStringArray(nbt.getStringList("brothers"));
         var chat = nbt.getString("BrotherBandSelected");
@@ -180,7 +180,7 @@ function initModule(system) {
       };
     },
     chatInfo: function (entity, manager, chat) {
-      var nbt = entity.getWornChestplate().nbt();
+      var nbt = system.mainNBT(entity);
       if (nbt.hasKey("brothers")) {
         if (nbt.getTagList("brothers").tagCount() > 0) {
           var brothersList = system.getStringArray(nbt.getStringList("brothers"));
@@ -200,7 +200,7 @@ function initModule(system) {
       };
     },
     chatModeInfo: function (entity) {
-      var nbt = entity.getWornChestplate().nbt();
+      var nbt = system.mainNBT(entity);
       if (nbt.hasKey("brothers")) {
         if (nbt.getTagList("brothers").tagCount() > 0) {
           var brothersList = system.getStringArray(nbt.getStringList("brothers"));

@@ -10,7 +10,7 @@ function initModule(system) {
    * @param {string} presetName - Name of preset
    **/
   function addPreset(entity, manager, presetName) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -34,7 +34,7 @@ function initModule(system) {
    * @param {JSDataManager} manager - Required
    **/
   function listPresets(entity, manager) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -52,7 +52,7 @@ function initModule(system) {
    * @param {string} presetName - Name of preset
    **/
   function removePreset(entity, manager, presetName) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -72,7 +72,7 @@ function initModule(system) {
    * @returns Array of preset names
    **/
   function getPresetArray(entity, manager) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -92,7 +92,7 @@ function initModule(system) {
    * @param {string} presetName - Name of preset
    **/
   function setPreset(entity, manager, presetName) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("eyePresets")) {
       var newPresetsList = manager.newTagList();
       manager.setTagList(nbt, "eyePresets", newPresetsList);
@@ -121,7 +121,7 @@ function initModule(system) {
     helpMessage: "<n>!eyes <nh>-<n> Eyes",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "set":
             switch(argList[2]) {

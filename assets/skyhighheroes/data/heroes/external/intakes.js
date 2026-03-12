@@ -13,7 +13,7 @@ function initModule(system) {
     disabledMessage: "<e>Module <eh>intakes<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
       if (argList.length > 1 && argList.length < 5) {
-        var nbt = entity.getWornHelmet().nbt();
+        var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "open":
             switch (argList[2]) {
@@ -330,7 +330,7 @@ function initModule(system) {
       return result;
     },
     whenDisabled: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       manager.setData(entity, "skyhighheroes:dyn/intake_head_left_open", false);
       manager.setData(entity, "skyhighheroes:dyn/intake_head_right_open", false);
       manager.setData(entity, "skyhighheroes:dyn/intake_body_left_open", false);
@@ -341,7 +341,7 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_open", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       //manager.setData(entity, "skyhighheroes:dyn/intake_head_left_starting_up", entity.getData("skyhighheroes:dyn/intake_head_left_open_timer") == 1);
       manager.incrementData(entity, "skyhighheroes:dyn/intake_head_left_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_head_left_starting_up"));
       //manager.setData(entity, "skyhighheroes:dyn/intake_head_right_starting_up", entity.getData("skyhighheroes:dyn/intake_head_right_open_timer") == 1);

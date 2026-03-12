@@ -37,27 +37,28 @@ var hexColors = {
 };
 
 function assignTranser(entity, manager, satellite) {
-  manager.setString(entity.getWornChestplate().nbt(), "satellite", satellite);
-  manager.setBoolean(entity.getWornChestplate().nbt(), "Unbreakable", true);
-  if (!entity.getWornChestplate().nbt().hasKey("computerID")) {
+  var nbt = mainNBT(entity);
+  manager.setString(nbt, "satellite", satellite);
+  manager.setBoolean(nbt, "Unbreakable", true);
+  if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
       var computerID = Math.random().toFixed(8).toString().substring(2);
-      manager.setString(entity.getWornChestplate().nbt(), "computerID", computerID);
+      manager.setString(nbt, "computerID", computerID);
     };
   };
-  if (!entity.getWornChestplate().nbt().hasKey("systemColor")) {
+  if (!nbt.hasKey("systemColor")) {
     switch (satellite) {
       case "dragon":
-        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "2");
+        manager.setString(nbt, "systemColor", "2");
         break;
       case "leo":
-        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "4");
+        manager.setString(nbt, "systemColor", "4");
         break;
       case "pegasus":
-        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "1");
+        manager.setString(nbt, "systemColor", "1");
         break;
       default:
-        manager.setString(entity.getWornChestplate().nbt(), "systemColor", "0");
+        manager.setString(nbt, "systemColor", "0");
         break;
     };
   };
@@ -69,7 +70,7 @@ function assignTranser(entity, manager, satellite) {
  * @returns If the entity is wearing a transer
  **/
 function isWearingTranser(entity) {
-  return entity.getWornChestplate().nbt().hasKey("satellite");
+  return mainNBT(entity).hasKey("satellite");
 };
 
 /**
@@ -78,7 +79,7 @@ function isWearingTranser(entity) {
  * @returns If the entity has a device that is a computer
  **/
 function hasComputer(entity) {
-  return entity.getWornHelmet().nbt().hasKey("computerID") || entity.getWornChestplate().nbt().hasKey("computerID") || entity.getWornLeggings().nbt().hasKey("computerID") || entity.getWornBoots().nbt().hasKey("computerID");
+  return getMainNBT(entity).hasKey("computerID");
 };
 
 /**
@@ -87,7 +88,7 @@ function hasComputer(entity) {
  * @returns The satellite a transer is assigned to
  **/
 function getAssignedSatellite(entity) {
-  return entity.getWornChestplate().nbt().getString("satellite");
+  return mainNBT(entity).getString("satellite");
 };
 
 /**
@@ -96,7 +97,7 @@ function getAssignedSatellite(entity) {
  * @returns The system color of a transer
  **/
 function getSystemColor(entity) {
-  return "\u00A7" + entity.getWornChestplate().nbt().getString("systemColor");
+  return "\u00A7" + mainNBT(entity).getString("systemColor");
 };
 
 /**
@@ -203,6 +204,28 @@ function direction(base, other) {
   return direction;
 };
 
+function mainNBT(entity) {
+  return entity.getWornChestplate().nbt();
+};
+
+function getMainNBT(entity) {
+  if (entity.isWearingFullSuit()) {
+    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
+      return entity.getWornHelmet().nbt();
+    };
+    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
+      return entity.getWornChestplate().nbt();
+    };
+    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
+      return entity.getWornLeggings().nbt();
+    };
+    if (entity.getWornBoots().nbt().hasKey("computerID")) {
+      return entity.getWornBoots().nbt();
+    };
+  };
+  return null;
+};
+
 /**
  * Turns NBT String List into an array for easier use in code
  * @param {JSNBTList} nbtList - NBTList
@@ -224,14 +247,15 @@ function getStringArray(nbtList) {
  * @param {string} moduleName - Module name to disable
  **/
 function disableModule(entity, manager, moduleList, moduleName) {
+  var nbt = mainNBT(entity);
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!entity.getWornChestplate().nbt().hasKey("disabledModules")) {
+    if (!nbt.hasKey("disabledModules")) {
       var disabledModules = manager.newTagList();
       manager.appendString(disabledModules, moduleName);
-      manager.setTagList(entity.getWornChestplate().nbt(), "disabledModules", disabledModules);
+      manager.setTagList(nbt, "disabledModules", disabledModules);
       systemMessage(entity, "<s>Successfully disabled module <sh>" + moduleName + "<s>!");
     } else {
-      var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
+      var disabledModules = nbt.getStringList("disabledModules");
       var disabledModulesIndex = getStringArray(disabledModules).indexOf(moduleName);
       if (disabledModulesIndex > -1) {
         systemMessage(entity, "<e>You have already disabled module <eh>" + moduleName + "<e>!");
@@ -252,11 +276,12 @@ function disableModule(entity, manager, moduleList, moduleName) {
  * @param {integer} moduleName - Name of module to enable
  **/
 function enableModule(entity, manager, moduleList, moduleName) {
+  var nbt = mainNBT(entity);
   if (moduleList.indexOf(moduleName) > -1) {
-    if (!entity.getWornChestplate().nbt().hasKey("disabledModules")) {
+    if (!nbt.hasKey("disabledModules")) {
       systemMessage(entity, "<e>You have no disabled modules to enable!");
     } else {
-      var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
+      var disabledModules = nbt.getStringList("disabledModules");
       if (disabledModules.tagCount() == 0) {
         systemMessage(entity, "<e>You have no disabled modules to enable!");
       } else {
@@ -280,7 +305,7 @@ function enableModule(entity, manager, moduleList, moduleName) {
  * @returns If module is disabled
  **/
 function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
+  var disabledModules = mainNBT(entity).getStringList("disabledModules");
   var modulesDisabled = getStringArray(disabledModules);
   var result = false;
   modulesDisabled.forEach(entry => {
@@ -336,8 +361,8 @@ function systemMessage(entity, message) {
   chatMessage(entity, formatSystem(getSystemColor(entity) + "\u00A7ltranserOS\u00A7r> " + message));
 };
 /**
- * Sends message in group format
- * @param {string} message - Entity recieving message
+ * Sends message in log format
+ * @param {string} message - log message
  **/
 function logMessage(message) {
   PackLoader.print("skyhighheroes: " + message);
@@ -586,7 +611,7 @@ function initSystem(moduleList, transerName, satellite) {
     var chatMode = chatModes.indexOf(mode);
     if (chatMode > -1) {
       var chatModule = modules[messagingIndexes[chatMode]];
-      manager.setString(entity.getWornHelmet().nbt(), "chatMode", chatModule.modeID);
+      manager.setString(mainNBT(entity), "chatMode", chatModule.modeID);
       systemMessage(entity, chatModule.chatModeMessage);
       chatModule.chatModeInfo(entity);
     } else {
@@ -594,7 +619,7 @@ function initSystem(moduleList, transerName, satellite) {
     };
   };
   function switchChats(entity, manager, chat) {
-    var modeID = entity.getWornChestplate().nbt().getString("chatMode");
+    var modeID = mainNBT(entity).getString("chatMode");
     var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
@@ -609,7 +634,7 @@ function initSystem(moduleList, transerName, satellite) {
     });
     systemMessage(entity, "<n>transerOS");
     systemMessage(entity, modulesMessage);
-    systemMessage(entity, "<n>computerID: <nh>" + entity.getWornChestplate().nbt().getString("computerID"));
+    systemMessage(entity, "<n>computerID: <nh>" + mainNBT(entity).getString("computerID"));
   };
   function status(entity) {
     var date = new Date();
@@ -789,7 +814,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @param {JSDataManager} manager - Required
      **/
     systemHandler: (entity, manager) => {
-      var nbt = entity.getWornChestplate().nbt();
+      var nbt = mainNBT(entity);
       if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true)) {
         assignTranser(entity, manager, assignedSatellite);
         status(entity);

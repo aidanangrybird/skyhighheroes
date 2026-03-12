@@ -5,21 +5,7 @@ function initModule(system) {
    * @returns Array of waypoint names
    **/
   function getWaypointNameArray(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);
@@ -38,21 +24,7 @@ function initModule(system) {
    * @returns Array of waypoint names, coords and dimension
    **/
   function getWaypointArray(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);
@@ -77,21 +49,7 @@ function initModule(system) {
    * @param {string} waypointName - Name of waypoint
    **/
   function addWaypoint(entity, manager, waypointName) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);
@@ -122,21 +80,7 @@ function initModule(system) {
    * @param {string} waypointName - Name of waypoint
    **/
   function removeWaypoint(entity, manager, waypointName) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     var waypoints = nbt.getTagList("waypoints");
     var waypointIndex = getWaypointNameArray(entity, manager).indexOf(waypointName);
     if (waypointIndex < 0) {
@@ -153,21 +97,7 @@ function initModule(system) {
    * @param {string} waypointName - Name of waypoint
    **/
   function teleportToWaypoint(entity, manager, waypointName) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);
@@ -187,21 +117,7 @@ function initModule(system) {
    * @param {JSEntity} entity - Required
    **/
   function listWaypoints(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);

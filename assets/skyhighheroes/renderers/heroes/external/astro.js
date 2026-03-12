@@ -161,37 +161,6 @@ function initAstroAnimations(renderer) {
     .priority = -10;
 };
 
-/**
- * Turns NBT String List into an array for easier use in code
- * @param {JSNBTList} nbtList - NBTList
- * @returns Array of values from the NBTList
- **/
-function getStringArray(nbtList) {
-  var count = nbtList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    result.push(nbtList.getString(i));
-  };
-  return result;
-};
-/**
- * Checks if a module is disabled
- * @param {JSEntity} entity - Player getting checked
- * @param {string} moduleName - Module being checked if disabled
- * @returns If module is disabled
- **/
-function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornLeggings().nbt().getStringList("disabledModules");
-  var modulesDisabled = getStringArray(disabledModules);
-  var result = false;
-  modulesDisabled.forEach(entry => {
-    if (entry == moduleName) {
-      result = true;
-    };
-  });
-  return result;
-};
-
 function initNV(renderer, uuid) {
   nv = renderer.bindProperty("fiskheroes:night_vision");
   nv.fogStrength = 0.0;
@@ -642,4 +611,8 @@ function initRightLegBooster(renderer, model, colors) {
     }
   };
   return obj;
+};
+
+function mainNBT(entity) {
+  return entity.getWornLeggings().nbt();
 };

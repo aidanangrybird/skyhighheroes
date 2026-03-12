@@ -74,11 +74,11 @@ function initModule(system) {
       cyberMessage(entity, newName, message);
     },
     chatInfo: function (entity) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       system.systemMessage(entity, "<n>You are connected to a satellite at <nh>" + nbt.getShort("xSat") + ", " + nbt.getShort("ySat") + ", " + nbt.getShort("zSat")  + "<n> on frequency <nh>" + nbt.getShort("freq") + "<n>!");
     },
     chatModeInfo: function (entity) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       system.systemMessage(entity, "<n>You are in <nh>cyber messaging <n>mode!");
       system.systemMessage(entity, "<n>You are connected to a satellite at <nh>" + nbt.getShort("xSat") + ", " + nbt.getShort("ySat") + ", " + nbt.getShort("zSat")  + "<n> on frequency <nh>" + nbt.getShort("freq") + "<n>!");
     },

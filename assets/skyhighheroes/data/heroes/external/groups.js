@@ -1,24 +1,45 @@
 function initModule(system) {
   /**
+  * Turns NBT String List into an array for easier use in code
+  * @param {JSEntity} entity - Entity to create group array from
+  * @returns Array of group names
+  **/
+  function getGroupArray(entity) {
+    var groupList = system.getMainNBT(entity).getTagList("groups");
+    var count = groupList.tagCount();
+    var result = [];
+    for (i=0;i<count;i++) {
+      result.push(groupList.getCompoundTag(i).getString("groupName"));
+    };
+    return result;
+  };
+  /**
+   * Turns NBT String List into an array for easier use in code
+   * @param {JSEntity} entity - Entity to create group array from
+   * @returns Array of group names and member counts
+   **/
+  function getGroupArrayMembers(entity) {
+    var groupList = system.getMainNBT(entity).getTagList("groups");
+    var count = groupList.tagCount();
+    var result = [];
+    for (i=0;i<count;i++) {
+      var group = groupList.getCompoundTag(i);
+      var entry = {
+        "groupName": group.getString("groupName"),
+        "memberCount": group.getStringList("members").tagCount(),
+      };
+      result.push(entry);
+    };
+    return result;
+  };
+  /**
    * Adds group
    * @param {JSEntity} entity - Required
    * @param {JSDataManager} manager - Required
    * @param {string} groupName - Name of group
    **/
   function addGroup(entity, manager, groupName) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
@@ -46,19 +67,7 @@ function initModule(system) {
    * @param {JSDataManager} manager - Required
    **/
   function listGroups(entity, manager) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
@@ -76,19 +85,7 @@ function initModule(system) {
    * @param {string} groupName - Name of group
    **/
   function removeGroup(entity, manager, groupName) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
@@ -110,19 +107,7 @@ function initModule(system) {
    * @param {string} username - Username to add to group
    **/
   function addGroupMember(entity, manager, groupName, username) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = system.getMainNBT(entity);
     var groups = nbt.getTagList("groups");
     var groupIndex = getGroupArray(entity).indexOf(groupName);
     var members = groups.getCompoundTag(groupIndex).getStringList("members");
@@ -150,19 +135,7 @@ function initModule(system) {
    * @param {string} username - Username to add to group
    **/
   function removeGroupMember(entity, manager, groupName, username) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
@@ -186,19 +159,7 @@ function initModule(system) {
    * @param {integer} groupName - Name of group to add member to
    **/
   function listGroupMembers(entity, manager, groupName) {
-    var nbt = null;
-    if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      nbt = entity.getWornHelmet().nbt();
-    };
-    if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      nbt = entity.getWornChestplate().nbt();
-    };
-    if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      nbt = entity.getWornLeggings().nbt();
-    };
-    if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      nbt = entity.getWornBoots().nbt();
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
@@ -221,21 +182,7 @@ function initModule(system) {
    * @returns Array of group names
    **/
   function getGroupArray(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);
@@ -254,21 +201,7 @@ function initModule(system) {
    * @returns Array of group names and member counts
    **/
   function getGroupArrayMembers(entity, manager) {
-    var nbt = null;
-    if (entity.isWearingFullSuit()) {
-      if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-        nbt = entity.getWornHelmet().nbt();
-      };
-      if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-        nbt = entity.getWornChestplate().nbt();
-      };
-      if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-        nbt = entity.getWornLeggings().nbt();
-      };
-      if (entity.getWornBoots().nbt().hasKey("computerID")) {
-        nbt = entity.getWornBoots().nbt();
-      };
-    };
+    var nbt = system.getMainNBT(entity);
     if (!nbt.hasKey("groups")) {
       var newGroupsList = manager.newTagList();
       manager.setTagList(nbt, "groups", newGroupsList);

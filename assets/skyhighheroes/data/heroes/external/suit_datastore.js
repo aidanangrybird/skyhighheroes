@@ -8,7 +8,7 @@ function initModule(system) {
   * @param entity - Required
   **/
   function isSuitDriveInserted(entity) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     var result = false;
     var equipment = nbt.getTagList("Equipment");
     if (equipment.tagCount() == 1) {
@@ -24,7 +24,7 @@ function initModule(system) {
   * @param entity - Required
   **/
   function suitDriveName(entity) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     var result = "";
     var equipment = nbt.getTagList("Equipment");
     if (equipment.tagCount() == 1) {
@@ -42,7 +42,7 @@ function initModule(system) {
   * @param manager - Required
   **/
   function listDriveSuits(module, entity, manager) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -73,7 +73,7 @@ function initModule(system) {
       system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
       return;
     };
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -130,7 +130,7 @@ function initModule(system) {
   * @param currentDownload - Current suit being downloaded
   **/
   function downloadSuit(module, entity, manager, currentDownload) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -167,7 +167,7 @@ function initModule(system) {
       system.moduleMessage(module, entity, "<e>Suit list cannot be empty!");
       return;
     };
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuits = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuits);
@@ -217,7 +217,7 @@ function initModule(system) {
   * @param currentUpload - Suit index
   **/
   function uploadSuit(module, entity, manager, currentUpload) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (isSuitDriveInserted(entity)) {
       var uploadBuffer = nbt.getStringList("uploadBuffer");
       var suitDrive = nbt.getTagList("Equipment").getCompoundTag(0).getCompoundTag("Item").getCompoundTag("tag");
@@ -250,7 +250,7 @@ function initModule(system) {
       system.moduleMessage(module, entity, "<e>Suit index cannot be empty!");
       return;
     };
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -281,7 +281,7 @@ function initModule(system) {
   * @param manager - Required
   **/
   function listSuits(module, entity, manager) {
-    var nbt = entity.getWornHelmet().nbt();
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
       manager.setTagList(nbt, "suitDatastore", newSuitsList);
@@ -334,7 +334,7 @@ function initModule(system) {
       };
     },
     tickHandler: function (entity, manager) {
-      var nbt = entity.getWornHelmet().nbt();
+      var nbt = system.mainNBT(entity);
       if (entity.getData("skyhighheroes:dyn/download_timer") >= 1) {
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/downloading", false);
         system.moduleMessage(this, entity, "<s>Finished downloading suits!");
