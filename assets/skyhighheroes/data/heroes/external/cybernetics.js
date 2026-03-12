@@ -1449,9 +1449,14 @@ function initSystem(moduleList, name, colorCode) {
     };
     if (entity.getDataOrDefault("skyhighheroes:dyn/system_init", false)) {
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID))) {
-          manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-          manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? cyberName : cyberModelID));
+        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == null)) {
+          if (entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") == 1) {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", null);
+          } else {
+            manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
+            manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? cyberName : cyberModelID));
+          };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
           manager.setData(entity, "fiskheroes:shape_shift_timer", 0);
@@ -1572,7 +1577,12 @@ function initSystem(moduleList, name, colorCode) {
           };
         };
       };
-      manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+      if (entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1) {
+        manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+      };
+      if (entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") == 1) {
+        manager.setData(entity, "fiskheroes:disguise", null);
+      };
       tickHandlerIndexes.forEach(index => {
         var module = modules[index];
         if (!isModuleDisabled(entity, module.name) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
@@ -1669,7 +1679,7 @@ function initSystem(moduleList, name, colorCode) {
       };
     };
     if (sneakMultiTap.conditionalMultiTap(entity, manager, 2, 10, 1, entity.isSneaking())) {
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/thermoptic_camouflage", !entity.getData("skyhighheroes:dyn/thermoptic_camouflage"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/thermoptic_disguise", !entity.getData("skyhighheroes:dyn/thermoptic_disguise"));
     };
   };
   return {

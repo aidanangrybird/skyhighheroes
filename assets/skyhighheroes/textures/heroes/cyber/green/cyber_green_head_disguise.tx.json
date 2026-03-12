@@ -1,0 +1,34 @@
+{
+  "texture": {
+    "in": "skyhighheroes:cyber/green/cyber_green_<CLOTHING>",
+    "transform": [
+      {
+        "operation": "XOR",
+        "supply": "skyhighheroes:xor/cybernetic_thermoptic<SWITCH>_<TIMER>"
+      },
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:cybernetic_head"
+      }
+    ],
+    "out": "skyhighheroes:generated/cyber_green_head_<CLOTHING><SWITCH>_<TIMER>"
+  },
+  "getters": {
+    "TIMER": {
+      "key": "Math.min(Math.max(Math.ceil(47*(entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer') > 0 ? ((!entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer') + (!entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? 1 : 0)) : ((!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise_timer') + (!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? 1 : 0)))) + ((entity.getWornHelmet().nbt().getBoolean('disguiseOnStand') && !entity.getWornHelmet().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0), 0), 15) | 0",
+      "values": {
+        "min": 0,
+        "max": 15
+      }
+    },
+    "SWITCH": {
+      "key": "!entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise') || entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage') ? '_base' : ''",
+      "values": ["", "_base"]
+    },
+    "CLOTHING": {
+      "key": "(entity.getWornHelmet().nbt().getBoolean('disguiseClothing') ? 'disguise' : 'skin')",
+      "values": ["disguise", "skin"]
+    }
+  },
+  "isDynamic": true
+}

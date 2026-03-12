@@ -7,7 +7,7 @@ function initModule(system) {
   return {
     name: "machineGuns",
     type: 6,
-    powers: ["skyhighocs:astro_machine_guns"],
+    powers: ["skyhighheroes:astro_machine_guns"],
     keyBinds: function (hero) {
       hero.addKeyBind("CHARGED_BEAM", "Butt Machine Guns", 3);
     },

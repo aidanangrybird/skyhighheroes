@@ -33,6 +33,15 @@ var right_arm_camouflage_model;
 var left_leg_camouflage_model;
 var right_leg_camouflage_model;
 
+//Disguise models
+var head_disguise_model;
+var head_hair_disguise_model;
+var body_disguise_model;
+var left_arm_disguise_model;
+var right_arm_disguise_model;
+var left_leg_disguise_model;
+var right_leg_disguise_model;
+
 //Beams and boosters
 var satellite_beams;
 var body_boosters;
@@ -170,8 +179,53 @@ function initEffects(renderer) {
   right_leg_base_model.anchor.set("rightLeg");
   right_leg_base_model.setScale(1.0);
 
+  //Disguise
+  var head_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticHeadL2");
+  head_disguise.texture.set("head_disguise");
+  head_disguise.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => cybernetics.headAnimations(entity, data));
+  head_disguise_model = renderer.createEffect("fiskheroes:model").setModel(head_disguise);
+  head_disguise_model.anchor.set("head");
+  head_disguise_model.setScale(1.0);
+  var head_hair_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticHeadL2");
+  head_hair_disguise.texture.set("head_hair_disguise");
+  head_hair_disguise.bindAnimation("skyhighheroes:cybernetic_head").setData((entity, data) => cybernetics.headAnimations(entity, data));
+  head_hair_disguise_model = renderer.createEffect("fiskheroes:model").setModel(head_hair_disguise);
+  head_hair_disguise_model.anchor.set("head");
+  head_hair_disguise_model.setOffset(0.0, 0.5, 0.0);
+  head_hair_disguise_model.setScale(1.125);
+  var body_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticBodyL2");
+  body_disguise.texture.set("body_disguise");
+  body_disguise.bindAnimation("skyhighheroes:cybernetic_body").setData((entity, data) => cybernetics.bodyAnimations(entity, data));
+  body_disguise_model = renderer.createEffect("fiskheroes:model").setModel(body_disguise);
+  body_disguise_model.anchor.set("body");
+  body_disguise_model.setScale(1.0);
+  var left_arm_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticLeftArmL2");
+  left_arm_disguise.texture.set("left_arm_disguise");
+  left_arm_disguise.bindAnimation("skyhighheroes:cybernetic_left_arm").setData((entity, data) => cybernetics.leftArmAnimations(entity, data));
+  left_arm_disguise_model = renderer.createEffect("fiskheroes:model").setModel(left_arm_disguise);
+  left_arm_disguise_model.anchor.set("leftArm");
+  left_arm_disguise_model.setScale(1.0);
+  var right_arm_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticRightArmL2");
+  right_arm_disguise.texture.set("right_arm_disguise");
+  right_arm_disguise.bindAnimation("skyhighheroes:cybernetic_right_arm").setData((entity, data) => cybernetics.rightArmAnimations(entity, data));
+  right_arm_disguise_model = renderer.createEffect("fiskheroes:model").setModel(right_arm_disguise);
+  right_arm_disguise_model.anchor.set("rightArm");
+  right_arm_disguise_model.setScale(1.0);
+  var left_leg_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticLeftLegL2");
+  left_leg_disguise.texture.set("left_leg_disguise");
+  left_leg_disguise.bindAnimation("skyhighheroes:cybernetic_left_leg").setData((entity, data) => cybernetics.leftLegAnimations(entity, data));
+  left_leg_disguise_model = renderer.createEffect("fiskheroes:model").setModel(left_leg_disguise);
+  left_leg_disguise_model.anchor.set("leftLeg");
+  left_leg_disguise_model.setScale(1.0);
+  var right_leg_disguise = renderer.createResource("MODEL", "skyhighheroes:CyberneticRightLegL2");
+  right_leg_disguise.texture.set("right_leg_disguise");
+  right_leg_disguise.bindAnimation("skyhighheroes:cybernetic_right_leg").setData((entity, data) => cybernetics.rightLegAnimations(entity, data));
+  right_leg_disguise_model = renderer.createEffect("fiskheroes:model").setModel(right_leg_disguise);
+  right_leg_disguise_model.anchor.set("rightLeg");
+  right_leg_disguise_model.setScale(1.0);
+
   metal_heat = renderer.createEffect("fiskheroes:metal_heat");
-  metal_heat.includeEffects(head_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, head_base_model, head_hair_base_model, body_base_model, left_arm_base_model, right_arm_base_model, left_leg_base_model, right_leg_base_model);
+  metal_heat.includeEffects(head_model, body_model, left_arm_model, right_arm_model, left_leg_model, right_leg_model, head_base_model, head_hair_base_model, body_base_model, left_arm_base_model, right_arm_base_model, left_leg_base_model, right_leg_base_model, head_disguise_model, head_hair_disguise_model, body_disguise_model, left_arm_disguise_model, right_arm_disguise_model, left_leg_disguise_model, right_leg_disguise_model);
   renderer.bindProperty("fiskheroes:opacity").setOpacity((entity, renderLayer) => {
     return 0.999999;
   }).setCondition(entity => (entity.isWearingFullSuit() || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM"));
@@ -192,13 +246,24 @@ function initAnimations(renderer) {
 function render(entity, renderLayer, isFirstPersonArm) {
   var nbt = cybernetics.mainNBT(entity);
   if (entity.is("DISPLAY")) {
-    head_base_model.render();
-    head_hair_base_model.render();
-    body_base_model.render();
-    left_arm_base_model.render();
-    right_arm_base_model.render();
-    left_leg_base_model.render();
-    right_leg_base_model.render();
+    if (nbt.getBoolean("disguiseOnStand")) {
+      head_disguise_model.render();
+      head_hair_disguise_model.render();
+      body_disguise_model.render();
+      left_arm_disguise_model.render();
+      right_arm_disguise_model.render();
+      left_leg_disguise_model.render();
+      right_leg_disguise_model.render();
+    };
+    if (!nbt.getBoolean("disguiseOnStand")) {
+      head_base_model.render();
+      head_hair_base_model.render();
+      body_base_model.render();
+      left_arm_base_model.render();
+      right_arm_base_model.render();
+      left_leg_base_model.render();
+      right_leg_base_model.render();
+    };
     head_model.render();
     body_model.render();
     left_arm_model.render();
@@ -207,7 +272,16 @@ function render(entity, renderLayer, isFirstPersonArm) {
     right_leg_model.render();
   };
   if (entity.isWearingFullSuit()) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") < 1) {
+    if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") > 0) {
+      head_disguise_model.render();
+      head_hair_disguise_model.render();
+      body_disguise_model.render();
+      left_arm_disguise_model.render();
+      right_arm_disguise_model.render();
+      left_leg_disguise_model.render();
+      right_leg_disguise_model.render();
+    };
+    if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1) {
       head_base_model.render();
       head_hair_base_model.render();
       body_base_model.render();
@@ -224,7 +298,6 @@ function render(entity, renderLayer, isFirstPersonArm) {
       left_leg_model.render();
       right_leg_model.render();
     };
-
     satellite_beams.render(entity, isFirstPersonArm);
     body_boosters.render(entity, renderLayer, isFirstPersonArm);
     left_arm_boosters.render(entity, renderLayer, isFirstPersonArm);
