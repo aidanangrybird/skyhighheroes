@@ -4,7 +4,7 @@ function init(hero) {
   hero.setName("AMAKEN");
   hero.setTier(1);
   hero.setChestplate("Wave Suit");
-  hero.addPowers("skyhighheroes:wave_suit")
+  hero.addPowers("skyhighheroes:wave_suit", "skyhighheroes:color_editing")
 
   hero.addKeyBind("INVISIBILITY", "Wave World", 4);
   hero.addKeyBind("GRAVITY_MANIPULATION", "Change color (Sneak to change section)", 3);

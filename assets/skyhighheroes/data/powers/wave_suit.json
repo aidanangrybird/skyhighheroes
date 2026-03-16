@@ -2,15 +2,6 @@
   "name": "Wave Suit",
   "value": 1,
   "modifiers": {
-    "fiskheroes:gravity_manipulation": {
-      "range": 0.0,
-      "radius": 0.0,
-      "minGravity": 1.0,
-      "maxGravity": 1.0,
-      "affectsUser": false,
-      "soundEvents": {
-      }
-    },
     "fiskheroes:wall_crawling": {
     },
     "fiskheroes:intangibility|absolute": {
