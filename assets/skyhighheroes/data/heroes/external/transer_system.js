@@ -33,7 +33,11 @@ var months = [
 ];
 
 var hexColors = {
-  "Geo Stelar": "0x00FF00"
+  "Ace Stelar": "0xFF0000",
+  "Aidan Stelar": "0xFF8900",
+  "Lucas Stelar": "0xFF0000",
+  "Chase Stelar": "0x55FF00",
+  "Damien Stelar": "0x8000FF"
 };
 
 function assignTranser(entity, manager, satellite) {
@@ -362,7 +366,7 @@ function systemMessage(entity, message) {
 };
 /**
  * Sends message in log format
- * @param {string} message - log message
+ * @param {string} message - Log message
  **/
 function logMessage(message) {
   PackLoader.print("skyhighheroes: " + message);
@@ -431,6 +435,8 @@ function initSystem(moduleList, transerName, satellite) {
   var commands = [];
   /** @var commandIndexes - Indexes of command handlers */
   var commandIndexes = [];
+  /** @var onInitSystemIndexes - Indexes of system init capable modules */
+  var onInitSystemIndexes = [];
   /** @var messagingIndexes - Indexes of messaging handlers */
   var messagingIndexes = [];
   /** @var chatModes - Chat modes */
@@ -478,6 +484,10 @@ function initSystem(moduleList, transerName, satellite) {
               commands.push(moduleInit.command);
               commandIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             break;
           case 2:
@@ -499,6 +509,10 @@ function initSystem(moduleList, transerName, satellite) {
               chatModes.push(moduleInit.modeID);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             break;
           case 3:
@@ -522,6 +536,10 @@ function initSystem(moduleList, transerName, satellite) {
               commandIndexes.push(modules.length-1);
               messagingIndexes.push(modules.length-1);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             break;
           case 7:
@@ -542,6 +560,10 @@ function initSystem(moduleList, transerName, satellite) {
               waveIndex = modules.length-1;
               human = (moduleInit.hasOwnProperty("human")) ? moduleInit.human : null;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             break;
           case 8:
@@ -567,6 +589,10 @@ function initSystem(moduleList, transerName, satellite) {
               emBeingIndex = modules.length-1;
               emBeing = moduleInit.emBeing;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             break;
           case 9:
@@ -594,6 +620,10 @@ function initSystem(moduleList, transerName, satellite) {
               waveChange = moduleInit.waveChange;
               human = moduleInit.human;
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on transer " + transerName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             break;
           default:
@@ -608,10 +638,12 @@ function initSystem(moduleList, transerName, satellite) {
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on transer " + transerName + "!");
   function switchChatModes(entity, manager, mode) {
+    var nbt = mainNBT(entity);
     var chatMode = chatModes.indexOf(mode);
     if (chatMode > -1) {
       var chatModule = modules[messagingIndexes[chatMode]];
-      manager.setString(mainNBT(entity), "chatMode", chatModule.modeID);
+      manager.setData(entity, "skyhighheroes:dyn/chat_mode", chatModule.modeID);
+      manager.setString(nbt, "chatMode", chatModule.modeID);
       systemMessage(entity, chatModule.chatModeMessage);
       chatModule.chatModeInfo(entity);
     } else {
@@ -619,7 +651,7 @@ function initSystem(moduleList, transerName, satellite) {
     };
   };
   function switchChats(entity, manager, chat) {
-    var modeID = mainNBT(entity).getString("chatMode");
+    var modeID = entity.getData("skyhighheroes:dyn/chat_mode");
     var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
@@ -822,14 +854,14 @@ function initSystem(moduleList, transerName, satellite) {
           var hexColor = hexColors[human];
           manager.setString(nbt, "hudColorSkyHigh", hexColor);
         };
-        chatModes.forEach(mode => {
-          if (!nbt.hasKey(mode + "Selected")) {
-            manager.setString(nbt, mode + "Selected", "");
-          };
-        });
         if (!nbt.hasKey("chatMode")) {
           manager.setString(nbt, "chatMode", "");
         };
+        manager.setData(entity, "skyhighheroes:dyn/chat_mode", nbt.getString("chatMode"));
+        onInitSystemIndexes.forEach(index => {
+          var module = modules[index];
+          module.onInitSystem(entity, manager);
+        });
         manager.setData(entity, "skyhighheroes:dyn/system_init", true);
         manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
       };

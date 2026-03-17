@@ -100,50 +100,50 @@
     "fiskheroes:blade": {
       "isToggle": true
     },
-    "fiskheroes:transformation|blade_left_arm": {
+    "fiskheroes:transformation|blade_left": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/blade_left_arm",
-        "timerData": "skyhighheroes:dyn/blade_left_arm_timer",
+        "toggleData": "skyhighheroes:dyn/blade_left",
+        "timerData": "skyhighheroes:dyn/blade_left_timer",
         "time": 20
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|blade_right_arm": {
+    "fiskheroes:transformation|blade_right": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/blade_right_arm",
-        "timerData": "skyhighheroes:dyn/blade_right_arm_timer",
+        "toggleData": "skyhighheroes:dyn/blade_right",
+        "timerData": "skyhighheroes:dyn/blade_right_timer",
         "time": 20
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|blade_left_arm_deployed": {
+    "fiskheroes:transformation|blade_left_deployed": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/blade_left_arm_deployed",
-        "timerData": "skyhighheroes:dyn/blade_left_arm_deploy_timer",
+        "toggleData": "skyhighheroes:dyn/blade_left_deployed",
+        "timerData": "skyhighheroes:dyn/blade_left_deploy_timer",
         "time": 20
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|blade_right_arm_deployed": {
+    "fiskheroes:transformation|blade_right_deployed": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/blade_right_arm_deployed",
-        "timerData": "skyhighheroes:dyn/blade_right_arm_deploy_timer",
+        "toggleData": "skyhighheroes:dyn/blade_right_deployed",
+        "timerData": "skyhighheroes:dyn/blade_right_deploy_timer",
         "time": 20
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|blade_left_arm_stealth": {
+    "fiskheroes:transformation|blade_left_stealth": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/blade_left_arm_stealth",
-        "timerData": "skyhighheroes:dyn/blade_left_arm_stealth_timer",
+        "toggleData": "skyhighheroes:dyn/blade_left_stealth",
+        "timerData": "skyhighheroes:dyn/blade_left_stealth_timer",
         "time": 10
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|blade_right_arm_stealth": {
+    "fiskheroes:transformation|blade_right_stealth": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/blade_right_arm_stealth",
-        "timerData": "skyhighheroes:dyn/blade_right_arm_stealth_timer",
+        "toggleData": "skyhighheroes:dyn/blade_right_stealth",
+        "timerData": "skyhighheroes:dyn/blade_right_stealth_timer",
         "time": 10
       },
       "isToggle": true
@@ -1023,34 +1023,34 @@
         "DEFLECT": "fiskheroes:shield_deflect"
       }
     },
-    "fiskheroes:transformation|shield_left_arm": {
+    "fiskheroes:transformation|shield_left": {
         "transformation": {
-          "toggleData": "skyhighheroes:dyn/shield_left_arm",
-          "timerData": "skyhighheroes:dyn/shield_left_arm_timer",
+          "toggleData": "skyhighheroes:dyn/shield_left",
+          "timerData": "skyhighheroes:dyn/shield_left_timer",
           "time": 20
         },
         "isToggle": true
     },
-    "fiskheroes:transformation|shield_right_arm": {
+    "fiskheroes:transformation|shield_right": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/shield_right_arm",
-        "timerData": "skyhighheroes:dyn/shield_right_arm_timer",
+        "toggleData": "skyhighheroes:dyn/shield_right",
+        "timerData": "skyhighheroes:dyn/shield_right_timer",
         "time": 20
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|shield_left_arm_deployed": {
+    "fiskheroes:transformation|shield_left_deployed": {
         "transformation": {
-          "toggleData": "skyhighheroes:dyn/shield_left_arm_deployed",
-          "timerData": "skyhighheroes:dyn/shield_left_arm_deploy_timer",
+          "toggleData": "skyhighheroes:dyn/shield_left_deployed",
+          "timerData": "skyhighheroes:dyn/shield_left_deploy_timer",
           "time": 60
         },
         "isToggle": true
     },
-    "fiskheroes:transformation|shield_right_arm_deployed": {
+    "fiskheroes:transformation|shield_right_deployed": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/shield_right_arm_deployed",
-        "timerData": "skyhighheroes:dyn/shield_right_arm_deploy_timer",
+        "toggleData": "skyhighheroes:dyn/shield_right_deployed",
+        "timerData": "skyhighheroes:dyn/shield_right_deploy_timer",
         "time": 60
       },
       "isToggle": true

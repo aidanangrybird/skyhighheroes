@@ -13,40 +13,24 @@ function initModule(system) {
       if (argList.length > 1 && argList.length < 4) {
         var nbt = system.mainNBT(entity);
         switch(argList[1]) {
+          case "nightVision":
+            manager.setData(entity, "skyhighheroes:dyn/night_vision", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/night_vision")));
+            manager.setBoolean(nbt, "nightVision", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("nightVision")));
+            system.moduleMessage(this, entity, "<n>nightVision set to <nh>" + nbt.getBoolean("nightVision") + "<n>!");
+            break;
           case "hudScale":
+            manager.setData(entity, "skyhighheroes:dyn/hud_scale", parseFloat(argList[2]));
             manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
             system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
             break;
-          case "hudRange":
-            manager.setShort(nbt, "hudRange", parseInt(argList[2]));
-            system.moduleMessage(this, entity, "<n>hudRange set to <nh>" + nbt.getShort("hudRange") + "<n>!");
-            break;
-          case "hudFriendlies":
-            manager.setBoolean(nbt, "hudFriendlies", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hudFriendlies")));
-            system.moduleMessage(this, entity, "<n>hudFriendlies set to <nh>" + nbt.getBoolean("hudFriendlies") + "<n>!");
-            break;
-          case "hudHostiles":
-            manager.setBoolean(nbt, "hudHostiles", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hudHostiles")));
-            system.moduleMessage(this, entity, "<n>hudHostiles set to <nh>" + nbt.getBoolean("hudHostiles") + "<n>!");
-            break;
-          case "hudPlayers":
-            manager.setBoolean(nbt, "hudPlayers", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("hudPlayers")));
-            system.moduleMessage(this, entity, "<n>hudPlayers set to <nh>" + nbt.getBoolean("hudPlayers") + "<n>!");
-            break;
           case "list":
-            system.moduleMessage(this, entity, "<n>hudRange: <nh>" + nbt.getShort("hudRange"));
-            system.moduleMessage(this, entity, "<n>hudFriendlies: <nh>" + nbt.getBoolean("hudFriendlies"));
-            system.moduleMessage(this, entity, "<n>hudHostiles: <nh>" + nbt.getBoolean("hudHostiles"));
-            system.moduleMessage(this, entity, "<n>hudPlayers: <nh>" + nbt.getBoolean("hudPlayers"));
-            system.moduleMessage(this, entity, "<n>hudScale: <nh>" + nbt.getFloat("hudScale"));
+            system.moduleMessage(this, entity, "<n>nightVision: <nh>" + entity.getData("skyhighheroes:dyn/night_vision"));
+            system.moduleMessage(this, entity, "<n>hudScale: <nh>" + entity.getData("skyhighheroes:dyn/hud_scale"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
             system.moduleMessage(this, entity, "<n>!set list <nh>-<n> Lists current settings and their values");
-            system.moduleMessage(this, entity, "<n>!set hudRange <number> <nh>-<n> Sets range of HUD scanner");
-            system.moduleMessage(this, entity, "<n>!set hudFriendlies <true|false> <nh>-<n> Sets if friendly mobs appear on HUD");
-            system.moduleMessage(this, entity, "<n>!set hudHostiles <true|false> <nh>-<n> Sets if hostile mobs appear on HUD");
-            system.moduleMessage(this, entity, "<n>!set hudPlayers <true|false> <nh>-<n> Sets if players appear on HUD");
+            system.moduleMessage(this, entity, "<n>!set nightVision <true|false> <nh>-<n> Sets if night vision is active");
             system.moduleMessage(this, entity, "<n>!set hudScale <number> <nh>-<n> Sets scale of HUD elements");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
@@ -58,5 +42,16 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>Unknown <eh>settings<e> command! Try <eh>!set help<e> for a list of commands!");
       };
     },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("hudScale")) {
+        manager.setFloat(nbt, "hudScale", 1.0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_scale", nbt.getFloat("hudScale"));
+      if (!nbt.hasKey("nightVision")) {
+        manager.setFloat(nbt, "nightVision", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/night_vision", nbt.getBoolean("nightVision"));
+    }
   };
 };

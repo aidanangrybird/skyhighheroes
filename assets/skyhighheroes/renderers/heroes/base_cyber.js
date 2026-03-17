@@ -234,7 +234,7 @@ function initEffects(renderer) {
   nv.fogStrength = 0.0;
   nv.firstPersonOnly = false;
   nv.factor = 1.0;
-  nv.setCondition(entity => (entity.isWearingFullSuit() && cybernetics.mainNBT(entity).getBoolean("nightVision")));
+  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getData("skyhighheroes:dyn/night_vision")));
 };
 
 function initAnimations(renderer) {
@@ -308,45 +308,45 @@ function render(entity, renderLayer, isFirstPersonArm) {
     metal_heat.opacity = entity.getInterpolatedData("fiskheroes:metal_heat");
     metal_heat.render();
   };
-  
   if (entity.isWearingFullSuit() && isFirstPersonArm) {
     var leftSide = "OFF";
     var topSide = "OFF";
     var rightSide = "OFF";
     //Left
     if (!entity.getData("skyhighheroes:dyn/battle_mode")) {
-      if (nbt.getInteger("hudLeftSide") == 1) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 1) {
         leftSide = "Shields";
         var shieldsToRender = ["Shields:"];
-        var leftShield = "Left: " + (nbt.getBoolean("shieldsLeft") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/shield_left_arm_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/shield_left_arm_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
-        var rightShield = "Right: " + (nbt.getBoolean("shieldsRight") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/shield_right_arm_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/shield_right_arm_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
+        var leftShield = "Left: " + (entity.getData("skyhighheroes:dyn/shield_left_armed") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/shield_left_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/shield_left_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
+        var rightShield = "Right: " + (entity.getData("skyhighheroes:dyn/shield_right_armed") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/shield_right_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/shield_right_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
         shieldsToRender.push(leftShield);
         shieldsToRender.push(rightShield);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", shieldsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", shieldsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
-      if (nbt.getInteger("hudLeftSide") == 2) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 2) {
         leftSide = "Blades";
         var bladesToRender = ["Blades:"];
-        var leftBlade = "Left: " + (nbt.getBoolean("bladesLeft") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/blade_left_arm_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
-        var rightBlade = "Right: " + (nbt.getBoolean("bladesRight") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/blade_right_arm_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
-        var leftBladeMode = "Left mode: " + (nbt.getBoolean("bladesLeftStealth") ? "STEALTH" : "NORMAL");
-        var rightBladeMode = "Right mode: " + (nbt.getBoolean("bladesRightStealth") ? "STEALTH" : "NORMAL");
+        var leftBlade = "Left: " + (entity.getData("skyhighheroes:dyn/blade_left_armed") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/blade_left_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/blade_left_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
+        var rightBlade = "Right: " + (entity.getData("skyhighheroes:dyn/blade_left_armed") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/blade_right_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/blade_right_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
+        var leftBladeMode = "Left mode: " + (entity.getData("skyhighheroes:dyn/blade_left_stealth_enabled") ? "STEALTH" : "NORMAL");
+        var rightBladeMode = "Right mode: " + (entity.getData("skyhighheroes:dyn/blade_right_stealth_enabled") ? "STEALTH" : "NORMAL");
         bladesToRender.push(leftBlade);
         bladesToRender.push(rightBlade);
         bladesToRender.push(leftBladeMode);
         bladesToRender.push(rightBladeMode);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", bladesToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", bladesToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
-      if (nbt.getInteger("hudLeftSide") == 3) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 3) {
         leftSide = "Rockets";
         var armsSet = (entity.getData("skyhighheroes:dyn/rockets_arms_timer") > 0);
         var bodySet = (entity.getData("skyhighheroes:dyn/rockets_body_timer") > 0);
         var legsSet = (entity.getData("skyhighheroes:dyn/rockets_legs_timer") > 0);
         var rocketsToRender = ["Rockets:"];
-        var armRocket = "Arms: " + (nbt.getBoolean("rocketsArms") ? "ARMED" : "DISARMED") + " (" + (nbt.getBoolean("armRocketsOnFall") ? "ON FALL" : "OFF") + ")";
-        var bodyRocket = "Body: " + (nbt.getBoolean("rocketsBody") ? "ARMED" : "DISARMED") + " (" + (nbt.getBoolean("bodyRocketsOnFall") ? "ON FALL" : "OFF") + ")";
-        var legRocket = "Legs: " + (nbt.getBoolean("rocketsLegs") ? "ARMED" : "DISARMED") + " (" + (nbt.getBoolean("legRocketsOnFall") ? "ON FALL" : "OFF") + ")";
-        var wingRocket = "Wings: " + (nbt.getBoolean("rocketsWings") ? "ARMED" : "DISARMED");
+        var onFallRocket = "Activate on fall: " + (entity.getData("skyhighheroes:dyn/rockets_on_fall") ? "ENABLED" : "DISABLED");
+        var armRocket = "Arms: " + (entity.getData("skyhighheroes:dyn/rockets_arms_armed") ? "ARMED" : "DISARMED");
+        var bodyRocket = "Body: " + (entity.getData("skyhighheroes:dyn/rockets_body_armed") ? "ARMED" : "DISARMED");
+        var legRocket = "Legs: " + (entity.getData("skyhighheroes:dyn/rockets_legs_armed") ? "ARMED" : "DISARMED");
+        var wingRocket = "Wings: " + (entity.getData("skyhighheroes:dyn/rockets_wings_armed") ? "ARMED" : "DISARMED");
 
         var bodyRockets = "Body: " + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_body_left_deploy_timer") > 0) ? "L" : "-") + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_body_right_deploy_timer") > 0) ? "R" : "-");
         var leftArmRockets = "Left Arm: " + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_outer_deploy_timer") > 0) ? "O" : "-") + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_front_deploy_timer") > 0) ? "F" : "-") + ((armsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_back_deploy_timer") > 0) ? "B" : "-");
@@ -354,6 +354,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         var leftLegRockets = "Left Leg: " + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_main_deploy_timer") > 0) ? "M" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_outer_deploy_timer") > 0) ? "O" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_front_deploy_timer") > 0) ? "F" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_back_deploy_timer") > 0) ? "B" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") > 0) ? "I" : "-");
         var rightLegRockets = "Right Leg: " + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_main_deploy_timer") > 0) ? "M" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_outer_deploy_timer") > 0) ? "O" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_front_deploy_timer") > 0) ? "F" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_back_deploy_timer") > 0) ? "B" : "-") + ((legsSet || entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") > 0) ? "I" : "-");
 
+        rocketsToRender.push(onFallRocket);
         rocketsToRender.push(armRocket);
         rocketsToRender.push(bodyRocket);
         rocketsToRender.push(legRocket);
@@ -364,17 +365,17 @@ function render(entity, renderLayer, isFirstPersonArm) {
         rocketsToRender.push(leftLegRockets);
         rocketsToRender.push(rightLegRockets);
 
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
-      if (nbt.getInteger("hudLeftSide") == 4) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 4) {
         leftSide = "Cannons";
         var headSet = (entity.getData("skyhighheroes:dyn/cannons_head_timer") > 0);
         var bodySet = (entity.getData("skyhighheroes:dyn/cannons_body_timer") > 0);
         var armsSet = (entity.getData("skyhighheroes:dyn/cannons_arms_timer") > 0);
         var cannonsToRender = ["Cannons:"];
-        var headCannon = "Head: " + (nbt.getBoolean("cannonsHead") ? "ARMED" : "DISARMED");
-        var bodyCannon = "Body: " + (nbt.getBoolean("cannonsBody") ? "ARMED" : "DISARMED");
-        var armCannon = "Arms: " + (nbt.getBoolean("cannonsArms") ? "ARMED" : "DISARMED");
+        var headCannon = "Head: " + (entity.getData("skyhighheroes:dyn/cannons_head_armed") ? "ARMED" : "DISARMED");
+        var bodyCannon = "Body: " + (entity.getData("skyhighheroes:dyn/cannons_body_armed") ? "ARMED" : "DISARMED");
+        var armCannon = "Arms: " + (entity.getData("skyhighheroes:dyn/cannons_arms_armed") ? "ARMED" : "DISARMED");
 
         var headCannons = "Head: " + ((headSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") > 0) ? "L" : "-") + ((headSet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") > 0) ? "R" : "-");
         var bodyCannons = "Body: " + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_left_deploy_timer") > 0) ? "L" : "-") + ((bodySet || entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_right_deploy_timer") > 0) ? "R" : "-");
@@ -388,15 +389,15 @@ function render(entity, renderLayer, isFirstPersonArm) {
         cannonsToRender.push(bodyCannons);
         cannonsToRender.push(leftArmCannons);
         cannonsToRender.push(rightArmCannons);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", cannonsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", cannonsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
-      if (nbt.getInteger("hudLeftSide") == 5) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 5) {
         leftSide = "Comms";
         var commsToRender = ["Comms:"];
         var satellite = "Satellite Dish: " + ((entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") > 0) ? "DEPLOYED" : "STOWED") + ((entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? " (RAIN MODE)" : "");
         var antenna = "Antenna: " + ((entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") > 0) ? "DEPLOYED" : "STOWED");
-        var connectedSatellite = "Satellite: " + nbt.getShort("xSat") + ", " + nbt.getShort("ySat") + ", " + nbt.getShort("zSat");
-        var frequency = "Frequency: " + nbt.getShort("freq");
+        var connectedSatellite = "Satellite: " + entity.getData("skyhighheroes:dyn/satellite_x") + ", " + entity.getData("skyhighheroes:dyn/satellite_y") + ", " + entity.getData("skyhighheroes:dyn/satellite_z");
+        var frequency = "Frequency: " + entity.getData("skyhighheroes:dyn/frequency");
         commsToRender.push(satellite);
         commsToRender.push(antenna);
         commsToRender.push(connectedSatellite);
@@ -407,20 +408,20 @@ function render(entity, renderLayer, isFirstPersonArm) {
             commsToRender.push(cyber);
           });
         };
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", commsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", commsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
-      if (nbt.getInteger("hudLeftSide") == 6) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 6) {
         leftSide = "Wings";
         var wingsToRender = ["Wings:"];
-        var wings = "Wings: " + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED");
+        var wings = "Wings: " + (entity.getData("skyhighheroes:dyn/wings_armed") ? "ARMED" : "DISARMED");
         var leftWing = "Left wing: " + ((entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") > 0) || (entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") > 0) ? "DEPLOYED" : "STOWED");
         var rightWing = "Right wing: " + ((entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") > 0) || (entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") > 0) ? "DEPLOYED" : "STOWED");
         wingsToRender.push(wings);
         wingsToRender.push(leftWing);
         wingsToRender.push(rightWing);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", wingsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", wingsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
-      if (nbt.getInteger("hudLeftSide") == 7) {
+      if (entity.getData("skyhighheroes:dyn/hud_side_left") == 7) {
         leftSide = "Intakes";
         var rocketsToRender = ["Intakes:"];
         var leftHead = "Left Head: " + ((entity.getData("skyhighheroes:dyn/intake_head_left_starting_up") && entity.getInterpolatedData("skyhighheroes:dyn/intake_head_left_start_up_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/intake_head_left_start_up_timer") < 1) ? "STARTING UP" : ((entity.getData("skyhighheroes:dyn/intake_head_left_open")) ? "OPEN" : "CLOSED"));
@@ -441,7 +442,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         rocketsToRender.push(leftLeg);
         rocketsToRender.push(rightLeg);
 
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
     };
     if (entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -487,52 +488,52 @@ function render(entity, renderLayer, isFirstPersonArm) {
         dataToRender.push(noEntity);
       };
 
-      text_renderer.renderLines(isFirstPersonArm, "left", "center", dataToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      text_renderer.renderLines(isFirstPersonArm, "left", "center", dataToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     //Top
-    if (nbt.getInteger("hudTopSide") == 1) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_top") == 1) {
       topSide = "Thermoptics";
       var thermoToRender = [];
       var disguise = "" + (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") == 1 ? "DISGUISED" : "UNDISGUISED");
-      var clothing = "" + (nbt.getBoolean("disguiseClothing") ? "CLOTHED" : "UNCLOTHED");
+      var clothing = "" + (entity.getData("skyhighheroes:dyn/thermoptic_disguise_clothing") ? "CLOTHED" : "UNCLOTHED");
       var camouflage = "" + (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") == 1 ? "CAMOUFLAGED" : "UNCAMOUFLAGED");
       thermoToRender.push(disguise);
       thermoToRender.push(camouflage);
       thermoToRender.push(clothing);
-      text_renderer.renderLines(isFirstPersonArm, "center", "center", thermoToRender, 0.0, -100.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      text_renderer.renderLines(isFirstPersonArm, "center", "center", thermoToRender, 0.0, -100.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
-    if (nbt.getInteger("hudTopSide") == 2) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_top") == 2) {
       topSide = "Coords";
       var coordsToRender = [];
       var coords = "" + Math.round(entity.posX()) + " " + Math.round(entity.posY()) + " " + Math.round(entity.posZ());
       var direction = stuff.angleToDirection(entity.getInterpolatedData("skyhighheroes:dyn/bearing"));
       coordsToRender.push(coords);
       coordsToRender.push(direction);
-      text_renderer.renderLines(isFirstPersonArm, "center", "center", coordsToRender, 0.0, -100.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      text_renderer.renderLines(isFirstPersonArm, "center", "center", coordsToRender, 0.0, -100.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     //Right
-    if (nbt.getInteger("hudRightSide") == 1) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_right") == 1) {
       rightSide = "Status";
       var statusToRender = [];
-      var model = nbt.getString("cyberModelID");
-      var name = "(" + nbt.getString("cyberAliasName") + ")";
+      var model = entity.getData("skyhighheroes:dyn/model_id");
+      var name = "(" + entity.getData("skyhighheroes:dyn/alias") + ")";
       var health = "Health: " + entity.getHealth() + "/" + entity.getMaxHealth();
-      var chatMode = "Chat Mode: " + nbt.getString("chatMode");
+      var chatMode = "Chat Mode: " + entity.getData("skyhighheroes:dyn/chat_mode");
       statusToRender.push(model);
       statusToRender.push(name);
       statusToRender.push(health);
       statusToRender.push(chatMode);
-      if (nbt.getString("chatMode") == "group") {
-        var selectedGroup = "Group: " + nbt.getString("groupSelected");
+      if (entity.getData("skyhighheroes:dyn/chat_mode") == "group") {
+        var selectedGroup = "Group: " + entity.getData("skyhighheroes:dyn/group_selected");
         statusToRender.push(selectedGroup);
       };
-      if (nbt.getString("chatMode") == "normal") {
-        var selectedContact = "Contact: " + nbt.getString("normalSelected");
+      if (entity.getData("skyhighheroes:dyn/chat_mode") == "normal") {
+        var selectedContact = "Contact: " + entity.getData("skyhighheroes:dyn/normal_selected");
         statusToRender.push(selectedContact);
       };
-      text_renderer.renderLines(isFirstPersonArm, "right", "center", statusToRender, 210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      text_renderer.renderLines(isFirstPersonArm, "right", "center", statusToRender, 210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
-    if (nbt.getInteger("hudRightSide") == 2) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_right") == 2) {
       rightSide = "Coords";
       var locationToRender = [];
       var coords = "X: " + Math.round(entity.posX()) + " Y: " + Math.round(entity.posY()) + " Z: " + Math.round(entity.posZ());
@@ -541,27 +542,27 @@ function render(entity, renderLayer, isFirstPersonArm) {
       locationToRender.push(coords);
       locationToRender.push(dimension);
       locationToRender.push(biome);
-      text_renderer.renderLines(isFirstPersonArm, "right", "center", locationToRender, 210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      text_renderer.renderLines(isFirstPersonArm, "right", "center", locationToRender, 210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     //Switcher
     if (entity.getData("fiskheroes:gravity_manip")) {
       var hudsToRender = [];
-      if (nbt.getInteger("hudSelectedSide") == 0) {
+      if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 0) {
         hudsToRender.push("> Left: " + leftSide + " <");
       } else {
         hudsToRender.push("Left: " + leftSide);
       };
-      if (nbt.getInteger("hudSelectedSide") == 1) {
+      if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 1) {
         hudsToRender.push("> Top: " + topSide + " <");
       } else {
         hudsToRender.push("Top: " + topSide);
       };
-      if (nbt.getInteger("hudSelectedSide") == 2) {
+      if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 2) {
         hudsToRender.push("> Right: " + rightSide + " <");
       } else {
         hudsToRender.push("Right: " + rightSide);
       };
-      text_renderer.renderLines(isFirstPersonArm, "center", "center", hudsToRender, 0.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+      text_renderer.renderLines(isFirstPersonArm, "center", "center", hudsToRender, 0.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     leftSide = "OFF";
     topSide = "OFF";

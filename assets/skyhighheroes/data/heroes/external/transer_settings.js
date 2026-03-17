@@ -27,20 +27,21 @@ function initModule(system) {
     type: 1,
     command: "set",
     helpMessage: "<n>!set <nh>-<n> Settings",
-    commandHandler: function (entity, manager, args) {
-      if (args.length > 1 && args.length < 4) {
+    commandHandler: function (entity, manager, argList) {
+      if (argList.length > 1 && argList.length < 4) {
         var nbt = system.mainNBT(entity);
-        switch(args[1]) {
+        switch(argList[1]) {
           case "color":
-            if (colors.indexOf(args[2]) > -1) {
-              manager.setString(nbt, "systemColor", args[2]);
+            if (colors.indexOf(argList[2]) > -1) {
+              manager.setData(entity, "skyhighheroes:dyn/color", argList[2]);
+              manager.setString(nbt, "systemColor", argList[2]);
               system.moduleMessage(this, entity, "<n>color set to <nh>\u00A7" + nbt.getString("systemColor") + "COLOR<n>!");
             } else {
               system.moduleMessage(this, entity, "<e>Invalid color code!");
             };
             break;
           case "list":
-            system.moduleMessage(this, entity, "<n>color: <nh>\u00A7" + nbt.getString("systemColor") + "COLOR");
+            system.moduleMessage(this, entity, "<n>color: <nh>\u00A7" + entity.getData("skyhighheroes:dyn/color") + "COLOR");
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");

@@ -17,6 +17,7 @@ function initModule(system) {
           case "enable":
             switch (argList[2]) {
               case "clothing":
+                manager.setData(entity, "skyhighheroes:dyn/thermoptic_disguise_clothing", true);
                 manager.setBoolean(nbt, "disguiseClothing", true);
                 system.moduleMessage(this, entity, "<n>Enabled <nh>disguise clothing<n>!");
                 break;
@@ -52,6 +53,7 @@ function initModule(system) {
           case "disable":
             switch (argList[2]) {
               case "clothing":
+                manager.setData(entity, "skyhighheroes:dyn/thermoptic_disguise_clothing", false);
                 manager.setBoolean(nbt, "disguiseClothing", false);
                 system.moduleMessage(this, entity, "<n>Disabled <nh>disguise clothing<n>!");
                 break;
@@ -90,7 +92,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Disguise: <nh>" + ((entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") > 0) ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Auto Disguise: <nh>" + (nbt.getBoolean("autoDisguise") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Auto Camouflage: <nh>" + (nbt.getBoolean("autoCamouflage") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Disguise Clothing: <nh>" + (nbt.getBoolean("autoCamouflage") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Disguise Clothing: <nh>" + (entity.getData("skyhighheroes:dyn/thermoptic_disguise_clothing") ? "ENABLED" : "DISABLED"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Thermoptics commands:");
@@ -125,13 +127,24 @@ function initModule(system) {
       var invis = entity.getData("skyhighheroes:dyn/thermoptic_camouflage_timer") == 1;
       if (entity.getData("skyhighheroes:dyn/thermoptic_camouflage_timer") > 0) {
         manager.setData(entity, "fiskheroes:invisible", invis);
+        manager.setData(entity, "fiskheroes:invisibility_timer", (invis?1.0:0.0));
       };
     },
     onInitSystem: function (entity, manager) {
       var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("disguiseClothing")) {
+        manager.setBoolean(nbt, "disguiseClothing", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/thermoptic_disguise_clothing", nbt.getBoolean("disguiseClothing"));
+      if (!nbt.hasKey("autoDisguise")) {
+        manager.setBoolean(nbt, "autoDisguise", false);
+      };
       var autoDisguise = nbt.getBoolean("autoDisguise");
       if (autoDisguise) {
         manager.setData(entity, "skyhighheroes:dyn/thermoptic_disguise", true);
+      };
+      if (!nbt.hasKey("autoCamouflage")) {
+        manager.setBoolean(nbt, "autoCamouflage", false);
       };
       var autoCamouflage = nbt.getBoolean("autoCamouflage");
       if (autoCamouflage) {

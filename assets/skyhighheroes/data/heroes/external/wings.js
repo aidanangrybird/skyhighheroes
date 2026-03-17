@@ -15,14 +15,16 @@ function initModule(system) {
         var nbt = system.mainNBT(entity);
         switch(argList[1]) {
           case "arm":
-            if (nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
+            if (entity.getData("skyhighheroes:dyn/rockets_arms_armed") || entity.getData("skyhighheroes:dyn/rockets_body_armed") || entity.getData("skyhighheroes:dyn/rockets_legs_armed") || entity.getData("skyhighheroes:dyn/rockets_wings_armed")) {
               system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
             } else {
+              manager.setData(entity, "skyhighheroes:dyn/wings_armed", true);
               manager.setBoolean(nbt, "wings", true);
               system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
             };
             break;
           case "disarm":
+            manager.setData(entity, "skyhighheroes:dyn/wings_armed", false);
             manager.setBoolean(nbt, "wings", false);
             system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
             break;
@@ -90,7 +92,7 @@ function initModule(system) {
           case "status":
             var wings = (entity.getData("skyhighheroes:dyn/wings_timer") > 0);
             system.moduleMessage(this, entity, "<n>Wings status:");
-            system.moduleMessage(this, entity, "<n>Wings: <nh>" + (nbt.getBoolean("wings") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Wings: <nh>" + (entity.getData("skyhighheroes:dyn/wings_armed") ? "ARMED" : "DISARMED"));
             system.moduleMessage(this, entity, "<n>Left wing: <nh>" + ((entity.getData("skyhighheroes:dyn/wing_left_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Right wing: <nh>" + ((entity.getData("skyhighheroes:dyn/wing_right_deploy_timer") > 0) || wings ? "DEPLOYED" : "RETRACTED"));
             system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoGlide") ? "ENABLED" : "DISABLED"));
@@ -107,9 +109,10 @@ function initModule(system) {
       var nbt = system.mainNBT(entity);
       switch (arg) {
         case "wings":
-          if (nbt.getBoolean("rocketsArms") || nbt.getBoolean("rocketsBody") || nbt.getBoolean("rocketsLegs") || nbt.getBoolean("rocketsWings")) {
+          if (entity.getData("skyhighheroes:dyn/rockets_arms_armed") || entity.getData("skyhighheroes:dyn/rockets_body_armed") || entity.getData("skyhighheroes:dyn/rockets_legs_armed") || entity.getData("skyhighheroes:dyn/rockets_wings_armed")) {
             system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
           } else {
+            manager.setData(entity, "skyhighheroes:dyn/wings_armed", true);
             manager.setBoolean(nbt, "wings", true);
             system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
           };
@@ -120,6 +123,7 @@ function initModule(system) {
       var nbt = system.mainNBT(entity);
       switch (arg) {
         case "wings":
+          manager.setData(entity, "skyhighheroes:dyn/wings_armed", false);
           manager.setBoolean(nbt, "wings", false);
           system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
           return;
@@ -127,8 +131,7 @@ function initModule(system) {
     },
     isModifierEnabled: function (entity, modifier) {
       result = false;
-      var nbt = system.mainNBT(entity);
-      var wings = nbt.getBoolean("wings");
+      var wings = entity.getData("skyhighheroes:dyn/wings_armed");
       if (!system.isModuleDisabled(entity, this.name)) {
         if (modifier.name() == "fiskheroes:gliding" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = wings;
@@ -146,9 +149,8 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/wing_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
-      var nbt = system.mainNBT(entity);
-      var wings = nbt.getBoolean("wings") && entity.getData("fiskheroes:gliding");
-      if (!nbt.getBoolean("rocketsWings") && entity.getData("fiskheroes:gliding_timer") > 0) {
+      var wings = entity.getData("skyhighheroes:dyn/wings_armed") && entity.getData("fiskheroes:gliding");
+      if (!entity.getData("skyhighheroes:dyn/rockets_wings_armed") && entity.getData("fiskheroes:gliding_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/wings", wings);
         if (entity.getData("fiskheroes:gliding_timer") < 0.2) {
           if (wings) {
@@ -156,6 +158,13 @@ function initModule(system) {
           };
         };
       };
+    },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("wings")) {
+        manager.setBoolean(nbt, "wings", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/wings_armed", nbt.getBoolean("wings"));
     }
   };
 };

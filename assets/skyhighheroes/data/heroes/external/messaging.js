@@ -44,7 +44,7 @@ function initModule(system) {
       var foundPlayer = null;
       if (nbt.getStringList("contacts").tagCount() > 0) {
         var contactsList = system.getStringArray(nbt.getStringList("contacts"));
-        var chat = nbt.getString("normalSelected");
+        var chat = entity.getData("skyhighheroes:dyn/normal_selected");
         var chatIndex = contactsList.indexOf(chat);
         if (chatIndex > -1) {
           var entities = entity.world().getEntitiesInRangeOf(entity.pos(), range);
@@ -76,6 +76,7 @@ function initModule(system) {
           var contactsList = system.getStringArray(nbt.getStringList("contacts"));
           var chatIndex = contactsList.indexOf(chat);
           if (chatIndex > -1) {
+            manager.setData(entity, "skyhighheroes:dyn/normal_selected", chat);
             manager.setString(nbt, "normalSelected", chat);
             system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n>!");
           } else {
@@ -94,7 +95,7 @@ function initModule(system) {
       if (nbt.hasKey("contacts")) {
         if (nbt.getStringList("contacts").tagCount() > 0) {
           var contactsList = system.getStringArray(nbt.getStringList("contacts"));
-          var chat = nbt.getString("normalSelected");
+          var chat = entity.getData("skyhighheroes:dyn/normal_selected");
           var chatIndex = contactsList.indexOf(chat);
           if (chatIndex > -1) {
             system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n>!");
@@ -109,5 +110,12 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>You do not have any contacts!");
       };
     },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("normalSelected")) {
+        manager.setString(nbt, "normalSelected", "");
+      };
+      manager.setData(entity, "skyhighheroes:dyn/normal_selected", nbt.getString("normalSelected"));
+    }
   };
 };

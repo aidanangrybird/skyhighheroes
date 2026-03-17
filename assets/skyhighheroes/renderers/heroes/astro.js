@@ -383,7 +383,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
           var openPanels = openPanelCount + " panels open!";
           panelsToRender.push(openPanels);
         };
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", panelsToRender, -210.0, 0.0, -180.0, 1.0*nbt.getFloat("hudScale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", panelsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
     };
   };

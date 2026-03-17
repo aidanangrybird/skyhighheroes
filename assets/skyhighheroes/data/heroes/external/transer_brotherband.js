@@ -128,7 +128,7 @@ function initModule(system) {
       var nbt = system.mainNBT(entity);
       if (nbt.getStringList("brothers").tagCount() > 0) {
         var brothersList = system.getStringArray(nbt.getStringList("brothers"));
-        var chat = nbt.getString("BrotherBandSelected");
+        var chat = entity.getData("skyhighheroes:dyn/brotherband_selected");
         var chatIndex = brothersList.indexOf(chat);
         if (chatIndex > -1) {
           var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 512);
@@ -186,6 +186,7 @@ function initModule(system) {
           var brothersList = system.getStringArray(nbt.getStringList("brothers"));
           var chatIndex = brothersList.indexOf(chat);
           if (chatIndex > -1) {
+            manager.setData(entity, "skyhighheroes:dyn/brotherband_selected", chat);
             manager.setString(nbt, "BrotherBandSelected", chat);
             system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n>!");
           } else {
@@ -204,7 +205,7 @@ function initModule(system) {
       if (nbt.hasKey("brothers")) {
         if (nbt.getTagList("brothers").tagCount() > 0) {
           var brothersList = system.getStringArray(nbt.getStringList("brothers"));
-          var chat = nbt.getString("BrotherBandSelected");
+          var chat = entity.getData("skyhighheroes:dyn/brotherband_selected");
           var chatIndex = brothersList.indexOf(chat);
           if (chatIndex > -1) {
             system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n>!");
@@ -219,5 +220,12 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>You do not have any Brothers!");
       };
     },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("BrotherBandSelected")) {
+        manager.setString(nbt, "BrotherBandSelected", "");
+      };
+      manager.setData(entity, "skyhighheroes:dyn/brotherband_selected", nbt.getString("BrotherBandSelected"));
+    }
   };
 };

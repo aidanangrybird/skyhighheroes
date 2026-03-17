@@ -79,7 +79,7 @@ function initModule(system) {
       var nbt = system.getMainNBT(entity);
       if (nbt.getTagList("groups").tagCount() > 0) {
         var groupList = getGroupArray(entity);
-        var chat = nbt.getString("groupSelected");
+        var chat = entity.getData("skyhighheroes:dyn/group_selected");
         var chatIndex = groupList.indexOf(chat);
         if (chatIndex > -1) {
           var group = nbt.getTagList("groups").getCompoundTag(chatIndex);
@@ -116,6 +116,7 @@ function initModule(system) {
           var groupList = getGroupArray(entity);
           var chatIndex = groupList.indexOf(chat);
           if (chatIndex > -1) {
+            manager.setData(entity, "skyhighheroes:dyn/group_selected", chat);
             manager.setString(nbt, "groupSelected", chat);
             system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n> group!");
           } else {
@@ -134,7 +135,7 @@ function initModule(system) {
       if (nbt.hasKey("groups")) {
         if (nbt.getTagList("groups").tagCount() > 0) {
           var groupList = getGroupArray(entity);
-          var chat = nbt.getString("groupSelected");
+          var chat = entity.getData("skyhighheroes:dyn/group_selected");
           var chatIndex = groupList.indexOf(chat);
           if (chatIndex > -1) {
             system.moduleMessage(this, entity, "<n>You are now messaging <nh>" + chat + "<n> group!");
@@ -149,5 +150,12 @@ function initModule(system) {
         system.moduleMessage(this, entity, "<e>You do not have any groups!");
       };
     },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("groupSelected")) {
+        manager.setString(nbt, "groupSelected", "");
+      };
+      manager.setData(entity, "skyhighheroes:dyn/group_selected", nbt.getString("groupSelected"));
+    }
   };
 };

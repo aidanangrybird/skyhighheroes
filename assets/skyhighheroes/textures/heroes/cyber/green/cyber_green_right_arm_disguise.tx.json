@@ -26,7 +26,7 @@
       "values": ["", "_base"]
     },
     "CLOTHING": {
-      "key": "(entity.getWornHelmet().nbt().getBoolean('disguiseClothing') ? 'disguise' : 'skin')",
+      "key": "(entity.getData('skyhighheroes:dyn/thermoptic_disguise_clothing') ? 'disguise' : 'skin')",
       "values": ["disguise", "skin"]
     }
   },

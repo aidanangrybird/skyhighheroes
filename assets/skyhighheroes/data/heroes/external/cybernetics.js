@@ -30,37 +30,36 @@ var months = [
 ];
 
 var colorDamage = {
-  //Base
-  "9": "12",
-  //Blue
-  "1": "4",
-  //Green
-  "2": "2",
-  //Orange
+  //Orange gold
   "6": "14",
+  //Green lime
+  "2": "10",
   //Purple
   "5": "5",
   //Red
   "4": "1",
-  //Yellow
-  "e": "11"
+  //Cyan
+  "3": "6",
+  //Blue
+  "1": "4",
 };
 
+var cybers = [
+  "CF-4",
+  "CV-6",
+  "CA-1",
+  "CG-3",
+  "CN-2",
+  "CS-5"
+];
+
 var hexColors = {
-  //Base
-  "C-9": "0x00AEFF",
-  //Blue
-  "CB-1": "0x0000FF",
-  //Green
-  "CG-2": "0x00FF00",
-  //Orange
-  "CO-6": "0xFF9400",
-  //Purple
-  "CP-5": "0x7C00FF",
-  //Red
-  "CR-4": "0xFF0000",
-  //Yellow
-  "CY-e": "0xFFFF00"
+  "CF-4": "0xFF0000",
+  "CV-6": "0xFF8900",
+  "CA-1": "0x0000FF",
+  "CG-3": "0x00FFFF",
+  "CN-2": "0x55FF00",
+  "CS-5": "0x8000FF"
 };
 
 modelRegex = /[a-z\s]/gm;
@@ -130,7 +129,7 @@ function hasCyberneticBody(entity) {
  * @returns The Cyber ID
  **/
 function getModelID(entity) {
-  return mainNBT(entity).getString("cyberModelID");
+  return entity.getData("skyhighheroes:dyn/model_id");
 };
 /**
  * Gets the Cyber name
@@ -138,7 +137,15 @@ function getModelID(entity) {
  * @returns The Cyber alias
  **/
 function getAliasName(entity) {
-  return mainNBT(entity).getString("cyberAliasName");
+  return entity.getData("skyhighheroes:dyn/alias");
+};
+/**
+ * Gets the UUID of the suits authorized user
+ * @param {JSEntity} entity - Entity getting checked
+ * @returns The UUID of the suits authorized user
+ **/
+function getAuthorizedUser(entity) {
+  return entity.getWornHelmet().nbt().getString("boundUUID");
 };
 
 /**
@@ -517,33 +524,27 @@ function clamp(value, min, max) {
 
 function cycleUp(entity, manager) {
   var nbt = mainNBT(entity);
-  if (!nbt.hasKey("hudSelectedSide")) {
-    manager.setInteger(nbt, "hudSelectedSide", 0);
-  };
-  if (!nbt.hasKey("hudLeftSide")) {
-    manager.setInteger(nbt, "hudLeftSide", 0);
-  };
-  if (!nbt.hasKey("hudTopSide")) {
-    manager.setInteger(nbt, "hudTopSide", 0);
-  };
-  if (!nbt.hasKey("hudRightSide")) {
-    manager.setInteger(nbt, "hudRightSide", 0);
-  };
-  if (nbt.getInteger("hudSelectedSide") == 0) {
+  if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 0) {
+    manager.setData(entity, "skyhighheroes:dyn/hud_side_left", entity.getData("skyhighheroes:dyn/hud_side_left") + 1);
     manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") + 1);
-    if (nbt.getInteger("hudLeftSide") > 7) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_left") > 7) {
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_left", 0);
       manager.setInteger(nbt, "hudLeftSide", 0);
     };
   };
-  if (nbt.getInteger("hudSelectedSide") == 1) {
+  if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 1) {
+    manager.setData(entity, "skyhighheroes:dyn/hud_side_top", entity.getData("skyhighheroes:dyn/hud_side_top") + 1);
     manager.setInteger(nbt, "hudTopSide", nbt.getInteger("hudTopSide") + 1);
-    if (nbt.getInteger("hudTopSide") > 2) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_top") > 2) {
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_top", 0);
       manager.setInteger(nbt, "hudTopSide", 0);
     };
   };
-  if (nbt.getInteger("hudSelectedSide") == 2) {
+  if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 2) {
+    manager.setData(entity, "skyhighheroes:dyn/hud_side_right", entity.getData("skyhighheroes:dyn/hud_side_right") + 1);
     manager.setInteger(nbt, "hudRightSide", nbt.getInteger("hudRightSide") + 1);
-    if (nbt.getInteger("hudRightSide") > 2) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_right") > 2) {
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_right", 0);
       manager.setInteger(nbt, "hudRightSide", 0);
     };
   };
@@ -551,33 +552,27 @@ function cycleUp(entity, manager) {
 
 function cycleDown(entity, manager) {
   var nbt = mainNBT(entity);
-  if (!nbt.hasKey("hudSelectedSide")) {
-    manager.setInteger(nbt, "hudSelectedSide", 0);
-  };
-  if (!nbt.hasKey("hudLeftSide")) {
-    manager.setInteger(nbt, "hudLeftSide", 0);
-  };
-  if (!nbt.hasKey("hudTopSide")) {
-    manager.setInteger(nbt, "hudTopSide", 0);
-  };
-  if (!nbt.hasKey("hudRightSide")) {
-    manager.setInteger(nbt, "hudRightSide", 0);
-  };
-  if (nbt.getInteger("hudSelectedSide") == 0) {
+  if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 0) {
+    manager.setData(entity, "skyhighheroes:dyn/hud_side_left", entity.getData("skyhighheroes:dyn/hud_side_left") - 1);
     manager.setInteger(nbt, "hudLeftSide", nbt.getInteger("hudLeftSide") - 1);
-    if (nbt.getInteger("hudLeftSide") < 0) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_left") < 0) {
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_left", 7);
       manager.setInteger(nbt, "hudLeftSide", 7);
     };
   };
-  if (nbt.getInteger("hudSelectedSide") == 1) {
+  if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 1) {
+    manager.setData(entity, "skyhighheroes:dyn/hud_side_top", entity.getData("skyhighheroes:dyn/hud_side_top") - 1);
     manager.setInteger(nbt, "hudTopSide", nbt.getInteger("hudTopSide") - 1);
-    if (nbt.getInteger("hudTopSide") < 0) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_top") < 0) {
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_top", 2);
       manager.setInteger(nbt, "hudTopSide", 2);
     };
   };
-  if (nbt.getInteger("hudSelectedSide") == 2) {
+  if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 2) {
+    manager.setData(entity, "skyhighheroes:dyn/hud_side_right", entity.getData("skyhighheroes:dyn/hud_side_right") - 1);
     manager.setInteger(nbt, "hudRightSide", nbt.getInteger("hudRightSide") - 1);
-    if (nbt.getInteger("hudRightSide") < 0) {
+    if (entity.getData("skyhighheroes:dyn/hud_side_right") < 0) {
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_right", 2);
       manager.setInteger(nbt, "hudRightSide", 2);
     };
   };
@@ -678,11 +673,12 @@ function initMultiTap(varPrefix) {
  * @param {object} moduleList - cyber system modules
  * @param {string} name - Name of the cybernetic being
  * @param {string} colorCode - Color to set system thing to
+ * @param {string} uuid - UUID of player to be bound to
  **/
-function initSystem(moduleList, name, colorCode) {
+function initSystem(moduleList, name, colorCode, uuid) {
   var sneakMultiTap = initMultiTap("skyhighheroes:dyn/sneak");
   var punchMultiTap = initMultiTap("skyhighheroes:dyn/punch");
-  var selectedSideMultiTap = initMultiTap("skyhighheroes:dyn/selected_side");
+  var selectedSideMultiTap = initMultiTap("skyhighheroes:dyn/hud_selected_side");
   var cyberInstance = this;
   //Type 1 - commands (can have data management)
   /** @var type1Specs - Type 1 Specs */
@@ -731,7 +727,7 @@ function initSystem(moduleList, name, colorCode) {
   var damageProfileIndexes = [];
   /** @var tickHandlerIndexes - Indexes of tick handler capable modules */
   var tickHandlerIndexes = [];
-  /** @var onInitSystemIndexes - Indexes of tick handler capable modules */
+  /** @var onInitSystemIndexes - Indexes of system init capable modules */
   var onInitSystemIndexes = [];
   /** @var fightOrFlightIndexes - Indexes of fight or flight capable modules */
   var fightOrFlightIndexes = [];
@@ -743,6 +739,8 @@ function initSystem(moduleList, name, colorCode) {
   var cyberModelID = formatModel(name) + "-" + colorCode;
   /** @var cyberName - cyber name */
   var cyberName = name;
+  /** @var boundUUID - UUID */
+  var boundUUID = uuid;
   /** @var color - Color */
   var color = colorCode;
   var hasError = false;
@@ -773,6 +771,10 @@ function initSystem(moduleList, name, colorCode) {
               commandIndexes.push(modules.length-1);
               normalModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -796,6 +798,10 @@ function initSystem(moduleList, name, colorCode) {
               messagingIndexes.push(modules.length-1);
               normalModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -821,6 +827,10 @@ function initSystem(moduleList, name, colorCode) {
               messagingIndexes.push(modules.length-1);
               normalModules.push(moduleInit.name);
               logMessage("Module \"" + moduleInit.name + "\" was initialized successfully on cybernetic body " + cyberName + "!");
+              if (moduleInit.hasOwnProperty("onInitSystem")) {
+                onInitSystemIndexes.push(modules.length-1);
+                logMessage("Module \"" + moduleInit.name + "\" has optional spec \"onInitSystem\"!");
+              };
             };
             hasError = false;
             break;
@@ -1007,10 +1017,12 @@ function initSystem(moduleList, name, colorCode) {
   });
   logMessage("Successfully initialized " + modules.length + " out of " + ((moduleList.length > 1) ? moduleList.length + " modules" : moduleList.length + " module") + " on " + cyberName + "!");
   function switchChatModes(entity, manager, mode) {
+    var nbt = mainNBT(entity);
     var chatMode = chatModes.indexOf(mode);
     if (chatMode > -1) {
       var chatModule = modules[messagingIndexes[chatMode]];
-      manager.setString(entity.getWornHelmet().nbt(), "chatMode", chatModule.modeID);
+      manager.setData(entity, "skyhighheroes:dyn/chat_mode", chatModule.modeID);
+      manager.setString(nbt, "chatMode", chatModule.modeID);
       systemMessage(entity, chatModule.chatModeMessage);
       chatModule.chatModeInfo(entity);
     } else {
@@ -1018,7 +1030,7 @@ function initSystem(moduleList, name, colorCode) {
     };
   };
   function switchChats(entity, manager, chat) {
-    var modeID = entity.getWornHelmet().nbt().getString("chatMode");
+    var modeID = entity.getData("skyhighheroes:dyn/chat_mode");
     var chatMode = chatModes.indexOf(modeID);
     modules[messagingIndexes[chatMode]].chatInfo(entity, manager, chat);
   };
@@ -1387,42 +1399,44 @@ function initSystem(moduleList, name, colorCode) {
   function tickHandler(entity, manager) {
     var nbt = mainNBT(entity);
     if ((!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true))) {
-      manager.setString(nbt, "cyberModelID", cyberModelID);
-      manager.setString(nbt, "cyberAliasName", cyberName);
+      manager.setString(nbt, "boundUUID", boundUUID);
       manager.setBoolean(nbt, "Unbreakable", true);
       assignID(entity, manager);
-      chatModes.forEach(mode => {
-        if (!nbt.hasKey(mode + "Selected")) {
-          manager.setString(nbt, mode + "Selected", "");
-        };
-      });
+      if (!nbt.hasKey("cyberModelID")) {
+        manager.setString(nbt, "cyberModelID", cyberModelID);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/model_id", nbt.getString("cyberModelID"));
+      if (!nbt.hasKey("cyberAliasName")) {
+        manager.setInteger(nbt, "cyberAliasName", cyberName);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/alias", nbt.getString("cyberAliasName"));
+      if (!nbt.hasKey("hudSelectedSide")) {
+        manager.setInteger(nbt, "hudSelectedSide", 0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_selected_side", nbt.getInteger("hudSelectedSide"));
+      if (!nbt.hasKey("hudLeftSide")) {
+        manager.setInteger(nbt, "hudLeftSide", 0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_left", nbt.getInteger("hudLeftSide"));
+      if (!nbt.hasKey("hudTopSide")) {
+        manager.setInteger(nbt, "hudTopSide", 0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_top", nbt.getInteger("hudTopSide"));
+      if (!nbt.hasKey("hudRightSide")) {
+        manager.setInteger(nbt, "hudRightSide", 0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_side_right", nbt.getInteger("hudRightSide"));
       if (!nbt.hasKey("chatMode")) {
         manager.setString(nbt, "chatMode", "");
       };
-      if (!nbt.hasKey("durationFightOrFlight")) {
-        manager.setShort(nbt, "durationFightOrFlight", 20);
-      };
-      if (!nbt.hasKey("minHealthFightOrFlight")) {
-        manager.setShort(nbt, "minHealthFightOrFlight", 5);
-      };
-      if (!nbt.hasKey("xSat")) {
-        manager.setShort(nbt, "xSat", 0);
-      };
-      if (!nbt.hasKey("ySat")) {
-        manager.setShort(nbt, "ySat", 1000);
-      };
-      if (!nbt.hasKey("zSat")) {
-        manager.setShort(nbt, "zSat", 0);
-      };
-      if (!nbt.hasKey("freq")) {
-        manager.setShort(nbt, "freq", 100);
-      };
-      if (!nbt.hasKey("hudScale")) {
-        manager.setFloat(nbt, "hudScale", 1.0);
-      };
+      manager.setData(entity, "skyhighheroes:dyn/chat_mode", nbt.getString("chatMode"));
       var hexColor = hexColors[getModelID(entity)];
       manager.setString(nbt, "hudColorSkyHigh", hexColor);
-      systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
+      if (entity.getUUID() == boundUUID) {
+        systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
+      } else {
+        systemMessage(entity, "<e>\u00A7lUNAUTHORIZED USER!");
+      };
       onInitSystemIndexes.forEach(index => {
         var module = modules[index];
         module.onInitSystem(entity, manager);
@@ -1431,21 +1445,23 @@ function initSystem(moduleList, name, colorCode) {
       manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
     };
-    if ((Math.floor(entity.getHealth()) <= entity.getWornHelmet().nbt().getInteger("minHealthFightOrFlight")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getWornHelmet().nbt().getShort("durationFightOrFlight"))) {
+    if (entity.getUUID() == boundUUID) {
+      if ((Math.floor(entity.getHealth()) <= entity.getData("skyhighheroes:dyn/fight_or_flight_min_health")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getData("skyhighheroes:dyn/fight_or_flight_duration"))) {
         if (!entity.getDataOrDefault("skyhighheroes:dyn/fight_or_flight", true)) {
-        systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
-        manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", true);
+          systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
+          manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", true);
+        };
+        fightOrFlightIndexes.forEach(index => {
+          var module = modules[index];
+          silentEnableModule(entity, manager, module.name);
+          module.fightOrFlight(entity, manager);
+        });
+        if (entity.getData("fiskheroes:time_since_damaged") == entity.getData("skyhighheroes:dyn/fight_or_flight_duration")) {
+          systemMessage(entity, "<n>FIGHT OR FLIGHT MODE DEACTIVATED!");
+        };
+      } else {
+        manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", false);
       };
-      fightOrFlightIndexes.forEach(index => {
-        var module = modules[index];
-        silentEnableModule(entity, manager, module.name);
-        module.fightOrFlight(entity, manager);
-      });
-      if (entity.getData("fiskheroes:time_since_damaged") == entity.getWornHelmet().nbt().getShort("durationFightOrFlight")) {
-        systemMessage(entity, "<n>FIGHT OR FLIGHT MODE DEACTIVATED!");
-      }
-    } else {
-      manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", false);
     };
     if (entity.getDataOrDefault("skyhighheroes:dyn/system_init", false)) {
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
@@ -1503,6 +1519,18 @@ function initSystem(moduleList, name, colorCode) {
                 break;
               case "idSet":
                 maybeGetID(entity, manager, args[1])
+                break;
+              case "cv":
+                entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighheroes:dyn/" + args[1], 0));
+                break;
+              case "nbtStringList":
+                entity.as("PLAYER").addChatMessage(nbt.getStringList(args[1]));
+                break;
+              case "nbtInt":
+                entity.as("PLAYER").addChatMessage(nbt.getInteger(args[1]));
+                break;
+              case "nbtShort":
+                entity.as("PLAYER").addChatMessage(nbt.getShort(args[1]));
                 break;
               case "chatMode":
                 switchChatModes(entity, manager, args[1]);
@@ -1569,7 +1597,7 @@ function initSystem(moduleList, name, colorCode) {
                 break;
             };
           } else {
-            var chatMode = chatModes.indexOf(nbt.getString("chatMode"));
+            var chatMode = chatModes.indexOf(entity.getData("skyhighheroes:dyn/chat_mode"));
             if (chatMode > -1) {
               var chatModule = modules[messagingIndexes[chatMode]];
               chatModule.messageHandler(entity, name, 32);
@@ -1672,9 +1700,11 @@ function initSystem(moduleList, name, colorCode) {
       };
     };
     if (selectedSideMultiTap.conditionalMultiTap(entity, manager, 2, 20, 1, entity.getData("fiskheroes:gravity_manip"))) {
-      if (nbt.getInteger("hudSelectedSide") == 2) {
+      if (entity.getData("skyhighheroes:dyn/hud_selected_side") == 2) {
+        manager.setData(entity, "skyhighheroes:dyn/hud_selected_side", 0);
         manager.setInteger(nbt, "hudSelectedSide", 0);
       } else {
+        manager.setData(entity, "skyhighheroes:dyn/hud_selected_side", entity.getData("skyhighheroes:dyn/hud_selected_side") + 1);
         manager.setInteger(nbt, "hudSelectedSide", nbt.getInteger("hudSelectedSide") + 1);
       };
     };
@@ -1692,6 +1722,7 @@ function initSystem(moduleList, name, colorCode) {
       hero.setName(cyberName + "/Model " + cyberModelID + " Cybernetic Body");
       hero.setTier(9);
       hero.setHelmet("Cybernetic Brain");
+      hero.setVersion("OC");
     
       hero.addPrimaryEquipment("fiskheroes:suit_data_drive@" + colorDamage[color] + "{display:{Name:\u00A7" + color + cyberName + "'s Data Drive}}", true, item => (item.damage() == colorDamage[color] && item.displayName() == "\u00A7" + color + cyberName + "'s Data Drive"));
     

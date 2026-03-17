@@ -27,10 +27,9 @@ function initModule(system) {
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = system.mainNBT(entity);
-        var head = nbt.getBoolean("cannonsHead");
-        var body = nbt.getBoolean("cannonsBody");
-        var arms = nbt.getBoolean("cannonsArms");
+        var head = entity.getData("skyhighheroes:dyn/cannons_head_armed");
+        var body = entity.getData("skyhighheroes:dyn/cannons_body_armed");
+        var arms = entity.getData("skyhighheroes:dyn/cannons_arms_armed");
         if (keyBind == "CANNONS" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (!head && !body && !arms);
         };
@@ -43,10 +42,9 @@ function initModule(system) {
     isModifierEnabled: function (entity, modifier) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
-        var nbt = system.mainNBT(entity);
-        var head = (nbt.getBoolean("cannonsHead")) ? "T" : "F";
-        var body = (nbt.getBoolean("cannonsBody")) ? "T" : "F";
-        var arms = (nbt.getBoolean("cannonsArms")) ? "T" : "F";
+        var head = (entity.getData("skyhighheroes:dyn/cannons_head_armed")) ? "T" : "F";
+        var body = (entity.getData("skyhighheroes:dyn/cannons_body_armed")) ? "T" : "F";
+        var arms = (entity.getData("skyhighheroes:dyn/cannons_arms_armed")) ? "T" : "F";
         if (modifier.name() == "fiskheroes:charged_beam" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           if (modifier.id() == "cannons_" + head + body + arms) {
             result = true;
@@ -65,18 +63,24 @@ function initModule(system) {
           case "arm":
             switch (argList[2]) {
               case "head":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", true);
                 manager.setBoolean(nbt, "cannonsHead", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>head<s> cannons!");
                 break;
               case "body":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", true);
                 manager.setBoolean(nbt, "cannonsBody", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>body<s> cannons!");
                 break;
               case "arms":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", true);
                 manager.setBoolean(nbt, "cannonsArms", true);
                 system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> cannons!");
                 break;
               case "*":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", true);
+                manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", true);
+                manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", true);
                 manager.setBoolean(nbt, "cannonsHead", true);
                 manager.setBoolean(nbt, "cannonsBody", true);
                 manager.setBoolean(nbt, "cannonsArms", true);
@@ -90,18 +94,24 @@ function initModule(system) {
           case "disarm":
             switch (argList[2]) {
               case "head":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", false);
                 manager.setBoolean(nbt, "cannonsHead", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>head<s> cannons!");
                 break;
               case "body":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", false);
                 manager.setBoolean(nbt, "cannonsBody", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> cannons!");
                 break;
               case "arms":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", false);
                 manager.setBoolean(nbt, "cannonsArms", false);
                 system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> cannons!");
                 break;
               case "*":
+                manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", false);
+                manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", false);
                 manager.setBoolean(nbt, "cannonsHead", false);
                 manager.setBoolean(nbt, "cannonsBody", false);
                 manager.setBoolean(nbt, "cannonsArms", false);
@@ -208,28 +218,28 @@ function initModule(system) {
               case "head":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_left_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_right_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>head<s> cannons!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>head<s> cannons!");
                 break;
               case "headLeft":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_left_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left head<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>left head<s> cannon!");
                 break;
               case "headRight":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_right_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right head<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>right head<s> cannon!");
                 break;
               case "body":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_left_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>body<s> cannons!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>body<s> cannons!");
                 break;
               case "bodyLeft":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_left_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left body<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>left body<s> cannon!");
                 break;
               case "bodyRight":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right body<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>right body<s> cannon!");
                 break;
               case "arms":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", false);
@@ -238,43 +248,43 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>arm<s> cannons!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>arm<s> cannons!");
                 break;
               case "leftArm":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_back_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>left arm<s> cannon!");
                 break;
               case "leftArmBottom":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm bottom<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>left arm bottom<s> cannon!");
                 break;
               case "leftArmFront":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_front_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm front<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>left arm front<s> cannon!");
                 break;
               case "leftArmBack":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_back_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>left arm back<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>left arm back<s> cannon!");
                 break;
               case "rightArm":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>right arm<s> cannon!");
                 break;
               case "rightArmBottom":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm bottom<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>right arm bottom<s> cannon!");
                 break;
               case "rightArmFront":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm front<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>right arm front<s> cannon!");
                 break;
               case "rightArmBack":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>right arm back<s> cannon!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>right arm back<s> cannon!");
                 break;
               case "*":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", false);
@@ -287,7 +297,7 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/cannon_head_right_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_left_deployed", false);
                 manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", false);
-                system.moduleMessage(this, entity, "<s>Retracted <sh>all<s> cannons!");
+                system.moduleMessage(this, entity, "<s>Stowed <sh>all<s> cannons!");
                 break;
               default:
                 system.moduleMessage(this, entity, "<e>Unknown <eh>cannon<e>!");
@@ -301,14 +311,17 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<n>Hologram set to <nh>" + nbt.getBoolean("holoCannons") + "<n>!");
                 break;
               case "flushHead":
+                manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush_enabled", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/cannon_head_flush_enabled")));
                 manager.setBoolean(nbt, "flushHeadCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
                 system.moduleMessage(this, entity, "<n>Flush Head Cannons set to <nh>" + nbt.getBoolean("flushHeadCannons") + "<n>!");
                 break;
               case "flushLeftArm":
+                manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush_enabled", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/cannon_left_arm_flush_enabled")));
                 manager.setBoolean(nbt, "flushLeftArmCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushLeftArmCannons")));
                 system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon set to <nh>" + nbt.getBoolean("flushLeftArmCannons") + "<n>!");
                 break;
               case "flushRightArm":
+                manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush_enabled", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled")));
                 manager.setBoolean(nbt, "flushRightArmCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushRightArmCannons")));
                 system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon set to <nh>" + nbt.getBoolean("flushRightArmCannons") + "<n>!");
                 break;
@@ -332,22 +345,22 @@ function initModule(system) {
             var bodySet = (entity.getData("skyhighheroes:dyn/cannons_body_timer") > 0);
             var armSet = (entity.getData("skyhighheroes:dyn/cannons_arms_timer") > 0);
             system.moduleMessage(this, entity, "<n>Cannons status:");
-            system.moduleMessage(this, entity, "<n>Head set: <nh>" + (nbt.getBoolean("cannonsHead") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Body set: <nh>" + (nbt.getBoolean("cannonsBody") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Arm set: <nh>" + (nbt.getBoolean("cannonsArms") ? "ARMED" : "DISARMED"));
-            system.moduleMessage(this, entity, "<n>Left Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_left_deploy_timer") > 0) || headSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_right_deploy_timer") > 0) || headSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Body: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_body_left_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Body: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_body_right_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Arm bottom: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Left Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Arm bottom: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Right Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Flush Head Cannons: <nh>" + (nbt.getBoolean("flushHeadCannons") ? "ENABLED" : "DISABLED"));
-            system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon: <nh>" + (nbt.getBoolean("flushLeftArmCannons") ? "ENABLED" : "DISABLED"));
-            system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon: <nh>" + (nbt.getBoolean("flushRightArmCannons") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Head set: <nh>" + (entity.getData("skyhighheroes:dyn/cannons_head_armed") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Body set: <nh>" + (entity.getData("skyhighheroes:dyn/cannons_body_armed") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Arm set: <nh>" + (entity.getData("skyhighheroes:dyn/cannons_arms_armed") ? "ARMED" : "DISARMED"));
+            system.moduleMessage(this, entity, "<n>Left Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_left_deploy_timer") > 0) || headSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Right Head: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_head_right_deploy_timer") > 0) || headSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Left Body: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_body_left_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Right Body: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_body_right_deploy_timer") > 0) || bodySet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Left Arm bottom: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Left Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Left Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_left_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Right Arm bottom: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_bottom_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Right Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Right Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Flush Head Cannons: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_head_flush_enabled") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_left_arm_flush_enabled") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoCannons") ? "ENABLED" : "DISABLED"));
             break;
           default:
@@ -362,18 +375,24 @@ function initModule(system) {
       var nbt = system.mainNBT(entity);
       switch (arg) {
         case "headCannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", true);
           manager.setBoolean(nbt, "cannonsHead", true);
           system.moduleMessage(this, entity, "<s>Armed <sh>head<s> cannons!");
           return;
         case "bodyCannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", true);
           manager.setBoolean(nbt, "cannonsBody", true);
           system.moduleMessage(this, entity, "<s>Armed <sh>body<s> cannons!");
           return;
         case "armCannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", true);
           manager.setBoolean(nbt, "cannonsArms", true);
           system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> cannons!");
           return;
         case "cannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", true);
+          manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", true);
+          manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", true);
           manager.setBoolean(nbt, "cannonsHead", true);
           manager.setBoolean(nbt, "cannonsBody", true);
           manager.setBoolean(nbt, "cannonsArms", true);
@@ -385,18 +404,24 @@ function initModule(system) {
       var nbt = system.mainNBT(entity);
       switch (arg) {
         case "headCannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", false);
           manager.setBoolean(nbt, "cannonsHead", false);
           system.moduleMessage(this, entity, "<s>Disarmed <sh>head<s> cannons!");
           return;
         case "bodyCannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", false);
           manager.setBoolean(nbt, "cannonsBody", false);
           system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> cannons!");
           return;
         case "armCannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", false);
           manager.setBoolean(nbt, "cannonsArms", false);
           system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> cannons!");
           return;
         case "cannons":
+          manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", false);
+          manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", false);
+          manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", false);
           manager.setBoolean(nbt, "cannonsHead", false);
           manager.setBoolean(nbt, "cannonsBody", false);
           manager.setBoolean(nbt, "cannonsArms", false);
@@ -425,22 +450,28 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       var nbt = system.mainNBT(entity);
-      var head = nbt.getBoolean("cannonsHead") && entity.getData("fiskheroes:beam_charging");
-      var body = nbt.getBoolean("cannonsBody") && entity.getData("fiskheroes:beam_charging");
-      var arms = nbt.getBoolean("cannonsArms") && entity.getData("fiskheroes:beam_charging");
-      if ((!nbt.getBoolean("cannonsHead") || !nbt.getBoolean("cannonsBody") || !nbt.getBoolean("cannonsArms")) && cannonMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+      var head = entity.getData("skyhighheroes:dyn/cannons_head_armed") && entity.getData("fiskheroes:beam_charging");
+      var body = entity.getData("skyhighheroes:dyn/cannons_body_armed") && entity.getData("fiskheroes:beam_charging");
+      var arms = entity.getData("skyhighheroes:dyn/cannons_arms_armed") && entity.getData("fiskheroes:beam_charging");
+      if ((!entity.getData("skyhighheroes:dyn/cannons_head_armed") || !entity.getData("skyhighheroes:dyn/cannons_body_armed") || !entity.getData("skyhighheroes:dyn/cannons_arms_armed")) && cannonMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", true);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", true);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", true);
         manager.setBoolean(nbt, "cannonsHead", true);
         manager.setBoolean(nbt, "cannonsBody", true);
         manager.setBoolean(nbt, "cannonsArms", true);
         system.moduleMessage(this, entity, "<s>Armed <sh>all<s> cannons!");
       };
-      if ((nbt.getBoolean("cannonsHead") || nbt.getBoolean("cannonsBody") || nbt.getBoolean("cannonsArms")) && cannonMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+      if ((entity.getData("skyhighheroes:dyn/cannons_head_armed") || entity.getData("skyhighheroes:dyn/cannons_body_armed") || entity.getData("skyhighheroes:dyn/cannons_arms_armed")) && cannonMultiTap.multiTap(entity, manager, 2, 20, 1)) {
+        manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", false);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", false);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", false);
         manager.setBoolean(nbt, "cannonsHead", false);
         manager.setBoolean(nbt, "cannonsBody", false);
         manager.setBoolean(nbt, "cannonsArms", false);
         system.moduleMessage(this, entity, "<s>Disarmed <sh>all<s> cannons!");
       };
-      if ((nbt.getBoolean("cannonsHead") || nbt.getBoolean("cannonsBody") || nbt.getBoolean("cannonsArms")) && entity.getData("fiskheroes:beam_charge") > 0) {
+      if ((entity.getData("skyhighheroes:dyn/cannons_head_armed") || entity.getData("skyhighheroes:dyn/cannons_body_armed") || entity.getData("skyhighheroes:dyn/cannons_arms_armed")) && entity.getData("fiskheroes:beam_charge") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/cannons_arms", arms);
         manager.setData(entity, "skyhighheroes:dyn/cannons_body", body);
         manager.setData(entity, "skyhighheroes:dyn/cannons_head", head);
@@ -470,9 +501,9 @@ function initModule(system) {
           };
         };
       };
-      manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush", nbt.getBoolean("flushHeadCannons"));
-      manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", nbt.getBoolean("flushLeftArmCannons"));
-      manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush", nbt.getBoolean("flushRightArmCannons"));
+      manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush", entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled"));
+      manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled"));
+      manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush", entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled"));
       cannonMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
@@ -482,6 +513,33 @@ function initModule(system) {
         manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
         system.systemMessage(entity, "<n>Automatically armed <nh>cannons<n>!");
       }
+    },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("cannonsHead")) {
+        manager.setBoolean(nbt, "cannonsHead", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", nbt.getBoolean("cannonsHead"));
+      if (!nbt.hasKey("cannonsBody")) {
+        manager.setBoolean(nbt, "cannonsBody", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", nbt.getBoolean("cannonsBody"));
+      if (!nbt.hasKey("cannonsArms")) {
+        manager.setBoolean(nbt, "cannonsArms", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", nbt.getBoolean("cannonsArms"));
+      if (!nbt.hasKey("flushHeadCannons")) {
+        manager.setBoolean(nbt, "flushHeadCannons", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush_enabled", nbt.getBoolean("flushHeadCannons"));
+      if (!nbt.hasKey("flushLeftArmCannons")) {
+        manager.setBoolean(nbt, "flushLeftArmCannons", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush_enabled", nbt.getBoolean("flushLeftArmCannons"));
+      if (!nbt.hasKey("flushRightArmCannons")) {
+        manager.setBoolean(nbt, "flushRightArmCannons", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush_enabled", nbt.getBoolean("flushRightArmCannons"));
     }
   };
 };

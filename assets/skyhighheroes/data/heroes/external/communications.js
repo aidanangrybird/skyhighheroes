@@ -42,20 +42,20 @@ function initModule(system) {
   * @param manager - Required
   **/
   function receiveSuits(module, tx, rx, manager) {
-    var rxNBT = system.mainNBT(rx)
-    var txNBT = system.mainNBT(tx)
-    if (!rxNBT.hasKey("suitDatastore")) {
+    var nbtRX = system.mainNBT(rx)
+    var nbtTX = system.mainNBT(tx)
+    if (!nbtRX.hasKey("suitDatastore")) {
       var newSuitsList = manager.newTagList();
-      manager.setTagList(rxNBT, "suitDatastore", newSuitsList);
+      manager.setTagList(nbtRX, "suitDatastore", newSuitsList);
     };
-    if (!rxNBT.hasKey("receiveBuffer")) {
+    if (!nbtRX.hasKey("receiveBuffer")) {
       var newBuffer = manager.newTagList();
-      manager.setTagList(rxNBT, "receiveBuffer", newBuffer);
+      manager.setTagList(nbtRX, "receiveBuffer", newBuffer);
     };
     var suitReceiveDuration = 0;
     var receivesBuffered = 0;
-    var transmitBuffer = txNBT.getStringList("transmitBuffer");
-    var receiveBuffer = rxNBT.getStringList("receiveBuffer");
+    var transmitBuffer = nbtTX.getStringList("transmitBuffer");
+    var receiveBuffer = nbtRX.getStringList("receiveBuffer");
     var transmitBufferArray = system.getStringArray(transmitBuffer);
     transmitBufferArray.forEach(entry => {
       manager.appendString(receiveBuffer, entry);
@@ -235,7 +235,7 @@ function initModule(system) {
               //entity = tx
               //otherEntity = rx
               foundPlayers.forEach(otherEntity => {
-                var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
+                var rxDomain = rx.getWornHelmet().suitType().split(":")[0];
                 var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
@@ -291,7 +291,7 @@ function initModule(system) {
               //entity = tx
               //otherEntity = rx
               foundPlayers.forEach(otherEntity => {
-                var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
+                var rxDomain = rx.getWornHelmet().suitType().split(":")[0];
                 var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
@@ -412,18 +412,22 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
                 break;
               case "xSat":
+                manager.setData(entity, "skyhighheroes:dyn/satellite_x", parseInt(argList[2]));
                 manager.setShort(nbt, "xSat", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
                 break;
               case "ySat":
+                manager.setData(entity, "skyhighheroes:dyn/satellite_y", parseInt(argList[2]));
                 manager.setShort(nbt, "ySat", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
                 break;
               case "zSat":
+                manager.setData(entity, "skyhighheroes:dyn/satellite_z", parseInt(argList[2]));
                 manager.setShort(nbt, "zSat", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
                 break;
               case "freq":
+                manager.setData(entity, "skyhighheroes:dyn/frequency", parseInt(argList[2]));
                 manager.setShort(nbt, "freq", parseInt(argList[2]));
                 system.moduleMessage(this, entity, "<n>Frequency set to <nh>" + nbt.getShort("freq") + "<n>!");
                 break;
@@ -434,11 +438,11 @@ function initModule(system) {
             break;
           case "status":
             system.moduleMessage(this, entity, "<n>Comms status:");
-            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighheroes:dyn/antenna_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? "DEPLOYED" : "RETRACTED"));
-            system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + nbt.getShort("xSat") + "<n>, <nh>" + nbt.getShort("ySat") + "<n>, <nh>" + nbt.getShort("zSat"));
-            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + nbt.getShort("freq"));
+            system.moduleMessage(this, entity, "<n>Antenna: <nh>" + ((entity.getData("skyhighheroes:dyn/antenna_timer") > 0) ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Satellite: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_timer") > 0) ? "DEPLOYED" : "STOWED"));
+            system.moduleMessage(this, entity, "<n>Satellite Rain Mode: <nh>" + ((entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Connected Satellite: <nh>" + entity.getData("skyhighheroes:dyn/satellite_x") + "<n>, <nh>" + entity.getData("skyhighheroes:dyn/satellite_y") + "<n>, <nh>" + entity.getData("skyhighheroes:dyn/satellite_z"));
+            system.moduleMessage(this, entity, "<n>Frequency: <nh>" + entity.getData("skyhighheroes:dyn/frequency"));
             system.moduleMessage(this, entity, "<n>Antenna Hologram: <nh>" + (nbt.getBoolean("holoAnt") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Satellite Hologram: <nh>" + (nbt.getBoolean("holoSat") ? "ENABLED" : "DISABLED"));
             break;
@@ -486,13 +490,13 @@ function initModule(system) {
       };
       var nbt = system.mainNBT(entity);
       if (entity.getData("skyhighheroes:dyn/receive_timer") >= 1) {
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/receiving", false);
         system.moduleMessage(this, entity, "<s>Finished receiving suits!");
         manager.setTagList(nbt, "receiveBuffer", manager.newTagList());
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/receive_duration", 0);
-        if (PackLoader.getSide() == "CLIENT") {
-          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
-        };
       };
       var suitReceiveBuffer = manager.newTagList();
       if (nbt.getStringList("receiveBuffer") != null) {
@@ -515,13 +519,13 @@ function initModule(system) {
         };
       };
       if (entity.getData("skyhighheroes:dyn/transmit_timer") >= 1) {
+        if (PackLoader.getSide() == "CLIENT") {
+          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
+        };
         manager.setDataWithNotify(entity, "skyhighheroes:dyn/transmitting", false);
         system.moduleMessage(this, entity, "<s>Finished transmitting suits!");
         manager.setTagList(nbt, "transmitBuffer", manager.newTagList());
         manager.setDataWithNotify(nbt, "skyhighheroes:dyn/transmit_duration", 0);
-        if (PackLoader.getSide() == "CLIENT") {
-          entity.playSound("minecraft:random.levelup", 1.0, 1.0);
-        };
       };
       var suitTransmitBuffer = manager.newTagList();
       if (nbt.getStringList("transmitBuffer") != null) {
@@ -553,6 +557,25 @@ function initModule(system) {
           manager.setData(entity, "skyhighheroes:dyn/antenna", false);
         };
       };
+    },
+    onInitSystem: function (entity, manager) {
+      var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("xSat")) {
+        manager.setShort(nbt, "xSat", 0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/satellite_x", nbt.getShort("xSat"));
+      if (!nbt.hasKey("ySat")) {
+        manager.setShort(nbt, "ySat", 1000);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/satellite_y", nbt.getShort("ySat"));
+      if (!nbt.hasKey("zSat")) {
+        manager.setShort(nbt, "zSat", 0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/satellite_z", nbt.getShort("zSat"));
+      if (!nbt.hasKey("freq")) {
+        manager.setShort(nbt, "freq", 100);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/frequency", nbt.getShort("freq"));
     }
   };
 };
