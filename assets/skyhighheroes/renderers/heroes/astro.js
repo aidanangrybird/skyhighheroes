@@ -319,7 +319,7 @@ function initEffects(renderer) {
   nv.fogStrength = 0.0;
   nv.factor = 1.0;
   nv.firstPersonOnly = false;
-  nv.setCondition(entity => (entity.isWearingFullSuit()));
+  nv.setCondition(entity => (entity.isWearingFullSuit() && entity.getData("skyhighheroes:dyn/night_vision")));
 };
 
 function initAnimations(renderer) {
