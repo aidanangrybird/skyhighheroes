@@ -37,7 +37,7 @@ var hexColors = {
   "Vulcan": "0x8000FF"
 };
 
-function asssignID(entity, manager, robotName, color) {
+function asssignID(entity, manager) {
   var nbt = mainNBT(entity);
   if (!nbt.hasKey("computerID")) {
     if (PackLoader.getSide() == "SERVER") {
@@ -315,8 +315,7 @@ function chatMessage(entity, message) {
  * @param {string} message - Message content
  **/
 function systemMessage(entity, message) {
-  var id = getModel(entity);
-  var color = id.split("-")[1];
+  var color = entity.getData("skyhighheroes:dyn/color");
   chatMessage(entity, formatSystem("\u00A7" + color + "\u00A7lastrOS<r>> " + message));
 };
 /**
@@ -330,8 +329,7 @@ function moduleMessage(module, entity, message) {
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName;
   };
-  var id = getModel(entity);
-  var color = id.split("-")[1];
+  var color = entity.getData("skyhighheroes:dyn/color");
   chatMessage(entity, formatSystem("\u00A7" + color + messageName + "<r>> " + message));
 };
 /**
@@ -735,17 +733,16 @@ function initSystem(moduleList, name, colorCode) {
     systemHandler: (entity, manager) => {
       var nbt = mainNBT(entity);
       if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
-        asssignID(entity, manager, robotName, color);
+        asssignID(entity, manager);
         status(entity);
         var hexColor = hexColors[robotName];
         manager.setString(nbt, "hudColorSkyHigh", hexColor);
+        manager.setData(entity, "skyhighheroes:dyn/color", color);
         if (!nbt.hasKey("chatMode")) {
           manager.setString(nbt, "chatMode", "");
         };
         manager.setData(entity, "skyhighheroes:dyn/chat_mode", nbt.getString("chatMode"));
-        if (!nbt.hasKey("robotModelID")) {
-          manager.setString(nbt, "robotModelID", robotModelID);
-        };
+        manager.setString(nbt, "robotModelID", robotModelID);
         manager.setData(entity, "skyhighheroes:dyn/model_id", nbt.getString("robotModelID"));
         onInitSystemIndexes.forEach(index => {
           var module = modules[index];
