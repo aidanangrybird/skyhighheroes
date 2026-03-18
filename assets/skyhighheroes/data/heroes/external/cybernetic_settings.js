@@ -38,12 +38,24 @@ function initModule(system) {
             manager.setFloat(nbt, "hudScale", parseFloat(argList[2]));
             system.moduleMessage(this, entity, "<n>hudScale set to <nh>" + nbt.getFloat("hudScale") + "<n>!");
             break;
+          case "hudSidesBorder":
+            manager.setData(entity, "skyhighheroes:dyn/hud_sides_border", parseFloat(argList[2]));
+            manager.setFloat(nbt, "hudSidesBorder", parseFloat(argList[2]));
+            system.moduleMessage(this, entity, "<n>hudSidesBorder set to <nh>" + nbt.getFloat("hudSidesBorder") + "<n>!");
+            break;
+          case "hudTopBorder":
+            manager.setData(entity, "skyhighheroes:dyn/hud_top_border", parseFloat(argList[2]));
+            manager.setFloat(nbt, "hudTopBorder", parseFloat(argList[2]));
+            system.moduleMessage(this, entity, "<n>hudTopBorder set to <nh>" + nbt.getFloat("hudTopBorder") + "<n>!");
+            break;
           case "list":
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + entity.getData("skyhighheroes:dyn/fight_or_flight_duration"));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin: <nh>" + entity.getData("skyhighheroes:dyn/fight_or_flight_min_health"));
             system.moduleMessage(this, entity, "<n>aliasActive: <nh>" + entity.getData("skyhighheroes:dyn/alias_active"));
             system.moduleMessage(this, entity, "<n>nightVision: <nh>" + entity.getData("skyhighheroes:dyn/night_vision"));
             system.moduleMessage(this, entity, "<n>hudScale: <nh>" + entity.getData("skyhighheroes:dyn/hud_scale"));
+            system.moduleMessage(this, entity, "<n>hudSidesBorder: <nh>" + entity.getData("skyhighheroes:dyn/hud_sides_border"));
+            system.moduleMessage(this, entity, "<n>hudTopBorder: <nh>" + entity.getData("skyhighheroes:dyn/hud_top_border"));
             break;
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
@@ -53,6 +65,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!set aliasActive <true|false> <nh>-<n> Sets if alias name appears above head");
             system.moduleMessage(this, entity, "<n>!set nightVision <true|false> <nh>-<n> Sets if night vision is active");
             system.moduleMessage(this, entity, "<n>!set hudScale <number> <nh>-<n> Sets scale of HUD elements");
+            system.moduleMessage(this, entity, "<n>!set hudSidesBorder <number> <nh>-<n> Sets horizontal border of HUD elements");
+            system.moduleMessage(this, entity, "<n>!set hudTopBorder <number> <nh>-<n> Sets vertical border of HUD elements");
             system.moduleMessage(this, entity, "<n>!set help <nh>-<n> Shows this list");
             break;
           default:
@@ -77,6 +91,14 @@ function initModule(system) {
         manager.setFloat(nbt, "hudScale", 1.0);
       };
       manager.setData(entity, "skyhighheroes:dyn/hud_scale", nbt.getFloat("hudScale"));
+      if (!nbt.hasKey("hudSidesBorder")) {
+        manager.setInteger(nbt, "hudSidesBorder", 220.0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_sides_border", nbt.getInteger("hudSidesBorder"));
+      if (!nbt.hasKey("hudTopBorder")) {
+        manager.setInteger(nbt, "hudTopBorder", 110.0);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/hud_top_border", nbt.getInteger("hudTopBorder"));
       if (!nbt.hasKey("nightVision")) {
         manager.setFloat(nbt, "nightVision", false);
       };

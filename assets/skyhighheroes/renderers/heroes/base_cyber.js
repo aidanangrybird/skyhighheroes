@@ -321,7 +321,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         var rightShield = "Right: " + (entity.getData("skyhighheroes:dyn/shield_right_armed") ? "ARMED" : "DISARMED") + " (" + ((entity.getInterpolatedData("skyhighheroes:dyn/shield_right_deploy_timer") > 0 || entity.getInterpolatedData("skyhighheroes:dyn/shield_right_timer") > 0) ? "DEPLOYED" : "STOWED") + ")";
         shieldsToRender.push(leftShield);
         shieldsToRender.push(rightShield);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", shieldsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", shieldsToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 2) {
         leftSide = "Blades";
@@ -334,7 +334,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         bladesToRender.push(rightBlade);
         bladesToRender.push(leftBladeMode);
         bladesToRender.push(rightBladeMode);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", bladesToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", bladesToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 3) {
         leftSide = "Rockets";
@@ -365,7 +365,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         rocketsToRender.push(leftLegRockets);
         rocketsToRender.push(rightLegRockets);
 
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 4) {
         leftSide = "Cannons";
@@ -389,7 +389,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         cannonsToRender.push(bodyCannons);
         cannonsToRender.push(leftArmCannons);
         cannonsToRender.push(rightArmCannons);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", cannonsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", cannonsToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 5) {
         leftSide = "Comms";
@@ -408,7 +408,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
             commsToRender.push(cyber);
           });
         };
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", commsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", commsToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 6) {
         leftSide = "Wings";
@@ -419,7 +419,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         wingsToRender.push(wings);
         wingsToRender.push(leftWing);
         wingsToRender.push(rightWing);
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", wingsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", wingsToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 7) {
         leftSide = "Intakes";
@@ -442,7 +442,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         rocketsToRender.push(leftLeg);
         rocketsToRender.push(rightLeg);
 
-        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+        text_renderer.renderLines(isFirstPersonArm, "left", "center", rocketsToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
       };
     };
     if (entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -488,7 +488,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         dataToRender.push(noEntity);
       };
 
-      text_renderer.renderLines(isFirstPersonArm, "left", "center", dataToRender, -210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+      text_renderer.renderLines(isFirstPersonArm, "left", "center", dataToRender, -1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     //Top
     if (entity.getData("skyhighheroes:dyn/hud_side_top") == 1) {
@@ -500,7 +500,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
       thermoToRender.push(disguise);
       thermoToRender.push(camouflage);
       thermoToRender.push(clothing);
-      text_renderer.renderLines(isFirstPersonArm, "center", "center", thermoToRender, 0.0, -100.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+      text_renderer.renderLines(isFirstPersonArm, "center", "center", thermoToRender, 0.0, -1*entity.getData("skyhighheroes:dyn/hud_top_border"), -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     if (entity.getData("skyhighheroes:dyn/hud_side_top") == 2) {
       topSide = "Coords";
@@ -509,7 +509,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
       var direction = stuff.angleToDirection(entity.getInterpolatedData("skyhighheroes:dyn/bearing"));
       coordsToRender.push(coords);
       coordsToRender.push(direction);
-      text_renderer.renderLines(isFirstPersonArm, "center", "center", coordsToRender, 0.0, -100.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+      text_renderer.renderLines(isFirstPersonArm, "center", "center", coordsToRender, 0.0, -1*entity.getData("skyhighheroes:dyn/hud_top_border"), -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     //Right
     if (entity.getData("skyhighheroes:dyn/hud_side_right") == 1) {
@@ -531,7 +531,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
         var selectedContact = "Contact: " + entity.getData("skyhighheroes:dyn/normal_selected");
         statusToRender.push(selectedContact);
       };
-      text_renderer.renderLines(isFirstPersonArm, "right", "center", statusToRender, 210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+      text_renderer.renderLines(isFirstPersonArm, "right", "center", statusToRender, 1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     if (entity.getData("skyhighheroes:dyn/hud_side_right") == 2) {
       rightSide = "Coords";
@@ -542,7 +542,7 @@ function render(entity, renderLayer, isFirstPersonArm) {
       locationToRender.push(coords);
       locationToRender.push(dimension);
       locationToRender.push(biome);
-      text_renderer.renderLines(isFirstPersonArm, "right", "center", locationToRender, 210.0, 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
+      text_renderer.renderLines(isFirstPersonArm, "right", "center", locationToRender, 1*entity.getData("skyhighheroes:dyn/hud_sides_border"), 0.0, -180.0, 1.0*entity.getData("skyhighheroes:dyn/hud_scale"));
     };
     //Switcher
     if (entity.getData("fiskheroes:gravity_manip")) {

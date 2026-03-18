@@ -376,6 +376,8 @@
     "hud_side_left": "BYTE",
     "hud_side_top": "BYTE",
     "hud_side_right": "BYTE",
+    "hud_sides_border": "FLOAT",
+    "hud_top_border": "FLOAT",
     "hud_selected_side_tap_timer": { "type": "FLOAT", "resetWithoutSuit": true },
     "hud_selected_side_tap_count" : { "type": "BYTE", "resetWithoutSuit": true },
     "hud_selected_side_tap_cooldown": { "type": "FLOAT", "resetWithoutSuit": true },
