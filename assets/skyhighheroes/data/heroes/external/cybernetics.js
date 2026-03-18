@@ -30,36 +30,37 @@ var months = [
 ];
 
 var colorDamage = {
-  //Orange gold
+  //Base
+  "9": "12",
+  //Blue
+  "1": "4",
+  //Green
+  "2": "2",
+  //Orange
   "6": "14",
-  //Green lime
-  "2": "10",
   //Purple
   "5": "5",
   //Red
   "4": "1",
-  //Cyan
-  "3": "6",
-  //Blue
-  "1": "4",
+  //Yellow
+  "e": "11"
 };
 
-var cybers = [
-  "CF-4",
-  "CV-6",
-  "CA-1",
-  "CG-3",
-  "CN-2",
-  "CS-5"
-];
-
 var hexColors = {
-  "CF-4": "0xFF0000",
-  "CV-6": "0xFF8900",
-  "CA-1": "0x0000FF",
-  "CG-3": "0x00FFFF",
-  "CN-2": "0x55FF00",
-  "CS-5": "0x8000FF"
+  //Base
+  "C-9": "0x00AEFF",
+  //Blue
+  "CB-1": "0x0000FF",
+  //Green
+  "CG-2": "0x00FF00",
+  //Orange
+  "CO-6": "0xFF9400",
+  //Purple
+  "CP-5": "0x7C00FF",
+  //Red
+  "CR-4": "0xFF0000",
+  //Yellow
+  "CY-e": "0xFFFF00"
 };
 
 modelRegex = /[a-z\s]/gm;
@@ -138,14 +139,6 @@ function getModelID(entity) {
  **/
 function getAliasName(entity) {
   return entity.getData("skyhighheroes:dyn/alias");
-};
-/**
- * Gets the UUID of the suits authorized user
- * @param {JSEntity} entity - Entity getting checked
- * @returns The UUID of the suits authorized user
- **/
-function getAuthorizedUser(entity) {
-  return entity.getWornHelmet().nbt().getString("boundUUID");
 };
 
 /**
@@ -484,8 +477,7 @@ function shoutMessage(entity, message, range) {
  * @param {string} message - Message content
  **/
 function systemMessage(entity, message) {
-  var id = getModelID(entity);
-  var color = id.split("-")[1];
+  var color = entity.getData("skyhighheroes:dyn/color");
   chatMessage(entity, formatSystem("\u00A7" + color + "\u00A7lcyberOS" + "<r>> " + message));
 };
 /**
@@ -503,8 +495,7 @@ function logMessage(message) {
  * @param {string} message - Message content
  **/
 function moduleMessage(module, entity, message) {
-  var id = getModelID(entity);
-  var color = id.split("-")[1];
+  var color = entity.getData("skyhighheroes:dyn/color");
   var messageName = "\u00A7lcyberOS";
   if (module.hasOwnProperty("moduleMessageName")) {
     messageName = module.moduleMessageName
@@ -673,9 +664,8 @@ function initMultiTap(varPrefix) {
  * @param {object} moduleList - cyber system modules
  * @param {string} name - Name of the cybernetic being
  * @param {string} colorCode - Color to set system thing to
- * @param {string} uuid - UUID of player to be bound to
  **/
-function initSystem(moduleList, name, colorCode, uuid) {
+function initSystem(moduleList, name, colorCode) {
   var sneakMultiTap = initMultiTap("skyhighheroes:dyn/sneak");
   var punchMultiTap = initMultiTap("skyhighheroes:dyn/punch");
   var selectedSideMultiTap = initMultiTap("skyhighheroes:dyn/hud_selected_side");
@@ -739,8 +729,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
   var cyberModelID = formatModel(name) + "-" + colorCode;
   /** @var cyberName - cyber name */
   var cyberName = name;
-  /** @var boundUUID - UUID */
-  var boundUUID = uuid;
   /** @var color - Color */
   var color = colorCode;
   var hasError = false;
@@ -1321,16 +1309,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
       profile.addAttribute("KNOCKBACK", -1.0, 1);
       profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
     });
-    hero.addAttributeProfile("UNAUTHORIZED", function (profile) {
-      profile.addAttribute("BASE_SPEED", -1.0, 1);
-      profile.addAttribute("SPRINT_SPEED", -1.0, 1);
-      profile.addAttribute("WEAPON_DAMAGE", -1.0, 1);
-      profile.addAttribute("JUMP_HEIGHT", -1.0, 1);
-      profile.addAttribute("STEP_HEIGHT", -1.0, 1);
-      profile.addAttribute("KNOCKBACK", -1.0, 1);
-      profile.addAttribute("PUNCH_DAMAGE", -1.0, 1);
-      profile.addAttribute("MAX_HEALTH", -19.0, 0);
-    });
     damageProfileIndexes.forEach(index => {
       modules[index].initDamageProfiles(hero);
     });
@@ -1399,16 +1377,11 @@ function initSystem(moduleList, name, colorCode, uuid) {
   function tickHandler(entity, manager) {
     var nbt = mainNBT(entity);
     if ((!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true))) {
-      manager.setString(nbt, "boundUUID", boundUUID);
       manager.setBoolean(nbt, "Unbreakable", true);
       assignID(entity, manager);
-      if (!nbt.hasKey("cyberModelID")) {
-        manager.setString(nbt, "cyberModelID", cyberModelID);
-      };
+      manager.setString(nbt, "cyberModelID", cyberModelID);
       manager.setData(entity, "skyhighheroes:dyn/model_id", nbt.getString("cyberModelID"));
-      if (!nbt.hasKey("cyberAliasName")) {
-        manager.setInteger(nbt, "cyberAliasName", cyberName);
-      };
+      manager.setString(nbt, "cyberAliasName", cyberName);
       manager.setData(entity, "skyhighheroes:dyn/alias", nbt.getString("cyberAliasName"));
       if (!nbt.hasKey("hudSelectedSide")) {
         manager.setInteger(nbt, "hudSelectedSide", 0);
@@ -1430,13 +1403,10 @@ function initSystem(moduleList, name, colorCode, uuid) {
         manager.setString(nbt, "chatMode", "");
       };
       manager.setData(entity, "skyhighheroes:dyn/chat_mode", nbt.getString("chatMode"));
-      var hexColor = hexColors[getModelID(entity)];
+      var hexColor = hexColors[color];
       manager.setString(nbt, "hudColorSkyHigh", hexColor);
-      if (entity.getUUID() == boundUUID) {
-        systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
-      } else {
-        systemMessage(entity, "<e>\u00A7lUNAUTHORIZED USER!");
-      };
+      manager.setData(entity, "skyhighheroes:dyn/color", color);
+      systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
       onInitSystemIndexes.forEach(index => {
         var module = modules[index];
         module.onInitSystem(entity, manager);
@@ -1445,33 +1415,31 @@ function initSystem(moduleList, name, colorCode, uuid) {
       manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
     };
-    if (entity.getUUID() == boundUUID) {
-      if ((Math.floor(entity.getHealth()) <= entity.getData("skyhighheroes:dyn/fight_or_flight_min_health")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getData("skyhighheroes:dyn/fight_or_flight_duration"))) {
-        if (!entity.getDataOrDefault("skyhighheroes:dyn/fight_or_flight", true)) {
-          systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
-          manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", true);
-        };
-        fightOrFlightIndexes.forEach(index => {
-          var module = modules[index];
-          silentEnableModule(entity, manager, module.name);
-          module.fightOrFlight(entity, manager);
-        });
-        if (entity.getData("fiskheroes:time_since_damaged") == entity.getData("skyhighheroes:dyn/fight_or_flight_duration")) {
-          systemMessage(entity, "<n>FIGHT OR FLIGHT MODE DEACTIVATED!");
-        };
-      } else {
-        manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", false);
+    if ((Math.floor(entity.getHealth()) <= entity.getData("skyhighheroes:dyn/fight_or_flight_min_health")) && (entity.getData("fiskheroes:time_since_damaged") <= entity.getData("skyhighheroes:dyn/fight_or_flight_duration"))) {
+      if (!entity.getDataOrDefault("skyhighheroes:dyn/fight_or_flight", true)) {
+        systemMessage(entity, "<n>FIGHT OR FLIGHT MODE ACTIVATED!");
+        manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", true);
       };
+      fightOrFlightIndexes.forEach(index => {
+        var module = modules[index];
+        silentEnableModule(entity, manager, module.name);
+        module.fightOrFlight(entity, manager);
+      });
+      if (entity.getData("fiskheroes:time_since_damaged") == entity.getData("skyhighheroes:dyn/fight_or_flight_duration")) {
+        systemMessage(entity, "<n>FIGHT OR FLIGHT MODE DEACTIVATED!");
+      };
+    } else {
+      manager.setData(entity, "skyhighheroes:dyn/fight_or_flight", false);
     };
     if (entity.getDataOrDefault("skyhighheroes:dyn/system_init", false)) {
       if (typeof entity.getData("fiskheroes:disguise") === "string") {
-        if (!((entity.getData("fiskheroes:disguise") == cyberName || entity.getData("fiskheroes:disguise") == cyberModelID) || entity.getData("fiskheroes:disguise") == null)) {
+        if (!((entity.getData("fiskheroes:disguise") == getAliasName(entity) || entity.getData("fiskheroes:disguise") == getModelID(entity)) || entity.getData("fiskheroes:disguise") == null)) {
           if (entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") == 1) {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
             manager.setData(entity, "fiskheroes:disguise", null);
           } else {
             manager.setData(entity, "skyhighheroes:dyn/entry", entity.getData("fiskheroes:disguise"));
-            manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? cyberName : cyberModelID));
+            manager.setData(entity, "fiskheroes:disguise", ((entity.getData("skyhighheroes:dyn/alias_active")) ? getAliasName(entity) : getModelID(entity)));
           };
           manager.setData(entity, "fiskheroes:shape_shifting_to", null);
           manager.setData(entity, "fiskheroes:shape_shifting_from", null);
@@ -1519,18 +1487,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
                 break;
               case "idSet":
                 maybeGetID(entity, manager, args[1])
-                break;
-              case "cv":
-                entity.as("PLAYER").addChatMessage(entity.getDataOrDefault("skyhighheroes:dyn/" + args[1], 0));
-                break;
-              case "nbtStringList":
-                entity.as("PLAYER").addChatMessage(nbt.getStringList(args[1]));
-                break;
-              case "nbtInt":
-                entity.as("PLAYER").addChatMessage(nbt.getInteger(args[1]));
-                break;
-              case "nbtShort":
-                entity.as("PLAYER").addChatMessage(nbt.getShort(args[1]));
                 break;
               case "chatMode":
                 switchChatModes(entity, manager, args[1]);
@@ -1606,7 +1562,7 @@ function initSystem(moduleList, name, colorCode, uuid) {
         };
       };
       if (entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1) {
-        manager.setData(entity, "fiskheroes:disguise", ((nbt.getBoolean("aliasActive")) ? getAliasName(entity) : getModelID(entity)));
+        manager.setData(entity, "fiskheroes:disguise", ((entity.getData("skyhighheroes:dyn/alias_active")) ? getAliasName(entity) : getModelID(entity)));
       };
       if (entity.getData("skyhighheroes:dyn/thermoptic_disguise_timer") == 1) {
         manager.setData(entity, "fiskheroes:disguise", null);
@@ -1722,7 +1678,6 @@ function initSystem(moduleList, name, colorCode, uuid) {
       hero.setName(cyberName + "/Model " + cyberModelID + " Cybernetic Body");
       hero.setTier(9);
       hero.setHelmet("Cybernetic Brain");
-      hero.setVersion("OC");
     
       hero.addPrimaryEquipment("fiskheroes:suit_data_drive@" + colorDamage[color] + "{display:{Name:\u00A7" + color + cyberName + "'s Data Drive}}", true, item => (item.damage() == colorDamage[color] && item.displayName() == "\u00A7" + color + cyberName + "'s Data Drive"));
     
