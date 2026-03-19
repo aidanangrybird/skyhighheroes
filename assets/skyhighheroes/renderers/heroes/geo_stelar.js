@@ -35,7 +35,7 @@ function init(renderer) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
         return "base";
       };
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
+      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
         return "transer_default";
       } else {
         return "transer";
@@ -47,7 +47,7 @@ function init(renderer) {
       if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
         return "lights";
       };
-      if ((entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT")) {
+      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
         return "transer_default_lights";
       } else {
         return "visualizer_lights";
@@ -113,29 +113,31 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  if (isChristmasSeason) {
-    if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
-      santaHatEM.render();
-    } else {
-      santaHat.setScale(1.05);
-      santaHat.setOffset(0.0, -5.75, 1.25);
-      santaHat.setRotation(-45.0, 0.0, 0.0);
-      if (entity.getData("skyhighheroes:dyn/visualizer_toggle")) {
-        santaHat.setScale(1.02);
-        santaHat.setOffset(0.0, -7.25, -0.25);
-        santaHat.setRotation(-10.0, 0.0, 0.0);
+  if (!(entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
+    if (isChristmasSeason) {
+      if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
+        santaHatEM.render();
+      } else {
+        santaHat.setScale(1.05);
+        santaHat.setOffset(0.0, -5.75, 1.25);
+        santaHat.setRotation(-45.0, 0.0, 0.0);
+        if (entity.getData("skyhighheroes:dyn/visualizer_toggle")) {
+          santaHat.setScale(1.02);
+          santaHat.setOffset(0.0, -7.25, -0.25);
+          santaHat.setRotation(-10.0, 0.0, 0.0);
+        };
+        if (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
+          santaHat.setOffset(0.0, -6.5, 0);
+          santaHat.setRotation(0.0, 0.0, 0.0);
+          santaHat.setScale(1.08);
+        };
+        santaHat.render();
       };
-      if (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) {
-        santaHat.setOffset(0.0, -6.5, 0);
-        santaHat.setRotation(0.0, 0.0, 0.0);
-        santaHat.setScale(1.08);
-      };
-      santaHat.render();
     };
-  };
-  if (!isChristmasSeason) {
-    if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
-      hair.render();
+    if (!isChristmasSeason) {
+      if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
+        hair.render();
+      };
     };
   };
   if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
