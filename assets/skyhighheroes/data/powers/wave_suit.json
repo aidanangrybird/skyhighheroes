@@ -2,6 +2,8 @@
   "name": "Wave Suit",
   "value": 1,
   "modifiers": {
+    "fiskheroes:shape_shifting": {
+    },
     "fiskheroes:wall_crawling": {
     },
     "fiskheroes:intangibility|absolute": {

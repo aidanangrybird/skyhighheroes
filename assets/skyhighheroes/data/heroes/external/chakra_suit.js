@@ -1,9 +1,24 @@
+aliasRegex = /[\s]/gm;
+
+/**
+ * Formats name to alias format
+ * @param {string} input - Name to format
+ * @returns Formatted alias
+ **/
+function formatAlias(input) {
+  input = input.toLowerCase();
+  output = input.replace(aliasRegex, function(thing) {
+    return "_";
+  });
+  return output;
+};
+
 function initChakras(hero, name) {
-  var suit_name = name + " the Invicible";
-  var suit_alias = name.toLowerCase() + "_the_invicible";
+  var suit_name = name;
+  var suit_alias = formatAlias(name);
   hero.setName(suit_name);
   hero.setAliases(suit_alias);
-  hero.setChestplate("Suit");
+  hero.setChestplate("Chakra Suit");
 
   hero.addPowers("skyhighheroes:chakra_suit");
 

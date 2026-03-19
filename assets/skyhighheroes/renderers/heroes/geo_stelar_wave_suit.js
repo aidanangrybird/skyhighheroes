@@ -51,6 +51,8 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  hair.render();
+  if (!(entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT" || entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND")) {
+    hair.render();
+  };
   visor_model.render();
 };
