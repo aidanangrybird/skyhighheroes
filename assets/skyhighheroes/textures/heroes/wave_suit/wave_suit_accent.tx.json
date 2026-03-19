@@ -11,7 +11,7 @@
   },
   "getters": {
     "COLOR": {
-      "key": "((entity.getData('skyhighheroes:dyn/wave_suit_editing') ? entity.getData('skyhighheroes:dyn/wave_suit_accent') : entity.getWornChestplate().nbt().getInteger('accentColor')) * 4 % 360) | 0",
+      "key": "(((entity.as('DISPLAY').getDisplayType() == 'FABRICATOR_PREVIEW' || entity.as('DISPLAY').getDisplayType() == 'FABRICATOR_RESULT' || entity.as('DISPLAY').getDisplayType() == 'BOOK_PREVIEW' || entity.as('DISPLAY').getDisplayType() == 'DATABASE_PREVIEW') ? Math.floor(entity.loop(180)*90) : 0) * 4 % 360) + ((entity.getData('skyhighheroes:dyn/wave_suit_editing') ? entity.getData('skyhighheroes:dyn/wave_suit_accent') : entity.getWornChestplate().nbt().getInteger('accentColor')) * 4 % 360) | 0",
       "values": {
         "min": 0,
         "max": 360,
