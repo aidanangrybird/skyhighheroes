@@ -1,0 +1,16 @@
+{
+  "display": {
+    "name": {
+      "translate": "Wave Suits"
+    },
+    "description": {
+      "translate": "Access the Wave World!"
+    },
+    "icon": {
+      "texture": "skyhighheroes:textures/gui/nodes/wave_suit.png"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:base"
+  ]
+}

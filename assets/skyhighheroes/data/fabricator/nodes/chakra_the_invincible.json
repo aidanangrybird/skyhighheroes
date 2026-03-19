@@ -2,8 +2,7 @@
   "suit": "skyhighheroes:chakra_the_invincible",
   "requirements": [
     "skyhighheroes:chakra",
-    "fiskheroes:tier8_9",
-    "skyhighheroes:base"
+    "fiskheroes:tier8_9"
   ],
   "criteria": {
     "chance": {

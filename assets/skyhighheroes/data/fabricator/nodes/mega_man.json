@@ -7,7 +7,6 @@
   },
   "requirements": [
     "skyhighheroes:wave_change",
-    "skyhighheroes:transers",
     "fiskheroes:tier10",
     "skyhighheroes:geo_stelar"
   ],

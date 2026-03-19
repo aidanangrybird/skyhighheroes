@@ -1,0 +1,12 @@
+{
+  "suit": "skyhighheroes:wave_suit",
+  "display": {
+    "description": {
+      "translate": "Color customizable!"
+    }
+  },
+  "requirements": [
+    "skyhighheroes:wave_suits",
+    "fiskheroes:tier1"
+  ]
+}

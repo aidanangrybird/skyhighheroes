@@ -1,0 +1,7 @@
+{
+  "suit": "skyhighheroes:geo_stelar_wave_suit",
+  "requirements": [
+    "skyhighheroes:wave_suits",
+    "fiskheroes:tier1"
+  ]
+}

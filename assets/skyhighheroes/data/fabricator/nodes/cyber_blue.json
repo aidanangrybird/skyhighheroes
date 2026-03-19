@@ -2,8 +2,7 @@
   "suit": "skyhighheroes:cyber_blue",
   "requirements": [
     "skyhighheroes:cybernetics",
-    "fiskheroes:tier8_9",
-    "skyhighheroes:base"
+    "fiskheroes:tier8_9"
   ],
   "criteria": {
     "exist": {
