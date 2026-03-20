@@ -1,13 +1,13 @@
 {
   "texture": {
-    "in": "skyhighheroes:geo/geo_stelar_visualizer_lights_<VISUALIZER>",
+    "in": "skyhighheroes:geo/geo_stelar_visualizer_<VISUALIZER>",
     "transform": [
       {
         "operation": "XOR",
         "supply": "skyhighheroes:xor/wave_change_<TIMER>"
       }
     ],
-    "out": "skyhighheroes:generated/geo_stelar_visualizer_lights_<VISUALIZER>_<TIMER>"
+    "out": "skyhighheroes:generated/geo_stelar_visualizer_<VISUALIZER>_<TIMER>"
   },
   "getters": {
     "VISUALIZER": {

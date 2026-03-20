@@ -217,7 +217,7 @@ function initSatelliteBeams(renderer, model, color) {
   var receiveBase = model.getCubeOffset("head_satellite_dish_base");
   var transmitBase = model.getCubeOffset("head_satellite_dish_antenna");
 
-  var transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_transmit");
+  var transmitBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_transmit");
   var transmitShape = renderer.createResource("SHAPE", null);
   var transmitLine = transmitShape.bindLine({ "start": [0.0, 0.1875, 0.0], "end": [0.0, 0.1875, 0.0], "size": [0.5, 0.5] });
   var transmitBeam = renderer.createEffect("fiskheroes:lines").setRenderer(transmitBeamRenderer).setShape(transmitShape).setOffset(0.0, 0.0, 0.0);
@@ -226,7 +226,7 @@ function initSatelliteBeams(renderer, model, color) {
   transmitBeam.anchor.set("head", transmitBase);
   transmitBeam.color.set(color);
 
-  var receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighocs:cybernetic_receive");
+  var receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_receive");
   var receiveShape = renderer.createResource("SHAPE", null);
   var receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
   var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, 0.0, 0.0);
@@ -237,16 +237,16 @@ function initSatelliteBeams(renderer, model, color) {
   
   return {
     render: function (entity, isFirstPersonArm) {
-      var vector = PackLoader.asVec3(entity.getData("skyhighocs:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_y")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5);
-      var transmitTimer = entity.getInterpolatedData("skyhighocs:dyn/transmit_beam_timer");
-      var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_beam_timer");
+      var vector = PackLoader.asVec3(entity.getData("skyhighheroes:dyn/satellite_x")+0.5, entity.getData("skyhighheroes:dyn/satellite_y")+0.5, entity.getData("skyhighheroes:dyn/satellite_z")+0.5);
+      var transmitTimer = entity.getInterpolatedData("skyhighheroes:dyn/transmit_beam_timer");
+      var receiveTimer = entity.getInterpolatedData("skyhighheroes:dyn/receive_beam_timer");
       var factor = entity.eyePos().add(0, 1, 0).distanceTo(vector);
       receiveLine.start.y = factor+0.375;
       receiveLine.end.y = factor+0.375;
       transmitLine.end.y = transmitLine.start.y+factor*transmitTimer;
       receiveLine.end.y = receiveLine.start.y-factor*receiveTimer;
       if (!isFirstPersonArm) {
-        if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), vector) && entity.getData("skyhighocs:dyn/satellite")) {
+        if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), vector) && entity.getData("skyhighheroes:dyn/satellite")) {
           if (transmitTimer > 0) {
             transmitBeam.render();
           };

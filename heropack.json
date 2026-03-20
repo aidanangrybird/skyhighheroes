@@ -454,6 +454,12 @@
       },
       "subaru" : "\u00A74Subaru Style\u00A7r"
     },
+    "skyhighheroes:geo_stelar_wave_suit" : {
+      "$DEFAULT": {
+        "name": "\u00A74Normal Style\u00A7r"
+      },
+      "mega_man" : "\u00A7bMega Man \u00A7bStyle\u00A7r"
+    },
     "skyhighheroes:guyver" : {
       "1" : "Guyver I",
       "2" : "Guyver II",

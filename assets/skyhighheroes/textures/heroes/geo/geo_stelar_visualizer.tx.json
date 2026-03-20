@@ -1,5 +1,5 @@
 {
-  "texture": "skyhighheroes:geo/geo_stelar_visualizer_lights_<VISUALIZER>",
+  "texture": "skyhighheroes:geo/geo_stelar_visualizer_<VISUALIZER>",
   "getters": {
     "VISUALIZER": {
       "key": "entity.getData('skyhighheroes:dyn/visualizer_toggle') ? 'down' : 'up'",

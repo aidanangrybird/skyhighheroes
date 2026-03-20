@@ -3,9 +3,9 @@ loadTextures({
   "lights": "skyhighheroes:geo/mega_man_lights",
   "hair": "skyhighheroes:geo/geo_stelar_hair_wave_change.tx.json",
   "transer": "skyhighheroes:geo/geo_stelar_transer.tx.json",
+  "visualizer": "skyhighheroes:geo/geo_stelar_visualizer.tx.json",
   "visualizer_lights": "skyhighheroes:geo/geo_stelar_visualizer_lights.tx.json",
   "transer_default": "skyhighheroes:geo/geo_stelar_transer",
-  "transer_default_lights": "skyhighheroes:geo/geo_stelar_transer_lights",
   "null": "skyhighheroes:null",
   "santa_hat": "skyhighheroes:santa_hat",
   "santa_hat_em": "skyhighheroes:geo/mega_man_santa_hat",
@@ -25,6 +25,7 @@ var stuff = implement("skyhighheroes:external/stuff");
 
 var santaHat;
 var santaHatEM;
+var visualizerModel;
 var head;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
@@ -46,11 +47,8 @@ function init(renderer) {
     if (renderLayer == "CHESTPLATE") {
       if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
         return "lights";
-      };
-      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
-        return "transer_default_lights";
       } else {
-        return "visualizer_lights";
+        return "null";
       };
     };
   });
@@ -89,6 +87,11 @@ function initEffects(renderer) {
     hair.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
     hair.large = true;
   };
+  var visualizer = renderer.createResource("MODEL", "skyhighheroes:Visualizer");
+  visualizer.texture.set("visualizer", "visualizer_lights");
+  visualizerModel = renderer.createEffect("fiskheroes:model").setModel(visualizer);
+  visualizerModel.anchor.set("head");
+  visualizerModel.setScale(1.0);
   ears = renderer.createEffect("fiskheroes:ears");
   ears.anchor.set("head");
   ears.angle = 0;
@@ -142,6 +145,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
   };
   if (entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") > 0.45 && entity.getInterpolatedData("skyhighheroes:dyn/calling_timer") < 0.6) {
     head.render();
+  } else {
+    visualizerModel.render();
   };
   var callingTimer = entity.getInterpolatedData("skyhighheroes:dyn/calling_timer");
   ears.render();

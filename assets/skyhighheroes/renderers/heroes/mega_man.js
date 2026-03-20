@@ -3,6 +3,8 @@ var stuff = implement("skyhighheroes:external/stuff");
 
 var santaHat;
 var santaHatEM;
+var visualizerModel;
+var visualizerWaveChangeModel;
 var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
@@ -70,10 +72,11 @@ loadTextures({
   "hair_wave_changing_lights": "skyhighheroes:geo/mega_man_hair_wave_changing_lights.tx.json",
   "transer": "skyhighheroes:geo/geo_stelar_transer.tx.json",
   "transer_wave_change": "skyhighheroes:geo/geo_stelar_transer_wave_change.tx.json",
+  "visualizer": "skyhighheroes:geo/geo_stelar_visualizer.tx.json",
+  "visualizer_wave_change": "skyhighheroes:geo/geo_stelar_visualizer_wave_change.tx.json",
   "visualizer_lights": "skyhighheroes:geo/geo_stelar_visualizer_lights.tx.json",
   "visualizer_lights_wave_change": "skyhighheroes:geo/geo_stelar_visualizer_lights_wave_change.tx.json",
   "transer_default": "skyhighheroes:geo/geo_stelar_transer",
-  "transer_default_lights": "skyhighheroes:geo/geo_stelar_transer_lights",
   "shield": "skyhighheroes:geo/mega_man_shield",
   "shield_lights": "skyhighheroes:geo/mega_man_shield_lights",
   "katana": "skyhighheroes:geo/mega_man_katana",
@@ -89,11 +92,12 @@ loadTextures({
 function init(renderer) {
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
-        return "base";
-      };
-      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
-        return "transer_default";
+      if (entity.is("DISPLAY")) {
+        if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
+          return "transer_default";
+        } else {
+          return "base";
+        };
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
         return "transer_wave_change";
@@ -113,11 +117,12 @@ function init(renderer) {
   });
   renderer.setLights((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
-      if (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND" || entity.as("DISPLAY").getDisplayType() == "HOLOGRAM" || entity.as("DISPLAY").getDisplayType() == "ITERATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "DATABASE_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") {
-        return "lights";
-      };
-      if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
-        return "transer_default_lights";
+      if (entity.is("DISPLAY")) {
+        if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
+          return "null";
+        } else {
+          return "lights";
+        };
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0) {
         return "visualizer_lights_wave_change";
@@ -127,9 +132,6 @@ function init(renderer) {
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 1) {
         return "lights";
-      }
-      if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
-        return "visualizer_lights";
       } else {
         return "null";
       };
@@ -171,6 +173,16 @@ function initEffects(renderer) {
     hairWaveChange.setRotation(0.0, 180.0, 0.0).setCurve(0.0, 0.0).setOffset(0.0, -11.0625, 2.0625);
     hairWaveChange.large = true;
   };
+  var visualizer = renderer.createResource("MODEL", "skyhighheroes:Visualizer");
+  visualizer.texture.set("visualizer", "visualizer_lights");
+  visualizerModel = renderer.createEffect("fiskheroes:model").setModel(visualizer);
+  visualizerModel.anchor.set("head");
+  visualizerModel.setScale(1.0);
+  var visualizerWaveChange = renderer.createResource("MODEL", "skyhighheroes:Visualizer");
+  visualizerWaveChange.texture.set("visualizer_wave_change", "visualizer_lights_wave_change");
+  visualizerWaveChangeModel = renderer.createEffect("fiskheroes:model").setModel(visualizerWaveChange);
+  visualizerWaveChangeModel.anchor.set("head");
+  visualizerWaveChangeModel.setScale(1.0);
   stelar.initNV(renderer);
   stuff.setOpacityWithData(renderer, 0.0, 1.0, "fiskheroes:teleport_timer");
   stelar.initForceField(renderer, 0x00FF00);
@@ -278,6 +290,16 @@ function render(entity, renderLayer, isFirstPersonArm) {
     };
   };
   ears.render();
+  if (entity.is("DISPLAY")) {
+    if (entity.as("DISPLAY").getDisplayType() == "FABRICATOR_PREVIEW" || entity.as("DISPLAY").getDisplayType() == "FABRICATOR_RESULT") {
+      visualizerModel.render();
+    };
+  } else if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") == 0) {
+    visualizerModel.render();
+  };
+  if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 0.5) {
+    visualizerWaveChangeModel.render();
+  };
   if (entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0 && entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") < 1) {
     waveChangeLights.render();
   };
