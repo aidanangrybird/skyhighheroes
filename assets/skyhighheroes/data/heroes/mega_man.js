@@ -24,7 +24,7 @@ var transerOS = transer.initSystem([
   omegaXis
 ], "megaMan", "pegasus");
 function init(hero) {
-  hero.setName("Geo Stelar/\u00A7bMega Man");
+  hero.setName("Geo Stelar/\u00A7bMega Man\u00A7r");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setAliases("mega_man");
