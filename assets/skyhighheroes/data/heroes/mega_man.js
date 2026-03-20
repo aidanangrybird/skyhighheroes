@@ -24,11 +24,10 @@ var transerOS = transer.initSystem([
   omegaXis
 ], "megaMan", "pegasus");
 function init(hero) {
-  hero.setName("\u00A7bMega Man");
+  hero.setName("Geo Stelar/\u00A7bMega Man");
   hero.setTier(10);
   hero.setChestplate("Transer");
   hero.setAliases("mega_man");
-  hero.setVersion("Star Force");
   
   transerOS.keyBinds(hero);
   transerOS.initEMWaveChange(hero);
