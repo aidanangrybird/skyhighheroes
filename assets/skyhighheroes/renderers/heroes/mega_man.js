@@ -249,8 +249,7 @@ function initAnimations(renderer) {
   stuff.initHoloFlightAnim(renderer, "wave.HOLOGRAM_FLIGHT", "skyhighheroes:em_wave_change_holo_flight");
   stelar.addAnimationWithData(renderer, "stelar.JET_ATTACK_AIM", "skyhighheroes:em_wave_change_aim", "fiskheroes:energy_projection_timer")
   .priority = 10;
-  stuff.emCeilingAnimation(renderer);
-  stelar.initStelarAnimations(renderer);
+  stelar.initEMWaveChangeAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

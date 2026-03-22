@@ -43,7 +43,7 @@ function initEffects(renderer) {
 };
 
 function initAnimations(renderer) {
-  stuff.emCeilingAnimation(renderer);
+  stelar.initWaveSuitAnimations(renderer);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

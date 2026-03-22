@@ -66,8 +66,8 @@ function setOpacityWithData(renderer, min, max, data) {
 };
 
 //Useful Stuff
-function emCeilingAnimation(renderer) {
-  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:em_wave_change_wall_ceiling_stand");
+function waveWorldCeilingAnimation(renderer) {
+  addAnimationEvent(renderer, "CEILING_CRAWL", "skyhighheroes:wave_world_wall_ceiling_stand");
 };
 
 function emTeleport(renderer) {

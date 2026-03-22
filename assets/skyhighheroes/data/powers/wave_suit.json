@@ -2,6 +2,33 @@
   "name": "Wave Suit",
   "value": 1,
   "modifiers": {
+    "fiskheroes:controlled_flight": {
+      "speed": 0.1,
+      "boostSpeed": 0.5,
+      "canRoll": true,
+      "canBoost": true,
+      "collision": {
+        "blocks": {
+          "stopFlying": false,
+          "takeDamage": false
+        },
+        "entities": {
+          "stopFlying": false,
+          "dealDamage": true
+        }
+      },
+      "knockback": 1.0,
+      "soundEvents": {
+        "BOOST": ["skyhighheroes:wave_flying_start", "skyhighheroes:wave_flying_loop"]
+      }
+    },
+    "fiskheroes:teleportation": {
+      "canReachMoon": true,
+      "range": 1024.0,
+      "soundEvents": {
+        "TELEPORT": "skyhighheroes:wave_teleport"
+      }
+    },
     "fiskheroes:shape_shifting": {
     },
     "fiskheroes:wall_crawling": {
