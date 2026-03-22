@@ -402,6 +402,7 @@ function initModule(system) {
             };
             break;
           case "set":
+            var nbt = system.mainNBT(entity);
             switch (argList[2]) {
               case "holoAnt":
                 manager.setBoolean(nbt, "holoAnt", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoAnt")));
