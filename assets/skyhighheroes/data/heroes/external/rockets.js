@@ -21,7 +21,7 @@ function initModule(system) {
             } else {
               switch (argList[2]) {
                 case "onFall":
-                  manager.setData(entity, "skyhighheroes:dyn/rockets_arms_on_fall", true);
+                  manager.setData(entity, "skyhighheroes:dyn/rockets_on_fall", true);
                   manager.setBoolean(nbt, "rocketsOnFall", true);
                   system.moduleMessage(this, entity, "<s>Armed any armed rockets for <sh>onFall<s> protection!");
                   break;
@@ -63,7 +63,7 @@ function initModule(system) {
           case "disarm":
             switch (argList[2]) {
               case "onFall":
-                manager.setData(entity, "skyhighheroes:dyn/rockets_arms_on_fall", true);
+                manager.setData(entity, "skyhighheroes:dyn/rockets_on_fall", true);
                 manager.setBoolean(nbt, "rocketsOnFall", true);
                 system.moduleMessage(this, entity, "<s>Armed any armed rockets for <sh>onFall<s> protection!");
                 break;
