@@ -78,19 +78,19 @@ function initModule(system) {
             break;
           case "torsoFront":
             manager.setData(entity, "skyhighheroes:dyn/torso_front_open", true);
-            system.moduleMessage(this, entity, "<n>Opening upper front body!");
+            system.moduleMessage(this, entity, "<n>Opening front torso!");
             break;
           case "shortsFront":
             manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", true);
-            system.moduleMessage(this, entity, "<n>Opening lower front body!");
+            system.moduleMessage(this, entity, "<n>Opening front shorts!");
             break;
           case "torsoBack":
             manager.setData(entity, "skyhighheroes:dyn/torso_back_open", true);
-            system.moduleMessage(this, entity, "<n>Opening upper back body!");
+            system.moduleMessage(this, entity, "<n>Opening back torso!");
             break;
           case "shortsBack":
             manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", true);
-            system.moduleMessage(this, entity, "<n>Opening lower back body!");
+            system.moduleMessage(this, entity, "<n>Opening back shorts!");
             break;
           case "core":
             manager.setData(entity, "skyhighheroes:dyn/core_open", true);

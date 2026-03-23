@@ -59,12 +59,12 @@ function initModule(system) {
           case "torso":
             manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
-            system.moduleMessage(this, entity, "<n>Closing upper body!");
+            system.moduleMessage(this, entity, "<n>Closing torso!");
             break;
           case "shorts":
             manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
             manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
-            system.moduleMessage(this, entity, "<n>Closing lower body!");
+            system.moduleMessage(this, entity, "<n>Closing shorts!");
             break;
           case "bodyFront":
             manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
@@ -78,19 +78,19 @@ function initModule(system) {
             break;
           case "torsoFront":
             manager.setData(entity, "skyhighheroes:dyn/torso_front_open", false);
-            system.moduleMessage(this, entity, "<n>Closing upper front body!");
+            system.moduleMessage(this, entity, "<n>Closing front torso!");
             break;
           case "shortsFront":
             manager.setData(entity, "skyhighheroes:dyn/shorts_front_open", false);
-            system.moduleMessage(this, entity, "<n>Closing lower front body!");
+            system.moduleMessage(this, entity, "<n>Closing front shorts!");
             break;
           case "torsoBack":
             manager.setData(entity, "skyhighheroes:dyn/torso_back_open", false);
-            system.moduleMessage(this, entity, "<n>Closing upper back body!");
+            system.moduleMessage(this, entity, "<n>Closing back torso!");
             break;
           case "shortsBack":
             manager.setData(entity, "skyhighheroes:dyn/shorts_back_open", false);
-            system.moduleMessage(this, entity, "<n>Closing lower back body!");
+            system.moduleMessage(this, entity, "<n>Closing back shorts!");
             break;
           case "machineGun":
             manager.setData(entity, "skyhighheroes:dyn/machine_gun_open", false);
