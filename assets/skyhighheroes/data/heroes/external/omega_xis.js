@@ -35,7 +35,7 @@ function initModule(system) {
       hero.addKeyBind("GRAVITY_MANIPULATION", "Battle Card Predation", 2);
       hero.addKeyBind("AIM", "Aim Mega Buster", 4);
       hero.addKeyBindFunc("BATTLE_CARD_RESET", (player, manager) => resetBattleCard(player, manager), "Return To Mega Buster", 5);
-      hero.addKeyBindFunc("DESYNCHRONIZE_WAVES", (player, manager) => {
+      hero.addKeyBindFunc("PULSE_OUT", (player, manager) => {
         manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/body_temperature", 0.0);
@@ -50,8 +50,8 @@ function initModule(system) {
           manager.setData(player, "fiskheroes:penetrate_martian_invis", false);
         };
         return true;
-      }, "EM Wave Change!", 5);
-      hero.addKeyBindFunc("SYNCHRONIZE_WAVES", (player, manager) => {
+      }, "Pulse Out", 5);
+      hero.addKeyBindFunc("PULSE_IN", (player, manager) => {
         system.shoutMessage(player, "<Geo Stelar> EM Wave Change! \u00A7bGeo Stelar\u00A7r, On-Air!", 16);
         manager.setData(player, "skyhighheroes:dyn/battle_card", 0);
         manager.setData(player, "skyhighheroes:dyn/selected_battle_card", 0);
@@ -62,17 +62,17 @@ function initModule(system) {
         manager.setData(player, "skyhighheroes:dyn/omega_xis", false);
         manager.setData(player, "fiskheroes:penetrate_martian_invis", true);
         return true;
-      }, "EM Wave Change!", 5);
+      }, "Pulse In", 5);
       hero.addKeyBind("WAVE_CHANGE", "EM Wave Change!", 5);
       hero.addKeyBind("OMEGA_XIS_TOGGLE", "Toggle Mega Buster", 5);
       hero.addKeyBindFunc("COLD_TEMPERATURE", (player, manager) => {
-        system.shoutMessage(player, "\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too cold for us to EM Wave Change.", 16);
+        system.shoutMessage(player, "\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too cold for us to pulse in.", 16);
         return true;
-      }, "\u00A7mEM Wave Change!\u00A7r You are too cold", 5);
+      }, "\u00A7mPulse In\u00A7r You are too cold", 5);
       hero.addKeyBindFunc("HOT_TEMPERATURE", (player, manager) => {
-        system.shoutMessage(player, "\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too hot for us to EM Wave Change.", 16);
+        system.shoutMessage(player, "\u00A7r<\u00A7bOmega-Xis\u00A7r> You are too hot for us to pulse in.", 16);
         return true;
-      }, "\u00A7mEM Wave Change!\u00A7r You are too hot", 5);
+      }, "\u00A7mPulse In\u00A7r You are too hot", 5);
     },
     canAim: function (entity) {
       return (entity.getHeldItem().isEmpty() || entity.getHeldItem().name() == "fiskheroes:chronos_rifle") && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
@@ -85,10 +85,10 @@ function initModule(system) {
       if (keyBind == "BATTLE_CARD_RESET") {
         result = entity.isSneaking() && (entity.getData("skyhighheroes:dyn/selected_battle_card") > 0 && entity.getData("skyhighheroes:dyn/battle_card") > 0) && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
       };
-      if (keyBind == "SYNCHRONIZE_WAVES") {
+      if (keyBind == "PULSE_IN") {
         result = (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getData("skyhighheroes:dyn/body_temperature") < 0.25 && entity.getData("skyhighheroes:dyn/body_temperature") > -0.25);
       };
-      if (keyBind == "DESYNCHRONIZE_WAVES") {
+      if (keyBind == "PULSE_OUT") {
         result = entity.getData("fiskheroes:flight_timer") == 0 && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && !entity.isSneaking());
       };
       if (keyBind == "WAVE_CHANGE") {
