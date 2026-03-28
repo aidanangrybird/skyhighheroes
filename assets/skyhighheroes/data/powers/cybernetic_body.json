@@ -1132,6 +1132,14 @@
       "soundEvents": {
         "ENABLE": "fiskheroes:gliding"
       }
+    },
+    "fiskheroes:transformation|power_core_open": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/power_core_open",
+        "timerData": "skyhighheroes:dyn/power_core_open_timer",
+        "time": 100
+      },
+      "isToggle": true
     }
   },
   "hud": [

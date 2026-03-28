@@ -389,6 +389,7 @@ function bodyAnimations(entity, data) {
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
   data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(14, entity.getInterpolatedData("skyhighheroes:dyn/power_core_open_timer"));
 };
 
 function leftArmAnimations(entity, data) {

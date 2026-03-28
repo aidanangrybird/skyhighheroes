@@ -837,7 +837,7 @@ function initSystem(moduleList, name, colorCode) {
         manager.setData(entity, "fiskheroes:teleport_delay", 6);
       };
       if (entity.world().getDimension() == 2595 && entity.posY() >= 1000 && (entity.rotPitch() <= -87.5) && entity.getData("fiskheroes:flight_boost_timer") == 1) {
-        manager.setData(entity, "fiskheroes:teleport_dest", new DimensionalCoords(x, y, z, 0));
+        manager.setData(entity, "fiskheroes:teleport_dest", manager.newCoords(x, y, z, 0));
         manager.setData(entity, "fiskheroes:teleport_delay", 6);
       };
       var t = entity.getData("skyhighheroes:dyn/superhero_boosting_landing_ticks");

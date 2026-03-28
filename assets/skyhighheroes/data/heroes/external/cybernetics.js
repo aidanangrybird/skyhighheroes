@@ -1463,6 +1463,14 @@ function initSystem(moduleList, name, colorCode) {
                 manager.setData(entity, "skyhighheroes:dyn/powered_down", false);
                 systemMessage(entity, "<n>Powering on!");
                 break;
+              case "openCore":
+                manager.setData(entity, "skyhighheroes:dyn/power_core_open", true);
+                systemMessage(entity, "<n>Opening core!");
+                break;
+              case "closeCore":
+                manager.setData(entity, "skyhighheroes:dyn/power_core_open", false);
+                systemMessage(entity, "<n>Closing core!");
+                break;
               case "help":
                 systemMessage(entity, "<n>Available commands:");
                 commandIndexes.forEach(index => {
@@ -1688,6 +1696,9 @@ function initSystem(moduleList, name, colorCode) {
       hero.setHasProperty((entity, property) => {
         return property == "BREATHE_SPACE";
       });
+      hero.setTierOverride(entity => {
+        return (entity.getData("skyhighheroes:dyn/power_core_open_timer") == 0) ? 9 : 1;
+      });
       hero.setDefaultScale(1.0);
       hero.setModifierEnabled((entity, modifier) => {
         if (modifier.name() == "fiskheroes:shape_shifting") {
@@ -1697,7 +1708,7 @@ function initSystem(moduleList, name, colorCode) {
           return true;
         };
         if (modifier.name() == "fiskheroes:potion_immunity") {
-          return true;
+          return entity.getData("skyhighheroes:dyn/power_core_open_timer") == 0;
         };
         if (modifier.name() == "fiskheroes:regeneration") {
           return true;
@@ -1709,19 +1720,19 @@ function initSystem(moduleList, name, colorCode) {
           return true;
         };
         if (modifier.name() == "fiskheroes:fire_immunity") {
-          return true;
+          return entity.getData("skyhighheroes:dyn/power_core_open_timer") == 0;
         };
         if (modifier.name() == "fiskheroes:damage_immunity") {
-          return true;
+          return entity.getData("skyhighheroes:dyn/power_core_open_timer") == 0;
         };
         if (modifier.name() == "fiskheroes:projectile_immunity") {
-          return true;
+          return entity.getData("skyhighheroes:dyn/power_core_open_timer") == 0;
         };
         if (modifier.name() == "fiskheroes:transformation") {
           return true;
         };
         if (modifier.name() == "fiskheroes:metal_skin") {
-          return entity.getData("fiskheroes:metal_heat") < 1.0;
+          return entity.getData("skyhighheroes:dyn/power_core_open_timer") == 0 && entity.getData("fiskheroes:metal_heat") < 1.0;
         };
         return isModifierEnabled(entity, modifier);
       });
