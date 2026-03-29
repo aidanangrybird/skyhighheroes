@@ -21,6 +21,26 @@ function initModule(system) {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_battle_card", 5);
     };
   };
+  function battleCardMessage(entity) {
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") == 0) {
+      system.systemMessage(entity, "<n>No battle card selected!");
+    };
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") == 1) {
+      system.systemMessage(entity, "<n>Selected <nh>Barrier<n> battle card!");
+    };
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") == 2) {
+      system.systemMessage(entity, "<n>Selected <nh>Sword<n> battle card!");
+    };
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") == 3) {
+      system.systemMessage(entity, "<n>Selected <nh>Cannon<n> battle card!");
+    };
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") == 4) {
+      system.systemMessage(entity, "<n>Selected <nh>Jet Attack<n> battle card!");
+    };
+    if (entity.getData("skyhighheroes:dyn/selected_battle_card") == 5) {
+      system.systemMessage(entity, "<n>Selected <nh>Knuckle<n> battle card!");
+    };
+  };
   return {
     name: "omegaXis",
     type: 8,
@@ -139,10 +159,12 @@ function initModule(system) {
         var gravity_amount = entity.getData("fiskheroes:gravity_amount");
         if (gravity_amount > 0) {
           cycleUpCard(entity, manager);
+          battleCardMessage(entity);
           manager.setDataWithNotify(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
         };
         if (gravity_amount < 0) {
           cycleDownCard(entity, manager);
+          battleCardMessage(entity);
           manager.setDataWithNotify(entity, "skyhighheroes:dyn/reset_gravity_manip", true);
         };
       };

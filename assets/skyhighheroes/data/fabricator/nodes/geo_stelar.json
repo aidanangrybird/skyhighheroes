@@ -1,5 +1,10 @@
 {
   "suit": "skyhighheroes:geo_stelar",
+  "display": {
+    "description": {
+      "translate": "EM Wave Change! Geo Stelar, On-Air!"
+    }
+  },
   "requirements": [
     "skyhighheroes:transers",
     "fiskheroes:tier1"

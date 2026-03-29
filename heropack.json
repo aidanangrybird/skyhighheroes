@@ -50,6 +50,13 @@
     
     "wave_changing_timer": "FLOAT_INTERP",
     "wave_changed": "BOOLEAN",
+    "em_being": { "type": "STRING", "resetWithoutSuit": true },
+    "wave_change": { "type": "STRING", "resetWithoutSuit": true },
+    "compatible_human": { "type": "STRING", "resetWithoutSuit": true },
+    "compatible_uuid": { "type": "STRING", "resetWithoutSuit": true },
+    "satellite": { "type": "STRING", "resetWithoutSuit": true },
+    "system_color": { "type": "STRING", "resetWithoutSuit": true },
+    "wave_color": { "type": "STRING", "resetWithoutSuit": true },
     "calling_value": { "type": "FLOAT", "resetWithoutSuit": true },
     "calling_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "calling": { "type": "BOOLEAN", "resetWithoutSuit": true },
@@ -273,12 +280,12 @@
     "satellite_y": "SHORT",
     "satellite_z": "SHORT",
     "frequency": "SHORT",
-    "satellite_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "satellite": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "satellite_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "satellite_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "satellite_rain_mode_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "satellite_rain_mode": { "type": "BOOLEAN", "resetWithoutSuit": true },
-    "antenna_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "antenna": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "antenna_deploy_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "antenna_deployed": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "transmit_beam_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "transmit_beam": { "type": "BOOLEAN", "resetWithoutSuit": true },
     "receive_beam_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
@@ -451,11 +458,15 @@
     "ELEMENT_WIND": "Wind Element"
   },
   "alts" : {
-    "skyhighheroes:mega_man" : {
+    "skyhighheroes:geo_stelar" : {
       "$DEFAULT": {
-        "name": "\u00A7bNormal \u00A7bStyle\u00A7r"
+        "name": "\u00A7bNormal \u00A7bStyle\u00A7r",
+        "maskToggleTicks": 10
       },
-      "subaru" : "\u00A74Subaru Style\u00A7r"
+      "subaru" : {
+        "name": "\u00A74Subaru Style\u00A7r",
+        "maskToggleTicks": 10
+      }
     },
     "skyhighheroes:geo_stelar_wave_suit" : {
       "$DEFAULT": {

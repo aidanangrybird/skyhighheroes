@@ -4,19 +4,6 @@
  **/
 function initModule(system) {
   //All of the required functions and stuff go here
-  function toolSwitchEnchant(player, manager) {
-    //Silk Touch
-    if (player.getData("skyhighheroes:dyn/tool_enchant") == 0) {
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "id", 33);
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "lvl", 1);
-    };
-    //Fortune
-    if (player.getData("skyhighheroes:dyn/tool_enchant") == 1) {
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "id", 35);
-      manager.setInteger(player.getHeldItem().nbt().getTagList("ench").getCompoundTag(1), "lvl", 4);
-    };
-    return true;
-  };
   return {
     name: "megaMan",
     type: 9,
@@ -37,11 +24,6 @@ function initModule(system) {
       hero.addKeyBind("BATTLE_CARD_5", "Battle Card! Knuckle!", 2);
       hero.addKeyBind("INVISIBILITY", "Wave World", 3);
       hero.addKeyBind("AIM_CANNON", "Aim Cannon", 4);
-      hero.addKeyBindFunc("FORTUNE_SWITCH", toolSwitchEnchant, "Active Enchant: Silk Touch", 4);
-      hero.addKeyBindFunc("SILK_SWITCH", toolSwitchEnchant, "Active Enchant: Fortune", 4);
-      hero.addKeyBind("RIFLE_AIM", "Aim Rifle", 4);
-      hero.addKeyBind("SHIELD_THROW", "Throw Shield", 4);
-      hero.addKeyBind("CHARGE_ENERGY", "Charge Energy", 4);
       hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
     },
     tierOverride: function (entity) {
@@ -51,25 +33,7 @@ function initModule(system) {
       return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? 10 : 0;
     },
     properties: function (entity, property) {
-      return property == "BREATHE_SPACE" && (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 || entity.is("DISPLAY"));
-    },
-    permissions: function (entity, permission) {
-      return (permission == "USE_CHRONOS_RIFLE" || permission == "USE_SHIELD") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1;
-    },
-    initSounds: function (hero) {
-      hero.addSoundEvent("WEAPON_EQUIP", "skyhighheroes:wave_equip");
-      hero.addSoundEvent("WEAPON_UNEQUIP", "skyhighheroes:wave_equip");
-      hero.addSoundEvent("STEP", "skyhighheroes:wave_footstep");
-      hero.addSoundEvent("PUNCH", "skyhighheroes:wave_punch");
-    },
-    initEquipment: function (hero) {
-      //Fix stuff not going into thing
-      hero.addPrimaryEquipment("fiskheroes:katana{Dual:1,display:{Name:\u00A7bMega Man's Katanas},Unbreakable:1,ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Dual") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A7bMega Man's Katanas"));
-      hero.addPrimaryEquipment("fiskheroes:ruptures_scythe{display:{Name:\u00A7bMega Man's Scythe},Unbreakable:1,ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A7bMega Man's Scythe"));
-      hero.addPrimaryEquipment("fiskheroes:chronos_rifle{display:{Name:\u00A7bMega Man's Rifle},Unbreakable:1,ench:[{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A7bMega Man's Rifle"));
-      hero.addPrimaryEquipment("fiskheroes:captain_americas_shield{Electromagnetic:1,display:{Name:\u00A7bMega Man's Shield},Unbreakable:1,ench:[{id:16,lvl:6},{id:19,lvl:3},{id:20,lvl:3},{id:21,lvl:3},{id:34,lvl:5}]}", true, item => (item.nbt().getBoolean("Electromagnetic") && item.getEnchantmentLevel(16) == 6 && item.getEnchantmentLevel(19) == 3 && item.getEnchantmentLevel(20) == 3 && item.getEnchantmentLevel(21) == 3 && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A7bMega Man's Shield"));
-      hero.addPrimaryEquipment("fiskheroes:tutridium_pickaxe{display:{Name:\u00A7bMega Man's Pickaxe},Unbreakable:1,ench:[{id:32,lvl:7},{id:35,lvl:4},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A7bMega Man's Pickaxe"));
-      hero.addPrimaryEquipment("fiskheroes:tutridium_shovel{display:{Name:\u00A7bMega Man's Shovel},Unbreakable:1,ench:[{id:32,lvl:7},{id:33,lvl:1},{id:34,lvl:5}]}", true, item => (item.getEnchantmentLevel(32) == 7 && (item.getEnchantmentLevel(33) == 1 || item.getEnchantmentLevel(35) == 4) && item.getEnchantmentLevel(34) == 5 && item.nbt().getBoolean("Unbreakable") && item.displayName() == "\u00A7bMega Man's Shovel"));
+      return ((property == "BREATHE_SPACE") || (property == "MASK_TOGGLE")) && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) || (entity.as("DISPLAY").getDisplayType() == "BOOK_PREVIEW") || (entity.as("DISPLAY").getDisplayType() == "DISPLAY_STAND"));
     },
     initDamageProfiles: function (hero) {
       hero.addDamageProfile("SWORD", {
@@ -87,18 +51,6 @@ function initModule(system) {
       var result = null;
       if (entity.getData("skyhighheroes:dyn/sword_blade_timer") == 1 && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
         result = "SWORD";
-      };
-      if (entity.getHeldItem().name() == "fiskheroes:katana" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-        result = "SWORD";
-      };
-      if (entity.getHeldItem().name() == "fiskheroes:ruptures_scythe" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-        result = "SWORD";
-      };
-      if (entity.getHeldItem().name() == "fiskheroes:chronos_rifle" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-        result = "MAIN";
-      };
-      if (entity.getHeldItem().name() == "fiskheroes:captain_americas_shield" && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
-        result = "MAIN";
       };
       return (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) ? "MAIN" : result;
     },
@@ -158,23 +110,8 @@ function initModule(system) {
       if (keyBind == "INTANGIBILITY") {
         result = entity.getData("fiskheroes:flight_timer") > 0;
       };
-      if (keyBind == "SHIELD_THROW") {
-        result = entity.getHeldItem().name() == "fiskheroes:captain_americas_shield";
-      };
-      if (keyBind == "CHARGE_ENERGY") {
-        result = entity.getHeldItem().name() == "fiskheroes:ruptures_scythe";
-      };
       if (keyBind == "TELEPORT" || keyBind == "INVISIBILITY") {
         result = true;
-      };
-      if (keyBind == "SILK_SWITCH") {
-        result = entity.getData("skyhighheroes:dyn/tool_enchant") == 0 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
-      };
-      if (keyBind == "FORTUNE_SWITCH") {
-        result = entity.getData("skyhighheroes:dyn/tool_enchant") == 1 && (entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" || "fiskheroes:tutridium_pickaxe") && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5;
-      };
-      if (keyBind == "RIFLE_AIM") {
-        result = entity.getHeldItem().name() == "fiskheroes:chronos_rifle";
       };
       if (keyBind == "BATTLE_CARD_0") {
         result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;
@@ -251,12 +188,6 @@ function initModule(system) {
         }; */
         result = entity.getData("fiskheroes:invisible");
       };
-      if (modifier.name() == "fiskheroes:shield_throwing") {
-        result = true;
-      };
-      if (modifier.name() == "fiskheroes:energy_manipulation") {
-        result = true;
-      };
       if (modifier.name() == "fiskheroes:shield") {
         if (modifier.id() == "barrier") {
           result = entity.getData("skyhighheroes:dyn/battle_card") == 1 && entity.getData("fiskheroes:flight_boost_timer") == 0 && entity.getHeldItem().isEmpty();
@@ -277,18 +208,6 @@ function initModule(system) {
       return result;
     },
     tickHandler: function (entity, manager) {
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_shovel" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(33) == 1 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 1);
-      };
-      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1 && entity.getHeldItem().name() == "fiskheroes:tutridium_pickaxe" && entity.getHeldItem().getEnchantmentLevel(32) == 7 && entity.getHeldItem().getEnchantmentLevel(35) == 4 && entity.getHeldItem().getEnchantmentLevel(34) == 5) {
-        manager.setData(entity, "skyhighheroes:dyn/tool_enchant", 0);
-      };
       if ((entity.getData("fiskheroes:flight_timer") < 1.0) && (entity.getData("fiskheroes:flight_timer") > 0.0) && !entity.getData("fiskheroes:flying")) {
         var entities = entity.world().getEntitiesInRangeOf(entity.pos(), 20);
         entities.forEach(other => {

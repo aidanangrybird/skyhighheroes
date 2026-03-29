@@ -196,26 +196,6 @@
     },
     "fiskheroes:damage_immunity|bone": {
       "damageType": "BONE"
-    },
-    "fiskheroes:shield_throwing": {
-      "cooldownTime": 0,
-      "soundEvents": {
-        "THROW": "fiskheroes:shield_throw"
-      }
-	  },
-    "fiskheroes:energy_manipulation": {
-      "damageProfile": {
-        "damage": 15.0,
-        "types": {
-          "ELEMENT_ELEC": 1.0
-        },
-        "properties": {
-          "LIGHTNING_STRIKE": 1.0,
-          "HIT_COOLDOWN": 0
-        }
-      },
-      "chargeTime": 10,
-      "range": 128.0
     }
   }
 }

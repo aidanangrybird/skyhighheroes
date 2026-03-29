@@ -10,6 +10,8 @@ var contacts = implement("skyhighheroes:external/contacts");
 var scanner = implement("skyhighheroes:external/scanner");
 var waypoints = implement("skyhighheroes:external/waypoint");
 var theFugitive = implement("skyhighheroes:external/the_fugitive");
+var megaMan = implement("skyhighheroes:external/mega_man");
+var omegaXis = implement("skyhighheroes:external/omega_xis");
 var transerOS = transer.initSystem([
   settings,
   messaging,
@@ -19,7 +21,9 @@ var transerOS = transer.initSystem([
   contacts,
   scanner,
   waypoints,
-  theFugitive
+  theFugitive,
+  megaMan,
+  omegaXis
 ], "geoStelar", "pegasus");
 function init(hero) {
   hero.setAliases("geo_stelar");
@@ -31,6 +35,7 @@ function init(hero) {
   transerOS.keyBinds(hero);
   transerOS.addPowers(hero);
   transerOS.profileWave(hero);
+  transerOS.initEMWaveChange(hero);
 
   bodyTemp.initProfiles(hero);
 
@@ -40,10 +45,14 @@ function init(hero) {
   
   hero.setDefaultScale(1.0);
   hero.setAttributeProfile(entity => {
-    if (entity.getData("skyhighheroes:dyn/calling_timer") == 0) {
-      return bodyTemp.getAttributeProfile(entity); 
+    if (entity.getData("skyhighheroes:dyn/wave_changing_timer") == 1) {
+      return transerOS.getAttributeProfile(entity);
     } else {
-      return transerOS.getWaveProfile(entity);
+      if (entity.getData("skyhighheroes:dyn/calling_timer") == 0) {
+        return bodyTemp.getAttributeProfile(entity); 
+      } else {
+        return transerOS.getWaveProfile(entity);
+      };
     };
   });
   hero.setModifierEnabled((entity, modifier) => {
@@ -54,28 +63,29 @@ function init(hero) {
   });
   hero.setKeyBindEnabled((entity, keyBind) => {
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
-      return true;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+      return entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "CYCLE_CHATS") {
-      return !entity.isSneaking();
+      return !entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "CYCLE_CHAT_MODES") {
-      return entity.isSneaking();
+      return entity.isSneaking() && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "SHAPE_SHIFT") {
-      return true;
+      return entity.getData("skyhighheroes:dyn/battle_card") == 0 && ((entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0) ? true : entity.getData("skyhighheroes:dyn/omega_xis_timer") == 1);
     };
     return transerOS.isKeyBindEnabled(entity, keyBind);
   });
   hero.setTickHandler((entity, manager) => {
     transerOS.systemHandler(entity, manager);
     transerOS.waveHandler(entity, hero);
+    transerOS.emWaveHandler(entity, manager);
     bodyTemp.change(entity, manager, stelar.tempProfiles(), "skyhighheroes:dyn/body_temperature", 400.0, "skyhighheroes:dyn/stelar_clothes");
   });
 };

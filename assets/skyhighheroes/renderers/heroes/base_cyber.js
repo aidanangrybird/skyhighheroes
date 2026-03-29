@@ -394,8 +394,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
       if (entity.getData("skyhighheroes:dyn/hud_side_left") == 5) {
         leftSide = "Comms";
         var commsToRender = ["Comms:"];
-        var satellite = "Satellite Dish: " + ((entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") > 0) ? "DEPLOYED" : "STOWED") + ((entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? " (RAIN MODE)" : "");
-        var antenna = "Antenna: " + ((entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") > 0) ? "DEPLOYED" : "STOWED");
+        var satellite = "Satellite Dish: " + ((entity.getInterpolatedData("skyhighheroes:dyn/satellite_deploy_timer") > 0) ? "DEPLOYED" : "STOWED") + ((entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer") > 0) ? " (RAIN MODE)" : "");
+        var antenna = "Antenna: " + ((entity.getInterpolatedData("skyhighheroes:dyn/antenna_deploy_timer") > 0) ? "DEPLOYED" : "STOWED");
         var connectedSatellite = "Satellite: " + entity.getData("skyhighheroes:dyn/satellite_x") + ", " + entity.getData("skyhighheroes:dyn/satellite_y") + ", " + entity.getData("skyhighheroes:dyn/satellite_z");
         var frequency = "Frequency: " + entity.getData("skyhighheroes:dyn/frequency");
         commsToRender.push(satellite);

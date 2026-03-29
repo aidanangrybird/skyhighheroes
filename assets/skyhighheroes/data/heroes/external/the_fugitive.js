@@ -26,7 +26,10 @@ function initModule(system) {
         };
       };
       if (entity.getData("skyhighheroes:dyn/calling_timer") == 1) {
-        manager.setString(entity.getWornChestplate().nbt(), "HeroType", "skyhighheroes:mega_man");
+        manager.setString(entity.getWornChestplate().nbt(), "emBeing", "Jet-Streak");
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/em_being", "Jet-Streak");
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", false);
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling_timer", 0.0);
       };
     },
     waveHandler: function (entity, hero) {

@@ -246,7 +246,7 @@ function initSatelliteBeams(renderer, model, color) {
       transmitLine.end.y = transmitLine.start.y+factor*transmitTimer;
       receiveLine.end.y = receiveLine.start.y-factor*receiveTimer;
       if (!isFirstPersonArm) {
-        if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), vector) && entity.getData("skyhighheroes:dyn/satellite")) {
+        if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), vector) && entity.getData("skyhighheroes:dyn/satellite_deployed")) {
           if (transmitTimer > 0) {
             transmitBeam.render();
           };
@@ -296,12 +296,12 @@ function initAntennaBeams(renderer, model, color) {
           var otherYaw = directionAngle(entity, otherVector.x(), otherVector.z());
           transmitBeam.setRotation(-1*otherPitch, 0, entity.rotationInterpolated().x()-otherYaw);
           receiveBeam.setRotation(-1*otherPitch, 0, entity.rotationInterpolated().x()-otherYaw);
-          if (factor > 0 && entity.getData("skyhighheroes:dyn/antenna_timer") == 1) {
+          if (factor > 0 && entity.getData("skyhighheroes:dyn/antenna_deploy_timer") == 1) {
             transmitBeam.render();
             receiveBeam.render();
           };
           /* if (hasCyberneticBody(otherEntity) && checkFrequency(entity, otherEntity)) {
-            if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), otherEntity.eyePos().add(0, 1, 0)) && entity.getData("skyhighheroes:dyn/antenna") && otherEntity.getData("skyhighheroes:dyn/antenna")) {
+            if (entity.world().isUnobstructed(entity.eyePos().add(0, 1, 0), otherEntity.eyePos().add(0, 1, 0)) && entity.getData("skyhighheroes:dyn/antenna_deployed") && otherEntity.getData("skyhighheroes:dyn/antenna_deployed")) {
             };
           }; */
         });
@@ -360,9 +360,9 @@ function crossProduct(vector, otherVector) {
 function headAnimations(entity, data) {
   data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + getHoloBooleans(entity, "holoCannons", "cannonsHead"));
   data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer") + getHoloBooleans(entity, "holoCannons", "cannonsHead"));
-  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/satellite_timer") + getHoloBoolean(entity, "holoSat"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/satellite_deploy_timer") + getHoloBoolean(entity, "holoSat"));
   data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer"));
-  data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/antenna_timer") + getHoloBoolean(entity, "holoAnt"));
+  data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/antenna_deploy_timer") + getHoloBoolean(entity, "holoAnt"));
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_flush_timer"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/intake_head_left_open_timer"));
   data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/intake_head_right_open_timer"));
@@ -543,8 +543,8 @@ function availableCybers(entity) {
   var foundPlayerNames = [];
   var data = [];
   var newRange = (range*1);
-  var txAntennaDeployed = (entity.getData("skyhighheroes:dyn/antenna_timer") == 1) && (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
-  var txSatelliteDeployed = (entity.getData("skyhighheroes:dyn/satellite_timer") == 1) && (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+  var txAntennaDeployed = (entity.getData("skyhighheroes:dyn/antenna_deploy_timer") == 1) && (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+  var txSatelliteDeployed = (entity.getData("skyhighheroes:dyn/satellite_deploy_timer") == 1) && (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
   if (txAntennaDeployed) {
     newRange = (range*4);
   };
@@ -580,8 +580,8 @@ function availableCybers(entity) {
     //player = rx
     foundPlayers.forEach(otherEntity => {
       var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
-      var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
-      var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
+      var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
+      var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
       if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
         data.push(position(otherEntity));
       } else if (txAntennaDeployed && rxAntennaDeployed && checkFrequency(entity, otherEntity) && entity.canSee(otherEntity) && (entity.pos().distanceTo(otherEntity.pos()) <= range*4)) {

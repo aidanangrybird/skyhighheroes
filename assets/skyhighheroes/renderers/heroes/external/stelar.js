@@ -58,6 +58,20 @@ function addAnimationWithData(renderer, key, anim, dataVar) {
   return addAnimation(renderer, key, anim).setData((entity, data) => data.load(entity.getInterpolatedData(dataVar)));
 };
 
+function initHoloFlightAnim(renderer, name, value, emBeing) {
+  var anim = renderer.createResource("ANIMATION", value);
+  renderer.addCustomAnimation(name, anim);
+  anim.setData((entity, data) => data.load(entity.loop(20 * Math.PI) + 0.4));
+  anim.priority = -9.5;
+  anim.setCondition(entity => (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && (entity.getWornChestplate().nbt().getString("emBeing") == emBeing));
+  renderer.reprioritizeDefaultAnimation("PUNCH", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_CHRONOS_RIFLE", -9);
+  renderer.reprioritizeDefaultAnimation("HOLD_PIZZA", -9);
+  renderer.reprioritizeDefaultAnimation("BLOCK_CAPS_SHIELD", -9);
+  renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
+  return anim;
+};
+
 function addPredationAnimation(renderer, key, value) {
   if (typeof value === "string") {
     anim = renderer.createResource("ANIMATION", value);
@@ -176,6 +190,12 @@ function addHoverAnimation(renderer, name, value, dataLoader) {
   return anim;
 };
 
+function forceFieldAnimation(renderer) {
+  addAnimationWithData(renderer, "skyhigh.BLOCKING", "skyhighheroes:force_field_holding", "fiskheroes:shield_blocking_timer")
+    .setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 1)
+    .priority = -5;
+};
+
 function initForceField(renderer, color) {
   addAnimationWithData(renderer, "skyhigh.BLOCKING", "skyhighheroes:force_field_holding", "fiskheroes:shield_blocking_timer")
     .setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 1)
@@ -230,16 +250,19 @@ function initMegaBuster(renderer, color, color_other) {
 };
 
 function initNV(renderer) {
-  nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
-  nv_wave_change.fogStrength = 0.0;
-  nv_wave_change.factor = 1.0;
-  nv_wave_change.firstPersonOnly = true;
-  nv_wave_change.setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0.75);
   nv_visualizer = renderer.bindProperty("fiskheroes:night_vision");
   nv_visualizer.fogStrength = 0.0;
   nv_visualizer.factor = 1.0;
   nv_visualizer.firstPersonOnly = true;
   nv_visualizer.setCondition(entity => entity.getData("skyhighheroes:dyn/visualizer_toggle"));
+};
+
+function initWaveChangeNV(renderer) {
+  nv_wave_change = renderer.bindProperty("fiskheroes:night_vision");
+  nv_wave_change.fogStrength = 0.0;
+  nv_wave_change.factor = 1.0;
+  nv_wave_change.firstPersonOnly = true;
+  nv_wave_change.setCondition(entity => entity.getInterpolatedData("skyhighheroes:dyn/wave_changing_timer") > 0.75);
 };
 
 //Equipment
