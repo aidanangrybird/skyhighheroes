@@ -378,8 +378,20 @@
     "thermoptic_camouflage_timer": "FLOAT_INTERP",
     "thermoptic_camouflage": "BOOLEAN",
     
-    "power_core_open_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
-    "power_core_open": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "converted_cyber": "BOOLEAN",
+    "cybernetic_conversion_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "cybernetic_conversion": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "cybernetic_conversion_sleep_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "cybernetic_conversion_sleep": { "type": "BOOLEAN", "resetWithoutSuit": true },
+
+    "cybernetic_body_lights": "BOOLEAN",
+    "cybernetic_statue_mode": "BOOLEAN",
+
+    "system_core_open_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
+    "system_core_open": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    
+    "optics_enabling_timer": "FLOAT_INTERP",
+    "optics_enabled": "BOOLEAN",
     
     "hud_scale": "FLOAT",
     "hud_selected_side": "BYTE",
@@ -455,7 +467,8 @@
     "ELEMENT_AQUA": "Water Element",
     "ELEMENT_WOOD": "Wood Element",
     "ELEMENT_SWORD": "Sword Element",
-    "ELEMENT_WIND": "Wind Element"
+    "ELEMENT_WIND": "Wind Element",
+    "CYBERNETIC_CONVERSION": ""
   },
   "alts" : {
     "skyhighheroes:geo_stelar" : {

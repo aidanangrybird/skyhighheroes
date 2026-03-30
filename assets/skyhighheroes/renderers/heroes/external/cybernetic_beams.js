@@ -84,5 +84,5 @@ function initBodyBeams(renderer, color) {
 };
 
 function mainNBT(entity) {
-  return entity.getWornHelmet().nbt();
+  return entity.getWornChestplate().nbt();
 };

@@ -5,7 +5,7 @@ var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 var santaHat;
 var santaHatNormal;
-var blank_model;
+var darkness_model;
 var metal_heat;
 
 //Stuff models
@@ -37,7 +37,7 @@ var panelList = astro.panels;
 loadTextures({
   "null": "skyhighheroes:null",
   "santa_hat_normal": "skyhighheroes:santa_hat",
-  "blank": "skyhighheroes:astro_blank",
+  "darkness": "skyhighheroes:darkness",
   "boots": "skyhighheroes:astro/astro_boots",
   "shorts": "skyhighheroes:astro/astro_shorts",
   "head": "skyhighheroes:astro_head_base",
@@ -182,11 +182,13 @@ function init(renderer) {
 
 function initEffects(renderer) {
   text_renderer = stuff.text(renderer);
-  var blank = renderer.createResource("MODEL", "skyhighheroes:BlankThing");
-  blank.texture.set("blank");
-  blank_model = renderer.createEffect("fiskheroes:model").setModel(blank);
-  blank_model.anchor.set("head");
-  blank_model.setScale(100.0);
+  var darkness = renderer.createResource("MODEL", "skyhighocs:Darkness");
+  darkness.texture.set("darkness");
+  darkness_model = renderer.createEffect("fiskheroes:model").setModel(darkness);
+  darkness_model.anchor.set("head");
+  darkness_model.anchor.ignoreAnchor(true);
+  darkness_model.setOffset(0.0, 0.0, 0.0);
+  darkness_model.setScale(200.0);
   if (isChristmasSeason) {
     var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
     santa_hat_model.texture.set("santa_hat_normal");
@@ -359,11 +361,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
     right_leg_booster.render(entity, renderLayer, isFirstPersonArm);
 
     if (isFirstPersonArm) {
-      blank_model.setOffset(0.0, 0.0, 0.0);
-      blank_model.setScale(1000.0);
-      blank_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer");
-      blank_model.anchor.ignoreAnchor(true);
-      blank_model.render();
+      darkness_model.opacity = entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer");
+      darkness_model.render();
     };
     if (entity.isWearingFullSuit() && isFirstPersonArm) {
       var openPanelCount = 0;

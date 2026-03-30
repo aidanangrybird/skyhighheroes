@@ -13,6 +13,16 @@ function initModule(system) {
       if (argList.length > 1 && argList.length < 4) {
         var nbt = system.mainNBT(entity);
         switch(argList[1]) {
+          case "statueMode":
+            manager.setData(entity, "skyhighheroes:dyn/cybernetic_statue_mode", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/cybernetic_body_lights")));
+            manager.setBoolean(nbt, "statueMode", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("statueMode")));
+            system.moduleMessage(this, entity, "<n>statueMode set to <nh>" + nbt.getBoolean("statueMode") + "<n>!");
+            break;
+          case "bodyLights":
+            manager.setData(entity, "skyhighheroes:dyn/cybernetic_body_lights", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/cybernetic_body_lights")));
+            manager.setBoolean(nbt, "bodyLights", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : nbt.getBoolean("bodyLights")));
+            system.moduleMessage(this, entity, "<n>bodyLights set to <nh>" + nbt.getBoolean("bodyLights") + "<n>!");
+            break;
           case "fightOrFlightDur":
             manager.setData(entity, "skyhighheroes:dyn/fight_or_flight_duration", parseInt(argList[2]));
             manager.setShort(nbt, "durationFightOrFlight", parseInt(argList[2]));
@@ -49,6 +59,8 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>hudTopBorder set to <nh>" + nbt.getFloat("hudTopBorder") + "<n>!");
             break;
           case "list":
+            system.moduleMessage(this, entity, "<n>statueMode: <nh>" + entity.getData("skyhighheroes:dyn/cybernetic_statue_mode"));
+            system.moduleMessage(this, entity, "<n>bodyLights: <nh>" + entity.getData("skyhighheroes:dyn/cybernetic_body_lights"));
             system.moduleMessage(this, entity, "<n>fightOrFlightDur: <nh>" + entity.getData("skyhighheroes:dyn/fight_or_flight_duration"));
             system.moduleMessage(this, entity, "<n>fightOrFlightMin: <nh>" + entity.getData("skyhighheroes:dyn/fight_or_flight_min_health"));
             system.moduleMessage(this, entity, "<n>aliasActive: <nh>" + entity.getData("skyhighheroes:dyn/alias_active"));
@@ -60,6 +72,8 @@ function initModule(system) {
           case "help":
             system.moduleMessage(this, entity, "<n>Settings commands:");
             system.moduleMessage(this, entity, "<n>!set list <nh>-<n> Lists current settings and their values");
+            system.moduleMessage(this, entity, "<n>!set statueMode <true|false> <nh>-<n> Sets if all body movement is supressed");
+            system.moduleMessage(this, entity, "<n>!set bodyLights <true|false> <nh>-<n> Sets if body lights are active");
             system.moduleMessage(this, entity, "<n>!set fightOrFlightDur <number> <nh>-<n> Sets duration of fight or flight response");
             system.moduleMessage(this, entity, "<n>!set fightOrFlightMin <number> <nh>-<n> Sets minimum health to activate fight or flight");
             system.moduleMessage(this, entity, "<n>!set aliasActive <true|false> <nh>-<n> Sets if alias name appears above head");
@@ -79,6 +93,14 @@ function initModule(system) {
     },
     onInitSystem: function (entity, manager) {
       var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("statueMode")) {
+        manager.setBoolean(nbt, "statueMode", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cybernetic_statue_mode", nbt.getBoolean("statueMode"));
+      if (!nbt.hasKey("bodyLights")) {
+        manager.setBoolean(nbt, "bodyLights", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cybernetic_body_lights", nbt.getBoolean("bodyLights"));
       if (!nbt.hasKey("durationFightOrFlight")) {
         manager.setShort(nbt, "durationFightOrFlight", 20);
       };

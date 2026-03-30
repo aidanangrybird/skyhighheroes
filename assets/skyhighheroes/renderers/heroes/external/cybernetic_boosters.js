@@ -1155,5 +1155,5 @@ function getHoloBooleans(entity, condition, value) {
 };
 
 function mainNBT(entity) {
-  return entity.getWornHelmet().nbt();
+  return entity.getWornChestplate().nbt();
 };

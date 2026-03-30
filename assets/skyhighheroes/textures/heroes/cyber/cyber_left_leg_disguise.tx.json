@@ -15,18 +15,18 @@
   },
   "getters": {
     "TIMER": {
-      "key": "Math.min(Math.max(Math.ceil(47*(entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer') > 0 ? ((!entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer') + (!entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? 1 : 0)) : ((!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise_timer') + (!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? 1 : 0)))) + ((entity.getWornHelmet().nbt().getBoolean('disguiseOnStand') && !entity.getWornHelmet().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0), 31), 47) | 0",
+      "key": "Math.min(Math.max(Math.ceil(47*((!entity.getData('skyhighheroes:dyn/converted_cyber') && (entity.getInterpolatedData('skyhighheroes:dyn/cybernetic_conversion_timer') < 0.5)) ? (2*entity.getInterpolatedData('skyhighheroes:dyn/cybernetic_conversion_timer')) : (((!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise_timer') + (!entity.getData('skyhighheroes:dyn/thermoptic_disguise') ? 1 : 0)) - ((entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? -1 : 1) * entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage_timer') + (entity.getData('skyhighheroes:dyn/thermoptic_camouflage') ? 1 : 0))))) + ((entity.getWornChestplate().nbt().getBoolean('disguiseOnStand') && !entity.getWornChestplate().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY')) ? 47 : 0), 31), 47) | 0",
       "values": {
         "min": 31,
         "max": 47
       }
     },
     "SWITCH": {
-      "key": "!entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise') || entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage') ? '_base' : ''",
+      "key": "((!entity.getData('skyhighheroes:dyn/converted_cyber') && (entity.getInterpolatedData('skyhighheroes:dyn/cybernetic_conversion_timer') < 0.5)) ? '_base' : (!(entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_disguise') || (entity.getWornChestplate().nbt().getBoolean('disguiseOnStand') && entity.is('DISPLAY'))) || (entity.getInterpolatedData('skyhighheroes:dyn/thermoptic_camouflage') || (entity.getWornChestplate().nbt().getBoolean('camoOnStand') && entity.is('DISPLAY'))) ? '_base' : ''))",
       "values": ["", "_base"]
     },
     "CLOTHING": {
-      "key": "(entity.getData('skyhighheroes:dyn/thermoptic_disguise_clothing') ? 'disguise' : 'skin')",
+      "key": "((!entity.getData('skyhighheroes:dyn/converted_cyber') && (entity.getInterpolatedData('skyhighheroes:dyn/cybernetic_conversion_timer') < 0.5)) ? 'disguise' : (((entity.is('DISPLAY')) ? entity.getWornChestplate().nbt().getBoolean('disguiseClothing') : entity.getData('skyhighheroes:dyn/thermoptic_disguise_clothing')) ? 'disguise' : 'skin'))",
       "values": ["disguise", "skin"]
     }
   },

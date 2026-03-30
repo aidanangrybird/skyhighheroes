@@ -1,4 +1,19 @@
-{rightArm_rotZ} -= (cos({ticks} * 0.09) * 0.05 + 0.05)
-{leftArm_rotZ} += (cos({ticks} * 0.09) * 0.05 + 0.05)
-{rightArm_rotX} -= (sin({ticks} * 0.067) * 0.05)
-{leftArm_rotX} += (sin({ticks} * 0.067) * 0.05)
+{data} = ({data})
+{head_rotX} @ {data_0} -> 0
+{head_rotY} @ {data_0} -'> 0
+{head_rotZ} @ {data_0} -> 0
+{body_rotX} @ {data_0} -> 0
+{body_rotY} @ {data_0} -'> 0
+{body_rotZ} @ {data_0} -> 0
+{rightArm_rotX} @ {data_0} -> 0
+{rightArm_rotY} @ {data_0} -'> 0
+{rightArm_rotZ} @ {data_0} -> 0
+{leftArm_rotX} @ {data_0} -> 0
+{leftArm_rotY} @ {data_0} -'> 0
+{leftArm_rotZ} @ {data_0} -> 0
+{rightLeg_rotX} @ {data_0} -> 0
+{rightLeg_rotY} @ {data_0} -'> 0
+{rightLeg_rotZ} @ {data_0} -> 0
+{leftLeg_rotX} @ {data_0} -> 0
+{leftLeg_rotY} @ {data_0} -'> 0
+{leftLeg_rotZ} @ {data_0} -> 0
