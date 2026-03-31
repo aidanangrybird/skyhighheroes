@@ -8,9 +8,10 @@ function init(hero) {
 
   hero.addKeyBind("TELEPORT", "Transmit", 2);
   hero.addKeyBind("INVISIBILITY", "Wave World", 4);
-  hero.addKeyBind("INTANGIBILITY", "Become in Phase", 3);
+  hero.addKeyBind("INTANGIBILITY", "Become in Phase", 5);
   hero.addKeyBind("GRAVITY_MANIPULATION", "Change color (Sneak to change section)", 3);
-  hero.addKeyBindFunc("LOCK_COLORS", (entity, manager) => wave_suit.lockColors(entity, manager), "Unlock/Lock colors", 1);
+  hero.addKeyBindFunc("UNLOCK_SUIT", (entity, manager) => wave_suit.unlockSuit(entity, manager), "Attempt suit unlocking", 1);
+  hero.addKeyBindFunc("EDIT_COLORS", (entity, manager) => wave_suit.lockColors(entity, manager), "Toggle editing colors", 1);
   hero.addKeyBindFunc("COPY_COLORS", (entity, manager) => wave_suit.copyColors(entity, manager), "Copy colors to suit", 1);
   hero.addKeyBindFunc("PASTE_COLORS", (entity, manager) => wave_suit.pasteColors(entity, manager), "Paste colors to suit", 5);
   
@@ -62,17 +63,20 @@ function init(hero) {
         return !entity.getData("skyhighheroes:dyn/wave_suit_editing");
       case "GRAVITY_MANIPULATION":
         return entity.getData("skyhighheroes:dyn/wave_suit_editing");
-      case "LOCK_COLORS":
-        return true;
+      case "EDIT_COLORS":
+        return !entity.isSneaking();
+      case "UNLOCK_SUIT":
+        return entity.isSneaking();
       case "COPY_COLORS":
-        return !entity.getData("skyhighheroes:dyn/wave_suit_editing") && entity.getHeldItem().suitType() == "skyhighheroes:wave_suit";
+        return !entity.getData("skyhighheroes:dyn/wave_suit_editing") && entity.getHeldItem().suitType() == "skyhighheroes:wave_suit" && !entity.getHeldItem().nbt().getBoolean("locked");
       case "PASTE_COLORS":
-        return !entity.getData("skyhighheroes:dyn/wave_suit_editing") && entity.getHeldItem().suitType() == "skyhighheroes:wave_suit";
+        return !entity.getData("skyhighheroes:dyn/wave_suit_editing") && entity.getHeldItem().suitType() == "skyhighheroes:wave_suit" && !entity.getHeldItem().nbt().getBoolean("locked");
       default:
         return false;
     };
   });
   hero.setTickHandler((entity, manager) => {
+    wave_suit.initWaveSuitNBT(entity, manager);
     manager.setData(entity, "fiskheroes:penetrate_martian_invis", true);
     if (entity.getData("fiskheroes:gravity_manip")) {
       if (entity.getData("skyhighheroes:dyn/reset_gravity_manip")) {

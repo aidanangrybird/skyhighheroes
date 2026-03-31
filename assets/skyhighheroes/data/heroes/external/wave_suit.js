@@ -16,89 +16,89 @@ function formatAlias(input) {
 };
 
 function cycleUpVisor(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_visor", entity.getData("skyhighheroes:dyn/wave_suit_visor") + 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_visor", entity.getData("skyhighheroes:dyn/wave_suit_visor") + 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_visor") > 89) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_visor", 0);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_visor", 0);
   };
   chatMessage(entity, "Visor hue: " + entity.getData("skyhighheroes:dyn/wave_suit_visor")*4);
 };
 
 function cycleDownVisor(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_visor", entity.getData("skyhighheroes:dyn/wave_suit_visor") - 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_visor", entity.getData("skyhighheroes:dyn/wave_suit_visor") - 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_visor") < 0) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_visor", 89);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_visor", 89);
   };
   chatMessage(entity, "Visor hue: " + entity.getData("skyhighheroes:dyn/wave_suit_visor")*4);
 };
 
 function cycleUpArmor(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor", entity.getData("skyhighheroes:dyn/wave_suit_armor") + 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor", entity.getData("skyhighheroes:dyn/wave_suit_armor") + 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_armor") > 89) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor", 0);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor", 0);
   };
   chatMessage(entity, "Armor hue: " + entity.getData("skyhighheroes:dyn/wave_suit_armor")*4);
 };
 
 function cycleDownArmor(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor", entity.getData("skyhighheroes:dyn/wave_suit_armor") - 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor", entity.getData("skyhighheroes:dyn/wave_suit_armor") - 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_armor") < 0) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor", 89);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor", 89);
   };
   chatMessage(entity, "Armor hue: " + entity.getData("skyhighheroes:dyn/wave_suit_armor")*4);
 };
 
 function cycleUpAccent(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_accent", entity.getData("skyhighheroes:dyn/wave_suit_accent") + 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_accent", entity.getData("skyhighheroes:dyn/wave_suit_accent") + 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_accent") > 89) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_accent", 0);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_accent", 0);
   };
   chatMessage(entity, "Accent hue: " + entity.getData("skyhighheroes:dyn/wave_suit_accent")*4);
 };
 
 function cycleDownAccent(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_accent", entity.getData("skyhighheroes:dyn/wave_suit_accent") - 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_accent", entity.getData("skyhighheroes:dyn/wave_suit_accent") - 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_accent") < 0) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_accent", 89);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_accent", 89);
   };
   chatMessage(entity, "Accent hue: " + entity.getData("skyhighheroes:dyn/wave_suit_accent")*4);
 };
 
 function cycleUpSuit(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit", entity.getData("skyhighheroes:dyn/wave_suit") + 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit", entity.getData("skyhighheroes:dyn/wave_suit") + 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit") > 89) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit", 0);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit", 0);
   };
   chatMessage(entity, "Suit hue: " + entity.getData("skyhighheroes:dyn/wave_suit")*4);
 };
 
 function cycleDownSuit(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit", entity.getData("skyhighheroes:dyn/wave_suit") - 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit", entity.getData("skyhighheroes:dyn/wave_suit") - 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit") < 0) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit", 89);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit", 89);
   };
   chatMessage(entity, "Suit hue: " + entity.getData("skyhighheroes:dyn/wave_suit")*4);
 };
 
 function cycleUpArmorAccent(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor_accent", entity.getData("skyhighheroes:dyn/wave_suit_armor_accent") + 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor_accent", entity.getData("skyhighheroes:dyn/wave_suit_armor_accent") + 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_armor_accent") > 89) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor_accent", 0);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor_accent", 0);
   };
   chatMessage(entity, "Armor accent hue: " + entity.getData("skyhighheroes:dyn/wave_suit_armor_accent")*4);
 };
 
 function cycleDownArmorAccent(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor_accent", entity.getData("skyhighheroes:dyn/wave_suit_armor_accent") - 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor_accent", entity.getData("skyhighheroes:dyn/wave_suit_armor_accent") - 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_armor_accent") < 0) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor_accent", 89);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor_accent", 89);
   };
   chatMessage(entity, "Armor accent hue: " + entity.getData("skyhighheroes:dyn/wave_suit_armor_accent")*4);
 };
 
 function cycleUpEditingMode(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_editing_mode", entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") + 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_editing_mode", entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") + 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") > 4) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_editing_mode", 0);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_editing_mode", 0);
   };
   if (entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") == 0) {
     chatMessage(entity, "Now editing: Visor");
@@ -118,9 +118,9 @@ function cycleUpEditingMode(entity, manager) {
 };
 
 function cycleDownEditingMode(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_editing_mode", entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") - 1);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_editing_mode", entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") - 1);
   if (entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") < 0) {
-    manager.setData(entity, "skyhighheroes:dyn/wave_suit_editing_mode", 4);
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_editing_mode", 4);
   };
   if (entity.getData("skyhighheroes:dyn/wave_suit_editing_mode") == 0) {
     chatMessage(entity, "Now editing: Visor");
@@ -139,16 +139,35 @@ function cycleDownEditingMode(entity, manager) {
   };
 };
 
+function unlockSuit(entity, manager) {
+  var nbt = entity.getWornChestplate().nbt();
+  if (((nbt.hasKey("ownerUUID") ? (entity.getUUID() == nbt.getString("ownerUUID")) : true)) || entity.as("PLAYER").isCreativeMode()) {
+    manager.setString(nbt, "ownerUUID", "");
+    manager.setString(nbt, "ownerName", "");
+    var displayTag = nbt.getCompoundTag("display");
+    var loreList = manager.newTagList();
+    manager.appendString(loreList, "Owner: None");
+    manager.appendString(loreList, "Visor hue: " + (nbt.getInteger('visorColor') * 4));
+    manager.appendString(loreList, "Armor hue: " + (nbt.getInteger('armorColor') * 4));
+    manager.appendString(loreList, "Armor accent hue: " + (nbt.getInteger('armorAccentColor') * 4));
+    manager.appendString(loreList, "Suit hue: " + (nbt.getInteger('suitColor') * 4));
+    manager.appendString(loreList, "Suit accent hue: " + (nbt.getInteger('accentColor') * 4));
+    manager.setTagList(displayTag, "Lore", loreList);
+    manager.setBoolean(nbt, "locked", false);
+  };
+  return true;
+};
+
 function lockColors(entity, manager) {
-  manager.setData(entity, "skyhighheroes:dyn/wave_suit_editing", !entity.getData("skyhighheroes:dyn/wave_suit_editing"));
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_editing", !entity.getData("skyhighheroes:dyn/wave_suit_editing"));
   var nbt = entity.getWornChestplate().nbt();
   if (entity.getData("skyhighheroes:dyn/wave_suit_editing")) {
-    if (entity.getName() == (nbt.hasKey("ownerName") ? nbt.getString("ownerName") : entity.getName()) && entity.getUUID() == (nbt.hasKey("ownerUUID") ? nbt.getString("ownerUUID") : entity.getUUID())) {
-      manager.setData(entity, "skyhighheroes:dyn/wave_suit_visor", nbt.getInteger("visorColor"));
-      manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor", nbt.getInteger("armorColor"));
-      manager.setData(entity, "skyhighheroes:dyn/wave_suit_armor_accent", nbt.getInteger("armorAccentColor"));
-      manager.setData(entity, "skyhighheroes:dyn/wave_suit", nbt.getInteger("suitColor"));
-      manager.setData(entity, "skyhighheroes:dyn/wave_suit_accent", nbt.getInteger("accentColor"));
+    if ((nbt.hasKey("ownerUUID") ? (entity.getUUID() == nbt.getString("ownerUUID")) : true)) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_visor", nbt.getInteger("visorColor"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor", nbt.getInteger("armorColor"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_armor_accent", nbt.getInteger("armorAccentColor"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit", nbt.getInteger("suitColor"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_suit_accent", nbt.getInteger("accentColor"));
     };
   };
   if (!entity.getData("skyhighheroes:dyn/wave_suit_editing")) {
@@ -159,6 +178,16 @@ function lockColors(entity, manager) {
     manager.setInteger(nbt, "accentColor", entity.getData("skyhighheroes:dyn/wave_suit_accent"));
     manager.setString(nbt, "ownerUUID", entity.getUUID());
     manager.setString(nbt, "ownerName", entity.getName());
+    var displayTag = nbt.getCompoundTag("display");
+    var loreList = manager.newTagList();
+    manager.appendString(loreList, "Owner: " + entity.getName());
+    manager.appendString(loreList, "Visor hue: " + (nbt.getInteger('visorColor') * 4));
+    manager.appendString(loreList, "Armor hue: " + (nbt.getInteger('armorColor') * 4));
+    manager.appendString(loreList, "Armor accent hue: " + (nbt.getInteger('armorAccentColor') * 4));
+    manager.appendString(loreList, "Suit hue: " + (nbt.getInteger('suitColor') * 4));
+    manager.appendString(loreList, "Suit accent hue: " + (nbt.getInteger('accentColor') * 4));
+    manager.setTagList(displayTag, "Lore", loreList);
+    manager.setBoolean(nbt, "locked", true);
   };
   return true;
 };
@@ -177,12 +206,25 @@ function currentColors(entity, manager) {
 function pasteColors(entity, manager) {
   var nbt = entity.getWornChestplate().nbt();
   var nbtItem = entity.getHeldItem().nbt();
-  manager.setInteger(nbtItem, "visorColor", nbt.getInteger("visorColor"));
-  manager.setInteger(nbtItem, "armorColor", nbt.getInteger("armorColor"));
-  manager.setInteger(nbtItem, "armorAccentColor", nbt.getInteger("armorAccentColor"));
-  manager.setInteger(nbtItem, "suitColor", nbt.getInteger("suitColor"));
-  manager.setInteger(nbtItem, "accentColor", nbt.getInteger("accentColor"));
-  chatMessage(entity, "Pasted colors onto held wave suit!");
+  if (!nbtItem.getBoolean("locked")) {
+    manager.setInteger(nbtItem, "visorColor", nbt.getInteger("visorColor"));
+    manager.setInteger(nbtItem, "armorColor", nbt.getInteger("armorColor"));
+    manager.setInteger(nbtItem, "armorAccentColor", nbt.getInteger("armorAccentColor"));
+    manager.setInteger(nbtItem, "suitColor", nbt.getInteger("suitColor"));
+    manager.setInteger(nbtItem, "accentColor", nbt.getInteger("accentColor"));
+    manager.setString(nbt, "ownerUUID", "");
+    manager.setString(nbt, "ownerName", "");
+    var displayTag = nbtItem.getCompoundTag("display");
+    var loreList = manager.newTagList();
+    manager.appendString(loreList, "Owner: None");
+    manager.appendString(loreList, "Visor hue: " + (nbtItem.getInteger('visorColor') * 4));
+    manager.appendString(loreList, "Armor hue: " + (nbtItem.getInteger('armorColor') * 4));
+    manager.appendString(loreList, "Armor accent hue: " + (nbtItem.getInteger('armorAccentColor') * 4));
+    manager.appendString(loreList, "Suit hue: " + (nbtItem.getInteger('suitColor') * 4));
+    manager.appendString(loreList, "Suit accent hue: " + (nbtItem.getInteger('accentColor') * 4));
+    manager.setTagList(displayTag, "Lore", loreList);
+    manager.setBoolean(nbtItem, "locked", false);
+  };
   return true;
 };
 
@@ -194,13 +236,46 @@ function copyColors(entity, manager) {
   manager.setInteger(nbt, "armorAccentColor", nbtItem.getInteger("armorAccentColor"));
   manager.setInteger(nbt, "suitColor", nbtItem.getInteger("suitColor"));
   manager.setInteger(nbt, "accentColor", nbtItem.getInteger("accentColor"));
-  chatMessage(entity, "Copied colors from held wave suit!");
+  var displayTag = nbt.getCompoundTag("display");
+  var loreList = manager.newTagList();
+  manager.appendString(loreList, "Owner: None");
+  manager.appendString(loreList, "Visor hue: " + (nbt.getInteger('visorColor') * 4));
+  manager.appendString(loreList, "Armor hue: " + (nbt.getInteger('armorColor') * 4));
+  manager.appendString(loreList, "Armor accent hue: " + (nbt.getInteger('armorAccentColor') * 4));
+  manager.appendString(loreList, "Suit hue: " + (nbt.getInteger('suitColor') * 4));
+  manager.appendString(loreList, "Suit accent hue: " + (nbt.getInteger('accentColor') * 4));
+  manager.setTagList(displayTag, "Lore", loreList);
   return true;
 };
 
 function chatMessage(entity, message) {
   if (PackLoader.getSide() == "CLIENT") {
     entity.as("PLAYER").addChatMessage(message);
+  };
+};
+
+function initWaveSuitNBT(entity, manager) {
+  var nbt = entity.getWornChestplate().nbt();
+  if (!nbt.hasKey("display")) {
+    manager.setCompoundTag(nbt, "display", manager.newCompoundTag());
+  };
+  if (!nbt.hasKey("locked")) {
+    manager.setBoolean(nbt, "locked", false);
+  };
+  if (!nbt.hasKey("visorColor")) {
+    manager.setInteger(nbt, "visorColor", 0);
+  };
+  if (!nbt.hasKey("armorColor")) {
+    manager.setInteger(nbt, "armorColor", 0);
+  };
+  if (!nbt.hasKey("armorAccentColor")) {
+    manager.setInteger(nbt, "armorAccentColor", 0);
+  };
+  if (!nbt.hasKey("suitColor")) {
+    manager.setInteger(nbt, "suitColor", 0);
+  };
+  if (!nbt.hasKey("accentColor")) {
+    manager.setInteger(nbt, "accentColor", 0);
   };
 };
 
