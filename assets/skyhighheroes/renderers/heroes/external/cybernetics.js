@@ -174,10 +174,10 @@ function initCyberneticAnimations(renderer) {
     .priority = -10;
 
   addAnimation(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighheroes:cybernetic_holo_flight").setData((entity, data) => {
-    data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight") ? (getHoloBoolean(entity, "rocketsArms") + getHoloBoolean(entity, "rocketsBody") + getHoloBoolean(entity, "rocketsLegs")) : 0.0);
+    data.load(0, 0.0 + getHoloBooleans(entity, "holoFlight", "rocketsArms") + getHoloBooleans(entity, "holoFlight", "rocketsBody") + getHoloBooleans(entity, "holoFlight", "rocketsLegs"));
     data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
     data.load(2, entity.loop(20 * Math.PI) + 0.4);
-    data.load(3, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+    data.load(3, 0.0 + getHoloBooleans2(entity, "holoFlight", "rocketsArms", "holoFlightMotion") + getHoloBooleans2(entity, "holoFlight", "rocketsBody", "holoFlightMotion") + getHoloBooleans2(entity, "holoFlight", "rocketsLegs", "holoFlightMotion"));
   }).priority = -9;
 
   addAnimation(renderer, "cybernetic.HOLOGRAM_GLIDE", "skyhighheroes:cybernetic_holo_glide").setData((entity, data) => {
@@ -336,6 +336,18 @@ function getHoloBooleans(entity, condition, value) {
   return entity.is("DISPLAY") && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && (mainNBT(entity).getBoolean(condition) && mainNBT(entity).getBoolean(value));
 };
 
+/**
+ * Checks three NBT booleans to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} condition1 - First NBT boolean to use for condition
+ * @param {string} condition2 - Second NBT boolean to use for condition
+ * @param {string} value - NBT boolean to use for condition
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBooleans2(entity, condition1, condition2, value) {
+  return entity.is("DISPLAY") && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && (mainNBT(entity).getBoolean(condition1) && mainNBT(entity).getBoolean(condition2) && mainNBT(entity).getBoolean(value));
+};
+
 function elevation(entity, posX, posY, posZ) {
   var distance = entity.pos().xz().distanceTo(posX, posZ);
   var vector = PackLoader.asVec2(0, entity.pos().y());
@@ -393,7 +405,7 @@ function bodyAnimations(entity, data) {
   data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
   data.load(12, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
-  data.load(13, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(13, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
   data.load(14, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(15, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
@@ -411,7 +423,7 @@ function leftArmAnimations(entity, data) {
   data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_flush_timer"));
   data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_open_timer"));
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_start_up_timer") == 0)?0:1));
-  data.load(12, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(12, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
   data.load(13, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(14, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
@@ -429,7 +441,7 @@ function rightArmAnimations(entity, data) {
   data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_flush_timer"));
   data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_open_timer"));
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_start_up_timer") == 0)?0:1));
-  data.load(12, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(12, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
   data.load(13, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(14, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
@@ -443,7 +455,7 @@ function leftLegAnimations(entity, data) {
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_open_timer"));
   data.load(7, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_start_up_timer") == 0)?0:1));
-  data.load(8, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(8, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
   data.load(9, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(10, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
@@ -457,7 +469,7 @@ function rightLegAnimations(entity, data) {
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_open_timer"));
   data.load(7, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_start_up_timer") == 0)?0:1));
-  data.load(8, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(8, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
   data.load(9, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(10, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
