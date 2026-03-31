@@ -6,7 +6,7 @@
 {strafe} = clamp({motX}{cosa} + {motZ}{sina}, -0.5, 0.5)
 {forward} = clamp({motZ}{cosa} - {motX}{sina}, -1, 1)
 
-{hover} = {data_12}(1 - {data_13})
+{hover} = {data_13}(1 - {data_14})
 {x} = {hover}min(2{vel}, 1)
 {strafe} *= {x}
 {forward} *= {x}
@@ -29,6 +29,7 @@
 {cannon_flush} = curve(clamp({data_9}, 0, 1))
 {intake} = curve(clamp({data_10}, 0, 1))
 {spin} = {data_11}*2
+{mot_Z} = if({data_12}>0, 1, {motZ})
 
 ;cannons
 ;main
@@ -72,7 +73,7 @@
 {right_arm_back_outer_rocket_cover_posZ} += 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
 {right_arm_outer_rocket_base_posX} -= 2.9{part2_outer_rocket}
 {right_arm_outer_rocket_rotX} += 90'{part3_outer_rocket} - 45'{part3_outer_rocket}{adx}
-{right_arm_outer_rocket_rotY} -= 45'{part3_outer_rocket}{forward}
+{right_arm_outer_rocket_rotY} -= 45'{part3_outer_rocket}{forward} + 45'{part3_outer_rocket}{mot_Z}
 
 ;front
 {part0_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -87,7 +88,7 @@
 {right_arm_outer_front_rocket_cover_posY} -= 0.99{part2_front_rocket} + 0.01{part0_front_rocket}
 {right_arm_inner_front_rocket_cover_posY} -= 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
 {right_arm_front_rocket_base_posZ} -= 2.9{part3_front_rocket}
-{right_arm_front_rocket_rotX} += 90'{part3_front_rocket} - 45'{part3_front_rocket}{adz}
+{right_arm_front_rocket_rotX} += 90'{part3_front_rocket} - 45'{part3_front_rocket}{adz} - 45'{part3_front_rocket}{mot_Z}
 {right_arm_front_rocket_rotY} -= 90'{part3_front_rocket}{strafe}
 
 ;back
@@ -103,7 +104,7 @@
 {right_arm_outer_back_rocket_cover_posY} -= 0.99{part2_back_rocket} + 0.01{part0_back_rocket}
 {right_arm_inner_back_rocket_cover_posY} -= 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
 {right_arm_back_rocket_base_posZ} += 2.9{part3_back_rocket}
-{right_arm_back_rocket_rotX} += 90'{part3_back_rocket} - 45'{part3_back_rocket}{adz}
+{right_arm_back_rocket_rotX} += 90'{part3_back_rocket} - 45'{part3_back_rocket}{adz} - 45'{part3_back_rocket}{mot_Z}
 {right_arm_back_rocket_rotY} += 90'{part3_back_rocket}{strafe}
 
 ;blade

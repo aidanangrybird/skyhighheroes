@@ -182,7 +182,7 @@ function init(renderer) {
 
 function initEffects(renderer) {
   text_renderer = stuff.text(renderer);
-  var darkness = renderer.createResource("MODEL", "skyhighocs:Darkness");
+  var darkness = renderer.createResource("MODEL", "skyhighheroes:Darkness");
   darkness.texture.set("darkness");
   darkness_model = renderer.createEffect("fiskheroes:model").setModel(darkness);
   darkness_model.anchor.set("head");

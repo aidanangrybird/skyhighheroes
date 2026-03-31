@@ -539,6 +539,10 @@ function initModule(system) {
                 manager.setBoolean(nbt, "holoBoostFlight", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoBoostFlight")));
                 system.moduleMessage(this, entity, "<n>Hologram Boost set to <nh>" + nbt.getBoolean("holoBoostFlight") + "<n>!");
                 break;
+              case "holoMotion":
+                manager.setBoolean(nbt, "holoFlightMotion", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("holoFlightMotion")));
+                system.moduleMessage(this, entity, "<n>holoMotion set to <nh>" + nbt.getBoolean("holoFlightMotion") + "<n>!");
+                break;
               case "inner":
                 manager.setData(entity, "skyhighheroes:dyn/rocket_inner_legs_enabled", ((argList[2] == "true") ? true : (argList[2] == "false") ? false : entity.getData("skyhighheroes:dyn/rocket_inner_legs_enabled")));
                 manager.setBoolean(nbt, "innerRockets", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("innerRockets")));
@@ -555,7 +559,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>!rocket disarm <onFall|arms|body|legs|*> <nh>-<n> Disarms set of rockets or onFall protection");
             system.moduleMessage(this, entity, "<n>!rocket show <rocket|rocketSet> <nh>-<n> Deploys set of rockets");
             system.moduleMessage(this, entity, "<n>!rocket hide <rocket|rocketSet> <nh>-<n> Retracts set of rockets");
-            system.moduleMessage(this, entity, "<n>!rocket set <holo|holoBoost|inner> <nh>-<n> Settings");
+            system.moduleMessage(this, entity, "<n>!rocket set <holo|holoBoost|holoMotion|inner> <nh>-<n> Settings");
             system.moduleMessage(this, entity, "<n>!rocket status <nh>-<n> Shows status of rockets");
             system.moduleMessage(this, entity, "<n>!rocket help <nh>-<n> Shows rockets commands");
             break;
@@ -589,6 +593,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right Leg main: <nh>" + ((entity.getData("skyhighheroes:dyn/rocket_right_leg_main_deploy_timer") > 0) || legsSet ? "DEPLOYED" : "STOWED"));
             system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoFlight") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Hologram Boost: <nh>" + (nbt.getBoolean("holoBoostFlight") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Hologram Motion: <nh>" + (nbt.getBoolean("holoFlightMotion") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Inner: <nh>" + (entity.getData("skyhighheroes:dyn/rocket_inner_legs_enabled") ? "ENABLED" : "DISABLED"));
             break;
           default:
@@ -702,6 +707,9 @@ function initModule(system) {
             result = entity.getData("skyhighheroes:dyn/rockets_arms_armed") || entity.getData("skyhighheroes:dyn/rockets_body_armed") || entity.getData("skyhighheroes:dyn/rockets_legs_armed");
           };
         };
+        if (modifier.name() == "fiskheroes:teleportation") {
+          result = true;
+        };
       };
       if (modifier.name() == "fiskheroes:transformation") {
         result = true;
@@ -810,6 +818,9 @@ function initModule(system) {
     },
     onInitSystem: function (entity, manager) {
       var nbt = system.mainNBT(entity);
+      if (!nbt.hasKey("holoFlightMotion")) {
+        manager.setBoolean(nbt, "holoFlightMotion", false);
+      };
       if (!nbt.hasKey("rocketsOnFall")) {
         manager.setBoolean(nbt, "rocketsOnFall", false);
       };

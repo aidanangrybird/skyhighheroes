@@ -1,15 +1,22 @@
 ; data_0 = flight_timer
 ; data_1 = flight_boost_timer
-; data_2 = scale
+; data_2 = hover loop
+; data_3 = motion
 
 {data_0} = curve(clamp({data_0}, 0, 1))
 {data_1} = curve(clamp({data_1}, 0, 1)){data_0}
+{no_motion} = (1-{data_3})
+{data_2} = {data_2}{no_motion}
 
 {mot_X} = 0
-{mot_Z} = 1
+{mot_Y} = 0
+{mot_Z} = {data_3}
 {look_X} = 0
 {look_Z} = 0
 
+out "translate" (0, 0, 0.8{data_3})
+
+;Header
 ; Boosted/stationary "base" positioning
 {rightArm_rotX} @ {data_0} -> 0
 {rightArm_rotY} @ {data_0} -'> 0
@@ -36,44 +43,72 @@
 {forward} = clamp({mot_Z}{cosa} - {mot_X}{sina}, -1, 1)
 {hover} = {data_0}(1 - {data_1})
 
-out "translate" (0, 0, -0.75{hover})
 out "pivot" (0, 0.56{hover}, 0)
 
-;idle
+;Hover
 {x} = 30{hover}min(1.5{vel}, 1)
 out "rotate" (1.5{x}clamp({strafe}, -2, 2), 0, 0, 1)
 out "rotate" (-1.5{x}clamp({forward}, -2, 2), 1, 0, 0)
 
-{x} = {hover}min(4{vel}, 1.5)
+{x} = {hover}min(2{vel}, 1)
 {strafe} *= {x}
 {forward} *= {x}
 {adx} = abs {strafe}
 {adz} = abs {forward}
 
-{head_rotX} -= 30'clamp({forward}, -1, 1)
-{head_rotY} -= 30'clamp({forward}{strafe}, -1, 1)
+{head_rotX} -= 30'clamp({forward}, -2, 2)
+{head_rotY} -= 30'clamp({strafe}{forward}, -2, 2)
 {rightArm_rotX} += 0.2{forward} + 0.2{adz}
-{rightArm_rotZ} += 0.1{adz} + 0.2{strafe} + 7'{data_0} + 0.2{forward} + 0.2{adx}
+{rightArm_rotZ} += 0.1{adz} + 0.2{strafe} + 7'{forward} + 0.2{forward} + 0.2{adx}
 {leftArm_rotX} += 0.2{forward} + 0.2{adz}
-{leftArm_rotZ} -= 0.1{adz} - 0.2{strafe} + 7'{data_0} + 0.2{forward} + 0.2{adx}
+{leftArm_rotZ} -= 0.1{adz} - 0.2{strafe} + 7'{forward} + 0.2{forward} + 0.2{adx}
 {rightLeg_rotX} += 0.4{forward} + 0.05{adx}
 {rightLeg_rotZ} += 0.05{adz} + 0.4{strafe} + 0.05{adx}
 {leftLeg_rotX} += 0.4{forward} + 0.05{adx}
 {leftLeg_rotZ} -= 0.05{adz} - 0.4{strafe} + 0.05{adx}
 
+;Boost
 {x} = min({vel}, 1){data_1}{d1}{d} / 2.5
-;{rightArm_rotX} += {x}
-;{rightArm_rotZ} += 2'{data_1}
-;{leftArm_rotX} -= {x}
-;{leftArm_rotZ} -= 2'{data_1}
-;{rightLeg_rotX} += 0.2{x}
-;{leftLeg_rotX} -= 0.2{x}
+{rightArm_rotX} += {x}
+{rightArm_rotZ} += 2'{data_1}
+{leftArm_rotX} -= {x}
+{leftArm_rotZ} -= 2'{data_1}
+{rightLeg_rotX} += 0.2{x}
+{leftLeg_rotX} -= 0.2{x}
 {head_rotX} @ {data_1} -> -50'
 
 {d} *= {data_1} / 1'
 {x} = min({vel} / 2, 1) / 2
-out "translate" (0, 1.5{data_1}, 0.8)
+out "translate" (0, 1.5{data_1}, 0.8{data_1})
 out "rotate" (-{data_1}({pitch} + 90), 1, 0, 0)
 out "rotate" ({d1}{d}, 0, 1, 0)
 out "rotate" (-{d1}{d}{x}, 0, 0, 1)
 out "rotate" ({d}{x}, 1, 0, 0)
+
+;Idle
+{vel} = sqrt({mot_X}^2 + {mot_Z}^2) + (0.3{mot_Y})^2
+{vel} = 1 - curve min(1.5{vel}, 1){hover}
+{ud_wobble} = 0.2{data_0}sin(2pi{data_2}){hover}
+
+{right_z_wobble} = {data_0}sin(2pi{data_2}){hover}
+{left_z_wobble} = {data_0}sin(2pi{data_2} + pi / 2){hover}
+
+{left_x_wobble} = {data_0}sin(2pi{data_2}){hover}
+{right_x_wobble} = {data_0}sin(2pi{data_2} + pi / 2){hover}
+
+out "translate" (0, 0.4{ud_wobble}+1.3{data_0}{hover}, 0)
+{data_0} = {vel}curve({data_0}){hover}
+
+{leftLeg_rotX} -= 1'{left_x_wobble}
+{leftLeg_rotZ} -= 1'{data_0} - 1'{right_z_wobble}
+
+{rightLeg_rotX} -= 1'{right_x_wobble}
+{rightLeg_rotZ} += 1'{data_0} - 1'{left_z_wobble}
+
+{leftArm_rotX} += 1'{left_x_wobble}
+{leftArm_rotZ} -= 1'{data_0} - 1'{left_z_wobble}
+{rightArm_rotX} += 1'{right_x_wobble}
+{rightArm_rotZ} += 1'{data_0} - 1'{right_z_wobble}
+
+out "pivot" (0, 0.56, 0)
+out "rotate" ({data_0}, 1, 0, 0)

@@ -84,7 +84,7 @@ function addFlightAnimationWithLanding(renderer, name, value) {
   });
 };
 
-function addHoverAnimation(renderer, name, value, dataLoader) {
+function addFlightIdleAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
 
@@ -133,11 +133,15 @@ var panels = [
 //Astro Animations
 function initAstroAnimations(renderer) {
   //Aiming
-  addAnimationWithData(renderer, "astro.AIMING", "skyhighheroes:astro_aim", "fiskheroes:aiming_timer")
+  addAnimation(renderer, "astro.CANNON", "skyhighheroes:astro_aim").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + getHoloBoolean(entity, "holoArmCannon"));
+  })
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 5;
   //Dual Cannons
-  addAnimationWithData(renderer, "astro.DUAL_CANNONS", "skyhighheroes:astro_dual_aim", "fiskheroes:energy_projection_timer")
+  addAnimation(renderer, "astro.DUAL_CANNONS", "skyhighheroes:astro_dual_aim").setData((entity, data) => {
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + getHoloBoolean(entity, "holoDualCannons"));
+  })
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 5;
   //Flight
@@ -151,7 +155,7 @@ function initAstroAnimations(renderer) {
   addAnimationWithData(renderer, "astro.LAND_BOOST", "skyhighheroes:astro_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
     .priority = -8;
   addAnimationWithData(renderer, "astro.ROLL", "skyhighheroes:flight/astro_barrel_roll", "fiskheroes:barrel_roll_timer")
-  addHoverAnimation(renderer, "astro.HOVER", "skyhighheroes:astro_hover");
+  addFlightIdleAnimation(renderer, "astro.IDLE", "skyhighheroes:flight/astro_idle");
   addAnimationWithData(renderer, "astro.POWER", "skyhighheroes:astro_power_state", "skyhighheroes:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") > 0))
     .priority = -10;
@@ -159,6 +163,13 @@ function initAstroAnimations(renderer) {
     .setData((entity, data) => data.load(1.0))
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") == 1))
     .priority = -10;
+    
+  addAnimation(renderer, "astro.HOLOGRAM_FLIGHT", "skyhighheroes:astro_holo_flight").setData((entity, data) => {
+    data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight"));
+    data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
+    data.load(2, entity.loop(20 * Math.PI) + 0.4);
+    data.load(3, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  }).priority = -9;
 };
 
 function initNV(renderer, uuid) {
@@ -168,6 +179,7 @@ function initNV(renderer, uuid) {
   nv.setCondition(entity => entity.getUUID() == uuid);
 };
 
+//Cannon
 function initCannon(renderer) {
   var light_thing = renderer.createEffect("fiskheroes:overlay");
   light_thing.texture.set("cannon", "cannon_lights");
@@ -218,11 +230,11 @@ function initRightArmBeams(renderer, color) {
 };
 
 function headAnimations(entity, data) {
-  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer"));
-  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
-  data.load(4, entity.getInterpolatedData("fiskheroes:beam_charge"));
+  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + getHoloBoolean(entity, "holoFlight"));
+  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer") + getHoloBooleans(entity, "holoFlight", "holoBoostFlight"));
+  data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + getHoloBoolean(entity, "holoArmCannon"));
+  data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") + getHoloBoolean(entity, "holoDualCannons"));
+  data.load(4, entity.getInterpolatedData("fiskheroes:beam_charge") + getHoloBoolean(entity, "holoDualCannons"));
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/head_top_front_open_timer"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/head_top_back_open_timer"));
   data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/head_bottom_front_open_timer"));
@@ -240,22 +252,22 @@ function bodyAnimations(entity, data) {
 };
 
 function leftArmAnimations(entity, data) {
-  data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
+  data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") + getHoloBoolean(entity, "holoDualCannons"));
   data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/left_arm_outer_open_timer"));
   data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_cannon_outer_open_timer"));
   data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_cannon_inner_open_timer"));
 };
 
 function rightArmAnimations(entity, data) {
-  data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer"));
+  data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") + getHoloBoolean(entity, "holoArmCannon") + getHoloBoolean(entity, "holoDualCannons"));
   data.load(1, entity.getInterpolatedData("skyhighheroes:dyn/right_arm_outer_open_timer"));
   data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_cannon_outer_open_timer"));
   data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_cannon_inner_open_timer"));
 };
 
 function leftLegAnimations(entity, data) {
-  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
-  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + getHoloBoolean(entity, "holoFlight"));
+  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer") + getHoloBooleans(entity, "holoFlight", "holoBoostFlight"));
   data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/left_boot_front_open_timer"));
   data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/left_boot_back_open_timer"));
   data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/left_leg_front_open_timer"));
@@ -264,8 +276,8 @@ function leftLegAnimations(entity, data) {
 };
 
 function rightLegAnimations(entity, data) {
-  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + ((entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") ? 1.0 : 0.0));
-  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(0, entity.getInterpolatedData("fiskheroes:flight_timer") + getHoloBoolean(entity, "holoFlight"));
+  data.load(1, entity.getInterpolatedData("fiskheroes:flight_boost_timer") + getHoloBooleans(entity, "holoFlight", "holoBoostFlight"));
   data.load(2, entity.getInterpolatedData("skyhighheroes:dyn/right_boot_front_open_timer"));
   data.load(3, entity.getInterpolatedData("skyhighheroes:dyn/right_boot_back_open_timer"));
   data.load(4, entity.getInterpolatedData("skyhighheroes:dyn/right_leg_front_open_timer"));
@@ -288,7 +300,7 @@ function initLeftLegBooster(renderer, model, colors) {
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
   var booster = renderer.createEffect("fiskheroes:booster");
-  booster.setIcon(icon).setOffset(0.0, 2.55, 0.0).setSize(4.0, 2.0);
+  booster.setIcon(icon).setOffset(0.0, 2.18, 0.0).setSize(4.0, 2.0);
   booster.anchor.set("leftLeg", cubeOffset);
   booster.mirror = false;
   
@@ -302,7 +314,7 @@ function initLeftLegBooster(renderer, model, colors) {
   //Edge
   var shapeEdge = renderer.createResource("SHAPE", null);
   var lineEdge = shapeEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
-  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.55, 0.0);
+  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.18, 0.0);
   bloomEdge.anchor.set("leftLeg", cubeOffset);
   bloomEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
   bloomEdge.mirror = false;
@@ -317,7 +329,7 @@ function initLeftLegBooster(renderer, model, colors) {
   //Middle
   var shapeMiddle = renderer.createResource("SHAPE", null);
   var lineMiddle = shapeMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
-  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.55, 0.0);
+  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.18, 0.0);
   bloomMiddle.anchor.set("leftLeg", cubeOffset);
   bloomMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
   bloomMiddle.mirror = false;
@@ -332,7 +344,7 @@ function initLeftLegBooster(renderer, model, colors) {
   //Center
   var shapeCenter = renderer.createResource("SHAPE", null);
   var lineCenter = shapeCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
-  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.55, 0.0);
+  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.18, 0.0);
   bloomCenter.anchor.set("leftLeg", cubeOffset);
   bloomCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
   bloomCenter.mirror = false;
@@ -356,19 +368,19 @@ function initLeftLegBooster(renderer, model, colors) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Boots
       //Equations
-      var data_0 = (Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0;
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBoolean(entity, "holoFlight") + (Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0;
+      var data_1 = getHoloBooleans(entity, "holoFlight", "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
-      var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+      var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
       b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
       var f = Math.PI * 2;
       f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-      booster.setOffset(0.0,2.55+0.65*boost, 0.0);
-      bloomEdge.setOffset(0.0,2.55+0.65*boost, 0.0);
-      bloomMiddle.setOffset(0.0,2.55+0.65*boost, 0.0);
-      bloomCenter.setOffset(0.0,2.55+0.65*boost, 0.0);
+      booster.setOffset(0.0, 2.18+0.65*boost, 0.0);
+      bloomEdge.setOffset(0.0, 2.18+0.65*boost, 0.0);
+      bloomMiddle.setOffset(0.0, 2.18+0.65*boost, 0.0);
+      bloomCenter.setOffset(0.0, 2.18+0.65*boost, 0.0);
 
       //Default
       //Booster
@@ -458,7 +470,7 @@ function initRightLegBooster(renderer, model, colors) {
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
   
   var booster = renderer.createEffect("fiskheroes:booster");
-  booster.setIcon(icon).setOffset(0.0, 2.55, 0.0).setSize(4.0, 2.0);
+  booster.setIcon(icon).setOffset(0.0, 2.18, 0.0).setSize(4.0, 2.0);
   booster.anchor.set("rightLeg", cubeOffset);
   booster.mirror = false;
   
@@ -472,7 +484,7 @@ function initRightLegBooster(renderer, model, colors) {
   //Edge
   var shapeEdge = renderer.createResource("SHAPE", null);
   var lineEdge = shapeEdge.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [3.5, 3.5] });
-  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.55, 0.0);
+  var bloomEdge = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeEdge).setOffset(0.0, 2.18, 0.0);
   bloomEdge.anchor.set("rightLeg", cubeOffset);
   bloomEdge.color.set((typeof colors === "object" && colors.length == 3) ? colors[2] : color);
   bloomEdge.mirror = false;
@@ -487,7 +499,7 @@ function initRightLegBooster(renderer, model, colors) {
   //Middle
   var shapeMiddle = renderer.createResource("SHAPE", null);
   var lineMiddle = shapeMiddle.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [1.75, 1.75] });
-  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.55, 0.0);
+  var bloomMiddle = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeMiddle).setOffset(0.0, 2.18, 0.0);
   bloomMiddle.anchor.set("rightLeg", cubeOffset);
   bloomMiddle.color.set((typeof colors === "object" && colors.length == 3) ? colors[1] : color);
   bloomMiddle.mirror = false;
@@ -502,7 +514,7 @@ function initRightLegBooster(renderer, model, colors) {
   //Center
   var shapeCenter = renderer.createResource("SHAPE", null);
   var lineCenter = shapeCenter.bindLine({ "start": [0.0, 0.0, 0.0], "end": [0.0, 0.0, 0.0], "size": [0.875, 0.875] });
-  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.55, 0.0);
+  var bloomCenter = renderer.createEffect("fiskheroes:lines").setRenderer(beam).setShape(shapeCenter).setOffset(0.0, 2.18, 0.0);
   bloomCenter.anchor.set("rightLeg", cubeOffset);
   bloomCenter.color.set((typeof colors === "object" && colors.length == 3) ? colors[0] : color);
   bloomCenter.mirror = false;
@@ -526,19 +538,19 @@ function initRightLegBooster(renderer, model, colors) {
     render: (entity, renderLayer, isFirstPersonArm) => {
       //Boots
       //Equations
-      var data_0 = (Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0;
-      var data_1 = entity.getInterpolatedData("fiskheroes:flight_boost_timer");
+      var data_0 = getHoloBoolean(entity, "holoFlight") + (Math.sin(((5*Math.min(Math.max(entity.getInterpolatedData("fiskheroes:flight_timer"), 0.8), 1.0) - 4) * 2.0 - 1.0) * Math.PI / 2.0) + 1.0) / 2.0;
+      var data_1 = getHoloBooleans(entity, "holoFlight", "holoBoostFlight") + entity.getInterpolatedData("fiskheroes:flight_boost_timer");
       var boost = data_1;
-      var flight = data_0 + (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+      var flight = data_0;
       var b = Math.min(Math.max(boost * 3 - 1.25, 0), 1);
       b = entity.isSprinting() ? 0.5 - Math.cos(2 * b * Math.PI) / 2 : 0;
       var f = Math.PI * 2;
       f = Math.sin((entity.loop(f) * f) % f * 3) / 5;
 
-      booster.setOffset(0.0,2.55+0.65*boost, 0.0);
-      bloomEdge.setOffset(0.0,2.55+0.65*boost, 0.0);
-      bloomMiddle.setOffset(0.0,2.55+0.65*boost, 0.0);
-      bloomCenter.setOffset(0.0,2.55+0.65*boost, 0.0);
+      booster.setOffset(0.0, 2.18+0.65*boost, 0.0);
+      bloomEdge.setOffset(0.0, 2.18+0.65*boost, 0.0);
+      bloomMiddle.setOffset(0.0, 2.18+0.65*boost, 0.0);
+      bloomCenter.setOffset(0.0, 2.18+0.65*boost, 0.0);
 
       //Default
       //Booster
@@ -615,4 +627,25 @@ function initRightLegBooster(renderer, model, colors) {
 
 function mainNBT(entity) {
   return entity.getWornLeggings().nbt();
+};
+
+/**
+ * Checks a NBT boolean to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} value - NBT boolean to check
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBoolean(entity, value) {
+  return ((entity.is("DISPLAY") && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) ? mainNBT(entity).getBoolean(value) : 0.0);
+};
+
+/**
+ * Checks two NBT booleans to be used on holographic display stand
+ * @param {JSEntity} entity - required
+ * @param {string} condition - NBT boolean to use for condition
+ * @param {string} value - NBT boolean to use for condition
+ * @returns NBT boolean if the entity is a holographic display stand
+ **/
+function getHoloBooleans(entity, condition, value) {
+  return ((entity.is("DISPLAY") && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM")) ? (mainNBT(entity).getBoolean(condition) && mainNBT(entity).getBoolean(value)) : 0.0);
 };

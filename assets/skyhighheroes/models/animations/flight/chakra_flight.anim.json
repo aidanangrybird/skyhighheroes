@@ -1,7 +1,7 @@
 {
   "inputs": [
     "skyhighheroes:flight/chakra_header",
-    "skyhighheroes:flight/chakra_idle",
+    "skyhighheroes:flight/chakra_hover",
     "skyhighheroes:flight/chakra_boost"
   ]
 }

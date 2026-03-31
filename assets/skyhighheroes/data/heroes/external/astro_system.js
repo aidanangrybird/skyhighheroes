@@ -733,11 +733,11 @@ function initSystem(moduleList, name, colorCode) {
     systemHandler: (entity, manager) => {
       var nbt = mainNBT(entity);
       if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true) && entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
+        manager.setData(entity, "skyhighheroes:dyn/color", color);
         asssignID(entity, manager);
         status(entity);
         var hexColor = hexColors[robotName];
         manager.setString(nbt, "hudColorSkyHigh", hexColor);
-        manager.setData(entity, "skyhighheroes:dyn/color", color);
         if (!nbt.hasKey("chatMode")) {
           manager.setString(nbt, "chatMode", "");
         };

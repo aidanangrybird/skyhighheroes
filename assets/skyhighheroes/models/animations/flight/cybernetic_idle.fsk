@@ -1,20 +1,24 @@
-{x} = 30{hover}min(1.5{vel}, 1)
-out "rotate" (1.5{x}clamp({strafe}, -2, 2), 0, 0, 1)
-out "rotate" (-1.5{x}clamp({forward}, -2, 2), 1, 0, 0)
+{vel} = sqrt({mot_X}^2 + {mot_Z}^2) + (0.3{mot_Y})^2
+{vel} = 1 - curve min(1.5{vel}, 1)
+{data_0} = {vel}curve({data_0})
+{ud_wobble} = 0.2{data_0}sin(2pi{data_1})
 
-{x} = {hover}min(2{vel}, 1)
-{strafe} *= {x}
-{forward} *= {x}
-{adx} = abs {strafe}
-{adz} = abs {forward}
+{right_z_wobble} = {data_0}sin(2pi{data_1})
+{left_z_wobble} = {data_0}sin(2pi{data_1} + pi / 2)
 
-{head_rotX} -= 30'clamp({forward}, -2, 2)
-{head_rotY} -= 30'clamp({strafe}{forward}, -2, 2)
-{rightArm_rotX} += 0.2{forward} + 0.2{adz}
-{rightArm_rotZ} += 0.1{adz} + 0.2{strafe} + 7'{data_0} + 0.2{forward} + 0.2{adx}
-{leftArm_rotX} += 0.2{forward} + 0.2{adz}
-{leftArm_rotZ} -= 0.1{adz} - 0.2{strafe} + 7'{data_0} + 0.2{forward} + 0.2{adx}
-{rightLeg_rotX} += 0.4{forward} + 0.05{adx}
-{rightLeg_rotZ} += 0.05{adz} + 0.4{strafe} + 0.05{adx}
-{leftLeg_rotX} += 0.4{forward} + 0.05{adx}
-{leftLeg_rotZ} -= 0.05{adz} - 0.4{strafe} + 0.05{adx}
+{left_x_wobble} = {data_0}sin(2pi{data_1})
+{right_x_wobble} = {data_0}sin(2pi{data_1} + pi / 2)
+
+{leftLeg_rotX} -= 1'{left_x_wobble}
+{leftLeg_rotZ} -= 1'{data_0} - 1'{right_z_wobble}
+
+{rightLeg_rotX} -= 1'{right_x_wobble}
+{rightLeg_rotZ} += 1'{data_0} - 1'{left_z_wobble}
+
+{leftArm_rotX} += 1'{left_x_wobble}
+{leftArm_rotZ} -= 1'{data_0} - 1'{left_z_wobble}
+{rightArm_rotX} += 1'{right_x_wobble}
+{rightArm_rotZ} += 1'{data_0} - 1'{right_z_wobble}
+
+out "pivot" (0, 0.56, 0)
+out "rotate" ({data_0}, 1, 0, 0)

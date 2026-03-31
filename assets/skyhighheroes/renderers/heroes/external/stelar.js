@@ -94,13 +94,13 @@ function addBasePredationAnimation(renderer, key, value) {
   anim.priority = -9.75;
 };
 
-function addSwordAnimations(renderer, key, value) {
+function addSwordAnimations(renderer, key, value, sword) {
   if (typeof value === "string") {
     anim = renderer.createResource("ANIMATION", value);
   };
   renderer.addCustomAnimation(key, anim);
   anim.setData((entity, data) => {
-    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/sword_timer"));
+    data.load(0, entity.getInterpolatedData("skyhighheroes:dyn/" + sword + "_timer"));
     data.load(1, entity.getInterpolatedData("fiskheroes:shield_blocking_timer"));
   });
   anim.setCondition(entity => entity.getData("skyhighheroes:dyn/battle_card") == 2);
@@ -173,7 +173,7 @@ function addFlightBaseAnimation(renderer, name, value, dataLoader) {
   renderer.reprioritizeDefaultAnimation("AIM_BOW", -9);
 };
 
-function addHoverAnimation(renderer, name, value, dataLoader) {
+function addFlightIdleAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
 
@@ -226,7 +226,8 @@ function initEMWaveChangeAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "em_wave_change.ROLL", "skyhighheroes:flight/em_wave_change_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "em_wave_change.HOVER", "skyhighheroes:em_wave_change_hover");
+  addFlightIdleAnimation(renderer, "em_wave_change.IDLE", "skyhighheroes:flight/em_wave_change_idle");
+  forceFieldAnimation(renderer);
 };
 
 function initWaveSuitAnimations(renderer) {
@@ -239,14 +240,11 @@ function initWaveSuitAnimations(renderer) {
     .priority = -8;
   addAnimationWithData(renderer, "wave_suit.ROLL", "skyhighheroes:flight/wave_suit_barrel_roll", "fiskheroes:barrel_roll_timer")
     .priority = 10;
-  addHoverAnimation(renderer, "wave_suit.HOVER", "skyhighheroes:wave_suit_hover");
+  addFlightIdleAnimation(renderer, "wave_suit.IDLE", "skyhighheroes:flight/wave_suit_idle");
 };
 //Mega Buster
-function initMegaBuster(renderer, color, color_other) {
+function initMegaBuster(renderer, color) {
   renderer.bindProperty("fiskheroes:energy_bolt").color.set(color);
-  bindBeam(renderer, "fiskheroes:energy_manipulation", "fiskheroes:energy_discharge", "rightArm", color_other, [
-    { "firstPerson": [-2.5, 0.0, -7.0], "offset": [-0.5, 19.0, -12.0], "size": [1.5, 1.5] }
-  ]);
 };
 
 function initNV(renderer) {
@@ -479,37 +477,6 @@ function initEMBeing(renderer) {
       };
     }
   };
-};
-
-/**
- * Turns NBT String List into an array for easier use in code
- * @param {JSNBTList} nbtList - NBTList
- * @returns Array of values from the NBTList
- **/
-function getStringArray(nbtList) {
-  var count = nbtList.tagCount();
-  var result = [];
-  for (i=0;i<count;i++) {
-    result.push(nbtList.getString(i));
-  };
-  return result;
-};
-/**
- * Checks if a module is disabled
- * @param {JSEntity} entity - Player getting checked
- * @param {string} moduleName - Module being checked if disabled
- * @returns If module is disabled
- **/
-function isModuleDisabled(entity, moduleName) {
-  var disabledModules = entity.getWornChestplate().nbt().getStringList("disabledModules");
-  var modulesDisabled = getStringArray(disabledModules);
-  var result = false;
-  modulesDisabled.forEach(entry => {
-    if (entry == moduleName) {
-      result = true;
-    };
-  });
-  return result;
 };
 
 function mainNBT(entity) {

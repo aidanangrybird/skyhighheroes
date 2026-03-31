@@ -84,7 +84,7 @@ function addFlightAnimationWithLanding(renderer, name, value) {
   });
 };
 
-function addHoverAnimation(renderer, name, value, dataLoader) {
+function addFlightIdleAnimation(renderer, name, value, dataLoader) {
   var anim = renderer.createResource("ANIMATION", value);
   renderer.addCustomAnimation(name, anim);
 
@@ -168,7 +168,7 @@ function initCyberneticAnimations(renderer) {
   addAnimationWithData(renderer, "cybernetic.LAND_BOOST", "skyhighheroes:cybernetic_boosting_landing", "skyhighheroes:dyn/superhero_boosting_landing_timer")
     .priority = -8;
   addAnimationWithData(renderer, "cybernetic.ROLL", "skyhighheroes:flight/cybernetic_barrel_roll", "fiskheroes:barrel_roll_timer")
-  addHoverAnimation(renderer, "cybernetic.HOVER", "skyhighheroes:cybernetic_hover");
+  addFlightIdleAnimation(renderer, "cybernetic.IDLE", "skyhighheroes:flight/cybernetic_idle");
   addAnimationWithData(renderer, "cybernetic.POWER", "skyhighheroes:cybernetic_base", "skyhighheroes:dyn/powering_down_timer")
     .setCondition(entity => (!entity.is("DISPLAY") && entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") > 0))
     .priority = -10;
@@ -176,6 +176,8 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.HOLOGRAM_FLIGHT", "skyhighheroes:cybernetic_holo_flight").setData((entity, data) => {
     data.load(0, 0.0 + getHoloBoolean(entity, "holoFlight") ? (getHoloBoolean(entity, "rocketsArms") + getHoloBoolean(entity, "rocketsBody") + getHoloBoolean(entity, "rocketsLegs")) : 0.0);
     data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
+    data.load(2, entity.loop(20 * Math.PI) + 0.4);
+    data.load(3, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
   }).priority = -9;
 
   addAnimation(renderer, "cybernetic.HOLOGRAM_GLIDE", "skyhighheroes:cybernetic_holo_glide").setData((entity, data) => {
@@ -320,7 +322,7 @@ function initAntennaBeams(renderer, model, color) {
  * @returns NBT boolean if the entity is a holographic display stand
  **/
 function getHoloBoolean(entity, value) {
-  return entity.is("DISPLAY") && mainNBT(entity).getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+  return entity.is("DISPLAY") && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && mainNBT(entity).getBoolean(value);
 };
 
 /**
@@ -331,7 +333,7 @@ function getHoloBoolean(entity, value) {
  * @returns NBT boolean if the entity is a holographic display stand
  **/
 function getHoloBooleans(entity, condition, value) {
-  return entity.is("DISPLAY") && mainNBT(entity).getBoolean(condition) && mainNBT(entity).getBoolean(value) && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM");
+  return entity.is("DISPLAY") && (entity.as("DISPLAY").getDisplayType() == "HOLOGRAM") && (mainNBT(entity).getBoolean(condition) && mainNBT(entity).getBoolean(value));
 };
 
 function elevation(entity, posX, posY, posZ) {
@@ -388,11 +390,12 @@ function bodyAnimations(entity, data) {
   data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
   data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_open_timer"));
   data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_open_timer"));
-  data.load(10, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
-  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
-  data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
-  data.load(14, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
+  data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
+  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
+  data.load(12, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
+  data.load(13, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(14, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(15, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function leftArmAnimations(entity, data) {
@@ -408,8 +411,9 @@ function leftArmAnimations(entity, data) {
   data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_flush_timer"));
   data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_open_timer"));
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_start_up_timer") == 0)?0:1));
-  data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(12, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(13, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(14, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function rightArmAnimations(entity, data) {
@@ -425,8 +429,9 @@ function rightArmAnimations(entity, data) {
   data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_flush_timer"));
   data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_open_timer"));
   data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_start_up_timer") == 0)?0:1));
-  data.load(12, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(13, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(12, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(13, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(14, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function leftLegAnimations(entity, data) {
@@ -438,8 +443,9 @@ function leftLegAnimations(entity, data) {
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_open_timer"));
   data.load(7, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_start_up_timer") == 0)?0:1));
-  data.load(8, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(9, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(8, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(9, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(10, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function rightLegAnimations(entity, data) {
@@ -451,8 +457,9 @@ function rightLegAnimations(entity, data) {
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer") + getHoloBooleans(entity, "holoFlight", "innerRockets"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_open_timer"));
   data.load(7, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_start_up_timer") == 0)?0:1));
-  data.load(8, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(9, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(8, 0.0 + getHoloBoolean(entity, "holoFlightMotion"));
+  data.load(9, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(10, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function hudPlayer(renderer) {
@@ -583,8 +590,8 @@ function availableCybers(entity) {
     //player = rx
     foundPlayers.forEach(otherEntity => {
       var rxDomain = otherEntity.getWornHelmet().suitType().split(":")[0];
-      var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
-      var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
+      var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
+      var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
       if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
         data.push(position(otherEntity));
       } else if (txAntennaDeployed && rxAntennaDeployed && checkFrequency(entity, otherEntity) && entity.canSee(otherEntity) && (entity.pos().distanceTo(otherEntity.pos()) <= range*4)) {
@@ -711,6 +718,92 @@ function isStillCyber(entity, id) {
  **/
 function hasCyberneticBody(entity) {
   return mainNBT(entity).hasKey("cyberModelID") && mainNBT(entity).getString("cyberAliasName");
+};
+
+function headConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer");
+  var data_1 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_head_timer");
+  var data_2 = entity.getInterpolatedData("skyhighheroes:dyn/satellite_deploy_timer");
+  var data_3 = entity.getInterpolatedData("skyhighheroes:dyn/satellite_rain_mode_timer");
+  var data_4 = entity.getInterpolatedData("skyhighheroes:dyn/antenna_deploy_timer");
+  var data_5 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_head_flush_timer");
+  var data_6 = entity.getInterpolatedData("skyhighheroes:dyn/intake_head_left_open_timer");
+  var data_7 = entity.getInterpolatedData("skyhighheroes:dyn/intake_head_right_open_timer");
+  var data_8 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_head_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_head_left_start_up_timer") == 0)?0:1);
+  var data_9 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_head_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_head_right_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0);
+};
+
+function bodyConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_body_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_body_timer");
+  var data_1 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_body_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_body_timer");
+  var data_2 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_body_timer");
+  var data_3 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_body_timer");
+  var data_4 = entity.getInterpolatedData("skyhighheroes:dyn/wing_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer");
+  var data_5 = entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer");
+  var data_6 = entity.getInterpolatedData("skyhighheroes:dyn/external_arm_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer");
+  var data_7 = entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer");
+  var data_8 = entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_open_timer");
+  var data_9 = entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_open_timer");
+  var data_10 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1);
+  var data_11 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0 || data_10 > 0 || data_11 > 0);
+};
+
+function leftArmConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer");
+  var data_1 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer");
+  var data_2 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer");
+  var data_3 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_outer_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_arms_timer");
+  var data_4 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_arms_timer");
+  var data_5 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_arms_timer");
+  var data_6 = entity.getInterpolatedData("skyhighheroes:dyn/blade_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/blade_left_timer");
+  var data_7 = entity.getInterpolatedData("skyhighheroes:dyn/shield_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/shield_left_timer");
+  var data_8 = entity.getInterpolatedData("skyhighheroes:dyn/blade_left_stealth_timer");
+  var data_9 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_left_arm_flush_timer");
+  var data_10 = entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_open_timer");
+  var data_11 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_left_arm_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0 || data_10 > 0 || data_11 > 0);
+};
+
+function rightArmConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_bottom_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer");
+  var data_1 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer");
+  var data_2 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/cannons_arms_timer");
+  var data_3 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_arm_outer_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_arms_timer");
+  var data_4 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_arm_front_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_arms_timer");
+  var data_5 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_arm_back_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_arms_timer");
+  var data_6 = entity.getInterpolatedData("skyhighheroes:dyn/blade_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/blade_right_timer");
+  var data_7 = entity.getInterpolatedData("skyhighheroes:dyn/shield_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/shield_right_timer");
+  var data_8 = entity.getInterpolatedData("skyhighheroes:dyn/blade_left_stealth_timer");
+  var data_9 = entity.getInterpolatedData("skyhighheroes:dyn/cannon_right_arm_flush_timer");
+  var data_10 = entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_open_timer");
+  var data_11 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_right_arm_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0 || data_8 > 0 || data_9 > 0 || data_10 > 0 || data_11 > 0);
+};
+
+function leftLegConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_1 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_2 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_3 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_4 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_left_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_5 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer");
+  var data_6 = entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_open_timer");
+  var data_7 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_left_leg_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0);
+};
+
+function rightLegConditions(entity) {
+  var data_0 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_main_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_1 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_outer_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_2 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_inner_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_3 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_front_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_4 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_right_leg_back_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/rockets_legs_timer");
+  var data_5 = entity.getInterpolatedData("skyhighheroes:dyn/rocket_inner_legs_timer");
+  var data_6 = entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_open_timer");
+  var data_7 = entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_right_leg_start_up_timer") == 0)?0:1);
+  return (data_0 > 0 || data_1 > 0 || data_2 > 0 || data_3 > 0 || data_4 > 0 || data_5 > 0 || data_6 > 0 || data_7 > 0);
 };
 
 function mainNBT(entity) {
