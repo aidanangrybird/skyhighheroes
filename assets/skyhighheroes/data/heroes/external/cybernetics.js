@@ -1235,7 +1235,7 @@ function initSystem(moduleList, name, colorCode) {
    * @param {JSHero} hero - Required
    **/
   function keyBinds(hero) {
-    hero.addKeyBindFunc("BYPASS_CONVERSION", (entity, manager) => {
+    hero.addKeyBindFunc("BYPASS", (entity, manager) => {
       var nbt = mainNBT(entity);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/optics_enabled", true);
       manager.setBoolean(nbt, "bodyLights", true);
@@ -1247,35 +1247,18 @@ function initSystem(moduleList, name, colorCode) {
       manager.setData(entity, "skyhighheroes:dyn/thermoptic_disguise", true);
       return true;
     }, "Bypass Cybernetic Conversion", 5);
-    hero.addKeyBindFunc("TRIGGER_CONVERSION", (entity, manager) => {
-      manager.setData(entity, "skyhighheroes:dyn/cybernetic_conversion_sleep", true);
-      return true;
-    }, "Trigger Cybernetic Conversion", 4);
-    hero.addKeyBindFunc("ACCEPT", (entity, manager) => {
+    hero.addKeyBindFunc("WAKE_UP", (entity, manager) => {
       var nbt = mainNBT(entity);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/optics_enabled", true);
-      manager.setBoolean(mainNBT(entity), "bodyLights", true);
+      manager.setBoolean(nbt, "bodyLights", true);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_body_lights", true);
-      manager.setBoolean(mainNBT(entity), "convertedToCyber", true);
+      manager.setBoolean(nbt, "convertedToCyber", true);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/converted_cyber", true);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_conversion", false);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_conversion_timer", 0.0);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_conversion_sleep", false);
       return true;
-    }, "Accept your new body", 4);
-    hero.addKeyBindFunc("REJECT", (entity, manager) => {
-      var nbt = mainNBT(entity);      
-      entity.hurt(hero, "CONVERSION", "%1$s died from cybernetic conversion", 1000.0);
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/optics_enabled", false);
-      manager.setBoolean(mainNBT(entity), "bodyLights", false);
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_body_lights", false);
-      manager.setBoolean(mainNBT(entity), "convertedToCyber", false);
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/converted_cyber", false);
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_conversion", false);
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_conversion_timer", 0.0);
-      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_conversion_sleep", false);
-      return true;
-    }, "Reject your new body", 5);
+    }, "Wake Up", 4);
     hero.addKeyBindFunc("BATTLE_MODE", (entity, manager) => {
       manager.setData(entity, "skyhighheroes:dyn/battle_mode", !entity.getData("skyhighheroes:dyn/battle_mode"));
       if (!entity.getData("skyhighheroes:dyn/battle_mode")) {
@@ -1892,10 +1875,10 @@ function initSystem(moduleList, name, colorCode) {
    * @param {string} keyBind - Required
    **/
   function normalKeyBindEnabled(entity, keyBind) {
-    if (keyBind == "TRIGGER_CONVERSION" || keyBind == "BYPASS_CONVERSION") {
-      return entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") == 0;
+    if (keyBind == "BYPASS") {
+      return entity.as("PLAYER").isCreativeMode() && entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") > 0;
     };
-    if (keyBind == "ACCEPT" || keyBind == "REJECT") {
+    if (keyBind == "WAKE_UP") {
       return entity.getData("skyhighheroes:dyn/cybernetic_conversion_timer") == 1;
     };
     return false;
@@ -1979,6 +1962,9 @@ function initSystem(moduleList, name, colorCode) {
     var timer = entity.getData("skyhighheroes:dyn/cybernetic_conversion_timer");
     if (timer > 0 && timer < 1 && (Math.ceil(timer*150) % 30) == 0) {
       entity.hurt(hero, "CONVERSION", "%1$s died from cybernetic conversion", 0.5 + timer*10.0);
+    };
+    if (!nbt.getBoolean("convertedToCyber") && entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") == 0) {
+      manager.setData(entity, "skyhighheroes:dyn/cybernetic_conversion_sleep", true);
     };
     if (entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") == 1) {
       manager.setData(entity, "skyhighheroes:dyn/cybernetic_conversion", true);

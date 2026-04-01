@@ -845,35 +845,39 @@ function render(entity, renderLayer, isFirstPersonArm) {
 
     var linesToRender = [];
     var conversionTimer = entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer");
-    var upperProgressMessages = ["Conversion starting", "Disintegrating skeleton", "Preserving brain", "Depleting blood", "Ionizing lungs", "Removing remaining internal organs", "Ditching slow nervous system", "Discarding weak natural muscles", "Removing inferior eyes", "Shedding natural skin", "Initializing cyberOS", "Installing rockets drivers", "Installing cannons drivers", "Installing blades drivers", "Installing shields drivers", "Installing satellite dish drivers", "Installing antenna drivers", "Installing wings drivers", "Installing thermoptics drivers", "Installing optical sensor drivers"];
+    var upperProgressMessages = ["Conversion has started", "Disintegrating skeleton", "Preserving brain", "Depleting blood", "Ionizing lungs", "Removing remaining internal organs", "Ditching slow nervous system", "Discarding weak natural muscles", "Removing inferior eyes", "Shedding natural skin", "Initializing cyberOS", "Installing rockets drivers", "Installing cannons drivers", "Installing blades drivers", "Installing shields drivers", "Installing satellite dish drivers", "Installing antenna drivers", "Installing wings drivers", "Installing thermoptics drivers", "Installing optical sensor drivers"];
     var numUpperMessages = upperProgressMessages.length;
     var numUpperMessageShowing = Math.ceil(conversionTimer*numUpperMessages);
+    var lastUpperMessage = "It is time";
+    var lastUpperMessageStart = (numUpperMessages-1.0)/(numUpperMessages*1.0);
     var lowerProgressMessages = ["No turning back now", "Building lightweight and durable frame", "Installing nueral links", "Affixing hydraulic lines", "Installing voicebox", "Adding extremely dense power cells", "Improving reactions with fiber optics", "Adding powerful artficial muscles", "Enhancing vision with digital optics", "Substituting thermoptic armor plates", "Initializing cyberOS", "Calibrating rockets", "Boosting cannons", "Sharpening blades", "Adjusting shields", "Calibrating satellite dish", "Tuning antenna", "Stressing wings", "Simulating prior skin", "Starting optics"];
     var numLowerMessages = lowerProgressMessages.length;
     var numLowerMessageShowing = Math.ceil(conversionTimer*numLowerMessages);
+    var lastLowerMessage = "to wake up";
+    var lastLowerMessageStart = (numLowerMessages-1.0)/(numLowerMessages*1.0);
     if ((entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer") > 0) && (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer") < 1)) {
-      var line = upperProgressMessages[numUpperMessageShowing];
-      linesToRender.push(line);
+      var upperLine = upperProgressMessages[numUpperMessageShowing];
+      if (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer") > lastUpperMessageStart) {
+        upperLine = lastUpperMessage;
+      };
+      linesToRender.push(upperLine);
       var progress = (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer")*100).toFixed(0) + "%";
       linesToRender.push(progress);
-      var line = lowerProgressMessages[numLowerMessageShowing];
-      linesToRender.push(line);
-    };
-    if (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer") < 1) {
+      var lowerLine = lowerProgressMessages[numLowerMessageShowing];
+      if (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer") > lastLowerMessageStart) {
+        lowerLine = lastLowerMessage;
+      };
+      linesToRender.push(lowerLine);
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer") == 1) {
-      var line = "Accept";
-      linesToRender.push(line);
-      var line = "OR";
-      linesToRender.push(line);
-      var line = "Reject";
+      var line = "Wake up";
       linesToRender.push(line);
     };
     if (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") == 1) {
       text_renderer.renderLines(isFirstPersonArm, "center", "center", linesToRender, 0.0, 0.0, -180.0, 2.0);
     };
     if (isFirstPersonArm && !entity.is("DISPLAY") && (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") > 0)) {
-      darkness_model.opacity = ((entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep") ? stuff.clamp(entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer")*2, 0.0, 1.0) : entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer")) - entity.getInterpolatedData("skyhighheroes:dyn/optics_enabling_timer"));
+      darkness_model.opacity = ((entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep") ? stuff.clamp(entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer")*2, 0.0, 1.0) : entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer")));
       darkness_model.render();
     };
   };
