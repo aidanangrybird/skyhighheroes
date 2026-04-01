@@ -937,16 +937,11 @@ function initSystem(moduleList, transerName, satellite) {
                 case "status":
                   status(entity);
                   break;
-                case "unlock":
+                case "waveCalling":
                   if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
-                    manager.setString(entity.getWornChestplate().nbt(), "emBeing", emBeing);
-                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/em_being", emBeing);
-                  };
-                  break;
-                case "lock":
-                  if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
-                    manager.setString(entity.getWornChestplate().nbt(), "emBeing", "");
-                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/em_being", "");
+                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
+                  } else {
+                    systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                   };
                   break;
                 case "help":
@@ -959,6 +954,9 @@ function initSystem(moduleList, transerName, satellite) {
                   });
                   systemMessage(entity, "<n>!status <nh>-<n> Shows your current status");
                   systemMessage(entity, "<n>!systemInfo <nh>-<n> Shows your system info");
+                  if ((emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
+                    systemMessage(entity, "<n>!waveCalling <nh>-<n> Calls down your em being");
+                  };
                   systemMessage(entity, "<n>!help <nh>-<n> Shows this list");
                   break;
                 case "disable":
