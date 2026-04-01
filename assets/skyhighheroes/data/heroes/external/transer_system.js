@@ -49,19 +49,19 @@ function assignTranser(entity, manager, satellite) {
   };
   switch (satellite) {
     case "dragon":
-      manager.setString(nbt, "systemColor", "2");
+      manager.setString(nbt, "systemColor", "\u00A72");
       manager.setData(entity, "skyhighheroes:dyn/system_color", nbt.getString("systemColor"));
       break;
     case "leo":
-      manager.setString(nbt, "systemColor", "4");
+      manager.setString(nbt, "systemColor", "\u00A74");
       manager.setData(entity, "skyhighheroes:dyn/system_color", nbt.getString("systemColor"));
       break;
     case "pegasus":
-      manager.setString(nbt, "systemColor", "1");
+      manager.setString(nbt, "systemColor", "\u00A71");
       manager.setData(entity, "skyhighheroes:dyn/system_color", nbt.getString("systemColor"));
       break;
     default:
-      manager.setString(nbt, "systemColor", "0");
+      manager.setString(nbt, "systemColor", "\u00A70");
       manager.setData(entity, "skyhighheroes:dyn/system_color", nbt.getString("systemColor"));
       break;
   };
@@ -101,14 +101,6 @@ function getWaveChange(entity) {
   return entity.getData("skyhighheroes:dyn/wave_change");
 };
 /**
- * Gets the System Color
- * @param {JSEntity} entity - Entity getting checked
- * @returns The System Color
- **/
-function getSystemColorCode(entity) {
-  return entity.getData("skyhighheroes:dyn/system_color");
-};
-/**
  * Gets the Wave Color
  * @param {JSEntity} entity - Entity getting checked
  * @returns The Wave Color
@@ -140,7 +132,7 @@ function hasComputer(entity) {
  * @returns The system color of a transer
  **/
 function getSystemColor(entity) {
-  return "\u00A7" + mainNBT(entity).getString("systemColor");
+  return entity.getData("skyhighheroes:dyn/system_color");
 };
 
 /**
