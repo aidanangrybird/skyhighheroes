@@ -303,14 +303,15 @@ function bodyAnimations(entity, data) {
   data.load(5, entity.getInterpolatedData("skyhighheroes:dyn/wing_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/wings_timer") + getHoloBooleans(entity, "holoFlight", "rocketsWings") + getHoloBoolean(entity, "holoGlide"));
   data.load(6, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_left_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
   data.load(7, entity.getInterpolatedData("skyhighheroes:dyn/external_arm_right_deploy_timer") + entity.getInterpolatedData("skyhighheroes:dyn/external_arms_timer"));
-  data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_open_timer"));
-  data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_open_timer"));
-  data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
-  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
-  data.load(12, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
-  data.load(13, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
-  data.load(14, entity.getInterpolatedData("fiskheroes:flight_timer"));
-  data.load(15, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
+  data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_flush_timer"));
+  data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_open_timer"));
+  data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_open_timer"));
+  data.load(11, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
+  data.load(12, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
+  data.load(13, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
+  data.load(14, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
+  data.load(15, entity.getInterpolatedData("fiskheroes:flight_timer"));
+  data.load(16, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
 };
 
 function leftArmAnimations(entity, data) {

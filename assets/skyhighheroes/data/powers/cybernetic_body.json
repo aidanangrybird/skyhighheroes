@@ -451,7 +451,15 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|satellite": {
+    "fiskheroes:transformation|cannon_body_flush": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/cannon_body_flush",
+        "timerData": "skyhighheroes:dyn/cannon_body_flush_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|satellite_deployed": {
       "transformation": {
         "toggleData": "skyhighheroes:dyn/satellite_deployed",
         "timerData": "skyhighheroes:dyn/satellite_deploy_timer",
@@ -459,7 +467,7 @@
       },
       "isToggle": true
     },
-    "fiskheroes:transformation|antenna": {
+    "fiskheroes:transformation|antenna_deployed": {
       "transformation": {
         "toggleData": "skyhighheroes:dyn/antenna_deployed",
         "timerData": "skyhighheroes:dyn/antenna_deploy_timer",

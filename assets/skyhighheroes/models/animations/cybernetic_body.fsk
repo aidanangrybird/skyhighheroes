@@ -6,7 +6,7 @@
 {strafe} = clamp({motX}{cosa} + {motZ}{sina}, -0.5, 0.5)
 {forward} = clamp({motZ}{cosa} - {motX}{sina}, -1, 1)
 
-{hover} = {data_14}(1 - {data_15})
+{hover} = {data_15}(1 - {data_16})
 {x} = {hover}min(2{vel}, 1)
 {strafe} *= {x}
 {forward} *= {x}
@@ -21,12 +21,13 @@
 {wing_right} = curve(clamp({data_5}, 0, 1))
 {ext_arm_left} = curve(clamp({data_6}, 0, 1))
 {ext_arm_right} = curve(clamp({data_7}, 0, 1))
-{intake_left} = curve(clamp({data_8}, 0, 1))
-{intake_right} = curve(clamp({data_9}, 0, 1))
-{spin_left} = {data_10}*2
-{spin_right} = {data_11}*2
-{core} = curve(clamp({data_12}, 0, 1))
-{motion} = curve(clamp({data_13}, 0, 1))
+{cannon_flush} = curve(clamp({data_8}, 0, 1))
+{intake_left} = curve(clamp({data_9}, 0, 1))
+{intake_right} = curve(clamp({data_10}, 0, 1))
+{spin_left} = {data_11}*2
+{spin_right} = {data_12}*2
+{core} = curve(clamp({data_13}, 0, 1))
+{motion} = curve(clamp({data_14}, 0, 1))
 
 ;rockets
 ;left
@@ -57,6 +58,12 @@
 {body_right_rocket_rotY} += 90'{part4_right_rocket}{strafe}
 
 ;cannons
+;flush
+{part0_cannon_flush} = if({cannon_flush} != 1, animate2({cannon_flush}, 1.0, 0.0, 0.3, 0.0), 1)
+{part1_cannon_flush} = if({cannon_flush} != 1, animate2({cannon_flush}, 1.0, 0.3, 0.3, 0.0), 1)
+{part2_cannon_flush} = if({cannon_flush} != 1, animate2({cannon_flush}, 1.0, 0.6, 0.1, 0.0), 1)
+{part3_cannon_flush} = if({cannon_flush} != 1, animate2({cannon_flush}, 1.0, 0.7, 0.1, 0.0), 1)
+{part4_cannon_flush} = if({cannon_flush} != 1, animate2({cannon_flush}, 1.0, 0.8, 0.15, 0.0), 1)
 ;left
 {part1_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.0, 0.15, 0.0), 1)
 {part2_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.2, 0.1, 0.0), 1)
@@ -64,17 +71,19 @@
 {part4_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.4, 0.1, 0.0), 1)
 {part5_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.5, 0.25, 0.0), 1)
 {part6_cannon_left} = if({cannon_left} != 1, animate2({cannon_left}, 1.0, 0.75, 0.25, 0.0), 1)
-{body_left_cannon_outer_cover_posZ} += 0.02{part1_cannon_left}
+{body_left_cannon_outer_cover_posZ} += 0.02{part1_cannon_left} - 0.02{part1_cannon_left}{part4_cannon_flush}
 {body_left_cannon_middle_cover_posZ} += 0.01{part1_cannon_left}
 {body_left_cannon_inner_cover_posZ} += 0.01{part1_cannon_left}
-{body_left_cannon_outer_cover_posY} -= 0.99{part4_cannon_left} + 0.01{part1_cannon_left}
-{body_left_cannon_outer_cover_posX} += 0.99{part4_cannon_left} + 0.01{part1_cannon_left}
-{body_left_cannon_middle_cover_posY} -= 0.99{part3_cannon_left} + 0.01{part1_cannon_left}
-{body_left_cannon_middle_cover_posX} += 0.99{part3_cannon_left} + 0.01{part1_cannon_left}
+{body_left_cannon_outer_cover_posY} -= 0.99{part4_cannon_left} + 0.01{part1_cannon_left} - 0.99{part4_cannon_left}{part3_cannon_flush} - 0.01{part1_cannon_left}{part3_cannon_flush}
+{body_left_cannon_outer_cover_posX} += 0.99{part4_cannon_left} + 0.01{part1_cannon_left} - 0.99{part4_cannon_left}{part3_cannon_flush} - 0.01{part1_cannon_left}{part3_cannon_flush}
+{body_left_cannon_middle_cover_posY} -= 0.99{part3_cannon_left} + 0.01{part1_cannon_left} + 1{part4_cannon_left}{part3_cannon_flush}
+{body_left_cannon_middle_cover_posX} += 0.99{part3_cannon_left} + 0.01{part1_cannon_left} + 1{part4_cannon_left}{part3_cannon_flush}
 {body_left_cannon_inner_cover_posY} -= 0.99{part2_cannon_left} + 0.01{part1_cannon_left}
 {body_left_cannon_inner_cover_posX} += 0.99{part2_cannon_left} + 0.01{part1_cannon_left}
-{body_cannon_left_base_posZ} -= 1.55{part5_cannon_left}
-{body_cannon_left_posY} += 2.95{part6_cannon_left}
+{body_cannon_left_base_posZ} -= 1.55{part5_cannon_left} - 1.55{part5_cannon_left}{part0_cannon_flush}
+{body_cannon_left_posY} += 2.95{part6_cannon_left} - 2.9{part6_cannon_left}{part1_cannon_flush}
+{body_cannon_left_posX} -= 0.5{part2_cannon_flush}
+{body_cannon_left_posZ} += 0.5{part2_cannon_flush}
 ;right
 {part1_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.0, 0.15, 0.0), 1)
 {part2_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.2, 0.1, 0.0), 1)
@@ -82,17 +91,19 @@
 {part4_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.4, 0.1, 0.0), 1)
 {part5_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.5, 0.25, 0.0), 1)
 {part6_cannon_right} = if({cannon_right} != 1, animate2({cannon_right}, 1.0, 0.75, 0.25, 0.0), 1)
-{body_right_cannon_outer_cover_posZ} += 0.02{part1_cannon_right}
-{body_right_cannon_middle_cover_posZ} += 0.01{part1_cannon_right}
-{body_right_cannon_inner_cover_posZ} += 0.01{part1_cannon_right}
-{body_right_cannon_outer_cover_posY} -= 0.99{part4_cannon_right} + 0.01{part1_cannon_right}
-{body_right_cannon_outer_cover_posX} -= 0.99{part4_cannon_right} + 0.01{part1_cannon_right}
-{body_right_cannon_middle_cover_posY} -= 0.99{part3_cannon_right} + 0.01{part1_cannon_right}
-{body_right_cannon_middle_cover_posX} -= 0.99{part3_cannon_right} + 0.01{part1_cannon_right}
+{body_right_cannon_outer_cover_posZ} += 0.02{part1_cannon_right} - 0.02{part1_cannon_right}{part4_cannon_flush}
+{body_right_cannon_middle_cover_posZ} += 0.01{part1_cannon_right} + 0.02{part4_cannon_right}{part3_cannon_flush}
+{body_right_cannon_inner_cover_posZ} += 0.01{part1_cannon_right} + 0.02{part4_cannon_right}{part3_cannon_flush}
+{body_right_cannon_outer_cover_posY} -= 0.99{part4_cannon_right} + 0.01{part1_cannon_right} - 0.99{part4_cannon_right}{part3_cannon_flush} - 0.01{part1_cannon_right}{part3_cannon_flush}
+{body_right_cannon_outer_cover_posX} -= 0.99{part4_cannon_right} + 0.01{part1_cannon_right} - 0.99{part4_cannon_right}{part3_cannon_flush} - 0.01{part1_cannon_right}{part3_cannon_flush}
+{body_right_cannon_middle_cover_posY} -= 0.99{part3_cannon_right} + 0.01{part1_cannon_right} + 1{part4_cannon_right}{part3_cannon_flush}
+{body_right_cannon_middle_cover_posX} -= 0.99{part3_cannon_right} + 0.01{part1_cannon_right} + 1{part4_cannon_right}{part3_cannon_flush}
 {body_right_cannon_inner_cover_posY} -= 0.99{part2_cannon_right} + 0.01{part1_cannon_right}
 {body_right_cannon_inner_cover_posX} -= 0.99{part2_cannon_right} + 0.01{part1_cannon_right}
-{body_cannon_right_base_posZ} -= 1.55{part5_cannon_right}
-{body_cannon_right_posY} += 2.95{part6_cannon_right}
+{body_cannon_right_base_posZ} -= 1.55{part5_cannon_right} - 1.55{part5_cannon_right}{part0_cannon_flush}
+{body_cannon_right_posY} += 2.95{part6_cannon_right} - 2.9{part6_cannon_right}{part1_cannon_flush}
+{body_cannon_right_posX} += 0.5{part2_cannon_flush}
+{body_cannon_right_posZ} += 0.5{part2_cannon_flush}
 
 ;wings
 ;left

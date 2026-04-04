@@ -315,6 +315,11 @@ function initModule(system) {
                 manager.setBoolean(nbt, "flushHeadCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushHeadCannons")));
                 system.moduleMessage(this, entity, "<n>Flush Head Cannons set to <nh>" + nbt.getBoolean("flushHeadCannons") + "<n>!");
                 break;
+              case "flushBody":
+                manager.setData(entity, "skyhighheroes:dyn/cannon_body_flush_enabled", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : entity.getData("skyhighheroes:dyn/cannon_body_flush_enabled")));
+                manager.setBoolean(nbt, "flushBodyCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushBodyCannons")));
+                system.moduleMessage(this, entity, "<n>Flush Body Cannons set to <nh>" + nbt.getBoolean("flushBodyCannons") + "<n>!");
+                break;
               case "flushLeftArm":
                 manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush_enabled", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : entity.getData("skyhighheroes:dyn/cannon_left_arm_flush_enabled")));
                 manager.setBoolean(nbt, "flushLeftArmCannons", ((argList[3] == "true") ? true : (argList[3] == "false") ? false : nbt.getBoolean("flushLeftArmCannons")));
@@ -359,6 +364,7 @@ function initModule(system) {
             system.moduleMessage(this, entity, "<n>Right Arm front: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_front_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
             system.moduleMessage(this, entity, "<n>Right Arm back: <nh>" + ((entity.getData("skyhighheroes:dyn/cannon_right_arm_back_deploy_timer") > 0) || armSet ? "DEPLOYED" : "STOWED"));
             system.moduleMessage(this, entity, "<n>Flush Head Cannons: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_head_flush_enabled") ? "ENABLED" : "DISABLED"));
+            system.moduleMessage(this, entity, "<n>Flush Body Cannons: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_body_flush_enabled") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_left_arm_flush_enabled") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon: <nh>" + (entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled") ? "ENABLED" : "DISABLED"));
             system.moduleMessage(this, entity, "<n>Hologram: <nh>" + (nbt.getBoolean("holoCannons") ? "ENABLED" : "DISABLED"));
@@ -502,6 +508,7 @@ function initModule(system) {
         };
       };
       manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush", entity.getData("skyhighheroes:dyn/cannon_head_flush_enabled"));
+      manager.setData(entity, "skyhighheroes:dyn/cannon_body_flush", entity.getData("skyhighheroes:dyn/cannon_body_flush_enabled"));
       manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush", entity.getData("skyhighheroes:dyn/cannon_left_arm_flush_enabled"));
       manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush", entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled"));
       cannonMultiTap.tapReset(entity, manager);
@@ -532,6 +539,10 @@ function initModule(system) {
         manager.setBoolean(nbt, "flushHeadCannons", false);
       };
       manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush_enabled", nbt.getBoolean("flushHeadCannons"));
+      if (!nbt.hasKey("flushBodyCannons")) {
+        manager.setBoolean(nbt, "flushBodyCannons", false);
+      };
+      manager.setData(entity, "skyhighheroes:dyn/cannon_body_flush_enabled", nbt.getBoolean("flushBodyCannons"));
       if (!nbt.hasKey("flushLeftArmCannons")) {
         manager.setBoolean(nbt, "flushLeftArmCannons", false);
       };

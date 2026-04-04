@@ -85,7 +85,13 @@ function initBodyBeams(renderer, color) {
   ];
   var chargedBeam = bindBeam(renderer, "fiskheroes:charged_beam", "body", color, position);
   chargedBeam.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
-  chargedBeam.setCondition(entity => mainNBT(entity).getBoolean("cannonsBody"));
+  chargedBeam.setCondition(entity => mainNBT(entity).getBoolean("cannonsBody") && !mainNBT(entity).getBoolean("flushBodyCannons"));
+  var positionFlush = [
+    { "firstPerson": [0.0, 3.0, 2.0], "offset": [0.0, 3.0, -2.0], "size": [4.0, 2.0] }
+  ];
+  var chargedBeamFlush = bindBeam(renderer, "fiskheroes:charged_beam", "body", color, positionFlush);
+  chargedBeamFlush.setParticles(renderer.createResource("PARTICLE_EMITTER", "fiskheroes:impact_charged_beam"));
+  chargedBeamFlush.setCondition(entity => mainNBT(entity).getBoolean("cannonsBody") && mainNBT(entity).getBoolean("flushBodyCannons"));
 };
 
 function mainNBT(entity) {
