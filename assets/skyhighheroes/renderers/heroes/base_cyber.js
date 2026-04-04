@@ -125,7 +125,7 @@ function initEffects(renderer) {
   head_model = renderer.createEffect("fiskheroes:model").setModel(head);
   head_model.anchor.set("head");
   head_model.setScale(1.0);
-  satellite_beams = cybernetics.initSatelliteBeams(renderer, head, getColor());
+  satellite_beams = cybernetic_beams.initSatelliteBeams(renderer, head, getColor());
   cybernetic_beams.initHeadBeams(renderer, getColor());
   var body = renderer.createResource("MODEL", "skyhighheroes:CyberneticBodyL1");
   body.texture.set("body", "body_lights");

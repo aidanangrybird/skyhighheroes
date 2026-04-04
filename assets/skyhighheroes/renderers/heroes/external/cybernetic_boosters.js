@@ -1,3 +1,6 @@
+var overrides = {
+};
+
 function initLeftLegBoosters(renderer, model, color) {
 
   var mainRocketOffset = model.getCubeOffset("left_leg_main_rocket");
@@ -8,7 +11,10 @@ function initLeftLegBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  var beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  if (overrides.hasOwnProperty(color)) {
+    beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:" + overrides[color] + "_booster");
+  };
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
@@ -285,7 +291,7 @@ function initLeftLegBoosters(renderer, model, color) {
       //Center
       bloomBackCenter.progress = bloomBackCenter.opacity = flight;
 
-      if (!isFirstPersonArm) {
+      if (!isFirstPersonArm && (data_0 > 0.0)) {
         //Main
         boosterMain.render();
         bloomMainEdge.render();
@@ -327,7 +333,10 @@ function initRightLegBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  var beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  if (overrides.hasOwnProperty(color)) {
+    beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:" + overrides[color] + "_booster");
+  };
   
   //Main
   var boosterMain = renderer.createEffect("fiskheroes:booster");
@@ -604,7 +613,7 @@ function initRightLegBoosters(renderer, model, color) {
       //Center
       bloomBackCenter.progress = bloomBackCenter.opacity = flight;      
 
-      if (!isFirstPersonArm) {
+      if (!isFirstPersonArm && (data_0 > 0.0)) {
         //Main
         boosterMain.render();
         bloomMainEdge.render();
@@ -643,7 +652,10 @@ function initBodyBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  var beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  if (overrides.hasOwnProperty(color)) {
+    beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:" + overrides[color] + "_booster");
+  };
 
   //Left
   var boosterLeft = renderer.createEffect("fiskheroes:booster");
@@ -757,7 +769,7 @@ function initBodyBoosters(renderer, model, color) {
       //Center
       bloomRightCenter.progress = bloomRightCenter.opacity = flight;
 
-      if (!isFirstPersonArm) {
+      if (!isFirstPersonArm && (data_0 > 0.0)) {
         //Left
         boosterLeft.render();
         bloomLeftEdge.render();
@@ -782,7 +794,10 @@ function initLeftArmBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  var beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  if (overrides.hasOwnProperty(color)) {
+    beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:" + overrides[color] + "_booster");
+  };
   
   //Booster
   //Outer
@@ -933,7 +948,7 @@ function initLeftArmBoosters(renderer, model, color) {
       //Center
       bloomBackCenter.progress = bloomBackCenter.opacity = flight;
 
-      if (!isFirstPersonArm) {
+      if (!isFirstPersonArm && (data_0 > 0.0)) {
         //Outer
         boosterOuter.render();
         bloomOuterEdge.render();
@@ -963,7 +978,10 @@ function initRightArmBoosters(renderer, model, color) {
 
   var icon = renderer.createResource("ICON", "skyhighheroes:null");
 
-  beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  var beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_booster");
+  if (overrides.hasOwnProperty(color)) {
+    beam = renderer.createResource("BEAM_RENDERER", "skyhighheroes:" + overrides[color] + "_booster");
+  };
   
   //Booster
   var boosterOuter = renderer.createEffect("fiskheroes:booster");
@@ -1113,21 +1131,23 @@ function initRightArmBoosters(renderer, model, color) {
       //Center
       bloomBackCenter.progress = bloomBackCenter.opacity = flight;
 
-      //Outer
-      boosterOuter.render();
-      bloomOuterEdge.render();
-      bloomOuterMiddle.render();
-      bloomOuterCenter.render();
-      //Front
-      boosterFront.render();
-      bloomFrontEdge.render();
-      bloomFrontMiddle.render();
-      bloomFrontCenter.render();
-      //Back
-      boosterBack.render();
-      bloomBackEdge.render();
-      bloomBackMiddle.render();
-      bloomBackCenter.render();
+      if (data_0 > 0.0) {
+        //Outer
+        boosterOuter.render();
+        bloomOuterEdge.render();
+        bloomOuterMiddle.render();
+        bloomOuterCenter.render();
+        //Front
+        boosterFront.render();
+        bloomFrontEdge.render();
+        bloomFrontMiddle.render();
+        bloomFrontCenter.render();
+        //Back
+        boosterBack.render();
+        bloomBackEdge.render();
+        bloomBackMiddle.render();
+        bloomBackCenter.render();
+      };
     }
   };
   return obj;

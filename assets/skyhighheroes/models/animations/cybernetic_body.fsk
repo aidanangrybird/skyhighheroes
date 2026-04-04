@@ -26,7 +26,7 @@
 {spin_left} = {data_10}*2
 {spin_right} = {data_11}*2
 {core} = curve(clamp({data_12}, 0, 1))
-{motZ} = if({data_13}>0, 1, {motZ})
+{motion} = curve(clamp({data_13}, 0, 1))
 
 ;rockets
 ;left
@@ -40,7 +40,7 @@
 {body_left_outer_rocket_cover_posX} += 0.99{part1_left_rocket} + 0.01{part0_left_rocket}
 {body_left_inner_rocket_cover_posX} -= 0.99{part1_left_rocket} + 0.01{part0_left_rocket}
 {body_left_rocket_base_posZ} += 2.9{part3_left_rocket}
-{body_left_rocket_rotX} += 45'{part4_left_rocket}{adz} + 45'{part4_left_rocket}{motZ}
+{body_left_rocket_rotX} += 45'{part4_left_rocket}{adz} + 45'{part4_left_rocket}{motion}
 {body_left_rocket_rotY} += 90'{part4_left_rocket}{strafe}
 ;right
 {part0_right_rocket} = if({right_rocket} != 1, animate2({right_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -53,7 +53,7 @@
 {body_right_outer_rocket_cover_posX} -= 0.99{part1_right_rocket} + 0.01{part0_right_rocket}
 {body_right_inner_rocket_cover_posX} += 0.99{part1_right_rocket} + 0.01{part0_right_rocket}
 {body_right_rocket_base_posZ} += 2.9{part3_right_rocket}
-{body_right_rocket_rotX} += 45'{part4_right_rocket}{adz} + 45'{part4_right_rocket}{motZ}
+{body_right_rocket_rotX} += 45'{part4_right_rocket}{adz} + 45'{part4_right_rocket}{motion}
 {body_right_rocket_rotY} += 90'{part4_right_rocket}{strafe}
 
 ;cannons

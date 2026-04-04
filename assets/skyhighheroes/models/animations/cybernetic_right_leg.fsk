@@ -25,7 +25,7 @@
 {inner_rockets} = curve(clamp({data_5}, 0, 1))
 {intake} = curve(clamp({data_6}, 0, 1))
 {spin} = {data_7}*2
-{mot_Z} = if({data_8}>0, 1, {motZ})
+{motion} = curve(clamp({data_8}, 0, 1))
 
 ;rockets
 ;main
@@ -51,7 +51,7 @@
 {right_leg_front_outer_rocket_cover_posX} += 0.03{part0_outer_rocket}
 {right_leg_front_outer_rocket_cover_posZ} -= 0.99{part1_outer_rocket} + 0.01{part0_outer_rocket}
 {right_leg_outer_rocket_base_posX} -= 2.9{part2_outer_rocket}
-{right_leg_outer_rocket_rotX} += 90'{part3_outer_rocket} - 45'{part3_outer_rocket}{adx} - 45'{part3_outer_rocket}{mot_Z}
+{right_leg_outer_rocket_rotX} += 90'{part3_outer_rocket} - 45'{part3_outer_rocket}{adx} - 45'{part3_outer_rocket}{motion}
 {right_leg_outer_rocket_rotY} -= 45'{part3_outer_rocket}{forward}
 ;inner
 {part0_inner_rocket} = if({inner_rocket} != 1, animate2({inner_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -63,7 +63,7 @@
 {right_leg_front_inner_rocket_cover_posX} -= 0.03{part0_inner_rocket}
 {right_leg_front_inner_rocket_cover_posZ} -= 0.99{part1_inner_rocket} + 0.01{part0_inner_rocket}
 {right_leg_inner_rocket_base_posX} += 2.9{part2_inner_rocket}
-{right_leg_inner_rocket_rotX} += 90'{part3_inner_rocket} - 45'{part3_inner_rocket}{adx} - 45'{part3_inner_rocket}{mot_Z}
+{right_leg_inner_rocket_rotX} += 90'{part3_inner_rocket} - 45'{part3_inner_rocket}{adx} - 45'{part3_inner_rocket}{motion}
 {right_leg_inner_rocket_rotY} += 45'{part3_inner_rocket}{forward}
 ;front
 {part0_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -75,7 +75,7 @@
 {right_leg_outer_front_rocket_cover_posZ} += 0.03{part0_front_rocket}
 {right_leg_outer_front_rocket_cover_posX} -= 0.99{part1_front_rocket} + 0.01{part0_front_rocket}
 {right_leg_front_rocket_base_posZ} -= 2.9{part2_front_rocket}
-{right_leg_front_rocket_rotX} += 90'{part3_front_rocket} - 45'{part3_front_rocket}{adz} - 45'{part3_front_rocket}{mot_Z}
+{right_leg_front_rocket_rotX} += 90'{part3_front_rocket} - 45'{part3_front_rocket}{adz} - 45'{part3_front_rocket}{motion}
 {right_leg_front_rocket_rotY} -= 90'{part3_front_rocket}{strafe}
 ;back
 {part0_back_rocket} = if({back_rocket} != 1, animate2({back_rocket}, 1.0, 0.0, 0.15, 0.0), 1)
@@ -87,7 +87,7 @@
 {right_leg_outer_back_rocket_cover_posZ} -= 0.03{part0_back_rocket}
 {right_leg_outer_back_rocket_cover_posX} -= 0.99{part1_back_rocket} + 0.01{part0_back_rocket}
 {right_leg_back_rocket_base_posZ} += 2.9{part2_back_rocket}
-{right_leg_back_rocket_rotX} += 90'{part3_back_rocket} - 45'{part3_back_rocket}{adz} - 45'{part3_back_rocket}{mot_Z}
+{right_leg_back_rocket_rotX} += 90'{part3_back_rocket} - 45'{part3_back_rocket}{adz} - 45'{part3_back_rocket}{motion}
 {right_leg_back_rocket_rotY} += 90'{part3_back_rocket}{strafe}
 
 ;intake
