@@ -433,7 +433,7 @@ function initLeftLegBooster(renderer, model, colors) {
       lineEdge.size.x = 0.1 + boost*3.4;
       lineEdge.size.y = 0.1 + boost*3.4;
 
-      if (!isFirstPersonArm) {
+      if (!isFirstPersonArm && (data_0 > 0.0)) {
         booster.render();
         bloomEdge.render();
         bloomMiddle.render();
@@ -603,7 +603,7 @@ function initRightLegBooster(renderer, model, colors) {
       lineEdge.size.x = 0.1 + boost*3.4;
       lineEdge.size.y = 0.1 + boost*3.4;
 
-      if (!isFirstPersonArm) {
+      if (!isFirstPersonArm && (data_0 > 0.0)) {
         booster.render();
         bloomEdge.render();
         bloomMiddle.render();
