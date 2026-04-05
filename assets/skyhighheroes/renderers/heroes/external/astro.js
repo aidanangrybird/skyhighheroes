@@ -140,7 +140,7 @@ function initAstroAnimations(renderer) {
     .priority = 5;
   //Dual Cannons
   addAnimation(renderer, "astro.DUAL_CANNONS", "skyhighheroes:astro_dual_aim").setData((entity, data) => {
-    data.load(entity.getInterpolatedData("skyhighheroes:dyn/arm_cannon_timer") + getHoloBoolean(entity, "holoDualCannons"));
+    data.load(entity.getInterpolatedData("skyhighheroes:dyn/dual_arm_cannon_timer") + getHoloBoolean(entity, "holoDualCannons"));
   })
     .setCondition(entity => !entity.getHeldItem().doesNeedTwoHands() && !entity.getHeldItem().isRifle())
     .priority = 5;
