@@ -30,7 +30,7 @@
 {leftArm_posY} += 2{part2}+0.5{part3}-2.5{part5}
 {leftArm_posZ} += 5{part2}+1{part3}-6{part5}
 {rightArm_rotX} = 30'{part2}-170'+25'{part3}+35'{part4}+80'{part5}
-{rightArm_rotZ} = 37'{part2}-37'+{rightArm_rotZ}{inverse}
+{rightArm_rotZ} = 37'{part2}-37'
 {leftArm_rotX} = 30'{part2}-170'+25'{part3}+35'{part4}+80'{part5}
 {leftArm_rotZ} = -34'{part2}+34'
 ;{data} = 0
